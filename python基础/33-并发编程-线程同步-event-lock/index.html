@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>33-并发编程-线程同步-Event-lock  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="33-并发编程-线程同步-Event-lock  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "33-并发编程-线程同步-Event-lock",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  531 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>33-并发编程-线程同步-Event-lock
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5">1 线程同步</a>
+<ul>
+<li><a href="#11-event">1.1 Event</a>
+<ul>
+<li><a href="#111-%E4%BB%80%E4%B9%88%E6%98%AFflag">1.1.1 什么是Flag？</a></li>
+<li><a href="#112-event%E5%8E%9F%E7%90%86">1.1.2 Event原理</a></li>
+<li><a href="#113-%E5%90%83%E5%8C%85%E5%AD%90">1.1.3 吃包子</a></li>
+</ul>
+</li>
+<li><a href="#12-lock">1.2 Lock</a>
+<ul>
+<li><a href="#121-lock%E6%96%B9%E6%B3%95">1.2.1 lock方法</a></li>
+<li><a href="#122-%E8%AE%A1%E6%95%B0%E5%99%A8">1.2.2 计数器</a></li>
+<li><a href="#123-%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%94%81">1.2.3 非阻塞锁</a></li>
+<li><a href="#124-%E9%94%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">1.2.4 锁应用场景</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-线程同步">1 线程同步</h1>
+<p>        线程同步，线程间协同，通过某种技术，让一个线程访问某些数据时，其他线程不能访问这些数据，直到该线程完成对数据的操作后。不同的操作系统有多种实现方式。比如临界区(Critical Section)、互斥锁(Mutex)、信号量(Semaphore)、事件(Event)等。</p>
+<h2 id="11-event">1.1 Event</h2>
+<p>        Event是线程间通讯机制最简单的实现，使用一个内部标记flag，主要提供了三个方法wait、clear、set，通过操作flag来控制线程的执行。</p>
+<ul>
+<li>clear()：将&rsquo;Flag&rsquo;设置为False。</li>
+<li>set()：将&rsquo;Flag&rsquo;设置为True。</li>
+<li>wait(timeout=None)：等待&rsquo;Flag&rsquo;为True后，继续执行(timeout为超时时间，否则永远等待)。</li>
+<li>is_set(): 判断&rsquo;Flag&rsquo;是否为</li>
+</ul>
+<h3 id="111-什么是flag">1.1.1 什么是Flag？</h3>
+<p>        Event对象在全局定义了一个&rsquo;Flag'，如果&rsquo;Flag&rsquo;值为 False，那么当程序执行 Event对象的wait方法时就会阻塞，如果&rsquo;Flag&rsquo;值为True，那已经阻塞的wait方法会继续执行。</p>
+<h3 id="112-event原理">1.1.2 Event原理</h3>
+<p>        在使用threading.Event 实现线程间通信时：使用threading.Event可以使一个线程等待其他线程的通知，我们把这个Event传递到线程对象中，Event默认内置了一个标志，初始值为False。一旦该线程通过wait()方法进入等待状态，直到另一个线程调用该Event的set()方法将内置标志设置为True时，该Event会通知所有等待状态的线程恢复运行。</p>
+<h3 id="113-吃包子">1.1.3 吃包子</h3>
+<p>有下面代码，大欣负责吃包子，厨师负责做包子，只有厨师做好了，大欣才能开始吃。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+
+event <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
+    current <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 等着吃包子...&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    event<span style="color:#f92672">.</span>wait()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;包子来了，我正在吃&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>):
+        time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 吃 包子-{}。&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name,i))
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chef</span>():
+    current <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 正在做包子&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">3</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 包子做好了，下班&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    event<span style="color:#f92672">.</span>set()
+
+chef <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>chef,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;大厨师&#39;</span>)
+chef<span style="color:#f92672">.</span>start()
+
+consumer <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>consumer,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;大欣&#39;</span>)
+consumer<span style="color:#f92672">.</span>start()
+</code></pre></div><p>运行consumer时，包子还没做，所以只能等着，等chef做完了以后，设置了event为True，这时consumer就开始吃了。wait还可以指定等待时间，比如chef做的太慢了，consumer不吃了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+
+event <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">consumer</span>():
+    current <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 等着吃包子...&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> event<span style="color:#f92672">.</span>wait(<span style="color:#ae81ff">2</span>):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;太慢了，不吃了&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;包子来了，我正在吃&#39;</span>)
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">5</span>):
+            time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>))
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 吃 包子-{}。&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name,i))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">chef</span>():
+    current <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>current_thread()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 正在做包子&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">8</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} 包子做好了，下班&#39;</span><span style="color:#f92672">.</span>format(current<span style="color:#f92672">.</span>name))
+    event<span style="color:#f92672">.</span>set()
+
+chef <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>chef,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;大厨师&#39;</span>)
+chef<span style="color:#f92672">.</span>start()
+
+consumer <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>consumer,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;大欣&#39;</span>)
+consumer<span style="color:#f92672">.</span>start()
+</code></pre></div><p>当Event被set后，wait的返回值就是True，如果wait(2)，在2秒内，Event没有被set，那么返回值是False。</p>
+<h2 id="12-lock">1.2 Lock</h2>
+<p>        由于线程间的数据是共享的，当我们多个线程操作一个相同的用户的数据时，有可能造成混乱，如下例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> time
+
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">work</span>():
+    <span style="color:#66d9ef">global</span> n
+    <span style="color:#66d9ef">while</span> n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.01</span>)
+        n <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    t_l <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>work)
+        t_l<span style="color:#f92672">.</span>append(t)
+        t<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> t_l:
+        t<span style="color:#f92672">.</span>join()
+
+    <span style="color:#66d9ef">print</span>(n)
+</code></pre></div><p>　　我们认为结果应该是0，但是结果可能不如人意，因为进程间共享数据的问题，多个进程同时修改共享数据时，由于GIL的存在同一时刻只有1个线程在运行。当n的值为1的时候，10个子线程很有可能同时判断成功，再要修改的时候被挂起(时间片用完)，等到真正回来修改的时候，n已经被其他线程改过来！所以如果要保持数据的正确性，那么就需要牺牲性能，即使用锁机制。</p>
+<ol>
+<li>创建一个锁,由于进程内的线程共享进程数据，那么不需要传递，就可以直接调用</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+mutex <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()  
+</code></pre></div><ol start="2">
+<li>加锁解锁
+Lock内部实现了__enter__和__exit__的方法，所以我们可以使用两种方式来加锁或者解锁。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 调用方式一</span>
+mutex<span style="color:#f92672">.</span>acquire()    <span style="color:#75715e"># 加锁</span>
+<span style="color:#e6db74">&#39;&#39;&#39;code&#39;&#39;&#39;</span>
+mutex<span style="color:#f92672">.</span>release()    <span style="color:#75715e"># 解锁</span>
+
+<span style="color:#75715e"># 调用方式二</span>
+<span style="color:#66d9ef">with</span> mutex:
+    <span style="color:#e6db74">&#39;&#39;&#39;code&#39;&#39;&#39;</span>   <span style="color:#75715e"># 离开wit代码段，自动解锁</span>
+</code></pre></div><h3 id="121-lock方法">1.2.1 lock方法</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>acquire(blocking=True,timeout=-1)</td>
+<td>获取锁并加锁<!-- raw HTML omitted -->blocking:表示是否阻塞，默认为True表示阻塞。<!-- raw HTML omitted -->timeout：表示阻塞超时时间。<!-- raw HTML omitted -->当blocking为非阻塞时，timeout不能进行设置</td>
+</tr>
+<tr>
+<td>release()</td>
+<td>释放锁，可以从任何线程上调用释放.<!-- raw HTML omitted -->已上锁，调用时会释放锁，即重置为unlocked。<!-- raw HTML omitted -->未上锁，调用时会抛出RuntimeError异常</td>
+</tr>
+</tbody>
+</table>
+<p>所以，上面的例子可以有如下修改:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> time
+
+mutex <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">work</span>():
+    <span style="color:#66d9ef">global</span> n
+    <span style="color:#66d9ef">while</span> True:
+        mutex<span style="color:#f92672">.</span>acquire()
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+            n <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            mutex<span style="color:#f92672">.</span>release()
+        <span style="color:#66d9ef">else</span>:
+            mutex<span style="color:#f92672">.</span>release()
+            <span style="color:#66d9ef">break</span>
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    t_l <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>work)
+        t_l<span style="color:#f92672">.</span>append(t)
+        t<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> t_l:
+        t<span style="color:#f92672">.</span>join()
+
+    <span style="color:#66d9ef">print</span>(n)
+</code></pre></div><p>在判断的时候就开始加锁，在修改完毕的时候解锁。这样加锁的情况下我们发现运行时间变长了，那是因为只有抢到锁的线程才可以工作(穿行执行)，</p>
+<h3 id="122-计数器">1.2.2 计数器</h3>
+<p>有下面一个计数器类，来看如何加锁</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Counter</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">value</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_value
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inc</span>(self):
+        self<span style="color:#f92672">.</span>_value <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dec</span>(self):
+        self<span style="color:#f92672">.</span>_value <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calc</span>(c:Counter):
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">50</span>):
+            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+                c<span style="color:#f92672">.</span>dec()
+            <span style="color:#66d9ef">else</span>:
+                c<span style="color:#f92672">.</span>inc()
+
+c <span style="color:#f92672">=</span> Counter()
+lst <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>calc, args<span style="color:#f92672">=</span>(c,))
+    lst<span style="color:#f92672">.</span>append(t)
+    t<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> lst:
+    t<span style="color:#f92672">.</span>join()
+
+<span style="color:#66d9ef">print</span>(c<span style="color:#f92672">.</span>value)
+</code></pre></div><p>        在需要调用和修改的地方加锁，修改完毕后解锁，是锁使用的基本原则，一般来说，加锁就要解锁，但是加锁和解锁之间会有一些代码要执行，如果出现异常，那么锁是无法释放的，但是当前线程已经终止了，这种情况一般称为死锁，可以添加异常处理，来确保锁一定被释放。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+
+mutex <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Counter</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">value</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_value
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inc</span>(self):
+        <span style="color:#66d9ef">try</span>:  <span style="color:#75715e"># 添加异常处理，即便时崩溃也可以释放锁</span>
+            mutex<span style="color:#f92672">.</span>acquire()
+            self<span style="color:#f92672">.</span>_value <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">finally</span>:
+            mutex<span style="color:#f92672">.</span>release()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dec</span>(self):
+        <span style="color:#66d9ef">with</span> mutex:  <span style="color:#75715e"># 上下文管理写法</span>
+            self<span style="color:#f92672">.</span>_value <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calc</span>(c:Counter):
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#f92672">-</span><span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">50</span>):
+            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+                c<span style="color:#f92672">.</span>dec()
+            <span style="color:#66d9ef">else</span>:
+                c<span style="color:#f92672">.</span>inc()
+
+c <span style="color:#f92672">=</span> Counter()
+lst <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>calc, args<span style="color:#f92672">=</span>(c,))
+    lst<span style="color:#f92672">.</span>append(t)
+    t<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> lst:
+    t<span style="color:#f92672">.</span>join()
+</code></pre></div><p>当然这里也可以为每一个计数器实例对象初始化一个自己的锁，如果用全局锁，那么不同的计数器实例，会相互影响(因为多个实例，共享一把锁)，因为不同实例的结果是不同的，所以建议为每个实例构建一个自己的锁。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Counter</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        self<span style="color:#f92672">.</span>_lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">value</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_value
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inc</span>(self):
+        <span style="color:#66d9ef">try</span>: 
+            self<span style="color:#f92672">.</span>_lock<span style="color:#f92672">.</span>acquire()
+            self<span style="color:#f92672">.</span>_value <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">finally</span>:
+            self<span style="color:#f92672">.</span>_lock<span style="color:#f92672">.</span>release()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dec</span>(self):
+        <span style="color:#66d9ef">with</span> self<span style="color:#f92672">.</span>_lock:  
+            self<span style="color:#f92672">.</span>_value <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><h3 id="123-非阻塞锁">1.2.3 非阻塞锁</h3>
+<p>当lock.acquire(False)时，该锁就是非阻塞锁了，调用时，仅获取一次，如果获取到那么返回True，否则返回False。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> logging
+
+logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>INFO, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%(asctime)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(threadName)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(thread)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">worker</span>(tasks:list):
+    <span style="color:#66d9ef">for</span> task <span style="color:#f92672">in</span> tasks:
+        <span style="color:#66d9ef">if</span> task<span style="color:#f92672">.</span>lock<span style="color:#f92672">.</span>acquire(False):  <span style="color:#75715e"># 抢到任务</span>
+            time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>))  <span style="color:#75715e"># 模拟执行任务需要的时间</span>
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;{} I am working for {}&#39;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>name, task))
+        <span style="color:#66d9ef">else</span>:  <span style="color:#75715e"># 没有抢到任务</span>
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;{} not get {}&#39;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>name,task))
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Task</span>:
+    <span style="color:#66d9ef">def</span> __init__(self,name):
+        self<span style="color:#f92672">.</span>task <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>lock <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Lock()
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>task
+
+    __str__ <span style="color:#f92672">=</span> __repr__
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    task_list <span style="color:#f92672">=</span> [Task(<span style="color:#e6db74">&#39;task{}&#39;</span><span style="color:#f92672">.</span>format(x)) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">11</span>)]   <span style="color:#75715e"># 构建任务列表</span>
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>worker,args<span style="color:#f92672">=</span>(task_list,))<span style="color:#f92672">.</span>start()  <span style="color:#75715e"># 开启多线程执行任务</span>
+</code></pre></div><p>10个任务，交给10个线程运行，谁抢到哪个线程，谁就运行。</p>
+<h3 id="124-锁应用场景">1.2.4 锁应用场景</h3>
+<p>        锁适用于访问和修改同一个共享资源的时候，即读写同一个资源的时候。但如果都是读取的话，就不需要了。使用锁的时候有一下几点需要特别注意：</p>
+<ol>
+<li>少于锁，必要时用锁，使用了锁，多线程访问被被锁资源时，就成了穿行的了，要么排队，要么争抢执行。</li>
+<li>加锁时间越短越好，不需要时立即释放锁。</li>
+<li>一定要避免死锁。</li>
+</ol>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

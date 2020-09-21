@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>gogs安装  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="gogs安装  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/linux/tools/gogs%E5%AE%89%E8%A3%85/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "gogs安装",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  279 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/linux/tools/gogs%E5%AE%89%E8%A3%85/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>gogs安装
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<h1 id="1-gogs安装">1 Gogs安装</h1>
+<p>Gogs 是一款极易搭建的自助 Git 服务。Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。</p>
+<h2 id="11-安装准备">1.1 安装准备</h2>
+<blockquote>
+<p>以下步骤均在CentOS 7.6下测试成功</p>
+</blockquote>
+<ol>
+<li>更新yum源</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+</code></pre></div><ol start="2">
+<li>安装git</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install -y git
+</code></pre></div><ol start="3">
+<li>安装数据库
+支持MySQL、Mariadb、PostgreSQL、SQLite等</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install -y mariadb-server
+</code></pre></div><h2 id="12-启动数据库">1.2 启动数据库</h2>
+<ol>
+<li>启动数据库</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl start mariadb-server
+</code></pre></div><ol start="2">
+<li>验证数据库启动</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps aux | grep mariadb  <span style="color:#75715e"># 检查进程</span>
+
+ss -lanp | grep <span style="color:#ae81ff">3306</span>   <span style="color:#75715e"># 检查端口</span>
+</code></pre></div><ol start="2">
+<li>基础配置</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 初始化数据库</span>
+mysql_secure_installation
+</code></pre></div><p>按照提示删除test库，以及创建数据库的root等</p>
+<h2 id="13-安装gogs">1.3 安装gogs</h2>
+<ol>
+<li>创建用于运行gogs的用户</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">useradd git   <span style="color:#75715e"># 创建git用户</span>
+su <span style="color:#f92672">-</span> git      <span style="color:#75715e"># 切换到git用户</span>
+</code></pre></div><ol start="2">
+<li>访问gogs官网获取gogs安装包。
+使用git用户在Linux执行下面命令下载gogs软件包</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://dl.gogs.io/0.11.86/gogs_0.11.86_linux_386.tar.gz
+</code></pre></div><p>或者访问官方网站下载对应的软件包，然后手动上传</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">https://www.zhihu.com/question/313766183
+</code></pre></div><p><img src="photo/gogs.png" alt="gogs">
+3. 解压软件包
+在软件包所在目录，执行如下命令解压gogs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar xf gogs_0.11.86_linux_amd64.tar.gz
+</code></pre></div><ol start="4">
+<li>导入数据库信息
+进入解压完毕的gogs目录的scripts目录中去，导入数据库初始化数据</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd gogs/scripts
+mysql -u root -p <span style="color:#ae81ff">123456</span> &lt; mysql.sql
+</code></pre></div><p>这里使用mysql的root用户导入
+5. 创建程序访问数据库的用户名密码
+在数据库中配置gogs连接数据库时使用的账号和密码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># bash</span>
+mysql -u root -p <span style="color:#ae81ff">123456</span>
+
+<span style="color:#75715e"># sql</span>
+grant all on gogs.* to <span style="color:#e6db74">&#39;gogs&#39;</span>@<span style="color:#e6db74">&#39;%&#39;</span> identified by <span style="color:#e6db74">&#39;123456&#39;</span>   <span style="color:#75715e"># 创建授权账户gogs，密码为123456,可以登录的原地址是%（表示任意地址）</span>
+flush privileges;  <span style="color:#75715e"># 刷新用户权限</span>
+</code></pre></div><ol start="5">
+<li>创建gogs配置文件
+官方建议在gogs的根目录下，创建一个custom/conf目录用于存放配置文件,在gogs解压好的目录gogs中执行如下命令</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p custom/conf
+
+<span style="color:#75715e"># 编写或者上传初始化的配置文件</span>
+vi app.ini
+</code></pre></div><p>文件内容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 基础部分</span>
+APP_NAME <span style="color:#f92672">=</span> daxinGitServer
+RUN_USER <span style="color:#f92672">=</span> git
+RUN_MODE <span style="color:#f92672">=</span> dev
+
+<span style="color:#75715e"># 服务器部分</span>
+<span style="color:#f92672">[</span>server<span style="color:#f92672">]</span>
+HTTP_ADDR <span style="color:#f92672">=</span> 0.0.0.0
+HTTP_PORT <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+
+<span style="color:#75715e"># 数据库部分</span>
+<span style="color:#f92672">[</span>database<span style="color:#f92672">]</span>   
+DB_TYPE <span style="color:#f92672">=</span> mysql
+HOST <span style="color:#f92672">=</span> 127.0.0.1:3306
+NAME <span style="color:#f92672">=</span> gogs
+USER <span style="color:#f92672">=</span> gogs
+PASSWD <span style="color:#f92672">=</span> <span style="color:#ae81ff">123456</span>
+
+<span style="color:#75715e"># 安全部分</span>
+<span style="color:#f92672">[</span>security<span style="color:#f92672">]</span>
+INSTALL_LOCK <span style="color:#f92672">=</span> false  <span style="color:#75715e"># 首次访问时是否显示配置页面</span>
+SECRET_KEY <span style="color:#f92672">=</span> daxinGitServer:gogs
+</code></pre></div><p>基础部分配置含义如下:</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APP_NAME</code></td>
+<td>应用名称，可以改成您的组织或公司名称</td>
+</tr>
+<tr>
+<td><code>RUN_USER</code></td>
+<td>运行应用的用户名称，我们建议您使用 <code>git</code>，但如果您在个人计算机上运行 Gogs，请修改为您的系统用户名称。如果没有正确设置这个值，很可能导致您的应用崩溃</td>
+</tr>
+<tr>
+<td><code>RUN_MODE</code></td>
+<td>鉴于性能和其它考虑，建议在部署环境下修改为 <code>prod</code> 模式。在您完成安装操作时，该值也会被设置为 <code>prod</code></td>
+</tr>
+</tbody>
+</table>
+<p>服务器(<code>server</code>)部分配置含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HTTP_ADDR</code></td>
+<td>应用 HTTP 监听地址</td>
+</tr>
+<tr>
+<td><code>HTTP_PORT</code></td>
+<td>应用 HTTP 监听端口号</td>
+</tr>
+</tbody>
+</table>
+<p>数据库(<code>database</code>)部分配置含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DB_TYPE</code></td>
+<td>数据库类型，可以是 <code>mysql</code>、<code>postgres</code>、<code>mssql</code> 或 <code>sqlite3</code></td>
+</tr>
+<tr>
+<td><code>HOST</code></td>
+<td>数据库主机地址与端口</td>
+</tr>
+<tr>
+<td><code>NAME</code></td>
+<td>数据库名称</td>
+</tr>
+<tr>
+<td><code>USER</code></td>
+<td>数据库用户名</td>
+</tr>
+<tr>
+<td><code>PASSWD</code></td>
+<td>数据库用户密码</td>
+</tr>
+</tbody>
+</table>
+<p>安全(<code>security</code>)部分配置含义如下:</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INSTALL_LOCK</code></td>
+<td>用于指示是否允许访问安装页面（该页面可以设置管理员帐号，因此该选项非常重要）</td>
+</tr>
+<tr>
+<td><code>SECRET_KEY</code></td>
+<td>全局的加密密钥，<strong>务必修改该值以确保您的服务器安全</strong>（会在每次安装时自动生成随机字符串）</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://github.com/gogs/docs/blob/master/zh-CN/advanced/configuration_cheat_sheet.md">更多配置信息请点击这里哦</a></p>
+<h2 id="14-启动gogs">1.4 启动gogs</h2>
+<p>在gogs的安装目录下运行下列命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./gogs web 
+</code></pre></div><p>使用systemd管理gogs的方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 拷贝gogs提供的systemd管理脚本至管理目录</span>
+cp gogs/scripts/systemd/gogs.service  /lib/systemd/system
+
+<span style="color:#75715e"># 启动服务</span>
+systemctl start gogs.service  
+
+<span style="color:#75715e"># 开机启动</span>
+systemctl enable gogs.service
+</code></pre></div><h2 id="15-访问">1.5 访问</h2>
+<p>利用浏览器访问服务区的3000端口即可，注意如果服务器开启了防火墙可以先关闭，或者添加访问策略</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 关闭防火墙</span>
+systemctl stop firewalld
+
+<span style="color:#75715e"># 关闭开机启动</span>
+systemctl disable firewalld
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

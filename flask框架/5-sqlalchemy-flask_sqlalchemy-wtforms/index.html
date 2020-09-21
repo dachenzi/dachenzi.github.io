@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>5-sqlalchemy-flask_sqlalchemy-wtforms  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="5-sqlalchemy-flask_sqlalchemy-wtforms  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy-wtforms/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "5-sqlalchemy-flask_sqlalchemy-wtforms",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  685 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy-wtforms/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>5-sqlalchemy-flask_sqlalchemy-wtforms
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<h1 id="1-sqlalchemy">1 sqlalchemy</h1>
+<p>关于sqlalchemy的用法请参考：<a href="https://www.cnblogs.com/dachenzi/p/10569495.html">sqlalchemy用法点这里</a></p>
+<h1 id="2-flask_sqlalchemy">2 flask_sqlalchemy</h1>
+<p>        Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。
+<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html#id2">官方文档点这里</a></p>
+<p>下面是一个标准的falsk程序的目录结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cmdb
+├── cmdb
+│   ├── __init__.py   <span style="color:#75715e"># 创建db，create_app函数</span>
+│   ├── models.py   <span style="color:#75715e"># orm映射文件</span>
+│   ├── static
+│   ├── templates
+│   └── views   <span style="color:#75715e"># views视图函数</span>
+│       ├── __init__.py
+│       ├── account.py
+│       └── home.py
+├── create_table.py   <span style="color:#75715e"># 用于创建数据库表</span>
+├── manage.py    <span style="color:#75715e"># 管理，启动app</span>
+└── settings.py
+</code></pre></div><p>其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。</p>
+<h2 id="21-创建对象">2.1 创建对象</h2>
+<p>        新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 <code>pip3 install flask_sqlalchemy</code> 安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__.py</span>
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+
+db <span style="color:#f92672">=</span> SQLAlchemy()
+</code></pre></div><p>注意，</p>
+<h2 id="22-初始化init_app">2.2 初始化init_app</h2>
+<p>在一个函数中定义的应用，SQLAlchemy 对象是全局的，后者如何知道前者了？答案就是 init_app()函数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__.py</span>
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+<span style="color:#f92672">import</span> Flask
+
+db <span style="color:#f92672">=</span> SQLAlchemy()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+    app <span style="color:#f92672">=</span> Flask(__name__)
+    db<span style="color:#f92672">.</span>init_app(app)  <span style="color:#75715e"># 需要把app传入，这样SQLAlchemy在内部就可以读取app中的相关配置，比如sql的driver，host等等</span>
+</code></pre></div><p>关于sqlalchemy的配置，这样就可以直接写在app的settings.py中了，可以配置的项目参考:<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html">sqlalchemy配置</a></p>
+<p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>(object):
+    SECRET_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;121212asdsd121dafd&#39;</span>
+    SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    SQLALCHEMY_POOL_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><h2 id="23-上下文管理">2.3 上下文管理</h2>
+<p>        我们写的model如何创建数据库表呢？在sqlalchemy中，需要使用base.metadata.create_all()，在flask_sqlalchey中，简化了这个过程。利用db.create_all就可以完成创建,注意需要在db所在的地方，引入编写的model的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__</span>
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+
+<span style="color:#75715e"># 实例化一个flash_sqlalchemy对象</span>
+db <span style="color:#f92672">=</span> SQLAlchemy()
+
+<span style="color:#75715e"># 只能放在下面，因为会用到db 对象</span>
+<span style="color:#f92672">from</span> .models <span style="color:#f92672">import</span> User    <span style="color:#75715e"># 倒入编写的model文件中的类</span>
+<span style="color:#f92672">from</span> .views <span style="color:#f92672">import</span> account
+<span style="color:#f92672">from</span> .views <span style="color:#f92672">import</span> home
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+    app <span style="color:#f92672">=</span> Flask(__name__)
+    app<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>from_object(<span style="color:#e6db74">&#39;settings.Base&#39;</span>)
+
+    <span style="color:#75715e"># 注册蓝图</span>
+    app<span style="color:#f92672">.</span>register_blueprint(account<span style="color:#f92672">.</span>ac)
+    app<span style="color:#f92672">.</span>register_blueprint(home<span style="color:#f92672">.</span>hm)
+
+    <span style="color:#75715e"># 初始化</span>
+    db<span style="color:#f92672">.</span>init_app(app)
+
+    <span style="color:#66d9ef">return</span> app
+</code></pre></div><p>创建数据库表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># create_table.py </span>
+
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> db
+<span style="color:#f92672">from</span> manage <span style="color:#f92672">import</span> app
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">with</span> app<span style="color:#f92672">.</span>app_context():  <span style="color:#75715e"># 需要上下文环境</span>
+        db<span style="color:#f92672">.</span>create_all()      <span style="color:#75715e"># 初始化表结构</span>
+</code></pre></div><h2 id="24-视图中使用">2.4 视图中使用</h2>
+<p>在views中的视图函数中，通过导入db对象，即可使用它来操作数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># views.account.py</span>
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> db
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> models
+
+ac <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;ac&#39;</span>, __name__)
+
+<span style="color:#a6e22e">@ac.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    res <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>query(models<span style="color:#f92672">.</span>User)<span style="color:#f92672">.</span>all()  <span style="color:#75715e"># 直接使用</span>
+    <span style="color:#66d9ef">print</span>(res)
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;login&#39;</span>
+
+<span style="color:#a6e22e">@ac.route</span>(<span style="color:#e6db74">&#39;/logout&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;logout&#39;</span>
+</code></pre></div><h2 id="25-关闭触发信号">2.5 关闭触发信号</h2>
+<p>启动的时候会发送一个信号警告</p>
+<pre><code>FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
+</code></pre><p>在配置文件中关闭出发的信号</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>(object):
+    SECRET_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;121212asdsd121dafd&#39;</span>
+    SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    SQLALCHEMY_POOL_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+    SQLALCHEMY_TRACK_MODIFICATIONS <span style="color:#f92672">=</span> False   <span style="color:#75715e"># 添加这个配置即可。</span>
+</code></pre></div><h1 id="3-wtforms">3 wtforms</h1>
+<p>WTForms是一个支持多个web框架的form组件，主要用于对用户请求数据进行验证。和django的froms相同。</p>
+<h2 id="31-用户登陆">3.1 用户登陆</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, render_template, request, redirect
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> Form
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> core
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> html5
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> simple
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> validators
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> widgets
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginForm</span>(Form):
+    name <span style="color:#f92672">=</span> simple<span style="color:#f92672">.</span>StringField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名&#39;</span>,   <span style="color:#75715e"># 显示的标签名称</span>
+        validators<span style="color:#f92672">=</span>[     <span style="color:#75715e"># 验证规则</span>
+            validators<span style="color:#f92672">.</span>DataRequired(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名不能为空.&#39;</span>),   <span style="color:#75715e"># 必填项</span>
+            validators<span style="color:#f92672">.</span>Length(min<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, max<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>, message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名长度必须大于</span><span style="color:#e6db74">%(min)d</span><span style="color:#e6db74">且小于</span><span style="color:#e6db74">%(max)d</span><span style="color:#e6db74">&#39;</span>)
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>TextInput(),  <span style="color:#75715e"># 输入框类型</span>
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>}   <span style="color:#75715e"># 添加属性</span>
+
+    )
+    pwd <span style="color:#f92672">=</span> simple<span style="color:#f92672">.</span>PasswordField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码&#39;</span>,
+        validators<span style="color:#f92672">=</span>[
+            validators<span style="color:#f92672">.</span>DataRequired(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码不能为空.&#39;</span>),
+            validators<span style="color:#f92672">.</span>Length(min<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名长度必须大于</span><span style="color:#e6db74">%(min)d</span><span style="color:#e6db74">&#39;</span>),
+            validators<span style="color:#f92672">.</span>Regexp(regex<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&amp;])[A-Za-z\d$@$!%*?&amp;]{8,}&#34;</span>,
+                              message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码至少8个字符，至少1个大写字母，1个小写字母，1个数字和1个特殊字符&#39;</span>)  <span style="color:#75715e"># 正则匹配</span>
+
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>PasswordInput(),    <span style="color:#75715e"># 密码框类型</span>
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>}  
+    )
+<span style="color:#75715e"># 建议字段名称和数据库字段相同，因为可以直接将用户提交的数据更新到数据库中</span>
+</code></pre></div><p>对应的视图函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
+        form <span style="color:#f92672">=</span> LoginForm()   <span style="color:#75715e"># 将form对象传递到前端渲染</span>
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;login.html&#39;</span>, form<span style="color:#f92672">=</span>form)
+    <span style="color:#66d9ef">else</span>:
+        form <span style="color:#f92672">=</span> LoginForm(formdata<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>form)  <span style="color:#75715e"># 把用户的数据交给form验证</span>
+        <span style="color:#66d9ef">if</span> form<span style="color:#f92672">.</span>validate():   <span style="color:#75715e"># 如果可用</span>
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;用户提交数据通过格式验证，提交的值为：&#39;</span>, form<span style="color:#f92672">.</span>data)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(form<span style="color:#f92672">.</span>errors)   <span style="color:#75715e"># 不可用的提示信息</span>
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;login.html&#39;</span>, form<span style="color:#f92672">=</span>form) 
+</code></pre></div><p>前端渲染：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
+    <span style="color:#75715e">&lt;!--&lt;input type=&#34;text&#34; name=&#34;name&#34;&gt;--&gt;</span>
+    &lt;<span style="color:#f92672">p</span>&gt;{{form.name.label}} {{form.name}} {{form.name.errors[0] }}&lt;/<span style="color:#f92672">p</span>&gt;
+
+    <span style="color:#75715e">&lt;!--&lt;input type=&#34;password&#34; name=&#34;pwd&#34;&gt;--&gt;</span>
+    &lt;<span style="color:#f92672">p</span>&gt;{{form.pwd.label}} {{form.pwd}} {{form.pwd.errors[0] }}&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+</code></pre></div><h2 id="32-用户注册">3.2 用户注册</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, render_template, request, redirect
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> Form
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> core
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> html5
+<span style="color:#f92672">from</span> wtforms.fields <span style="color:#f92672">import</span> simple
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> validators
+<span style="color:#f92672">from</span> wtforms <span style="color:#f92672">import</span> widgets
+
+app <span style="color:#f92672">=</span> Flask(__name__, template_folder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;templates&#39;</span>)
+app<span style="color:#f92672">.</span>debug <span style="color:#f92672">=</span> True
+
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RegisterForm</span>(Form):
+    name <span style="color:#f92672">=</span> simple<span style="color:#f92672">.</span>StringField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名&#39;</span>,
+        validators<span style="color:#f92672">=</span>[
+            validators<span style="color:#f92672">.</span>DataRequired()
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>TextInput(),
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>},
+        default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>  <span style="color:#75715e"># 默认值</span>
+    )
+
+    pwd <span style="color:#f92672">=</span> simple<span style="color:#f92672">.</span>PasswordField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码&#39;</span>,
+        validators<span style="color:#f92672">=</span>[
+            validators<span style="color:#f92672">.</span>DataRequired(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码不能为空.&#39;</span>)
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>PasswordInput(),
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>}
+    )
+
+    pwd_confirm <span style="color:#f92672">=</span> simple<span style="color:#f92672">.</span>PasswordField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;重复密码&#39;</span>,
+        validators<span style="color:#f92672">=</span>[
+            validators<span style="color:#f92672">.</span>DataRequired(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;重复密码不能为空.&#39;</span>),
+            validators<span style="color:#f92672">.</span>EqualTo(<span style="color:#e6db74">&#39;pwd&#39;</span>, message<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;两次密码输入不一致&#34;</span>)
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>PasswordInput(),
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>}
+    )
+
+    email <span style="color:#f92672">=</span> html5<span style="color:#f92672">.</span>EmailField(   <span style="color:#75715e"># 包含邮箱的验证规则</span>
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;邮箱&#39;</span>,
+        validators<span style="color:#f92672">=</span>[
+            validators<span style="color:#f92672">.</span>DataRequired(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;邮箱不能为空.&#39;</span>),
+            validators<span style="color:#f92672">.</span>Email(message<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;邮箱格式错误&#39;</span>)
+        ],
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>TextInput(input_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;email&#39;</span>),
+        render_kw<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;form-control&#39;</span>}
+    )
+
+    gender <span style="color:#f92672">=</span> core<span style="color:#f92672">.</span>RadioField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;性别&#39;</span>,
+        choices<span style="color:#f92672">=</span>(
+            (<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;男&#39;</span>),
+            (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;女&#39;</span>),
+        ),
+        coerce<span style="color:#f92672">=</span>int   <span style="color:#75715e"># 数字类型的转换方式</span>
+    )
+    city <span style="color:#f92672">=</span> core<span style="color:#f92672">.</span>SelectField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;城市&#39;</span>,
+        choices<span style="color:#f92672">=</span>(
+            (<span style="color:#e6db74">&#39;bj&#39;</span>, <span style="color:#e6db74">&#39;北京&#39;</span>),
+            (<span style="color:#e6db74">&#39;sh&#39;</span>, <span style="color:#e6db74">&#39;上海&#39;</span>),
+        )
+    )
+
+    hobby <span style="color:#f92672">=</span> core<span style="color:#f92672">.</span>SelectMultipleField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;爱好&#39;</span>,
+        choices<span style="color:#f92672">=</span>(
+            (<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;篮球&#39;</span>),
+            (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;足球&#39;</span>),
+        ),
+        coerce<span style="color:#f92672">=</span>int
+    )
+
+    favor <span style="color:#f92672">=</span> core<span style="color:#f92672">.</span>SelectMultipleField(
+        label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;喜好&#39;</span>,
+        choices<span style="color:#f92672">=</span>(
+            (<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;篮球&#39;</span>),
+            (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;足球&#39;</span>),
+        ),
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>ListWidget(prefix_label<span style="color:#f92672">=</span>False),
+        option_widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>CheckboxInput(),
+        coerce<span style="color:#f92672">=</span>int,
+        default<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]
+    )
+
+    <span style="color:#66d9ef">def</span> __init__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        super(RegisterForm, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        self<span style="color:#f92672">.</span>favor<span style="color:#f92672">.</span>choices <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;篮球&#39;</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;足球&#39;</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;羽毛球&#39;</span>))  
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_pwd_confirm</span>(self, field):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        自定义pwd_confirm字段规则，例：与pwd字段是否一致
+</span><span style="color:#e6db74">        :param field: 
+</span><span style="color:#e6db74">        :return: 
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#75715e"># 最开始初始化时，self.data中已经有所有的值</span>
+
+        <span style="color:#66d9ef">if</span> field<span style="color:#f92672">.</span>data <span style="color:#f92672">!=</span> self<span style="color:#f92672">.</span>data[<span style="color:#e6db74">&#39;pwd&#39;</span>]:
+            <span style="color:#75715e"># raise validators.ValidationError(&#34;密码不一致&#34;) # 继续后续验证</span>
+            <span style="color:#66d9ef">raise</span> validators<span style="color:#f92672">.</span>StopValidation(<span style="color:#e6db74">&#34;密码不一致&#34;</span>)  <span style="color:#75715e"># 不再继续后续验证</span>
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/register&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>():
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
+        form <span style="color:#f92672">=</span> RegisterForm(data<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;gender&#39;</span>: <span style="color:#ae81ff">1</span>})
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;register.html&#39;</span>, form<span style="color:#f92672">=</span>form)
+    <span style="color:#66d9ef">else</span>:
+        form <span style="color:#f92672">=</span> RegisterForm(formdata<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>form)
+        <span style="color:#66d9ef">if</span> form<span style="color:#f92672">.</span>validate():
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;用户提交数据通过格式验证，提交的值为：&#39;</span>, form<span style="color:#f92672">.</span>data)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(form<span style="color:#f92672">.</span>errors)
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;register.html&#39;</span>, form<span style="color:#f92672">=</span>form)
+
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run()
+</code></pre></div><p>注意：choices字段和django中的form是一样的，如果数据来自于数据库，那么只能在第一次实例化的时候加载，无法做的实时更新，所以处理方法也是相同的，放在__init__中，每次实例化的时候更新。</p>
+<p>for循环渲染多个不同的标签：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span>Title<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>h1<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">用户注册</span><span style="color:#f92672">&lt;/</span>h1<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>form method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> novalidate style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;padding:0  50px&#34;</span><span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> form <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{item<span style="color:#f92672">.</span>label}}: {{item}} {{item<span style="color:#f92672">.</span>errors[<span style="color:#ae81ff">0</span>] }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>form<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>html<span style="color:#f92672">&gt;</span>
+
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

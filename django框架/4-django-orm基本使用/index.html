@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>4-django-orm基本使用  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="4-django-orm基本使用  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/django%E6%A1%86%E6%9E%B6/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "4-django-orm基本使用",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  1312 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/django%E6%A1%86%E6%9E%B6/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>4-django-orm基本使用
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8Eorm">1 数据库与ORM</a></li>
+<li><a href="#2-orm%E7%9A%84%E9%85%8D%E7%BD%AE">2 orm的配置</a>
+<ul>
+<li><a href="#21-%E5%BC%95%E6%93%8E%E5%92%8C%E9%85%8D%E7%BD%AE">2.1 引擎和配置</a></li>
+<li><a href="#22-mysql%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">2.2 mysql驱动程序</a></li>
+</ul>
+</li>
+<li><a href="#3-orm-%E8%A1%A8%E6%A8%A1%E5%9E%8B">3 orm 表模型</a>
+<ul>
+<li><a href="#31-%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%AF%B9%E8%B1%A1">3.1 创建表对象</a></li>
+<li><a href="#32-django%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B">3.2 Django字段类型</a></li>
+<li><a href="#33-%E5%B8%B8%E7%94%A8%E5%AD%97%E6%AE%B5%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">3.3 常用字段参数说明</a></li>
+<li><a href="#34-%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%E5%AD%97%E6%AE%B5%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">3.4 特殊类型字段参数说明</a></li>
+<li><a href="#35-meta%E4%BF%A1%E6%81%AF">3.5 Meta信息</a></li>
+<li><a href="#36-%E7%94%9F%E6%88%90%E8%A1%A8">3.6 生成表</a>
+<ul>
+<li><a href="#361-%E6%B3%A8%E5%86%8Capp">3.6.1 注册app</a></li>
+<li><a href="#362-%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">3.6.2 修改表结构遇到的问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E5%88%A9%E7%94%A8orm%E5%AE%8C%E6%88%90%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5">4 利用orm完成数据库的增删改查</a>
+<ul>
+<li><a href="#41-orm%E4%B9%8B%E5%A2%9E%E5%8A%A0">4.1 orm之增加</a></li>
+<li><a href="#42-orm%E4%B9%8B%E5%88%A0%E9%99%A4">4.2 orm之删除</a></li>
+<li><a href="#43-orm%E4%B9%8B%E4%BF%AE%E6%94%B9">4.3 orm之修改</a></li>
+<li><a href="#44-orm%E4%B9%8B%E6%9F%A5%E8%AF%A2">4.4 orm之查询</a>
+<ul>
+<li><a href="#441-%E6%9F%A5%E8%AF%A2%E8%BF%87%E6%BB%A4%E6%96%B9%E6%B3%95">4.4.1 查询过滤方法</a></li>
+<li><a href="#442-%E9%99%90%E5%88%B6%E6%9F%A5%E8%AF%A2%E9%9B%86%E5%88%87%E7%89%87">4.4.2 限制查询集（切片）</a></li>
+<li><a href="#442-%E5%AD%97%E6%AE%B5%E6%9F%A5%E8%AF%A2%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF">4.4.2 字段查询（双下划线）</a></li>
+<li><a href="#443-q%E5%AF%B9%E8%B1%A1">4.4.3 Q对象</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-%E8%A1%A8%E4%B8%8E%E8%A1%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB">5 表与表之间的关系</a>
+<ul>
+<li><a href="#51-%E4%B8%80%E5%AF%B9%E5%A4%9A">5.1 一对多</a>
+<ul>
+<li><a href="#511-%E6%AD%A3%E5%90%91%E6%9F%A5%E8%AF%A2%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF">5.1.1 正向查询(双下划线)</a></li>
+<li><a href="#512-%E5%8F%8D%E5%90%91%E6%9F%A5%E8%AF%A2set">5.1.2 反向查询(set)</a></li>
+</ul>
+</li>
+<li><a href="#52-%E5%A4%9A%E5%AF%B9%E5%A4%9A">5.2 多对多</a>
+<ul>
+<li><a href="#521-%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA">5.2.1 手动创建</a></li>
+<li><a href="#522-%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA">5.2.2 自动创建</a></li>
+<li><a href="#523-%E6%93%8D%E4%BD%9C%E5%85%B3%E7%B3%BB%E8%A1%A8">5.2.3 操作关系表</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-数据库与orm">1 数据库与ORM</h1>
+<p>对象关系映射（英语：(Object Relational Mapping，简称ORM，或O/RM，或O/R mapping），是一种程序技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换 。从效果上说，它其实是创建了一个可在编程语言里使用的&ndash;“虚拟对象数据库”。</p>
+<p>简单一句话来说：就是把数据库的表映射为一个个对象，对对象的操作会被映射成SQL语句，在数据库执行。<br>
+<img src="../photo/django-orm.png" alt="django-orm"></p>
+<h1 id="2-orm的配置">2 orm的配置</h1>
+<p>django默认支持sqlite，mysql, oracle,postgresql数据库。</p>
+<ul>
+<li>sqllit: django默认使用sqlite的数据库，默认自带sqlite的数据库驱动 , 引擎名称：django.db.backends.sqlite3</li>
+<li>mysql: 引擎名称：django.db.backends.mysql</li>
+</ul>
+<h2 id="21-引擎和配置">2.1 引擎和配置</h2>
+<p>在django的项目中会默认使用sqlite数据库，在settings里有如下设置：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DATABASES <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;default&#39;</span>: {
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;ENGINE&#39;</span>: <span style="color:#e6db74">&#39;django.db.backends.sqlite3&#39;</span>,
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;NAME&#39;</span>: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#39;db.sqlite3&#39;</span>),
+    }
+}
+</code></pre></div><p>下面是MySQL的配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">DATABASES <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;default&#39;</span>: {
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;ENGINE&#39;</span>: <span style="color:#e6db74">&#39;django.db.backends.mysql&#39;</span>, 
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;NAME&#39;</span>: <span style="color:#e6db74">&#39;books&#39;</span>,    <span style="color:#75715e"># 你的数据库名称</span>
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;USER&#39;</span>: <span style="color:#e6db74">&#39;root&#39;</span>,     <span style="color:#75715e"># 你的数据库用户名</span>
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;PASSWORD&#39;</span>: <span style="color:#e6db74">&#39;&#39;</span>,     <span style="color:#75715e"># 你的数据库密码</span>
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;HOST&#39;</span>: <span style="color:#e6db74">&#39;&#39;</span>,<span style="color:#f92672">-</span>  <span style="color:#75715e"># 你的数据库主机，留空默认为localhost</span>
+<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;PORT&#39;</span>: <span style="color:#e6db74">&#39;3306&#39;</span>,     <span style="color:#75715e"># 你的数据库端口</span>
+    }
+}
+</code></pre></div><p>参数如下：</p>
+<ul>
+<li>NAME即数据库的名字，在mysql连接前该数据库必须已经创建，而上面的sqlite数据库下的db.sqlite3则是项目自动创建</li>
+<li>USER和PASSWORD分别是数据库的用户名和密码。</li>
+</ul>
+<h2 id="22-mysql驱动程序">2.2 mysql驱动程序</h2>
+<p>django可以使用如下mysql的驱动程序：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">MySQLdb<span style="color:#960050;background-color:#1e0010">（不完美支持</span>Python3<span style="color:#960050;background-color:#1e0010">）</span> 
+mysqlclient (<span style="color:#960050;background-color:#1e0010">官方建议</span>)
+PyMySQL(<span style="color:#960050;background-color:#1e0010">纯</span>python的mysql驱动程序)
+</code></pre></div><p>建议使用：</p>
+<ul>
+<li>mysqlclient</li>
+<li>PyMySQL</li>
+</ul>
+<p>django基础配置部分已经描述了mysqlclient的安装，这里介绍如何使用pymysql，首先需要安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install pymysql
+</code></pre></div><p>下一步只需要找到项目名文件下的__init__,在里面写入：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pymysql
+pymysql<span style="color:#f92672">.</span>install_as_MySQLdb()
+</code></pre></div><p>即可完成配置</p>
+<h1 id="3-orm-表模型">3 orm 表模型</h1>
+<p>我们所说的ORM主要分为两种：</p>
+<ul>
+<li><code>DB First</code> 数据库里先创建数据库表结构，根据表结构生成类，根据类操作数据库</li>
+<li><code>Code First</code> 先写代码，执行代码创建数据库表结构</li>
+</ul>
+<p>主流的orm都是code first。django 的orm也是code first，所以本质上分为两部分：</p>
+<ul>
+<li>根据类自动创建数据库表</li>
+<li>根据类对数据库表中的数据进行各种操作</li>
+</ul>
+<h2 id="31-创建表对象">3.1 创建表对象</h2>
+<p>现在有一张表，主要字段如下:<br>
+<img src="../photo/orm-table.png" alt="orm-table"><br>
+对应的models中的映射类为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models     <span style="color:#75715e"># 导入models,django提供的对象包含很多建表的方法</span>
+ 
+<span style="color:#75715e"># Create your models here.</span>
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfo</span>(models<span style="color:#f92672">.</span>Model):    <span style="color:#75715e"># 需要继承models.Model</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;userinfo&#39;</span>  <span style="color:#75715e"># 在数据库中生成的表明</span>
+
+    id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True,null<span style="color:#f92672">=</span>False,verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ID&#39;</span>)
+    name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,null<span style="color:#f92672">=</span>False,verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名&#39;</span>)
+    password <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>,null<span style="color:#f92672">=</span>False,verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码&#39;</span>)
+    email <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>EmailField(null<span style="color:#f92672">=</span>False,verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;邮箱&#39;</span>)
+ 
+ 
+<span style="color:#75715e"># AutoField : 自增字段，类似于mysql的int字段加auto_increment属性</span>
+<span style="color:#75715e"># CharField：可变长字段，类似于mysql的varchar类型，需要指定长度</span>
+<span style="color:#75715e"># EmailField：邮件字段，仅仅提供给 django admin进行约束使用，映射到MySQL上，根本上也是字符串类型</span>
+<span style="color:#75715e"># null：是否为空，通用参数，默认为否。</span>
+<span style="color:#75715e"># verbose_name：django admin上对表操作时，显示的字段名称</span>
+<span style="color:#75715e"># primary_key：主键</span>
+<span style="color:#75715e"># max_length：针对于CharField字段，标示其长度</span>
+</code></pre></div><h2 id="32-django字段类型">3.2 Django字段类型</h2>
+<p>部分字段类型及说明如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AutoField(Field)</td>
+<td>int自增列，必须填入参数 primary_key=True</td>
+</tr>
+<tr>
+<td>BigAutoField(AutoField)</td>
+<td>bigint自增列，必须填入参数 primary_key=True<!-- raw HTML omitted -->注：当model中如果没有自增列，则自动会创建一个列名为id的列</td>
+</tr>
+<tr>
+<td>SmallIntegerField(IntegerField)</td>
+<td>小整数 -32768 ～ 32767</td>
+</tr>
+<tr>
+<td>PositiveSmallIntegerField(PositiveIntegerRelDbTypeMixin, IntegerField)</td>
+<td>正小整数 0 ～ 32767</td>
+</tr>
+<tr>
+<td>IntegerField(Field)</td>
+<td>整数列(有符号的) -2147483648 ～ 2147483647</td>
+</tr>
+<tr>
+<td>PositiveIntegerField(PositiveIntegerRelDbTypeMixin, IntegerField)</td>
+<td>正整数 0 ～ 2147483647</td>
+</tr>
+<tr>
+<td>BigIntegerField(IntegerField)</td>
+<td>长整型(有符号的) -9223372036854775808 ～ 9223372036854775807</td>
+</tr>
+<tr>
+<td>BooleanField(Field)</td>
+<td>布尔值类型</td>
+</tr>
+<tr>
+<td>NullBooleanField(Field)</td>
+<td>可以为空的布尔值</td>
+</tr>
+<tr>
+<td>CharField(Field)</td>
+<td>字符类型,必须提供max_length参数， max_length表示字符长度</td>
+</tr>
+<tr>
+<td>TextField(Field)</td>
+<td>文本类型</td>
+</tr>
+<tr>
+<td>EmailField(CharField)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供验证机制</td>
+</tr>
+<tr>
+<td>IPAddressField(Field)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供验证 IPV4 机制</td>
+</tr>
+<tr>
+<td>GenericIPAddressField(Field)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供验证 Ipv4和Ipv6</td>
+</tr>
+<tr>
+<td>URLField(CharField)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供验证 URL</td>
+</tr>
+<tr>
+<td>SlugField(CharField)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供验证支持 字母、数字、下划线、连接符（减号）</td>
+</tr>
+<tr>
+<td>CommaSeparatedIntegerField(CharField)</td>
+<td>字符串类型，格式必须为逗号分割的数字</td>
+</tr>
+<tr>
+<td>UUIDField(Field)</td>
+<td>字符串类型，Django Admin以及ModelForm中提供对UUID格式的验证</td>
+</tr>
+<tr>
+<td>FilePathField(Field)</td>
+<td>字符串，Django Admin以及ModelForm中提供读取文件夹下文件的功</td>
+</tr>
+<tr>
+<td>FileField(Field)</td>
+<td>字符串，路径保存在数据库，文件上传到指定目录</td>
+</tr>
+<tr>
+<td>ImageField(FileField)</td>
+<td>字符串，路径保存在数据库，文件上传到指定目录</td>
+</tr>
+<tr>
+<td>DateTimeField(DateField)</td>
+<td>日期+时间格式 YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]</td>
+</tr>
+<tr>
+<td>DateField(DateTimeCheckMixin, Field)</td>
+<td>日期格式      YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>TimeField(DateTimeCheckMixin, Field)</td>
+<td>时间格式      HH:MM[:ss[.uuuuuu]]</td>
+</tr>
+<tr>
+<td>DurationField(Field)</td>
+<td>长整数，时间间隔，数据库中按照bigint存储，ORM中获取的值为datetime.timedelta类型</td>
+</tr>
+<tr>
+<td>FloatField(Field)</td>
+<td>浮点型</td>
+</tr>
+<tr>
+<td>DecimalField(Field)</td>
+<td>10进制小数</td>
+</tr>
+<tr>
+<td>BinaryField(Field)</td>
+<td>二进制类型</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-常用字段参数说明">3.3 常用字段参数说明</h2>
+<p>django中提供了很多参数对字段进行控制</p>
+<p>通用类：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>null</td>
+<td>是否可以为空</td>
+</tr>
+<tr>
+<td>default</td>
+<td>默认值</td>
+</tr>
+<tr>
+<td>primary_key</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>db_column</td>
+<td>列名</td>
+</tr>
+<tr>
+<td>db_index</td>
+<td>索引(bool)</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>唯一索引</td>
+</tr>
+</tbody>
+</table>
+<p>时间日期类：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unique_for_date</td>
+<td>对日期字段来说，表示只对时间做索引</td>
+</tr>
+<tr>
+<td>unique_for_month</td>
+<td>对日期字段来说，表示只对月份做索引</td>
+</tr>
+<tr>
+<td>unique_for_year</td>
+<td>对日期字段来说，表示只对年做索引</td>
+</tr>
+<tr>
+<td>auto_now</td>
+<td>无论是你添加还是修改对象，时间为你添加或者修改的时间。</td>
+</tr>
+<tr>
+<td>auto_now_add</td>
+<td>为添加时的时间，更新对象时不会有变动。</td>
+</tr>
+</tbody>
+</table>
+<p>django admin相关：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>choices</td>
+<td>在django admin中显示下拉框，避免连表查询(比如用户类型，可以在存在内存中)</td>
+</tr>
+<tr>
+<td>blank</td>
+<td>在django admin中是否可以为空</td>
+</tr>
+<tr>
+<td>verbose_name</td>
+<td>字段在django admin中显示的名称</td>
+</tr>
+<tr>
+<td>editable</td>
+<td>在django admin中是否可以进行编辑，默认是true</td>
+</tr>
+<tr>
+<td>error_message</td>
+<td>当在django admin中输入的信息不匹配时，字段的提示信息</td>
+</tr>
+<tr>
+<td>help_text</td>
+<td>在django admin中输入框旁边进行提示</td>
+</tr>
+<tr>
+<td>validators</td>
+<td>在django admin中自定义规则限制</td>
+</tr>
+</tbody>
+</table>
+<p>django中提供了很多的字段类型，大部分都是提供给django admin 来做验证的，实际体现在数据库中的，大部分都是字符串类型。</p>
+<h2 id="34-特殊类型字段参数说明">3.4 特殊类型字段参数说明</h2>
+<p><code>GenericIPAddressField(Field)</code>：字符串类型，Django Admin以及ModelForm中提供验证 Ipv4和Ipv6<br>
+参数：</p>
+<ul>
+<li>protocol，用于指定Ipv4或Ipv6， &lsquo;both&rsquo;,&ldquo;ipv4&rdquo;,&ldquo;ipv6&rdquo;</li>
+<li>unpack_ipv4， 如果指定为True，则输入::ffff:192.0.2.1时候，可解析为192.0.2.1，开启刺功能，需要protocol=&ldquo;both&rdquo;</li>
+</ul>
+<p><code>FilePathField(Field)</code>:字符串，Django Admin以及ModelForm中提供读取文件夹下文件的功能<br>
+参数：</p>
+<ul>
+<li>path:文件夹路径</li>
+<li>match=None:正则匹配</li>
+<li>recursive=False:递归下面的文件夹</li>
+<li>allow_files=True:允许文件</li>
+<li>allow_folders=False:允许文件夹</li>
+</ul>
+<p><code>FileField(Field)</code>:字符串，路径保存在数据库，文件上传到指定目录<br>
+参数：</p>
+<ul>
+<li>upload_to = &ldquo;&quot;:上传文件的保存路径</li>
+<li>storage = None:存储组件，默认django.core.files.storage.FileSystemStorage</li>
+</ul>
+<p><code>ImageField(FileField)</code>:字符串，路径保存在数据库，文件上传到指定目录<br>
+参数：</p>
+<ul>
+<li>upload_to = &quot;&rdquo;      上传文件的保存路径</li>
+<li>storage = None      存储组件，默认django.core.files.storage.FileSystemStorage</li>
+<li>width_field=None,   上传图片的高度保存的数据库字段名（字符串）</li>
+<li>height_field=None   上传图片的宽度保存的数据库字段名（字符串）</li>
+</ul>
+<p><code>DecimalField(Field)</code>:10进制小数<br>
+参数：</p>
+<ul>
+<li>max_digits，小数总长度</li>
+<li>decimal_places，小数位长度</li>
+</ul>
+<h2 id="35-meta信息">3.5 Meta信息</h2>
+<p>在类内部定义内部类Meta，由于设置映射的表的元数据信息，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;user&#39;</span>
+    
+    id<span style="color:#f92672">...</span>
+    name<span style="color:#f92672">...</span>
+</code></pre></div><p>这里的Meta的类属性db_name，表示生成的数据库表名称为&rsquo;user',更多的参数有：</p>
+<table>
+<thead>
+<tr>
+<th>属性信息</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db_tablespace</td>
+<td>有些数据库有数据库表空间，比如Oracle。你可以通过db_tablespace来指定这个模型对应的数据库表放在哪个数据库表空间。</td>
+</tr>
+<tr>
+<td>managed</td>
+<td>默认值为True,Django可以对数据库表进行 migrate或migrations、删除等操作，如果为False的时候，不会对数据库表进行创建、删除等操作。可以用于现有表、数据库视图等，其他操作是一样的。</td>
+</tr>
+<tr>
+<td>ordering</td>
+<td>告诉Django模型对象返回的记录结果集是按照哪个字段排序的</td>
+</tr>
+<tr>
+<td>unique_together</td>
+<td>设置两个字段保持唯一性时使用</td>
+</tr>
+<tr>
+<td>verbose_name</td>
+<td>给模型类起一个更可读的名字</td>
+</tr>
+<tr>
+<td>verbose_name_plural</td>
+<td>表在django admin中显示的名称</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>常用的就是db_table，用于指定生成的表的名称</p>
+</blockquote>
+<h2 id="36-生成表">3.6 生成表</h2>
+<p>        前面我们已经编写了对应数据库表的类，这里我们将进行实例化(创建数据库对应的表)。利用django提供的命令进行数据库的初始化工作.(以及其他对数据库表进行修改的动作，比如修改表结构，字段属性等，都需要执行如下步骤)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 进入项目目录下执行</span>
+python manage<span style="color:#f92672">.</span>py makemigrations
+<span style="color:#75715e"># 大致含义是：把类转换成对应格式的sql语句。</span>
+ 
+<span style="color:#75715e"># 创建表</span>
+python manage<span style="color:#f92672">.</span>py migrate
+<span style="color:#75715e"># 在数据库中执行生成的sql语句</span>
+</code></pre></div><p>注意：</p>
+<ul>
+<li>执行makemigrations后生成的文件，存放在应用目录下的migrations目录下，一般以0001_initial.py为文件名并且依次递增。</li>
+<li>0001_initial.py存放的是 django 根据我们写的 class 生成的相关代码，执行migrate后，会根据这些代码生成对应的数据库表。</li>
+<li>如果我们执行migrate后没有生成我们创建的表格，那么需要确认在django配置文件中，是否加载了我们的应用(因为django会加载setting里面的install_app中查找对应的modules.py)</li>
+<li>表名默认是：应用名_class类名,可以在映射类内部定义内部类Meta，设置db_table=&lsquo;表名&rsquo;，来修改在数据库中生存的表名</li>
+</ul>
+<h3 id="361-注册app">3.6.1 注册app</h3>
+<p>如果没有生成对应的表文件，那么需要在settings.py中，注册你的app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+INSTALLED_APPS <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#39;django.contrib.admin&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.auth&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.contenttypes&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.sessions&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.messages&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.staticfiles&#39;</span>,
+    <span style="color:#e6db74">&#39;app01.apps.App01Config&#39;</span>,
+    <span style="color:#e6db74">&#39;你的app名称&#39;</span>       
+]
+</code></pre></div><h3 id="362-修改表结构遇到的问题">3.6.2 修改表结构遇到的问题</h3>
+<p>当我们对已生成的表添加新字段时，会出现如下情况</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ou are trying to add a non<span style="color:#f92672">-</span>nullable field <span style="color:#e6db74">&#39;code&#39;</span> to business without a default; we can<span style="color:#e6db74">&#39;t do that (the database needs something to populate existing rows).</span>
+Please select a fix:
+ <span style="color:#ae81ff">1</span>) Provide a one<span style="color:#f92672">-</span>off default now (will be set on all existing rows <span style="color:#66d9ef">with</span> a null value <span style="color:#66d9ef">for</span> this column)
+ <span style="color:#ae81ff">2</span>) Quit, <span style="color:#f92672">and</span> let me add a default <span style="color:#f92672">in</span> models<span style="color:#f92672">.</span>py
+Select an option:
+</code></pre></div><p>        由于我们添加字段会影响之前的数据，所以这时django提醒我们，不能只是单纯的添加一个字段，还需要为该字段指定对应的值，当然有几种解决办法：</p>
+<ul>
+<li>设置新增字段default属性，表示其默认值</li>
+<li>设置新增字段null属性，表示其默认可以为空</li>
+<li>根据上面的提示，选择1，手动输入默认值即可(注意默认值需要用引号引起来，不然django认为输入的数据是个变量)</li>
+</ul>
+<h1 id="4-利用orm完成数据库的增删改查">4 利用orm完成数据库的增删改查</h1>
+<p>接下来就需要利用orm来对数据库的表数据进行增删改查等基本操作了。</p>
+<h2 id="41-orm之增加">4.1 orm之增加</h2>
+<p>        根据django的MTV架构，业务的处理是在views中完成的，那么对数据库的查询逻辑也应该在views中编写，而我们定义的数据库对象在model.py中，那么在导入之后，才能进行表操作。</p>
+<p>django提供了两种增加数据的方式：1、create，2、save</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#------------------------------------- create -------------------------------------</span>
+<span style="color:#f92672">from</span> app01 <span style="color:#f92672">import</span> models      <span style="color:#75715e"># 从自己的应用中导入models模块</span>
+ 
+username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;abc.123&#39;</span>
+email <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daixin@qq.com&#39;</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>username,password<span style="color:#f92672">=</span>password,email<span style="color:#f92672">=</span>email)
+ 
+<span style="color:#75715e"># 表对象.objects.create() 用来新增数据</span>
+<span style="color:#75715e"># name,password,email 表示表的字段</span>
+<span style="color:#75715e"># 等号右边的表示数据</span>
+<span style="color:#75715e"># 传递的key也可以是字典利用**dic进行传递，在后面利用form的时候会经常使用这种方式。</span>
+dict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;usernane&#39;</span>:<span style="color:#e6db74">&#39;daxin&#39;</span>,<span style="color:#e6db74">&#39;password&#39;</span>:<span style="color:#e6db74">&#39;abc.123&#39;</span>,email<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin@qq.com&#39;</span>}
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(<span style="color:#f92672">**</span>dict)
+ 
+
+
+<span style="color:#75715e">#------------------------------------- save -------------------------------------</span>
+<span style="color:#f92672">from</span> app01 <span style="color:#f92672">import</span> models      <span style="color:#75715e"># 从自己的应用中导入models模块</span>
+ 
+username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;abc.123&#39;</span>
+email <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daixin@qq.com&#39;</span>
+userobj <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>UserInfo(name<span style="color:#f92672">=</span>username,password<span style="color:#f92672">=</span>password,email<span style="color:#f92672">=</span>email)
+userobj<span style="color:#f92672">.</span>save()
+ 
+<span style="color:#75715e"># save的方式是利用对象实例化的传递参数后，调用save方法进行保存的</span>
+<span style="color:#75715e"># 利用对象，我们可以方便的进行数据修改后，再进行save</span>
+<span style="color:#75715e"># 比如 userobj.name = &#39;dahuaidan&#39;</span>
+<span style="color:#75715e"># userobj.save()</span>
+</code></pre></div><p>注意：利用create新增数据时，会默认返回新增加的数据对象，我们可以接受该对象来进行其他的操作，比如添加多对多关系等</p>
+<blockquote>
+<p>比较常用的方式是 利用create进行数据的增加</p>
+</blockquote>
+<h2 id="42-orm之删除">4.2 orm之删除</h2>
+<p>想要对数据进行删除，首先需要匹配到数据，然后执行删除操作，那么就涉及两部分：查找，删除</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>delete()
+ 
+<span style="color:#75715e"># 利用filter对数据唯一的字段进行过滤，匹配到删除的行，也可以用all()匹配所有数据，进行删除</span>
+<span style="color:#75715e"># 利用delete方法进行删除操作</span>
+</code></pre></div><h2 id="43-orm之修改">4.3 orm之修改</h2>
+<p>整体思路和删除是相同的，首先查找到数据，然后对字段进行修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>update(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dachenzi&#39;</span>)
+ 
+<span style="color:#75715e"># 利用filter过滤到要修改的数据，然后更新它的name字段的值</span>
+</code></pre></div><h2 id="44-orm之查询">4.4 orm之查询</h2>
+<p>查询会返回结果的集，它是django.db.models.query.QuerySet类型。是惰性求值，和sqlalchemy一样。结果就是查询的集。同时它也是一个可迭代对象。</p>
+<ul>
+<li>创建查询集不会带来任何数据库的访问，直到调用方法使用数据时，才会访问数据库。在迭代、序列化、if语句中
+都会立即求值。</li>
+<li>每一个查询集都包含一个缓存，来最小化对数据库的访问。</li>
+</ul>
+<h3 id="441-查询过滤方法">4.4.1 查询过滤方法</h3>
+<p>返回结果集的方法：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all()</td>
+<td>获取所有</td>
+</tr>
+<tr>
+<td>filter()</td>
+<td>过滤，返回满足条件的数据</td>
+</tr>
+<tr>
+<td>exclude()</td>
+<td>排除，排除满足条件的数据</td>
+</tr>
+<tr>
+<td>order_by()</td>
+<td>以什么字段排序（在字段前面加<code>减号</code>，表示倒序）</td>
+</tr>
+<tr>
+<td>values()</td>
+<td>返回一个对象字典的列表，列表的元素是字典，字典内是字段和值的键值对</td>
+</tr>
+<tr>
+<td>values_list()</td>
+<td>返回一个对象字典的列表，列表的元素是元组，字典内是字段和值的键值对</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">models<span style="color:#f92672">.</span>Userinfo<span style="color:#f92672">.</span>object<span style="color:#f92672">.</span>all()<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;username&#39;</span>)
+<span style="color:#75715e"># 表示只取指定的id和username列</span>
+ 
+<span style="color:#75715e"># 结果依旧返回的是QuerySet，但是数据不同，体现的形式是一个字典</span>
+QuerySet({<span style="color:#e6db74">&#39;id&#39;</span>:<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;username&#39;</span>:<span style="color:#e6db74">&#39;daxin&#39;</span>},{<span style="color:#e6db74">&#39;id&#39;</span>:<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;username&#39;</span>:<span style="color:#e6db74">&#39;dachenzi&#39;</span>}<span style="color:#f92672">......</span>)
+ 
+<span style="color:#75715e"># 使用value_list(&#39;id&#39;,&#39;username&#39;)，体现的形式是一个元组</span>
+QuerySet((<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;daxin&#39;</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;dachenzi&#39;</span>)<span style="color:#f92672">......</span>)
+</code></pre></div><p>关于filter：</p>
+<ul>
+<li>filter(k1=v1).filter(k2=v2) 等价于 filter(k1=v1, k2=v2)</li>
+<li>filter(pk=10) 这里pk指的就是主键， 不用关心主键字段名，当然也可以使用使用主键名filter(std_id=10)</li>
+</ul>
+<blockquote>
+<p>获取结果集的方法通过适当的组合可以链式编写。</p>
+</blockquote>
+<p>返回单个值的方法：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get()</td>
+<td>仅返回单个满足条件的对象<!-- raw HTML omitted -->如果未能返回对象则抛出DoesNotExist异常；<!-- raw HTML omitted -->如果能返回多条抛出MultipleObjectsReturned异常</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>返回当前查询的总条数</td>
+</tr>
+<tr>
+<td>first()</td>
+<td>返回第一个对象</td>
+</tr>
+<tr>
+<td>last()</td>
+<td>返回最后一个对象</td>
+</tr>
+<tr>
+<td>exist()</td>
+<td>判断查询集中是否有数据，如果有则返回True</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 获取表里所有的对象</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()    <span style="color:#75715e"># 结果为一个QuerySet对象(django提供的)，可以理解为一个列表</span>
+ 
+<span style="color:#75715e"># 获取id为1的对象</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)   <span style="color:#75715e"># 类似于sql中的 where查询条件，结果也是一个QuerySet</span>
+ 
+<span style="color:#75715e"># 获取name字段包含da的记录</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(name__contains<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;da&#39;</span>) <span style="color:#75715e"># 这里涉及了万能的双下划线，在后续会进行说明</span>
+ 
+<span style="color:#75715e"># get获取一条数据</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)    <span style="color:#75715e"># 注意get不到数据，会直接抛出异常</span>
+ 
+<span style="color:#75715e"># 除了id等于1的其他数据</span>
+models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>exclude(id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><p>注意：</p>
+<ul>
+<li>查找到的不是想sql语句那样直接列出一行的各个字段及对应的值，而已把改行表示为一个行对象。匹配到一行，就表示1个表中的行对象。</li>
+<li>每个对象内才包含了对应的字段和值。</li>
+<li>通过 行对象.字段名，来获取对应的数据。</li>
+<li>filter中包含多个条件，那么它们是and的关系。</li>
+</ul>
+<p>PS：由于filter、all取到的数据默认是 <code>QuerySet</code> 格式，在某些场景下我们只需要验证是否取到，我们可以直接获取结果中的第一个数据即可，即在最后添加.first()即可，表示取第一个数据，或者使用.count()来统计匹配到的数据的个数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">module<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>filter(username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>)<span style="color:#f92672">.</span>first()
+</code></pre></div><h3 id="442-限制查询集切片">4.4.2 限制查询集（切片）</h3>
+<p>查询集对象可以直接使用索引下标的方式（不支持负索引），相当于SQL语句中的limit和offset子句。
+注意使用索引返回的新的结果集，依然是惰性求值，不会立即查询。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">qs <span style="color:#f92672">=</span> User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()[<span style="color:#ae81ff">20</span>:<span style="color:#ae81ff">40</span>]
+<span style="color:#75715e"># LIMIT 20 OFFSET 20</span>
+qs <span style="color:#f92672">=</span> User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()[<span style="color:#ae81ff">20</span>:<span style="color:#ae81ff">30</span>]
+<span style="color:#75715e"># LIMIT 10 OFFSET 20</span>
+</code></pre></div><h3 id="442-字段查询双下划线">4.4.2 字段查询（双下划线）</h3>
+<p>字段查询表达式可以作为filter()、exclude()、get()的参数，实现where子句。<br>
+语法：<code>字段名称__比较运算符=值</code>,属性名和运算符之间使用<code>双下划线</code></p>
+<p>比较运算符如下</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>举例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exact<!-- raw HTML omitted -->filter(isdeleted=False)<!-- raw HTML omitted --></td>
+<td>filter(isdeleted__exact=False)</td>
+<td>严格等于，可省略不写</td>
+</tr>
+<tr>
+<td>contains</td>
+<td>exclude(title__contains=&lsquo;天&rsquo;)</td>
+<td>是否包含，大小写敏感，等价于like &lsquo;%天%&rsquo;</td>
+</tr>
+<tr>
+<td>statswith<!-- raw HTML omitted -->endswith</td>
+<td>filter(title__startswith=&lsquo;天&rsquo;)</td>
+<td>以什么开头或结尾，大小写敏感</td>
+</tr>
+<tr>
+<td>isnull<!-- raw HTML omitted -->isnotnull</td>
+<td>filter(title__isnull=False)</td>
+<td>是否为null</td>
+</tr>
+<tr>
+<td>iexact<!-- raw HTML omitted -->icontains<!-- raw HTML omitted -->istartswith<!-- raw HTML omitted -->iendswith<!-- raw HTML omitted --></td>
+<td></td>
+<td>i的意思是忽略大小写</td>
+</tr>
+<tr>
+<td>in</td>
+<td>filter(pk__in=[1,2,3,100])</td>
+<td>是否在指定范围数据中</td>
+</tr>
+<tr>
+<td>gt、gte<!-- raw HTML omitted -->lt、lte<!-- raw HTML omitted --></td>
+<td>filter(id__gt=3)<!-- raw HTML omitted -->filter(pk__lte=6)<!-- raw HTML omitted -->filter(pub_date__gt=date(2000,1,1))<!-- raw HTML omitted --></td>
+<td></td>
+</tr>
+<tr>
+<td>year、month、day<!-- raw HTML omitted -->week_day、hour<!-- raw HTML omitted -->minute、second<!-- raw HTML omitted --></td>
+<td>filter(pub_date__year=2000)</td>
+<td>对日期类型属性处理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="443-q对象">4.4.3 Q对象</h3>
+<p>        虽然Django提供传入条件的方式，但是不方便，它还提供了Q对象来解决。Q对象是django.db.models.Q，可以使用&amp;（and）、|（or）操作符来组成逻辑表达式。 ~ 表示not。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db.models <span style="color:#f92672">import</span> Q
+User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(Q(pk__lt<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>))           <span style="color:#75715e"># 不如直接写User.objects.filter(pk&lt;6)</span>
+User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(pk__gt<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>)<span style="color:#f92672">.</span>filter(pk_lt<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)  <span style="color:#75715e"># 与</span>
+User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(Q(pk_gt<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>) <span style="color:#f92672">&amp;</span> Q(pk_lt<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>))   <span style="color:#75715e"># 与</span>
+User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(Q(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>) <span style="color:#f92672">|</span> Q(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>))         <span style="color:#75715e"># 或</span>
+User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(<span style="color:#f92672">~</span>Q(pk__lt<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>))               <span style="color:#75715e"># 非</span>
+</code></pre></div><p>可使用&amp;|和Q对象来构造复杂的逻辑表达式</p>
+<ul>
+<li>过滤器函数可以使用一个或多个Q对象</li>
+<li>如果混用关键字参数和Q对象，那么Q对象必须位于关键字参数的前面。所有参数都将and在一起</li>
+</ul>
+<h1 id="5-表与表之间的关系">5 表与表之间的关系</h1>
+<p>我们常说的表与表之间的关系有：一对一、一对多、多对多，下面分别说明</p>
+<h2 id="51-一对多">5.1 一对多</h2>
+<p>        表示当前表的某个字段的值，来自于其他表，比如人员表和部门表，在人员表中利用一对多外键关系标明该员工属于哪个部门。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">user_type <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;表名&#39;</span>,to_field<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;字段&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xxx&#39;</span>,limit_choices_to<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;xx&#39;</span>:<span style="color:#e6db74">&#39;xx&#39;</span>})       <span style="color:#75715e"># 默认会自动关联对方表的ID字段(主键)，手动指定的话必须是唯一列才行。</span>
+</code></pre></div><p>参数：</p>
+<ol>
+<li>limit_choices_to：django admin控制时，对选择的数据进行过滤，比如{&lsquo;gender&rsquo;:&lsquo;female&rsquo;},表示当关联表的gender字段的值为female，才会在django admin的管理页面中显示。</li>
+<li>related_name: 在对表中插入的表示本表的对象(外键关联自己时，特别需要设置)</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>默认情况下，外键字段在数据库中存储的名称为：字段名_id (上面的例子的话，在数据库中的字段名：user_type_id)</li>
+<li>外键字段(user_type_id)存放的是所关连表的id信息</li>
+<li>同时还存在一个字段名(上面的例子就是user_type)对象，这个对象指代的就是所关联的表中的数据对象</li>
+<li>我们可以通过user_type，来跨表获取其关联的信息的某写字段的值(通过.字段名，即可访问)</li>
+</ol>
+<h3 id="511-正向查询双下划线">5.1.1 正向查询(双下划线)</h3>
+<p>        什么叫正向查询？还是拿人员表和部门表举例，外键关系存在人员表中，那么我们通过人员表利用表中的外键字段就可以查询到该人员的部门信息，我一般称之为正向查询。</p>
+<p>一对多跨表查询例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -------------------- models.py --------------------</span>
+
+<span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Business</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;business&#39;</span>
+    caption <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+    code <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SA&#39;</span>)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Host</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;host&#39;</span>
+    nid <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    hostname <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    ip <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>GenericIPAddressField(protocol<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ipv4&#39;</span>,db_index<span style="color:#f92672">=</span>True)
+    port <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>IntegerField()
+    b <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Business&#39;</span>,to_field<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;id&#39;</span>)    <span style="color:#75715e"># 外键关联Business表</span>
+
+<span style="color:#75715e">#  -------------------- views.py --------------------</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">host</span>(request):
+    v1 <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+    <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;host.html&#39;</span>,{<span style="color:#e6db74">&#39;v1&#39;</span>:v1})
+
+<span style="color:#75715e"># -------------------- host.html --------------------</span>
+
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span>Title<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>div<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">主机信息</span><span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+        {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> v1 <span style="color:#f92672">%</span>}
+            <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ row<span style="color:#f92672">.</span>nid }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>hostname }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>ip }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>port }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>b_id }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>b<span style="color:#f92672">.</span>caption }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>b<span style="color:#f92672">.</span>code }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>   <span style="color:#75715e"># 通过b对象，进行跨表查询主机业务线相关信息</span>
+        {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>html<span style="color:#f92672">&gt;</span>
+</code></pre></div><blockquote>
+<p>这里通过row.b_id 和通过b对象来获取 row.b.id 结果是相同的，区别在于使用b对象，会多一次sql查询</p>
+</blockquote>
+<p>PS：当多个表进行及联跨表，那么都可以通过表的外键字段使用点来进行跨表访问(或者使用双下划线)
+双下划线和点跨表的不同之处在于：</p>
+<ul>
+<li>双下划线一般用于条件查询(values,values_list)</li>
+<li>点则一般用于在结果中利用外键对象进行跨表查询</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># -------------- 利用点进行跨表查询 --------------</span>
+ 
+<span style="color:#75715e"># 如果我只想获取主机地址和所属业务线使用点跨表的话</span>
+v2 <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+<span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;host.html&#39;</span>,{<span style="color:#e6db74">&#39;v2&#39;</span>:v2})
+<span style="color:#75715e"># 前端代码</span>
+{<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> v2 <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ row<span style="color:#f92672">.</span>hostname }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>b<span style="color:#f92672">.</span>caption }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+{<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+<span style="color:#75715e"># 我们只用了两个字段，却取出了相关的所有数据。</span>
+ 
+<span style="color:#75715e"># 是否可以在查询阶段只取出所需字段即可？使用双下划线__即可</span>
+ 
+ 
+<span style="color:#75715e"># -------------- 利用双下划线跨表查询 --------------</span>
+ 
+v3 <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>object<span style="color:#f92672">.</span>all()<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;hostname&#39;</span>,<span style="color:#e6db74">&#39;b__caption&#39;</span>)
+<span style="color:#75715e"># 我们可以看到在作为value的条件语句，通过b对象配合双下划线就进行了一次跨表查询</span>
+ 
+<span style="color:#75715e"># 前端代码</span>
+<span style="color:#f92672">&lt;</span>div<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span>  <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> v2 <span style="color:#f92672">%</span>}
+        <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ row<span style="color:#f92672">.</span>hostname }} <span style="color:#f92672">-</span> {{ row<span style="color:#f92672">.</span>b__caption }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>    <span style="color:#75715e"># 只需要向字典一样即可。</span>
+    {<span style="color:#f92672">%</span> endfor  <span style="color:#f92672">%</span>}
+<span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+</code></pre></div><blockquote>
+<p>在django内部，它之所以能识别__,是因为，它在处理values条件时，会使用__作为分隔符，分隔后再进行相关处理</p>
+</blockquote>
+<h3 id="512-反向查询set">5.1.2 反向查询(set)</h3>
+<p>        很多时候我们会有另一种需求，查询一个部门下的所有员工，这时部门表中没有外间字段关联人员表啊，该怎么查？其实是可以的，我把这个查询方式称之为反向查询。<br>
+        在建立外键关系时，不仅会在外键所在表中产生外键所关联表的对象，在所关联表中也会产生一个关联表的对象(可能有点绕，没找到更好的表达方式)，这个对象一般有两种体现方式：</p>
+<ol>
+<li>关联我的表(小写)：<code>一般用在values，values_list当作条件做字段过滤</code></li>
+<li>关联我的表名(小写)_set：<code>一般当作对象，当作字段处理</code></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(request):
+    users <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+    departments <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Department<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;user__name&#39;</span>)   <span style="color:#75715e"># 跨到管理本表的user表中，查找对应的user的名称，利用的是join 格式</span>
+    <span style="color:#66d9ef">for</span> dep <span style="color:#f92672">in</span> departments:
+        <span style="color:#66d9ef">print</span>(dep)
+
+        <span style="color:#75715e"># {&#39;user__name&#39;: &#39;daxin&#39;}</span>
+        <span style="color:#75715e"># {&#39;user__name&#39;: &#39;dachenzi&#39;}</span>
+        <span style="color:#75715e"># {&#39;user__name&#39;: &#39;hello&#39;}</span>
+        <span style="color:#75715e"># {&#39;user__name&#39;: &#39;xiaoming&#39;}</span>
+        <span style="color:#75715e"># {&#39;user__name&#39;: &#39;xiaochen&#39;}</span>
+        
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;ok&#39;</span>)
+</code></pre></div><p>对应的sql语句为：</p>
+<ul>
+<li>SELECT&quot;user&quot;.&ldquo;name&quot;FROM&quot;department&quot;LEFTOUTERJOIN&quot;user&quot;ON(&ldquo;department&rdquo;.&ldquo;dept_id&rdquo; = &ldquo;user&rdquo;.&ldquo;dept_id&rdquo;);</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(request):
+    departments <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Department<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">for</span> dep <span style="color:#f92672">in</span> departments:
+        <span style="color:#66d9ef">for</span> username <span style="color:#f92672">in</span> dep<span style="color:#f92672">.</span>user_set<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;name&#39;</span>):  <span style="color:#75715e"># user_set指代的是关联的user表对象</span>
+            <span style="color:#66d9ef">print</span>(username)
+
+            <span style="color:#75715e"># {&#39;name&#39;: &#39;daxin&#39;}</span>
+            <span style="color:#75715e"># {&#39;name&#39;: &#39;dachenzi&#39;}</span>
+            <span style="color:#75715e"># {&#39;name&#39;: &#39;hello&#39;}</span>
+
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;ok&#39;</span>)
+</code></pre></div><p>对应的sql语句为：</p>
+<ul>
+<li>SELECT &ldquo;department&rdquo;.&ldquo;dept_id&rdquo;, &ldquo;department&rdquo;.&ldquo;dept_name&rdquo; FROM &ldquo;department&rdquo; WHERE &ldquo;department&rdquo;.&ldquo;dept_id&rdquo; = 1;</li>
+<li>SELECT &ldquo;user&rdquo;.&ldquo;name&rdquo; FROM &ldquo;user&rdquo; WHERE &ldquo;user&rdquo;.&ldquo;dept_id&rdquo; = 1;</li>
+</ul>
+<h2 id="52-多对多">5.2 多对多</h2>
+<p>        前面说了一对多的情况，这里还有一种情况叫多对对，比如一个主机可以关联多个业务线，不同的业务线可以关联多个主机，所以这里，业务线和主机的关系为多对多，在多对多的情况下，有需要一张额外的表来表示对应关系，这里有两种情况来创建这张关系表。</p>
+<h3 id="521-手动创建">5.2.1 手动创建</h3>
+<p>手动创建，故名思议，我们需要手动的创建一张关系表，然后创建两个ForeignKey字段(一对多)，关联两张表即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 业务线表</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Business</span>(models<span style="color:#f92672">.</span>Model):
+    caption <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+    code <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SA&#39;</span>)
+ 
+<span style="color:#75715e"># 主机表</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Host</span>(models<span style="color:#f92672">.</span>Model):
+    nid <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    hostname <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    ip <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>GenericIPAddressField(protocol<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ipv4&#39;</span>,db_index<span style="color:#f92672">=</span>True)
+    port <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>IntegerField()
+ 
+<span style="color:#75715e"># 多对多关系表</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Application</span>(models<span style="color:#f92672">.</span>Model):
+    h <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Host&#39;</span>,to_field<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nid&#39;</span>)          <span style="color:#75715e"># 关联主机id，字段名为h_id，同时存在对象h，存放对应的Host信息</span>
+    b <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Business&#39;</span>,to_field<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;id&#39;</span>)       <span style="color:#75715e"># 关联业务线id,字段名为b_id，同时存在对象b，存放对应的Business信息</span>
+</code></pre></div><p>PS：一共手动创建三张表，可以利用创建的Application关系表来直接操作多对多关系。</p>
+<h3 id="522-自动创建">5.2.2 自动创建</h3>
+<p>在Django中，还存在一种方式为自动创建， 通过django提供的ManyToMany关键字创建。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 业务线表</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Business</span>(models<span style="color:#f92672">.</span>Model):
+    caption <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+    code <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>,default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;SA&#39;</span>)
+ 
+<span style="color:#75715e"># 主机表</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Host</span>(models<span style="color:#f92672">.</span>Model):
+    nid <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    hostname <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    ip <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>GenericIPAddressField(protocol<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ipv4&#39;</span>,db_index<span style="color:#f92672">=</span>True)
+    port <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>IntegerField()
+    business <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ManyToManyField(<span style="color:#e6db74">&#39;Business&#39;</span>)      <span style="color:#75715e"># 通过manytomany字段创建多对多关系</span>
+</code></pre></div><p>注意：</p>
+<ol>
+<li>虽然我们创建了两张表，但是由于我们使用了manytomany关键字创建多对对关系，django还会为我们创建一张表名为当前表名加当前字段名的表(上面的例子就是：app01_host_business)，当作关系表，不会产生business字段。</li>
+<li>由于我们没有关系表这个class类对象，所以我们不能直接操作关系表，需要通过Host对象间接通过business字段来操作关系表。</li>
+<li>虽然利用manytomany关键字，能帮我们创建关系表，节省了很多代码，但是自动生成的表中只会生成两个字段(两张表的主键id字段)，不能定制其他字段，相反手动生成的表可以定制，平时可以根据情况二者混用。</li>
+</ol>
+<h3 id="523-操作关系表">5.2.3 操作关系表</h3>
+<p>手动创建关系表的情况下，由于含有第三张表对应的class，那么我们可以直接使用这个class对关系表进行操作，但是多对多的情况下没有关系表的class，所以我们需要通过其他办法来操作。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add()</td>
+<td>添加关系</td>
+</tr>
+<tr>
+<td>remove()</td>
+<td>删除关系</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清除所有关系　　</td>
+</tr>
+<tr>
+<td>all()</td>
+<td>获取对应的所有关系对象(在查询时这里可以使用all,filter,get等，就像查找过滤其他数据一样)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(nid<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()<span style="color:#f92672">.</span>business<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)   <span style="color:#75715e"># 添加两条多对多关系 1(host) --&gt; 1(business)，1(host) --&gt; 2(business)</span>
+models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(nid<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()<span style="color:#f92672">.</span>business<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 删除一条多对多关系 1 -x-&gt; 2</span>
+models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(nid<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()<span style="color:#f92672">.</span>business<span style="color:#f92672">.</span>clear()    <span style="color:#75715e"># 清除nid为1的所有的多对多关系</span>
+</code></pre></div><p>下面是一个小栗子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># models.py</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bussiness</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bussiness&#39;</span>
+    bus_id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    bus_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, null<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Host</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;host&#39;</span>
+    host_id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    host_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, null<span style="color:#f92672">=</span>False)
+    host_ip <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>GenericIPAddressField(protocol<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>)
+    bus <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ManyToManyField(Bussiness)
+
+<span style="color:#75715e"># views.py</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(request):
+    hosts <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Host<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+    <span style="color:#66d9ef">for</span> host <span style="color:#f92672">in</span> hosts:
+        <span style="color:#66d9ef">for</span> bus <span style="color:#f92672">in</span> host<span style="color:#f92672">.</span>bus<span style="color:#f92672">.</span>all():   <span style="color:#75715e"># 通过bus对象获取它关联的所有bussiness实例记录</span>
+            <span style="color:#66d9ef">print</span>(host<span style="color:#f92672">.</span>host_name, host<span style="color:#f92672">.</span>host_ip, bus<span style="color:#f92672">.</span>bus_name)
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;ok&#39;</span>)
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

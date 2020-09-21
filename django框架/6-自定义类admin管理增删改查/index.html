@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>6-自定义类admin管理增删改查  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="6-自定义类admin管理增删改查  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/django%E6%A1%86%E6%9E%B6/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "6-自定义类admin管理增删改查",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  1085 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/django%E6%A1%86%E6%9E%B6/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>6-自定义类admin管理增删改查
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-django-admin%E5%88%86%E6%9E%90">1 django admin分析</a></li>
+<li><a href="#2-django-admin%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90">2 django admin源码分析</a>
+<ul>
+<li><a href="#21-%E6%B3%A8%E5%86%8C%E9%83%A8%E5%88%86">2.1 注册部分</a></li>
+<li><a href="#22-%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91%E9%83%A8%E5%88%86">2.2 路由分发部分</a></li>
+<li><a href="#23-%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93">2.3 流程总结</a></li>
+<li><a href="#24-%E5%AE%9A%E5%88%B6admin">2.4 定制admin</a></li>
+</ul>
+</li>
+<li><a href="#3-django-admin%E7%9A%84%E6%8E%A5%E5%8F%A3">3 django admin的接口</a></li>
+<li><a href="#4-%E8%87%AA%E5%AE%9A%E4%B9%89ayra%E8%BF%9B%E8%A1%8Ccrud">4 自定义ayra进行CRUD</a>
+<ul>
+<li><a href="#41-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">4.1 准备工作</a>
+<ul>
+<li><a href="#411-%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F">4.1.1 文件加载顺序</a></li>
+<li><a href="#412-%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%A2%AB%E4%BC%98%E5%85%88%E5%8A%A0%E8%BD%BD">4.1.2 让我们的程序被优先加载</a></li>
+<li><a href="#413-%E7%BC%96%E5%86%99%E8%B0%83%E7%94%A8%E6%96%87%E4%BB%B6">4.1.3 编写调用文件</a></li>
+<li><a href="#414-%E6%9B%B4%E6%8D%A2%E8%A3%85%E8%BD%BD%E5%BA%94%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F">4.1.4 更换装载应用的方式</a></li>
+<li><a href="#415-include%E6%9C%AC%E8%B4%A8">4.1.5 include本质</a></li>
+</ul>
+</li>
+<li><a href="#42-%E4%B8%BA%E6%AF%8F%E4%B8%AAmodel%E5%AF%B9%E8%B1%A1%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E7%9A%84url">4.2 为每个model对象生成对应的url</a>
+<ul>
+<li><a href="#421-%E6%B3%A8%E5%86%8Cmodel%E7%B1%BB">4.2.1 注册model类</a></li>
+<li><a href="#422-servicearya%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0">4.2.2 service/arya基本实现</a></li>
+<li><a href="#423-%E6%B7%BB%E5%8A%A0urls%E5%8F%8Aviews%E5%87%BD%E6%95%B0">4.2.3 添加urls及views函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-django-admin分析">1 django admin分析</h1>
+<p>在每个app下都会存在一个admin.py文件用于注册当前app下的models文件，给django admin来管理，仔细观察Django admin针对不同models的管理页面、URL等信息，我们发现</p>
+<ol>
+<li>不同的类对象生成的url是类似的。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UserInfo</span>
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>app01<span style="color:#f92672">/</span>userindo<span style="color:#f92672">/</span>
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>app01<span style="color:#f92672">/</span>userinfo<span style="color:#f92672">/</span>add
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>app01<span style="color:#f92672">/</span>userinfo<span style="color:#f92672">/</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>change
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>app01<span style="color:#f92672">/</span>userinfo<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>delete
+<span style="color:#75715e"># Role</span>
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>role<span style="color:#f92672">/</span>
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>role<span style="color:#f92672">/</span>add
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>role<span style="color:#f92672">/</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>change
+<span style="color:#f92672">/</span>admin<span style="color:#f92672">/</span>role<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span>delete
+</code></pre></div><ol start="2">
+<li>不同的类，页面的布局模版也是类似的。
+所以，我们分析，admin内部应该是为我们的注册的类，生成了对应的url，以及视图函数，并且通过相同的模版渲染来返回页面的。下面来跟一下源码文件</li>
+</ol>
+<h1 id="2-django-admin源码分析">2 django admin源码分析</h1>
+<h2 id="21-注册部分">2.1 注册部分</h2>
+<p>首先从注册开始，看下我们的admin.py文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> admin
+<span style="color:#f92672">from</span> .models <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>register(Userinfo)
+</code></pre></div><p>注册是通过site的register方法完成的，那么从这个入口开始看它内部是怎么完成的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">site <span style="color:#f92672">=</span> AdminSite() 
+</code></pre></div><p>查看他的register方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(self, model_or_iterable, admin_class<span style="color:#f92672">=</span>None, <span style="color:#f92672">**</span>options):
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span> 
+    self<span style="color:#f92672">.</span>_registry[model] <span style="color:#f92672">=</span> admin_class(model, self)
+</code></pre></div><p>内部把我们的model类使用字典存储起来(self._registry = {}),而admin_class默认情况下的值为ModelAdmin</p>
+<h2 id="22-路由分发部分">2.2 路由分发部分</h2>
+<p>查看项目的urls.py文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> admin
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+]
+</code></pre></div><p>这里的site和admin.py里的site是同一个对象,而在urls代码内部调用了get_urls方法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_urls</span>(self):
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+        valid_app_labels <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">for</span> model, model_admin <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_registry<span style="color:#f92672">.</span>items():
+            urlpatterns <span style="color:#f92672">+=</span> [
+                url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/&#39;</span> <span style="color:#f92672">%</span> (model<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>app_label, model<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>model_name), include(model_admin<span style="color:#f92672">.</span>urls)),
+            ]
+</code></pre></div><p>内部为每一个model类封装了一个url(inclue)路由：</p>
+<ul>
+<li>model._meta.app_label:就是app的名称</li>
+<li>model._meta.model_name：就是model的名称
+最后调用的是model_admin的urls方法，其实也就是封装的ModelAdmin对象的urls方法</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_urls</span>(self):
+        <span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+        urlpatterns <span style="color:#f92672">=</span> [
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^$&#39;</span>, wrap(self<span style="color:#f92672">.</span>changelist_view), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_changelist&#39;</span> <span style="color:#f92672">%</span> info),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^add/$&#39;</span>, wrap(self<span style="color:#f92672">.</span>add_view), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_add&#39;</span> <span style="color:#f92672">%</span> info),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(.+)/history/$&#39;</span>, wrap(self<span style="color:#f92672">.</span>history_view), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_history&#39;</span> <span style="color:#f92672">%</span> info),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(.+)/delete/$&#39;</span>, wrap(self<span style="color:#f92672">.</span>delete_view), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_delete&#39;</span> <span style="color:#f92672">%</span> info),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(.+)/change/$&#39;</span>, wrap(self<span style="color:#f92672">.</span>change_view), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_change&#39;</span> <span style="color:#f92672">%</span> info),
+            <span style="color:#75715e"># For backwards compatibility (was the change url before 1.9)</span>
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(.+)/$&#39;</span>, wrap(RedirectView<span style="color:#f92672">.</span>as_view(
+                pattern_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">_change&#39;</span> <span style="color:#f92672">%</span> ((self<span style="color:#f92672">.</span>admin_site<span style="color:#f92672">.</span>name,) <span style="color:#f92672">+</span> info)
+            ))),
+        ]
+        <span style="color:#66d9ef">return</span> urlpatterns
+</code></pre></div><p>这里才是，为每个model类生成的url列表，对应的就是处理方法。</p>
+<h2 id="23-流程总结">2.3 流程总结</h2>
+<p>整个流程如下：</p>
+<ol>
+<li>site 是一个 AdminSite()对象</li>
+<li>查看AdminSite()对象的register方法，使用字典封装了我们的model类{model类,ModelAdmin(model类，site对象)}</li>
+<li>访问urls时，admin为每个model类创建一个以'/app名称/model类名&rsquo;为前缀的url</li>
+<li>映射到包装好的ModelAdmin对象的get_url方法内</li>
+<li>在内部为CRUD操作，定义了url列表以及对应的views方法。</li>
+</ol>
+<h2 id="24-定制admin">2.4 定制admin</h2>
+<p>根据分析，我们知道，真正完成数据库的增删改查的任务，其实是ModelAdmin对象，而在我们注册我们的model时，django提供了一个额外的参数admin_class，用于让我们定制自己的admin。
+所以，我们可以通过继承ModelAdmin来定制，比如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib.admin.options <span style="color:#f92672">import</span> ModelAdmin
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyModelAdmin</span>(ModelAdmin):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">changelist_view</span>(self, request, extra_context<span style="color:#f92672">=</span>None):
+        <span style="color:#66d9ef">return</span> HTTPResponse(<span style="color:#e6db74">&#39;hello&#39;</span>)
+admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>register(Permission, admin_class<span style="color:#f92672">=</span>MyModelAdmin)
+</code></pre></div><p>这样，Permission表的，list页面就会被我们修改。</p>
+<h1 id="3-django-admin的接口">3 django admin的接口</h1>
+<p>上面的方法比较麻烦，django admin提供了不少接口和参数用于控制admin页面的展示
+定制Admin
+在admin.py中只需要讲Mode中的某个类注册，即可在Admin中实现增删改查的功能，如：
+admin.site.register(models.UserInfo)
+但是，这种方式比较简单，如果想要进行更多的定制操作，需要利用ModelAdmin进行操作，如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">方式一：</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+        list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>,)
+ 
+    admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>register(models<span style="color:#f92672">.</span>UserInfo, UserAdmin) <span style="color:#75715e"># 第一个参数可以是列表</span>
+     
+ 
+<span style="color:#960050;background-color:#1e0010">方式二：</span>
+    <span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)                <span style="color:#75715e"># 第一个参数可以是列表</span>
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+        list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>,)
+</code></pre></div><p>ModelAdmin中提供了大量的可定制功能，如</p>
+<ol>
+<li>list_display，列表时，定制显示的列。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>, <span style="color:#e6db74">&#39;xxxxx&#39;</span>)
+ 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">xxxxx</span>(self, obj):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;xxxxx&#34;</span>
+</code></pre></div><ol start="2">
+<li>list_display_links，列表时，定制列可以点击跳转。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>, <span style="color:#e6db74">&#39;xxxxx&#39;</span>)
+    list_display_links <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;pwd&#39;</span>,)
+</code></pre></div><ol start="3">
+<li>list_filter，列表时，定制右侧快速筛选。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.utils.translation <span style="color:#f92672">import</span> ugettext_lazy <span style="color:#66d9ef">as</span> _
+ 
+<span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>)
+ 
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Ugg</span>(admin<span style="color:#f92672">.</span>SimpleListFilter):
+        title <span style="color:#f92672">=</span> _(<span style="color:#e6db74">&#39;decade born&#39;</span>)
+        parameter_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;xxxxxx&#39;</span>
+ 
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lookups</span>(self, request, model_admin):
+            <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            显示筛选选项
+</span><span style="color:#e6db74">            :param request:
+</span><span style="color:#e6db74">            :param model_admin:
+</span><span style="color:#e6db74">            :return:
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>
+            <span style="color:#66d9ef">return</span> models<span style="color:#f92672">.</span>UserGroup<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>values_list(<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>)
+ 
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">queryset</span>(self, request, queryset):
+            <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">            点击查询时，进行筛选
+</span><span style="color:#e6db74">            :param request:
+</span><span style="color:#e6db74">            :param queryset:
+</span><span style="color:#e6db74">            :return:
+</span><span style="color:#e6db74">            &#34;&#34;&#34;</span>
+            v <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>value()
+            <span style="color:#66d9ef">return</span> queryset<span style="color:#f92672">.</span>filter(ug<span style="color:#f92672">=</span>v)
+ 
+    list_filter <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,Ugg,)
+</code></pre></div><ol start="4">
+<li>list_select_related，列表时，连表查询是否自动select_related</li>
+<li>分页相关</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 分页，每页显示条数</span>
+    list_per_page <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+ 
+<span style="color:#75715e"># 分页，显示全部（真实数据&lt;该值时，才会有显示全部）</span>
+    list_max_show_all <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+ 
+<span style="color:#75715e"># 分页插件</span>
+    paginator <span style="color:#f92672">=</span> Paginator
+</code></pre></div><ol start="6">
+<li>list_editable，列表时，可以编辑的列</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>,<span style="color:#e6db74">&#39;ug&#39;</span>,)
+    list_editable <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;ug&#39;</span>,)
+</code></pre></div><ol start="7">
+<li>search_fields，列表时，模糊搜索的功能</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+     
+    search_fields <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>)
+</code></pre></div><ol start="8">
+<li>date_hierarchy，列表时，对Date和DateTime类型进行搜索</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    date_hierarchy <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ctime&#39;</span>
+</code></pre></div><ol start="9">
+<li>preserve_filters，详细页面，删除、修改，更新后跳转回列表后，是否保留原搜索条件</li>
+<li>save_as = False，详细页面，按钮为“Sava as new” 或 “Sava and add another”</li>
+<li>save_as_continue = True，点击保存并继续编辑</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">save_as_continue <span style="color:#f92672">=</span> True
+ 
+<span style="color:#75715e"># 如果 save_as=True，save_as_continue = True， 点击Sava as new 按钮后继续编辑。</span>
+<span style="color:#75715e"># 如果 save_as=True，save_as_continue = False，点击Sava as new 按钮后返回列表。</span>
+ 
+New <span style="color:#f92672">in</span> Django <span style="color:#ae81ff">1.10</span><span style="color:#f92672">.</span>
+</code></pre></div><ol start="12">
+<li>save_on_top = False，详细页面，在页面上方是否也显示保存删除等按钮</li>
+<li>inlines，详细页面，如果有其他表和当前表做FK，那么详细页面可以进行动态增加和删除</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfoInline</span>(admin<span style="color:#f92672">.</span>StackedInline): <span style="color:#75715e"># TabularInline</span>
+    extra <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>UserInfo
+ 
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GroupAdminMode</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;title&#39;</span>,)
+    inlines <span style="color:#f92672">=</span> [UserInfoInline, ]
+</code></pre></div><ol start="14">
+<li>action，列表时，定制action中的操作</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    <span style="color:#75715e"># 定制Action行为具体方法</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(self, request, queryset):
+        <span style="color:#66d9ef">print</span>(self, request, queryset)
+        <span style="color:#66d9ef">print</span>(request<span style="color:#f92672">.</span>POST<span style="color:#f92672">.</span>getlist(<span style="color:#e6db74">&#39;_selected_action&#39;</span>))
+ 
+    func<span style="color:#f92672">.</span>short_description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;中文显示自定义Actions&#34;</span>
+    actions <span style="color:#f92672">=</span> [func, ]
+ 
+    <span style="color:#75715e"># Action选项都是在页面上方显示</span>
+    actions_on_top <span style="color:#f92672">=</span> True
+    <span style="color:#75715e"># Action选项都是在页面下方显示</span>
+    actions_on_bottom <span style="color:#f92672">=</span> False
+ 
+    <span style="color:#75715e"># 是否显示选择个数</span>
+    actions_selection_counter <span style="color:#f92672">=</span> True
+</code></pre></div><ol start="15">
+<li>定制HTML模板</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">add_form_template <span style="color:#f92672">=</span> None
+change_form_template <span style="color:#f92672">=</span> None
+change_list_template <span style="color:#f92672">=</span> None
+delete_confirmation_template <span style="color:#f92672">=</span> None
+delete_selected_confirmation_template <span style="color:#f92672">=</span> None
+object_history_template <span style="color:#f92672">=</span> None
+</code></pre></div><ol start="16">
+<li>raw_id_fields，详细页面，针对FK和M2M字段变成以Input框形式</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    raw_id_fields <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;FK字段&#39;</span>, <span style="color:#e6db74">&#39;M2M字段&#39;</span>,)
+</code></pre></div><ol start="17">
+<li>fields，详细页面时，显示字段的字段</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    fields <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,)
+</code></pre></div><ol start="18">
+<li>exclude，详细页面时，排除的字段</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    exclude <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,)
+</code></pre></div><ol start="19">
+<li>readonly_fields，详细页面时，只读字段</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    readonly_fields <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,)
+</code></pre></div><ol start="20">
+<li>fieldsets，详细页面时，使用fieldsets标签对数据进行分割显示</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    fieldsets <span style="color:#f92672">=</span> (
+        (<span style="color:#e6db74">&#39;基本数据&#39;</span>, {
+            <span style="color:#e6db74">&#39;fields&#39;</span>: (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>, <span style="color:#e6db74">&#39;ctime&#39;</span>,)
+        }),
+        (<span style="color:#e6db74">&#39;其他&#39;</span>, {
+            <span style="color:#e6db74">&#39;classes&#39;</span>: (<span style="color:#e6db74">&#39;collapse&#39;</span>, <span style="color:#e6db74">&#39;wide&#39;</span>, <span style="color:#e6db74">&#39;extrapretty&#39;</span>),  <span style="color:#75715e"># &#39;collapse&#39;,&#39;wide&#39;, &#39;extrapretty&#39;</span>
+            <span style="color:#e6db74">&#39;fields&#39;</span>: (<span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#e6db74">&#39;pwd&#39;</span>),
+        }),
+    )
+</code></pre></div><ol start="21">
+<li>详细页面时，M2M显示时，数据移动选择（方向：上下和左右）</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    filter_vertical <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;m2m字段&#34;</span>,) <span style="color:#75715e"># 或filter_horizontal = (&#34;m2m字段&#34;,)</span>
+</code></pre></div><ol start="22">
+<li>ordering，列表时，数据排序规则</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    ordering <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;-id&#39;</span>,)
+    <span style="color:#960050;background-color:#1e0010">或</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_ordering</span>(self, request):
+        <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">&#39;-id&#39;</span>, ]
+</code></pre></div><ol start="23">
+<li>view_on_site，编辑时，是否在页面上显示view on set</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">view_on_site <span style="color:#f92672">=</span> False
+<span style="color:#960050;background-color:#1e0010">或</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">view_on_site</span>(self, obj):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;https://www.baidu.com&#39;</span>
+</code></pre></div><ol start="24">
+<li>radio_fields，详细页面时，使用radio显示选项（FK默认使用select）</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">radio_fields <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;ug&#34;</span>: admin<span style="color:#f92672">.</span>VERTICAL} <span style="color:#75715e"># 或admin.HORIZONTAL</span>
+</code></pre></div><ol start="25">
+<li>show_full_result_count = True，列表时，模糊搜索后面显示的数据个数样式</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    <span style="color:#75715e"># show_full_result_count = True # 1 result (12 total)</span>
+    <span style="color:#75715e"># show_full_result_count = False  # 1 result (Show all)</span>
+    search_fields <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,)
+</code></pre></div><ol start="26">
+<li>formfield_overrides = {}，详细页面时，指定现实插件</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> widgets
+<span style="color:#f92672">from</span> django.utils.html <span style="color:#f92672">import</span> format_html
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTextarea</span>(widgets<span style="color:#f92672">.</span>Widget):
+    <span style="color:#66d9ef">def</span> __init__(self, attrs<span style="color:#f92672">=</span>None):
+        <span style="color:#75715e"># Use slightly better defaults than HTML&#39;s 20x2 box</span>
+        default_attrs <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;cols&#39;</span>: <span style="color:#e6db74">&#39;40&#39;</span>, <span style="color:#e6db74">&#39;rows&#39;</span>: <span style="color:#e6db74">&#39;10&#39;</span>}
+        <span style="color:#66d9ef">if</span> attrs:
+            default_attrs<span style="color:#f92672">.</span>update(attrs)
+        super(MyTextarea, self)<span style="color:#f92672">.</span>__init__(default_attrs)
+ 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">render</span>(self, name, value, attrs<span style="color:#f92672">=</span>None):
+        <span style="color:#66d9ef">if</span> value <span style="color:#f92672">is</span> None:
+            value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+        final_attrs <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>build_attrs(attrs, name<span style="color:#f92672">=</span>name)
+        <span style="color:#66d9ef">return</span> format_html(<span style="color:#e6db74">&#39;&lt;textarea {}&gt;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">{}&lt;/textarea&gt;&#39;</span>,final_attrs, value)
+ 
+ 
+ 
+<span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    formfield_overrides <span style="color:#f92672">=</span> {
+        models<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>CharField: {<span style="color:#e6db74">&#39;widget&#39;</span>: MyTextarea},
+    }
+</code></pre></div><ol start="27">
+<li>prepopulated_fields = {}，添加页面，当在某字段填入值后，自动会将值填充到指定字段。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    prepopulated_fields <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;email&#34;</span>: (<span style="color:#e6db74">&#34;user&#34;</span>,<span style="color:#e6db74">&#34;pwd&#34;</span>,)}
+PS: DjangoAdmin中使用js实现功能<span style="color:#960050;background-color:#1e0010">，页面</span>email字段的值会在输入<span style="color:#960050;background-color:#1e0010">：</span>user<span style="color:#960050;background-color:#1e0010">、</span>pwd时自动填充
+</code></pre></div><ol start="28">
+<li>form = ModelForm，用于定制用户请求时候表单验证</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> app01 <span style="color:#f92672">import</span> models
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ModelForm
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> fields
+ 
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyForm</span>(ModelForm):
+    others <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField()
+ 
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        model <span style="color:#f92672">=</span> models <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>UserInfo
+        fields <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;__all__&#34;</span>
+ 
+<span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+ 
+    form <span style="color:#f92672">=</span> MyForm
+</code></pre></div><ol start="29">
+<li>empty_value_display = &ldquo;列数据为空时，显示默认值&rdquo;</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@admin.register</span>(models<span style="color:#f92672">.</span>UserInfo)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserAdmin</span>(admin<span style="color:#f92672">.</span>ModelAdmin):
+    empty_value_display <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;列数据为空时，默认显示&#34;</span>
+ 
+    list_display <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;user&#39;</span>,<span style="color:#e6db74">&#39;pwd&#39;</span>,<span style="color:#e6db74">&#39;up&#39;</span>)
+ 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">up</span>(self,obj):
+        <span style="color:#66d9ef">return</span> obj<span style="color:#f92672">.</span>user
+    up<span style="color:#f92672">.</span>empty_value_display <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;指定列数据为空时，默认显示&#34;</span>
+</code></pre></div><h1 id="4-自定义ayra进行crud">4 自定义ayra进行CRUD</h1>
+<p>django admin的功能比较强大，比较重，我们可以自己写一个轻量级的类admin的管理工具。</p>
+<h2 id="41-准备工作">4.1 准备工作</h2>
+<h3 id="411-文件加载顺序">4.1.1 文件加载顺序</h3>
+<p>分析djando admin的代码我们知道，在请求进来之前，我们注册的model就已经被包装好了，所以admin.py这个文件是最先被加载的，然后才才可以创建url，完成url的映射</p>
+<h3 id="412-让我们的程序被优先加载">4.1.2 让我们的程序被优先加载</h3>
+<p>每个应用下的admin.py总是在应用启动的时候就被加载了，我们的程序如何加载呢。观察admin的源码我们发现其内部有一个：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">autodiscover</span>():
+    autodiscover_modules(<span style="color:#e6db74">&#39;admin&#39;</span>, register_to<span style="color:#f92672">=</span>site)
+</code></pre></div><p>这个方法看名字是自动发现，并加载模块的。它是在哪里调用了呢,通过查看源码，我们发现在django.contrib.admin.apps下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AdminConfig</span>(SimpleAdminConfig):
+    <span style="color:#e6db74">&#34;&#34;&#34;The default AppConfig for admin which does autodiscovery.&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ready</span>(self):
+        super(AdminConfig, self)<span style="color:#f92672">.</span>ready()
+        self<span style="color:#f92672">.</span>module<span style="color:#f92672">.</span>autodiscover()
+</code></pre></div><p>ready方法调用了autodiscover.</p>
+<h3 id="413-编写调用文件">4.1.3 编写调用文件</h3>
+<p>知道了怎么被调用的，那么我们先来在每个app下定义一个ayra文件.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># arya.py</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;被加载了&#39;</span>)
+</code></pre></div><p>然后我们创建一个arya app，然后在他的apps.py文件中做如下修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AryaConfig</span>(AppConfig):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;arya&#39;</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ready</span>(self):
+        <span style="color:#f92672">from</span> django.utils.module_loading <span style="color:#f92672">import</span> autodiscover_modules
+        autodiscover_modules(<span style="color:#e6db74">&#39;arya&#39;</span>)
+</code></pre></div><h3 id="414-更换装载应用的方式">4.1.4 更换装载应用的方式</h3>
+<p>在settings.py重，更换下面的导入方式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">INSTALLED_APPS <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#39;django.contrib.admin&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.auth&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.contenttypes&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.sessions&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.messages&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.staticfiles&#39;</span>,
+    <span style="color:#e6db74">&#39;arya.apps.AryaConfig&#39;</span>,    <span style="color:#75715e"># 通过app来导入（顺序无所谓）</span>
+    <span style="color:#e6db74">&#39;rbac&#39;</span>,
+    <span style="color:#e6db74">&#39;main&#39;</span>,
+]
+</code></pre></div><p>这样，准备工作就做好了，启动的django的时候，同时也会加载每个项目目录下的arya.py 文件了</p>
+<h3 id="415-include本质">4.1.5 include本质</h3>
+<p>观察include源码，我们知道include是一个函数，最后返回的是<code>一个三元组</code>，通过观察源码，可以的指导它们代表的值是：</p>
+<ul>
+<li>urlconf_module：url列表</li>
+<li>app_name：None</li>
+<li>namespace：None</li>
+</ul>
+<p>所以，不使用include时，我们可以有如下操作来分发路由</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 测试代码</span>
+<span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> HttpResponse
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test1</span>(request):
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;test1&#39;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test2</span>(request):
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;test2&#39;</span>)
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^login/&#39;</span>, main<span style="color:#f92672">.</span>views<span style="color:#f92672">.</span>login),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^index/&#39;</span>, main<span style="color:#f92672">.</span>views<span style="color:#f92672">.</span>index),
+    <span style="color:#75715e"># url(r&#39;^rbac/&#39;, include(&#39;rbac.urls&#39;)) # 等于下面的</span>
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;rbac/&#39;</span>, ([
+                       url(<span style="color:#e6db74">&#39;user/info&#39;</span>, test1),
+                       url(<span style="color:#e6db74">&#39;user/add&#39;</span>, ([
+                                            url(<span style="color:#e6db74">&#39;list&#39;</span>, test2),
+                                        ], None, None)),
+                   ], None, None))
+]
+</code></pre></div><p>看起来有些杂乱，分析一下产生的url</p>
+<ol>
+<li>/rbac/user/info 对应test1</li>
+<li>/rbac/user/add/list 对应test2</li>
+</ol>
+<p>这就是include的本质</p>
+<h2 id="42-为每个model对象生成对应的url">4.2 为每个model对象生成对应的url</h2>
+<p>根据django admin的源码的编写方式，我们来模仿一下，用于动态的生成对应的urls。创建arya app，然后创建service模块，用于存放arya.py文件，在该文件内部编写主要实现逻辑</p>
+<h3 id="421-注册model类">4.2.1 注册model类</h3>
+<p>首先在每一个app下的arya.py中，模仿admin的方式，注册model类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> arya.service <span style="color:#f92672">import</span> arya
+<span style="color:#f92672">from</span> .models <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+arya<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>register(Userinfo, arya<span style="color:#f92672">.</span>AryaConfig)
+arya<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>register(Permission, arya<span style="color:#f92672">.</span>AryaConfig)
+</code></pre></div><p>不同的app中调用的是相同的site对象，一般称它为单例模式，并且它存在一个register方法，通过了解admin的源码， 我们知道它包含两个参数，一个是model类，还有一个是默认的一个类对象。</p>
+<h3 id="422-servicearya基本实现">4.2.2 service/arya基本实现</h3>
+<p>根据上一部的分析，注册功能就实现了，我们的arya如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> HttpResponse
+
+<span style="color:#75715e"># 根据admin site的源码实现</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AryaConfig</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, model_class, site):
+        self<span style="color:#f92672">.</span>model_class <span style="color:#f92672">=</span> model_class
+        self<span style="color:#f92672">.</span>site <span style="color:#f92672">=</span> site
+
+<span style="color:#75715e"># 根据admin site的源码实现</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AryaSite</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>_register <span style="color:#f92672">=</span> {}
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(self, model_class, arya_class):
+        self<span style="color:#f92672">.</span>_register[model_class] <span style="color:#f92672">=</span> arya_class(model_class, self) <span style="color:#75715e"># 接受两个参数</span>
+
+<span style="color:#75715e"># 单例模式</span>
+site <span style="color:#f92672">=</span> AryaSite()
+</code></pre></div><h3 id="423-添加urls及views函数">4.2.3 添加urls及views函数</h3>
+<p>下面从入口继续编写：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 项目的urls.py文件</span>
+url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^arya/&#39;</span>,arya<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>url)
+</code></pre></div><p>根据前面include的本质，和adjango admin的源码我们知道，这里的url返回的是一个三元组，即[],None,None。列表就是urlpatterns</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># service/arya.py</span>
+<span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> HttpResponse
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AryaConfig</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self, model_class, site):
+        self<span style="color:#f92672">.</span>model_class <span style="color:#f92672">=</span> model_class
+        self<span style="color:#f92672">.</span>site <span style="color:#f92672">=</span> site
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">urls</span>(self):
+        <span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+
+        <span style="color:#75715e"># 为不同的model对象，生成不同的urls</span>
+        patterns <span style="color:#f92672">=</span> [
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^$&#39;</span>, self<span style="color:#f92672">.</span>changelist_view),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^add/&#39;</span>, self<span style="color:#f92672">.</span>add_view),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(\d+)/change/&#39;</span>, self<span style="color:#f92672">.</span>change_view),
+            url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(\d+)/delete/&#39;</span>, self<span style="color:#f92672">.</span>delete_view),
+        ]
+        <span style="color:#66d9ef">return</span> patterns, None, None   <span style="color:#75715e"># 必须返回三元组</span>
+
+    <span style="color:#75715e"># 真正处理CRUD的 views函数</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">changelist_view</span>(self,request):
+        <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;列表页面&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_view</span>(self,request):
+        <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;增加页面&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_view</span>(self,request, id):
+        <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;修改页面&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_view</span>(self,request, id):
+        <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;删除页面&#39;</span>)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AryaSite</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;执行了&#39;</span>)
+        self<span style="color:#f92672">.</span>_register <span style="color:#f92672">=</span> {}
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(self, model_class, arya_class):
+        self<span style="color:#f92672">.</span>_register[model_class] <span style="color:#f92672">=</span> arya_class(model_class, self)
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">url</span>(self):
+        <span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+        patterns <span style="color:#f92672">=</span> []
+
+        <span style="color:#75715e"># 为不同modellei 生成不同的include对象，包含CRUD的urls</span>
+        <span style="color:#66d9ef">for</span> model_class, arya_class <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_register<span style="color:#f92672">.</span>items():
+            pt <span style="color:#f92672">=</span> url(<span style="color:#e6db74">&#39;^{}/{}/&#39;</span><span style="color:#f92672">.</span>format(model_class<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>app_label, model_class<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>model_name), arya_class<span style="color:#f92672">.</span>urls)
+            patterns<span style="color:#f92672">.</span>append(pt)
+
+        <span style="color:#66d9ef">return</span> patterns, None, None
+
+site <span style="color:#f92672">=</span> AryaSite()
+</code></pre></div><blockquote>
+<p>注意：urls路径匹配结尾处，要添加/</p>
+</blockquote>
+<p>为什么要保存model呢？ 观察上面的views函数，内部存在model类对象的话，是不是就可以进行CRUD了呢？配上一个templates模版，就可以完成页面渲染了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>model_class<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

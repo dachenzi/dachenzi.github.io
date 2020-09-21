@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>37-网络编程-UDP编程  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="37-网络编程-UDP编程  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "37-网络编程-UDP编程",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  519 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>37-网络编程-UDP编程
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-udp%E5%8D%8F%E8%AE%AE">1 UDP协议</a></li>
+<li><a href="#2-udp%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B">2 UDP通信流程</a></li>
+<li><a href="#3-udp%E7%BC%96%E7%A8%8B">3 UDP编程</a>
+<ul>
+<li><a href="#31-%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E7%AB%AF">3.1 构建服务端</a></li>
+<li><a href="#32-%E6%9E%84%E5%BB%BA%E5%AE%A2%E6%88%B7%E7%AB%AF">3.2 构建客户端</a></li>
+<li><a href="#33-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">3.3 常用方法</a></li>
+</ul>
+</li>
+<li><a href="#4-%E8%81%8A%E5%A4%A9%E5%AE%A4">4 聊天室</a></li>
+<li><a href="#5-udp%E5%8D%8F%E8%AE%AE%E5%BA%94%E7%94%A8">5 UDP协议应用</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-udp协议">1 UDP协议</h1>
+<p>UDP是面向无连接的协议，<code>使用UDP协议时，不需要建立连接，只需要知道对方的IP地址和端口号，就可以直接发数据包</code>。但是，能不能到达就不知道了。虽然用UDP传输数据不可靠，但它的优点是和TCP比，速度快，对于不要求可靠到达的数据，就可以使用UDP协议。</p>
+<h1 id="2-udp通信流程">2 UDP通信流程</h1>
+<p>我们先来了解一下，python的socket的通讯流程:<br>
+<img src="photo/udpsocket.png" alt="tcp_socket"></p>
+<p>服务端：</p>
+<ol>
+<li>创建Socket对象</li>
+<li>绑定IP地址Address和端口Port，使用bind方法，IPv4地址为一个二元组(&lsquo;IP&rsquo;,Port)，<code>一个UDP端口只能被绑定一次</code></li>
+<li>接受数据，recvfrom方法，使用缓冲区接受数据</li>
+<li>发送数据，sendto方法，类型为bytes</li>
+<li>关闭连接</li>
+</ol>
+<p>客户端：</p>
+<ol>
+<li>创建Socket对象</li>
+<li>连接服务端。connect方法（可选）</li>
+<li>发送数据，sendto/send方法，类型为bytes</li>
+<li>接受数据，recvfrom/recv方法，使用缓冲区接受数据</li>
+<li>关闭连接</li>
+</ol>
+<blockquote>
+<p>我们可以看到UDP不需要维护一个连接，所以比较简单</p>
+</blockquote>
+<h1 id="3-udp编程">3 UDP编程</h1>
+<p>        使用udp编程和使用tcp编程用于相似的步骤，而因为udp的特性，它的服务端不需要监听端口，并且客户端也不需要事先连接服务端。根据上图，以及建立服务端的流程，我门来捋一下服务端的逻辑到代码的步骤：</p>
+<h2 id="31-构建服务端">3.1 构建服务端</h2>
+<ol>
+<li>创建服务端</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">socket <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET,socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+<span style="color:#75715e"># socke.AF_INET 指的是使用 IPv4</span>
+<span style="color:#75715e"># socket.SOCK_STREAM 指定使用面向数据报的UDP协议</span>
+</code></pre></div><ol start="2">
+<li>绑定IP地址和端口。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">socket<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">999</span>))  
+<span style="color:#75715e"># 小于1024的端口只有管理员才可以指定</span>
+</code></pre></div><ol start="3">
+<li>接受数据(阻塞)</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data, client_info <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recvfrom(<span style="color:#ae81ff">1024</span>) 
+<span style="color:#75715e"># 返回一个元组，数据和客户端的地址，因为UDP没有连接，所以只能通过提取消息的发送的源地址，才能在应答时指定对方地址</span>
+</code></pre></div><ol start="6">
+<li>发送数据</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sock<span style="color:#f92672">.</span>sendto(<span style="color:#e6db74">&#39;data&#39;</span><span style="color:#f92672">.</span>encode(),(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">999</span>)) <span style="color:#75715e"># bytes格式</span>
+<span style="color:#75715e"># 第二个参数为客户端地址</span>
+</code></pre></div><ol start="7">
+<li>关闭连接</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sock<span style="color:#f92672">.</span>close()
+</code></pre></div><p>完成的代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)      <span style="color:#75715e"># 指定socket的协议，UDP使用的是SOCK_DGRAM</span>
+server<span style="color:#f92672">.</span>bind((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">9999</span>))                               <span style="color:#75715e"># 绑定端口</span>
+ 
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;UDP Server is Starting...&#39;</span>)
+data, addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>recvfrom(<span style="color:#ae81ff">1024</span>)                             <span style="color:#75715e"># 接受(包含数据以及客户端的地址)</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Received from {}&#39;</span><span style="color:#f92672">.</span>format(addr))
+server<span style="color:#f92672">.</span>sendto(<span style="color:#e6db74">&#39;hello,{}&#39;</span><span style="color:#f92672">.</span>format(addr)<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>), addr)   <span style="color:#75715e"># 应答，格式为(应答的数据，客户端的IP和Port元组)</span>
+</code></pre></div><p>为什么要使用recvfrom/sendto?</p>
+<ol>
+<li>UDP无连接的特性，当服务端收到一条消息时，不会为它维护一个socket的，那么如何应答呢？</li>
+<li>UDP报文中包含对方的IP和Port信息，使用recvfrom，就会返回对方发送的数据和对方的地址</li>
+<li>sendto由于没有socket的特性，所以应答时也需要传递client的地址和端口</li>
+</ol>
+<h2 id="32-构建客户端">3.2 构建客户端</h2>
+<ol>
+<li>创建客户端</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">socket <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET,socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+<span style="color:#75715e"># socke.AF_INET 指的是使用 IPv4</span>
+<span style="color:#75715e"># socket.SOCK_STREAM 指定使用面向数据报的UDP协议</span>
+</code></pre></div><ol start="2">
+<li>添加服务端地址信息（可选）。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">socket<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">999</span>))  
+<span style="color:#75715e"># UDP不会创建连接，所以这里仅仅是在socket上添加了本段/对端的地址而已，并不会发起连接</span>
+</code></pre></div><ol start="3">
+<li>接受数据(阻塞)</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data, client_info <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>) 
+<span style="color:#75715e"># 返回一个元组，数据和客户端的地址，因为UDP没有连接，所以只能通过提取消息的发送的源地址，才能在应答时指定对方地址</span>
+</code></pre></div><ol start="4">
+<li>发送数据</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sock<span style="color:#f92672">.</span>sendto(<span style="color:#e6db74">&#39;data&#39;</span><span style="color:#f92672">.</span>encode(),(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">999</span>)) <span style="color:#75715e"># bytes格式</span>
+<span style="color:#75715e"># 第二个参数为客户端地址</span>
+</code></pre></div><ol start="5">
+<li>关闭连接</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sock<span style="color:#f92672">.</span>close()
+</code></pre></div><p>为什么connect是可选的？</p>
+<ol>
+<li>当执行connect时，由于UDP的特性，并不会为我们创建连接，这里仅仅是在socket上添加了对端的地址而已，并不会发起连接</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+client <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+<span style="color:#66d9ef">print</span>(client) <span style="color:#75715e"># &lt;socket.socket fd=140, family=AddressFamily.AF_INET, type=SocketKind.SOCK_DGRAM, proto=0&gt;</span>
+client<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">9999</span>))
+<span style="color:#66d9ef">print</span>(client) <span style="color:#75715e"># &lt;socket.socket fd=140, family=AddressFamily.AF_INET, type=SocketKind.SOCK_DGRAM, proto=0, laddr=(&#39;127.0.0.1&#39;, 51859), raddr=(&#39;127.0.0.1&#39;, 9999)&gt;</span>
+</code></pre></div><ol start="2">
+<li>如果不执行connect，那么在使用send发生时，就无法知道对端的IP地址，那么只能使用sendto来指定了。</li>
+<li>为什么接收时使用recv，因为是client，只会有server应答消息，所以就不需要来区分了。</li>
+<li>如果指定了connect，sendto已久可以发给任意终端，但recv只能接受connect指定的对端，发来的消息。</li>
+</ol>
+<p>完整的代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+ 
+client <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)            <span style="color:#75715e"># 指定socket的协议，UDP使用的是SOCK_DGRAM</span>
+client<span style="color:#f92672">.</span>sendto(<span style="color:#e6db74">&#39;hello world&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>), (<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">9999</span>))    <span style="color:#75715e"># 发送数据，格式为(发送的数据，服务端的IP和Port元组)</span>
+<span style="color:#66d9ef">print</span>(client<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))                             <span style="color:#75715e"># 同样使用recv来接受服务端的应答数据</span>
+</code></pre></div><blockquote>
+<p>UDP的使用与TCP类似，但是不需要建立连接。此外，服务器绑定UDP端口和TCP端口互不冲突，也就是说，UDP的9999端口与TCP的9999端口可以各自绑定。　</p>
+</blockquote>
+<h2 id="33-常用方法">3.3 常用方法</h2>
+<p>服务器端套接字:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.bind()</code></td>
+<td>绑定地址（host,port）到套接字， 在AF_INET下,以元组（host,port）的形式表示地址。</td>
+</tr>
+</tbody>
+</table>
+<p>客户端套接字:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.connect()</code></td>
+<td>初始化UDP连接对象的，本段/对端地址。</td>
+</tr>
+<tr>
+<td>s.connect_ex()</td>
+<td>connect()函数的扩展版本,出错时返回出错码,而不是抛出异常</td>
+</tr>
+</tbody>
+</table>
+<p>公共用途的套接字函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.recv()</code></td>
+<td>接收TCP/UDP数据，数据以字符串形式返回，bufsize指定要接收的最大数据量。flag提供有关消息的其他信息，通常可以忽略。</td>
+</tr>
+<tr>
+<td><code>s.send()</code></td>
+<td>发送TCP/UDP数据，将string中的数据发送到连接的套接字。返回值是要发送的字节数量，该数量可能小于string的字节大小。</td>
+</tr>
+<tr>
+<td><code>s.recvfrom()</code></td>
+<td>接收UDP数据，与recv()类似，但返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。</td>
+</tr>
+<tr>
+<td><code>s.sendto()</code></td>
+<td>发送UDP数据，将数据发送到套接字，address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。</td>
+</tr>
+<tr>
+<td><code>s.close()</code></td>
+<td>关闭套接字</td>
+</tr>
+<tr>
+<td>s.fileno()</td>
+<td>返回套接字的文件描述符。</td>
+</tr>
+<tr>
+<td><code>s.setblocking(flag)</code></td>
+<td>如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。</td>
+</tr>
+<tr>
+<td><code>s.makefile()</code></td>
+<td>创建一个与该套接字相关连的文件</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-聊天室">4 聊天室</h1>
+<p>下面来模仿上一篇TCP版本的聊天室的结构来创建一个UDP版本的聊天室
+服务端：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> logging
+
+FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%(asctime)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>
+logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>INFO, format<span style="color:#f92672">=</span>FORMAT)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatUDPServer</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self, ip, port):
+        self<span style="color:#f92672">.</span>ip <span style="color:#f92672">=</span> ip
+        self<span style="color:#f92672">.</span>port <span style="color:#f92672">=</span> port
+        self<span style="color:#f92672">.</span>event <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+        self<span style="color:#f92672">.</span>clients <span style="color:#f92672">=</span> {}
+        self<span style="color:#f92672">.</span>sock <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start</span>(self):
+        self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>bind((self<span style="color:#f92672">.</span>ip, self<span style="color:#f92672">.</span>port))
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>recv, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;start&#39;</span>)<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recv</span>(self):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>is_set():
+            <span style="color:#75715e"># 待清理的列表</span>
+            clean <span style="color:#f92672">=</span> set()
+
+            <span style="color:#75715e"># 远程主机关闭连接时，这里会触发异常。不知道为啥</span>
+            <span style="color:#66d9ef">try</span>:
+                data, client_addr <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>recvfrom(<span style="color:#ae81ff">1024</span>)
+            <span style="color:#66d9ef">except</span> ConnectionResetError:
+                <span style="color:#66d9ef">continue</span>
+
+            <span style="color:#66d9ef">if</span> data<span style="color:#f92672">.</span>upper() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;quit&#39;</span> <span style="color:#f92672">or</span> data <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>:
+                self<span style="color:#f92672">.</span>clients<span style="color:#f92672">.</span>pop(client_addr)
+                logging<span style="color:#f92672">.</span>info(client_addr, <span style="color:#e6db74">&#39;is down&#39;</span>)
+                <span style="color:#66d9ef">continue</span>
+
+            <span style="color:#75715e"># 心跳包，内容越小越好</span>
+            <span style="color:#66d9ef">if</span> data<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;@im@&#39;</span>:
+                self<span style="color:#f92672">.</span>clients[client_addr] <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>timestamp()
+                <span style="color:#66d9ef">continue</span>
+
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;{}:{} {}&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">*</span>client_addr, data<span style="color:#f92672">.</span>decode()))
+            self<span style="color:#f92672">.</span>clients[client_addr] <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>timestamp()
+            msg <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{}:{} {}&#34;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">*</span>client_addr, data<span style="color:#f92672">.</span>decode())<span style="color:#f92672">.</span>encode()
+            current <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>timestamp()
+            <span style="color:#66d9ef">for</span> client, date <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>clients<span style="color:#f92672">.</span>items():
+                <span style="color:#75715e"># 如果10s内没有发送心跳包，则进行清理</span>
+                <span style="color:#66d9ef">if</span> current <span style="color:#f92672">-</span> date <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>:
+                    clean<span style="color:#f92672">.</span>add(client)
+                <span style="color:#66d9ef">else</span>:
+                    self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>sendto(msg, client)
+
+            <span style="color:#75715e"># 清理超时连接</span>
+            <span style="color:#66d9ef">for</span> client <span style="color:#f92672">in</span> clean:
+                self<span style="color:#f92672">.</span>clients<span style="color:#f92672">.</span>pop(client)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>set()
+        self<span style="color:#f92672">.</span>sock<span style="color:#f92672">.</span>close()
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    cus <span style="color:#f92672">=</span> ChatUDPServer(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">9999</span>)
+    cus<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">while</span> True:
+        cmd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;&gt;&gt;&gt;&gt;: &#39;</span>)<span style="color:#f92672">.</span>strip()
+        <span style="color:#66d9ef">if</span> cmd<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;quit&#39;</span>:
+            cus<span style="color:#f92672">.</span>stop()
+            <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(threading<span style="color:#f92672">.</span>enumerate())
+</code></pre></div><p>客户端:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> logging
+
+FORMAT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%(asctime)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>
+logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>INFO, format<span style="color:#f92672">=</span>FORMAT)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ChatUDPClient</span>:
+
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    self.ip: 服务端地址
+</span><span style="color:#e6db74">    self.port：服务端端口
+</span><span style="color:#e6db74">    self.socket：创建一个socket对象，用于socket通信
+</span><span style="color:#e6db74">    self.event：创建一个事件对象，用于控制链接循环
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__(self, ip, port):
+        self<span style="color:#f92672">.</span>ip <span style="color:#f92672">=</span> ip
+        self<span style="color:#f92672">.</span>port <span style="color:#f92672">=</span> port
+        self<span style="color:#f92672">.</span>socket <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET,socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+        self<span style="color:#f92672">.</span>event <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Event()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">connect</span>(self):
+        self<span style="color:#f92672">.</span>socket<span style="color:#f92672">.</span>connect((self<span style="color:#f92672">.</span>ip, self<span style="color:#f92672">.</span>port))
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>recv, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;recv&#39;</span>,daemon<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>start()
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_heart,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;heart&#39;</span>,daemon<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_heart</span>(self):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>wait(<span style="color:#ae81ff">5</span>):
+            data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;@im@&#39;</span>
+            self<span style="color:#f92672">.</span>send(data)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recv</span>(self):
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>is_set():
+
+            <span style="color:#75715e"># 某些服务端强制关闭时，会出b&#39;&#39;，这里进行判断</span>
+            <span style="color:#66d9ef">try</span>:
+                data <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>socket<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+                <span style="color:#66d9ef">if</span> data <span style="color:#f92672">==</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>:
+                    self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>set()
+                    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;{}:{} is down&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>ip, self<span style="color:#f92672">.</span>port))
+                    <span style="color:#66d9ef">break</span>
+                logging<span style="color:#f92672">.</span>info(data<span style="color:#f92672">.</span>decode())
+
+            <span style="color:#75715e"># 有些服务端在关闭时不会触发b&#39;&#39;，这里会直接提示异常，这里进行捕捉</span>
+            <span style="color:#66d9ef">except</span> (ConnectionResetError,<span style="color:#a6e22e">OSError</span>):
+                self<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>set()
+                logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;{}:{} is down&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>ip, self<span style="color:#f92672">.</span>port))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send</span>(self, msg):
+        self<span style="color:#f92672">.</span>socket<span style="color:#f92672">.</span>send(msg<span style="color:#f92672">.</span>encode())
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop</span>(self):
+        self<span style="color:#f92672">.</span>send(<span style="color:#e6db74">&#39;quit&#39;</span>)
+        self<span style="color:#f92672">.</span>socket<span style="color:#f92672">.</span>close()
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    ctc <span style="color:#f92672">=</span> ChatUDPClient(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">9999</span>)
+    ctc<span style="color:#f92672">.</span>connect()
+
+    <span style="color:#66d9ef">while</span> True:
+        info <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;&gt;&gt;&gt;&gt;:&#39;</span>)<span style="color:#f92672">.</span>strip()
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> info: <span style="color:#66d9ef">continue</span>
+        <span style="color:#66d9ef">if</span> info<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;quit&#39;</span>:
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;bye bye&#39;</span>)
+            ctc<span style="color:#f92672">.</span>stop()
+            <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ctc<span style="color:#f92672">.</span>event<span style="color:#f92672">.</span>is_set():
+            ctc<span style="color:#f92672">.</span>send(info)
+        <span style="color:#66d9ef">else</span>:
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Server is down...&#39;</span>)
+            <span style="color:#66d9ef">break</span>
+</code></pre></div><h1 id="5-udp协议应用">5 UDP协议应用</h1>
+<p>UDP是无连接协议，它基于以下假设：</p>
+<ul>
+<li>网络足够好</li>
+<li>消息不会丢包</li>
+<li>包不会乱序</li>
+</ul>
+<p>但是，即使在局域网，也不能保证不丢包，而且包的到达不一定有序。</p>
+<p>应用场景：</p>
+<ol>
+<li>视频音频传输，一般来说，丢些包，问题不大，最多丢些图像，听不清话语。</li>
+<li>海量采集数据，例如传感器发来的数据，丢几十、几百条数据也没有关系。</li>
+<li>DNS协议，数据内容小，一个包就能查到结果，不存在乱序，丢包时重新请求解析即可。</li>
+</ol>
+<p>一般来说，UDP性能优于TCP，但是可靠性要求高的场合还是要选择TCP协议。
+　　
+{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

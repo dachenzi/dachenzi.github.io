@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>5-Python的封装与解构-集合  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="5-Python的封装与解构-集合  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "5-Python的封装与解构-集合",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  885 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>5-Python的封装与解构-集合
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84">1 封装与解构</a>
+<ul>
+<li><a href="#11-%E5%B0%81%E8%A3%85">1.1 封装</a></li>
+<li><a href="#12-%E8%A7%A3%E6%9E%84">1.2 解构</a></li>
+<li><a href="#13-python3%E7%9A%84%E8%A7%A3%E6%9E%84">1.3 Python3的解构</a></li>
+</ul>
+</li>
+<li><a href="#2-set%E7%B1%BB%E5%9E%8B">2 set类型</a>
+<ul>
+<li><a href="#21-set%E7%9A%84%E5%AE%9A%E4%B9%89">2.1 set的定义</a></li>
+<li><a href="#22-set%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">2.2 set的基本操作</a>
+<ul>
+<li><a href="#221-%E5%A2%9E%E5%8A%A0%E5%85%83%E7%B4%A0">2.2.1 增加元素</a></li>
+<li><a href="#222-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0">2.2.2 删除元素</a></li>
+<li><a href="#223-%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0">2.2.3 修改元素</a></li>
+<li><a href="#224-%E6%88%90%E5%91%98%E5%88%A4%E6%96%AD">2.2.4 成员判断</a></li>
+</ul>
+</li>
+<li><a href="#23-set%E5%B0%8F%E7%BB%93">2.3 set小结</a></li>
+</ul>
+</li>
+<li><a href="#3-%E9%9B%86%E5%90%88">3 集合</a>
+<ul>
+<li><a href="#31-%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97">3.1 集合运算</a></li>
+<li><a href="#32-%E5%B9%B6%E9%9B%86">3.2 并集</a></li>
+<li><a href="#33-%E4%BA%A4%E9%9B%86">3.3 交集</a></li>
+<li><a href="#33-%E5%B7%AE%E9%9B%86">3.3 差集</a></li>
+<li><a href="#34-%E5%AF%B9%E7%A7%B0%E5%B7%AE%E9%9B%86">3.4 对称差集</a></li>
+<li><a href="#35-%E9%9B%86%E5%90%88%E7%9A%84%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97">3.5 集合的其他运算</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<hr>
+<h1 id="1-封装与解构">1 封装与解构</h1>
+<p>        封装与解构属于Python语言的一种特性，它使用起来很像其他语言中的<code>&quot;逗号表达式&quot;</code>，但内部原理是不同的，在某些场景下：比如变量交换复制时使用，显得非常优雅。</p>
+<h2 id="11-封装">1.1 封装</h2>
+<p>        封装故名思议就是装箱，把多个值使用逗号分隔，组合在一起，本质上来看，其返回的是一个元组，只是省略了小括号。(一定要区别与C语言的逗号表达式)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">91</span>]: t1 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 定义一个元组                                        </span>
+In [<span style="color:#ae81ff">92</span>]: t2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>    <span style="color:#75715e"># 省略括号，其内部还是会封装成元组                                       </span>
+In [<span style="color:#ae81ff">93</span>]: t1                                                 
+Out[<span style="color:#ae81ff">93</span>]: (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+In [<span style="color:#ae81ff">94</span>]: t2                                                 
+Out[<span style="color:#ae81ff">94</span>]: (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+In [<span style="color:#ae81ff">95</span>]: type(t1)                                           
+Out[<span style="color:#ae81ff">95</span>]: tuple
+In [<span style="color:#ae81ff">96</span>]: type(t2)                                           
+Out[<span style="color:#ae81ff">96</span>]: tuple
+
+</code></pre></div><h2 id="12-解构">1.2 解构</h2>
+<p>        解构，解构，就是把箱子解开，在Python中表示从线性结构中把元素解开，并且顺序的赋值给其他变量，需要注意的是，解构时接受元素的变量，需要放在等式的左边，并且数量要和右边解开的元素的个数一致。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">97</span>]: t1                                                 
+Out[<span style="color:#ae81ff">97</span>]: (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+In [<span style="color:#ae81ff">98</span>]: a,b <span style="color:#f92672">=</span> t1    <span style="color:#75715e"># 表示把1赋给a，把2赋给b                                       </span>
+In [<span style="color:#ae81ff">99</span>]: a                                                  
+Out[<span style="color:#ae81ff">99</span>]: <span style="color:#ae81ff">1</span>
+In [<span style="color:#ae81ff">100</span>]: b                                                 
+Out[<span style="color:#ae81ff">100</span>]: <span style="color:#ae81ff">2</span>
+In [<span style="color:#ae81ff">101</span>]: a,b,c <span style="color:#f92672">=</span> t1           <span style="color:#75715e"># 当接受元素的变量多余解构的元素时，会提示ValueError，反之相同                             </span>
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">ValueError</span>                                Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">101</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2e8</span>ad53e5fc7<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> a,b,c <span style="color:#f92672">=</span> t1
+
+<span style="color:#a6e22e">ValueError</span>: <span style="color:#f92672">not</span> enough values to unpack (expected <span style="color:#ae81ff">3</span>, got <span style="color:#ae81ff">2</span>)
+
+In [<span style="color:#ae81ff">102</span>]:  
+</code></pre></div><h2 id="13-python3的解构">1.3 Python3的解构</h2>
+<p>        了解了封装与解构，那么回想一下当我们需要进行变量交换的时候，是否可以通过封装与解构进行优化呢？当我们在其他语言中进行a，b变量的值的交换，我们需要一个中间变量temp，即：<code>a = temp,a = b,b = temp</code>，在Python中我们可以省略。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> b <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> a,b <span style="color:#f92672">=</span> b,a    <span style="color:#75715e"># 这样就完成了变量的交换了，是不是很方便</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> a
+<span style="color:#ae81ff">200</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> b
+<span style="color:#ae81ff">1</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> 
+</code></pre></div><blockquote>
+<p>为什么可以使用这种骚操作，是因为Python在进行变量赋值时，会先计算等式右边的表达式，封装起来，然后再进行解构，赋给对应位置上的变量。并且还提供了其他更便捷的方法比如*号。</p>
+</blockquote>
+<ul>
+<li><code>*号</code>： 使用方式为: <code>*变量名</code>，贪婪的吸收解构的元素形成一个列表,<strong>无论能否吸收，都会返回一个列表</strong>。</li>
+<li><code>_号</code>：表示丢弃一个变量(实际上是使用<code>_</code>接受变量，但是使用这么一个符号，就表示我们不想用它)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: t <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">5</span>))                                  
+In [<span style="color:#ae81ff">2</span>]: t                                                   
+Out[<span style="color:#ae81ff">2</span>]: [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]
+In [<span style="color:#ae81ff">3</span>]: head,<span style="color:#f92672">*</span>mid,tail <span style="color:#f92672">=</span> t                                  
+In [<span style="color:#ae81ff">4</span>]: head                                                
+Out[<span style="color:#ae81ff">4</span>]: <span style="color:#ae81ff">0</span>
+In [<span style="color:#ae81ff">5</span>]: mid                                                 
+Out[<span style="color:#ae81ff">5</span>]: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+In [<span style="color:#ae81ff">6</span>]: tail                                                
+Out[<span style="color:#ae81ff">6</span>]: <span style="color:#ae81ff">4</span>
+
+</code></pre></div><p>需要注意的是：</p>
+<ol>
+<li>*变量名，这种格式不能单独使用</li>
+<li>也不能多个*变量名，连续使用(因为从原理上看，两个、*变量名连起来使用，会引起歧义，所以Python禁止了这种写法)</li>
+<li>*_这种格式，可以收集足够多的元素丢弃</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 1 从[1,(2,3,4),5]中取出4来</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> _,(<span style="color:#f92672">*</span>_,a),_ <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>),<span style="color:#ae81ff">5</span>]
+<span style="color:#f92672">&gt;&gt;&gt;</span> a
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">4</span>
+
+<span style="color:#75715e"># 环境变量JAVA_HOME=/usr/bin/java，返回环境变量名和路径</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> env,path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;JAVA_HOME=/usr/bin/java&#39;</span><span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;=&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> env,path
+<span style="color:#f92672">&gt;&gt;&gt;</span> (<span style="color:#e6db74">&#39;JAVA_HOME&#39;</span>,<span style="color:#e6db74">&#39;/usr/bin/java&#39;</span>)
+
+<span style="color:#960050;background-color:#1e0010">或者</span>
+
+In [<span style="color:#ae81ff">9</span>]:  env, _, path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;JAVA_HOME=/usr/bin/java&#39;</span><span style="color:#f92672">.</span>partition(<span style="color:#e6db74">&#39;=&#39;</span>)                                                                                    
+In [<span style="color:#ae81ff">10</span>]: env,path                                           
+Out[<span style="color:#ae81ff">10</span>]: (<span style="color:#e6db74">&#39;JAVA_HOME&#39;</span>, <span style="color:#e6db74">&#39;/usr/bin/java&#39;</span>)
+</code></pre></div><p><strong>解构是Python提供的很好的功能，可以方便的提取复杂的数据结构的值，配置_使用时，会更加便捷。</strong></p>
+<h1 id="2-set类型">2 set类型</h1>
+<p>        集合set在Python中是一个非常重要的<code>非线性结构</code>，它使用<code>{}</code>表示，用三个词总结集合的特点就是：<strong><code>可变的</code></strong>、<strong><code>无序的</code></strong>、<strong><code>不重复</code></strong>。它的官方解释如下：</p>
+<ul>
+<li>set是一个无序的，不同的<code>可hash对象</code>组成的集。</li>
+<li>常用来进行成员测试，在一个序列中去掉重复的对象，和进行数学上的计算，比如<code>交集(intersection)</code>、<code>并集(union)</code>、<code>差集(difference)</code>、<code>对称差集(symmetric difference)</code>等。</li>
+<li>和其他容器类型相似，在一个无序的集合中支持<code>x in set</code>,<code>len(set)</code>,<code>for x in set</code>等操作。</li>
+<li>set不会记录元素的位置以及元素加入集合的顺序，所以set不支持<code>索引</code>，<code>切片</code>或者其他的类序列的操作。</li>
+</ul>
+<blockquote>
+<p>什么是可hash对象，可以简单的理解为可以被hash()计算的对象，在Python中，可hash对象是不可变类型的，比如tuple, str, int, 等等。</p>
+</blockquote>
+<h2 id="21-set的定义">2.1 set的定义</h2>
+<p>        Python提供了两种定义一个集合的方式，<code>set()</code> 和 <code>set(iterable)</code>，他们的用法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">set() <span style="color:#f92672">-&gt;</span> new empty set object     <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回一个空的</span>set对象
+set(iterable) <span style="color:#f92672">-&gt;</span> new set object   <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回一个</span>set对象<span style="color:#960050;background-color:#1e0010">，元素有</span>iterable填充
+</code></pre></div><p>例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">44</span>]: s1 <span style="color:#f92672">=</span> set()
+In [<span style="color:#ae81ff">45</span>]: s2 <span style="color:#f92672">=</span> set(range(<span style="color:#ae81ff">5</span>))             <span style="color:#75715e"># {0, 1, 2, 3, 4}                                                                    </span>
+In [<span style="color:#ae81ff">46</span>]: s3 <span style="color:#f92672">=</span> set(list(range(<span style="color:#ae81ff">10</span>)))   <span style="color:#75715e"># 外面使用list进行转换，多此一举，{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}                                                                     </span>
+In [<span style="color:#ae81ff">47</span>]: s4 <span style="color:#f92672">=</span> {}           <span style="color:#75715e"># 这种方式实际上是创建了一个字典                                                                               </span>
+In [<span style="color:#ae81ff">48</span>]: s4        
+Out[<span style="color:#ae81ff">48</span>]: {}
+In [<span style="color:#ae81ff">50</span>]: type(s4)  
+Out[<span style="color:#ae81ff">50</span>]: dict
+In [<span style="color:#ae81ff">51</span>]: s5 <span style="color:#f92672">=</span> {(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>),<span style="color:#ae81ff">3</span>,<span style="color:#e6db74">&#39;a&#39;</span>}                                                                                  
+In [<span style="color:#ae81ff">52</span>]: s6<span style="color:#f92672">=</span>{[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>],(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>}       <span style="color:#75715e"># list属于不可hash对象，所以无法添加到set中去                                                                        </span>
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">TypeError</span>                                 Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">52</span><span style="color:#f92672">-</span><span style="color:#ae81ff">237</span>c72203405<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> s6<span style="color:#f92672">=</span>{[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>],(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,),<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>}
+
+<span style="color:#a6e22e">TypeError</span>: unhashable type: <span style="color:#e6db74">&#39;list&#39;</span>
+
+In [<span style="color:#ae81ff">53</span>]:
+</code></pre></div><h2 id="22-set的基本操作">2.2 set的基本操作</h2>
+<p>        set是可变的类型，那就意味着，我们可以对set进行增加、删除、修改等操作。</p>
+<h3 id="221-增加元素">2.2.1 增加元素</h3>
+<p>        set提供了两种定义一个集合的方式，<code>add</code> 和 <code>update</code>，他们的用法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>add() <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">在集合</span>s中添加一个元素<span style="color:#960050;background-color:#1e0010">，如果元素存在，则什么都不做</span>(<span style="color:#960050;background-color:#1e0010">去重特性</span>)<span style="color:#960050;background-color:#1e0010">。（就地修改）</span>
+
+s<span style="color:#f92672">.</span>update(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">把</span><span style="color:#f92672">*</span>others个可迭代可hash对象<span style="color:#960050;background-color:#1e0010">，和</span>s进行并集<span style="color:#960050;background-color:#1e0010">，然后赋给</span>s<span style="color:#960050;background-color:#1e0010">。（就地修改）</span>
+</code></pre></div><p>例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">62</span>]: s         
+Out[<span style="color:#ae81ff">62</span>]: {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}
+In [<span style="color:#ae81ff">63</span>]: s<span style="color:#f92672">.</span>add(<span style="color:#e6db74">&#39;abc&#39;</span>)     <span style="color:#75715e"># 把&#39;abc&#39;当作一个元素添加进去                                                                                     </span>
+In [<span style="color:#ae81ff">64</span>]: s         
+Out[<span style="color:#ae81ff">64</span>]: {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;abc&#39;</span>}  
+In [<span style="color:#ae81ff">65</span>]: s<span style="color:#f92672">.</span>add((<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>))     <span style="color:#75715e"># 把(1,2,3) 当作一个元素添加进去                                                                             </span>
+In [<span style="color:#ae81ff">66</span>]: s         
+Out[<span style="color:#ae81ff">66</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;abc&#39;</span>}
+In [<span style="color:#ae81ff">67</span>]: s<span style="color:#f92672">.</span>update(range(<span style="color:#ae81ff">5</span>),<span style="color:#e6db74">&#39;abcdef&#39;</span>,[<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>])     <span style="color:#75715e"># 多个可迭代可hash对象取并集                                                      </span>
+In [<span style="color:#ae81ff">68</span>]: s         
+Out[<span style="color:#ae81ff">68</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+</code></pre></div><h3 id="222-删除元素">2.2.2 删除元素</h3>
+<p>        set提供了多种定义一个集合的方式，比如 <code>remove</code> ,<code>pop</code>，他们的用法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>remove()  <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">在集合</span>s中删除一个元素<span style="color:#960050;background-color:#1e0010">，这个元素必须存在集合</span>s中<span style="color:#960050;background-color:#1e0010">，否则会报</span>KeyError异常
+
+s<span style="color:#f92672">.</span>pop()  <span style="color:#f92672">--&gt;</span> item <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">在集合</span>s中随便弹出一个元素<span style="color:#960050;background-color:#1e0010">，并返回元素的本身，如果集合本身为空，那么会提示</span>KeyError异常
+
+s<span style="color:#f92672">.</span>discard(elem) <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">在集合</span>s中删除一个元素<span style="color:#960050;background-color:#1e0010">，如果元素不存在集合中，那么什么也不做</span>
+
+s<span style="color:#f92672">.</span>clear()  <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">清空集合</span>
+</code></pre></div><p>例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">71</span>]: s         
+Out[<span style="color:#ae81ff">71</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+
+In [<span style="color:#ae81ff">72</span>]: s<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">0</span>)                                                                                       
+
+In [<span style="color:#ae81ff">73</span>]: s         
+Out[<span style="color:#ae81ff">73</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+
+In [<span style="color:#ae81ff">74</span>]: s<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">1000</span>)       <span style="color:#75715e"># 不存在集合内的元素，删除会报异常                                                                               </span>
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">KeyError</span>                                  Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">74</span><span style="color:#f92672">-</span><span style="color:#ae81ff">9</span>d9da17ab719<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> s<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">1000</span>)
+
+<span style="color:#a6e22e">KeyError</span>: <span style="color:#ae81ff">1000</span>
+In [<span style="color:#ae81ff">76</span>]: s         
+Out[<span style="color:#ae81ff">76</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+
+In [<span style="color:#ae81ff">77</span>]: s<span style="color:#f92672">.</span>pop()   
+Out[<span style="color:#ae81ff">77</span>]: <span style="color:#ae81ff">1</span>
+
+In [<span style="color:#ae81ff">78</span>]: s         
+Out[<span style="color:#ae81ff">78</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+In [<span style="color:#ae81ff">82</span>]: s1        
+Out[<span style="color:#ae81ff">82</span>]: set()
+In [<span style="color:#ae81ff">84</span>]: s1<span style="color:#f92672">.</span>pop()      <span style="color:#75715e"># 空集合会报异常                                                                                    </span>
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">KeyError</span>                                  Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">84</span><span style="color:#f92672">-</span><span style="color:#ae81ff">095118</span>de218b<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> s1<span style="color:#f92672">.</span>pop()
+
+<span style="color:#a6e22e">KeyError</span>: <span style="color:#e6db74">&#39;pop from an empty set&#39;</span>
+
+In [<span style="color:#ae81ff">85</span>]: s         
+Out[<span style="color:#ae81ff">85</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+In [<span style="color:#ae81ff">86</span>]: s<span style="color:#f92672">.</span>discard(<span style="color:#ae81ff">1000</span>)     <span style="color:#75715e"># 直接删除，不会返回                                                                             </span>
+In [<span style="color:#ae81ff">89</span>]: s<span style="color:#f92672">.</span>discard(<span style="color:#ae81ff">4</span>)                                                                                      
+In [<span style="color:#ae81ff">90</span>]: s         
+Out[<span style="color:#ae81ff">90</span>]: {(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;abc&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>, <span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;e&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>}
+In [<span style="color:#ae81ff">92</span>]: s<span style="color:#f92672">.</span>clear() 
+In [<span style="color:#ae81ff">93</span>]: s         
+Out[<span style="color:#ae81ff">93</span>]: set()
+</code></pre></div><h3 id="223-修改元素">2.2.3 修改元素</h3>
+<p>上来我们需要先想一个问题，为什么要修改set呢？修改的本质是什么？</p>
+<ul>
+<li>修改的本质其实就是找到这个元素，删除，然后在加入新的元素</li>
+<li>由于集合是非线性结构，所以无法被索引</li>
+<li>但是set是容器，可以被迭代</li>
+</ul>
+<blockquote>
+<p>所以set不能像list那样，通过索引修改元素，因为它无序的特性，修改其实等同于删除、再添加而已。</p>
+</blockquote>
+<h3 id="224-成员判断">2.2.4 成员判断</h3>
+<p>我们说既然set是容器，那么我们就可以对容器内的元素进行判断，那么就需要使用成员判断符 <code>in</code> 和 <code>not in</code> 了。</p>
+<ul>
+<li>in: x in s, 判断元素x是否是在集合s中，返回bool类型</li>
+<li>not in : x not in s,  判断元素x不在集合s中，返回bool类型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">95</span>]: s <span style="color:#f92672">=</span> set(range(<span style="color:#ae81ff">20</span>))                                                                                
+In [<span style="color:#ae81ff">96</span>]: <span style="color:#ae81ff">1</span> <span style="color:#f92672">in</span> s    
+Out[<span style="color:#ae81ff">96</span>]: True
+In [<span style="color:#ae81ff">97</span>]: <span style="color:#ae81ff">10000</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> s                                                                                    
+Out[<span style="color:#ae81ff">97</span>]: True
+</code></pre></div><blockquote>
+<p>我们知道在list，str这种<code>线性结构</code>中进行<code>成员判断</code>时，它的时间复杂度是<code>O(n)</code>的，因为需要遍历，但是在set中就很简单了，它只需要把要判断的元素进行hash，找到set中对应的门牌号，把里面的数据拽出来，看看是不是相同。 这种操作通常都是<code>O(1)</code>的，所以在set中，<code>成员判断效率很高</code>，当然在<code>dict类型</code>中，也是如此。</p>
+</blockquote>
+<h2 id="23-set小结">2.3 set小结</h2>
+<p>        线性结构的查询时间复杂度是<code>O(n)</code>，即随着数据规模的这不过大而增加耗时，set、dict等结构，内部使用的是hash值作为key，时间复杂度可以做到<code>O(1)</code>查询时间和数据规模无关，在python中可hash对象有(都属于不可变类型)</p>
+<ul>
+<li>数值类型int、float、complex</li>
+<li>布尔值True、False</li>
+<li>字符串String、Bytes</li>
+<li>元组tuple</li>
+<li>None</li>
+</ul>
+<h1 id="3-集合">3 集合</h1>
+<p>        简单来说，所谓的一个集合，就是将数个对象归类而分成为一个或数个形态各异的大小整体。 一般来讲，集合是具有某种特性的事物的整体，或是一些确认对象的汇集。构成集合的事物或对象称作元素或是成员。集合的元素可以是任何事物，可以是人，可以是物，也可以是字母或数字等。 （此解释来自于维基百科）</p>
+<ul>
+<li>全集：所有元素的结合。例如实数集，所有实数组成的集合就是实数集</li>
+<li>子集subset和超集superset: 一个集合A所有的元素都在另一个集合B内，A是B的子集，B是A的超集</li>
+<li>真子集和真超集：A是B的子集，且A不等于B，A就是B的真子集，B就是A的真超集</li>
+<li>并集：多个集合合并的结果</li>
+<li>交集：多个集合的公共部分</li>
+<li>差集：集合中除去和其他集合共有的部分</li>
+</ul>
+<blockquote>
+<p>这些是小学数学基础概念哦，兄弟们。</p>
+</blockquote>
+<h2 id="31-集合运算">3.1 集合运算</h2>
+<p>        通过集合运算，我们可以方便的对求出集合的差集、并集等，Python的集合除了提供了大量的集合运算方法还提供了不少的特殊符号用来表示集合运算。</p>
+<h2 id="32-并集">3.2 并集</h2>
+<p>        将集合A和集合B所有元素合并在一起，组成的集合称为集合A和集合B的并集</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>union(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> new set object <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">把多个集合和集合</span>s进行合并<span style="color:#960050;background-color:#1e0010">，返回一个新的集合对象</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">|</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+s<span style="color:#f92672">.</span>update(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">把</span><span style="color:#f92672">*</span>others个可迭代可hash对象<span style="color:#960050;background-color:#1e0010">，和</span>s进行并集<span style="color:#960050;background-color:#1e0010">，然后赋给</span>s<span style="color:#960050;background-color:#1e0010">。（就地修改）</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">!=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+</code></pre></div><h2 id="33-交集">3.3 交集</h2>
+<p>        集合A和集合B，由所有属于A且属于B的元素组成的集合。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>intersection(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> new set object <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回多个集合的交集</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">&amp;</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+s<span style="color:#f92672">.</span>intersection_update(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> None  <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">获取多个集合的交集，就地进行修改</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">&amp;=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+</code></pre></div><h2 id="33-差集">3.3 差集</h2>
+<p>        集合A和B，由所有属于A且不属于B的元素组成的集合。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>difference(<span style="color:#f92672">*</span>others) <span style="color:#f92672">--&gt;</span> new set object <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回集合</span>s和其他多个集合的差集
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+s<span style="color:#f92672">.</span>difference_update(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回集合</span>s和其他多个集合的差集<span style="color:#960050;background-color:#1e0010">，就地进行修改</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">-=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+</code></pre></div><h2 id="34-对称差集">3.4 对称差集</h2>
+<p>        不属于集合A和集合B交集的其他元素组成的集合，数学表达式为：(A-B) U (B-A)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>symmetric_difference(<span style="color:#f92672">*</span>other) <span style="color:#f92672">--&gt;</span> new set object <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回和另一些集合的对称差集</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">^</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+s<span style="color:#f92672">.</span>symmetric_difference_update <span style="color:#f92672">--&gt;</span> None <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">返回和另一些集合的对称差集，就地修改</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">^=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+</code></pre></div><h2 id="35-集合的其他运算">3.5 集合的其他运算</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">s<span style="color:#f92672">.</span>issubset(other) <span style="color:#f92672">--&gt;</span> bool <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">判断当前集合是否是另一个集合的子集</span>
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">&lt;=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+set1 <span style="color:#f92672">&lt;</span> set2 : <span style="color:#960050;background-color:#1e0010">判断</span>set1是否是set2的真子集
+
+s<span style="color:#f92672">.</span>isssuperset(other) <span style="color:#f92672">--&gt;</span> bool <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">判断当前集合是否是</span>other的超集
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">使用</span> <span style="color:#f92672">&gt;=</span> <span style="color:#960050;background-color:#1e0010">表示</span>
+
+set1 <span style="color:#f92672">&gt;</span> set2 : <span style="color:#960050;background-color:#1e0010">判断</span>set1是否是other的真超集
+
+s<span style="color:#f92672">.</span>isdisjoint(other) <span style="color:#f92672">--&gt;</span> bool <span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">判断当前集合和另一个集合有没有交集</span>
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

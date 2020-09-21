@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flask框架s on dahl&#39;s blog</title>
+    <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/</link>
+    <description>Recent content in Flask框架s on dahl&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>dahlhin.li@gmail.com (daxin.li)</managingEditor>
+    <webMaster>dahlhin.li@gmail.com (daxin.li)</webMaster>
+    <copyright>(c) 2015 Lee xin.</copyright><atom:link href="https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-flask-快速入门-配置-路由基础-请求与响应</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</guid>
+      <description>{% raw %}
+文章目录 1 werkzeug 2 hello world 3 静态文件和模板文件配置 4 用户登录 5 session使用  5.1 基于装饰器的用户认证 5.2 endpoint 5.3 functools.wraps 5.4 session的产生过程分析   6 配置基础  6.1 内置的配置值 6.2 Flask的默认配置 6.3 最佳实践 6.4 动态加载的思想   7 路由系统  7.1 路由系统的本质 7.2 FBV和CBV   8 flask中的before/after 9 请求和响应相关  9.1 上传及保存文件 9.2 构建响应头   10 模板使用  10.1 template_global和template_filter    1 werkzeug  Werkzeug是一个全面的WSGI Web应用程序库。它最初是作为WSGI应用程序的各种实用程序的简单集合开始的，并且已经成为最先进的WSGI实用程序库之一。</description>
+    </item>
+    
+    <item>
+      <title>2-flask-蓝图-闪现-中间件-session</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</guid>
+      <description>{% raw %}
+文章目录 1 flask蓝图  1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置   2 消息闪现 3 中间件 4 flask-session插件  4.1 安装 4.2 将session放在redis中 4.3 为什么可以直接使用    1 flask蓝图  为了在一个或多个应用中，使应用模块化并且支持常用方案，Flask引入了蓝图概念。蓝图可以极大地简化大型应用并为扩展提供集中的注册入口。 Blueprint对象与 Flask 应用对象的工作方式类似，但不是一 个真正的应用。它更像一个用于构建和扩展应用的蓝图 。
+蓝图的用途：
+ 把一个应用分解为一套蓝图。这是针对大型应用的理想方案：一个项目可以实例化几个应用，初始化多个扩展，并注册许多蓝图。 在一个应用的 URL 前缀和（或）子域上注册一个蓝图。 URL 前缀和（或）子域的参数成为蓝图中所有视图的通用视图参数（缺省情况下）。 使用不同的 URL 规则在应用中多次注册蓝图。 通过蓝图提供模板过滤器、静态文件、模板和其他工具。蓝图不必执行应用或视图 函数。 当初始化一个 Flask 扩展时，为以上任意一种用途注册一个蓝图。   在蓝图被注册到应用之后，当分配请求时，Flask 会把蓝图和视图函数关联起来，并生成两个端点之前的URL 。
+1.1 第一个蓝图 蓝图的标准目录结构如下：
+flask_app ├─manage.py └─flask_app ├─__init__.py ├─static ├─templates └─views # 视图函数存放的位置 ├─account.</description>
+    </item>
+    
+    <item>
+      <title>3-flask-上下文原码分析-多app</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/</guid>
+      <description>{% raw %}
+文章目录 1 上下文管理  1.1 threading.local 1.2 partial偏函数 1.3 setattr 魔术方法 1.4 localproxy代理 1.5 真实原码流程 1.6 django传参与flask的对比 1.7 总结   2 多app应用  1 上下文管理  flask的上下文管理非常巧妙，先来说一下前导知识，flask内部实现的方式和threading.local很像，但其内部做了精妙的设置，如果支持协程(greenlet),那么还会使用协程的方式实现。
+1.1 threading.local  在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁(锁住资源，否则一旦在多个线程中修改，会产生无法预期的结果)。但是局部变量也有问题，就是在函数调用的时候，每次都要传递，感觉很麻烦。
+在主进程中创建ThreadLocal对象，每个Thread对它都可以读写属性，但互不影响。你可以把ThreadLocal看成全局变量，但每个属性都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。即：一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。
+import threading local = threading.local() local.x = 200 def worker(): for i in range(100): local.x += 1 print(&amp;#39;{} {}&amp;#39;.format(threading.current_thread().name,local.x)) for i in range(10): t = threading.Thread(target=worker) t.start() print(local.x) 上面的执行结果是互补不干扰的。为什么local对象可以安全使用？
+通过分析原码，我们看到：在主线程中创建后local后，threading.local会为实例初始化一个字典管理器，创建一个大字典，用于嵌套每一个线程创建的它自己线程相关的字典。当开启了新的线程时，查找local对象的某个属性时，首先会被__getattribute__方法捕获，在内部又调用了包装为上下文管理器的_path(打补丁)，首先它通过local初始化时构建的key(prefix+id(当前线程))来查找它嵌套的字典。如果不存在说明线程第一次运行，为它初始化一个__dict__属性字典，替换local的属性，如果存在，则把字典管理器拿出来，直接替换local的属性。所以在不同线程内，每个local对象在调用时都会切换到它对应的__dict__上。线程执行完毕后，回到主线程，在_path中重新切换到主线程的小字典，然后继续把local对象的__dict__进行切换。
+一句话总结：运行时，threading.local实例处在不同的线程中，就从大字典中找到当前线程相关键值对中的字典，覆盖threading.local实例的 __dict__ 。这样就可以在不同的线程中，安全地使用线程独有的数据，做到了线程间数据隔离，如同本地变量一样安全。
+简单的模拟thread_local的实现：</description>
+    </item>
+    
+    <item>
+      <title>4-websocket-flask-websocket</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/4-websocket-flask-websocket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/4-websocket-flask-websocket/</guid>
+      <description>{% raw %}
+文章目录 1 websocket 2 协议 3 websocket协议简单实现  3.1 server与client 2.2 加密与握手 2.3 websocket数据包格式 2.4 解包 2.5 交互 2.6 完整的代码   3 利用flask提供websocket服务  1 websocket  WebSocket是HTML5新增的协议，它的目的是在浏览器和服务器之间建立一个不受限的双向通信的通道，比如说，服务器可以在任意时刻发送消息给浏览器。为什么传统的HTTP协议不能做到WebSocket实现的功能？这是因为HTTP协议是一个请求-响应协议，请求必须先由浏览器发给服务器，服务器才能响应这个请求，再把数据发送给浏览器。换句话说，浏览器不主动请求，服务器是没法主动发数据给浏览器的。这样一来，要在浏览器中搞一个实时聊天，或者在线多人游戏的话就没法实现了，只能借助Flash这些插件。也有人说，HTTP协议其实也能实现啊，比如用轮询或者Comet(长轮询)。
+ 轮询是指浏览器通过JavaScript启动一个定时器，然后以固定的间隔给服务器发请求，询问服务器有没有新消息。这个机制的缺点一是实时性不够，二是频繁的请求会给服务器带来极大的压力。 Comet(长轮询)本质上也是轮询，但是在没有消息的情况下，服务器先拖一段时间，等到有消息了再回复。这个机制暂时地解决了实时性问题，但是它带来了新的问题：以多线程模式运行的服务器会让大部分线程大部分时间都处于挂起状态，极大地浪费服务器资源。另外，一个HTTP连接在长时间没有数据传输的情况下，链路上的任何一个网关都可能关闭这个连接，而网关是我们不可控的，这就要求Comet连接必须定期发一些ping数据表示连接&amp;rsquo;正常工作&#39;。  以上两种机制都治标不治本，所以，HTML5推出了WebSocket标准，让浏览器和服务器之间可以建立无限制的全双工通信，任何一方都可以主动发消息给对方。
+2 协议 WebSocket协议是基于TCP的一种新的协议。WebSocket最初在HTML5规范中被引用为TCP连接，作为基于TCP的套接字API的占位符。它实现了浏览器与服务器全双工(full-duplex)通信。其本质是保持TCP连接，在浏览器和服务端通过Socket进行通信。 它的主要特点有：
+ 数据格式：和html的结构类似 连接：创建连接后不断开 校验：第一次连接时，需要进行校验(魔法字符串) 加密：每次发送/接受的数据都需要一个加密解密的过程  3 websocket协议简单实现 下面我们来一步一步的用代码实现websocket协议的数据交互，基本交互逻辑如下：
+ 客户端发起websocket连接 服务段根据WebSocket-Key与magic_string通过加密计算出结果，发送给客户端。 客户端验证通过连接建立完毕 进入收发数据阶段 客户端加密发送数据 服务段解密接受数据，然后再加密返回数据 客户端解密接受数据，然后循环5-7这个过程  3.1 server与client 首先编写一个socket server，利用浏览器发送websocket协议的数据，看看发送的到底是什么东西
+import socket server_ip = (&amp;#39;127.0.0.1&amp;#39;, 8080) server = socket.</description>
+    </item>
+    
+    <item>
+      <title>5-sqlalchemy-flask_sqlalchemy</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy/</guid>
+      <description>{% raw %}
+1 sqlalchemy 关于sqlalchemy的用法请参考：sqlalchemy用法点这里
+2 flask_sqlalchemy  Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。 官方文档点这里
+下面是一个标准的falsk程序的目录结构：
+cmdb ├── cmdb │ ├── __init__.py # 创建db，create_app函数 │ ├── models.py # orm映射文件 │ ├── static │ ├── templates │ └── views # views视图函数 │ ├── __init__.py │ ├── account.py │ └── home.py ├── create_table.py # 用于创建数据库表 ├── manage.py # 管理，启动app └── settings.py 其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。
+2.1 创建对象  新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 pip3 install flask_sqlalchemy 安装</description>
+    </item>
+    
+    <item>
+      <title>5-sqlalchemy-flask_sqlalchemy-wtforms</title>
+      <link>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy-wtforms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>dahlhin.li@gmail.com (daxin.li)</author>
+      <guid>https://dachenzi.github.io/flask%E6%A1%86%E6%9E%B6/5-sqlalchemy-flask_sqlalchemy-wtforms/</guid>
+      <description>{% raw %}
+1 sqlalchemy 关于sqlalchemy的用法请参考：sqlalchemy用法点这里
+2 flask_sqlalchemy  Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。 官方文档点这里
+下面是一个标准的falsk程序的目录结构：
+cmdb ├── cmdb │ ├── __init__.py # 创建db，create_app函数 │ ├── models.py # orm映射文件 │ ├── static │ ├── templates │ └── views # views视图函数 │ ├── __init__.py │ ├── account.py │ └── home.py ├── create_table.py # 用于创建数据库表 ├── manage.py # 管理，启动app └── settings.py 其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。
+2.1 创建对象  新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 pip3 install flask_sqlalchemy 安装</description>
+    </item>
+    
+  </channel>
+</rss>

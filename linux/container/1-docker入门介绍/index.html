@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1-docker入门介绍  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="1-docker入门介绍  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/linux/container/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "1-docker入门介绍",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  370 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/linux/container/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>1-docker入门介绍
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<h1 id="1-虚拟化介绍">1 虚拟化介绍</h1>
+<p>主流的虚拟机化方式：</p>
+<ul>
+<li><code>主机级虚拟化</code>：虚拟化的是整个完整的物理硬件平台(VMware workstation)</li>
+<li><code>容器级虚拟化</code>：虚拟化的是一个个的用户空间</li>
+</ul>
+<p>主机虚拟化两种类型的实现：</p>
+<ul>
+<li><code>Type-I</code>:直接在硬件设备上安装虚拟机管理器一般叫hypervisor，然后再来创建虚拟机</li>
+<li><code>Type-II</code>:在宿主机上安装一个宿主机操作系统，再装一个VMM(viurtul Machine Manage) 虚拟机管理器，然后再来创建虚拟机（WMware、virtualbox等)</li>
+</ul>
+<p>没有一个虚拟机是直接跑在硬件设备之上的。所以减少中间层，中间环境，就可以有效的提高效率。
+<img src="../photo/Virtualization.png" alt="Virtualization"></p>
+<p>        由图可知，去掉虚拟机的内核以后，就需要直接在主机的用户空间内进行分割，形成多个用户态，在这些独立分割的用户空间内去运行应用程序。</p>
+<h1 id="2-容器技术">2 容器技术</h1>
+<p>        不同用户空间内，主机名肯定需要不相同、并且PID号、文件系统等，都应该相对隔离，所以每一个用户空间都应该存在以下七个部分：</p>
+<ul>
+<li>主机名/域名（UTS）</li>
+<li>文件系统（Mount） - <code>树形结构</code></li>
+<li>进程间通讯（IPC）</li>
+<li>进程(PID) - <code>树形结构</code>（归属与init或者本身就是init)</li>
+<li>用户(User)</li>
+<li>网络(Network)</li>
+</ul>
+<p>        Linux在内合层面通过使用名称空间(namespace)对以上六种资源进行的隔离进行直接支持，并通过系统调用直接输出。但是不同的内核版本对名称空间的支持不同，下面是六大资源实现的内核版本</p>
+<table>
+<thead>
+<tr>
+<th>namespace</th>
+<th>系统调用参数</th>
+<th>隔离内容</th>
+<th>内核版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UTS</td>
+<td>CLONE_NEWUTS</td>
+<td>主机和域名</td>
+<td>2.6.19</td>
+</tr>
+<tr>
+<td>IPC</td>
+<td>CLONE_NEWIPC</td>
+<td>信号量、消息队列和共享内存</td>
+<td>2.6.19</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>CLONE_NEWPID</td>
+<td>进程编号</td>
+<td>2.6.24</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>CLONE_NEWNET</td>
+<td>网络设备、网络栈、端口等</td>
+<td>2.6.29</td>
+</tr>
+<tr>
+<td>Mount</td>
+<td>CLONE_NEWNS</td>
+<td>挂在点(文件系统)</td>
+<td>2.4.19</td>
+</tr>
+<tr>
+<td>User</td>
+<td>CLONE_NEWUSER</td>
+<td>用户和用户组</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>PS：没有User也可以用，但是在某些特殊的地方是有缺失的，所以 CentOS 6 2.6+内核，天生被排除在外。</p>
+<h2 id="21-资源如何分配">2.1 资源如何分配</h2>
+<p>        每个名称空间所需要的资源，都是由宿主机提供的，那么该如何限制不同的名称空间的资源配额？内核通过CGroups (Control Groups) 来对资源进行分组，然后将不同的组分配到指定的名称空间中去使用.</p>
+<p>        一个cgroups分组中一般包含如下资源：</p>
+<ul>
+<li>blkio：块设备IO</li>
+<li>cpu：CPU</li>
+<li>cpuacct：CPUT资源使用报告</li>
+<li>cpuset: 多处理器平台上的CPU集合</li>
+<li>devices: 设备访问</li>
+<li>freezer: 挂起或恢复任务</li>
+<li>memory: 内存用量及报告</li>
+<li>perf_event: 对cgroup中的任务进行统一性能测试</li>
+<li>net_cls: cgroup中的任务创建的数据报文的类别标识符</li>
+</ul>
+<p>所以内核实现容器虚拟化，最重要的三种技术就是 <code>chroot</code>、<code>namespace</code>、<code>cgroups</code></p>
+<p>LXC(LinuX Container): 把完整的容器技术用一组简易使用的工具和模版来极大的简化了容器技术使用的方案</p>
+<ul>
+<li>lxc-create: 快速创建一个容器(用户空间)</li>
+<li>template: 自动的实现安装过程(你所指向的系统发行版的仓库)，把所需要的包下载到本地来安装。</li>
+<li>other：比如chroot来切换等。</li>
+</ul>
+<p>docker是lxc的一个增强版，可以理解为容器的一个易用工具。</p>
+<p>docker是什么？
+        docker：直译成中文是码头工人的意思
+        早期的docker就是lxc的一个封装发行版，利用lxc做管理容器引擎，在创建用户空间时，不通过templates去下载所需要的所有文件，而是使用一种镜像技术（ 比如把那些创建一个用户空间需要的文件事先编排好，然后打包成一个文件(镜像文件)),镜像文件一般放在一个大家都能访问到的仓库中。docker会连到仓库中去搜索匹配你创建容器时需求的镜像文件，然后下载到本地，并基于镜像来启动容器.</p>
+<p>docker为了使整个容器的使用更加便于管理，采用一种更精巧的方式，在一个容器内只运行一个进程，不同进程归属与不同的容器，二者通信时使用容器间的通讯方式来交互。</p>
+<p>所以docker和lxc最主要的区别是：lxc虚拟出来的容器是当一个虚拟机来使用的，里面可以存在N个进程，而docker中仅仅存在一个进程。
+这种方式有几个特点：</p>
+<ol>
+<li>每一个进程只运行在自己单独的容器中。</li>
+<li>容器只为了运行这一个进程，所以如果进程没有用到哪个目录，就不会去创建。</li>
+<li>相同的文件，需要多份存在与不同的容器内，会浪费空间，但是每个容器内的进程对文件的操作不会影响其他容器</li>
+<li>每一个程序都运行在自己空间内，那么就需要在不同的容器内准备多份调试工具。</li>
+<li>运行第二个进程是必然的，但是仅仅是在需要的使用来使用（排查工具等)</li>
+</ol>
+<p>镜像的运行简述：</p>
+<ul>
+<li>分层构建，联合挂载的方式。
+PS: 包含读写层</li>
+</ul>
+<p>成熟以后，抛弃LXC，自建容器引擎：</p>
+<ul>
+<li>libcontainer -&gt; runContainer(runC) 目前新版的容器引擎。（容器运行时的环境标准）</li>
+<li>镜像文件标准 -&gt; OCF(开放容器标准)</li>
+</ul>
+<p>docker的基本使用：</p>
+<ul>
+<li>容纳容器镜像的站点：dockerhub(hub.docker.com)</li>
+</ul>
+<p>dokcer架构：</p>
+<ul>
+<li>Client端  &ndash;&gt; docker client</li>
+<li>DOCKER_HOST(Server端)  &ndash;&gt; docker daemon</li>
+<li>Registry  &ndash;&gt; docker registries</li>
+</ul>
+<p>C/S结构的应用程序。 运行docker daemon 就把这台主机变成了Server端，通过监听socket来接受client端的请求，服务器端支持三种类型套接字(IPv4，IPv6，unix socket)，默认是unix socket套接字文件</p>
+<p>PS：docker client到 docker Host 使用的是也是HTTPS（docker HOST 遵循Restful风格）</p>
+<p>DOCKER_HOST主机：</p>
+<ul>
+<li>Containers:</li>
+<li>Images:来自于registry，镜像仓库，默认为docker hub，初始化是空的从远端下载(HTTP,HTTPS),默认为HTTPS，除非明确确认安全。</li>
+</ul>
+<p>为什么不不叫repository，而叫registry包含</p>
+<ul>
+<li>镜像存储</li>
+<li>用户认证</li>
+<li>可用镜像的索引(搜索索引)
+不仅仅是一个仓库，而是一个应用程序，包含多个仓库(repository)，一个仓库用于存放一个应用程序的镜像(一般仓库名就是应用程序名)，单个仓库加标签，唯一标示一个镜像(图)，如果没有执行标签，那么就是最新版,当然还有稳定版的标签(stable)指向对应的版本。</li>
+</ul>
+<p>镜像是静态的(文件)，容器是动态的，包含生命周期（类似进程）</p>
+<p>docker中的资源和对象：（restful中的资源是可以支持增删改查的操作)</p>
+<ul>
+<li>images</li>
+<li>containers</li>
+<li>networks</li>
+<li>volumes</li>
+<li>plugins</li>
+</ul>
+<p>安装及使用docker:</p>
+<ul>
+<li>64bits CPU</li>
+<li>Linux Kernel 3.10+</li>
+<li>Linux Kernel cgroups and namespaces</li>
+</ul>
+<p>Centos 7:</p>
+<ul>
+<li>Extras repository(包含)</li>
+</ul>
+<p>docker默认配置文件是json格式的</p>
+<ul>
+<li>/etc/docker/daemon.json
+PS:第一次启动前是不存在的，可以手动创建</li>
+</ul>
+<p>配置docker 镜像仓库（加速下载）
+vim /etc/docker/daemon.json
+{
+&ldquo;registry-mirrors:[&ldquo;https://xxx.com&rdquo;]&rdquo;
+}</p>
+<p>启动docker: systemctl start docker.service</p>
+<p>命令主要分两类：</p>
+<ul>
+<li>杂乱无章的(早期)</li>
+<li>分类管理(后期)</li>
+</ul>
+<p>docker info:</p>
+<ul>
+<li>storage Driver: overlay2 ,7.4及以前的docker早期版本是DM(基于LVM的实现，性能很弱，还不稳定)</li>
+</ul>
+<p>常用操作：
+docker image 系列包含如下命令：</p>
+<ul>
+<li>docker search: 在docker Hub中搜索镜像(docker image search)</li>
+<li>docker pull: 从仓库中拉取镜像(下载到本地)(docker image pill)</li>
+<li>docker images: 显示本地images列表(docker image ls)</li>
+<li>docker rmi: 删除一个或多个镜像(docker image rm)</li>
+</ul>
+<p>docker container 系列命令包含如下命令</p>
+<ul>
+<li>docker create: 创建一个新的容器</li>
+<li>docker start: 启动一个容器</li>
+<li>docker run: 在一个新的容器中运行一个命令（创建并启动容器)</li>
+<li>docker attach:</li>
+<li>docker ps: 列出容器</li>
+<li>docker logs: 列出容器日志(输出到控制台的日志)</li>
+<li>docker restart: 重启容器</li>
+<li>docker stop: 停止一个或多个运行的容器</li>
+<li>docker kill: 杀掉一个或多个运行的容器</li>
+<li>docker rm: 删除一个或多个容器</li>
+</ul>
+<p>在容器中执行命令：</p>
+<ul>
+<li>docker exec -it ContainerName /bin/bash: 在容器内执行一个shell</li>
+</ul>
+<p>docker容器状态转换机制命令：
+图 docker event state</p>
+<h1 id="docker-image-镜像">docker image 镜像</h1>
+<p>        docker host 从docker registries 中获取镜像并存入到本地，所以要求docker host本地能够存储这种镜像，这种存储空间要求是一种特殊而且专用的文件系统(1.18 overlay2存储驱动)
+        镜像可以理解为应用程序的集装箱(docker(码头工人)负责转配这些集装箱)
+        Docker镜像含有启动容器所需要的文件系统及其内容，因此，其用于创建并启动Docker容器</p>
+<ul>
+<li>采用分层构建机制，大体上分为两部分：最底层为bootfs，其之上为rootfs(图，rootfs层(/etc,/bin,/sbin等)，bootfs层)
+<ul>
+<li>bootfs：用于系统引导的文件系统，包括bootloader和kernel，容器启动完成后会被卸载以节约内存资源（从内存中移除)
+底层为aufs/btrfs/overlay文件系统，来确保能够引导并启动一个用户空间</li>
+<li>rootfs：位于bootfs之上，表现为docker容器的根 文件系统
+<ul>
+<li>传统模式中，系统启动之时，内核挂载rootfs时会首先将其挂载为“只读”模式，完整性自检完成后将其重新挂载为读写模式；</li>
+<li>docker中，rootfs由内核挂载为“只读”模式，而后通过“联合挂载”技术额外挂载一个“可写”层。</li>
+</ul>
+</li>
+<li>位于下层的镜像称为父镜像(parent image)，最底层的称为基础镜像(base image)</li>
+<li>最上层为“可读写”层，其下的均为“只读”层。(图，可写层，http层，vim层，base image层，bootfs层)</li>
+</ul>
+</li>
+</ul>
+<h2 id="专有文件系统">专有文件系统</h2>
+<p>        docker的这种分层构建，联合挂载，需要的是专有的文件系统的支持，比如Aufs、overlay2，brtfs等。</p>
+<h3 id="aufs文件系统">Aufs文件系统</h3>
+<p>        Aufs：advanced multi-layered unification filesystem：高级多层统一文件系统</p>
+<ul>
+<li>用于为Linux文件系统实现”联合挂载“</li>
+<li>aufs是之前的UnionFS的重新实现，2006年由Junjiro Okajima开发；</li>
+<li>Docker最初使用aufs作为容器文件系统层，它目前仍作为存储后端之一来支持；</li>
+<li>aufs的竞争产品是overlayfs，后者自从3.18版本开始被合并到Linux内核；</li>
+<li>docker的分层镜像，除了aufs、docker还支持btrfs，devicemapper和vfs等
+<ul>
+<li>在Ubuntu系统下，docker默认Ubuntu的aufs；而在Centos7上，用的是devicemapper(DM)；</li>
+</ul>
+</li>
+</ul>
+<h3 id="devicemapper文件系统">devicemapper文件系统</h3>
+<h3 id="overlay2文件系统">overlay2文件系统</h3>
+<p>overlay2是一个抽象的二级文件系统，它需要构建在一个本地文件系统之上，这个文件系统就是xfs(extfs)</p>
+<h2 id="docker-registry">docker registry</h2>
+<p>启动容器时，docker daemon会视图从本地获取相关的镜像；本地镜像不存在时，其将从registry中下载该镜像并保存到本地；(图，docker Client ,http/https, Docker Daemon(stroage Driver, aufs,dm), Public Docker registry DockerHub, Private Docker Registry,Storage Driver)</p>
+<p>PS: docker distribution：docker提供的一个镜像服务，但是不完成，默认不支持HTTPS服务，在安全情况下，docker daemon要求 docker registry必须是HTTPS服务的，如果不是，需要配置docker daemon来明确指示其使用不安全的镜像仓库(现在更流行使用vmware开源的harbor)</p>
+<p>分类：</p>
+<ul>
+<li>Registry用于保存docker镜像，包括镜像的层次结构和元数据</li>
+<li>用户可自建Registry，也可以使用官方的Docker Hub</li>
+<li>分类：
+<ul>
+<li>Sponsor Registry：第三方的registry，供客户和Docker社区使用</li>
+<li>Mirror Registry：第三方的registry，只让客户使用(加速器，比如阿里云)</li>
+<li>Vendor Registry：由发布docker镜像的供应商提供的registry（比如红帽提供的供购买它服务的客户使用)</li>
+<li>Privage Registry：通过设有防火墙和额外安全层的私有实体提供的registry</li>
+</ul>
+</li>
+</ul>
+<p>组成：
+一般由两部分组成：Repository、Index</p>
+<ul>
+<li>
+<p>Repository</p>
+<ul>
+<li>有特定的docker镜像的所以迭代版本组成的镜像仓库</li>
+<li>一个Registory中可以存在多个Repository
+<ul>
+<li>Repository可以分为”顶层仓库”和“用户仓库“</li>
+<li>顶层仓库名称格式为“仓库名”</li>
+<li>用户仓库名称格式为”用户名/仓库名“</li>
+</ul>
+</li>
+<li>每个仓库可以包含多个Tag(标签),每个标签对应一个镜像，但一个镜像可以对应多个标签</li>
+</ul>
+</li>
+<li>
+<p>Index</p>
+<ul>
+<li>维护用户账户、镜像的校验以及公共命名空间的信息</li>
+<li>相当于为Registry提供了一个完成用户认证等功能的检索接口</li>
+</ul>
+</li>
+</ul>
+<p>docker registry中的镜像来自于何处？
+        通常由镜像开发人员制作，而后推送至“公共”或“私有”Registry上保存，供其他人员使用，例如“部署”到生产环境；</p>
+<p>docker hub</p>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

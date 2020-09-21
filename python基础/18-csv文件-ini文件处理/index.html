@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>18-csv文件-ini文件处理  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="18-csv文件-ini文件处理  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "18-csv文件-ini文件处理",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  389 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/python%E5%9F%BA%E7%A1%80/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+<a href="https://dachenzi.github.io/about">About</a>
+
+<a href="https://dachenzi.github.io/post" title="Show list of posts">Posts</a>
+
+<a href="https://dachenzi.github.io/tags" title="Show list of tags">Tags</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>18-csv文件-ini文件处理
+</h1>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-csv%E6%96%87%E4%BB%B6">1 CSV文件</a>
+<ul>
+<li><a href="#11-%E6%89%8B%E5%8A%A8%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAcsv%E6%96%87%E4%BB%B6">1.1 手动生成一个csv文件</a></li>
+<li><a href="#12-cvs%E6%A8%A1%E5%9D%97">1.2 cvs模块</a>
+<ul>
+<li><a href="#121-reader%E6%96%B9%E6%B3%95">1.2.1 reader方法</a></li>
+<li><a href="#122-writer%E6%96%B9%E6%B3%95">1.2.2 writer方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">2 ini文件处理</a>
+<ul>
+<li><a href="#21-configparser%E6%A8%A1%E5%9D%97">2.1 configparser模块</a></li>
+<li><a href="#22-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">2.2 常用方法</a>
+<ul>
+<li><a href="#221-%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E9%85%8D%E4%BB%B6">2.2.1 读取配置配件</a></li>
+<li><a href="#222-section%E6%93%8D%E4%BD%9C">2.2.2 section操作</a></li>
+<li><a href="#223-option%E6%93%8D%E4%BD%9C">2.2.3 option操作</a></li>
+<li><a href="#224-%E8%8E%B7%E5%8F%96value">2.2.4 获取value</a></li>
+<li><a href="#225-%E8%AE%BE%E7%BD%AEvalue">2.2.5 设置value</a></li>
+<li><a href="#226-%E4%BF%9D%E5%AD%98%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">2.2.6 保存修改后的配置文件</a></li>
+</ul>
+</li>
+<li><a href="#23-%E5%AD%97%E5%85%B8%E7%9A%84%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F">2.3 字典的访问方式</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-csv文件">1 CSV文件</h1>
+<p>        逗号分隔值（Comma-Separated Values，CSV，有时也称为字符分隔值，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）。</p>
+<pre><code class="language-csv" data-lang="csv"># 下面都是csv文件的内容格式
+1,2,3,4,5
+
+1,2,&quot;1,3&quot;
+
+1,2,&quot;a,&quot;&quot;f&quot;
+</code></pre><ul>
+<li>CSV 是一个被行分隔符、列分隔符划分成行和列的文本文件。</li>
+<li>CSV 不指定字符编码。</li>
+</ul>
+<p>它有以下规范：</p>
+<ol>
+<li>行分隔符为\r\n，最后一行可以没有换行符</li>
+<li>列分隔符常为逗号或者制表符。每一行称为一条记录record</li>
+<li>字段可以使用双引号括起来，也可以不使用。如果字段中出现了双引号、逗号、换行符必须使用双引号括起来。</li>
+<li>如果字段的值是双引号，需要额外使用一个个双引号，表示一个转义。</li>
+<li>表头可选，和字段列对齐就行了。</li>
+</ol>
+<h2 id="11-手动生成一个csv文件">1.1 手动生成一个csv文件</h2>
+<p>只需要打开一个文件，按照CSV的格式，编写内容，然后写入文件中去即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+
+p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;E:\Python - base - code\chapter06文件\test.csv&#39;</span>)
+p<span style="color:#f92672">.</span>touch()
+csv_body <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">no,name,age,comment
+</span><span style="color:#e6db74">1,daxin,20,&#34;I Like Cat&#34;
+</span><span style="color:#e6db74">2,tom,30,&#34;I Like Movice&#34;
+</span><span style="color:#e6db74">3,ben,40,&#34;I&#34;&#34;m super man    # &#34;&#34; 表示&#34;
+</span><span style="color:#e6db74">4xyz&#34;
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+
+<span style="color:#66d9ef">with</span> open(p,<span style="color:#e6db74">&#39;a+&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    f<span style="color:#f92672">.</span>write(csv_body)
+</code></pre></div><h2 id="12-cvs模块">1.2 cvs模块</h2>
+<p>Python提供的csv模块用于处理csv文件，主要通过<code>读(reader)</code>和<code>写(writer)</code>两种方式：</p>
+<h3 id="121-reader方法">1.2.1 reader方法</h3>
+<p>csv模块的reader方法，用于读模式打开一个csv文件，返回一个<code>reader对象</code>，是一个<code>行迭代器</code>。它的基本格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">csv<span style="color:#f92672">.</span>reader(iterable, dialect<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;excel&#39;</span>,<span style="color:#f92672">**</span>fmtparams)
+</code></pre></div><ul>
+<li><code>dialect</code>：表示使用excel的方言(标准)去读取</li>
+<li><code>**fmtparams</code>: 对excel的规范进行自定义设置</li>
+</ul>
+<p>可以设置的参数有：</p>
+<ol>
+<li>delimiter：列分隔符(逗号)</li>
+<li>lineterminator：行分隔符\r\n</li>
+<li>quotechar：字段的引用符号，缺省为 &quot; 双引号</li>
+<li>双引号的处理(<code>一般使用doublequote=True</code>，按照默认的来)
+<ul>
+<li>doublequote 双引号的处理，默认为True。如果碰到数据中有双引号，而quotechar也是双引号，doublequote=True时，则使用2个双引号表示，False表示使用转义字符将作为双引号的前缀</li>
+<li>escapechar 一个转义字符，默认为None</li>
+<li>writer = csv.writer(f, doublequote=False, escapechar='@') 遇到双引号，则必须提供转义字符</li>
+</ul>
+</li>
+<li>quoting 指定双引号的规则
+<ul>
+<li>QUOTE_ALL 所有字段</li>
+<li><code>QUOTE_MINIMAL</code>特殊字符字段，Excel方言使用该规则</li>
+<li>QUOTE_NONNUMERIC非数字字段</li>
+<li>QUOTE_NONE都不使用引号。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>建议都是用默认规则</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+<span style="color:#f92672">import</span> csv
+
+p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;E:\Python - base - code\chapter06文件\test.csv&#39;</span>)
+<span style="color:#66d9ef">with</span> open(p, <span style="color:#e6db74">&#39;r&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    reader <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>reader(f)
+    <span style="color:#66d9ef">print</span>(next(reader))  <span style="color:#75715e"># [&#39;no&#39;, &#39;name&#39;, &#39;age&#39;, &#39;comment&#39;]  逗号分隔好的一行列表</span>
+    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> reader:
+        <span style="color:#66d9ef">print</span>(line)
+
+<span style="color:#75715e"># [&#39;no&#39;, &#39;name&#39;, &#39;age&#39;, &#39;comment&#39;]</span>
+<span style="color:#75715e"># [&#39;1&#39;, &#39;daxin&#39;, &#39;20&#39;, &#39;I Like Cat&#39;]</span>
+<span style="color:#75715e"># [&#39;2&#39;, &#39;tom&#39;, &#39;30&#39;, &#39;I Like Movice&#39;]</span>
+<span style="color:#75715e"># [&#39;3&#39;, &#39;ben&#39;, &#39;40&#39;, &#39;I&#34;m super man\n4xyz&#39;]</span>
+</code></pre></div><h3 id="122-writer方法">1.2.2 writer方法</h3>
+<p>csv模块的writer方法，用于写模式打开一个csv文件，返回一个<code>DictWriter对象</code>。它的基本格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">writer(fileobj, dialect<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;excel&#39;</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)<span style="color:#960050;background-color:#1e0010">：</span>
+</code></pre></div><p>它包含两个主要的方法：</p>
+<ul>
+<li><code>writerow(row)</code>：写一行</li>
+<li><code>writerows(rows)</code>：写多行</li>
+</ul>
+<p>注意，这里的row需要是一个列表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+<span style="color:#f92672">import</span> csv
+
+p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;E:\Python - base - code\chapter06文件\test.csv&#39;</span>)
+
+rows <span style="color:#f92672">=</span> [
+    [<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;daxin&#39;</span>, <span style="color:#e6db74">&#39;20&#39;</span>, <span style="color:#e6db74">&#39;I Like Cat&#39;</span>],
+    [<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;tom&#39;</span>, <span style="color:#e6db74">&#39;30&#39;</span>, <span style="color:#e6db74">&#39;I Like Movice&#39;</span>],
+    [<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;ben&#39;</span>, <span style="color:#e6db74">&#39;40&#39;</span>, <span style="color:#e6db74">&#39;I&#34;m super man</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">4xyz&#39;</span>]
+]
+
+<span style="color:#66d9ef">with</span> open(p, <span style="color:#e6db74">&#39;a+&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    writer <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f)
+    writer<span style="color:#f92672">.</span>writerow(rows[<span style="color:#ae81ff">0</span>])  <span style="color:#75715e"># 写一行</span>
+    writer<span style="color:#f92672">.</span>writerows(rows)    <span style="color:#75715e"># 写多行</span>
+</code></pre></div><p>        观察生成好的csv文件，发现每一行，后面都会多一行空行，这是因为在写的时候把一行文本的结尾\r\n转换成两个回车写入的，所以官方建议我们在打开文件的时候，添加<code>newline=''</code>参数，来组织替换。读取时也可以使用newline参数(不会影响原来的读取效果)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(p, <span style="color:#e6db74">&#39;a+&#39;</span>, newline<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    writer <span style="color:#f92672">=</span> csv<span style="color:#f92672">.</span>writer(f)
+    writer<span style="color:#f92672">.</span>writerow(rows[<span style="color:#ae81ff">0</span>])  <span style="color:#75715e"># 写一行</span>
+    writer<span style="color:#f92672">.</span>writerows(rows)    <span style="color:#75715e"># 写多行</span>
+</code></pre></div><h1 id="2-ini文件处理">2 ini文件处理</h1>
+<p>作为配置文件，ini文件格式很流行。著名的配置文件还有：json,yaml,xml等。下面是一个ini格式的文件(mariadb就是用的是这种格式的配置文件)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[mysqld]</span>
+<span style="color:#a6e22e">datadir</span><span style="color:#f92672">=</span><span style="color:#e6db74">/var/lib/mysql</span>
+<span style="color:#a6e22e">socket</span><span style="color:#f92672">=</span><span style="color:#e6db74">/var/lib/mysql/mysql.sock</span>
+<span style="color:#a6e22e">symbolic-links</span><span style="color:#f92672">=</span><span style="color:#e6db74">0</span>
+
+<span style="color:#66d9ef">[mysqld_safe]</span>
+<span style="color:#a6e22e">log-error</span><span style="color:#f92672">=</span><span style="color:#e6db74">/var/log/mariadb/mariadb.log</span>
+<span style="color:#a6e22e">pid-file</span><span style="color:#f92672">=</span><span style="color:#e6db74">/var/run/mariadb/mariadb.pid</span>
+
+</code></pre></div><p>其中：</p>
+<ul>
+<li><code>中括号</code>里面的部分称为<code>section</code>，译作节、区、段。</li>
+<li>每一个section内，都是key=value形成的键值对，<code>key</code>称为<code>option</code>选项。</li>
+</ul>
+<h2 id="21-configparser模块">2.1 configparser模块</h2>
+<p>        configparser模块的ConfigParser类就是用来操作ini文件的。可以将section当做key，section存储着键值对组成的字典，可以把ini配置文件当做一个嵌套的字典。默认使用的是有序字典。</p>
+<blockquote>
+<p>注意：在Python中的configparser库中，DEFAULT是缺省section的名字，必须大写，必须存在。当其他section中不存在某个option中时，会在DEFAULT中寻找对应的option，如果不存在则提示异常或者调用fallback。</p>
+</blockquote>
+<p>ConfigParser对象中有很多方法，其中与读取配置文件，判断配置相关的方法有：</p>
+<ul>
+<li><code>read</code>: 读取一个ini配置文件</li>
+<li><code>sections</code>：返回一个包含所有章节的列表</li>
+<li><code>has_sections</code>：判断章节是否存在</li>
+<li><code>items</code>：以元祖的形式返回所有的选项</li>
+<li><code>options</code>：返回一个包含章节下所有选项的列表</li>
+<li><code>has_option</code>：判读某个选项是否存在</li>
+<li><code>get</code>、<code>getboolean</code>、<code>getinit</code>、<code>getfloat</code>：获取选项的值</li>
+</ul>
+<p>ConfigParser对象也提供了许多方法便于我们修改配置文件：</p>
+<ul>
+<li><code>remove_section</code>：删除一个章节</li>
+<li><code>add_section</code>：添加一个章节</li>
+<li><code>remote_option</code>：删除一个选项</li>
+<li><code>set</code>：添加一个选项(<strong>写入的所有值，都是字符串</strong>)</li>
+<li><code>write</code>：将ConfigParser对象中保存的数据保存的文件中去</li>
+</ul>
+<h2 id="22-常用方法">2.2 常用方法</h2>
+<h3 id="221-读取配置配件">2.2.1 读取配置配件</h3>
+<p>        解析一个配置文件，需要先创建一个ConfigParser对象，创建ConfigParser对象时有多个参数，其中比较重要的是<code>allow_no_value</code>，allow_no_value默认取值为<code>False</code>，表示在配置文件中是否允许有没有选项的值的情况。默认情况下每个选项都应该有一个值，但是在一些特殊的应用选项下，选项存在即为真，不存在即为假，比如MySQL的配置文件skip-external-locking。所以如果需要解析这样的参数，那么就需要在实例化的时候添加allow_no_value 为True</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config<span style="color:#f92672">.</span>read(filenames, encoding<span style="color:#f92672">=</span>None,allow_no_value<span style="color:#f92672">=</span>False)<span style="color:#960050;background-color:#1e0010">：</span>
+</code></pre></div><p>读取ini文件，可以是单个文件，也可以是文件列表。可以指定文件编码。</p>
+<h3 id="222-section操作">2.2.2 section操作</h3>
+<ul>
+<li>sections() 返回section列表。缺省section不包括在内。</li>
+<li>add_section(section_name) 增加一个section。</li>
+<li>has_section(section_name) 判断section是否存在</li>
+<li>remove_section(section)：移除section及其所有option</li>
+</ul>
+<h3 id="223-option操作">2.2.3 option操作</h3>
+<ul>
+<li>options(section) 返回section的所有option，会追加缺省section的option</li>
+<li>has_option(section, option) 判断section是否存在这个option</li>
+<li>items(section， raw=False, vars=None)：没有section，则返回所有section名字及其对象，如果指定section，则返回这个指定的section的键值对组成二元组。</li>
+<li>remove_option(section, option)：移除section下的option。</li>
+</ul>
+<h3 id="224-获取value">2.2.4 获取value</h3>
+<ul>
+<li>get(section, option, *, raw=False, vars=None[, fallback]):从指定的段的选项上取值，如果找到返回，如果没有找到就去找DEFAULT段有没有，如果还没有，则看fallback是否指定，没有则直接抛出异常，否则返回fallback。</li>
+<li>getint(section, option, *, raw=False, vars=None[, fallback])：同get方式，结果会使用int函数转换</li>
+<li>getfloat(section, option, *, raw=False, vars=None[, fallback])：同get方式，结果会使用float函数转换</li>
+<li>getboolean(section, option, *, raw=False, vars=None[, fallback])：同get方式，结果会使用bool函数转换</li>
+</ul>
+<h3 id="225-设置value">2.2.5 设置value</h3>
+<ul>
+<li>set(section, option, value)：section存在的情况下，写入option=value，要求option、value必须是字符串。</li>
+</ul>
+<h3 id="226-保存修改后的配置文件">2.2.6 保存修改后的配置文件</h3>
+<ul>
+<li>write(fileobject, space_around_delimiters=True)：将当前config的所有内容写入fileobject中，一般open函数使用w模式。</li>
+</ul>
+<h2 id="23-字典的访问方式">2.3 字典的访问方式</h2>
+<p>对Configparser对象的操作还可以使用字典的方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> configparser <span style="color:#f92672">import</span> ConfigParser
+<span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+
+p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;mysql.ini&#39;</span>)
+
+config <span style="color:#f92672">=</span> ConfigParser()
+config<span style="color:#f92672">.</span>read(p)
+
+config[<span style="color:#e6db74">&#39;daxin&#39;</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>:<span style="color:#e6db74">&#39;daxin&#39;</span>,<span style="color:#e6db74">&#39;age&#39;</span>:<span style="color:#ae81ff">20</span>}  <span style="color:#75715e"># 新建一个section</span>
+<span style="color:#66d9ef">print</span>(config[<span style="color:#e6db74">&#39;daxin&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>])  <span style="color:#75715e"># daxin</span>
+</code></pre></div><blockquote>
+<p>在Configparser内部，其实使用的就是一个OrderDict存储的</p>
+</blockquote>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="https://dachenzi.github.io/license">license</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+
