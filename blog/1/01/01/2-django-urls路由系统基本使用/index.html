@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>2-django-urls路由系统基本使用 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">2-django-urls路由系统基本使用</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 3 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9Furls%E6%8E%A7%E5%88%B6">1 路由系统(urls控制)</a>
+<ul>
+<li><a href="#11-%E6%AD%A3%E5%88%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%82%E6%95%B0">1.1 正则字符串参数</a></li>
+<li><a href="#12-url%E7%9A%84%E5%88%86%E7%BB%84">1.2 url的分组</a>
+<ul>
+<li><a href="#121-%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84">1.2.1 无名分组</a></li>
+<li><a href="#122-%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84">1.2.2 有名分组</a></li>
+</ul>
+</li>
+<li><a href="#13-urlconf-%E5%9C%A8%E4%BB%80%E4%B9%88%E4%B8%8A%E6%9F%A5%E6%89%BE">1.3 URLconf 在什么上查找</a></li>
+<li><a href="#14-include%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91">1.4 include(路由分发)</a></li>
+<li><a href="#15-%E5%88%AB%E5%90%8Dname%E5%8F%82%E6%95%B0">1.5 别名(name参数)</a></li>
+<li><a href="#16-%E5%8F%8D%E6%8E%A8url">1.6 反推URL</a></li>
+<li><a href="#17-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">1.7 命名空间</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-路由系统urls控制">1 路由系统(urls控制)</h1>
+<p>url控制其实就是把不同的url对应到不同的views函数中去</p>
+<p>格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 项目目录下的urls.py文件中</span>
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(regex, view, kwargs<span style="color:#f92672">=</span>None, name<span style="color:#f92672">=</span>None)
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+]
+</code></pre></div><p>url可以有多个，每个url都是一个独立的规则。
+参数如下：</p>
+<ul>
+<li><code>regex</code>(url正则表达式):与之匹配的 URL 会执行对应的第二个参数 view。</li>
+<li><code>view</code>(views视图函数): 用于执行与正则表达式匹配的 URL 请求。</li>
+<li><code>kwargs</code>(参数列表): 视图使用的字典类型的参数。  &ndash;&gt; 很少使用</li>
+<li><code>name</code>(别名): 用来反向获取 URL。</li>
+</ul>
+<h2 id="11-正则字符串参数">1.1 正则字符串参数</h2>
+<p>url的第一个参数为正则表达式，所以常用的正则表达式符号都可以进行匹配</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> views  <span style="color:#75715e"># 导入我们的app的views，才可以调用</span>
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^articles/2003/$&#39;</span>, views<span style="color:#f92672">.</span>special_case_2003),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^articles/[0-9]{4}/$&#39;</span>, views<span style="color:#f92672">.</span>year_archive), 
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^articles/([0-9]{4})/([0-9]{2})/$&#39;</span>, views<span style="color:#f92672">.</span>month_archive), <span style="color:#75715e"># 传递两个位置参数</span>
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$&#39;</span>, views<span style="color:#f92672">.</span>article_detail),  <span style="color:#75715e"># 传递三个位置参数</span>
+]
+</code></pre></div><p>这里对url表达式使用括号，表示取出匹配到的路径字符串（分组）</p>
+<p>注意：</p>
+<ul>
+<li>一旦<code>匹配成功则不再继续匹配</code></li>
+<li><code>不需要添加一个前导的反斜杠</code>，因为每个URL 都有。例如，应该是^articles 而不是 ^/articles。</li>
+<li>每个正则表达式前面的&rsquo;r'，是可选的但是建议加上。</li>
+</ul>
+<h2 id="12-url的分组">1.2 url的分组</h2>
+<p>        在url正则表达式上加上括号，就表示对括号内的元素进行取出，然后传给后面的views函数，根据传递参数的方式不同，分为<code>无名分组</code>和<code>有名分组</code>:</p>
+<blockquote>
+<p>若要从URL中捕获一个值，只需要在它周围放置一对圆括号。</p>
+</blockquote>
+<h3 id="121-无名分组">1.2.1 无名分组</h3>
+<p>只需要把要分组的正则字符串用括号括起来即可。这样，括号内的匹配的内容会当作位置参数传递给后面指定的views函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^articles/([0-9]{4})/([0-9]{2})/$&#39;</span>, views<span style="color:#f92672">.</span>year_month),
+]
+ 
+<span style="color:#75715e"># ([0-9]{4}) 第一个位置参数</span>
+<span style="color:#75715e"># ([0-9]{2}) 第二个位置参数</span>
+</code></pre></div><p>views函数需要定义位置参数来一一对应,否则将会抛出TypeError异常</p>
+<h3 id="122-有名分组">1.2.2 有名分组</h3>
+<p>        即捕获url中的一个值时，并赋予其名称，使用关键字参数来进行传递。在Python 正则表达式中，命名正则表达式组的语法是(?P<!-- raw HTML omitted -->pattern)，其中 name 是组的名称，pattern 是要匹配的模式。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^index/(?P&lt;year&gt;201[0-9])&#39;</span>, user<span style="color:#f92672">.</span>views<span style="color:#f92672">.</span>index)
+]
+
+<span style="color:#75715e"># 会把 {&#39;year&#39;:201[0-9]} 当作关键字参数</span>
+</code></pre></div><p>这种方式可以在views中的处理函数内，直接定义关键字变量来接受，而不用在意参数的位置。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>(request,year):
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+</code></pre></div><p>如果year没有捕获到数据，那么views函数index将会报错，所以我们一般可以在index中为year，配置默认值来避免这种错误。当然也可以在urls内，指定默认参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^index/year(?P&lt;year&gt;[0-9]?)&#39;</span>, user<span style="color:#f92672">.</span>views<span style="color:#f92672">.</span>index, {<span style="color:#e6db74">&#39;year&#39;</span>: <span style="color:#ae81ff">2019</span>}) 
+</code></pre></div><p>但是这样就把前面匹配到的year的值给覆盖了。请慎重选用</p>
+<h2 id="13-urlconf-在什么上查找">1.3 URLconf 在什么上查找</h2>
+<p>请求的URL被看做是一个普通的Python 字符串， URLconf在其上查找并匹配。进行匹配时将不包括GET或POST请求方式的参数以及域名。</p>
+<ul>
+<li>GET:把用户发送的参数放在URL中进行传递，在URL中一般用?隔开。</li>
+<li>POST:把用户发送的参数放在请求头中传递。</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><a href="https://www.example.com/myapp/">https://www.example.com/myapp/</a> 请求中，URLconf 将查找 myapp/</li>
+<li><a href="https://www.example.com/myapp/?page=3">https://www.example.com/myapp/?page=3</a> 请求中，URLconf 仍将查找 myapp/ 。</li>
+</ul>
+<p>URLconf 不检查使用了哪种请求方法。换句话讲，所有的请求方法,即对同一个URL的无论是 POST请求、GET请求、或是HEAD请求方法等等，都将路由到相同的函数。</p>
+<h2 id="14-include路由分发">1.4 include(路由分发)</h2>
+<p>        当项目中的应用变得越来越多的时候，如果所有的应用的URL都通过项目的urls统一进行分配，那么耦合度会很高，另外也不利于管理，所以这里通过include来交给应用的urls来处理。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 项目的urls.py</span>
+<span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> include, url
+ 
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^user/&#39;</span>, include(<span style="color:#e6db74">&#39;user.urls&#39;</span>)),
+]
+ 
+<span style="color:#75715e"># 通过include 来指定交给那个应用的urls来处理</span>
+<span style="color:#75715e"># include 包涵在 django.conf.urls中</span>
+</code></pre></div><p>在应用user下创建urls.py文件，写入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+<span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> views
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">&#39;^login&#39;</span>, views<span style="color:#f92672">.</span>login)
+]
+</code></pre></div><p>注意：路由分发后，子路径的起始位置就从分发的URL开始了。上面匹配到的路径为：<code>user/login</code></p>
+<h2 id="15-别名name参数">1.5 别名(name参数)</h2>
+<p>当我们在做路径匹配然后配合form表单等需要提交的数据的元素的时候会遇到以下问题</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#urls.py</span>
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^login/&#39;</span>, views<span style="color:#f92672">.</span>login),      <span style="color:#75715e">#  匹配路径</span>
+]
+</code></pre></div><p>返回的页面文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Title&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+ 
+ 
+&lt;<span style="color:#f92672">h1</span>&gt;登录页面&lt;/<span style="color:#f92672">h1</span>&gt;
+&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/login/&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;     <span style="color:#75715e">&lt;!--   根据路径进行提交 --&gt;</span>
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">h2</span>&gt;姓名&lt;/<span style="color:#f92672">h2</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">h2</span>&gt;密码&lt;/<span style="color:#f92672">h2</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;登录&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+ 
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>如果我们某一天改了url匹配的路径，那么,就绪要修改页面中所有的提交路径，否则将会提交失败.而url的name就是解决这个问题的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^login/$&#39;</span>, views<span style="color:#f92672">.</span>login,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;LOGIN&#39;</span>),  <span style="color:#75715e"># 添加name关键字</span>
+]
+</code></pre></div><p>返回的html文件如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Title&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+ 
+ 
+&lt;<span style="color:#f92672">h1</span>&gt;登录页面&lt;/<span style="color:#f92672">h1</span>&gt;
+&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{% url &#39;LOGIN&#39; %}&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;      <span style="color:#75715e">&lt;!-- 这里使用name关键字来动态的传递url --&gt;</span>
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">h2</span>&gt;姓名&lt;/<span style="color:#f92672">h2</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">h2</span>&gt;密码&lt;/<span style="color:#f92672">h2</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;登录&#34;</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+ 
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>这样就算URL后期更改，也会动态指向最新的URL。</p>
+<ul>
+<li>个人觉得说白了就是一个变量的替换，只不过是用的是django特有的语法格式。
+name=&lsquo;LOGIN&rsquo; 就是把前面匹配的url保存到LOGIN中，然后Django 在返回html文件的时候再进行替换。
+补充：</li>
+<li>当url存在正则表达式的时候，只使用name参数是不行的。因为正则部分无法进行渲染。目前的解决方法是在url部分进行拼接</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># --------------------------- url ---------------------------</span>
+<span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+<span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> admin
+<span style="color:#f92672">from</span> app01 <span style="color:#f92672">import</span> views
+ 
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^abc/(\d+)/&#39;</span>, views<span style="color:#f92672">.</span>login,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;LOGIN&#34;</span>),
+]
+ 
+ 
+ 
+<span style="color:#75715e"># -------------------------- Teamplates ---------------------------</span>
+ 
+<span style="color:#f92672">&lt;</span>form action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{</span><span style="color:#e6db74">% u</span><span style="color:#e6db74">rl &#34;</span>LOGIN<span style="color:#e6db74">&#34; 4 %}&#34;</span><span style="color:#f92672">&gt;</span>     <span style="color:#75715e"># 这里正则匹配了几个部分，那么就需要传递几个参数</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>Username:<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>Password:<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>form<span style="color:#f92672">&gt;</span>
+</code></pre></div><h2 id="16-反推url">1.6 反推URL</h2>
+<p>        什么叫反推url？在views函数中，如果想要获取当前函数对应的url，该怎么办呢？还记得前面的name属性吗，反推url就是在views中根据name属性的值，获得对应的url</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> reverse
+ 
+url <span style="color:#f92672">=</span> reverse(<span style="color:#e6db74">&#39;name&#39;</span>)
+</code></pre></div><p>当然reverse还有两个参数(args,kwargs)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">args <span style="color:#f92672">=</span> ()
+kwargs <span style="color:#f92672">=</span> {}
+ 
+<span style="color:#75715e"># 参数是配合urls中的正则表达式的</span>
+url(<span style="color:#e6db74">&#39;^detail/(\d+)&#39;</span> ,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;i1&#39;</span>,views<span style="color:#f92672">.</span>detail)          <span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span>   reverse(<span style="color:#e6db74">&#39;i1&#39;</span>,args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,))
+<span style="color:#75715e"># 反推的URL为： detail/10</span>
+ 
+<span style="color:#75715e"># kwargs则表示在命名关键字的情况下</span>
+url(<span style="color:#e6db74">&#39;^detail/(?P&lt;nid&gt;\d+)&#39;</span> ,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;i2&#39;</span>,views<span style="color:#f92672">.</span>detail)   <span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span>   reverse(<span style="color:#e6db74">&#39;i1&#39;</span>,kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;nid&#39;</span>:<span style="color:#ae81ff">10</span>})
+<span style="color:#75715e"># 反推的url为： detail/10</span>
+</code></pre></div><p>还有一个方法是利用request对象的path_info，因为其中存放的是用户提交的url。</p>
+<h2 id="17-命名空间">1.7 命名空间</h2>
+<p>        当在url(路由系统)中使用了include时，在views函数中，我们就无法单独的利用name参数来反推url了，因为在include时，是无法使用name关键字的，不过django提供了其他关键字提供类似功能：namespace，称作命名空间。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># urls.py</span>
+ 
+url <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;crm/&#39;</span>,include(<span style="color:#e6db74">&#39;crm.urls&#39;</span>),namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;crm&#39;</span>),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;cmdb/&#39;</span>,include(<span style="color:#e6db74">&#39;cmdb.urls&#39;</span>),namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cmdb&#39;</span>),
+]
+ 
+<span style="color:#75715e"># crm 中的 urls.py</span>
+ 
+app_name <span style="color:#f92672">=</span> crm
+url <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;index/&#39;</span>,views<span style="color:#f92672">.</span>index,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;index&#39;</span>),
+]
+ 
+<span style="color:#75715e"># crm 中的views.py</span>
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>(request):
+    url <span style="color:#f92672">=</span> reverse(<span style="color:#e6db74">&#39;crm:index&#39;</span>)    <span style="color:#75715e"># 这里通过namespace:name 来反向获取url</span>
+    <span style="color:#66d9ef">print</span>(url)
+    <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#ae81ff">200</span>)
+</code></pre></div><p>PS：在html中，通过{% url &lsquo;crm:index&rsquo; %} 也是通过namespace：name来获取url的。</p>
+<p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

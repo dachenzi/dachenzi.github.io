@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>5-paramiko模块 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">5-paramiko模块</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 2 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/5-paramiko%E6%A8%A1%E5%9D%97/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<h1 id="1-简介">1 简介</h1>
+<p>        ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6+ 和Python 3.3+ 版本，实现了SSHv2协议(底层使用cryptography)。有了Paramiko以后，我们就可以在Python代码中直接使用SSH协议对远程服务器执行操作，而不是通过ssh命令对远程服务器进行操作。<br>
+        由于paramiko属于第三方库，所以需要使用如下命令先行安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip3 install paramiko
+ 
+<span style="color:#75715e"># 测试</span>
+python3 <span style="color:#f92672">-</span>c <span style="color:#e6db74">&#39;import paramiko&#39;</span>
+</code></pre></div><h1 id="2-paramiko介绍">2 Paramiko介绍</h1>
+<p>        paramiko包含两个核心组件：SSHClient和SFTPClient。</p>
+<ul>
+<li>SSHClient的作用类似于Linux的ssh命令，是对SSH会话的封装，该类封装了传输(Transport)，通道(Channel)及SFTPClient建立的方法(open_sftp)，通常用于执行远程命令。</li>
+<li>SFTPClient的作用类似与Linux的sftp命令，是对SFTP客户端的封装，用以实现远程文件操作，如文件上传、下载、修改文件权限等操作。</li>
+</ul>
+<h2 id="21-paramiko中的几个基础名词">2.1 Paramiko中的几个基础名词：</h2>
+<ol>
+<li>Channel：是一种类Socket，一种安全的SSH传输通道；</li>
+<li>transport：是一种加密的会话，使用时会同步创建了一个加密的Tunnels(通道)，这个Tunnels叫做Channel；</li>
+<li>Session：是client与Server保持连接的对象，用connect()/start_client()/start_server()开始会话。</li>
+</ol>
+<h1 id="3-paramiko的基本使用">3 Paramiko的基本使用</h1>
+<p>        基于常用的两个核心组件进行说明。</p>
+<h2 id="31-sshclient介绍">3.1 SSHClient介绍</h2>
+<p>        下面是一个使用SSHClient连接服务器并执行命令的操作步骤：（支持密码认证和密钥认证）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> paramiko
+ 
+<span style="color:#75715e">#实例化SSHClient</span>
+client <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>SSHClient()
+ 
+<span style="color:#75715e">#自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接</span>
+client<span style="color:#f92672">.</span>set_missing_host_key_policy(paramiko<span style="color:#f92672">.</span>AutoAddPolicy())
+ 
+<span style="color:#75715e">#连接SSH服务端，以用户名和密码进行认证</span>
+client<span style="color:#f92672">.</span>connect(hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.3&#39;</span>,port<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span>,username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;root&#39;</span>,password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;123456&#39;</span>)
+
+<span style="color:#75715e">#打开一个Channel并执行命令</span>
+stdin,stdout,stderr <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>exec_command(<span style="color:#e6db74">&#39;df -h &#39;</span>)      <span style="color:#75715e"># stdout 为正确输出，stderr为错误输出，同时只有1个变量有值</span>
+ 
+<span style="color:#75715e">#打印执行结果</span>
+<span style="color:#66d9ef">print</span>(stdout<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+ 
+<span style="color:#75715e">#关闭SSHClient</span>
+client<span style="color:#f92672">.</span>close()
+</code></pre></div><p>SSHClient使用私钥连接:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> paramiko
+
+<span style="color:#75715e"># 配置私人密钥文件位置</span>
+private <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>RSAKey<span style="color:#f92672">.</span>from_private_key_file(<span style="color:#e6db74">&#39;/Users/DahlHin/.ssh/id_rsa&#39;</span>)
+
+<span style="color:#75715e">#实例化SSHClient</span>
+client <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>SSHClient()
+
+<span style="color:#75715e">#自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接</span>
+client<span style="color:#f92672">.</span>set_missing_host_key_policy(paramiko<span style="color:#f92672">.</span>AutoAddPolicy())
+
+<span style="color:#75715e">#连接SSH服务端，以用户名和密码进行认证</span>
+client<span style="color:#f92672">.</span>connect(hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.3&#39;</span>,port<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span>,username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;root&#39;</span>,pkey<span style="color:#f92672">=</span>private)
+
+<span style="color:#75715e">#打开一个Channel并执行命令</span>
+stdin,stdout,stderr <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>exec_command(<span style="color:#e6db74">&#39;df -h &#39;</span>)      <span style="color:#75715e"># stdout 为正确输出，stderr为错误输出，同时是有1个变量有值</span>
+
+<span style="color:#75715e">#打印执行结果</span>
+<span style="color:#66d9ef">print</span>(stdout<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+
+<span style="color:#75715e">#关闭SSHClient</span>
+client<span style="color:#f92672">.</span>close()
+
+<span style="color:#75715e"># 在登陆的时候传递还可以利用key_filename直接来指定私钥的位置比如</span>
+client<span style="color:#f92672">.</span>connect(IP,Port,Username,key_filename<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;~/.ssh/id_rsa&#39;</span>)
+</code></pre></div><h3 id="311-常用的方法">3.1.1 常用的方法</h3>
+<p><code>connect()</code>：实现远程服务器的连接与认证，对于该方法只有hostname是必传参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">connect(self,hostname,port<span style="color:#f92672">=</span>SSH_PORT,username<span style="color:#f92672">=</span>None,password<span style="color:#f92672">=</span>None,
+        pkey<span style="color:#f92672">=</span>None,key_filename<span style="color:#f92672">=</span>None,timeout<span style="color:#f92672">=</span>None,allow_agent<span style="color:#f92672">=</span>True,
+        look_for_keys<span style="color:#f92672">=</span>True,compress<span style="color:#f92672">=</span>False,sock<span style="color:#f92672">=</span>None,gss_auth<span style="color:#f92672">=</span>False,gss_kex<span style="color:#f92672">=</span>False,
+        gss_deleg_creds<span style="color:#f92672">=</span>True,gss_host<span style="color:#f92672">=</span>None,banner_timeout<span style="color:#f92672">=</span>None,auth_timeout<span style="color:#f92672">=</span>None,)
+</code></pre></div><p><code>set_missing_host_key_policy()</code>：设置远程服务器没有在know_hosts文件中记录时的应对策略。目前支持三种策略：
+<code>AutoAddPolicy</code>：自动添加服务器到know_hosts文件中
+<code>RejectPolicy(默认策略)</code>：拒绝本次连接
+<code>WarningPolicy</code>：警告并将服务器添加到know_hosts文件中
+<code>exec_command()</code>：在远程服务器执行Linux命令的方法。
+<code>open_sftp()</code>：在当前ssh会话的基础上创建一个sftp会话。该方法会返回一个SFTPClient对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 利用SSHClient对象的open_sftp()方法，可以直接返回一个基于当前连接的sftp对象，可以进行文件的上传等操作.</span>
+sftp <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>open_sftp()
+sftp<span style="color:#f92672">.</span>put(<span style="color:#e6db74">&#39;test.txt&#39;</span>,<span style="color:#e6db74">&#39;text.txt&#39;</span>)
+</code></pre></div><h2 id="32-sftpclient介绍">3.2 SFTPClient介绍</h2>
+<p>        下面是一个使用SFTPClient连接服务器并传输文件的操作步骤：（支持密码认证和密钥认证）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> paramiko
+ 
+<span style="color:#75715e"># 获取Transport实例</span>
+tran <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>Transport((<span style="color:#e6db74">&#39;10.0.0.3&#39;</span>,<span style="color:#ae81ff">22</span>))
+ 
+<span style="color:#75715e"># 连接SSH服务端，使用pkey指定私钥</span>
+tran<span style="color:#f92672">.</span>connect(username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>, password<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;123456)</span>
+ 
+<span style="color:#75715e"># 获取SFTP实例</span>
+sftp <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>SFTPClient<span style="color:#f92672">.</span>from_transport(tran)
+ 
+<span style="color:#75715e"># 设置上传的本地/远程文件路径</span>
+localpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/Users/DahlHin/Downloads/daxin.txt&#34;</span>
+remotepath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/tmp/daxin.txt&#34;</span>
+ 
+<span style="color:#75715e"># 执行上传动作</span>
+sftp<span style="color:#f92672">.</span>put(localpath,remotepath)
+ 
+tran<span style="color:#f92672">.</span>close()
+</code></pre></div><p>配置SFTPClient使用密钥</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> paramiko
+
+<span style="color:#75715e"># 配置私人密钥文件位置</span>
+private <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>RSAKey<span style="color:#f92672">.</span>from_private_key_file(<span style="color:#e6db74">&#39;/Users/DahlHin/.ssh/id_rsa&#39;</span>)
+
+<span style="color:#75715e"># 获取Transport实例</span>
+tran <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>Transport((<span style="color:#e6db74">&#39;10.0.0.3&#39;</span>,<span style="color:#ae81ff">22</span>))
+
+<span style="color:#75715e"># 连接SSH服务端，使用pkey指定私钥</span>
+tran<span style="color:#f92672">.</span>connect(username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span>, pkey<span style="color:#f92672">=</span>private)
+
+<span style="color:#75715e"># 获取SFTP实例</span>
+sftp <span style="color:#f92672">=</span> paramiko<span style="color:#f92672">.</span>SFTPClient<span style="color:#f92672">.</span>from_transport(tran)
+
+<span style="color:#75715e"># 设置上传的本地/远程文件路径</span>
+localpath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/Users/DahlHin/Downloads/daxin.txt&#34;</span>
+remotepath<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/tmp/daxin.txt&#34;</span>
+
+<span style="color:#75715e"># 执行上传动作</span>
+sftp<span style="color:#f92672">.</span>put(localpath,remotepath)
+
+tran<span style="color:#f92672">.</span>close()
+</code></pre></div><h3 id="321-常用的方法">3.2.1 常用的方法</h3>
+<p><code>put()</code>：上传本地文件到远程服务器
+<code>get()</code>：从远程服务器下载文件到本地
+<code>mkdir()</code>：在远程服务器上创建目录
+<code>remove()</code>：删除远程服务器中的文件
+<code>rmdir()</code>：删除远程服务器中的目录
+<code>rename()</code>：重命名远程服务器中的文件或目录
+<code>stat()</code>：获取远程服务器中文件的详细信息
+<code>listdir()</code>：列出远程服务器中指定目录下的内容</p>
+<h3 id="322-使用paramiko部署监控程序">3.2.2 使用paramiko部署监控程序</h3>
+<p>        现有如下需求：在所有的主机上部署monitor.py监控程序。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> paramiko
+<span style="color:#f92672">from</span> paramiko.ssh_exception <span style="color:#f92672">import</span> AuthenticationException
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">deploy_monitor</span>(ip):
+ 
+    <span style="color:#66d9ef">with</span> paramiko<span style="color:#f92672">.</span>SSHClient() <span style="color:#66d9ef">as</span> client:     <span style="color:#75715e"># 利用上下文管理的方式，可以不用显示的进行链接的关闭</span>
+        <span style="color:#66d9ef">try</span>:
+            client<span style="color:#f92672">.</span>set_missing_host_key_policy(paramiko<span style="color:#f92672">.</span>AutoAddPolicy())
+            client<span style="color:#f92672">.</span>connect(ip,<span style="color:#ae81ff">22</span>,<span style="color:#e6db74">&#39;root&#39;</span>,<span style="color:#e6db74">&#39;......&#39;</span>)
+ 
+            stdin,stdout,stderr <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>exec_command(<span style="color:#e6db74">&#39;ls -l&#39;</span>)
+            <span style="color:#66d9ef">print</span>(stdout<span style="color:#f92672">.</span>read())
+ 
+            <span style="color:#66d9ef">with</span> client<span style="color:#f92672">.</span>open_sftp() <span style="color:#66d9ef">as</span> sftp:
+                sftp<span style="color:#f92672">.</span>put(<span style="color:#e6db74">&#39;sendmail.py&#39;</span>,<span style="color:#e6db74">&#39;sendmail.py&#39;</span>)
+                sftp<span style="color:#f92672">.</span>chmod(<span style="color:#e6db74">&#39;sendmail.py&#39;</span>,<span style="color:#ae81ff">0</span>o755)      <span style="color:#75715e"># 注意这里的权限是八进制的，八进制需要使用0o作为前缀</span>
+        <span style="color:#66d9ef">except</span> AuthenticationException <span style="color:#66d9ef">as</span> e:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;用户名或者密码不正确&#39;</span>)
+ 
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    ip <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;x.x.x.x&#39;</span>   <span style="color:#75715e"># 多IP的情况可以读取文件中的IP列表,利用for循环或者配合多线程就可以完成分发。</span>
+    deploy_monitor(ip)
+ 
+ 
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    main()
+</code></pre></div><h1 id="4-新版ssh-keygent生成的key的问题">4 新版ssh-keygent生成的key的问题</h1>
+<p>        现在使用命令 ssh-keygen -t rsa  生成ssh，默认是以新的格式生成，id_rsa的第一行变成了“BEGIN OPENSSH PRIVATE KEY” 而不在是“BEGIN RSA PRIVATE KEY”，此时用来msyql、MongoDB，配置ssh登陆的话，可能会报 “Resource temporarily unavailable. Authentication by key (/Users/youname/.ssh/id_rsa) failed (Error -16). (Error #35)” 提示资源不可用，这就是id_rsa 格式不对造成的。<code>Paramiko也会认为这个key，不是一个合法的RSA密钥</code>。</p>
+<h2 id="41-解决方法">4.1 解决方法</h2>
+<p>使用 ssh-keygen -m PEM -t rsa -b 4096 来生成</p>
+<ul>
+<li>-m 参数指定密钥的格式，PEM（也就是RSA格式）是之前使用的旧格式</li>
+<li>-b：指定密钥长度；</li>
+<li>-e：读取openssh的私钥或者公钥文件；</li>
+<li>-C：添加注释；</li>
+<li>-f：指定用来保存密钥的文件名；</li>
+<li>-i：读取未加密的ssh-v2兼容的私钥/公钥文件，然后在标准输出设备上显示openssh兼容的私钥/公钥；</li>
+<li>-l：显示公钥文件的指纹数据；</li>
+<li>-N：提供一个新密语；</li>
+<li>-P：提供（旧）密语；</li>
+<li>-q：静默模式；</li>
+<li>-t：指定要创建的密钥类型</li>
+</ul>
+<p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

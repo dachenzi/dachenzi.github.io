@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>1-构建博客-表结构设计-基础配置 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">1-构建博客-表结构设计-基础配置</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 3 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/1-%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E7%9B%AE%E6%A0%87">1 目标</a></li>
+<li><a href="#2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1">2 表结构设计</a>
+<ul>
+<li><a href="#21-%E8%A1%A8%E7%BB%93%E6%9E%84">2.1 表结构</a>
+<ul>
+<li><a href="#211-%E7%94%A8%E6%88%B7%E8%A1%A8">2.1.1 用户表</a></li>
+<li><a href="#212-%E5%8D%9A%E6%96%87%E8%A1%A8">2.1.2 博文表</a></li>
+<li><a href="#213-%E5%86%85%E5%AE%B9%E8%A1%A8">2.1.3 内容表</a></li>
+<li><a href="#214-%E5%85%B3%E7%B3%BB%E6%95%B4%E7%90%86">2.1.4 关系整理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-%E5%88%9B%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE">3 创建django项目</a></li>
+<li><a href="#4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE">4 基础配置</a>
+<ul>
+<li><a href="#41-%E6%9E%84%E5%BB%BA%E5%AE%9E%E4%BD%93%E7%B1%BB">4.1 构建实体类</a>
+<ul>
+<li><a href="#411-user%E5%BA%94%E7%94%A8">4.1.1 user应用</a></li>
+<li><a href="#412-post%E5%BA%94%E7%94%A8">4.1.2 post应用</a></li>
+</ul>
+</li>
+<li><a href="#42-%E8%A3%85%E8%BD%BD%E5%BA%94%E7%94%A8">4.2 装载应用</a></li>
+<li><a href="#43-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93">4.3 配置数据库</a></li>
+</ul>
+</li>
+<li><a href="#5-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E8%BF%81%E7%A7%BB">5 数据库表迁移</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-目标">1 目标</h1>
+<p>利用django完成简单个人博客的开发，主要的功能有</p>
+<ul>
+<li>用户
+<ol>
+<li>登录</li>
+<li>注册</li>
+</ol>
+</li>
+<li>博文
+<ol>
+<li>发布博文</li>
+<li>查询博文</li>
+</ol>
+</li>
+</ul>
+<p>环境情况：</p>
+<ul>
+<li>django 1.11.20</li>
+<li>Python 3.6.8</li>
+<li>pycharm 2017.3</li>
+<li>MySQL 5.5.27</li>
+</ul>
+<h1 id="2-表结构设计">2 表结构设计</h1>
+<p>根据博客的功能分析，最少要有两个表：</p>
+<ul>
+<li><code>用户表</code>：存放用户的id，账户，密码，邮箱等相关信息</li>
+<li><code>博文表</code>：存放博文的名称，发布时间，作者，内容等信息</li>
+</ul>
+<p>        但是仔细一分析，用户的博文信息可能不止几个字，并且很多时候，我们查找博文的同时，如果不访问详细信息，那么是不会看博文内容的，所以这里将博文和内容表分开设计。</p>
+<ul>
+<li><code>内容表</code>：存放博文的内容，与博文形成一对一关系</li>
+</ul>
+<h2 id="21-表结构">2.1 表结构</h2>
+<p>这里使用workbench来对数据库进行建模设计</p>
+<h3 id="211-用户表">2.1.1 用户表</h3>
+<p>由于业务简单，针对用户表设计的表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>是否为空</th>
+<th>是否为主键</th>
+<th>是否唯一</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>TRUE</td>
+<td>用户id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>varchar(48)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>用户名称(作者名称)</td>
+</tr>
+<tr>
+<td>email</td>
+<td>varchar(64)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>用户的邮箱(登录名)</td>
+</tr>
+<tr>
+<td>password</td>
+<td>varchar(128)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>用户登录密码</td>
+</tr>
+</tbody>
+</table>
+<p>对应的表结构SQL代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">user</span><span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>name<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">48</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>email<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>password<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">128</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>email<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>email<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4;
+</code></pre></div><h3 id="212-博文表">2.1.2 博文表</h3>
+<p>由于业务简单，针对博文表设计的表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>是否为空</th>
+<th>是否为主键</th>
+<th>是否唯一</th>
+<th>是否为外键</th>
+<th>外键关联</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>TRUE</td>
+<td>FALSE</td>
+<td></td>
+<td>博文id</td>
+</tr>
+<tr>
+<td>title</td>
+<td>varchar(120)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td></td>
+<td>博文的title</td>
+</tr>
+<tr>
+<td>postdate</td>
+<td>date</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td></td>
+<td>博文提交的日期</td>
+</tr>
+<tr>
+<td>author_id</td>
+<td>varchar(128)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>user.id</td>
+<td>作者的id</td>
+</tr>
+</tbody>
+</table>
+<p>对应的表结构SQL代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>post<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>title<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">120</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>postdate<span style="color:#f92672">`</span> date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>author_id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>post_author_id_2343ddae_fk_user_id<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>author_id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#f92672">`</span>post_author_id_2343ddae_fk_user_id<span style="color:#f92672">`</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>author_id<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span><span style="color:#66d9ef">user</span><span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4;
+</code></pre></div><h3 id="213-内容表">2.1.3 内容表</h3>
+<p>由于业务简单，针对内容表设计的表结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>是否为空</th>
+<th>是否为主键</th>
+<th>是否唯一</th>
+<th>是否为外键</th>
+<th>外键关联</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>TRUE</td>
+<td>FALSE</td>
+<td></td>
+<td>内容id</td>
+</tr>
+<tr>
+<td>content</td>
+<td>longtext</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td></td>
+<td>博文内容</td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>int(11)</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>FALSE</td>
+<td>TRUE</td>
+<td>post.id</td>
+<td>作者的id</td>
+</tr>
+</tbody>
+</table>
+<p>对应的表结构SQL代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>content<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>content<span style="color:#f92672">`</span> longtext <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>post_id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>post_id<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>post_id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#f92672">`</span>content_post_id_c6de7cfd_fk_post_id<span style="color:#f92672">`</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>post_id<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span>post<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4;
+</code></pre></div><h3 id="214-关系整理">2.1.4 关系整理</h3>
+<p>        一个用户可以写任意篇博文，所以用户表和博文表是一对多关系。一个博文只能有一个内容，一个内容也只能归属一篇博文，所以他们是一对一关系。利用workbeach完成的逻辑关系图如下：
+<img src="photo/relationship.png" alt="relationship"></p>
+<h1 id="3-创建django项目">3 创建django项目</h1>
+<p>创建项目名为blog，并创建user用户应用和post博文应用。安装django请参考django部分文档。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 创建blog项目</span>
+mkdir blog <span style="color:#f92672">&amp;&amp;</span> cd blog
+django-admin startproject blog .
+
+<span style="color:#75715e"># 创建user和post应用</span>
+python manage.py startapp user
+python manage.py startapp post
+</code></pre></div><p>上面是通过命令行创建app的方式，如果你用的是专业版的pycharm，可以直接通过pycharm来创建django项目和app（它可以帮你装载app）</p>
+<h1 id="4-基础配置">4 基础配置</h1>
+<p>下面首先进行实体类的编写，以及数据库的配置工作。</p>
+<h2 id="41-构建实体类">4.1 构建实体类</h2>
+<p>在user和post两个应用中构建，他们的对应的实体类</p>
+<h3 id="411-user应用">4.1.1 user应用</h3>
+<p>在user应用下的models.py中编写user表的映射类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># models.py</span>
+<span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;user&#39;</span>
+
+    id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">48</span>, null<span style="color:#f92672">=</span>False)
+    email <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, unique<span style="color:#f92672">=</span>True, null<span style="color:#f92672">=</span>False)
+    password <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, null<span style="color:#f92672">=</span>False)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;User {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>id, self<span style="color:#f92672">.</span>name)
+
+    __str__ <span style="color:#f92672">=</span> __repr__
+</code></pre></div><h3 id="412-post应用">4.1.2 post应用</h3>
+<p>博文应用包含post博文表和content内容表，在post应用下的models.py中编写他们的映射类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># models.py</span>
+<span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+<span style="color:#f92672">from</span> user.models <span style="color:#f92672">import</span> User
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Post</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;post&#39;</span>
+
+    id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">120</span>, null<span style="color:#f92672">=</span>False)
+    postdate <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateField(null<span style="color:#f92672">=</span>False)
+
+    <span style="color:#75715e"># 作者</span>
+    author <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(User)  <span style="color:#75715e"># 外键关联user表，不指定字段的情况下，会自动关联主键</span>
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;Post {} {} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>pk, self<span style="color:#f92672">.</span>title, self<span style="color:#f92672">.</span>postdate, self<span style="color:#f92672">.</span>author
+        )
+
+    __str__ <span style="color:#f92672">=</span> __repr__
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Content</span>(models<span style="color:#f92672">.</span>Model):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;content&#39;</span>
+
+    id <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>AutoField(primary_key<span style="color:#f92672">=</span>True)
+    post <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>OneToOneField(Post)   <span style="color:#75715e"># 一对一关联博文表的主键</span>
+    content <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>TextField(null<span style="color:#f92672">=</span>False)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;Content {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>post, self<span style="color:#f92672">.</span>content[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>]
+        )
+
+    __str__ <span style="color:#f92672">=</span> __repr__
+</code></pre></div><h2 id="42-装载应用">4.2 装载应用</h2>
+<p>上面实体类编写完成以后，要先初始化还需要先装载我们的app，即在项目的配置文件settings.py中添加我们的app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+INSTALLED_APPS <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#39;django.contrib.admin&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.auth&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.contenttypes&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.sessions&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.messages&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.staticfiles&#39;</span>,
+    <span style="color:#e6db74">&#39;user&#39;</span>,
+    <span style="color:#e6db74">&#39;post&#39;</span>
+]
+</code></pre></div><h2 id="43-配置数据库">4.3 配置数据库</h2>
+<p>本次blog使用的数据库为MySQL 5.5.27,这里不再说明部署。需要在settings.py中添加如下数据库配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+DATABASES <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;default&#39;</span>: {
+        <span style="color:#e6db74">&#39;ENGINE&#39;</span>: <span style="color:#e6db74">&#39;django.db.backends.mysql&#39;</span>,  <span style="color:#75715e"># 引擎</span>
+        <span style="color:#e6db74">&#39;NAME&#39;</span>: <span style="color:#e6db74">&#39;blog&#39;</span>,  <span style="color:#75715e"># 库名</span>
+        <span style="color:#e6db74">&#39;USER&#39;</span>: <span style="color:#e6db74">&#39;dahl&#39;</span>,  <span style="color:#75715e"># 数据库用户名</span>
+        <span style="color:#e6db74">&#39;PASSWORD&#39;</span>: <span style="color:#e6db74">&#39;123456&#39;</span>,  <span style="color:#75715e"># 数据库密码</span>
+        <span style="color:#e6db74">&#39;HOST&#39;</span>: <span style="color:#e6db74">&#39;10.0.0.13&#39;</span>,  <span style="color:#75715e"># 数据库地址</span>
+        <span style="color:#e6db74">&#39;PORT&#39;</span>: <span style="color:#e6db74">&#39;3306&#39;</span>,  <span style="color:#75715e"># 数据库端口</span>
+    }
+}
+</code></pre></div><h1 id="5-数据库表迁移">5 数据库表迁移</h1>
+<p>当完成上面配置以后，我们就可以生成对应的数据库表文件了。需要在项目的根目录下执行如下命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 创建实体类映射SQL的过程文件</span>
+python manage.py makemigrations
+
+<span style="color:#75715e"># 将过程文件应用到数据库中</span>
+python manage.py migrate
+</code></pre></div><blockquote>
+<p>以上过程如果出错并且自己无法搞定，请发送问题至 <a href="mailto:daxin.li@foxmail.com">daxin.li@foxmail.com</a>
+{% endraw %}</p>
+</blockquote>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

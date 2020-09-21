@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>26-面向对象高级-上下文管理-反射 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">26-面向对象高级-上下文管理-反射</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 4 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/26-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86-%E5%8F%8D%E5%B0%84/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86">1 上下文管理</a>
+<ul>
+<li><a href="#11-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7">1.1 上下文管理的安全性</a></li>
+<li><a href="#12-%E8%BF%94%E5%9B%9E%E5%80%BC">1.2 返回值</a></li>
+<li><a href="#13-%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0">1.3 方法的参数</a></li>
+<li><a href="#14-%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4">1.4 计算函数的运行时间</a></li>
+<li><a href="#15-%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">1.5 主要应用场景</a></li>
+<li><a href="#16-contextlibcontextmanager">1.6 contextlib.contextmanager</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%8F%8D%E5%B0%84">2 反射</a>
+<ul>
+<li><a href="#21-%E5%8F%8D%E5%B0%84%E7%9B%B8%E5%85%B3%E7%9A%84%E5%87%BD%E6%95%B0">2.1 反射相关的函数</a></li>
+<li><a href="#22-%E5%8F%8D%E5%B0%84%E7%9B%B8%E5%85%B3%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95">2.2 反射相关的魔术方法</a>
+<ul>
+<li><a href="#221-__getattr__">2.2.1 <strong>getattr</strong></a></li>
+<li><a href="#222-__setattr__">2.2.2 <strong>setattr</strong></a></li>
+<li><a href="#223-__delattr__">2.2.3 <strong>delattr</strong></a></li>
+</ul>
+</li>
+<li><a href="#23-__getattribute__">2.3 <strong>getattribute</strong></a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-上下文管理">1 上下文管理</h1>
+<p>文件IO操作可以对文件对象使用上下文管理,它主要使用<code>with..as..</code>语法.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;123.txt&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">print</span>(f)
+</code></pre></div><p>要想自己写的类实现上下文管理,那么需要用到两个方法__exit__和__enter__.</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__enter__</td>
+<td>进入与此对象相关的上下文,如果存放该方法,with语法会把该方法的返回值绑定到as子句中指定的变量上</td>
+</tr>
+<tr>
+<td>__exit__</td>
+<td>退出与此对象相关的上下文</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Text</span>:
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;enter------&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;exit-------&#39;</span>)
+
+<span style="color:#66d9ef">with</span> Text() <span style="color:#66d9ef">as</span> f :
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;进来了&#39;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;出来了&#39;</span>)
+
+<span style="color:#75715e"># enter------</span>
+<span style="color:#75715e"># 进来了</span>
+<span style="color:#75715e"># exit-------</span>
+<span style="color:#75715e"># 出来了</span>
+</code></pre></div><p>实例化对象的时候,并不会调用__enter__方法,只有进入with语句体中,才会调用__enter__方法,然后执行语句体,最后离开with语句块的时候,再调用__exit__方法.</p>
+<blockquote>
+<p>with可以开启一个上下文运行环境,在执行前做一些准备工作,执行后,做一些收尾工作,它并不会开启一个新的作用域.</p>
+</blockquote>
+<h2 id="11-上下文管理的安全性">1.1 上下文管理的安全性</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Text</span>:
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;enter------&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;exit-------&#39;</span>)
+
+<span style="color:#66d9ef">with</span> Text() <span style="color:#66d9ef">as</span> f :
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>
+
+<span style="color:#75715e"># Traceback (most recent call last):</span>
+<span style="color:#75715e"># enter------</span>
+<span style="color:#75715e">#   File &#34;E:/Python - base - code/chapter08面向对象/练习3.py&#34;, line 169, in &lt;module&gt;</span>
+<span style="color:#75715e">#     raise Exception</span>
+<span style="color:#75715e"># exit-------</span>
+<span style="color:#75715e"># Exception</span>
+</code></pre></div><p>我们可以看到,with语句体中当异常抛出时,__exit__已经可以执行完毕,所以上下文管理是安全的.</p>
+<h2 id="12-返回值">1.2 返回值</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Text</span>:
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;enter------&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;exit-------&#39;</span>)
+
+<span style="color:#66d9ef">with</span> Text() <span style="color:#66d9ef">as</span> f :
+    <span style="color:#66d9ef">print</span>(f)   <span style="color:#75715e"># None</span>
+</code></pre></div><p>这里之所以是None,是因为,__enter__函数的返回值为None,所以如果哪些类的实例化属性或实例本身要在with语句内部使用,可以在__enter__函数中进行返回.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Text</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;enter------&#39;</span>)
+        <span style="color:#66d9ef">return</span> self
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;exit-------&#39;</span>)
+
+<span style="color:#66d9ef">with</span> Text() <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>name)   <span style="color:#75715e"># daxin</span>
+</code></pre></div><h2 id="13-方法的参数">1.3 方法的参数</h2>
+<p>方法的参数如下:</p>
+<ul>
+<li>__enter__(self):没有其他参数</li>
+<li>__exit__(self, exc_type, exc_val, exc_tb): 这三个参数都与异常有关系,如果上下文管理内部没有产生异常,那么三个属性的值都为None,否则
+<ul>
+<li>exc_type: 异常类型</li>
+<li>exc_val: 异常的值</li>
+<li>exc_tb: 异常的追踪信息</li>
+</ul>
+</li>
+</ul>
+<p>注意:__exit__函数的返回值很重要,当返回值等效为True,表示压制异常(异常不会上报),等效False时,表示不压制异常(此时异常会上报)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Enter ~~~~~&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;exit ~~~~~&#39;</span>)
+        <span style="color:#66d9ef">print</span>(exc_type)
+        <span style="color:#66d9ef">print</span>(exc_val)
+        <span style="color:#66d9ef">print</span>(exc_tb)
+        <span style="color:#66d9ef">return</span> True
+
+<span style="color:#66d9ef">with</span> A():
+    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#39;Test&#39;</span>)
+
+<span style="color:#75715e"># Enter ~~~~~</span>
+<span style="color:#75715e"># &lt;class &#39;Exception&#39;&gt;</span>
+<span style="color:#75715e"># Test</span>
+<span style="color:#75715e"># &lt;traceback object at 0x000001E4D0A5C808&gt;</span>
+</code></pre></div><p>因为__exit__方法return 了True，所以异常被压制，所以不会异常崩溃。</p>
+<h2 id="14-计算函数的运行时间">1.4 计算函数的运行时间</h2>
+<p>下面来计算一个函数的运行时间，主要有两个办法：</p>
+<ol>
+<li>装饰器(一般人都能想到)</li>
+<li>上下文管理期(一般人很难想到)</li>
+</ol>
+<p>装饰器版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">timer</span>(fn):
+    <span style="color:#a6e22e">@functools.wraps</span>(fn)  <span style="color:#75715e"># 拷贝属性信息</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        stop <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(stop)
+        <span style="color:#66d9ef">return</span> res
+
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@timer</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>))
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><p>装饰器版本2：类装饰器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Timer</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self,fn):
+        self<span style="color:#f92672">.</span>fn <span style="color:#f92672">=</span> fn
+        functools<span style="color:#f92672">.</span>wraps(fn)(self)  <span style="color:#75715e"># 拷贝用户函数属性信息</span>
+
+    <span style="color:#66d9ef">def</span> __call__(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>fn(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
+        stop <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;The fn run time is {}&#39;</span><span style="color:#f92672">.</span>format(stop))
+        <span style="color:#66d9ef">return</span> res
+
+<span style="color:#a6e22e">@Timer</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#e6db74">&#39;&#39;&#39;from add function&#39;&#39;&#39;</span>
+    time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>))
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">print</span>(add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>))
+<span style="color:#66d9ef">print</span>(add<span style="color:#f92672">.</span>__name__)
+</code></pre></div><p>上下文管理器方法1：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> datetime
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>))
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Timer</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>start <span style="color:#f92672">=</span> None
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        self<span style="color:#f92672">.</span>start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        self<span style="color:#f92672">.</span>stop <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>stop)
+
+<span style="color:#66d9ef">with</span> Timer():
+    add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</code></pre></div><p>上下文管理版本2:将要计算的函数当作参数传入上下问管理器中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> datetime
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(random<span style="color:#f92672">.</span>randrange(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>))
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Timer</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self, fn):
+        self<span style="color:#f92672">.</span>fn <span style="color:#f92672">=</span> fn
+        self<span style="color:#f92672">.</span>start <span style="color:#f92672">=</span> None
+
+    <span style="color:#66d9ef">def</span> __enter__(self):
+        self<span style="color:#f92672">.</span>start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>fn
+
+    <span style="color:#66d9ef">def</span> __exit__(self, exc_type, exc_val, exc_tb):
+        self<span style="color:#f92672">.</span>stop <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>stop)
+
+<span style="color:#66d9ef">with</span> Timer(add) <span style="color:#66d9ef">as</span> f:
+    f(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</code></pre></div><h2 id="15-主要应用场景">1.5 主要应用场景</h2>
+<p>根据上下文管理的特性，总结出三个常用的场景：</p>
+<ol>
+<li><code>增强功能</code>：在代码执行的前后增加代码，以增强其功能。类似装饰器的功能。</li>
+<li><code>资源管理</code>：打来的资源需要关闭，例如文件对象、网络连接、数据库连接等。</li>
+<li><code>权限验证</code>：在执行代码之前，做权限的验证，在__enter__中处理。</li>
+</ol>
+<h2 id="16-contextlibcontextmanager">1.6 contextlib.contextmanager</h2>
+<p>        它是一个装饰器，用于实现上下文管理，它装饰一个函数，因为函数没有像类那样使用__enter__和__exit__来实现，所以使用contextlib.contextmanger可以使一个函数变为上下文管理器，但是对被装饰的函数有一个要求，必须包含yeild关键字，也就是说这个函数必须返回一个生成器，且只有yield一个值。</p>
+<blockquote>
+<p>这个装饰器接受一个生成器作为参数</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> contextmanager
+
+<span style="color:#a6e22e">@contextmanager</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+    <span style="color:#66d9ef">yield</span> x <span style="color:#f92672">+</span> y
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;bye bye&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;start&#39;</span>)
+<span style="color:#66d9ef">with</span> add(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">print</span>(f)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;end&#39;</span>)
+
+<span style="color:#75715e"># start</span>
+<span style="color:#75715e"># hello</span>
+<span style="color:#75715e"># 9</span>
+<span style="color:#75715e"># bye bye</span>
+<span style="color:#75715e"># end</span>
+</code></pre></div><p>根据打印结果我们分析：</p>
+<ol>
+<li>函数中yield语句前面的，在with语句执行时被触发。</li>
+<li>yield返回值被 as 语句交给了f。</li>
+<li>yield语句后面的，在退出with语句时执行。</li>
+</ol>
+<p>当我们传入参数add(1, [5,]) 时，异常直接是函数异常退出了，并没有执行yield后面的类似__enter__方法的语句，怎么办呢？可以使用try,finally来捕捉</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> contextlib <span style="color:#f92672">import</span> contextmanager
+
+<span style="color:#a6e22e">@contextmanager</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+        <span style="color:#66d9ef">yield</span> x <span style="color:#f92672">+</span> y
+    <span style="color:#66d9ef">finally</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;bye bye&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;start&#39;</span>)
+<span style="color:#66d9ef">with</span> add(<span style="color:#ae81ff">1</span>, [<span style="color:#ae81ff">5</span>,]) <span style="color:#66d9ef">as</span> f:
+    <span style="color:#66d9ef">print</span>(f)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;end&#39;</span>)
+</code></pre></div><p>这样就会打印yield后续语句，虽然会异常退出，但由于错误的参数由用户自主传递，那就让用户自己去解决吧。</p>
+<blockquote>
+<p>业务逻辑简单，可以使用函数加contextlib.contextmanager装饰器实现，业务逻辑复杂的话，可以使用类加__enter__和__exit__来解决。</p>
+</blockquote>
+<h1 id="2-反射">2 反射</h1>
+<p>一个对象能够在运行时，像照镜子一样，显示出其类型信息，这种方法叫做反射。换句话是反射可以在程序运行的同时获取类型定义的信息，比如通过一个对象，找出它的type、class、attribute或者method等。具有反射能力的函数有：type()、isinstance()、callable()、dir()、getattr()等。</p>
+<h2 id="21-反射相关的函数">2.1 反射相关的函数</h2>
+<table>
+<thead>
+<tr>
+<th>内建函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getattr(object, name[, default])</td>
+<td>通过name返回object的属性值。当属性不存在，将使用default返回。<!-- raw HTML omitted -->如果没有设置default，则抛出AttributeError异常，name必须为字符串。</td>
+</tr>
+<tr>
+<td>setattr(obj, name, value)</td>
+<td>obj的属性存在，则覆盖，不存在，则新增。</td>
+</tr>
+<tr>
+<td>hasattr(obj, name)</td>
+<td>判断obj是否存在属性，name必须为字符串，返回值为bool类型</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+
+    <span style="color:#66d9ef">def</span> __init__(self,name,age):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">talk</span>(self):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{} is talking&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name))
+
+daxin <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#39;daxin&#39;</span>,<span style="color:#ae81ff">20</span>)
+<span style="color:#66d9ef">if</span> hasattr(daxin,<span style="color:#e6db74">&#39;name&#39;</span>):         <span style="color:#75715e"># 判断daxin是否含有name属性</span>
+    <span style="color:#66d9ef">print</span>(getattr(daxin,<span style="color:#e6db74">&#39;name&#39;</span>))  <span style="color:#75715e"># 如果有，通过getattr获取name属性</span>
+
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> hasattr(daxin,<span style="color:#e6db74">&#39;sing&#39;</span>):     <span style="color:#75715e"># 判断daxin没有sing方法</span>
+    setattr(daxin,<span style="color:#e6db74">&#39;sing&#39;</span>,<span style="color:#66d9ef">lambda</span> self:<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;{} is singing&#34;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>name)))  <span style="color:#75715e"># 为实例绑定一个sing方法</span>
+
+daxin<span style="color:#f92672">.</span>sing()  <span style="color:#75715e"># 实例调用</span>
+</code></pre></div><p>        直接调用时无法执行，提示缺少self参数，想一下，我们定义的方法通常是在类中定义的，在类中我们指定的self参数，在实例调用时会进行传递(因为是实例是绑定在方法上的)，而我们绑定的sing方法是绑定在实例本身上的，所以这种情况下，是无法帮我们传递self参数的，所以我们在函数内部也无法调用实例的参数。</p>
+<blockquote>
+<p>这种动态增加属性的方式是运行时改变类或者实例的方式，而装饰器或者Mixin是在定义时就决定了的，因此反射具有更大的灵活性。</p>
+</blockquote>
+<p>命令分发器实例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dispather</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(self, name, func):
+        setattr(self, name, func)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+        <span style="color:#66d9ef">while</span> True:
+            cmd <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#39;&gt;&gt;&gt;: &#39;</span>)<span style="color:#f92672">.</span>strip()
+            <span style="color:#66d9ef">if</span> cmd<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;quit&#39;</span>:
+                <span style="color:#66d9ef">break</span>
+            <span style="color:#66d9ef">else</span>:
+                getattr(self, cmd<span style="color:#f92672">.</span>lower())()
+
+d <span style="color:#f92672">=</span> Dispather()
+d<span style="color:#f92672">.</span>register(<span style="color:#e6db74">&#39;ls&#39;</span>,<span style="color:#66d9ef">lambda</span> :<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;hello world&#39;</span>))
+d<span style="color:#f92672">.</span>run()
+</code></pre></div><h2 id="22-反射相关的魔术方法">2.2 反射相关的魔术方法</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__getattr__(self, name)</td>
+<td>定义当用户试图获取一个不存在的属性时的行为</td>
+</tr>
+<tr>
+<td>__setattr__(self, name, value)</td>
+<td>定义当一个属性被设置时的行为</td>
+</tr>
+<tr>
+<td>__delattr__(self, name)</td>
+<td>定义当一个属性被删除时的行为</td>
+</tr>
+</tbody>
+</table>
+<h3 id="221-__getattr__">2.2.1 <strong>getattr</strong></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;__getattr__&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+
+daxin <span style="color:#f92672">=</span> A()
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>name)
+
+<span style="color:#75715e"># __getattr__</span>
+<span style="color:#75715e"># daxin</span>
+</code></pre></div><p>        访问daxin的一个属性name，如果不存在，最后会调用__getattr__方法，它的返回值就是结果。如果没有这个方法，就会抛出AttributeError异常，表示找不到属性。<br>
+        查找属性的顺序为：instance.__dict__ &ndash;&gt; instance.__class__.__dict__ &ndash;&gt; &hellip; &ndash;&gt; object的__dict__，找不到，调用实例的__getattr__</p>
+<h3 id="222-__setattr__">2.2.2 <strong>setattr</strong></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;__getattr__&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __setattr__(self, key, value):
+        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> value   <span style="color:#75715e"># self.key依旧调用self.__setattr__方法</span>
+        <span style="color:#75715e"># self.__dict__[key] = value </span>
+
+
+daxin <span style="color:#f92672">=</span> A()
+daxin<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>  <span style="color:#75715e"># 调用__setattr__方法</span>
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>name)
+</code></pre></div><p>上面的代码无法执行，会产生递归是为什么呢？</p>
+<ol>
+<li>daxin.name = &lsquo;daxin&rsquo; 这里会调用daxin的__setattr__方法。</li>
+<li>daxin的__stattr__方法内部使用self.key = value的方法赋值，这种方法等同于self.__setattr__ = value，所以会产生递归。</li>
+<li>利用self.__dict__[key]的方式是直接操作实例的字典，所以不会引起递归。</li>
+</ol>
+<p>__setattr__()方法，可以拦截对实例属性的增加、修改操作，如果要设置生效，需要自己修改操作实例的__dict__属性。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#66d9ef">def</span> __init__(self,name):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;getattr~~~~~&#39;</span>)
+        <span style="color:#66d9ef">return</span> getattr(self,item)
+
+    <span style="color:#66d9ef">def</span> __setattr__(self, key, value):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;setattr~~~~~~&#39;</span>)
+        self<span style="color:#f92672">.</span>__dict__[key] <span style="color:#f92672">=</span> value
+        <span style="color:#75715e"># setattr(self,key,value)  # 不能这样写，这样写等同于调用对象的__setattr__方法，会产生递归</span>
+
+
+daxin <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#39;daxin&#39;</span>)
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>name)
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>a)
+</code></pre></div><p>结果只会输出1次getattr,因为初始化时，已经为字典创建了一个key，a，所以当访问实例属性a时，由于__dict__中存在，所以不会被__getattr__捕获。</p>
+<blockquote>
+<p>setattr本质上也是通过 instance.attribute = value 的方式赋值的。</p>
+</blockquote>
+<h3 id="223-__delattr__">2.2.3 <strong>delattr</strong></h3>
+<p>删除一个属性时，触发__delattr__方法的执行。可以阻止通过实例来删除属性的操作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#66d9ef">def</span> __init__(self,name):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>__dict__[<span style="color:#e6db74">&#39;a&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;getattr~~~~~&#39;</span>)
+        <span style="color:#66d9ef">return</span> getattr(self,item)
+
+    <span style="color:#66d9ef">def</span> __setattr__(self, key, value):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;setattr~~~~~~&#39;</span>)
+        self<span style="color:#f92672">.</span>__dict__[key] <span style="color:#f92672">=</span> value
+
+    <span style="color:#66d9ef">def</span> __delattr__(self, item):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;delattr~~~~~~&#39;</span>)
+        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>__dict__[item]  <span style="color:#75715e"># 删除实例的属性， 也可以在这里啥也不做，提示不能删除，即可阻止实例的属性被删除。</span>
+
+daxin <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#39;daxin&#39;</span>)
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>name)
+<span style="color:#66d9ef">del</span> daxin<span style="color:#f92672">.</span>a  <span style="color:#75715e"># 触发实例的__delattr__方法的执行。</span>
+</code></pre></div><h2 id="23-__getattribute__">2.3 <strong>getattribute</strong></h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__getattribute__(self, name)</td>
+<td>定义当该类的属性被访问时的行为</td>
+</tr>
+</tbody>
+</table>
+<p>实例所有的属性访问，第一个都会调用__getattribute__方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#66d9ef">def</span> __init__(self,name,age):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;getattr&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __getattribute__(self, item):
+        <span style="color:#66d9ef">pass</span>
+        <span style="color:#75715e"># return &#39;ABC&#39;</span>
+        <span style="color:#75715e"># raise AttributeError(&#39;ABC&#39;)</span>
+
+daxin <span style="color:#f92672">=</span> Person(<span style="color:#e6db74">&#39;daxin&#39;</span>,<span style="color:#ae81ff">20</span>)
+<span style="color:#66d9ef">print</span>(daxin<span style="color:#f92672">.</span>name)
+</code></pre></div><p>上面的例子得到以下结论：</p>
+<ol>
+<li>当我们重写__getattribute__方法时，它的返回值就是我们属性访问的结果。</li>
+<li>如果在__getattribute__方法中抛出AttributeErro异常，那么最好会执行__getattr__方法，因为属性没有找到。</li>
+</ol>
+<p>__getattribute__方法中为了避免在该方法中无限递归，它的实现应该永远调用基类的同名方法以访问需要的任何属性(object.__getattribute__(self, name))。</p>
+<p>实例属性查找顺序：
+<code>instance.__getattribute__()  --&gt;  instance.__dict__  --&gt; instance.__class__.__dict__ --&gt; object.__dict__ --&gt; instance.__getattr__</code></p>
+<p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

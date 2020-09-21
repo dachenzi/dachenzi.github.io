@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>3-docker镜像 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">3-docker镜像</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 1 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/3-docker%E9%95%9C%E5%83%8F/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<h1 id="1-docker-image-镜像">1 docker image 镜像</h1>
+<p>        docker host 从docker registries 中获取镜像并存入到本地，所以要求docker host本地能够存储这种镜像，这种存储空间要求是一种特殊而且专用的文件系统(1.18 overlay2存储驱动)
+        镜像可以理解为应用程序的集装箱(docker(码头工人)负责转配这些集装箱)
+        Docker镜像含有启动容器所需要的文件系统及其内容，因此，其用于创建并启动Docker容器</p>
+<ul>
+<li>采用分层构建机制，大体上分为两部分：最底层为bootfs，其之上为rootfs(图，rootfs层(/etc,/bin,/sbin等)，bootfs层)
+<ul>
+<li>bootfs：用于系统引导的文件系统，包括bootloader和kernel，容器启动完成后会被卸载以节约内存资源（从内存中移除)
+底层为aufs/btrfs/overlay文件系统，来确保能够引导并启动一个用户空间</li>
+<li>rootfs：位于bootfs之上，表现为docker容器的根 文件系统
+<ul>
+<li>传统模式中，系统启动之时，内核挂载rootfs时会首先将其挂载为“只读”模式，完整性自检完成后将其重新挂载为读写模式；</li>
+<li>docker中，rootfs由内核挂载为“只读”模式，而后通过“联合挂载”技术额外挂载一个“可写”层。</li>
+</ul>
+</li>
+<li>位于下层的镜像称为父镜像(parent image)，最底层的称为基础镜像(base image)</li>
+<li>最上层为“可读写”层，其下的均为“只读”层。(图，可写层，http层，vim层，base image层，bootfs层)</li>
+</ul>
+</li>
+</ul>
+<h2 id="专有文件系统">专有文件系统</h2>
+<p>        docker的这种分层构建，联合挂载，需要的是专有的文件系统的支持，比如Aufs、overlay2，brtfs等。</p>
+<h3 id="aufs文件系统">Aufs文件系统</h3>
+<p>        Aufs：advanced multi-layered unification filesystem：高级多层统一文件系统</p>
+<ul>
+<li>用于为Linux文件系统实现”联合挂载“</li>
+<li>aufs是之前的UnionFS的重新实现，2006年由Junjiro Okajima开发；</li>
+<li>Docker最初使用aufs作为容器文件系统层，它目前仍作为存储后端之一来支持；</li>
+<li>aufs的竞争产品是overlayfs，后者自从3.18版本开始被合并到Linux内核；</li>
+<li>docker的分层镜像，除了aufs、docker还支持btrfs，devicemapper和vfs等
+<ul>
+<li>在Ubuntu系统下，docker默认Ubuntu的aufs；而在Centos7上，用的是devicemapper(DM)；</li>
+</ul>
+</li>
+</ul>
+<h3 id="devicemapper文件系统">devicemapper文件系统</h3>
+<h3 id="overlay2文件系统">overlay2文件系统</h3>
+<p>overlay2是一个抽象的二级文件系统，它需要构建在一个本地文件系统之上，这个文件系统就是xfs(extfs)</p>
+<h2 id="docker-registry">docker registry</h2>
+<p>启动容器时，docker daemon会视图从本地获取相关的镜像；本地镜像不存在时，其将从registry中下载该镜像并保存到本地；(图，docker Client ,http/https, Docker Daemon(stroage Driver, aufs,dm), Public Docker registry DockerHub, Private Docker Registry,Storage Driver)</p>
+<p>PS: docker distribution：docker提供的一个镜像服务，但是不完成，默认不支持HTTPS服务，在安全情况下，docker daemon要求 docker registry必须是HTTPS服务的，如果不是，需要配置docker daemon来明确指示其使用不安全的镜像仓库(现在更流行使用vmware开源的harbor)</p>
+<p>分类：</p>
+<ul>
+<li>Registry用于保存docker镜像，包括镜像的层次结构和元数据</li>
+<li>用户可自建Registry，也可以使用官方的Docker Hub</li>
+<li>分类：
+<ul>
+<li>Sponsor Registry：第三方的registry，供客户和Docker社区使用</li>
+<li>Mirror Registry：第三方的registry，只让客户使用(加速器，比如阿里云)</li>
+<li>Vendor Registry：由发布docker镜像的供应商提供的registry（比如红帽提供的供购买它服务的客户使用)</li>
+<li>Privage Registry：通过设有防火墙和额外安全层的私有实体提供的registry</li>
+</ul>
+</li>
+</ul>
+<p>组成：
+一般由两部分组成：Repository、Index</p>
+<ul>
+<li>
+<p>Repository</p>
+<ul>
+<li>有特定的docker镜像的所以迭代版本组成的镜像仓库</li>
+<li>一个Registory中可以存在多个Repository
+<ul>
+<li>Repository可以分为”顶层仓库”和“用户仓库“</li>
+<li>顶层仓库名称格式为“仓库名”</li>
+<li>用户仓库名称格式为”用户名/仓库名“</li>
+</ul>
+</li>
+<li>每个仓库可以包含多个Tag(标签),每个标签对应一个镜像，但一个镜像可以对应多个标签</li>
+</ul>
+</li>
+<li>
+<p>Index</p>
+<ul>
+<li>维护用户账户、镜像的校验以及公共命名空间的信息</li>
+<li>相当于为Registry提供了一个完成用户认证等功能的检索接口</li>
+</ul>
+</li>
+</ul>
+<p>docker registry中的镜像来自于何处？
+        通常由镜像开发人员制作，而后推送至“公共”或“私有”Registry上保存，供其他人员使用，例如“部署”到生产环境；</p>
+<p>镜像相关的操作
+1 镜像的生成途径</p>
+<ul>
+<li>dockerfile</li>
+<li>基于容器制作</li>
+<li>Docker Hub Automated Builds</li>
+</ul>
+<p>基于容器制作镜像：</p>
+<ul>
+<li>
+<p>正在运行的容器，不能是已经停止的
+docker commit -p  web    (-p表示暂停，否则如果容器内的某个文件正在读写，会造成文件不完整的情况)
+这种方式是没有tag和仓库名称的</p>
+</li>
+<li>
+<p>为自定义容器加tag
+docker tag ca87c7dc2d2c dachenzi/nginx:latest
+一个镜像可以包含多个标签，一个标签只能针对一个镜像</p>
+<p>修改容器启动时运行的命令：
+docker commit -a &ldquo;dachenzi <a href="mailto:dachenzi@gmail.com">dachenzi@gmail.com</a>&rdquo; -c &lsquo;CMD [&quot;/bin/httpd&quot;,&quot;-f&quot;,&quot;-h&quot;,&quot;/data/html/&quot;]&rsquo; -p dachenzi/httpd:v0.2</p>
+</li>
+<li>
+<p>将制作好的镜像上传至dockerhub（镜像的名称要和dockerhub仓库的名称一致，否则上传失败)
+docker login -u xxx -p
+docker push dachenzi/nginx[tag] 不加tag就是上传所有的tag</p>
+</li>
+<li>
+<p>将制作好的镜像上传至阿里云的镜像仓库内</p>
+</li>
+</ul>
+<p>镜像的导入和导出：</p>
+<ul>
+<li>仅仅是本地的导出，再另一台主机上导入测试</li>
+<li>docker save ：打包
+docker save -o myimages.gz dachenzi/nginx:latest dachenzi/nginx:stable  可以写多个,一次打包多个镜像</li>
+<li>docker load ：导入
+docker load -i myimages.gz</li>
+</ul>
+<p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

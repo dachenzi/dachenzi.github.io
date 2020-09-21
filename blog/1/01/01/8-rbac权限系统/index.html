@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>8-rbac权限系统 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">8-rbac权限系统</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 5 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-rbac">1 rbac</a></li>
+<li><a href="#2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1">2 表结构设计</a></li>
+<li><a href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%99%90%E7%BB%93%E6%9E%84">3 初始化权限结构</a></li>
+<li><a href="#4-%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%AA%8C%E8%AF%81">4 中间件验证</a></li>
+<li><a href="#5-%E7%94%9F%E6%88%90%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA">5 生成菜单显示</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-rbac">1 rbac</h1>
+<p>基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有两个功能：</p>
+<ul>
+<li>权限验证</li>
+<li>菜单生成</li>
+</ul>
+<p>通过将权限信息写入到session中，每次访问时，使用中间件来匹配访问的URL与session中权限列表中的url是否匹配，如果匹配准入，否则提示无权访问，针对菜单的显示功能，通过inclusion_tag渲染的方式，构造一个菜单列表，进行渲染，可以在任何使用的地方，使用templatetags的方式进入，并渲染（样式需要自行调整）。</p>
+<h1 id="2-表结构设计">2 表结构设计</h1>
+<p>分析业务逻辑，创建五张表:</p>
+<ul>
+<li>用户表：存放用户相关信息，并关联角色表（一个人有多个角色，一个角色可以包含多个人）</li>
+<li>角色表：角色信息，关联权限组（一个角色可以关联多个角色组，一个角色组可以关联多个角色）</li>
+<li>权限表：存放权限信息，存储带正则表达式的url（一个权限只能关联一个权限组）</li>
+<li>权限组表：将权限进行分类，并关联到所属的菜单中（一个组只能关联一个菜单）</li>
+<li>菜单表：菜单信息</li>
+</ul>
+<p>表关系如下：
+<img src="../photo/rbac.jpg" alt="rbac"></p>
+<p>下面是字段代码设计：字段可以自行增减。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfo</span>(models<span style="color:#f92672">.</span>Model):
+
+    name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;用户名&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>)
+    passwd <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;密码&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+    email <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;邮箱&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, null<span style="color:#f92672">=</span>True, blank<span style="color:#f92672">=</span>True)
+    roles <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ManyToManyField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;角色&#39;</span>, to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Role&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;users&#39;</span>, blank<span style="color:#f92672">=</span>True, null<span style="color:#f92672">=</span>True)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rbac_userinfo&#39;</span>
+        verbose_name_plural <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;用户表&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>name
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Role</span>(models<span style="color:#f92672">.</span>Model):
+
+    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;角色名称&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    permissions <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ManyToManyField(to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Permission&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;roles&#39;</span>, blank<span style="color:#f92672">=</span>True)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rbac_role&#39;</span>
+        verbose_name_plural <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;角色表&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>title
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Permission</span>(models<span style="color:#f92672">.</span>Model):
+
+    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;权限名称&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    url <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;带正则的url&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>)
+    code <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;权限代码&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    groups <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;权限组&#39;</span>, to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;PermissionGroup&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;permissions&#39;</span>, blank<span style="color:#f92672">=</span>True, null<span style="color:#f92672">=</span>True)
+    is_menu <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>BooleanField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;是否是菜单&#39;</span>)
+    parent <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;归属菜单&#39;</span>, to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Permission&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;parents&#39;</span>, blank<span style="color:#f92672">=</span>True, null<span style="color:#f92672">=</span>True)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rbac_permission&#39;</span>
+        verbose_name_plural <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;权限表&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>title
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PermissionGroup</span>(models<span style="color:#f92672">.</span>Model):
+
+    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;权限组名称&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+    menu <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;所属菜单&#39;</span>, to<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Menu&#39;</span>, related_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;permissiongroups&#39;</span>, null<span style="color:#f92672">=</span>True, blank<span style="color:#f92672">=</span>True)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rbac_permissiongroup&#39;</span>
+        verbose_name_plural <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;权限组表&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>title
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Menu</span>(models<span style="color:#f92672">.</span>Model):
+
+    title <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(verbose_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;菜单名称&#39;</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        db_table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rbac_menu&#39;</span>
+        verbose_name_plural <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;菜单表&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __str__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>title
+</code></pre></div><h1 id="3-初始化权限结构">3 初始化权限结构</h1>
+<p>用户请求进来，首先为其初始化个人权限信息：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">init_permission</span>(obj, request):
+    <span style="color:#75715e"># 初始化权限</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    1. 获取这个人的所有权限
+</span><span style="color:#e6db74">    2. 组建权限结构
+</span><span style="color:#e6db74">    3. 组建菜单结构
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#75715e"># 1. 获取这个人的所有权限（角色权限重叠，要去重）</span>
+    permissions_dict <span style="color:#f92672">=</span> obj<span style="color:#f92672">.</span>roles<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;permissions__id&#39;</span>, <span style="color:#e6db74">&#39;permissions__parent__id&#39;</span>,
+                                        <span style="color:#e6db74">&#39;permissions__groups__id&#39;</span>,
+                                        <span style="color:#e6db74">&#39;permissions__groups__title&#39;</span>, <span style="color:#e6db74">&#39;permissions__code&#39;</span>,
+                                        <span style="color:#e6db74">&#39;permissions__url&#39;</span>, <span style="color:#e6db74">&#39;permissions__groups__menu__id&#39;</span>,
+                                        <span style="color:#e6db74">&#39;permissions__groups__menu__title&#39;</span>, <span style="color:#e6db74">&#39;permissions__title&#39;</span>)<span style="color:#f92672">.</span>distinct()
+    <span style="color:#75715e"># 修改名称</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    [
+</span><span style="color:#e6db74">        {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
+</span><span style="color:#e6db74">        {&#39;id&#39;: 2, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;add&#39;, &#39;url&#39;: &#39;/add&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
+</span><span style="color:#e6db74">        {&#39;id&#39;: 3, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;delete&#39;, &#39;url&#39;: &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/delete&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
+</span><span style="color:#e6db74">    ]
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    permissions_list <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> permissions <span style="color:#f92672">in</span> permissions_dict:
+        tmp <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;id&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__id&#39;</span>],
+            <span style="color:#e6db74">&#39;title&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__title&#39;</span>],
+            <span style="color:#e6db74">&#39;parent_id&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__parent__id&#39;</span>],
+            <span style="color:#e6db74">&#39;group_id&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__groups__id&#39;</span>],
+            <span style="color:#e6db74">&#39;group_title&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__groups__title&#39;</span>],
+            <span style="color:#e6db74">&#39;code&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__code&#39;</span>],
+            <span style="color:#e6db74">&#39;url&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__url&#39;</span>],
+            <span style="color:#e6db74">&#39;menu_id&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__groups__menu__id&#39;</span>],
+            <span style="color:#e6db74">&#39;menu_title&#39;</span>: permissions[<span style="color:#e6db74">&#39;permissions__groups__menu__title&#39;</span>]
+        }
+
+        permissions_list<span style="color:#f92672">.</span>append(tmp)
+
+    <span style="color:#75715e"># 写入session 中</span>
+    request<span style="color:#f92672">.</span>session[settings<span style="color:#f92672">.</span>PERMISSION_MENU_KEY] <span style="color:#f92672">=</span> permissions_list
+
+    <span style="color:#75715e"># 构建权限结构</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        {
+</span><span style="color:#e6db74">            1: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;delete&#39;, &#39;edit&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/delete&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/change&#39;]}, 
+</span><span style="color:#e6db74">            3: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;delete&#39;, &#39;edit&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/delete&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/change&#39;]}, 
+</span><span style="color:#e6db74">            2: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;edit&#39;, &#39;delete&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/change&#39;, &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/delete&#39;]}
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    permissions_code_url <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> permissions_dict:
+        id <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;permissions__groups__id&#39;</span>]
+        code <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;permissions__code&#39;</span>]
+        url <span style="color:#f92672">=</span> item[<span style="color:#e6db74">&#39;permissions__url&#39;</span>]
+        <span style="color:#66d9ef">if</span> id <span style="color:#f92672">in</span> permissions_code_url<span style="color:#f92672">.</span>keys():
+            permissions_code_url[id][<span style="color:#e6db74">&#39;code&#39;</span>]<span style="color:#f92672">.</span>append(code)
+            permissions_code_url[id][<span style="color:#e6db74">&#39;url&#39;</span>]<span style="color:#f92672">.</span>append(url)
+        <span style="color:#66d9ef">else</span>:
+            permissions_code_url[id] <span style="color:#f92672">=</span> {
+                <span style="color:#e6db74">&#39;code&#39;</span>: [code, ],
+                <span style="color:#e6db74">&#39;url&#39;</span>: [url, ]
+            }
+
+    <span style="color:#75715e"># 写入session中</span>
+    request<span style="color:#f92672">.</span>session[settings<span style="color:#f92672">.</span>PERMISSION_KEY] <span style="color:#f92672">=</span> permissions_code_url
+</code></pre></div><p>注意：这里为了配置化，把一些key放在了settings.py文件中定义,可以在配置文件中进行如下配置：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">########### rbac权限 ############</span>
+PERMISSION_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;permission_keys&#39;</span>
+PERMISSION_MENU_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;menu_keys&#39;</span>
+WHITE_LIST <span style="color:#f92672">=</span> [   <span style="color:#75715e"># 白名单配置</span>
+    <span style="color:#e6db74">&#39;/login/&#39;</span>,
+    <span style="color:#e6db74">&#39;/admin.*&#39;</span>
+]
+</code></pre></div><h1 id="4-中间件验证">4 中间件验证</h1>
+<p>编写中间件，用于对请求url的权限验证，注意要配置白名单。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
+<span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> HttpResponse, redirect
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RbacMiddleWare</span>(MiddlewareMixin):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_request</span>(self, request):
+        current_path <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>path_info
+
+        <span style="color:#75715e"># 白名单验证</span>
+        <span style="color:#66d9ef">for</span> url <span style="color:#f92672">in</span> settings<span style="color:#f92672">.</span>WHITE_LIST:
+            url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;^{}$&#39;</span><span style="color:#f92672">.</span>format(url)   <span style="color:#75715e"># 使用正则进行验证</span>
+            <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(url, current_path):
+                <span style="color:#66d9ef">return</span> None
+
+        <span style="color:#75715e"># 权限验证</span>
+        permission_list <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>get(settings<span style="color:#f92672">.</span>PERMISSION_KEY, None)
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> permission_list:
+            <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/login/&#39;</span>)
+
+        flag <span style="color:#f92672">=</span> False
+        <span style="color:#66d9ef">for</span> _, permission_info <span style="color:#f92672">in</span> permission_list<span style="color:#f92672">.</span>items():
+            <span style="color:#66d9ef">for</span> url <span style="color:#f92672">in</span> permission_info[<span style="color:#e6db74">&#39;url&#39;</span>]:
+                url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;^{}$&#39;</span><span style="color:#f92672">.</span>format(url)
+                <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(url, current_path):
+                    flag <span style="color:#f92672">=</span> True
+                    <span style="color:#66d9ef">break</span>
+            <span style="color:#66d9ef">if</span> flag:
+                <span style="color:#66d9ef">break</span>
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> flag:
+            <span style="color:#66d9ef">return</span> HttpResponse(<span style="color:#e6db74">&#39;Permission Deny&#39;</span>)
+</code></pre></div><p>返回None或者无明确返回，则表示验证通过。</p>
+<h1 id="5-生成菜单显示">5 生成菜单显示</h1>
+<p>这里利用inclusion_tag来完成菜单的渲染，注意，需要存放在templagetags目录下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+
+<span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
+<span style="color:#f92672">from</span> django.template <span style="color:#f92672">import</span> Library
+
+register <span style="color:#f92672">=</span> Library()
+
+
+<span style="color:#a6e22e">@register.inclusion_tag</span>(<span style="color:#e6db74">&#39;menu/menu.html&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">menu_html</span>(request):
+    current_path <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>path_info
+    menu_list <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>get(settings<span style="color:#f92672">.</span>PERMISSION_MENU_KEY)
+
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    [
+</span><span style="color:#e6db74">        {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
+</span><span style="color:#e6db74">        {&#39;id&#39;: 2, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;add&#39;, &#39;url&#39;: &#39;/add&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
+</span><span style="color:#e6db74">        {&#39;id&#39;: 3, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;delete&#39;, &#39;url&#39;: &#39;/(</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">d+)/delete&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
+</span><span style="color:#e6db74">    ]
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#75715e"># 菜单</span>
+    menu_dict <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">for</span> menu <span style="color:#f92672">in</span> menu_list:
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> menu[<span style="color:#e6db74">&#39;parent_id&#39;</span>]:
+            menu_dict[menu[<span style="color:#e6db74">&#39;id&#39;</span>]] <span style="color:#f92672">=</span> menu
+
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        {
+</span><span style="color:#e6db74">            1: {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
+</span><span style="color:#e6db74">            5: {&#39;id&#39;: 5, &#39;parent_id&#39;: None, &#39;group_id&#39;: 3, &#39;group_title&#39;: &#39;成绩组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 3, &#39;menu_title&#39;: &#39;成绩管理&#39;}
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#75715e"># 处理菜单选择信息，如果当前访问的链接是菜单，那么则添加active属性，如果不是菜单，那么找到它所在的菜单，为其添加active属性</span>
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> menu_list:
+        url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;^{}$&#39;</span><span style="color:#f92672">.</span>format(item[<span style="color:#e6db74">&#39;url&#39;</span>])
+        <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>match(url, current_path):
+            <span style="color:#66d9ef">if</span> item[<span style="color:#e6db74">&#39;parent_id&#39;</span>]:
+                menu_dict[item[<span style="color:#e6db74">&#39;parent_id&#39;</span>]][<span style="color:#e6db74">&#39;active&#39;</span>] <span style="color:#f92672">=</span> True
+            <span style="color:#66d9ef">else</span>:
+                menu_dict[item[<span style="color:#e6db74">&#39;id&#39;</span>]][<span style="color:#e6db74">&#39;active&#39;</span>] <span style="color:#f92672">=</span> True
+
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        {
+</span><span style="color:#e6db74">            1: {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
+</span><span style="color:#e6db74">            13: {&#39;id&#39;: 13, &#39;parent_id&#39;: None, &#39;group_id&#39;: 4, &#39;group_title&#39;: &#39;首页组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/index/&#39;, &#39;menu_id&#39;: 4, &#39;menu_title&#39;: &#39;首页&#39;, &#39;active&#39;:True}
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#75715e"># 构建显示的菜单结构</span>
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    {
+</span><span style="color:#e6db74">        1: {&#39;menu_title&#39;: &#39;用户管理&#39;, &#39;menu_id&#39;: 1, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 1, &#39;title&#39;: &#39;用户列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 2, &#39;title&#39;: &#39;添加用户&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
+</span><span style="color:#e6db74">        3: {&#39;menu_title&#39;: &#39;成绩管理&#39;, &#39;menu_id&#39;: 3, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 5, &#39;title&#39;: &#39;成绩列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 6, &#39;title&#39;: &#39;添加成绩&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
+</span><span style="color:#e6db74">        2: {&#39;menu_title&#39;: &#39;课程管理&#39;, &#39;menu_id&#39;: 2, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 9, &#39;title&#39;: &#39;课程列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 10, &#39;title&#39;: &#39;添加课程&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
+</span><span style="color:#e6db74">        4: {&#39;menu_title&#39;: &#39;首页&#39;, &#39;menu_id&#39;: 4, &#39;active&#39;: True, &#39;children&#39;: [{&#39;id&#39;: 13, &#39;title&#39;: &#39;首页&#39;, &#39;url&#39;: &#39;/index/&#39;}]}
+</span><span style="color:#e6db74">    }
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    result <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> menu_dict<span style="color:#f92672">.</span>values():
+        active <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;active&#39;</span>, None)
+        <span style="color:#66d9ef">if</span> item[<span style="color:#e6db74">&#39;menu_id&#39;</span>] <span style="color:#f92672">in</span> result:
+            result[item[<span style="color:#e6db74">&#39;menu_id&#39;</span>]][<span style="color:#e6db74">&#39;active&#39;</span>] <span style="color:#f92672">=</span> active
+            result[item[<span style="color:#e6db74">&#39;menu_id&#39;</span>]][<span style="color:#e6db74">&#39;children&#39;</span>]<span style="color:#f92672">.</span>append(
+                {<span style="color:#e6db74">&#39;id&#39;</span>: item[<span style="color:#e6db74">&#39;id&#39;</span>], <span style="color:#e6db74">&#39;title&#39;</span>: item[<span style="color:#e6db74">&#39;title&#39;</span>], <span style="color:#e6db74">&#39;url&#39;</span>: item[<span style="color:#e6db74">&#39;url&#39;</span>], <span style="color:#e6db74">&#39;active&#39;</span>:active}
+            )
+
+        <span style="color:#66d9ef">else</span>:
+            result[item[<span style="color:#e6db74">&#39;menu_id&#39;</span>]] <span style="color:#f92672">=</span> {
+                <span style="color:#e6db74">&#39;menu_title&#39;</span>: item[<span style="color:#e6db74">&#39;menu_title&#39;</span>],
+                <span style="color:#e6db74">&#39;menu_id&#39;</span>: item[<span style="color:#e6db74">&#39;menu_id&#39;</span>],
+                <span style="color:#e6db74">&#39;active&#39;</span>: active,
+                <span style="color:#e6db74">&#39;children&#39;</span>: [{<span style="color:#e6db74">&#39;id&#39;</span>: item[<span style="color:#e6db74">&#39;id&#39;</span>], <span style="color:#e6db74">&#39;title&#39;</span>: item[<span style="color:#e6db74">&#39;title&#39;</span>], <span style="color:#e6db74">&#39;url&#39;</span>: item[<span style="color:#e6db74">&#39;url&#39;</span>], <span style="color:#e6db74">&#39;active&#39;</span>:active}]
+            }
+
+    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;menu_dict&#39;</span>: result}
+</code></pre></div><p>inclusion_tag会把函数的返回值，使用模版渲染后，当作返回值，返回到前端页面，所以这里定制menu/menu.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> k,item <span style="color:#f92672">in</span> menu_dict<span style="color:#f92672">.</span>items <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item-title&#34;</span><span style="color:#f92672">&gt;</span>{{ item<span style="color:#f92672">.</span>menu_title }}<span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+        {<span style="color:#f92672">%</span> <span style="color:#66d9ef">if</span> item<span style="color:#f92672">.</span>active <span style="color:#f92672">%</span>}
+            <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item-permission&#34;</span><span style="color:#f92672">&gt;</span>
+        {<span style="color:#f92672">%</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">%</span>}
+            <span style="color:#f92672">&lt;</span>div class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item-permission hide&#34;</span><span style="color:#f92672">&gt;</span>
+        {<span style="color:#f92672">%</span> endif <span style="color:#f92672">%</span>}
+        {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> item<span style="color:#f92672">.</span>children <span style="color:#f92672">%</span>}
+
+            {<span style="color:#f92672">%</span> <span style="color:#66d9ef">if</span> child<span style="color:#f92672">.</span>active <span style="color:#f92672">%</span>}
+                <span style="color:#f92672">&lt;</span>a href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ child.url }}&#34;</span> class<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;active&#34;</span><span style="color:#f92672">&gt;</span>{{ child<span style="color:#f92672">.</span>title }}<span style="color:#f92672">&lt;/</span>a<span style="color:#f92672">&gt;</span>
+            {<span style="color:#f92672">%</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">%</span>}
+                <span style="color:#f92672">&lt;</span>a href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ child.url }}&#34;</span><span style="color:#f92672">&gt;</span>{{ child<span style="color:#f92672">.</span>title }}<span style="color:#f92672">&lt;/</span>a<span style="color:#f92672">&gt;</span>
+            {<span style="color:#f92672">%</span> endif <span style="color:#f92672">%</span>}
+
+        {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+        <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;/</span>div<span style="color:#f92672">&gt;</span>
+{<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+</code></pre></div><p>样式可以自定调整。在页面中渲染时，可以比如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> load staticfiles <span style="color:#f92672">%</span>}
+{<span style="color:#f92672">%</span> load menu_page <span style="color:#f92672">%</span>}   <span style="color:#75715e"># 加载inclusion_tag所在的文件名</span>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span>Title<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{</span><span style="color:#e6db74">% s</span><span style="color:#e6db74">tatic &#39;rbac/rbac.css&#39; %}&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+{<span style="color:#f92672">%</span> menu_html request <span style="color:#f92672">%</span>}   <span style="color:#75715e"># 调用inclusion_tag并传递参数</span>
+<span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{</span><span style="color:#e6db74">% s</span><span style="color:#e6db74">tatic &#39;js/jquery-3.2.1.min.js&#39; %}&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{</span><span style="color:#e6db74">% s</span><span style="color:#e6db74">tatic &#39;rbac/rbac.js&#39; %}&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>html<span style="color:#f92672">&gt;</span>
+
+</code></pre></div><p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

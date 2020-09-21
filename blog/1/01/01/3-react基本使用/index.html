@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>3-React基本使用 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">3-React基本使用</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 4 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<h1 id="1-react">1 React</h1>
+<p>        React是Facebook开发并开源的前端框架。当时他们的团队在市面上没有找到合适的MVC框架，就自己写了一个Js框架，用来架设Instagram（图片分享社交网络）。2013年React开源。</p>
+<blockquote>
+<p>React解决的是前端MVC框架中的View视图层的问题。</p>
+</blockquote>
+<h2 id="11-virtual-dom">1.1 Virtual DOM</h2>
+<p>        DOM（文档对象模型Document Object Model）将网页内所有内容映射到一棵树型结构的层级对象模型上，浏览器提供对DOM的支持，用户可以是用脚本调用DOM API来动态的修改DOM结点，从而达到修改网页的目的，这种修改是浏览器中完成，浏览器会根据DOM的改变重绘改变的DOM结点部分。<br>
+        修改DOM重新渲染代价太高，前端框架为了提高效率，尽量减少DOM的重绘，提出了Virtual DOM，所有的修改都是先在Virtual DOM上完成的，通过比较算法，找出浏览器DOM之间的差异，使用这个差异操作DOM，浏览器只需要渲染这部分变化就行了。</p>
+<blockquote>
+<p>React实现了DOM Diff算法可以高效比对Virtual DOM和DOM间的差异。</p>
+</blockquote>
+<h2 id="12-支持jsx语法">1.2 支持JSX语法</h2>
+<p>JSX是一种JavaScript和XML混写的语法，是JavaScript的扩展。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">render</span>(    <span style="color:#75715e">/* React提供的渲染函数   */</span>
+ <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">/* XML格式标签 */</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">content</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+ <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;,</span>
+ document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;example&#39;</span>) <span style="color:#75715e">/*  javascript语法操作DOM  */</span>
+);
+</code></pre></div><p>JSX规范：</p>
+<ol>
+<li>约定标签中<code>首字母小写</code>就是<code>html标记</code>，<code>首字母大写</code>就是<code>React组件</code></li>
+<li>要求严格的HTML标记，要求所有标签都必须闭合。br也应该写成 <!-- raw HTML omitted --> ，/前留一个空格。</li>
+<li>单行省略小括号，多行请使用小括号</li>
+<li>元素有嵌套，建议多行，注意缩进</li>
+<li><code>JSX表达式</code>：表达式使用{}括起来，如果大括号内使用了引号，会当做字符串处理，例如 <!-- raw HTML omitted -->{&lsquo;2&gt;1?true:false&rsquo;}<!-- raw HTML omitted --> 里面的表达式成了字符串了</li>
+</ol>
+<h1 id="2-基本使用">2 基本使用</h1>
+<h2 id="21-导入react">2.1 导入React</h2>
+<p>使用前需要进行导入操作：（下面的导入操作是基于ES6语法的)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>; <span style="color:#a6e22e">导入react模块</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">ReactDOM</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>; <span style="color:#a6e22e">导入react的DOM模块</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">用于操作Virtual</span> <span style="color:#a6e22e">DOM</span>
+</code></pre></div><h2 id="22-创建组件">2.2 创建组件</h2>
+<p>React中我们自己写的类，被叫做组件，需要从<code>React.Component继承</code>，它会帮我们完成更多的功能。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+    ... ... 
+}
+
+</code></pre></div><p>这个类生成<code>JSXElement对象</code>即React元素。</p>
+<h2 id="23-渲染函数">2.3 渲染函数</h2>
+<p>JSXElement对象内部可以使用rander函数来渲染一个内容，注意，只能返回唯一 一个顶级元素回去。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+    <span style="color:#a6e22e">render</span> () {
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span> <span style="color:#a6e22e">daxin</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    }
+}
+</code></pre></div><p>返回的内容，就是此Root对象，在网页上显示的标签信息</p>
+<p>当然也可以通过构造方法来构造一个简单的JSXElement对象</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyRoot</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;div&#39;</span>,<span style="color:#66d9ef">null</span>,<span style="color:#e6db74">&#39;hello world&#39;</span>)
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">MyRoot</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><ul>
+<li>第一参数是React组件或者一个HTML的标签名称（例如div、span）。</li>
+<li>第二参数是组件的props属性，如果是一个html标签，可以为null</li>
+<li>第三参数是children信息，指代的是标签的内容</li>
+</ul>
+<blockquote>
+<p>建议使用JSX语法直接生成需要的标签信息，这样看起来更简洁。</p>
+</blockquote>
+<h2 id="24-在网页上输出">2.4 在网页上输出</h2>
+<p>如果需要在网页上输出我们的Root对象，那么就需要操作DOM，需要使用ReactDOM的render函数，可以帮我们在指定的DOM节点上，渲染标签</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>, document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>));   <span style="color:#75715e">// getElementById表示使用id的方式查找id为root的标签节点。
+</span></code></pre></div><p>它接受两个参数：</p>
+<ul>
+<li>第一个参数是JSXElement对象(<code>使用XML自闭合的格式编写</code>)</li>
+<li>第二个是DOM的Element元素(<code>要在哪个dom节点下渲染</code>)</li>
+</ul>
+<blockquote>
+<p>将React元素添加到DOM的Element元素中并渲染。</p>
+</blockquote>
+<h2 id="25-增加子元素组件嵌套">2.5 增加子元素(组件嵌套)</h2>
+<p>我们是可以在一个组件的render返回的顶级标签内，还可以继续嵌套自组建。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sub</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">from</span> <span style="color:#a6e22e">Sub</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  }
+}
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">From</span> <span style="color:#a6e22e">Root</span> 
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#f92672">/&gt;</span>   <span style="color:#75715e">// 首字母大写，否则会认为是HTML标签进行渲染
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  }
+}
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><p>注意：</p>
+<ol>
+<li>React组件的render函数return，只能是一个顶级元素</li>
+<li>JSX语法是XML，要求所有元素必须闭合，注意 <!-- raw HTML omitted --> 不能写成 <!-- raw HTML omitted --></li>
+</ol>
+<h1 id="3-事件触发">3 事件触发</h1>
+<p>在js中，我们可以针对不同的时间触发，来绑定相应的事件，来处理。下面是js中的事件：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>此事件发生在何时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onabort</td>
+<td>图像的加载被中断</td>
+</tr>
+<tr>
+<td>onblur</td>
+<td>元素失去焦点</td>
+</tr>
+<tr>
+<td>onchange</td>
+<td>域的内容被改变</td>
+</tr>
+<tr>
+<td>onclick</td>
+<td>当用户点击某个对象时调用的事件句柄</td>
+</tr>
+<tr>
+<td>ondblclick</td>
+<td>当用户双击某个对象时调用的事件句柄</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>在加载文档或图像时发生错误</td>
+</tr>
+<tr>
+<td>onfocus</td>
+<td>元素获得焦点</td>
+</tr>
+<tr>
+<td>onkeydown</td>
+<td>某个键盘按键被按下</td>
+</tr>
+<tr>
+<td>onkeypress</td>
+<td>某个键盘按键被按下并松开</td>
+</tr>
+<tr>
+<td>onkeyup</td>
+<td>某个键盘按键被松开</td>
+</tr>
+<tr>
+<td>onload</td>
+<td>一张页面或一幅图像完成加载</td>
+</tr>
+<tr>
+<td>onmousedown</td>
+<td>鼠标按钮被按下</td>
+</tr>
+<tr>
+<td>onmousemove</td>
+<td>鼠标被移动</td>
+</tr>
+<tr>
+<td>onmouseout</td>
+<td>鼠标从某元素移开</td>
+</tr>
+<tr>
+<td>onmouseover</td>
+<td>鼠标移到某元素之上</td>
+</tr>
+<tr>
+<td>onmouseup</td>
+<td>鼠标按键被松开</td>
+</tr>
+<tr>
+<td>onreset</td>
+<td>重置按钮被点击</td>
+</tr>
+<tr>
+<td>onresize</td>
+<td>窗口或框架被重新调整大小</td>
+</tr>
+<tr>
+<td>onselect</td>
+<td>文本被选中</td>
+</tr>
+<tr>
+<td>onsubmit</td>
+<td>确认按钮被点击</td>
+</tr>
+<tr>
+<td>onunload</td>
+<td>用户退出页面</td>
+</tr>
+</tbody>
+</table>
+<h2 id="31-javascript中的事件触发">3.1 javascript中的事件触发</h2>
+<p>下面是一个onlick时间，当鼠标点击字体时，会触发alert警告，填写的函数需要加括号来触发执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+    &lt;<span style="color:#f92672">head</span>&gt;
+        &lt;<span style="color:#f92672">title</span>&gt;test evevt&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;/<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">script</span>&gt;
+        <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HandlerClick</span>(<span style="color:#a6e22e">event</span>) {
+            <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;test&#39;</span>)
+        }
+    &lt;/<span style="color:#f92672">script</span>&gt;
+    &lt;<span style="color:#f92672">body</span>&gt;
+        &lt;<span style="color:#f92672">h1</span>&gt;welcome to daxin &lt;/<span style="color:#f92672">h1</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HandlerClick(event);&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;color:red;background-color: aqua&#34;</span>&gt;
+            点击我
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>event为触发的事件,由DOM封装成对象后传入。</p>
+<h2 id="32-react组件中的事件触发">3.2 React组件中的事件触发</h2>
+<p>在React中，事件均使用<code>小驼峰</code>语法。并且不需要调用，填写名称即可，调用时会自动加括号调用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+
+  <span style="color:#a6e22e">handlerClick</span> (<span style="color:#a6e22e">event</span>){
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">target</span>)
+    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;test&#39;</span>)
+  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">From</span> <span style="color:#a6e22e">Root</span> 
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><p>通常情况下，事件触发函数都会接受一个参数event，event.target是触发事件的标签本身。</p>
+<h1 id="4-组件状态state">4 组件状态(state)</h1>
+<p>        每一个React组件都有一个状态属性state，它是一个JavaScript对象，可以为它定义属性来保存值。如果状态变化了，会触发UI的重新渲染(自动触发render渲染函数)。</p>
+<blockquote>
+<p>state是每个组件自己内部使用的，是组件自己的属性。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+    <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+        <span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,   <span style="color:#75715e">// 不建议在这里设置，后面会放在constructor来指定
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">suffix</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;.com&#39;</span>
+    }
+    <span style="color:#a6e22e">render</span>(){
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">domain</span>}{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">suffix</span>}<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">br</span> <span style="color:#f92672">/&gt;&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#f92672">/&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    }
+}
+</code></pre></div><p>为组件设置state属性，需要使用类Python字典的格式添加。在render函数中就可以使用this进行调用。</p>
+<h2 id="41-修改state">4.1 修改state</h2>
+<p>修改state其实是有两种方法：(这里this用在类内部，所以可以安全使用)</p>
+<ul>
+<li><code>this.setState({name:'newname'})</code>：方法</li>
+<li><code>this.state.name = 'newname'</code>：直接修改(<code>不建议使用这种方式</code>)</li>
+</ul>
+<p>那么应该在哪里修改state呢，下面来看一个场景</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+    <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+        <span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+        <span style="color:#a6e22e">suffix</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;.com&#39;</span>
+    }
+    <span style="color:#a6e22e">render</span>(){   
+        <span style="color:#75715e">// this.state.suffix = &#39;.org&#39;  
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({<span style="color:#a6e22e">suffix</span><span style="color:#f92672">:</span>})   
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">domain</span>}{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">suffix</span>}<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">br</span> <span style="color:#f92672">/&gt;&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#f92672">/&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><p>上面代码在render函数中设置了state属性，但是页面无法运行，为什么呢？</p>
+<ul>
+<li>渲染root时，会执行render函数。</li>
+<li>执行render函数时，发现state参数改变，重新触发render函数改变，发生递归。</li>
+</ul>
+<p>所以，最好不要在render函数中修改state属性(使用this.state.suffix = &lsquo;.org&rsquo;，不会出错，但是也不建议使用)</p>
+<h2 id="42-在事件中修改state">4.2 在事件中修改state</h2>
+<p>在事件中修改state属性：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+  }
+  <span style="color:#a6e22e">handlerClick</span> (<span style="color:#a6e22e">event</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">id</span>)  <span style="color:#75715e">// 触发事件的id属性
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>})
+  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>}<span style="color:#f92672">&gt;</span>
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><p>当我们点击标签是，发现在控制台(F12,console)中提示异常:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Uncaught</span> <span style="color:#a6e22e">TypeError</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Cannot</span> <span style="color:#a6e22e">read</span> <span style="color:#a6e22e">property</span> <span style="color:#e6db74">&#39;setState&#39;</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">undefined</span>
+</code></pre></div><p>这是因为，this是函数执行的上下文决定的，this已经不是触发事件的对象了。所以我们想要在内部使用this，那么就需要为handlerClick绑定this。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+  }
+  <span style="color:#a6e22e">handlerClick</span> (<span style="color:#a6e22e">event</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>})
+  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)}<span style="color:#f92672">&gt;</span>  <span style="color:#75715e">// 这里调用bind方法，绑定this
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><blockquote>
+<p>在事件触发函数中一定要记得将this进行绑定。</p>
+</blockquote>
+<h2 id="43-阻止默认事件触发">4.3 阻止默认事件触发</h2>
+<p>        在js中，由于触发事件先于默认事件触发，所以在触发函数内return false后，将会阻止默认时间产生，但React中不是这样的，如果要阻止事件默认行为，需要使用<code>event.preventDefault()</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+  }
+
+  <span style="color:#a6e22e">handlerClick</span> (<span style="color:#a6e22e">event</span>) {
+    <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">preventDefault</span>()   <span style="color:#75715e">// 阻止a标签的跳转
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">setTimeout</span>( () =&gt;  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>}),<span style="color:#ae81ff">5000</span>)  <span style="color:#75715e">//延迟函数，延迟5000ms,执行前面的函数
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)} <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https://www.baidu.com&#39;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><h1 id="5-属性props">5 属性(props)</h1>
+<p>在组件应用的地方，以类似html标签的设置方式，为组件添加属性，在组件内部可以进行使用props对象进行访问，设置方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span><span style="color:#f92672">/&gt;</span>
+</code></pre></div><blockquote>
+<p>类似于HTML标签的属性。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+  }
+
+  <span style="color:#a6e22e">handlerClick</span> (<span style="color:#a6e22e">event</span>) {
+    <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">preventDefault</span>()
+    <span style="color:#a6e22e">setTimeout</span>( () =&gt;  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>}),
+    <span style="color:#ae81ff">5000</span>)
+  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)} <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https://www.baidu.com&#39;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">work</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">work</span>}  <span style="color:#75715e">// 通过props对象获取属性信息
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">work</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Pythoner&#39;</span><span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><h2 id="51-嵌套标签的属性注入">5.1 嵌套标签的属性注入</h2>
+<p>在嵌套标签的场景下，有时我们需要在嵌套的子组件内调用父类的state信息。该怎么办呢？主要的解决办法有两个</p>
+<ul>
+<li>单个导入</li>
+<li>注解注入父标签本身</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sub</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span> () {
+    <span style="color:#75715e">// return &lt;div&gt;My Parent&#39;s Name is : {this.props.parent.state.name} &lt;/div&gt; /* 通过parent对象访问父组件state状态的name
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// return &lt;div&gt;My Parent&#39;s Name is : {this.props.name} &lt;/div&gt;  /* 通过注入的指定属性，访问 */
+</span><span style="color:#75715e"></span>
+  }
+}
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+    <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+  }
+  
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handlerClick</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)} <span style="color:#f92672">&gt;</span>
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">work</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">work</span>}
+    { <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#a6e22e">parent</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>}<span style="color:#f92672">/&gt;</span> }               <span style="color:#75715e">/* 把父表掐你当作parent属性注入 */</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Sub</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}<span style="color:#f92672">/&gt;</span>         <span style="color:#75715e">/* 仅仅传递父组件某个固定的属性 */</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span> <span style="color:#a6e22e">work</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Pythoner&#39;</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><h2 id="52-子标签的children">5.2 子标签的children</h2>
+<p>有的时候我们需要像使用XML、HTML那样，在标签内编写内容或者嵌套标签，就像下面这样</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Sub</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">Hello</span> <span style="color:#a6e22e">world</span>  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Sub&gt;</span>
+</code></pre></div><p>如上面的例子：那么这就需要用到子组件的children属性了，可以理解为父标签为子标签Sub，注入了一些children。即把 <code>Hello world</code> 注入到了Sub的<code>props.children</code>中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sub</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span> () {   
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">My</span> <span style="color:#a6e22e">Parent</span><span style="color:#e6db74">&#39;s Name is : {this.props.name}
+</span><span style="color:#e6db74">    {this.props.children}   // 必须在这里调用children渲染，才可以显示
+</span><span style="color:#e6db74">    &lt;/div&gt;
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">class Root extends React.Component {
+</span><span style="color:#e6db74">  state = {
+</span><span style="color:#e6db74">    name:&#39;</span><span style="color:#a6e22e">daxin</span><span style="color:#e6db74">&#39;,
+</span><span style="color:#e6db74">    age:20
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  render (){
+</span><span style="color:#e6db74">    return &lt;a onClick={this.handlerClick.bind(this)} &gt;
+</span><span style="color:#e6db74">    My name is {this.state.name}
+</span><span style="color:#e6db74">    I am {this.state.age} years old 
+</span><span style="color:#e6db74">    My work is {this.props.work}
+</span><span style="color:#e6db74">    &lt;Sub name={this.state.name}&gt;
+</span><span style="color:#e6db74">      &lt;div&gt; I am New Info&lt;/div&gt;  // 直接这样写，内容是无法显示的
+</span><span style="color:#e6db74">    &lt;/Sub&gt;
+</span><span style="color:#e6db74">    &lt;/a&gt;
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">ReactDom.render(&lt;Root name=&#39;</span><span style="color:#a6e22e">daxin</span><span style="color:#e6db74">&#39; work=&#39;</span><span style="color:#a6e22e">Pythoner</span><span style="color:#e6db74">&#39; /&gt;,document.getElementById(&#39;</span><span style="color:#a6e22e">root</span><span style="color:#960050;background-color:#1e0010">&#39;</span>))
+</code></pre></div><h2 id="53-props属性的修改">5.3 props属性的修改</h2>
+<p>props是通过外部注入到组件内的，所以是只读属性，在组件内部只能读取无法修改，对比state我们知道：</p>
+<ul>
+<li>state属于组件的私有属性，组件外无法直接访问，可以修改，但建议使用setState方法</li>
+<li>props属于组件的公有属性，组件外也可以访问，但是只读</li>
+</ul>
+<h1 id="6-构造器constructor">6 构造器(constructor)</h1>
+<p>非常类似于Python类中的__init__函数，当为组件定义state属性时，建议放在构造器中。它的一般格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">constructor</span> (<span style="color:#a6e22e">props</span>) {
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>)  <span style="color:#75715e">//调用父类并传入props
+</span><span style="color:#75715e"></span>    ... ...   <span style="color:#75715e">// 私有属性等
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>props为固定参数，用于接收外部注入的props属性信息。<code>如果定义了constructor，必须在内部第一条语句中执行super(props)，将props传递给父类才行</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Root</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">constructor</span> (<span style="color:#a6e22e">props</span>){
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>)
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+      <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;daxin&#39;</span>,
+      <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>
+    }
+  }
+
+  <span style="color:#a6e22e">render</span> (){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">name</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">name</span>}
+    <span style="color:#a6e22e">I</span> <span style="color:#a6e22e">am</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">age</span>} <span style="color:#a6e22e">years</span> <span style="color:#a6e22e">old</span> 
+    <span style="color:#a6e22e">My</span> <span style="color:#a6e22e">work</span> <span style="color:#a6e22e">is</span> {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">work</span>}
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;</span>
+  }
+}
+
+<span style="color:#a6e22e">ReactDom</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span> <span style="color:#a6e22e">work</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Pythoner&#39;</span> <span style="color:#f92672">/&gt;</span>,document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>))
+</code></pre></div><h1 id="7-组件的生命周期">7 组件的生命周期</h1>
+<p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

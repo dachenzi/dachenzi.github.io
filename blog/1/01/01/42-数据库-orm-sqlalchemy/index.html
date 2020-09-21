@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>42-数据库-orm-SQLAlchemy &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">42-数据库-orm-SQLAlchemy</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 12 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-orm">1 ORM</a></li>
+<li><a href="#2-sqlalchemy">2 sqlalchemy</a></li>
+<li><a href="#3-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">3 基本使用</a>
+<ul>
+<li><a href="#31-%E5%88%9B%E5%BB%BA%E8%BF%9E%E6%8E%A5">3.1 创建连接</a>
+<ul>
+<li><a href="#311-%E5%88%A9%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%89%A7%E8%A1%8Csql">3.1.1 利用连接池执行sql</a></li>
+</ul>
+</li>
+<li><a href="#32-%E5%88%9B%E5%BB%BA%E5%9F%BA%E7%B1%BB">3.2 创建基类</a></li>
+<li><a href="#33-%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E7%B1%BB">3.3 创建实体类</a>
+<ul>
+<li><a href="#331-%E5%B8%B8%E7%94%A8%E5%AD%97%E6%AE%B5">3.3.1 常用字段</a></li>
+</ul>
+</li>
+<li><a href="#34-%E5%AE%9E%E4%BE%8B%E5%8C%96">3.4 实例化</a></li>
+<li><a href="#35-%E5%88%9B%E5%BB%BA%E8%A1%A8">3.5 创建表</a></li>
+<li><a href="#36-%E5%88%9B%E5%BB%BA%E4%BC%9A%E8%AF%9Dsession">3.6 创建会话Session</a></li>
+<li><a href="#37-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C">3.7 数据操作</a>
+<ul>
+<li><a href="#371-%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE">3.7.1 增加数据</a></li>
+<li><a href="#372-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2">3.7.2 简单查询</a></li>
+<li><a href="#373-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE">3.7.3 修改数据</a></li>
+<li><a href="#374-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%BB%BA%E8%AE%AE">3.7.4 删除数据(不建议)</a></li>
+<li><a href="#375-%E7%8A%B6%E6%80%81">3.7.5 状态</a></li>
+<li><a href="#376-%E6%9E%9A%E4%B8%BE%E5%AD%97%E6%AE%B5">3.7.6 枚举字段</a></li>
+<li><a href="#377-%E5%A4%8D%E6%9D%82%E6%9F%A5%E8%AF%A2">3.7.7 复杂查询</a>
+<ul>
+<li><a href="#3771-where%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2">3.7.7.1 where条件查询</a></li>
+<li><a href="#3772-%E6%8E%92%E5%BA%8F">3.7.7.2 排序</a></li>
+<li><a href="#3773-%E5%88%86%E9%A1%B5%E5%81%8F%E7%A7%BB%E9%87%8F">3.7.7.3 分页(偏移量)</a></li>
+<li><a href="#3774-%E6%B6%88%E8%B4%B9%E6%96%B9%E6%B3%95">3.7.7.4 消费方法</a></li>
+<li><a href="#3775-%E5%88%86%E7%BB%84%E5%8F%8A%E8%81%9A%E5%90%88%E6%96%B9%E6%B3%95">3.7.7.5 分组及聚合方法</a></li>
+<li><a href="#3776-%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2">3.7.7.6 关联查询</a>
+<ul>
+<li><a href="#%E9%9A%90%E5%BC%8F%E8%BF%9E%E6%8E%A5">隐式连接</a></li>
+<li><a href="#join%E8%BF%9E%E6%8E%A5">join连接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB">4 一对多关系</a>
+<ul>
+<li><a href="#41-%E5%88%9B%E5%BB%BA%E5%85%B3%E7%B3%BB%E8%A1%A8">4.1 创建关系表</a></li>
+<li><a href="#42-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE">4.2 添加数据</a></li>
+<li><a href="#43-relationship">4.3 relationship</a></li>
+<li><a href="#44-%E9%80%9A%E8%BF%87relationship%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE">4.4 通过relationship添加数据</a></li>
+</ul>
+</li>
+<li><a href="#5-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB">5 多对多关系</a>
+<ul>
+<li><a href="#51-%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%AF%B9%E5%A4%9A%E5%85%B3%E7%B3%BB">5.1 创建多对多关系</a></li>
+<li><a href="#52-%E9%80%9A%E8%BF%87relationship%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE">5.2 通过relationship操作数据</a></li>
+</ul>
+</li>
+<li><a href="#6-%E5%88%AB%E5%90%8D">6 别名</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-orm">1 ORM</h1>
+<p>Object-Relational Mapping，把关系数据库的表结构映射到对象上。使用面向对象的方式来操作数据库。</p>
+<p><img src="photo/orm.png" alt="orm"></p>
+<p>下面是一个关系模型与Python对象之间的映射关系：</p>
+<ul>
+<li>table   &ndash;&gt;  class    : 表映射为类</li>
+<li>row     &ndash;&gt;  object   : 行映射为实例</li>
+<li>column  &ndash;&gt;  property : 字段映射为属性</li>
+</ul>
+<h1 id="2-sqlalchemy">2 sqlalchemy</h1>
+<p>SQLAlchemy是一个ORM框架。内部是使用了<code>连接池</code>来管理数据库连接。其本身只是做了关系映射，不能连接数据库，也不能执行sql语句，它在底层需要使用pymysql等模块来连接并执行sql语句，要使用sqlalchemy，那么需要先进行安装：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip3 install sqlalchemy
+</code></pre></div><p>查看版本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: <span style="color:#f92672">import</span> sqlalchemy
+In [<span style="color:#ae81ff">2</span>]: <span style="color:#66d9ef">print</span>(sqlalchemy<span style="color:#f92672">.</span>__version__)
+<span style="color:#ae81ff">1.3</span><span style="color:#f92672">.</span><span style="color:#ae81ff">1</span>
+</code></pre></div><h1 id="3-基本使用">3 基本使用</h1>
+<p>先来总结一下使用sqlalchemy框架操作数据库的一般流程：</p>
+<ol>
+<li><code>创建引擎</code>(不同类型数据库使用不同的连接方式)</li>
+<li><code>创建基类</code>(类对象要继承，因为基类会利用元编程为我们的子类绑定关于表的其他属性信息)</li>
+<li><code>创建实体类</code>(用来对应数据库中的表)</li>
+<li><code>编写实体类属性</code>(用来对应表中的字段/属性)</li>
+<li><code>创建表</code>(如果表不存在,则需要执行语句在数据库中创建出对应的表)</li>
+<li><code>实例化</code>(具体的一条record记录)</li>
+<li><code>创建会话session</code>(用于执行sql语句的连接)</li>
+<li><code>使用会话执行SQL语句</code></li>
+<li><code>关闭会话</code></li>
+</ol>
+<h2 id="31-创建连接">3.1 创建连接</h2>
+<p>sqlalchemy 使用引擎管理数据库连接(DATABASE URLS)，连接的一般格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dialect<span style="color:#f92672">+</span>driver:<span style="color:#f92672">//</span>username:password<span style="color:#a6e22e">@host</span>:port<span style="color:#f92672">/</span>database
+</code></pre></div><ul>
+<li><code>dialect</code>：表示什么数据库(比如,mysql,sqlite,oracle等)</li>
+<li><code>driver</code>：用于连接数据库的模块(比如pymysql,mysqldb等)</li>
+<li><code>username</code>：连接数据库的用户名</li>
+<li><code>password</code>：连接数据库的密码</li>
+<li><code>host</code>: 数据库的主机地址</li>
+<li><code>port</code>: 数据库的端口</li>
+<li><code>database</code>: 要连接的数据库名称</li>
+</ul>
+<p>pymysql模块是较长用于连接mysql的模块，使用pymysql的连接的语句为：</p>
+<ul>
+<li><code>mysql+pymysql://dahl:123456@10.0.0.13:3306/test</code></li>
+</ul>
+<p>创建引擎用于进行数据库的连接：<code>create_engine(urls)</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url,echo<span style="color:#f92672">=</span>True)
+</code></pre></div><ul>
+<li>echo：引擎是否打印执行的sql语句，等于True时，表示打印，便于调试</li>
+<li>max_overflow=5: 超过连接池大小外最多创建的连接</li>
+<li>pool_size=1: 连接池大小</li>
+<li>pool_timeout=30: 池中没有线程最多等待的时间(否则会报错)</li>
+<li>pool_recycle=-1: 多久之后对线程池中的线程进行一次连接的回收(重置)</li>
+</ul>
+<blockquote>
+<p><code>特别注意</code>：创建引擎并不会马上连接数据库，直到让数据库执行任务是才连接。</p>
+</blockquote>
+<h3 id="311-利用连接池执行sql">3.1.1 利用连接池执行sql</h3>
+<p>sqlalchemy内部是原生支持连接池的，我们可以仅仅利用它的连接池功能。通过engie的<code>raw_connection</code>方法就可以获取到一个连接，然后就可以执行sql语句了(基本上就是Pymysql+DBUtils的实现)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">import</span> pymysql
+
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(
+    <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>,
+    max_overflow<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>,
+    pool_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+    pool_timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+    pool_recycle<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>
+)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+    conn <span style="color:#f92672">=</span> engine<span style="color:#f92672">.</span>raw_connection()
+    cursor <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor(pymysql<span style="color:#f92672">.</span>cursors<span style="color:#f92672">.</span>DictCursor)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    cursor<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select * from employees;&#39;</span>)
+    res <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+    <span style="color:#66d9ef">print</span>(res)
+    cursor<span style="color:#f92672">.</span>close()
+    conn<span style="color:#f92672">.</span>close()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>func)<span style="color:#f92672">.</span>start()
+</code></pre></div><h3 id="312-利用session来执行sql">3.1.2 利用session来执行sql</h3>
+<p>上面是通过链接池来执行sql的，其实也可以通过session来执行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(
+    <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>,
+    max_overflow<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>,
+    pool_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+    pool_timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+    pool_recycle<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>
+)
+
+DBsession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+    session <span style="color:#f92672">=</span> DBsession()
+    cursor <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;select * from employees;&#39;</span>)
+    res <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+    <span style="color:#66d9ef">print</span>(res)
+    cursor<span style="color:#f92672">.</span>close()
+    session<span style="color:#f92672">.</span>close()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>func)<span style="color:#f92672">.</span>start()
+</code></pre></div><h2 id="32-创建基类">3.2 创建基类</h2>
+<p>        使用: <code>sqlalchemy.ext.declarative.declarative_base</code> 来构造声明性类定义的基类。因为sqlalchemy内部大量使用了元编程，为实例化的子类注入映射所需的属性，所以我们定义的映射要继承自它（必须继承）</p>
+<blockquote>
+<p>一般只需要一个这样的基类</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Base <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>ext<span style="color:#f92672">.</span>declarative<span style="color:#f92672">.</span>declarative_base()
+<span style="color:#75715e"># 或者</span>
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+</code></pre></div><h2 id="33-创建实体类">3.3 创建实体类</h2>
+<p>现数据库存在如下表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>student<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>name<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">30</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>age<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8mb4;
+</code></pre></div><p>创建对应的实体类:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>(Base):
+
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;student&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, autoincrement<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    age <span style="color:#f92672">=</span> Column(Integer, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(Student<span style="color:#f92672">.</span>__dict__)
+
+<span style="color:#75715e"># Table(&#39;student&#39;, MetaData(bind=None),   这里没有绑定engine，所以是None</span>
+<span style="color:#75715e"># Column(&#39;id&#39;, Integer(), table=&lt;student&gt;, primary_key=True, nullable=False), </span>
+<span style="color:#75715e"># Column(&#39;name&#39;, String(), table=&lt;student&gt;, default=ColumnDefault(&#39;Null&#39;)), </span>
+<span style="color:#75715e"># Column(&#39;age&#39;, Integer(), table=&lt;student&gt;, default=ColumnDefault(&#39;Null&#39;)), schema=None),</span>
+<span style="color:#75715e"># Column(&#39;data&#39;,DateTime,default=datetime.datetime.now)  # 这里不能加括号</span>
+</code></pre></div><ul>
+<li>__tablename__: 表明，如果表已存在，则必须指定正确的表名</li>
+<li>Column: 用于构建一个列对象，它的参数一般都和数据库中的列属性是对应的，主要有：
+<ul>
+<li>name: 数据库中表示的此列的名称</li>
+<li><code>type</code>：字段类型(比如String、Integer，这里是sqlalchemy包装的类型，对应的是数据库的varchar、int等)，来自TypeEngine的子类</li>
+<li><code>autoincrement</code>：是否自增</li>
+<li>default：默认值，可以是值，可调用对象或者类，当写入数据该字段没有指定时，调用。当是可调用对象的时候，建议不要加括号</li>
+<li>doc：字段说明信息</li>
+<li>key: 一个可选的字符串标识符，用于标识表上的此Column对象。</li>
+<li>index: 是否启用索引</li>
+<li><code>nullable</code>: 是否可以为空</li>
+<li>onupdate: 如果在更新语句的SET子句中不存在此列，则将在更新时调用该值</li>
+<li><code>primary_key</code>: 主键</li>
+<li>server_default:它的值是 FetchedValue实例、字符串、Unicode 或者 text()实例，用作DDL语句中该列的default值</li>
+</ul>
+</li>
+</ul>
+<p>注意：Column和String、Integer等都来自于sqlalchemy下的方法，要么直接导入，要么就使用sqlalchemy.String来引用。</p>
+<h3 id="331-常用字段">3.3.1 常用字段</h3>
+<table>
+<thead>
+<tr>
+<th>类型名</th>
+<th>python中类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>int</td>
+<td>普通整数，一般是32位</td>
+</tr>
+<tr>
+<td>SmallInteger</td>
+<td>int</td>
+<td>取值范围小的整数，一般是16位</td>
+</tr>
+<tr>
+<td>BigInteger</td>
+<td>int或long</td>
+<td>不限制精度的整数</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>float</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>decimal.Decimal</td>
+<td>普通整数，一般是32位</td>
+</tr>
+<tr>
+<td>String</td>
+<td>str</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>str</td>
+<td>变长字符串，对较长或不限长度的字符串做了优化</td>
+</tr>
+<tr>
+<td>Unicode</td>
+<td>unicode</td>
+<td>变长Unicode字符串</td>
+</tr>
+<tr>
+<td>UnicodeText</td>
+<td>unicode</td>
+<td>变长Unicode字符串，对较长或不限长度的字符串做了优化</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>bool</td>
+<td>布尔值</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>datetime.date</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>datetime.datetime</td>
+<td>日期和时间</td>
+</tr>
+<tr>
+<td>LargeBinary</td>
+<td>str</td>
+<td>二进制文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-实例化">3.4 实例化</h2>
+<p>通过我们构建的类，来实例化的对象，在将来就是数据库中的一条条记录。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">student <span style="color:#f92672">=</span> Student()
+student<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+student<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+student<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+<span style="color:#66d9ef">print</span>(student)   <span style="color:#75715e"># &lt;1 daxin 20&gt;</span>
+</code></pre></div><h2 id="35-创建表">3.5 创建表</h2>
+<p>        我们自己写的类都是继承自Base，每继承一次Base类，在Base类的metadata属性中就会记录当前子类，metadata提供了方法用于删除/创建表。如果数据库中已经存在对应的表，那么将不会继续创建</p>
+<ul>
+<li>drop_all(bind=None, tables=None, checkfirst=True):删除metadata中记录的所有表</li>
+<li>create_all(bind=None, tables=None, checkfirst=True):创建metadata中记录的所有表</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()  
+Base<span style="color:#f92672">.</span>metadata<span style="color:#f92672">.</span>create_all(bind<span style="color:#f92672">=</span>engine)  <span style="color:#75715e"># 需要通过引擎去执行</span>
+
+<span style="color:#75715e"># 下面是engine的echo为true时的输出信息</span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,922 INFO sqlalchemy.engine.base.Engine </span>
+<span style="color:#75715e"># CREATE TABLE hello (</span>
+<span style="color:#75715e"># 	id INTEGER NOT NULL AUTO_INCREMENT, </span>
+<span style="color:#75715e"># 	name VARCHAR(24), </span>
+<span style="color:#75715e"># 	age INTEGER, </span>
+<span style="color:#75715e"># 	PRIMARY KEY (id)</span>
+<span style="color:#75715e"># )</span>
+<span style="color:#75715e"># </span>
+<span style="color:#75715e"># </span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,922 INFO sqlalchemy.engine.base.Engine {}</span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,926 INFO sqlalchemy.engine.base.Engine COMMIT</span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,927 INFO sqlalchemy.engine.base.Engine </span>
+<span style="color:#75715e"># CREATE TABLE world (</span>
+<span style="color:#75715e"># 	id INTEGER NOT NULL AUTO_INCREMENT, </span>
+<span style="color:#75715e"># 	name VARCHAR(24), </span>
+<span style="color:#75715e"># 	age INTEGER, </span>
+<span style="color:#75715e"># 	PRIMARY KEY (id)</span>
+<span style="color:#75715e"># )</span>
+<span style="color:#75715e"># </span>
+<span style="color:#75715e"># </span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,927 INFO sqlalchemy.engine.base.Engine {}</span>
+<span style="color:#75715e"># 2019-03-16 16:53:45,928 INFO sqlalchemy.engine.base.Engine COMMIT</span>
+</code></pre></div><ul>
+<li>生产环境很少这样创建表，都是系统上线的时候由脚本生成。</li>
+<li>生产环境很少删除表，宁可废除都不能删除。</li>
+</ul>
+<p>注意：sqlalchemy 只能创建和删除表，不能修改表结构。只能手动的在数据库中修改然后在代码中添加即可。</p>
+<h2 id="36-创建会话session">3.6 创建会话Session</h2>
+<p>        在一个会话中操作数据库，绘画建立在连接上，连接被引擎管理，当第一次使用数据库时，从引擎维护的连接池中取出一个连接使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+Session <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine) 
+session <span style="color:#f92672">=</span> Session()  <span style="color:#75715e"># 实例化一个session对象</span>
+</code></pre></div><ul>
+<li>session对象线程不安全。所以不同线程应该使用不同的session对象</li>
+<li>Session类和engine有一个就行了。</li>
+</ul>
+<p><code>scoped_session</code>是sqlalchemy提供的线程安全的session，利用的是ThreadLocal实现的。</p>
+<h2 id="37-数据操作">3.7 数据操作</h2>
+<h3 id="371-增加数据">3.7.1 增加数据</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add()</td>
+<td>增加一个对象</td>
+</tr>
+<tr>
+<td>add_all()</td>
+<td>增加多个对象，类型为可迭代</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+DBSession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+session <span style="color:#f92672">=</span> DBSession()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;student&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, autoincrement<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">24</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    age <span style="color:#f92672">=</span> Column(Integer, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>id, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age
+        )
+
+daxin <span style="color:#f92672">=</span> Student(id<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+session<span style="color:#f92672">.</span>add(daxin)
+dachenzi <span style="color:#f92672">=</span> Student(id<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dachenzi&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">21</span>)
+xiaobai <span style="color:#f92672">=</span> Student(id<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;xiaobai&#39;</span>, age<span style="color:#f92672">=</span><span style="color:#ae81ff">22</span>)
+session<span style="color:#f92672">.</span>add_all((dachenzi,xiaobai))   <span style="color:#75715e"># 新增三条数据</span>
+session<span style="color:#f92672">.</span>commit()
+</code></pre></div><p>需要注意的是下面的情况：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">daxin <span style="color:#f92672">=</span> Student(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>)
+daxin<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+session<span style="color:#f92672">.</span>add(daxin)  <span style="color:#75715e"># 1</span>
+session<span style="color:#f92672">.</span>commit()   
+daxin<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>  
+session<span style="color:#f92672">.</span>add(daxin)  <span style="color:#75715e"># 2</span>
+session<span style="color:#f92672">.</span>commit()
+daxin<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+session<span style="color:#f92672">.</span>add_all([daxin, daxin, daxin, daxin]) <span style="color:#75715e"># 3</span>
+session<span style="color:#f92672">.</span>commit()  
+<span style="color:#75715e"># &lt;30 daxin 10&gt;</span>
+</code></pre></div><p>结果生成个1条数据，&lt;30 daxin 10&gt;，为什么呢？由于id属于自增列，我们在执行#1时，id是没有固定下来的。</p>
+<ol>
+<li>执行后，commit，则daxin的id就固定下来了。</li>
+<li>执行时，由于id没变，所以并不会新增数据，而是使用update语句更新了age字段</li>
+<li>执行时，由于都是daxin的，id，name，age都没有改变，所以只会执行1条语句</li>
+</ol>
+<blockquote>
+<p>当engine的echo等于true时，看到具体的sql语句，一切就很明白了。</p>
+</blockquote>
+<h3 id="372-简单查询">3.7.2 简单查询</h3>
+<p>使用session的query方法进行简单查询,格式为：</p>
+<ul>
+<li><code>session.query(student)</code>: 等同于select * from student;</li>
+<li><code>session.query(student).get(2)</code>: 等同于select * from student where id = 2,这里的get方法只能主键查询</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)
+<span style="color:#66d9ef">print</span>(std_list)        <span style="color:#75715e"># SELECT student.id AS student_id, student.name AS student_name, student.age AS student_age FROM student</span>
+<span style="color:#66d9ef">print</span>(type(std_list))  <span style="color:#75715e"># &lt;class &#39;sqlalchemy.orm.query.Query&#39;&gt;</span>
+</code></pre></div><p>这里直接打印并不会结果，因为它太懒了，你不迭代它，它就不会真的去数据库查询。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)
+<span style="color:#66d9ef">for</span> std <span style="color:#f92672">in</span> std_list:
+    <span style="color:#66d9ef">print</span>(std)
+
+<span style="color:#75715e"># 通过get来过滤主键，是可以直接执行返回结果的。</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">print</span>(std_list)
+</code></pre></div><h3 id="373-修改数据">3.7.3 修改数据</h3>
+<p>修改的数据的流程分为两步：</p>
+<ol>
+<li>查找匹配的数据</li>
+<li>修改后，提交</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">print</span>(std)  <span style="color:#75715e"># &lt;30 daxin 200&gt;</span>
+std<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+session<span style="color:#f92672">.</span>add(std)
+session<span style="color:#f92672">.</span>commit()
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">print</span>(std)  <span style="color:#75715e"># &lt;30 daxin 1000&gt;</span>
+
+<span style="color:#75715e"># 或者</span>
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>update({<span style="color:#e6db74">&#39;name&#39;</span>:<span style="color:#e6db74">&#39;daxin&#39;</span>})
+std<span style="color:#f92672">.</span>commit()
+</code></pre></div><blockquote>
+<p>大部分ORM是都是这样，必须先查才能改。</p>
+</blockquote>
+<p>在原有数据的基础上批量修改，比如在所有名称后面添加特定的后缀</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">session<span style="color:#f92672">.</span>query(Users)<span style="color:#f92672">.</span>filter(Users<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>update({Users<span style="color:#f92672">.</span>name: Users<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;099&#34;</span>}, synchronize_session<span style="color:#f92672">=</span>False)  <span style="color:#75715e"># 必须为synchronize_session=False</span>
+session<span style="color:#f92672">.</span>query(Users)<span style="color:#f92672">.</span>filter(Users<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">.</span>update({<span style="color:#e6db74">&#34;age&#34;</span>: Users<span style="color:#f92672">.</span>age <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>}, synchronize_session<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;evaluate&#34;</span>)  <span style="color:#75715e"># 必须synchronize_session=&#34;evaluate&#34;，表示要进行计算</span>
+</code></pre></div><h3 id="374-删除数据不建议">3.7.4 删除数据(不建议)</h3>
+<p>使用session.delete来删除数据</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">30</span>)
+session<span style="color:#f92672">.</span>delete(std)
+session<span style="color:#f92672">.</span>commit()   <span style="color:#75715e"># 提交删除操作</span>
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">30</span>)
+<span style="color:#66d9ef">print</span>(std)  <span style="color:#75715e"># None</span>
+</code></pre></div><h3 id="375-状态">3.7.5 状态</h3>
+<p>当我们创建一条数据，或是从数据库中获取一条数据时，数据本身是存在一个状态属性的，用来标识当前数据是否持久化，或者其他状态，在sqlalchemy中，<code>inspect(obj)</code>可以用来窥探数据(obj)的状态</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">daxin <span style="color:#f92672">=</span> Student(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>)
+daxin<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+state <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>inspect(daxin)
+<span style="color:#66d9ef">print</span>(state)  <span style="color:#75715e"># &lt;sqlalchemy.orm.state.InstanceState object at 0x00000186EEC38EB8&gt;</span>
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">28</span>)
+state <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>inspect(std)
+<span style="color:#66d9ef">print</span>(state)  <span style="color:#75715e"># &lt;sqlalchemy.orm.state.InstanceState object at 0x00000186EFDCDA20&gt;</span>
+</code></pre></div><p>我们看到，inspect返回的是一个InstanceState对象。这个对象有以下几个属性：</p>
+<ul>
+<li>session_id：获取数据时的session ID，如果是自建数据未持久化ID为None</li>
+<li>_attached: 是否是附加的(数据已经加载(已add)，就差提交的数据库了)</li>
+<li>transient：是否是临时数据(临时创建，还没有提交(还没有add))</li>
+<li>pending: 是否是待定的数据</li>
+<li>persistent: 是否是持久的</li>
+<li>deleted: 是否已删除</li>
+<li>detached：是否被分离</li>
+<li>key：key是多少</li>
+</ul>
+<blockquote>
+<p>InstanceState对象，可以通过sqlalchemy.orm.state导入</p>
+</blockquote>
+<p>具体的状态信息与含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transient</code></td>
+<td>实体类尚未加入到session中，同时并没有保存到数据库中</td>
+</tr>
+<tr>
+<td><code>pending</code></td>
+<td>transient的实体被加入到session中，状态切换到pending，但它还没有被flsh到数据库中</td>
+</tr>
+<tr>
+<td><code>persistent</code></td>
+<td>session中的实体对象对应着数据库中的真实记录。pending状态在提交成功后可以变成persistent状态，或者查询成功返回的实体也是persistent状态</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td>实体被删除且已经flush但未commit完成。事物提交成功了，实体变成detached，事物失败返回persistent状态</td>
+</tr>
+<tr>
+<td><code>detached</code></td>
+<td>删除成功的实体进入这个状态</td>
+</tr>
+</tbody>
+</table>
+<p>所以数据的状态变化如下：</p>
+<ol>
+<li>新建一个实体，状态是transient临时的</li>
+<li>add()以后，状态变为pending</li>
+<li>commit()以后，状态变为persistent</li>
+<li>查询成功返回的实体状态也是persistent状态</li>
+<li>delete()并flush()以后，状态变为deleted</li>
+<li>commit()以后，变为detached，提交失败，回退到persistent状态</li>
+</ol>
+<blockquote>
+<p>flush()方法，主动把改变应用到数据库中去</p>
+</blockquote>
+<p>        删除、修改操作，需要对应一个真实存在的数据，也就是说数据的状态是persistent才行。当使用add语句新增信息时，如果这个对象已经添加过数据库了，那么它的状态会变为persistent，如果对persistent的数据进行修改继续提交的话，那么使用的将会是update语句而非insert。这也是前面为啥多次对一个数据进行add，提交了多次只会插入1次的原因。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+DBSession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+session <span style="color:#f92672">=</span> DBSession()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;student&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, autoincrement<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">24</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    age <span style="color:#f92672">=</span> Column(Integer, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>id, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age
+        )
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getstate</span>(state: InstanceState):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    session_id={} transient={} _attached={} pending={} persistent={} deleted={} detached={}
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span><span style="color:#f92672">.</span>format(state<span style="color:#f92672">.</span>session_id, state<span style="color:#f92672">.</span>transient, state<span style="color:#f92672">.</span>_attached, state<span style="color:#f92672">.</span>pending, state<span style="color:#f92672">.</span>persistent, state<span style="color:#f92672">.</span>deleted,
+               state<span style="color:#f92672">.</span>detached))
+
+daxin <span style="color:#f92672">=</span> Student(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>)
+daxin<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+state <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>inspect(daxin)
+getstate(state)  <span style="color:#75715e"># session_id=None transient=True _attached=False pending=False persistent=False deleted=False detached=False</span>
+
+session<span style="color:#f92672">.</span>add(daxin)
+getstate(state)  <span style="color:#75715e"># session_id=1 transient=False _attached=True pending=True persistent=False deleted=False detached=False</span>
+
+session<span style="color:#f92672">.</span>commit()
+getstate(state)  <span style="color:#75715e"># session_id=1 transient=False _attached=True pending=False persistent=True deleted=False detached=False</span>
+
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">28</span>)
+state <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>inspect(std)
+getstate(state)  <span style="color:#75715e"># session_id=1 transient=False _attached=True pending=False persistent=True deleted=False detached=False</span>
+
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">31</span>)
+session<span style="color:#f92672">.</span>delete(std)
+state <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>inspect(std)
+getstate(state)  <span style="color:#75715e"># session_id=1 transient=False _attached=True pending=False persistent=True deleted=False detached=False</span>
+
+session<span style="color:#f92672">.</span>flush()
+getstate(state)  <span style="color:#75715e"># session_id=1 transient=False _attached=True pending=False persistent=False deleted=True detached=False</span>
+
+session<span style="color:#f92672">.</span>commit()
+getstate(state)  <span style="color:#75715e"># session_id=None transient=False _attached=False pending=False persistent=False deleted=False detached=True</span>
+</code></pre></div><h3 id="376-枚举字段">3.7.6 枚举字段</h3>
+<p>        在数据库的字段类型中，比如性别字段，我们可能会限制数据来源为M(male),F(Female),这个时候字段类型可以是枚举的，但是在sqlalchemy中，原生的字段类型没有枚举类型，那么就需要借助enum类了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+<span style="color:#f92672">import</span> enum
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+DBSession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+session <span style="color:#f92672">=</span> DBSession()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenderEnum</span>(enum<span style="color:#f92672">.</span>Enum):
+    M <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;M&#39;</span>
+    F <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;F&#39;</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;student&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, autoincrement<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">24</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    age <span style="color:#f92672">=</span> Column(Integer, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    gender <span style="color:#f92672">=</span> Column(sqlalchemy<span style="color:#f92672">.</span>Enum(GenderEnum),nullable<span style="color:#f92672">=</span>False)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>id, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age
+        )
+</code></pre></div><p>用起来很麻烦，所以建议性别使用1或者0来存储，显示的时候做对于转换即可</p>
+<h3 id="377-复杂查询">3.7.7 复杂查询</h3>
+<h4 id="3771-where条件查询">3.7.7.1 where条件查询</h4>
+<p>使用filter方法进行条件过滤查询：</p>
+<ul>
+<li><code>session.query(student).filter(student.id &gt; 10)</code>：相当于select * from student where student.id &gt; 10</li>
+</ul>
+<blockquote>
+<p>同时还存在一个filter_by，它的不同之处在于括号中的不是表达式，而是参数。比如：filter(user.id == 10) -&gt; filter_by(user.id = 10)</p>
+</blockquote>
+<p>where条件中的关系：</p>
+<ul>
+<li><code>AND</code>(与) 对应 <code>and_</code></li>
+<li><code>OR</code>(或) 对应 <code>or_</code></li>
+<li><code>not</code>(非) 对应 <code>not_</code></li>
+<li><code>in</code> 对应字段的 <code>in_</code></li>
+<li><code>not in</code> 对应字段的 <code>notin_</code></li>
+<li><code>like</code> 对应 字段的like方法</li>
+<li><code>not like</code> 对应 字段的notlike方法</li>
+</ul>
+<p>想要使用与或非，需要先行导入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> and_, or_, not_
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+DBSession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+session <span style="color:#f92672">=</span> DBSession()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;student&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, autoincrement<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">24</span>), default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+    age <span style="color:#f92672">=</span> Column(Integer, default<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Null&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>id, self<span style="color:#f92672">.</span>name, self<span style="color:#f92672">.</span>age
+        )
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getresulte</span>(stds):
+    <span style="color:#66d9ef">for</span> std <span style="color:#f92672">in</span> stds:
+        <span style="color:#66d9ef">print</span>(std)
+</code></pre></div><p>条件判断之<code>AND</code>(&amp;,and_)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># and</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(and_(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30</span>, Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">27</span>))
+getresulte(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30</span>)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">27</span>)   <span style="color:#75715e"># filter返回的还是一个结果集，所以还可以继续使用filter进行过滤</span>
+getresulte(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">30</span>, Student<span style="color:#f92672">.</span>age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">100</span>)  <span style="color:#75715e"># 多个条件一起写，也是and的关系</span>
+getresulte(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter((Student<span style="color:#f92672">.</span>name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;daxin&#39;</span>) <span style="color:#f92672">&amp;</span> (Student<span style="color:#f92672">.</span>age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">28</span>))
+getresulte(std_list)
+</code></pre></div><p>条件判断之<code>OR</code>(or_，|)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># or</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(or_(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">27</span>, Student<span style="color:#f92672">.</span>age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">50</span>))
+getresulte(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter((Student<span style="color:#f92672">.</span>id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">27</span>) <span style="color:#f92672">|</span> (Student<span style="color:#f92672">.</span>age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">50</span> ))
+getresulte(std_list)
+</code></pre></div><p>条件判断之<code>NOT</code>(not_,~)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># not</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(not_(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">32</span>))
+getresulte(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(<span style="color:#f92672">~</span>(Student<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">32</span>))
+getresulte(std_list)
+</code></pre></div><p><code>like</code>和<code>in</code>及<code>not in</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># like</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>like(<span style="color:#e6db74">&#39;da%&#39;</span>))
+getresulte(std_list)
+
+<span style="color:#75715e"># not like</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>notlike(<span style="color:#e6db74">&#39;da%&#39;</span>))
+getresulte(std_list)
+
+<span style="color:#75715e"># in</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>age<span style="color:#f92672">.</span>in_([<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">50</span>]))
+getresulte(std_list)
+
+<span style="color:#75715e"># not in</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>age<span style="color:#f92672">.</span>notin_([<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">30</span>,<span style="color:#ae81ff">50</span>]))
+getresulte(std_list)
+</code></pre></div><p>补充：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">r6 <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Users)<span style="color:#f92672">.</span>filter(text(<span style="color:#e6db74">&#34;id&lt;:value and name=:name&#34;</span>))<span style="color:#f92672">.</span>params(value<span style="color:#f92672">=</span><span style="color:#ae81ff">224</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fred&#39;</span>)<span style="color:#f92672">.</span>order_by(Users<span style="color:#f92672">.</span>id)<span style="color:#f92672">.</span>all()  <span style="color:#75715e"># 传参的方式查询</span>
+r7 <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Users)<span style="color:#f92672">.</span>from_statement(text(<span style="color:#e6db74">&#34;SELECT * FROM users where name=:name&#34;</span>))<span style="color:#f92672">.</span>params(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ed&#39;</span>)<span style="color:#f92672">.</span>all()  <span style="color:#75715e"># 用的不多</span>
+</code></pre></div><p><a href="http://www.cnblogs.com/wupeiqi/articles/8259356.html">更多</a></p>
+<h4 id="3772-排序">3.7.7.2 排序</h4>
+<ul>
+<li>order_by：排序</li>
+<li>asc: 升序（默认）</li>
+<li>desc: 降序</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 升序</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>like(<span style="color:#e6db74">&#39;da%&#39;</span>))<span style="color:#f92672">.</span>order_by(Student<span style="color:#f92672">.</span>age)
+getresulte(std_list)
+
+<span style="color:#75715e"># 降序</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>like(<span style="color:#e6db74">&#39;da%&#39;</span>))<span style="color:#f92672">.</span>order_by(Student<span style="color:#f92672">.</span>age<span style="color:#f92672">.</span>desc())
+getresulte(std_list)
+</code></pre></div><h4 id="3773-分页偏移量">3.7.7.3 分页(偏移量)</h4>
+<ul>
+<li>limit: 显示结果的条目数</li>
+<li>offset：偏移量</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># limit</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>filter(Student<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>like(<span style="color:#e6db74">&#39;da%&#39;</span>))<span style="color:#f92672">.</span>order_by(Student<span style="color:#f92672">.</span>age<span style="color:#f92672">.</span>desc())<span style="color:#f92672">.</span>limit(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>offset(<span style="color:#ae81ff">2</span>)
+getresulte(std_list)
+<span style="color:#75715e"># select * from Student where name like &#39;da%&#39; order_by age desc limit 3 offset 2</span>
+</code></pre></div><h4 id="3774-消费方法">3.7.7.4 消费方法</h4>
+<ul>
+<li>count(): 获取总条数（仅仅针对结果集，不能all以后再count）</li>
+<li>all(): 取所有行（默认）（列表）</li>
+<li>first()：取首行</li>
+<li>one()：有且只有一行，多行则抛出异常</li>
+<li>delete()：对查询出来的数据直接进行删除</li>
+<li>scalar(): 第一条记录的第一个元素</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># count</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)
+<span style="color:#66d9ef">print</span>(std_list<span style="color:#f92672">.</span>count())
+
+<span style="color:#75715e"># first</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">print</span>(std_list)
+</code></pre></div><blockquote>
+<p>first本质上就是limit。</p>
+</blockquote>
+<h4 id="3775-分组及聚合方法">3.7.7.5 分组及聚合方法</h4>
+<p>sqlalchemy同样提供了聚合方法，使用sqlalchemy.func来调用</p>
+<ul>
+<li>group_by:分组显示</li>
+</ul>
+<p>func提供的方法有</p>
+<ul>
+<li>max:求最大值</li>
+<li>min:求最小值</li>
+<li>avg:求平均值</li>
+<li>count:聚合（一般和分组连用）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># max</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student<span style="color:#f92672">.</span>name,sqlalchemy<span style="color:#f92672">.</span>func<span style="color:#f92672">.</span>max(Student<span style="color:#f92672">.</span>age))  <span style="color:#75715e"># select name,max(age) from Student;</span>
+getresulte(std_list)
+
+<span style="color:#75715e"># count</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Student<span style="color:#f92672">.</span>name,sqlalchemy<span style="color:#f92672">.</span>func<span style="color:#f92672">.</span>count(Student<span style="color:#f92672">.</span>id))<span style="color:#f92672">.</span>group_by(Student<span style="color:#f92672">.</span>name)  <span style="color:#75715e"># SELECT name, count(id)  FROM student GROUP BY name </span>
+getresulte(std_list)
+</code></pre></div><h4 id="3776-关联查询">3.7.7.6 关联查询</h4>
+<p>sqlalchemy提供ForeignKey用来进行外键关联，它的格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sqlalchemy<span style="color:#f92672">.</span>ForeignKey(<span style="color:#960050;background-color:#1e0010">表名</span><span style="color:#f92672">.</span><span style="color:#960050;background-color:#1e0010">字段名</span>,ondelete<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;更新规则&#39;</span>)
+
+<span style="color:#75715e"># 如果填写映射后的class，那么可以直接写：类.字段</span>
+<span style="color:#75715e"># 如果填写数据库中的表，那么需要使用引号：&#39;数据库表名.字段名&#39;</span>
+</code></pre></div><p>更新规则和删除规则，可选项如下：</p>
+<ul>
+<li><code>CASCADE</code>:级联删除，删除被关联数据时，从表关联的数据全部删除。</li>
+<li><code>SET NULL</code>:从父表删除或更新行，会设置子表中的外键列为NULL，但必须保证子表没有指定 NOT NULL，也就是说子表的字段可以为NULL才行。</li>
+<li><code>RESTRICT</code>:如果从父表删除主键，如果子表引用了，则拒绝对父表的删除或更新操作。(保护数据)</li>
+<li><code>NO ACTION</code>:表中SQL的关键字，在MySQL中与RESTRICT相同。拒绝对父表的删除或更新操作。</li>
+</ul>
+<p>现有如下关系表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>departments<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span> char(<span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>dept_name<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">40</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>dept_name<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>dept_name<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>employees<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>birth_date<span style="color:#f92672">`</span> date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>first_name<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">14</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>last_name<span style="color:#f92672">`</span> varchar(<span style="color:#ae81ff">16</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>gender<span style="color:#f92672">`</span> enum(<span style="color:#e6db74">&#39;M&#39;</span>,<span style="color:#e6db74">&#39;F&#39;</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>hire_date<span style="color:#f92672">`</span> date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>dept_emp<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span> char(<span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>from_date<span style="color:#f92672">`</span> date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>to_date<span style="color:#f92672">`</span> date <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span>,<span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#f92672">`</span>dept_emp_ibfk_1<span style="color:#f92672">`</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span>employees<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span>) <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">CASCADE</span>,
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#f92672">`</span>dept_emp_ibfk_2<span style="color:#f92672">`</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span>departments<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>dept_no<span style="color:#f92672">`</span>) <span style="color:#66d9ef">ON</span> <span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">CASCADE</span>
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+</code></pre></div><p>创建对应的映射实体类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sqlalchemy
+<span style="color:#f92672">from</span> sqlalchemy.ext <span style="color:#f92672">import</span> declarative
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> Column, String, Integer, Date
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+<span style="color:#f92672">import</span> enum
+
+db_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.13:3306/test&#39;</span>
+engine <span style="color:#f92672">=</span> sqlalchemy<span style="color:#f92672">.</span>create_engine(db_url, echo<span style="color:#f92672">=</span>True)
+
+Base <span style="color:#f92672">=</span> declarative<span style="color:#f92672">.</span>declarative_base()
+DBSession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+session <span style="color:#f92672">=</span> DBSession()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Departments</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;departments&#39;</span>
+    dept_no <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">4</span>), nullable<span style="color:#f92672">=</span>False, primary_key<span style="color:#f92672">=</span>True)
+    dept_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">40</span>), nullable<span style="color:#f92672">=</span>False, unique<span style="color:#f92672">=</span>True)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self<span style="color:#f92672">.</span>dept_no, self<span style="color:#f92672">.</span>dept_name)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GenderEnum</span>(enum<span style="color:#f92672">.</span>Enum):
+    M <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;M&#39;</span>
+    F <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;F&#39;</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Employees</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;employees&#39;</span>
+    emp_no <span style="color:#f92672">=</span> Column(Integer, nullable<span style="color:#f92672">=</span>False, primary_key<span style="color:#f92672">=</span>True)
+    birth_date <span style="color:#f92672">=</span> Column(Date, nullable<span style="color:#f92672">=</span>False)
+    first_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">14</span>), nullable<span style="color:#f92672">=</span>False)
+    last_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">16</span>), nullable<span style="color:#f92672">=</span>False)
+    gender <span style="color:#f92672">=</span> Column(sqlalchemy<span style="color:#f92672">.</span>Enum(GenderEnum), nullable<span style="color:#f92672">=</span>False)
+    hire_date <span style="color:#f92672">=</span> Column(Date, nullable<span style="color:#f92672">=</span>False)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} {} {} {} {} {}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self<span style="color:#f92672">.</span>emp_no, self<span style="color:#f92672">.</span>birth_date, self<span style="color:#f92672">.</span>first_name, self<span style="color:#f92672">.</span>last_name, self<span style="color:#f92672">.</span>gender,
+            self<span style="color:#f92672">.</span>hire_date
+        )
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dept_emp</span>(Base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dept_emp&#39;</span>
+    emp_no <span style="color:#f92672">=</span> Column(Integer, sqlalchemy<span style="color:#f92672">.</span>ForeignKey(Employees<span style="color:#f92672">.</span>emp_no, ondelete<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CASCADE&#39;</span>), primary_key<span style="color:#f92672">=</span>True, )
+    dept_no <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">4</span>), sqlalchemy<span style="color:#f92672">.</span>ForeignKey(Departments<span style="color:#f92672">.</span>dept_no, ondelete<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CASCADE&#39;</span>), nullable<span style="color:#f92672">=</span>False)
+    from_date <span style="color:#f92672">=</span> Column(Date, nullable<span style="color:#f92672">=</span>False)
+    to_date <span style="color:#f92672">=</span> Column(Date, nullable<span style="color:#f92672">=</span>False)
+
+    <span style="color:#66d9ef">def</span> __repr__(self):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&lt;{} emp_no={} dept_no={}&gt;&#39;</span><span style="color:#f92672">.</span>format(
+            self<span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>__name__, self<span style="color:#f92672">.</span>emp_no, self<span style="color:#f92672">.</span>dept_no
+        )
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getres</span>(emps):
+    <span style="color:#66d9ef">for</span> emp <span style="color:#f92672">in</span> emps:
+        <span style="color:#66d9ef">print</span>(emp)
+</code></pre></div><p>查询10010员工所在的部门编号及员工信息</p>
+<h5 id="隐式连接">隐式连接</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">emps <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Employees, Dept_emp)<span style="color:#f92672">.</span>filter(and_(Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> Dept_emp<span style="color:#f92672">.</span>emp_no, Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;10010&#39;</span>))<span style="color:#f92672">.</span>all()
+getres(emps)
+
+emps <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Employees, Dept_emp)<span style="color:#f92672">.</span>filter(Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> Dept_emp<span style="color:#f92672">.</span>emp_no)<span style="color:#f92672">.</span>filter(Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;10010&#39;</span>)<span style="color:#f92672">.</span>all()
+getres(emps)
+
+
+<span style="color:#75715e"># 相当于:select * from employees,dept_emp where employees.emp_no = dept_emp.emp_no and employees.emp_no = &#39;10010&#39;;</span>
+</code></pre></div><h5 id="join连接">join连接</h5>
+<p>使用join()关键字来进行连表查询，其isouter参数用于指定join的类型，默认情况下使用的是inner join,当isouter=True时，就表示是left join(right join没有实现，需要自己交换前面表的顺序)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># join连接</span>
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Employees)<span style="color:#f92672">.</span>join(Dept_emp,Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> Dept_emp<span style="color:#f92672">.</span>emp_no,isouter<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>filter(Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;10010&#39;</span>)
+getres(std_list)
+
+std_list <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Employees)<span style="color:#f92672">.</span>join(Dept_emp)<span style="color:#f92672">.</span>filter((Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> Dept_emp<span style="color:#f92672">.</span>emp_no) <span style="color:#f92672">&amp;</span> (Employees<span style="color:#f92672">.</span>emp_no <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;10010&#39;</span>))
+getres(std_list)
+
+<span style="color:#75715e"># 如果query中，仅列出一个表明，相当于</span>
+<span style="color:#75715e"># select employees.* from employees inner join dept_emp on employees.emp_no = dept_emp.emp_no where employees.emp_no = &#39;10010&#39;;</span>
+</code></pre></div><h1 id="4-一对多关系">4 一对多关系</h1>
+<p>一对多是一种表与表的关系，在orm中创建和使用方式有一写特点，这里单独描述</p>
+<h2 id="41-创建关系表">4.1 创建关系表</h2>
+<p>通过ForeignKey来创建一对多关系，需要注意的是它内部需要填写对应的真实的表名和字段（非映射的类对象）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Deptment</span>(base):
+
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;deptment&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, autoincrement<span style="color:#f92672">=</span>True, primary_key<span style="color:#f92672">=</span>True)
+    dep_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">32</span>), nullable<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(base):
+
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;user&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, autoincrement<span style="color:#f92672">=</span>True, primary_key<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">32</span>), nullable<span style="color:#f92672">=</span>False)
+    dept_id <span style="color:#f92672">=</span> Column(Integer, ForeignKey(<span style="color:#e6db74">&#39;deptment.id&#39;</span>))
+
+<span style="color:#75715e"># CREATE TABLE `user` (</span>
+<span style="color:#75715e">#   `id` int(11) NOT NULL AUTO_INCREMENT,</span>
+<span style="color:#75715e">#   `name` varchar(32) NOT NULL,</span>
+<span style="color:#75715e">#   `dept_id` int(11) DEFAULT NULL,</span>
+<span style="color:#75715e">#   PRIMARY KEY (`id`),</span>
+<span style="color:#75715e">#   KEY `dept_id` (`dept_id`),</span>
+<span style="color:#75715e">#   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `deptment` (`id`)</span>
+<span style="color:#75715e"># ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</span>
+
+<span style="color:#75715e"># CREATE TABLE `deptment` (</span>
+<span style="color:#75715e">#   `id` int(11) NOT NULL AUTO_INCREMENT,</span>
+<span style="color:#75715e">#   `dep_name` varchar(32) NOT NULL,</span>
+<span style="color:#75715e">#   PRIMARY KEY (`id`)</span>
+<span style="color:#75715e"># ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</span>
+</code></pre></div><h2 id="42-添加数据">4.2 添加数据</h2>
+<p>添加部门数据时，只能使用id来插入，当插入的dept_id在deptment表中不存在时，会直接爆出异常</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 批量添加部门数据</span>
+session<span style="color:#f92672">.</span>add_all([
+    Deptment(dep_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;运维部&#39;</span>),
+    Deptment(dep_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;开发部&#39;</span>),
+    Deptment(dep_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;产品部&#39;</span>),
+    Deptment(dep_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;测试部&#39;</span>)]
+)
+
+<span style="color:#75715e"># 添加用户数据</span>
+session<span style="color:#f92672">.</span>add_all([
+    User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;daxin&#39;</span>, dept_id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>),
+    User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dachenzi&#39;</span>, dept_id<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>),
+    User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dahl&#39;</span>, dept_id<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)]
+)
+session<span style="color:#f92672">.</span>commit()
+</code></pre></div><h2 id="43-relationship">4.3 relationship</h2>
+<p>        在表中使用relationship来创建一个关联的对象，便于查询（和django的一对多隐含的对象相同，但在sqlalchemy中必须通过relationship才可以生成），并不会生成新的字段，仅仅是产生一个关联关系。</p>
+<blockquote>
+<p>注意relationship对象不能作为条件直接进行表查询：session.query(User.name,User.deptment.dept_name) 这样是不行的。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">relationship(obj,backref<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><ul>
+<li>obj:表示要关联的ORM对象</li>
+<li>backref：表示在对方插入一个关键字，用于反向关联relationship所在的表对象的本身。</li>
+</ul>
+<p>下面是一个例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Deptment</span>(base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;deptment&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, autoincrement<span style="color:#f92672">=</span>True, primary_key<span style="color:#f92672">=</span>True)
+    dep_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">32</span>), nullable<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;user&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, autoincrement<span style="color:#f92672">=</span>True, primary_key<span style="color:#f92672">=</span>True)
+    name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">32</span>), nullable<span style="color:#f92672">=</span>False)
+    dept_id <span style="color:#f92672">=</span> Column(Integer, ForeignKey(<span style="color:#e6db74">&#39;deptment.id&#39;</span>))
+ 
+    deptment <span style="color:#f92672">=</span> relationship(Deptment, backref<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;user&#39;</span>)   <span style="color:#75715e"># 创建relationship关系</span>
+
+<span style="color:#75715e"># 正向查（通过User查deptment）</span>
+std <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(User)<span style="color:#f92672">.</span>filter(User<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">print</span>(std<span style="color:#f92672">.</span>name)
+<span style="color:#66d9ef">print</span>(std<span style="color:#f92672">.</span>deptment<span style="color:#f92672">.</span>dep_name)  <span style="color:#75715e"># 直接通过deptment对象，读取Deptment表中对于的信息</span>
+
+<span style="color:#75715e"># 反向查（通过depement查User）</span>
+dep <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Deptment)<span style="color:#f92672">.</span>filter(Deptment<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">print</span>(dep<span style="color:#f92672">.</span>user[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>name)   <span style="color:#75715e"># 反向查，通过user获取到的数据是一个列表</span>
+</code></pre></div><p>relationship，就是通过在一个映射类中增加一个属性，该属性用于表示连接关系，可以在结果中，访问该属性来访问关联的表信息</p>
+<h2 id="44-通过relationship添加数据">4.4 通过relationship添加数据</h2>
+<p>存在relationship的映射关系时，我们添加数据时，就可以通过relationship使用对象来添加关联数据了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dep <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Deptment)<span style="color:#f92672">.</span>filter(Deptment<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>first()
+session<span style="color:#f92672">.</span>add_all([
+    User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hello&#39;</span>, deptment<span style="color:#f92672">=</span>dep),
+    User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;world&#39;</span>, deptment<span style="color:#f92672">=</span>dep)]
+)
+session<span style="color:#f92672">.</span>commit()
+</code></pre></div><p>直接创建新的部门对象也是可以的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">user <span style="color:#f92672">=</span> User(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dahlhin&#39;</span>,deptment<span style="color:#f92672">=</span>Deptment(dep_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;管理员&#39;</span>))
+session<span style="color:#f92672">.</span>add(user)
+session<span style="color:#f92672">.</span>commit()
+</code></pre></div><h1 id="5-多对多关系">5 多对多关系</h1>
+<p>和django不同sqlalchemy的第三张表需要手动创建。</p>
+<h2 id="51-创建多对多关系">5.1 创建多对多关系</h2>
+<p>模拟主机与业务线的归属问题。</p>
+<ul>
+<li>主机可以属于多个业务线</li>
+<li>一个业务线可以包含多个主机</li>
+</ul>
+<p>这是一个典型的多对多关系，需要额外一张关系表来记录。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service2host</span>(base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;service_to_host&#39;</span>
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, unique<span style="color:#f92672">=</span>True, autoincrement<span style="color:#f92672">=</span>True)
+    s_id <span style="color:#f92672">=</span> Column(Integer, ForeignKey(<span style="color:#e6db74">&#39;service.id&#39;</span>))
+    h_id <span style="color:#f92672">=</span> Column(Integer, ForeignKey(<span style="color:#e6db74">&#39;host.id&#39;</span>))
+
+    __table_args__ <span style="color:#f92672">=</span> (
+        <span style="color:#75715e"># 联合唯一索引</span>
+        UniqueConstraint(<span style="color:#e6db74">&#39;s_id&#39;</span>, <span style="color:#e6db74">&#39;h_id&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;serivce_to_host&#39;</span>),
+    )  <span style="color:#75715e"># 业务id和主机id不能重复，这里创建唯一索引来约束</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span>(base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;service&#39;</span>
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, unique<span style="color:#f92672">=</span>True, autoincrement<span style="color:#f92672">=</span>True)
+    ser_name <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">16</span>), nullable<span style="color:#f92672">=</span>False)
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Host</span>(base):
+    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;host&#39;</span>
+
+    id <span style="color:#f92672">=</span> Column(Integer, primary_key<span style="color:#f92672">=</span>True, nullable<span style="color:#f92672">=</span>False, unique<span style="color:#f92672">=</span>True, autoincrement<span style="color:#f92672">=</span>True)
+    hostname <span style="color:#f92672">=</span> Column(String(<span style="color:#ae81ff">16</span>), nullable<span style="color:#f92672">=</span>False)
+    datetime <span style="color:#f92672">=</span> Column(DateTime, default<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now, nullable<span style="color:#f92672">=</span>False)
+
+<span style="color:#75715e"># CREATE TABLE `host` (</span>
+<span style="color:#75715e">#   `id` int(11) NOT NULL AUTO_INCREMENT,</span>
+<span style="color:#75715e">#   `hostname` varchar(16) NOT NULL,</span>
+<span style="color:#75715e">#   `datetime` date NOT NULL,</span>
+<span style="color:#75715e">#   PRIMARY KEY (`id`),</span>
+<span style="color:#75715e">#   UNIQUE KEY `id` (`id`)</span>
+<span style="color:#75715e"># ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</span>
+
+
+<span style="color:#75715e"># CREATE TABLE `service` (</span>
+<span style="color:#75715e">#   `id` int(11) NOT NULL AUTO_INCREMENT,</span>
+<span style="color:#75715e">#   `ser_name` varchar(16) NOT NULL,</span>
+<span style="color:#75715e">#   PRIMARY KEY (`id`),</span>
+<span style="color:#75715e">#   UNIQUE KEY `id` (`id`)</span>
+<span style="color:#75715e"># ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</span>
+
+
+<span style="color:#75715e"># CREATE TABLE `service_to_host` (</span>
+<span style="color:#75715e">#   `id` int(11) NOT NULL AUTO_INCREMENT,</span>
+<span style="color:#75715e">#   `s_id` int(11) DEFAULT NULL,</span>
+<span style="color:#75715e">#   `h_id` int(11) DEFAULT NULL,</span>
+<span style="color:#75715e">#   PRIMARY KEY (`id`),</span>
+<span style="color:#75715e">#   UNIQUE KEY `id` (`id`),</span>
+<span style="color:#75715e">#   UNIQUE KEY `serivce_to_host` (`s_id`,`h_id`),</span>
+<span style="color:#75715e">#   KEY `h_id` (`h_id`),</span>
+<span style="color:#75715e">#   CONSTRAINT `service_to_host_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `service` (`id`),</span>
+<span style="color:#75715e">#   CONSTRAINT `service_to_host_ibfk_2` FOREIGN KEY (`h_id`) REFERENCES `host` (`id`)</span>
+<span style="color:#75715e"># ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</span>
+</code></pre></div><h2 id="52-通过relationship操作数据">5.2 通过relationship操作数据</h2>
+<p>如果没有relationship关联对象，那么我们将需要分别操作三张表，使用relationship将会大大简化这个过程，那么在Service中创建关系:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">hosts <span style="color:#f92672">=</span> relationship(<span style="color:#e6db74">&#39;host&#39;</span>, secondary<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;service_to_host&#39;</span>, backref<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;services&#39;</span>)
+</code></pre></div><p>创建后：</p>
+<ul>
+<li>在Service中存在一个hosts属性，对应host表</li>
+<li>在Host中被动注入一个services属性，对应service表</li>
+<li>secondary=&lsquo;service_to_host&rsquo; 表示通过第三张表来关联关系</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 添加一个业务，并创建几台主机</span>
+session<span style="color:#f92672">.</span>add(
+    Service(ser_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;运营&#39;</span>, hosts<span style="color:#f92672">=</span>[
+        Host(hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;openstack&#39;</span>),
+        Host(hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nginx&#39;</span>)
+    ])
+)
+
+<span style="color:#75715e"># 添加一个主机，并关联几个业务线</span>
+service <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Service)<span style="color:#f92672">.</span>filter(or_(Service<span style="color:#f92672">.</span>ser_name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;运营&#39;</span>, Service<span style="color:#f92672">.</span>ser_name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;运维&#39;</span>))<span style="color:#f92672">.</span>all()
+session<span style="color:#f92672">.</span>add(
+    Host(hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Tomcat&#39;</span>, services<span style="color:#f92672">=</span>service)
+)
+
+<span style="color:#75715e"># 查询一个业务线下都有哪些主机</span>
+service <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Service)<span style="color:#f92672">.</span>filter(Service<span style="color:#f92672">.</span>ser_name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;运营&#39;</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">for</span> host <span style="color:#f92672">in</span> service<span style="color:#f92672">.</span>hosts:
+    <span style="color:#66d9ef">print</span>(host<span style="color:#f92672">.</span>id, host<span style="color:#f92672">.</span>hostname)
+
+<span style="color:#75715e"># 查询一台主机都归属哪些业务线</span>
+host <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(Host)<span style="color:#f92672">.</span>filter(Host<span style="color:#f92672">.</span>hostname <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;openstack&#39;</span>)<span style="color:#f92672">.</span>first()
+<span style="color:#66d9ef">for</span> servcie <span style="color:#f92672">in</span> host<span style="color:#f92672">.</span>services:
+    <span style="color:#66d9ef">print</span>(service<span style="color:#f92672">.</span>id, service<span style="color:#f92672">.</span>ser_name)
+</code></pre></div><h1 id="6-scoped_session推荐">6 scoped_session(推荐)</h1>
+<p>当我们启动多线程来执行数据库操作时，每个线程都会用到session来执行sql语句，一般情况下，我们会在线程内不创建新的session来执行sql语句,下面是一个利用session完成原生sql的执行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> create_engine
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> sessionmaker
+
+engine <span style="color:#f92672">=</span> create_engine(
+    <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>,
+    max_overflow<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>,
+    pool_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+    pool_timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>,
+    pool_recycle<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>
+)
+
+DBsession <span style="color:#f92672">=</span> sessionmaker(bind<span style="color:#f92672">=</span>engine)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+    session <span style="color:#f92672">=</span> DBsession()
+    cursor <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;show tables&#39;</span>)
+    res <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+    <span style="color:#66d9ef">print</span>(res)
+    cursor<span style="color:#f92672">.</span>close()
+    session<span style="color:#f92672">.</span>close()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>func)<span style="color:#f92672">.</span>start()
+</code></pre></div><p>这里会产生一个问题，每个线程启动时都会创建一个session，用完又会关闭，这样太麻烦了，这里可以使用scoped_session对象来完成，它类似与threading.Local的实现方式。作用是，当线程调用scoped_session对象的功能时，比如各种sql查询，在其内部会为每个线程创建一个新的session对象，让它来使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 1 引入scoped_session</span>
+<span style="color:#f92672">from</span> sqlalchemy.orm <span style="color:#f92672">import</span> scoped_session
+
+<span style="color:#75715e"># 2 全局创建session对象</span>
+session <span style="color:#f92672">=</span> scoped_session(DBsession)
+
+<span style="color:#75715e"># 3 多进程内直接使用</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>():
+    cursor <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#39;show tables&#39;</span>)
+    res <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span>fetchall()
+    <span style="color:#66d9ef">print</span>(res)
+    cursor<span style="color:#f92672">.</span>close()
+    session<span style="color:#f92672">.</span>remove()   <span style="color:#75715e"># 使用完毕需要remove</span>
+</code></pre></div><p>不需要关闭，直接使用scoped_session对象的remove方法即可。</p>
+<p>实现过程：</p>
+<ol>
+<li>scoped_session是一个类</li>
+<li>它内部并没有实现所有的Session类的方法</li>
+<li>它只是在内部，把传入的session对象的属性，进行反射获取，并绑定在自己身上。</li>
+<li>self.registry() 就是为每个线程创建的Session对象，其内部使用的就是threading.local实现的。</li>
+</ol>
+<p>源码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># scoping</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">instrument</span>(name):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">return</span> getattr(self<span style="color:#f92672">.</span>registry(), name)(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+    <span style="color:#66d9ef">return</span> do
+
+<span style="color:#66d9ef">for</span> meth <span style="color:#f92672">in</span> Session<span style="color:#f92672">.</span>public_methods:
+    setattr(scoped_session, meth, instrument(meth))
+
+<span style="color:#75715e"># registry是ThreadLocalRegistry对象</span>
+self<span style="color:#f92672">.</span>registry <span style="color:#f92672">=</span> ThreadLocalRegistry(session_factory)
+
+
+<span style="color:#75715e"># ThreadLocalRegistry对象内部通过threading.local实现的</span>
+    <span style="color:#66d9ef">def</span> __init__(self, createfunc):
+        self<span style="color:#f92672">.</span>createfunc <span style="color:#f92672">=</span> createfunc  <span style="color:#75715e"># Session对象</span>
+        self<span style="color:#f92672">.</span>registry <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>local()
+
+    
+    <span style="color:#75715e"># registry()其实调用的就是__call__方法</span>
+    <span style="color:#66d9ef">def</span> __call__(self):
+        <span style="color:#66d9ef">try</span>:
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>registry<span style="color:#f92672">.</span>value
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
+            val <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>registry<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>createfunc()   <span style="color:#75715e"># 第一次执行，就会实例化一个Session对象</span>
+            <span style="color:#66d9ef">return</span> val
+</code></pre></div><h1 id="7-别名">7 别名</h1>
+<p>当使用join语句连表查询时，难免会碰到两个表重名的字段，这里就可以使用<code>label</code>来对字段进行别名显示。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stds <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>query(User<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>label(<span style="color:#e6db74">&#39;username&#39;</span>), User<span style="color:#f92672">.</span>id, Deptment<span style="color:#f92672">.</span>dep_name)<span style="color:#f92672">.</span>join(Deptment)<span style="color:#f92672">.</span>all()
+<span style="color:#66d9ef">for</span> std <span style="color:#f92672">in</span> stds:
+    <span style="color:#66d9ef">print</span>(std<span style="color:#f92672">.</span>username, std<span style="color:#f92672">.</span>id, std<span style="color:#f92672">.</span>dep_name)
+</code></pre></div><p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

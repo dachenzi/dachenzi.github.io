@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>2-flask-蓝图-闪现-中间件-session &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">2-flask-蓝图-闪现-中间件-session</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 2 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-flask%E8%93%9D%E5%9B%BE">1 flask蓝图</a>
+<ul>
+<li><a href="#11-%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%93%9D%E5%9B%BE">1.1 第一个蓝图</a></li>
+<li><a href="#12-before_requestafter_request">1.2 before_request/after_request</a></li>
+<li><a href="#13-%E8%93%9D%E5%9B%BE%E9%85%8D%E7%BD%AE">1.3 蓝图配置</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%B6%88%E6%81%AF%E9%97%AA%E7%8E%B0">2 消息闪现</a></li>
+<li><a href="#3-%E4%B8%AD%E9%97%B4%E4%BB%B6">3 中间件</a></li>
+<li><a href="#4-flask-session%E6%8F%92%E4%BB%B6">4 flask-session插件</a>
+<ul>
+<li><a href="#41-%E5%AE%89%E8%A3%85">4.1 安装</a></li>
+<li><a href="#42-%E5%B0%86session%E6%94%BE%E5%9C%A8redis%E4%B8%AD">4.2 将session放在redis中</a></li>
+<li><a href="#43-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8">4.3 为什么可以直接使用</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-flask蓝图">1 flask蓝图</h1>
+<p>        为了在一个或多个应用中，使应用模块化并且支持常用方案，Flask引入了<code>蓝图</code>概念。蓝图可以极大地简化大型应用并为扩展提供集中的注册入口。 <code>Blueprint对象</code>与 Flask 应用对象的工作方式类似，但不是一 个真正的应用。它更像一个用于构建和扩展应用的蓝图 。</p>
+<p>蓝图的用途：</p>
+<ol>
+<li>把一个应用分解为一套蓝图。这是针对大型应用的理想方案：一个项目可以实例化几个应用，初始化多个扩展，并注册许多蓝图。</li>
+<li>在一个应用的 URL 前缀和（或）子域上注册一个蓝图。 URL 前缀和（或）子域的参数成为蓝图中所有视图的通用视图参数（缺省情况下）。</li>
+<li>使用不同的 URL 规则在应用中多次注册蓝图。</li>
+<li>通过蓝图提供模板过滤器、静态文件、模板和其他工具。蓝图不必执行应用或视图 函数。</li>
+<li>当初始化一个 Flask 扩展时，为以上任意一种用途注册一个蓝图。</li>
+</ol>
+<p>        在蓝图被注册到应用之后，当分配请求时，Flask 会把蓝图和视图函数关联起来，并生成两个端点之前的URL 。</p>
+<h2 id="11-第一个蓝图">1.1 第一个蓝图</h2>
+<p>蓝图的标准目录结构如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">flask_app
+<span style="color:#960050;background-color:#1e0010">├─</span>manage<span style="color:#f92672">.</span>py
+<span style="color:#960050;background-color:#1e0010">└─</span>flask_app
+	<span style="color:#960050;background-color:#1e0010">├─</span>__init__<span style="color:#f92672">.</span>py
+    <span style="color:#960050;background-color:#1e0010">├─</span>static
+    <span style="color:#960050;background-color:#1e0010">├─</span>templates
+    <span style="color:#960050;background-color:#1e0010">└─</span>views   <span style="color:#75715e"># 视图函数存放的位置</span>
+    	<span style="color:#960050;background-color:#1e0010">├─</span>account<span style="color:#f92672">.</span>py
+    	<span style="color:#960050;background-color:#1e0010">└─</span>content<span style="color:#f92672">.</span>py
+</code></pre></div><p>要求在__init__.py文件中去实例化flask对象</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+
+<span style="color:#f92672">from</span> .views.acount <span style="color:#f92672">import</span> account
+<span style="color:#f92672">from</span> .views.content <span style="color:#f92672">import</span> content
+
+app<span style="color:#f92672">.</span>register_blueprint(account)  <span style="color:#75715e"># 注册蓝图</span>
+app<span style="color:#f92672">.</span>register_blueprint(content)  <span style="color:#75715e"># 注册蓝图</span>
+</code></pre></div><blockquote>
+<p>注册蓝图时，也可以添加<code>url_prefix='/pages'</code>来指定当前蓝图的前缀。</p>
+</blockquote>
+<p>在manage.py来做启动管理</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask_app <span style="color:#f92672">import</span> app
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run()
+</code></pre></div><p>在我们的views的模块中，我们需要通过blueprint对象来注册路由</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># user.py</span>
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint
+
+account <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;account&#39;</span>, __name__)  <span style="color:#75715e"># 创建蓝图对象</span>
+
+<span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)   <span style="color:#75715e"># 添加蓝图管理的视图函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;login&#39;</span>
+
+<span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/logout&#39;</span>)  <span style="color:#75715e"># 添加蓝图管理的视图函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;logout&#39;</span>
+</code></pre></div><p>可以把blueprint对象理解为代理（也可以理解为django中的app的概念)，使用蓝图以后的执行逻辑为：</p>
+<ol>
+<li>创建蓝图对象</li>
+<li>使用不同的蓝图对象来聚合不同类型的视图函数</li>
+<li>将蓝图注册给app管理</li>
+</ol>
+<h2 id="12-before_requestafter_request">1.2 before_request/after_request</h2>
+<p>在使用蓝图的情况下，before_request/after_request装饰器，就可以选择针对不同的蓝图来调用，还是针对全局来调用。以上面的结构为例：</p>
+<ol>
+<li>定义在__init__.py中就是全局执行</li>
+<li>在某个蓝图对象中，调用before_request/after_request就是针对这个蓝图对象来执行的。</li>
+</ol>
+<p>针对全局(在__init__.py文件中):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.before_request</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">auth</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;auth&#39;</span>)
+
+</code></pre></div><p>针对蓝图对象(在对应的views函数中):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 以content.py的content蓝图对象为例</span>
+<span style="color:#a6e22e">@account.before_request</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;check&#39;</span>)
+</code></pre></div><p>执行顺序为：先执行全局before_request，然后执行蓝图before_request，先执行蓝图after_request，然后执行全局after_request</p>
+<h2 id="13-蓝图配置">1.3 蓝图配置</h2>
+<p><code>url_prefix</code>: 为蓝图添加前缀</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint
+
+account <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;account&#39;</span>, __name__,url_prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/account&#39;</span>)  <span style="color:#75715e"># 创建蓝图对象</span>
+
+<span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)   <span style="color:#75715e"># 添加蓝图管理的视图函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;login&#39;</span>
+
+<span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/logout&#39;</span>)  <span style="color:#75715e"># 添加蓝图管理的视图函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;logout&#39;</span>
+</code></pre></div><p>访问当前蓝图接管的视图函数时，需要添加前缀/account才可以，比如/login,就是/account/login</p>
+<p><code>static_folder</code>: 蓝图的静态文件存放路径
+<code>static_url_path</code>: 蓝图静态文件的访问路径
+<code>template_folder</code>: 蓝图的模板文件存放路径</p>
+<h1 id="2-消息闪现">2 消息闪现</h1>
+<p>        一个好的应用和用户界面都需要良好的反馈。如果用户得不到足够的反馈，那么应用 最终会被用户唾弃。 Flask 的闪现系统提供了一个良好的反馈方式。闪现系统的基 本工作方式是：在且只在下一个请求中访问上一个请求结束时记录的消息。一般我们 结合布局模板来使用闪现系统。</p>
+<blockquote>
+<p>注意，浏览器会限制 cookie 的大小，有时候网络服 务器也会。这样如果消息比会话 cookie 大的话，那么会导致消息闪现静默失败。</p>
+</blockquote>
+<p>        比如：我们在上一个函数中执行了错误的操作，那么直接在当前页面报错可能不是特别友好，更多的用法是跳转到特定的错误页面，然后将异常信息输出。通常我们使用的方式是通过session传递，产生错误时，将信息设置到session中，跳转到错误页面时，通过session将信息取出显示完毕后，删除session中的数据(如果只用一次的话)</p>
+<p>        消息闪现就是基于session的一次性消息的注入与提取，主要使用两个函数实现</p>
+<ul>
+<li><code>flash(message,category='message')</code>:设置消息,category可以为消息设置分类(可以不分类)</li>
+<li><code>get_flashed_messages(category_filter=[])</code>：可以通过指定类别来获取消息(可以不指定过滤)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/logout&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+    flash(<span style="color:#e6db74">&#39;用户退出&#39;</span>)  <span style="color:#75715e"># 等同于session[&#39;message&#39;] = &#39;用户退出&#39;</span>
+    <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/info&#39;</span>)
+
+<span style="color:#a6e22e">@account.route</span>(<span style="color:#e6db74">&#39;/info&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">info</span>():
+    data <span style="color:#f92672">=</span> get_flashed_messages(category_filter<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;message&#39;</span>)  <span style="color:#75715e"># 等同于session.pop(&#39;message&#39;)</span>
+    <span style="color:#66d9ef">return</span> Markup(<span style="color:#e6db74">&#39;&lt;h1&gt;{}&lt;/h1&gt;&#39;</span><span style="color:#f92672">.</span>format(data[<span style="color:#ae81ff">0</span>]))
+</code></pre></div><h1 id="3-中间件">3 中间件</h1>
+<p>django中的中间件可以用于登录验证，IP限制的问题，flask的中间件实现原理不同，看下面的列子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    app<span style="color:#f92672">.</span>run()  <span style="color:#75715e"># 这里的run，最终执行的是wsgi_app</span>
+</code></pre></div><p>那么我们如何使用中间件呢，需要在接受请求之前来执行我们的代码，run函数实际上调用的是对象的wsgi_app，那么我们改写wsgi_app即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Middleware</span>(object):
+	<span style="color:#66d9ef">def</span> __init__(applciation):
+		self<span style="color:#f92672">.</span>app <span style="color:#f92672">=</span> application
+
+	<span style="color:#66d9ef">def</span> __call__(self,<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
+		<span style="color:#f92672">...</span> <span style="color:#f92672">...</span>  <span style="color:#75715e"># 可以定制的代码</span>
+		<span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+		<span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>app(<span style="color:#f92672">*</span>arge, <span style="color:#f92672">**</span>kwargs)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+	app<span style="color:#f92672">.</span>wsgi_app <span style="color:#f92672">=</span> Middleware(app<span style="color:#f92672">.</span>wsgi_app)
+    app<span style="color:#f92672">.</span>run()  <span style="color:#75715e"># 这里的run，最终执行的是wsgi_app</span>
+</code></pre></div><p>需要注意的是，<strong>request对象是在wsgi_app执行的时候才会产生的，所以我们这里是没办法直接使用request对象的。</strong></p>
+<h1 id="4-flask-session插件">4 flask-session插件</h1>
+<p>        flask-session插件用于处理session敏感度的问题，如果加密存放在客户端，那么有一定几率被反解，一般情况下，我们会把session放在redis/memcache等nosql中去，使用flask-session可以帮我们简化这个过程。</p>
+<h2 id="41-安装">4.1 安装</h2>
+<p>首先需要安装如下模块</p>
+<ul>
+<li>flask-session:扩展插件</li>
+<li>redis:Python的redis驱动程序</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install flask<span style="color:#f92672">-</span>session
+pip install redis
+</code></pre></div><h2 id="42-将session放在redis中">4.2 将session放在redis中</h2>
+<p>        flask比较厉害的一点，就是想要更换redis存储的位置，那么代码根本不需要修改，只需要添加下面redis的配置即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 在创建app的地方进行配置</span>
+
+<span style="color:#f92672">from</span> flask.ext.session <span style="color:#f92672">import</span> Session 
+<span style="color:#f92672">from</span> redis <span style="color:#f92672">import</span> Redis  
+
+app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SESSION_TYPE&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;redis&#39;</span>
+app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SESSION_REDIS&#39;</span>] <span style="color:#f92672">=</span> Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.13&#39;</span>,port<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;6379&#39;</span>)
+Session(app) 
+</code></pre></div><p>问题:</p>
+<ol>
+<li>新版本已经无法通过flask.ext.session来导入Session对象了，需要使用flask_session来导入Session</li>
+<li>如果redis存在密码，那么只需要给Redis对象添加password属性即可</li>
+</ol>
+<p>redis中存储的session格式：（存放的是session的id,利用uuid生成)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">10.0.0.13:6379&gt; keys *
+1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;session:857c79dc-3871-4a89-9737-ce6b4aeea3b8&#34;</span>
+2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;session:48c714d0-9c54-434b-b43a-70a53c1e0056&#34;</span> 
+</code></pre></div><h2 id="43-为什么可以直接使用">4.3 为什么可以直接使用</h2>
+<p>        还记得的我们session生成的过程吗？当用户第一次访问时，如果session为空，那么会使用SecureCookieSessionInterface()为我们生成一个session(空字典)，然后调用它的open_session方法来处理生成新的session。</p>
+<p>        在使用前我们使用Session(app)包装了一下我们的app，它做了什么？</p>
+<ul>
+<li>利用init_app初始化app</li>
+<li>将app的session_interface替换为Session对象的_get_interface(app)的返回值</li>
+<li>内部将system_interface替换成了RedisSessionInterface对象的实例</li>
+<li>所以再执行open_session方法的时候，其实已经被换成了RedisSessionInterface的open_session方法</li>
+<li>在它们内部处理redis相关的读取操作</li>
+</ul>
+<blockquote>
+<p>利用uuid生成的随机唯一ID，通过cookie写到客户端，真正保存的信息，存放在redis中
+{% endraw %}</p>
+</blockquote>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

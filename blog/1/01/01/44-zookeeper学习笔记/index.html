@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>44-zookeeper学习笔记 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">44-zookeeper学习笔记</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 3 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<h1 id="1-zookeeper">1 zookeeper</h1>
+<p>        zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。</p>
+<h1 id="2-应用场景">2 应用场景</h1>
+<p>        越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。</p>
+<h1 id="3-zookeeper的体系架构">3 zookeeper的体系架构</h1>
+<p>        server端集群架构（leader及follower）每个集群仅选出一个leader，其他zk节点均为follower，具有fast fail特性（leader失效，快速在剩下的follower中竞选leader），非常健壮，无单点，不超过半数Server挂掉不影响提供服务（所以建议zookeeper的节点个数为奇数个，比如zk节点为4个，那么挂两个节点，整个集群就会失效，而5个的话，挂3个才会失效），采用master/Slave模式
+<img src="photo/zookeeper.png" alt="zookeeper"></p>
+<h1 id="4-zookeeper的工作原理">4 zookeeper的工作原理</h1>
+<p>        zookeeper和核心是原子广播，这个机制保证了各个server之间的同步。实现这个机制的协议叫做zab协议。zab协议有两种模式，分别使用的是<code>恢复模式（选主）</code>和<code>广播模式（同步）</code>。当服务启动或者在领导者崩溃后，zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。<br>
+        为保证事务的顺序一致性，zookeeper采用了递增的事务id号(zxid)来标识事务。所有的协议(请求)都在被提出的时候加上了zxid。zxid是一个64位的数字，它的高32位是epoch用来表示leader关系是否改变，每次一个leader被选举出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。简单来说：高32位就是标识当前系统的leader的，低32位就是当前环境下zxid的计数
+每个Server在工作过程中有三种状态：</p>
+<ol>
+<li>LOOKING：当前Server不知道leader是谁，正在搜寻</li>
+<li>LEADING：当前Server即为选举出来的leader</li>
+<li>FOLLOWING：leader已经选举出来，当前Server与之同步</li>
+</ol>
+<h2 id="41-选主流程">4.1 选主流程</h2>
+<p>        当leader崩溃或者服务刚刚启动时，这时zk进入恢复模式，恢复模式需要重新选举出一个新的leader，让所有的Server都恢复到一个正确的状态。zk的选举算法有两种：一种是基于basic paxos实现的，另外一种是基于fast paxos算法实现的。系统默认的选举算法为fast paxos。流程如下；
+<img src="photo/flow.png" alt="flow"></p>
+<ol>
+<li>选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server；</li>
+<li>选举线程首先向所有Server节点发起一次询问（包括自己）；</li>
+<li>选举线程收到回复后，验证是否是自己发起的讯问（验证zxid是否一致），然后获取对方的id（myid），并存储到当前询问对象列表中，最后堆取对方提出的leader相关信息（id，zxid）并将这些信息存储到当次选举的投票记录表中；</li>
+<li>收到所有Server回复后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server；</li>
+<li>线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2+1的Server票数，就设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。</li>
+<li>要使Leader获得多数Server的支持，则Server的总数必须是奇数（2n+1），且存活的Server数目不得少于n+1</li>
+</ol>
+<p>每个Server启动都会重复以上流程。在恢复模式下，如果是刚存崩溃状态恢复的或者刚启动的Server还会从磁盘快照中恢复数据和会话消息，zk会记录事务日志并定期进行快照，方便在恢复时期进行状态恢复。选主流程图如下：</p>
+<blockquote>
+<p>原理简单来说，就是要选举leader，会生成一个zxid，然后分发给所有的server（所以这里一台server可以接受多台server给他发送要选举leader的请求），然后各个server根据发送给自己的zxid，选择一个值最大的，然后将这个选择返回给发送这个zxid的server，只要这个server收到的答复大于等于2/n+1个（也就是超过半数的同意票），则表明自己当选为leader，然后会向所有server广播自己已经成为leader。</p>
+</blockquote>
+<h2 id="42-同步流程">4.2 同步流程</h2>
+<p>选举完leader以后，zk就进入了状态同步过程。</p>
+<ol>
+<li>leader等待server链接</li>
+<li>follower链接leader，将最大的zxid发送给leader</li>
+<li>leader根据follower的zxid确定同步点</li>
+<li>完成同步后通知follower已经成为<code>up to date</code>状态</li>
+<li>follower收到uptodate消息后，就可以接受client的请求进行服务了。</li>
+</ol>
+<p><img src="photo/flow1.png" alt="flow1"></p>
+<h2 id="43-角色与工作流程">4.3 角色与工作流程</h2>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leader</td>
+<td>负责投票的发起和决议，更新系统状态。Leader数据是最新的、最权威的。</td>
+</tr>
+<tr>
+<td>Follower</td>
+<td>接受客户端读请求并返回结果，写请求转给Leader。参与选主投票</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td>接受客户端读请求并返回结果，写请求发给Leader。不参与投票。扩展节点，减轻读压力</td>
+</tr>
+<tr>
+<td>Client</td>
+<td>读写请求的发起方</td>
+</tr>
+</tbody>
+</table>
+<h3 id="431-leader的工作流程">4.3.1 leader的工作流程</h3>
+<p>leader主要有三个功能</p>
+<ol>
+<li>恢复数据</li>
+<li>维持与Learner的心跳，</li>
+<li>learner的消息类型主要有ping消息、request消息、ack消息、revalidate消息.</li>
+</ol>
+<p><img src="photo/flow3.png" alt="flow3"></p>
+<p>根据不同的消息类型进行不同的处理</p>
+<ul>
+<li><code>ping消息</code>：指learner的心跳消息。</li>
+<li><code>request消息</code>：是follower发送的提议消息。（包括写请求与同步请求）</li>
+<li><code>ack消息</code>：是follower对提议的回复，超过半数的follower通过，则commit该提议。</li>
+<li><code>revalidate消息</code>：是用来延长session有效时间的。</li>
+</ul>
+<h3 id="432-follower工作流程">4.3.2 follower工作流程</h3>
+<p>follower主要有四个功能</p>
+<ol>
+<li>向leader发送请求(ping消息、request消息、ack消息、revalidate消息）</li>
+<li>接受leader的消息并处理</li>
+<li>接受client的请求，如果为写请求，发送给leader进行投票</li>
+<li>返回client结果</li>
+</ol>
+<p>follower的消息循环处理如下集成来自leader的消息</p>
+<ul>
+<li>ping消息：心跳消息</li>
+<li>proposal消息：leader发起的提案，要求follower投票；</li>
+<li>commit消息：服务器端最新一次提案的消息：</li>
+<li>uptodate消息：表明同步完成；</li>
+<li>revalidate消息：根据leader的revalidate结果，关闭带revalidate的session还是允许其接收消息；</li>
+<li>sync消息：返回sync结果到客户端，这个消息最初由客户端发起，用来强制道德最新的更新；</li>
+</ul>
+<p>follower的工作流程简图如下所示，在实际实现中，follower是通过5个线程来实现的</p>
+<p><img src="photo/flow4.png" alt="flow4"></p>
+<p>对于observer的流程不再叙述，observer流程和Follower的唯一不同的地方就是observer不会参加leader发起的投票。
+资料来源：http://cailin.iteye.com/blog/2014486/
+<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/">http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/</a></p>
+<h1 id="5-安装">5 安装</h1>
+<p>(建议在Linux/Mac下运行)</p>
+<p>软件需求：需要安装jdk，1.8+ 以上。</p>
+<p>下载zookeeper软件包：http://zookeeper.apache.org/releases.htm</p>
+<p>安装方式：解压就可以使用，建议配置一下JAVA_HOME变量</p>
+<p>yum安装的jdk一般存放在/usr/java下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># vim /etc/profile.d/jdk.sh </span>
+export JAVA_HOME<span style="color:#f92672">=/</span>usr<span style="color:#f92672">/</span>java<span style="color:#f92672">/</span>default 
+export PATH<span style="color:#f92672">=</span><span style="color:#960050;background-color:#1e0010">$</span>JAVA_HOME<span style="color:#f92672">/</span>bin:<span style="color:#960050;background-color:#1e0010">$</span>PATH
+</code></pre></div><h1 id="6-配置文件">6 配置文件</h1>
+<p>conf目录下为zookeeper的配置文件，默认zookeeper提供了一个simple文件，我们可以根据它来定制我们自己的配置文件.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp zoo_simple.cfg zoo.cfg
+</code></pre></div><p>一个基本的zoo.cfg文件为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tickTime<span style="color:#f92672">=</span><span style="color:#ae81ff">2000</span>
+initLimit<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+syncLimit<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+dataDir<span style="color:#f92672">=/</span>tmp<span style="color:#f92672">/</span>zookeeper
+dataLogDir<span style="color:#f92672">=/</span>tmp<span style="color:#f92672">/</span>zookeeper<span style="color:#f92672">/</span>log
+clientPort<span style="color:#f92672">=</span><span style="color:#ae81ff">2181</span>
+
+<span style="color:#75715e"># 集群配置部分</span>
+server<span style="color:#f92672">.</span><span style="color:#ae81ff">1</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.10</span>:<span style="color:#ae81ff">2887</span>:<span style="color:#ae81ff">3887</span>
+server<span style="color:#f92672">.</span><span style="color:#ae81ff">2</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.10</span>:<span style="color:#ae81ff">2888</span>:<span style="color:#ae81ff">3888</span>
+server<span style="color:#f92672">.</span><span style="color:#ae81ff">3</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.10</span>:<span style="color:#ae81ff">2889</span>:<span style="color:#ae81ff">3889</span>
+</code></pre></div><table>
+<thead>
+<tr>
+<th>配置项目</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clientPort</td>
+<td>客户端通信端口</td>
+</tr>
+<tr>
+<td>dataDir</td>
+<td>zk的数据目录，持久化内存数据的目录，快照</td>
+</tr>
+<tr>
+<td>dataLogDir</td>
+<td>顺序日志存储目录</td>
+</tr>
+<tr>
+<td>tickTime</td>
+<td>滴答声，以后凡是用到时间都是以这个时间间隔tick为单位，本例中，设定时 间1个tick是2000毫秒</td>
+</tr>
+<tr>
+<td>initLimit=10</td>
+<td>Follower到Leader初始化连接的忍受的最长时间间隔，2000ms*10=20s</td>
+</tr>
+<tr>
+<td>syncLimit=5</td>
+<td>Follower和Leader之间通信，请求和应答的时间上限为5个tick间隔</td>
+</tr>
+<tr>
+<td>server.1=nodex:2887:3887</td>
+<td>server.x，x是每一个server的myid nodex必须是每一个主机都能解析的主机名，可以用ip <!-- raw HTML omitted -->2887，Follower和Leader之间通信端口 <!-- raw HTML omitted -->3887，选举用端口</td>
+</tr>
+</tbody>
+</table>
+<h2 id="61-myid">6.1 myid</h2>
+<p>集群模式下，需要配置myid文件，它存放在对应节点的data目录下，名字为myid，如果集群无法启动，请确认该文件是否存在</p>
+<h2 id="62-启动模式">6.2 启动模式</h2>
+<p>主要分为两种模式：</p>
+<ul>
+<li>单机模式：单节点单进程跑</li>
+<li>集群模式
+<ul>
+<li>伪集群：单节点跑多个进程</li>
+<li>真集群：多节点跑</li>
+</ul>
+</li>
+</ul>
+<p>建议使用多节点，可靠性更高</p>
+<h1 id="7-基本操作">7 基本操作</h1>
+<p>配置zookeeper目录下的bin目录，到PATH中，可以方便的直接使用bin下面的命令，否则只能使用绝对路径了。
+使用zkCli.sh连接zookeeper，常用参数</p>
+<ul>
+<li><code>timeout</code>：当前会话的超时时间，zookeper依靠与客户端的心跳来判断会话是否有效，单位是毫秒</li>
+<li><code>r</code>： 只读模式，zookeeper的只读模式指一个服务器与集群中过半机器失去连接以后，这个服务器就不在不处理客户端的请求，但我们仍然希望该服务器可以提供读服务。</li>
+<li><code>server</code>：zookeeper服务器ip地址和端口号</li>
+</ul>
+<h2 id="71-结构">7.1 结构</h2>
+<p>Zk是一种树型层次目录结构数据模型。每个节点称作ZNode。每一个节点ZNode可以包含数据和子节点(Ephemeral类型节点不能有子节点)。
+ZNode有2种类型:</p>
+<ul>
+<li>Ephemeral临时的:临时节点是会话级的，会话结束时节点会被自动删除，不能有子节点。</li>
+<li>Persistent持久的:持久节点可以长期保存数据。
+<ul>
+<li>Sequential节点：这种节点是顺序节点</li>
+</ul>
+</li>
+</ul>
+<p>组合使用生成4种形式节点：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PERSISTENT</td>
+<td>create 持久节点</td>
+</tr>
+<tr>
+<td>EPHEMERAL</td>
+<td>create -e /test/epath e，客户端断开，节点就消失了</td>
+</tr>
+<tr>
+<td>PERSISTENT_SEQUENTIAL</td>
+<td>create -s /test/spath s，连续执行几次看看效果</td>
+</tr>
+<tr>
+<td>EPHEMERAL_SEQUENTIAL</td>
+<td>create -e -s /test/spath s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="72-命令行操作">7.2 命令行操作</h2>
+<p>下面是常用操作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls <span style="color:#960050;background-color:#1e0010">查看节点</span>
+    ls path [watch]
+ls2 <span style="color:#960050;background-color:#1e0010">查看节点和信息</span> 
+    ls2 path [watch]
+get <span style="color:#960050;background-color:#1e0010">获取节点的信息</span> 
+    get path [watch]
+create <span style="color:#960050;background-color:#1e0010">创建</span>path<span style="color:#960050;background-color:#1e0010">，设置数据</span>
+    create [<span style="color:#f92672">-</span>s] [<span style="color:#f92672">-</span>e] path data acl 
+delete <span style="color:#960050;background-color:#1e0010">删除</span>path
+    delete path [version]
+</code></pre></div><ul>
+<li>-s 表示数据类型为序列</li>
+<li>-e 表示数据为临时数据(绑定owner节点，当owner断开时，对应配置消失)</li>
+</ul>
+<blockquote>
+<p>create的时候必须指定节点属性，当节点没有属性时，可以使用create /data []</p>
+</blockquote>
+<p>下面是基础命令操作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 16<span style="color:#f92672">]</span> create /name data
+Created /name
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 17<span style="color:#f92672">]</span> ls /name
+<span style="color:#f92672">[]</span>
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 18<span style="color:#f92672">]</span> get /name
+data
+cZxid <span style="color:#f92672">=</span> 0x30000003c
+ctime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:41:47 CST <span style="color:#ae81ff">2019</span>
+mZxid <span style="color:#f92672">=</span> 0x30000003c
+mtime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:41:47 CST <span style="color:#ae81ff">2019</span>
+pZxid <span style="color:#f92672">=</span> 0x30000003c
+cversion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+dataVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+aclVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+ephemeralOwner <span style="color:#f92672">=</span> 0x0
+dataLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+numChildren <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 20<span style="color:#f92672">]</span> create -s /name/habby lanqiu
+Created /name/habby0000000000
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 21<span style="color:#f92672">]</span> create -s /name/habby zuqiu
+Created /name/habby0000000001
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 24<span style="color:#f92672">]</span> ls /name
+<span style="color:#f92672">[</span>habby0000000001, habby0000000000<span style="color:#f92672">]</span>  <span style="color:#75715e"># 序列类型</span>
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 25<span style="color:#f92672">]</span> get /name/habby0000000001
+zuqiu
+cZxid <span style="color:#f92672">=</span> 0x30000003e
+ctime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:43:04 CST <span style="color:#ae81ff">2019</span>
+mZxid <span style="color:#f92672">=</span> 0x30000003e
+mtime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:43:04 CST <span style="color:#ae81ff">2019</span>
+pZxid <span style="color:#f92672">=</span> 0x30000003e
+cversion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+dataVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+aclVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+ephemeralOwner <span style="color:#f92672">=</span> 0x0
+dataLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+numChildren <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 26<span style="color:#f92672">]</span>
+
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 44<span style="color:#f92672">]</span> create -e -s /data/agent 10.0.0.10
+Created /data/agent0000000000
+<span style="color:#f92672">[</span>zk: 127.0.0.1:2182<span style="color:#f92672">(</span>CONNECTED<span style="color:#f92672">)</span> 45<span style="color:#f92672">]</span> get /data/agent0000000000
+10.0.0.10
+cZxid <span style="color:#f92672">=</span> 0x300000048
+ctime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:55:05 CST <span style="color:#ae81ff">2019</span>
+mZxid <span style="color:#f92672">=</span> 0x300000048
+mtime <span style="color:#f92672">=</span> Sun Apr <span style="color:#ae81ff">14</span> 18:55:05 CST <span style="color:#ae81ff">2019</span>
+pZxid <span style="color:#f92672">=</span> 0x300000048
+cversion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+dataVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+aclVersion <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+ephemeralOwner <span style="color:#f92672">=</span> 0x2000b1cd6260006   <span style="color:#75715e"># 当前session id，退出时，当前配置失效</span>
+dataLength <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
+numChildren <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>PS：利用zookeeper的这种特性，我们的分布式应用心跳可以通过zookeeper来做，agent可以使用-e的方式来zookeeper中注册，当agent失效时，那么zookeeper中的相关配置就会被剔除，此时agent失效。</p>
+<h1 id="8-python操作zookeeper">8 Python操作zookeeper</h1>
+<p>利用kazoo库，来操作zookeeper，使用pip安装即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> kazoo.client <span style="color:#f92672">import</span> KazooClient
+
+zk <span style="color:#f92672">=</span> KazooClient(hosts<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.10:2181&#39;</span>)
+zk<span style="color:#f92672">.</span>start()
+
+<span style="color:#75715e">## 新增</span>
+zk<span style="color:#f92672">.</span>create(<span style="color:#e6db74">&#39;/name&#39;</span>, <span style="color:#e6db74">&#39;daxin&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))  <span style="color:#75715e"># create /name daxin</span>
+zk<span style="color:#f92672">.</span>ensure_path(<span style="color:#e6db74">&#39;/name1&#39;</span>)  <span style="color:#75715e"># 确保/name1存在，不存在创建(递归创建)</span>
+zk<span style="color:#f92672">.</span>create(<span style="color:#e6db74">&#39;/cmdb/agent/10.0.0.10&#39;</span>, <span style="color:#e6db74">&#39;nginx&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>), sequence<span style="color:#f92672">=</span>True, ephemeral<span style="color:#f92672">=</span>True)  <span style="color:#75715e"># create -e -s /cmdb/agent/10.0.0.10 nginx</span>
+
+<span style="color:#75715e">## 获取</span>
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;/name&#39;</span>)  <span style="color:#75715e"># get /name</span>
+datas <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>get_children(<span style="color:#e6db74">&#39;/name&#39;</span>) <span style="color:#75715e"># ls /name</span>
+
+<span style="color:#75715e">## 修改</span>
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;helloworld&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))  <span style="color:#75715e"># 修改数据</span>
+
+<span style="color:#75715e">## 删除</span>
+zk<span style="color:#f92672">.</span>delete(<span style="color:#e6db74">&#39;/name&#39;</span>)  <span style="color:#75715e"># delete /name , 不存在，异常</span>
+
+<span style="color:#75715e">## 其他判断</span>
+zk<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;/name&#39;</span>)   <span style="color:#75715e"># 判断/name 是否存在，不存在返回None，存在返回对应的ZnodeStat对象</span>
+
+zk<span style="color:#f92672">.</span>close()
+</code></pre></div><h2 id="81-watcher">8.1 watcher</h2>
+<p>可以在get、get_children、exists方法上。当这些get、exists方法调用时，将watcher挂在节点上，如果节点改变或被删除，触发watcher。注意，<code>该节点事件触发一次</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> kazoo.client <span style="color:#f92672">import</span> KazooClient
+
+zk <span style="color:#f92672">=</span> KazooClient(hosts<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.10:2181&#39;</span>)
+zk<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">watcher</span>(event):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;--&gt;&#39;</span>,event)  <span style="color:#75715e"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
+
+
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;/name&#39;</span>,watch<span style="color:#f92672">=</span>watcher)
+<span style="color:#66d9ef">print</span>(data)
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;daxin&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+<span style="color:#66d9ef">print</span>(data)
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;dachenzi&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+<span style="color:#66d9ef">print</span>(data)
+
+
+<span style="color:#75715e">########</span>
+<span style="color:#f92672">from</span> kazoo.client <span style="color:#f92672">import</span> KazooClient
+<span style="color:#f92672">from</span> kazoo.protocol.states <span style="color:#f92672">import</span> ZnodeStat
+zk <span style="color:#f92672">=</span> KazooClient(hosts<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.10:2181&#39;</span>)
+zk<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">watcher</span>(<span style="color:#f92672">*</span>args):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;--&gt;&#39;</span>,args)  <span style="color:#75715e"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
+
+zk<span style="color:#f92672">.</span>create(<span style="color:#e6db74">&#39;/names&#39;</span>)
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;/names&#39;</span>,watch<span style="color:#f92672">=</span>watcher)
+<span style="color:#66d9ef">print</span>(data)
+data <span style="color:#f92672">=</span> zk<span style="color:#f92672">.</span>delete(<span style="color:#e6db74">&#39;/names&#39;</span>)  <span style="color:#75715e"># 触发一次</span>
+<span style="color:#66d9ef">print</span>(data)
+</code></pre></div><p>仅仅在第一次执行set的时，触发了watcher函数</p>
+<h2 id="82-高级api">8.2 高级API</h2>
+<p>一般情况下watcher只在该节点上触发一次，kazoo提供了装饰器实现多次触发</p>
+<ul>
+<li>DataWatch()</li>
+<li>ChildrenWatch()</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> kazoo.client <span style="color:#f92672">import</span> KazooClient
+<span style="color:#f92672">from</span> kazoo.protocol.states <span style="color:#f92672">import</span> ZnodeStat
+
+zk <span style="color:#f92672">=</span> KazooClient(hosts<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10.0.0.10:2181&#39;</span>)
+zk<span style="color:#f92672">.</span>start()
+<span style="color:#a6e22e">@zk.DataWatch</span>(<span style="color:#e6db74">&#39;/name&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">watcher</span>(<span style="color:#f92672">*</span>args):
+    <span style="color:#66d9ef">print</span>(args)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">30</span>)
+
+
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;123&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))  <span style="color:#75715e"># 每次触发都会执行</span>
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;123&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;123&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;123&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+zk<span style="color:#f92672">.</span>set(<span style="color:#e6db74">&#39;/name&#39;</span>,<span style="color:#e6db74">&#39;123&#39;</span><span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+</code></pre></div><p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

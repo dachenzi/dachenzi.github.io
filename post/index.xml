@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on daxin&#39;s blog</title>
+    <link>https://dachenzi.github.io/post/</link>
+    <description>Recent content in Posts on daxin&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://dachenzi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-ansible</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-ansible/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-ansible/</guid>
+      <description>{% raw %}
+文章目录 1 简介  1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍   2 Ansible配置文件介绍  2.1 常用配置 2.2 ssh相关 2.3 权限提升相关   3 常用模块  3.1 setup 3.2 file 3.3 copy 3.4 command 3.5 shell 3.6 service 3.7 cron 3.8 filesystem 3.9 yum 3.10 user 3.11 synchronize 3.12 mount 3.12 template 3.13 get_url 3.14 unarchive 3.15 git 3.16 stat 3.17 sysctl   4 模块的返回值 5 YAML简介  5.</description>
+    </item>
+    
+    <item>
+      <title>1-django-介绍-MTV-命令-基础配置-admin</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</guid>
+      <description>{% raw %}
+文章目录 1 什么是web框架 2 WSGI 3 MVC与MTV模式  3.1 MVC框架 3.2 MTV框架 3.3 区别   4 django介绍  4.1 Django处理顺序 4.2 创建django站点  4.2.1 安装Django 4.2.2 创建一个project 4.2.3 创建一个app 4.2.3 启动Django项目   4.3 Django 版的 hello world  4.3.1 定义URL选择器 4.3.2 定义views函数 4.3.3 启动服务   4.4 基础配置  4.4.1 配置静态文件存放路径 4.4.2 配置模板路径 4.4.3 关闭csrftoken 4.4.4 连接数据库 4.4.5 加载静态文件   4.5 django admin配置  4.</description>
+    </item>
+    
+    <item>
+      <title>1-docker入门介绍</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>{% raw %}
+1 虚拟化介绍 主流的虚拟机化方式：
+ 主机级虚拟化：虚拟化的是整个完整的物理硬件平台(VMware workstation) 容器级虚拟化：虚拟化的是一个个的用户空间  主机虚拟化两种类型的实现：
+ Type-I:直接在硬件设备上安装虚拟机管理器一般叫hypervisor，然后再来创建虚拟机 Type-II:在宿主机上安装一个宿主机操作系统，再装一个VMM(viurtul Machine Manage) 虚拟机管理器，然后再来创建虚拟机（WMware、virtualbox等)  没有一个虚拟机是直接跑在硬件设备之上的。所以减少中间层，中间环境，就可以有效的提高效率。  由图可知，去掉虚拟机的内核以后，就需要直接在主机的用户空间内进行分割，形成多个用户态，在这些独立分割的用户空间内去运行应用程序。
+2 容器技术  不同用户空间内，主机名肯定需要不相同、并且PID号、文件系统等，都应该相对隔离，所以每一个用户空间都应该存在以下七个部分：
+ 主机名/域名（UTS） 文件系统（Mount） - 树形结构 进程间通讯（IPC） 进程(PID) - 树形结构（归属与init或者本身就是init) 用户(User) 网络(Network)   Linux在内合层面通过使用名称空间(namespace)对以上六种资源进行的隔离进行直接支持，并通过系统调用直接输出。但是不同的内核版本对名称空间的支持不同，下面是六大资源实现的内核版本
+   namespace 系统调用参数 隔离内容 内核版本     UTS CLONE_NEWUTS 主机和域名 2.6.19   IPC CLONE_NEWIPC 信号量、消息队列和共享内存 2.6.19   PID CLONE_NEWPID 进程编号 2.6.24   Network CLONE_NEWNET 网络设备、网络栈、端口等 2.</description>
+    </item>
+    
+    <item>
+      <title>1-flask-快速入门-配置-路由基础-请求与响应</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</guid>
+      <description>{% raw %}
+文章目录 1 werkzeug 2 hello world 3 静态文件和模板文件配置 4 用户登录 5 session使用  5.1 基于装饰器的用户认证 5.2 endpoint 5.3 functools.wraps 5.4 session的产生过程分析   6 配置基础  6.1 内置的配置值 6.2 Flask的默认配置 6.3 最佳实践 6.4 动态加载的思想   7 路由系统  7.1 路由系统的本质 7.2 FBV和CBV   8 flask中的before/after 9 请求和响应相关  9.1 上传及保存文件 9.2 构建响应头   10 模板使用  10.1 template_global和template_filter    1 werkzeug  Werkzeug是一个全面的WSGI Web应用程序库。它最初是作为WSGI应用程序的各种实用程序的简单集合开始的，并且已经成为最先进的WSGI实用程序库之一。</description>
+    </item>
+    
+    <item>
+      <title>1-JavaScript介绍及使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+文章目录 1 JavaScript概述  1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成   2 JavaScript基础  2.1 JavaScript调用方式 2.2 JavaScript的变量标识符  2.2.1 变量的命名 2.2.2 标识符   2.3 JS的数据类型  2.3.1 数字(Number)类型 2.3.2 字符串(String)类型 2.3.3 布尔(Boolean)类型 2.3.4 数组(Array)类型 2.3.5 对象(Object) 2.3.6 空(Null)类型和未定义(Undefined)类型 2.3.7 声明变量类型   2.4 运算符  2.4.1 == 和 === 的区别 2.4.2 variable++和++variable的区别 2.4.3 三元运算符 2.4.4 逗号操作符 2.4.5 其他   2.5 流程控制  2.5.1 顺序结构 2.</description>
+    </item>
+    
+    <item>
+      <title>1-random模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-random%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-random%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+1 随机数random  之所以在这里介绍random模块是因为，我们可能需要在列表中随机挑选一个或几个重复或者不重复的数据，这时，就可以使用python得知的radnom模块。我们常用的函数如下：
+random.randint(a,b): 返回[a,b]之间的整数,包含a和b本身。 random.choice(seq): 从非空序列的元素中随机挑选一个元素。 random.randrange([start,] stop, [,step]): 从指定范围内获取一个随机数。和range相同属于前包后不包区间, start(起始) 默认为0，step（步长) 默认为1 random.shuffle(list) --&amp;gt; None : 直接对原列表进行洗牌(随机打乱) random.sample(population, k): 从population(样本空间)中随机选取出k个不同的元素，返回一个新的列表 下面是例子：
+In [24]: import random In [25]: random.randint(1,10) Out[25]: 4 In [26]: random.choice(range(10)) Out[26]: 5 In [27]: random.randrange(1) Out[27]: 0 In [28]: random.randrange(0,5,2) Out[28]: 2 In [31]: lst = list(range(10)) In [32]: random.shuffle(lst) In [33]: lst Out[33]: [8, 1, 6, 4, 3, 9, 7, 0, 5, 2] In [34]: random.</description>
+    </item>
+    
+    <item>
+      <title>1-zookeeper</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-zookeeper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-zookeeper/</guid>
+      <description>{% raw %}
+1 zookeeper  zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。
+2 应用场景  越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。
+3 zookeeper的体系架构  server端集群架构（leader及follower）每个集群仅选出一个leader，其他zk节点均为follower，具有fast fail特性（leader失效，快速在剩下的follower中竞选leader），非常健壮，无单点，不超过半数Server挂掉不影响提供服务（所以建议zookeeper的节点个数为奇数个，比如zk节点为4个，那么挂两个节点，整个集群就会失效，而5个的话，挂3个才会失效），采用master/Slave模式 4 zookeeper的工作原理  zookeeper和核心是原子广播，这个机制保证了各个server之间的同步。实现这个机制的协议叫做zab协议。zab协议有两种模式，分别使用的是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。
+为保证事务的顺序一致性，zookeeper采用了递增的事务id号(zxid)来标识事务。所有的协议(请求)都在被提出的时候加上了zxid。zxid是一个64位的数字，它的高32位是epoch用来表示leader关系是否改变，每次一个leader被选举出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。简单来说：高32位就是标识当前系统的leader的，低32位就是当前环境下zxid的计数 每个Server在工作过程中有三种状态：
+ LOOKING：当前Server不知道leader是谁，正在搜寻 LEADING：当前Server即为选举出来的leader FOLLOWING：leader已经选举出来，当前Server与之同步  4.1 选主流程  当leader崩溃或者服务刚刚启动时，这时zk进入恢复模式，恢复模式需要重新选举出一个新的leader，让所有的Server都恢复到一个正确的状态。zk的选举算法有两种：一种是基于basic paxos实现的，另外一种是基于fast paxos算法实现的。系统默认的选举算法为fast paxos。流程如下；  选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server； 选举线程首先向所有Server节点发起一次询问（包括自己）； 选举线程收到回复后，验证是否是自己发起的讯问（验证zxid是否一致），然后获取对方的id（myid），并存储到当前询问对象列表中，最后堆取对方提出的leader相关信息（id，zxid）并将这些信息存储到当次选举的投票记录表中； 收到所有Server回复后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server； 线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2+1的Server票数，就设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。 要使Leader获得多数Server的支持，则Server的总数必须是奇数（2n+1），且存活的Server数目不得少于n+1  每个Server启动都会重复以上流程。在恢复模式下，如果是刚存崩溃状态恢复的或者刚启动的Server还会从磁盘快照中恢复数据和会话消息，zk会记录事务日志并定期进行快照，方便在恢复时期进行状态恢复。选主流程图如下：
+ 原理简单来说，就是要选举leader，会生成一个zxid，然后分发给所有的server（所以这里一台server可以接受多台server给他发送要选举leader的请求），然后各个server根据发送给自己的zxid，选择一个值最大的，然后将这个选择返回给发送这个zxid的server，只要这个server收到的答复大于等于2/n+1个（也就是超过半数的同意票），则表明自己当选为leader，然后会向所有server广播自己已经成为leader。
+ 4.2 同步流程 选举完leader以后，zk就进入了状态同步过程。
+ leader等待server链接 follower链接leader，将最大的zxid发送给leader leader根据follower的zxid确定同步点 完成同步后通知follower已经成为up to date状态 follower收到uptodate消息后，就可以接受client的请求进行服务了。  4.3 角色与工作流程    角色 功能     Leader 负责投票的发起和决议，更新系统状态。Leader数据是最新的、最权威的。   Follower 接受客户端读请求并返回结果，写请求转给Leader。参与选主投票   Observer 接受客户端读请求并返回结果，写请求发给Leader。不参与投票。扩展节点，减轻读压力   Client 读写请求的发起方    4.</description>
+    </item>
+    
+    <item>
+      <title>1-冒泡排序</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <description>{% raw %}
+1 冒泡算法  冒泡排序（Bubble Sort），是一种计算机科学领域的较简单的排序算法,它属于交换排序，主要的方式是通过两辆比较，交换位置，如同水泡咕嘟咕嘟往上冒一样，需要称他为&amp;rsquo;冒泡排序&#39;。
+2 具体的排序方法  它重复地走访过要排序的元素列，依次比较两个相邻的元素，按照一定的顺序(升序/降序)进行比较，如果是升序，那么当右边的数小于左边的数，那么就会进行交换，直到没有相邻的元素需要交换后停止。此时表示该列元素已经排序完成。
+3 分析  根据定义，我们知道最少需要两个循环，第一个循环遍历所有元素，内层循环则进行两两比较及换位的操作。
+升序分析：
+初始列表：[9,1,3,2,6,8,7,4,5]
+第一趟,第一次：比较9和1的大小情况，9大于1，需要调换位置[1,9,3,2,6,8,7,4,5]
+第一趟,第二次：比较9和3的大小情况，9大于3，需要调换位置[1,3,9,2,6,8,7,4,5]
+第一趟,第三次：比较9和2的大小情况，9大于2，需要调换位置[1,3,2,9,6,8,7,4,5]
+第一趟,第四次：比较9和6的大小情况，9大于6，需要调换位置[1,3,2,6,9,8,7,4,5]
+第一趟,第五次：比较9和8的大小情况，9大于8，需要调换位置[1,3,2,6,8,9,7,4,5]
+第一趟,第六次：比较9和7的大小情况，9大于7，需要调换位置[1,3,2,6,8,7,9,4,5]
+第一趟,第七次：比较9和4的大小情况，9大于4，需要调换位置[1,3,2,6,8,7,4,9,5]
+第一趟,第八次：比较9和5的大小情况，9大于5，需要调换位置[1,3,2,6,8,7,4,5,9]
+第一趟确定了一个最大数，放在最右边。接下来在除他以外的未排序空间进行第二趟循环，确认第二大的数放在最油边
+第二趟初始列表：[1,3,2,6,8,7,4,5,9]
+第二趟,第一次：比较1和3的大小情况，1小于3，不用调换位置[1,3,2,6,8,7,4,5,9]
+第二趟,第二次：比较3和2的大小情况，3大于2，需要调换位置[1,2,3,6,8,7,4,5,9]
+第二趟,第三次：比较3和6的大小情况，3小于6，不用调换位置[1,2,3,6,8,7,4,5,9]
+第二趟,第四次：比较6和8的大小情况，6小于8，不用调换位置[1,2,3,6,8,7,4,5,9]
+第二趟,第五次：比较8和7的大小情况，8大于7，需要调换位置[1,2,3,6,7,8,4,5,9]
+第二趟,第六次：比较8和4的大小情况，8大于4，需要调换位置[1,2,3,6,7,4,8,5,9]
+第二趟,第七次：比较8和5的大小情况，8大于5，需要调换位置[1,2,3,6,7,4,5,8,9] 第二趟找到了第二大的书，放在了第一趟找出的最大数的左边。
+4 实现  通过观察可以得知，外层循环每次都可以确定一个最大数，放在最右边，而内层循环，判断的次数是依次减少的，因为上一堂确定的最大数，下一趟就不必再进行对比，根据这个情况编写代码进行排序。
+lst = [1,9,3,2,6,8,7,4,5] length = len(lst) for i in range(length): flag = False # 退出开关 for j in range(length - i - 1): if lst[j] &amp;gt; lst[j+1]: flag = True # 如果本次交换了位置，开关位置为关 lst[j], lst[j+1] = lst[j+1], lst[j] if not flag:break # 当开关为开时，表示本次判断没有交换，没有交换，则认为已经排序完毕 print(lst) 5 总结  冒泡法需要数据一轮一轮的比较 可以设定一个标记判断是否有数据交换发生，如果没有发生交换，可以结束排序，因为此时已经排序完毕了，如果发生了交换，那么就需要继续下一轮排序了 最差的排序情况是，出事顺序与目标顺序完全相反，遍历次数1,&amp;hellip;n-1之和： n(n-1)/2 最好的排序情况是，初始顺序与目标顺序完全相同,遍历次数n-1 时间复杂度为O(n**2) {% endraw %}  </description>
+    </item>
+    
+    <item>
+      <title>1-基础概念及环境部署</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>{% raw %}
+文章目录 1. 编程基础  1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展   2. 程序 3. python的语言介绍 4. Python的解释器 5. Python版本区别 6. Python安装  6.1. windows安装 6.2. Linux安装   7. pyenv多版本管理  7.1. pyenv介绍及安装 7.2. virtualenv 7.3. 导出项目依赖包 7.4. pyenv安装位置   8. pip命令  8.1. 命令说明 8.2. 配置说明   9. pycharm安装及基本使用 10. 第一个Python程序  1. 编程基础  首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得&amp;rsquo;翻译&amp;rsquo;成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+所以Python是一种相当高级的语言。
+你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。下面我们了解一下计算机的基础概念
+1.1. 基本概念  程序：是一组能让计算机识别和执行的指令。 计算机五大部件：输入设备、输出设备、运算器、控制器、存储器，各部分主要作用：</description>
+    </item>
+    
+    <item>
+      <title>1-平均负载</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</guid>
+      <description>{% raw %}
+1 平均负载 安装stress，sysstat包
+yum install -y stress sysstat 其中：
+ stress是一个Linux系统压力测试工具，可以用作异常进程，模拟平均负载升高的场景。 sysstat包含了常用的Linux性能工具，用来监控和分析系统的性能。（比如mpstat和pidstat）  mpstat：是一个常用的多喝    {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>1-构建博客-表结构设计-基础配置</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</guid>
+      <description>{% raw %}
+文章目录 1 目标 2 表结构设计  2.1 表结构  2.1.1 用户表 2.1.2 博文表 2.1.3 内容表 2.1.4 关系整理     3 创建django项目 4 基础配置  4.1 构建实体类  4.1.1 user应用 4.1.2 post应用   4.2 装载应用 4.3 配置数据库   5 数据库表迁移  1 目标 利用django完成简单个人博客的开发，主要的功能有
+ 用户  登录 注册   博文  发布博文 查询博文    环境情况：
+ django 1.11.20 Python 3.6.8 pycharm 2017.</description>
+    </item>
+    
+    <item>
+      <title>1-源码安装缺少configure文件</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</guid>
+      <description>{% raw %}
+源代码中没有configure的软件安装方法 今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里记录一下安装遇到的问题 网上大部分GeoIP下载地址已经失效，因为GeoIP新版本GeoIP2，所以这里附旧版Geoip的下载地址：GeoIP下载地址
+生成configure文件的步骤 在软件包内执行如下命令：
+ aclocal autoconf &amp;ndash;&amp;gt; 生成configure文件 autoheader(出现什么AC_CONFIG_HEADERS not found in configure.ac 可以忽略) automake --add-missing(出现ltmain.sh not found，需要执行autoreconf -ivf) &amp;ndash;&amp;gt; 会生成Makefile .in 文件  然后就会生成configure文件，继续按照软件的INSTALL/README文件开始安装即可
+参考： 生成configure
+{% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>10-函数嵌套-作用域-闭包-LEGB-函数销毁</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</guid>
+      <description>{% raw %}
+文章目录 1 函数嵌套 2 作用域  2.1 global关键字   3 闭包  3.1 nonlocal关键字   4 默认值的作用域 5 变量名解析原则LEGB 6 函数的销毁  1 函数嵌套  一个函数中存在另外一个函数(定义/调用)，这种方式我们称之为函数嵌套。所以：函数的嵌套主要分为嵌套调用，以及嵌套定义。
+函数的嵌套调用 def max2(a,b): # 判断两个变量的最大值 return a if a &amp;gt; b else b def max4(a,b,c,d): # 判断四个变量的最大值 res1 = max2(a,b) # 函数的嵌套调用 res2 = max2(res1,c) res3 = max(res2,d) print(res3) max4(10,100,21,99) 函数的嵌套定义 def func1(): print(&amp;#39;from func1&amp;#39;) def func2(): print(&amp;#39;from func2&amp;#39;) def func3(): print(&amp;#39;from func3&amp;#39;) func3() # 只有在func2中才能调用内部定义的函数func3 func2() func1()  注意：在函数的内部定义函数，只能在函数内部进行调用，在其他地方是无法进行调用，强行调用就会提示NameError异常，所以说函数是有可见范围的，这就涉及到了作用域了</description>
+    </item>
+    
+    <item>
+      <title>11-函数的执行流程-函数递归-匿名函数-生成器</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
+      <description>{% raw %}
+文章目录 1 函数的执行流程  1.1 字节码了解压栈过程 1.2 嵌套函数的压栈   2 递归  2.1 递归函数 2.2 递归的性能 2.3 递归的优化 2.4 间接递归 2.5 递归总结   3 匿名函数 4 Python生成器  4.1 基本结构 4.2 使用场景 4.3 协程coriutine 4.4 yield from    1 函数的执行流程 函数的执行需要对函数进行压栈的，什么是压栈呢，简而言之就是在函数执行时在栈中创建栈帧存放需要变量以及指针的意思。具体涉及的知识非常多，这里就已一个Python脚本简单进行分析。
+def foo1(b, b1=3): print(&amp;#39;call foo1&amp;#39;, b, b1) def foo2(c): foo3(c) print(&amp;#39;call foo2&amp;#39;, c) def foo3(d): print(&amp;#39;call foo3&amp;#39;, d) def main(): print(&amp;#39;call main&amp;#39;) foo1(100, 101) foo2(20) print(&amp;#39;main ending&amp;#39;) main() 当我们运行上面代码时，它的执行流程如下：</description>
+    </item>
+    
+    <item>
+      <title>12-树-基础知识-二叉树-完全二叉树-斜树</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</guid>
+      <description>{% raw %}
+文章目录 1 树 2 树的概念 3 树的特点 4 二叉树  4.1 斜树 4.2 满二叉树 4.3 完全二叉树 4.4 二叉树的性质  4.4.1 性质1 4.4.2 性质2 4.4.3 性质3 4.4.4 性质4 4.4.5 性质5 4.4.6 其他性质      1 树  树在数据结构中属于一种非线性结构，每个元素可以有多个前驱和后继，它有如下定义：
+树是n(n≥0)个元素的集合：
+ n = 0 时，成为空树 树只有一个特殊的没有前驱的元素，称为数的根Root 树中除了根节点外，其余元素只能有一个前驱，可以有零个或者多个后继  递归定义：
+ 树T是n(n≥0)个元素的集合。n = 0 时，成为空树 有且只有一个特殊元素根，剩余元素都可以被划分为m个互不相交的集合T1，T2，&amp;hellip;，Tm，而每一个集合都是树，成为T的子树Subtree 子树也有自己的根  2 树的概念 树是一个中非常抽象的概念，下面主要介绍树中各种名词的含义：
+   名称 含义     节点 数中的数据元素   数的度 树内各节点的度的最大值   节点的度(degree) 节点拥有的子树的数目成为度，记作d(v)   叶子节点 节点的度数为0，成为叶子节点leaf、终端节点、末端节点   分支节点 节点度数不为0，成为非终端节点或分支节点   分支 节点之间的关系   内部节点 除根节点外的分支节点，当然也不包括叶子节点   孩子(儿子Child)节点 节点的子树的根节点成为该节点的孩子   双亲(父Parent)节点 一个节点是它各个树的根节点的双亲   兄弟(Sibling)节点 具有相同双亲节点的节点   祖先节点 从根节点到该节点所经分支上所有的节点。   子孙节点 节点的所有子树上的节点都成为该节点的子孙。   节点的层次(Level) 根节点为第一层，根的孩子为第二层，依次类推记作(Lv)   树的深度(高度Depth) 树的层次的最大值   堂兄弟 双亲在同一层的节点   有序树 结点的子树是有顺序的(兄弟有大小，有先后次序)，不能交换   无序数 结点的子树是无序的，可以交换   路径 树中的k个节点n1、n2、&amp;hellip;nk，满足ni是n(i+1)的双亲，成为n1到nk的一条路径。就是一条线串下来的，前一个都是后一个父(前驱)节点。   森林 m(m≥0)课不相交的树的集合，对于节点而言，其子树的集合就是森林。        3 树的特点 下面我们来总结一下书的特点：</description>
+    </item>
+    
+    <item>
+      <title>13-高阶函数-柯里化-装饰器</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/</guid>
+      <description>{% raw %}
+文章目录 1 高阶函数  1.1 自定义sort函数  1.1.1 将规模缩小，先实现排序，先不管key和reverse参数 1.1.2 添加reverse参数判断 1.1.3 添加key参数判断   1.2 内建函数(高阶函数)  1.2.1 sorted排序 1.2.2 filter 过滤 1.2.3 map 映射     2 柯里化 3 装饰器  3.1 需求分析 3.2 函数柯里化 3.3 装饰器函数(语法糖) 3.4 装饰器带来的问题 3.5 拷贝函数属性   4 代参装饰器  4.1 还是从一个需求开始 4.2 代参装饰器编写 4.3 代参装饰器小结    1 高阶函数  在Python中一切皆对象，当然也包括函数。函数在Python中是一等公民(First Class Object)。即函数与字符串数组整型无异，它可以被命名可以被赋值可以当作参数被传进另一个函数也可以被另一个函数当作返回值可以放在任何位置，简单来说：
+ 函数也是一个对象，并且是一个可调用对象(callable) 函数可以作为普通变量、参数、返回值等等   那什么是高阶函数呢？在Python中我们可以理解为：当一个函数接受另一个函数作为参数使用，或者一个函数最后返回了另外一个函数。在这两种情况下，这个函数就可以称之为高阶函数(满足以上任意一种情况即可，不必同时满足)。</description>
+    </item>
+    
+    <item>
+      <title>14-函数参数检测-inspect模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+文章目录 1 python类型注解 2 函数定义的弊端 3 函数文档 4 函数注解  4.1 annotation属性   5 inspect模块  5.1 常用方法 5.2 signature类 5.3 parameters属性 5.4 获取对象的参数签名   6 检查参数  1 python类型注解  类型注解，即对变量的类型，进行标注或者说明，因为Python是一门动态编译型语言，我们无法在赋值时就定义它的变量类型，所以在Python3.5以上版本新增了类型注解，但仅仅是提示作用，并不能严格控制，这是动态编译型语言的通病，下面来仔细看一下什么是Python的类型注解。
+2 函数定义的弊端  Python是动态语言，变量随时可以被赋值，且赋值为不同的类型，这就与静态语言不同了，变量的类型是在运行期决定的，而静态语言事先就已经定义好了变量的类型了。这是动态语言方便之处，但也是一种弊端，我们无法控制变量的类型，也就无法控制异常的产生。举个栗子
+def add(x,y): return x + y print(add(1,2)) print(add(&amp;#39;s&amp;#39;,&amp;#39;b&amp;#39;)) print(add(1,&amp;#39;a&amp;#39;))  当用户传入两个数字时，返回它们的和，但是如果我们传递其他变量呢？比如字符串，因为Python中实现了+号的类型重载，所以说两个字符串的确可以加，但是如果是数字和字符串呢？在Python这种强类型语言中来说，属于非法操作(javascript会隐式转换)，而这时，我们就需要对用户传入的数据进行类型判断，不符合本函数的需求，那么就抛个异常，或者提示等等操作，这样就不会引起后续代码在执行期崩溃。如何解决呢？其实主要有两种方式。
+ 函数文档 函数注解  3 函数文档  在函数中插入说明性文档的方式成为函数文档。
+def add(x, y): &amp;#34;&amp;#34;&amp;#34; This function used to add something :param x: int object :param y: int object :return: int object &amp;#34;&amp;#34;&amp;#34; return x + y 在函数中，一般是定义语句后的首行使用三对双引号表示。通常存储在函数的__doc__属性中。当用户使用help(函数)时，会被打印在屏幕上。</description>
+    </item>
+    
+    <item>
+      <title>15-reduce-pratial偏函数-lsu_cache</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</guid>
+      <description>{% raw %}
+文章目录 介绍 1 reduce方法 2 partial方法(偏函数)  2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.warps实现分析   3 lsu_cache方法  3.1 基本使用 3.2 lru_cache原码分析 3.3 斐波那契序列的lru改造 3.4 lsu_cache的总结    介绍  functools模块存放着很多工具函数，大部分都是高阶函数，其作用于或返回其他函数的函数。一般来说，对于这个模块，任何可调用的对象都可以被视为函数。
+1 reduce方法  其含义是减少，它接受一个两个参数的函数，初始时从可迭代对象中取两个元素交给函数，下一次会将本次函数返回值和下一个元素传入函数进行计算，直到将可迭代对象减少为一个值，然后返回：reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates ((((1+2)+3)+4)+5),
+reduce(function, sequence[, initial]) -&amp;gt; value  function: 两个参数的函数 sequence：可迭代对象(不能为空) initital：初始值(可以理解为给函数的第一个参数指定默认值)，否则第一次会在可迭代对象中再取一个元素  下面是一个求1到100累加的栗子
+# 普通版 In [24]: sum = 0 In [25]: for i in range(1,101): .</description>
+    </item>
+    
+    <item>
+      <title>16-文件操作-StringIO-BytesIO</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</guid>
+      <description>{% raw %}
+文章目录 1 文件操作  1.1 open函数介绍 1.2 打开操作  1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数   1.3 读写操作 1.4 关闭操作 1.5 上下文管理 1.6 文件对象的其他方法   2 StringIO模块 3 BytesIO模块 4 file-like对象  1 文件操作  读写文件是最常见的IO操作(一般说IO操作，指的是文件IO，如果是网络，一般都会直接说网络IO)，在磁盘上读写文件的功能都是由操作系统提供的，操作系统不允许普通的程序直接操作磁盘(大部分程序都需要间接的通过操作系统来完成对硬件的操作)，所以，读写文件就是请求操作系统打开一个文件对象（通常称为文件描述符），然后，通过操作系统提供的接口从这个文件对象中读取数据（读文件），或者把数据写入这个文件对象（写文件）。在操作系统中，文件常用的操作有：
+   功能 介绍     open 打开   read 读取   write 写   close 关闭   readline 行读取   readlines 多行读取   seek 文件指针操作   tell 指针操作    1.</description>
+    </item>
+    
+    <item>
+      <title>17-路径操作-shutil模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+文章目录 1 路径操作  1.1 os.path模块 1.2 pathlib模块  1.2.1 目录操作  初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法及判断方法 通配符 目录属性   1.2.2 文件操作   1.3 os 模块   2 shutil模块  2.1 copy复制 2.2 rm删除 2.3 move移动 2.4 打包    1 路径操作  使用Python操作文件系统时,少不了会对路径进行切换,对目录的遍历,以及获取文件的绝对路径的一系列的操作,Python内置了相关的模块完成对应的功能,其中:
+ 3.4 以前使用os.path模块 3.4 开始使用pathlib模块  1.1 os.path模块  os.path是os模块中的一个比较重要的用来拼接、判断路径的主要方法，它主要有如下方法：
+os.path.abspath(&amp;#39;dir/file&amp;#39;) 获取dir/file的绝对路径 os.path.split(&amp;#39;path&amp;#39;) 把路径分割为目录和文件名组成的元组格式，不管path是否存在 os.dirname(&amp;#39;path&amp;#39;) 获取文件的父目录名称，不管path是否存在 os.basename(&amp;#39;path&amp;#39;) 获取文件的名称，不管path是否存在 os.</description>
+    </item>
+    
+    <item>
+      <title>18-csv文件-ini文件处理</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</guid>
+      <description>{% raw %}
+文章目录 1 CSV文件  1.1 手动生成一个csv文件 1.2 cvs模块  1.2.1 reader方法 1.2.2 writer方法     2 ini文件处理  2.1 configparser模块 2.2 常用方法  2.2.1 读取配置配件 2.2.2 section操作 2.2.3 option操作 2.2.4 获取value 2.2.5 设置value 2.2.6 保存修改后的配置文件   2.3 字典的访问方式    1 CSV文件  逗号分隔值（Comma-Separated Values，CSV，有时也称为字符分隔值，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）。
+# 下面都是csv文件的内容格式 1,2,3,4,5 1,2,&amp;quot;1,3&amp;quot; 1,2,&amp;quot;a,&amp;quot;&amp;quot;f&amp;quot;  CSV 是一个被行分隔符、列分隔符划分成行和列的文本文件。 CSV 不指定字符编码。  它有以下规范：
+ 行分隔符为\r\n，最后一行可以没有换行符 列分隔符常为逗号或者制表符。每一行称为一条记录record 字段可以使用双引号括起来，也可以不使用。如果字段中出现了双引号、逗号、换行符必须使用双引号括起来。 如果字段的值是双引号，需要额外使用一个个双引号，表示一个转义。 表头可选，和字段列对齐就行了。  1.</description>
+    </item>
+    
+    <item>
+      <title>2-datetime模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-datetime%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-datetime%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+文章目录 1 时间 2 datetime模块  2.1 获取当前日期和时间 2.2 获取指定日期和时间 2.3 datetime转换为timestamp 2.4 timestamp转换为datetime 2.5 str转换为datetime 2.6 datetime转换为str 2.7 datetime加减   3 time模块   1 时间  在我们日常写代码的过程中很多时候会用到时间，比如：输出当前时间，计算程序的运行时间，让程序休息一定的时间然后再做某些事情等等，Python内置了不少用于计算和输出时间的模块，最常用的是time模块和datetime模块。在Python 3中建议使用datetime模块。
+2 datetime模块  datetime是Python标准库中用于处理时间的模块，是date模块和time模块的合集。它在内部提供了多种类，用于处理不同场景下的时间需求。
+class datetime.date : 日期类，包含year，month 和 day等 class datetime.time : 时间类，包含hour，minute，second，microsecound 和 tzinfo等 class datetime.datetime : 日期和时间的组合 class datetime.timedelta : 表示两个日期、时间或日期时间实例到微秒分辨率之间的差异。 class datetime.tzinfo : 时区信息对象的抽象基类 class datetime.timezone : 根据tzinfo组合UTC时间的类(UTC时间基类)  常用的是datetime.datetime类和datetime.timedelta类，其他类可以不关注
+ 2.1 获取当前日期和时间 通过datetime模块我们可以方便的获取当前的时间</description>
+    </item>
+    
+    <item>
+      <title>2-django-urls路由系统基本使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+ 1 路由系统(urls控制)  1.1 正则字符串参数 1.2 url的分组  1.2.1 无名分组 1.2.2 有名分组   1.3 URLconf 在什么上查找 1.4 include(路由分发) 1.5 别名(name参数) 1.6 反推URL 1.7 命名空间    1 路由系统(urls控制) url控制其实就是把不同的url对应到不同的views函数中去
+格式：
+# 项目目录下的urls.py文件中 urlpatterns = [ url(regex, view, kwargs=None, name=None) ... ... ] url可以有多个，每个url都是一个独立的规则。 参数如下：
+ regex(url正则表达式):与之匹配的 URL 会执行对应的第二个参数 view。 view(views视图函数): 用于执行与正则表达式匹配的 URL 请求。 kwargs(参数列表): 视图使用的字典类型的参数。 &amp;ndash;&amp;gt; 很少使用 name(别名): 用来反向获取 URL。  1.1 正则字符串参数 url的第一个参数为正则表达式，所以常用的正则表达式符号都可以进行匹配</description>
+    </item>
+    
+    <item>
+      <title>2-docker基本使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+1 docker的基本结构 docker的架构图如下：  Client端 &amp;ndash;&amp;gt; docker client Hosts(Docker_Host,server端) &amp;ndash;&amp;gt; docker daemon Registries &amp;ndash;&amp;gt; docker registries   docker是一个采用C/S结构的应用程序。当我们运行docker daemon是，这台主机变成了Server端，它默认情况下通过监听socket来接受client端的请求，当然服务器端还支持其他两种类型套接字(IPv4，IPv6)，默认是unix socket套接字文件
+PS：docker client 到 docker Host 使用的是也是HTTPS（docker HOST 遵循Restful风格）
+docker中的资源和对象：（restful中的资源是可以支持增删改查的操作)
+ images：镜像 containers：容器 networks：网络 volumes：存储卷 plugins：插件  1.1 server端  运行docker daemon的主机就变成了DOCKER_HOST主机,也就是server端，它内部主要包含两部分：
+ Containers:容器 Images:镜像，来自于registry，镜像仓库，默认为docker hub，初始化是空的从远端下载(HTTP,HTTPS),默认为HTTPS，除非明确确认安全。  PS：镜像是静态的(文件)，容器是动态的，包含生命周期（类似进程）
+1.2 仓库  docker提供的公共存储空间叫做docker hub,默认情况下我们的server都是从它那来下载镜像的，但是docker称它为 registry,那么为什么不不叫repository，而叫registry呢，其实它还包含了如下功能
+ 镜像存储 用户认证 可用镜像的索引(搜索索引)   所以registry不仅仅是一个仓库，而是一个应用程序，包含多个仓库(repository)，一个仓库用于存放一个应用程序的镜像(一般仓库名就是应用程序名)，单个仓库加标签，唯一标示一个镜像(图)，如果没有执行标签，那么就是最新版,当然还有稳定版的标签(stable)指向对应的版本。
+2 安装及使用docker 基础平台需求：
+ 64bits CPU Linux Kernel 3.</description>
+    </item>
+    
+    <item>
+      <title>2-flask-蓝图-闪现-中间件-session</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</guid>
+      <description>{% raw %}
+文章目录 1 flask蓝图  1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置   2 消息闪现 3 中间件 4 flask-session插件  4.1 安装 4.2 将session放在redis中 4.3 为什么可以直接使用    1 flask蓝图  为了在一个或多个应用中，使应用模块化并且支持常用方案，Flask引入了蓝图概念。蓝图可以极大地简化大型应用并为扩展提供集中的注册入口。 Blueprint对象与 Flask 应用对象的工作方式类似，但不是一 个真正的应用。它更像一个用于构建和扩展应用的蓝图 。
+蓝图的用途：
+ 把一个应用分解为一套蓝图。这是针对大型应用的理想方案：一个项目可以实例化几个应用，初始化多个扩展，并注册许多蓝图。 在一个应用的 URL 前缀和（或）子域上注册一个蓝图。 URL 前缀和（或）子域的参数成为蓝图中所有视图的通用视图参数（缺省情况下）。 使用不同的 URL 规则在应用中多次注册蓝图。 通过蓝图提供模板过滤器、静态文件、模板和其他工具。蓝图不必执行应用或视图 函数。 当初始化一个 Flask 扩展时，为以上任意一种用途注册一个蓝图。   在蓝图被注册到应用之后，当分配请求时，Flask 会把蓝图和视图函数关联起来，并生成两个端点之前的URL 。
+1.1 第一个蓝图 蓝图的标准目录结构如下：
+flask_app ├─manage.py └─flask_app ├─__init__.py ├─static ├─templates └─views # 视图函数存放的位置 ├─account.</description>
+    </item>
+    
+    <item>
+      <title>2-JavaScript函数-作用域-异常</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/</guid>
+      <description>{% raw %}
+文章目录 1 Javascript函数  1.1 基本语法 1.2 函数表达式 1.3 函数的调用 1.4 高阶函数    1 Javascript函数  javascript的函数和其他任何一门语言的函数是相同的，都是用来组合代码块完成某个功能和任务的。不同的是：执行函数的代码可以放在函数之前，也可以放在函数之后，因为js是先编译完毕后再执行代码中的语句。(不建议这么做)
+1.1 基本语法 函数分为带参数的和不带参数的。
+&amp;lt;script&amp;gt; // 不带参数的函数 function functionname() { 执行代码 } // 带参数的函数 function myFunction(var1,var2) { // 同样是形参  执行代码 } &amp;lt;/script&amp;gt; 1.2 函数表达式  使用表达式来定义函数，表达式中的函数名可以省略，如果这个函数名不省略，也只能用在此函数内部。
+// 匿名函数 const add = function(x, y){ return x + y; }; console.log(add(4, 6)); // 有名字的函数表达式 const sub = function fn(x, y){ return x - y; }; console.</description>
+    </item>
+    
+    <item>
+      <title>2-nginx安装echo模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+nginx 安装第三方echo模块 openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，便于排错，对于nginx来说，可以使用echo-nginx-module来添加echo模块。
+添加echo-nginx-module模块   下载echo-nginx-module模块 echo-nginx-module下载地址
+  解压后重新编译nginx 只需要在原有的nginx编译命令后添加如下命令
+  $ ./configure ... ...--add-module=/opt/software/echo-nginx-module-0.61/ $ make &amp;amp;&amp;amp; make install 基本使用 在nginx.conf中使用 echo 即可输出打印的变量 nginx内置变量
+比如nginx配置文件
+location /hello { echo $http_user_agent echo $host } {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>2-基础语法-操作符-循环控制</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E6%93%8D%E4%BD%9C%E7%AC%A6-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E6%93%8D%E4%BD%9C%E7%AC%A6-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6/</guid>
+      <description>{% raw %}
+文章目录 1 Python 基础语法  1.1 注释 1.2 缩进 1.3 续行 1.4 标识符 1.5 转义序列 1.6 数字 1.7 字符串 1.8 其他   2 Python 运算符  2.1 赋值运算符 2.2 算数运算符 2.3 关系运算符 2.4 逻辑运算符 2.5 位运算符  2.5.1 原码、反码、补码、负数表示法 2.5.2 位运算符   2.6 成员、身份运算符 2.7 运算符优先级   3 Python 内存管理  3.1 Python的内存特性 3.2 Python的GC管理   4 程序控制  4.1 分支结构  4.1.1 单分支 4.</description>
+    </item>
+    
+    <item>
+      <title>2-用户注册接口设计与实现</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+      <description>{% raw %}
+文章目录 1 注册接口设计与实现  1.1 路由配置 1.2 涉及知识  1.2.1 csrf token 1.2.2 密码加密  1.2.2.1 安装bcrypt 1.2.2.2 基本使用   1.2.3 JWT  1.2.3.1 传统的session-cookie机制 1.2.3.2 无session方案 1.2.3.3 基本使用 1.2.3.4 Jwt使用场景     1.3 视图函数编写  1.3.1 工具函数编写      1 注册接口设计与实现 由于我们现阶段还没有web页面，为了方便测试，这里使用postman来发起http的请求，注册接口使用json作为认证及返回的数据格式
+1.1 路由配置 不同应用的路由应该由应用自行处理，所以在blog项目的urls文件中，使用include来分发路由
+from django.conf.urls import url, include from django.contrib import admin urlpatterns = [ url(r&amp;#39;^admin/&amp;#39;, admin.site.urls), url(r&amp;#39;^user/&amp;#39;, include(&amp;#39;user.</description>
+    </item>
+    
+    <item>
+      <title>2-选择排序</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>{% raw %}
+ 1 选择排序介绍 2 基本选择排序 3 选择排序的优化  3.1 二元选择排序 3.2 同时排序最大和最小值 3.3 索引混乱 3.4 代码优化   4 总结  1 选择排序介绍  选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理是：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置(升序或者降序)，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则它不会被移动。选择排序每次交换一对元素，它们当中至少有一个将被移到其最终位置上，因此对n个元素的表进行排序总共进行至多n-1次交换，所以它的时间复杂度是n(n-1),不包括这个函数的低阶项和首项系数后用大O表示法为：O(n^2)。在所有的完全依靠交换去移动元素的排序方法中，选择排序属于非常好的一种。
+2 基本选择排序  现有序列[1, 9, 8, 5, 6, 7, 4, 3, 2]，请使用选择排序对该列表进行排序。
+nums = [1, 9, 8, 5, 6, 7, 4, 3, 2] length = len(nums) for i in range(length-1): max_index=i for j in range(i+1,length): if nums[max_index] &amp;lt; nums[j]: max_index = j if i !</description>
+    </item>
+    
+    <item>
+      <title>23-面向对象基础-封装-属性-方法-访问控制</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/23-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E5%B0%81%E8%A3%85-%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/23-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E5%B0%81%E8%A3%85-%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/</guid>
+      <description>{% raw %}
+文章目录 1 面向对象介绍 2 面向对象  2.1 类class 2.2 对象instance/object 2.3 Python的哲学思想   3 面向对象的要素 4 Python的类  4.1 类对象及属性 4.2 实例化  4.2.1 __init__函数 4.2.2 实例对象(instance) 4.2.3 实例变量和类变量 4.2.4 __dict__和变量查找顺序 4.2.5 总结   4.3 装饰一个类 4.4 类方法和静态方法  4.4.1 普通函数(不用) 4.4.2 类方法 4.4.3 静态方法(用的很少) 4.4.4 方法的调用     5 访问控制  5.1 私有属性 5.2 保护变量 5.3 私有方法 5.4 补丁：(黑科技) 5.5 属性装饰器 5.6 对象的销毁 5.</description>
+    </item>
+    
+    <item>
+      <title>24-面向对象基础-多继承-super-mro-Mixin</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/24-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E5%A4%9A%E7%BB%A7%E6%89%BF-super-mro-mixin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/24-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E5%A4%9A%E7%BB%A7%E6%89%BF-super-mro-mixin/</guid>
+      <description>{% raw %}
+文章目录 1 类的继承 2 不同版本的类 3 基本概念 4 特殊属性和方法 5 继承中的访问控制 6 方法的重写(override)  6.1 super 6.2 继承中的初始化   7 多继承  7.1 多继承弊端 7.2 MRO 7.3 多继承的建议 7.4 Mixin  7.4.1 利用装饰器新增功能 7.4.2 Mixin类      1 类的继承  继承是面向对象的重要特性之一，是相对两个类而言的父子关系，子类继承了父类的所有的属性和方法，继承最大的好处是实现了代码的重用，可以重用已经存在的数据和行为，减少代码的重复编写。
+2 不同版本的类  在Python2.2之前，类是没有共同的祖先的，之后，引入了object类，它是所有类的共同祖先类。Python2中为了兼容，分为古典类(旧式类)和新式类。而在Python 3中全部都为新式类，新式类都是继承object类的，并且可以使用super函数(后面会说)。下面是Python2.x中的代码
+class A: pass class B(object): pass &amp;gt;&amp;gt;&amp;gt; dir(A) # 查看类的__dict__ [&amp;#39;__doc__&amp;#39;, &amp;#39;__module__&amp;#39;] &amp;gt;&amp;gt;&amp;gt; dir(B) [&amp;#39;__class__&amp;#39;, &amp;#39;__delattr__&amp;#39;, &amp;#39;__dict__&amp;#39;, &amp;#39;__doc__&amp;#39;, &amp;#39;__format__&amp;#39;, &amp;#39;__getattribute__&amp;#39;, &amp;#39;__hash__&amp;#39;, &amp;#39;__init__&amp;#39;, &amp;#39;__module__&amp;#39;, &amp;#39;__new__&amp;#39;, &amp;#39;__reduce__&amp;#39;, &amp;#39;__reduce_ex__&amp;#39;, &amp;#39;__repr__&amp;#39;, &amp;#39;__setattr__&amp;#39;, &amp;#39;__sizeof__&amp;#39;, &amp;#39;__str__&amp;#39;, &amp;#39;__subclasshook__&amp;#39;, &amp;#39;__weakref__&amp;#39;] 在Python2.</description>
+    </item>
+    
+    <item>
+      <title>25-面向对象高级-魔术方法基础</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
+      <description>{% raw %}
+文章目录 1 魔术方法 2 类的魔术方法  2.1 基本的魔法方法和常用属性 2.2 有关属性 2.3 比较操作符 2.4 算数运算符 2.5 反运算 2.6 增量赋值运算 2.7 一元操作符 2.8 类型转换 2.9 上下文管理（with 语句） 2.10 容器类型   3 常用方法  3.1 查看属性 3.2 实例化 3.3 hash相关  3.3.1 hash相同能否去重 3.3.2 比较内容是否相同 3.3.3 坐标轴小例子   3.4 bool类型 3.5 可视化 3.6 运算符重载  3.6.1 实现两个实例相减 3.6.2 坐标轴小例子 3.6.3 应用场景 3.6.4 total_ordering装饰器   3.7 容器相关方法 3.8 可调用对象    1 魔术方法 　在Python中以两个下划线开头和结尾的方法，比如：__init__、__str__、__doc__、__new__等，被称为&amp;quot;魔术方法&amp;quot;（Magic methods）。魔术方法在类或对象的某些事件出发后会自动执行，如果希望根据自己的程序定制自己特殊功能的类，那么就需要对这些方法进行重写。</description>
+    </item>
+    
+    <item>
+      <title>26-面向对象高级-上下文管理-反射</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/26-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86-%E5%8F%8D%E5%B0%84/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/26-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86-%E5%8F%8D%E5%B0%84/</guid>
+      <description>{% raw %}
+文章目录 1 上下文管理  1.1 上下文管理的安全性 1.2 返回值 1.3 方法的参数 1.4 计算函数的运行时间 1.5 主要应用场景 1.6 contextlib.contextmanager   2 反射  2.1 反射相关的函数 2.2 反射相关的魔术方法  2.2.1 getattr 2.2.2 setattr 2.2.3 delattr   2.3 getattribute    1 上下文管理 文件IO操作可以对文件对象使用上下文管理,它主要使用with..as..语法.
+with open(&amp;#39;123.txt&amp;#39;) as f: print(f) 要想自己写的类实现上下文管理,那么需要用到两个方法__exit__和__enter__.
+   方法 意义     __enter__ 进入与此对象相关的上下文,如果存放该方法,with语法会把该方法的返回值绑定到as子句中指定的变量上   __exit__ 退出与此对象相关的上下文    class Text: def __enter__(self): print(&amp;#39;enter------&amp;#39;) def __exit__(self, exc_type, exc_val, exc_tb): print(&amp;#39;exit-------&amp;#39;) with Text() as f : print(&amp;#39;进来了&amp;#39;) print(&amp;#39;出来了&amp;#39;) # enter------ # 进来了 # exit------- # 出来了 实例化对象的时候,并不会调用__enter__方法,只有进入with语句体中,才会调用__enter__方法,然后执行语句体,最后离开with语句块的时候,再调用__exit__方法.</description>
+    </item>
+    
+    <item>
+      <title>27-面向对象高级-描述器</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/27-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E6%8F%8F%E8%BF%B0%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/27-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E6%8F%8F%E8%BF%B0%E5%99%A8/</guid>
+      <description>{% raw %}
+文章目录 1 描述器 2 描述器协议  2.1 非数据描述器  2.1.1 实例分析   2.2 数据描述器  2.2.1 实例   2.3 描述器的调用及属性访问顺序 2.4 描述器总结   3 Python的描述器体现  3.1 staticmethod简单实现 3.2 ClassMethod简单实现 3.3 对实例的数据进行校验  3.3.1 直接在__init__函数中检查 3.3.2 装饰器版本 3.3.3 描述器版本 3.3.4 装饰器+描述器版本之函数装饰器 3.3.5 装饰器+描述器版本之类装饰器     4 疑问  1 描述器  一般来说，一个描述器是一个有&#39;__绑定行为__&amp;lsquo;的对象属性(object attribute)，它的访问控制被描述器协议方法重写。这些方法是 __get__(), __set__(), 和 __delete__() 。
+ 有这些方法的对象叫做描述器。
+  默认对属性的访问控制是从对象的字典里面(__dict__)中获取、设置和删除它。举例来说, 比如 a.</description>
+    </item>
+    
+    <item>
+      <title>28-生成器交互-__slots__-未实现异常</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/28-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92-__slots__-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/28-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92-__slots__-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8/</guid>
+      <description>{% raw %}
+文章目录 1 生成器交互 2 slots 3 未实现和未实现异常 4 Python的对象模型  1 生成器交互 生成器提供了一个send方法用于动态的和生成器对象进行交互。怎么理解的呢？看下面的例子：
+def generator(): a = 0 while True: position = yield a # 格式 if position: a = position a += 1 g = generator() print(next(g)) g.send(10) print(next(g)) print(next(g))  上面的 变量 = yield 返回值，是生成器提供的交互格式，当我们使用生成器对象的send方法时，实参就会被传递给这里的position变量，从而在函数外部来控制函数内部的运行，同时send和next一样可以推动生成器的运行。
+import time import random class Person: def __init__(self, name): self.name = name def eat(self): while True: something = yield print(&amp;#39;{} is eating {}&amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>29-异常处理-模块化</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/</guid>
+      <description>{% raw %}
+文章目录 1 异常  1.1 产生异常  1.1.1 解释器触发异常 1.1.2 手动触发异常   1.2 异常类型  1.2.1 自定义异常   1.3 异常处理(捕获)  1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常的传递 1.3.4 异常的捕捉时机 1.3.5 小结     2 模块化  2.1 导入语句  2.1.1 import导入 2.1.2 from导入   2.2 自定义模块 2.3 模块搜索顺序 2.4 模块的重复导入 2.5 模块的运行 2.6 包  2.6.1 模块和包的区别   2.7 相对导入与绝对导入 2.8 访问控制  2.</description>
+    </item>
+    
+    <item>
+      <title>3-concurrent模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-concurrent%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-concurrent%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+文章目录 1 conturrent包 2 future模块 3 ThreadPoolExecutor对象 4 Future对象 5 ProcessPoolExecutor对象 6 支持上下文管理 7 异步爬网站的小例子  1 conturrent包 conturrent包内只包含了一个future模块，它为异步执行调用提供了高级的接口。
+2 future模块 主要提供了两个用于异步执行的类：
+ ThreadpPoolExecutor：异步调用的线程池的执行器 ProcessPoolExecutor：异步调用的进程池的执行器   两者实现相同的接口，该接口由抽象Executor类定义。
+ 3 ThreadPoolExecutor对象 提供了以下方法用于构建和执行多线程任务：
+   方法 含义     ThreadpPoolExecutor(max_workers=None, thread_name_prefix=&#39;&#39;) 池中至多创建max_workers个线程的池来同时异步执行，返回Executor实例，如果max_workers没有指定，那么会开启cpu核数(或1) * 5 个线程   submit(fn, *args, **kwargs) 提交执行的函数及其参数，返回Future类的实例   shutdown(wait=True) 清理池    基本使用:
+import concurrent.futures def worker(name, count=1000): total = 0 for i in range(count): total += 1 return name, total fs = [] executor = concurrent.</description>
+    </item>
+    
+    <item>
+      <title>3-django-template模板基本使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+文章目录 1 Template  1.1 模板的基础使用  1.1.1 变量 1.1.2 注释标签 1.1.3 深度查询 1.1.4 内置变量过滤器filter 1.1.5 自定义过滤器之filter 1.1.6 自定义过滤器之simple_tag 1.1.7 inclusion_tag   1.2 逻辑控制语法  1.2.1 for标签 1.2.2 if标签 1.2.3 ifequal/ifnotequal 标签   1.3 特殊标签 1.4 extends模板继承 1.5 include引入    1 Template  使用 Django的 模板系统 (Template System)来实现将Python代码和HTML代码分开的目的。 python的模板包涵：HTML代码＋逻辑控制代码 , 将具体数据嵌入到前端模板的语法，在一个html文件中包含模板语法的文件，可以认为是模板文件
+1.1 模板的基础使用 主要分为两部分：渲染变量使用双大括号{{ }}，渲染标签则使用双大括号双百分号{% %}
+1.1.1 变量 在html页面中使用两个大括号包起来的字符串叫做变量：
+{{ Var_name }} 这里通过python django的shell环境来举例（在这个环境中可以直接引用 所属django模块中的变量等信息）</description>
+    </item>
+    
+    <item>
+      <title>3-docker镜像</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-docker%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-docker%E9%95%9C%E5%83%8F/</guid>
+      <description>{% raw %}
+1 docker image 镜像  docker host 从docker registries 中获取镜像并存入到本地，所以要求docker host本地能够存储这种镜像，这种存储空间要求是一种特殊而且专用的文件系统(1.18 overlay2存储驱动) 镜像可以理解为应用程序的集装箱(docker(码头工人)负责转配这些集装箱) Docker镜像含有启动容器所需要的文件系统及其内容，因此，其用于创建并启动Docker容器
+ 采用分层构建机制，大体上分为两部分：最底层为bootfs，其之上为rootfs(图，rootfs层(/etc,/bin,/sbin等)，bootfs层)  bootfs：用于系统引导的文件系统，包括bootloader和kernel，容器启动完成后会被卸载以节约内存资源（从内存中移除) 底层为aufs/btrfs/overlay文件系统，来确保能够引导并启动一个用户空间 rootfs：位于bootfs之上，表现为docker容器的根 文件系统  传统模式中，系统启动之时，内核挂载rootfs时会首先将其挂载为“只读”模式，完整性自检完成后将其重新挂载为读写模式； docker中，rootfs由内核挂载为“只读”模式，而后通过“联合挂载”技术额外挂载一个“可写”层。   位于下层的镜像称为父镜像(parent image)，最底层的称为基础镜像(base image) 最上层为“可读写”层，其下的均为“只读”层。(图，可写层，http层，vim层，base image层，bootfs层)    专有文件系统  docker的这种分层构建，联合挂载，需要的是专有的文件系统的支持，比如Aufs、overlay2，brtfs等。
+Aufs文件系统  Aufs：advanced multi-layered unification filesystem：高级多层统一文件系统
+ 用于为Linux文件系统实现”联合挂载“ aufs是之前的UnionFS的重新实现，2006年由Junjiro Okajima开发； Docker最初使用aufs作为容器文件系统层，它目前仍作为存储后端之一来支持； aufs的竞争产品是overlayfs，后者自从3.18版本开始被合并到Linux内核； docker的分层镜像，除了aufs、docker还支持btrfs，devicemapper和vfs等  在Ubuntu系统下，docker默认Ubuntu的aufs；而在Centos7上，用的是devicemapper(DM)；    devicemapper文件系统 overlay2文件系统 overlay2是一个抽象的二级文件系统，它需要构建在一个本地文件系统之上，这个文件系统就是xfs(extfs)
+docker registry 启动容器时，docker daemon会视图从本地获取相关的镜像；本地镜像不存在时，其将从registry中下载该镜像并保存到本地；(图，docker Client ,http/https, Docker Daemon(stroage Driver, aufs,dm), Public Docker registry DockerHub, Private Docker Registry,Storage Driver)</description>
+    </item>
+    
+    <item>
+      <title>3-flask-上下文原码分析-多app</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/</guid>
+      <description>{% raw %}
+文章目录 1 上下文管理  1.1 threading.local 1.2 partial偏函数 1.3 setattr 魔术方法 1.4 localproxy代理 1.5 真实原码流程 1.6 django传参与flask的对比 1.7 总结   2 多app应用  1 上下文管理  flask的上下文管理非常巧妙，先来说一下前导知识，flask内部实现的方式和threading.local很像，但其内部做了精妙的设置，如果支持协程(greenlet),那么还会使用协程的方式实现。
+1.1 threading.local  在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁(锁住资源，否则一旦在多个线程中修改，会产生无法预期的结果)。但是局部变量也有问题，就是在函数调用的时候，每次都要传递，感觉很麻烦。
+在主进程中创建ThreadLocal对象，每个Thread对它都可以读写属性，但互不影响。你可以把ThreadLocal看成全局变量，但每个属性都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。即：一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。
+import threading local = threading.local() local.x = 200 def worker(): for i in range(100): local.x += 1 print(&amp;#39;{} {}&amp;#39;.format(threading.current_thread().name,local.x)) for i in range(10): t = threading.Thread(target=worker) t.start() print(local.x) 上面的执行结果是互补不干扰的。为什么local对象可以安全使用？
+通过分析原码，我们看到：在主线程中创建后local后，threading.local会为实例初始化一个字典管理器，创建一个大字典，用于嵌套每一个线程创建的它自己线程相关的字典。当开启了新的线程时，查找local对象的某个属性时，首先会被__getattribute__方法捕获，在内部又调用了包装为上下文管理器的_path(打补丁)，首先它通过local初始化时构建的key(prefix+id(当前线程))来查找它嵌套的字典。如果不存在说明线程第一次运行，为它初始化一个__dict__属性字典，替换local的属性，如果存在，则把字典管理器拿出来，直接替换local的属性。所以在不同线程内，每个local对象在调用时都会切换到它对应的__dict__上。线程执行完毕后，回到主线程，在_path中重新切换到主线程的小字典，然后继续把local对象的__dict__进行切换。
+一句话总结：运行时，threading.local实例处在不同的线程中，就从大字典中找到当前线程相关键值对中的字典，覆盖threading.local实例的 __dict__ 。这样就可以在不同的线程中，安全地使用线程独有的数据，做到了线程间数据隔离，如同本地变量一样安全。
+简单的模拟thread_local的实现：</description>
+    </item>
+    
+    <item>
+      <title>3-React基本使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+1 React  React是Facebook开发并开源的前端框架。当时他们的团队在市面上没有找到合适的MVC框架，就自己写了一个Js框架，用来架设Instagram（图片分享社交网络）。2013年React开源。
+ React解决的是前端MVC框架中的View视图层的问题。
+ 1.1 Virtual DOM  DOM（文档对象模型Document Object Model）将网页内所有内容映射到一棵树型结构的层级对象模型上，浏览器提供对DOM的支持，用户可以是用脚本调用DOM API来动态的修改DOM结点，从而达到修改网页的目的，这种修改是浏览器中完成，浏览器会根据DOM的改变重绘改变的DOM结点部分。
+修改DOM重新渲染代价太高，前端框架为了提高效率，尽量减少DOM的重绘，提出了Virtual DOM，所有的修改都是先在Virtual DOM上完成的，通过比较算法，找出浏览器DOM之间的差异，使用这个差异操作DOM，浏览器只需要渲染这部分变化就行了。
+ React实现了DOM Diff算法可以高效比对Virtual DOM和DOM间的差异。
+ 1.2 支持JSX语法 JSX是一种JavaScript和XML混写的语法，是JavaScript的扩展。
+React.render( /* React提供的渲染函数 */ &amp;lt;div&amp;gt; /* XML格式标签 */ &amp;lt;div&amp;gt; &amp;lt;div&amp;gt;content&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt;, document.getElementById(&amp;#39;example&amp;#39;) /* javascript语法操作DOM */ ); JSX规范：
+ 约定标签中首字母小写就是html标记，首字母大写就是React组件 要求严格的HTML标记，要求所有标签都必须闭合。br也应该写成 ，/前留一个空格。 单行省略小括号，多行请使用小括号 元素有嵌套，建议多行，注意缩进 JSX表达式：表达式使用{}括起来，如果大括号内使用了引号，会当做字符串处理，例如 {&amp;lsquo;2&amp;gt;1?true:false&amp;rsquo;}里面的表达式成了字符串了  2 基本使用 2.1 导入React 使用前需要进行导入操作：（下面的导入操作是基于ES6语法的)
+import React from &amp;#39;react&amp;#39;; 导入react模块 import ReactDOM from &amp;#39;react-dom&amp;#39;; 导入react的DOM模块，用于操作Virtual DOM 2.</description>
+    </item>
+    
+    <item>
+      <title>3-内置结构-列表</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</guid>
+      <description>{% raw %}
+文章目录 1 Python内置数据结构  1.1 数值型 1.2 math模块 1.3 round圆整 1.4 常用的其他函数 1.5 类型判断   2 列表  2.1 索引访问 2.2 列表和链表的区别 2.3 列表的查询 2.4 列表元素修改 2.5 列表的追加和插入 2.6 列表使用*重复带来的问题 2.7 删除元素 2.8 其他操作    1 Python内置数据结构  Python内置了很多数据结构(容器),供我们直接进行使用，在学习结构之前，有一些小的知识点进行补充。
+1.1 数值型  int、float、complex、bool都是class、1，5.0，2+3j都是对象即实例 int：Python3的int就是长整型，且没有大小限制，受限于内存区域大小 float：有整数和小数部分组成。支持十进制和科学计数法表示。 complex：有实属和虚数部分组成，实数部分和虚数部分都是浮点数 bool：int的子类，仅有2个实例，True和False，其中True表示1，False表示0  In [2]: int(10.12) # 直接取整  Out[2]: 10 In [3]: int(-12) Out[3]: -12 In [4]: float(10) # 转换为浮点数  Out[4]: 10.</description>
+    </item>
+    
+    <item>
+      <title>3-直接插入排序</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
+      <description>{% raw %}
+ 1 直接插入排序 2 分析过程 3 关于存储中间变量 4 代码编写 5 总结  1 直接插入排序 直接插入排序属于比较简单的排序算法，基本原理：
+ 在未排序序列中，构建一个子排序序列，直至全部数据排列完成。 将待排序的数，插入到已经排序的序列中合适的位置。 增加一个哨兵(中间变量)，放入待比较的值，让它和后面已经排好序的序列比较，找到合适的插入点。  2 分析过程  看上面的定义可能不是特别清楚其原理，那么请看来自维基百科的动态演示图：
+以图中列表为例，下面是分析过程：
+[6，5，3，1，8，7，2，4]  假定已排序序列在列表的最左边初始为空。 第一趟循环将第一个元素6，赋值给中间变量，然后在已排序区一一比较，由于已排序区初始为空，所以元素6被直接放入已排序区 第二趟循环将第二个元素5，赋值给中间变量，然后在已排序中开始比较，循环开始，由于已排序区中只有1个元素，所以只需要比对1次，5比6小，先将元素6向右移动一位，然后将5赋值给6的原位上。此时排序后的元素排列如下：  [5，6，3，1，8，7，2，4]  第三趟循环将第三个元素3，赋值给中间变量，然后在已排序中开始比较，循环开始，由于已排序区中有2个元素，所以需要比对2次，3比6小，将6向右移动一位，继续循环，3比5小，将5向右移动一位，然后把3放在原来5的位置上。此时排序后的元素排列如下：  [3, 5, 6, 1, 8, 7，2，4]  第四趟循环将第四个元素1，赋值给中间变量，然后在已排序中开始比较，循环开始，最后把1放在原来3的位置上。此时排序后的元素排列如下：  [1，3，5，6，8, 7，2，4]  第五趟循环将第五个元素8，赋值给中间变量，然后在已排序中开始比较，循环开始，由于8大于6，会直接将8赋给当前已排序区最大值的右边。此时排序后的元素排列如下：  [1，3，5，6，8, 7，2，4] 以此类推。直到排序完成
+3 关于存储中间变量  我们可以单独使用一个中间变量来存储待排序的元素，也可以在列表的首部插入一个变量用来存储待排序的元素。因为代码量以及索引计算方便等原因，这里使用在列表的首部插入一个元素一个变量用来存储待排序的元素的方式编写代码。
+4 代码编写 lst = [6, 5, 3, 1, 8, 7, 2, 4] lst = [0] + lst # [0, 6, 5, 3, 1, 8, 7, 2, 4] length = len(lst) for i in range(2, length): # lst[0] = lst[i] j = i - 1 if lst[j] &amp;gt; lst[0]: while lst[j] &amp;gt; lst[0]: lst[j+1] = lst[j] lst[j] = lst[0] j -= 1 print(lst[1:])  因为在列表头部添加了一个元素用于记录待交换元素，所以应该从索引为2的元素，开始，拿来和已经排序好的序列进行比较(认为6已经在排序空间了) 由于无法判断已排序区到底排了几次，所以只能使用while循环，直到排序区的某个元素比待排序元素小时，表示在上一次插入过后，排序区已经排序完毕，这时就可以退出循环了。  附上使用单个变量的方法： lst = [6, 5, 3, 1, 8, 7, 2, 4] length = len(lst) temp = 0 for i in range(1, length): # 7 temp = lst[i] j = i - 1 # 6 if lst[j] &amp;gt; temp: while lst[j] &amp;gt; temp: lst[j+1], lst[j] = lst[j], temp j -= 1 if j &amp;lt; 0: # 不限制j的索引时，j会取到-1.</description>
+    </item>
+    
+    <item>
+      <title>31-gogs安装-git基础</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</guid>
+      <description>{% raw %}
+文章目录 1 Gogs安装 2 Git介绍 3 使用Github仓库  3.1 Git配置 3.2 远程仓库   4 Git基本使用  4.1 创建版本库 4.2 查看工作区状态 4.3 查看修改内容 4.4 查看提交日志 4.5 查看命令历史 4.6 版本回退   5 工作区、暂存区和版本库 6 Git高级  6.1 撤销修改  6.1.1 丢弃工作区的修改 6.1.2 丢弃暂存区的修改   6.2 删除文件 6.3 分支  6.3.1 创建及切换分支 6.3.2 合并分支及删除分支 6.3.3 普通模式合并分支 6.3.4 切换工作区 6.3.5 抓取分支   6.4 标签  6.4.1 新建一个标签 6.</description>
+    </item>
+    
+    <item>
+      <title>32-并发编程-线程-多线程</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>{% raw %}
+1 概述  我们都知道windows是支持多任务的操作系统。
+什么叫&amp;rsquo;多任务&amp;rsquo;呢？简单地说，就是操作系统可以同时运行多个任务。打个比方，你一边在用浏览器上网，一边在听MP3，一边在用Word赶作业，这就是多任务，至少同时有3个任务正在运行。还有很多任务悄悄地在后台同时运行着，只是桌面上没有显示而已。
+现在，多核CPU已经非常普及了，但是，即使过去的单核CPU，也可以执行多任务。由于CPU执行代码都是顺序执行的，那么，单核CPU是怎么执行多任务的呢？
+答案就是操作系统轮流让各个任务交替执行，任务1执行0.01秒，切换到任务2，任务2执行0.01秒，再切换到任务3，执行0.01秒……这样反复执行下去。表面上看，每个任务都是交替执行的，但是，由于CPU的执行速度实在是太快了，我们感觉就像所有任务都在同时执行一样。
+ 这里的执行时间，一般被称为时间片，即操作系统把CPU的时间划分为一个一个的时间片，在一个时间片内，线程可以可劲儿的运行，时间一到，当前线程就被挂起了。
+  真正的并行执行多任务只能在多核CPU上实现，但是，由于任务数量远远多于CPU的核心数量，所以，操作系统也会自动把很多任务轮流调度到每个核心上执行。
+对于操作系统来说，一个任务就是一个进程（Process），比如打开一个浏览器就是启动一个浏览器进程，打开一个记事本就启动了一个记事本进程，打开两个记事本就启动了两个记事本进程，打开一个Word就启动了一个Word进程。
+有些进程还不止同时干一件事，比如Word，它可以同时进行打字、拼写检查、打印等事情。在一个进程内部，要同时干多件事，就需要同时运行多个&amp;rsquo;子任务&#39;，我们把进程内的这些&amp;rsquo;子任务&amp;rsquo;称为线程（Thread）。
+由于每个进程至少要干一件事，所以，一个进程至少有一个线程。当然，像Word这种复杂的进程可以有多个线程，多个线程可以同时执行，多线程的执行方式和多进程是一样的，也是由操作系统在多个线程之间快速切换，让每个线程都短暂地交替运行，看起来就像同时执行一样。当然，真正地同时执行多线程需要多核CPU才可能实现。
+我们前面编写的所有的Python程序，都是执行单任务的进程，也就是只有一个线程。如果我们要同时执行多个任务怎么办？有两种解决方案：
+ 一种是启动多个进程，每个进程虽然只有一个线程，但多个进程可以一块执行多个任务。 一种方法是启动一个进程，在一个进程内启动多个线程，这样，多个线程也可以一块执行多个任务。   当然还有第三种方法，就是启动多个进程，每个进程再启动多个线程，这样同时执行的任务就更多了，当然这种模型更复杂，实际很少采用。总结一下就是，多任务的实现有3种方式：
+ 多进程模式； 多线程模式； 多进程+多线程模式   同时执行多个任务通常各个任务之间并不是没有关联的，而是需要相互通信和协调，有时，任务1必须暂停等待任务2完成后才能继续执行，有时，任务3和任务4又不能同时执行，所以，多进程和多线程的程序的复杂度要远远高于我们前面写的单进程单线程的程序。
+ Python既支持多进程，又支持多线程。
+ 2 进程和线程  进程(Process)是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础。线程(Thread)是操作系统能够进行运算调度的最小单位，它被包含在进程中，是进程中的实际运作单位。
+ 一个程序的执行实例就是一个进程
+ 2.1 进程和线程的关系  程序是源代码编译后的文件，而这些文件存放在磁盘上。当程序被操作系统加载到内存中，就是进程，进程中存放着指令和数据(资源)，它也是线程的容器。
+ Linux进程有父进程、子进程，而Windows中的进程都是平等关系。 线程，有时被称为轻量级进程(Lightweight Process,LWP)，是程序执行流的最小单元。一个标准的线程由线程ID，当前指令指针(PC)，寄存器集合和堆栈组成。在许多系统中，创建一个线程比创建一个进程快10-100倍。
+ 2.2 进程和线程的特点 现在操作系统提出进程的概念，每一个进程都认为自己独占所以计算机硬件资源：
+ 进程就是独立的王国，进程间不可以随便的共享数据(IPC) 线程就是省份，同一个进程内的线程可以共享进程资源，每一个线程拥有自己独立的堆栈。  2.3 线程与进程的区别  线程共享创建它的进程的地址空间，进程拥有自己的地址空间 线程可以直接访问进程的数据，进程拥有它父进程内存空间的拷贝 线程可以和同一进程内其他的线程直接通信，进程必须interprocess communicateion(IPC机制)进行通信 线程可以被很容易的创建，而进程依赖于父进程内存空间的拷贝 线程可以直接控制同一进程内的其他线程，进程只能控制自己的子进程 改变主线程(控制)可能会影响其他线程，改变主进程不会影响它的子进程  2.3 线程的状态 线程的状态如下表:</description>
+    </item>
+    
+    <item>
+      <title>33-并发编程-线程同步-Event-lock</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</guid>
+      <description>{% raw %}
+文章目录 1 线程同步  1.1 Event  1.1.1 什么是Flag？ 1.1.2 Event原理 1.1.3 吃包子   1.2 Lock  1.2.1 lock方法 1.2.2 计数器 1.2.3 非阻塞锁 1.2.4 锁应用场景      1 线程同步  线程同步，线程间协同，通过某种技术，让一个线程访问某些数据时，其他线程不能访问这些数据，直到该线程完成对数据的操作后。不同的操作系统有多种实现方式。比如临界区(Critical Section)、互斥锁(Mutex)、信号量(Semaphore)、事件(Event)等。
+1.1 Event  Event是线程间通讯机制最简单的实现，使用一个内部标记flag，主要提供了三个方法wait、clear、set，通过操作flag来控制线程的执行。
+ clear()：将&amp;rsquo;Flag&amp;rsquo;设置为False。 set()：将&amp;rsquo;Flag&amp;rsquo;设置为True。 wait(timeout=None)：等待&amp;rsquo;Flag&amp;rsquo;为True后，继续执行(timeout为超时时间，否则永远等待)。 is_set(): 判断&amp;rsquo;Flag&amp;rsquo;是否为  1.1.1 什么是Flag？  Event对象在全局定义了一个&amp;rsquo;Flag&#39;，如果&amp;rsquo;Flag&amp;rsquo;值为 False，那么当程序执行 Event对象的wait方法时就会阻塞，如果&amp;rsquo;Flag&amp;rsquo;值为True，那已经阻塞的wait方法会继续执行。
+1.1.2 Event原理  在使用threading.Event 实现线程间通信时：使用threading.Event可以使一个线程等待其他线程的通知，我们把这个Event传递到线程对象中，Event默认内置了一个标志，初始值为False。一旦该线程通过wait()方法进入等待状态，直到另一个线程调用该Event的set()方法将内置标志设置为True时，该Event会通知所有等待状态的线程恢复运行。
+1.1.3 吃包子 有下面代码，大欣负责吃包子，厨师负责做包子，只有厨师做好了，大欣才能开始吃。
+import time import random event = threading.</description>
+    </item>
+    
+    <item>
+      <title>35-并发编程-GIL-多进程</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/35-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-gil-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/35-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-gil-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
+      <description>{% raw %}
+文章目录 1 GIL  1.1 为什么会有GIL 1.2 GIL与thread lock  1.3 个人总结     2 multiprocessing模块  2.1 Process类 2.2 Process类的方法 2.3 Process的其他属性 2.3 基本使用 2.4 进程同步锁 2.5 进程池  2.5.1 常用方法 2.5.2 AsyncResul对象常用方法 2.5.3 回调函数   2.6 进程间通讯  2.6.1 队列 2.6.2 共享数据      1 GIL  GIL：Global Interpreter Lock 全局解释器锁，它的含义是：在同一时间在某一个进程内，只有一个线程可以运行。即便是在多CPU下 。GIL并不是Python的特性，它是在实现Python解析器(CPython)时所引入的一个概念。就好比C++是一套语言（语法）标准，但是可以用不同的编译器来编译成可执行代码。有名的编译器例如GCC，INTEL C++，Visual C++等。Python也一样，同样一段代码可以通过CPython，PyPy，Psyco等不同的Python执行环境来执行。像其中的JPython就没有GIL。然而因为CPython是大部分环境下默认的Python执行环境。所以在很多人的概念里CPython就是Python，也就想当然的把GIL归结为Python语言的缺陷。所以这里要先明确一点：GIL并不是Python的特性，Python完全可以不依赖于GIL。
+官方是这样解释GIL的：
+In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once.</description>
+    </item>
+    
+    <item>
+      <title>36-网络编程-TCP编程</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/</guid>
+      <description>{% raw %}
+文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程  3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法  3.4.1 makefile方法   3.5 socket交互  3.4.1 通讯循环及客户端发空消息时的问题 3.4.2 链接循环及客户端强制退出时的问题 3.4.3 模拟远程执行命令   3.6 粘包问题  3.6.1 struct模块 3.6.2 通过struct传递包头解决粘包问题 3.6.3 大并发时的问题   3.6 聊天室  3.6.1 聊天室之函数实现 3.6.2 聊天室之类实现      1 概述  自从互联网诞生以来，现在基本上所有的程序都是网络程序，很少有单机版的程序了。
+计算机网络就是把各个计算机连接到一起，让网络中的计算机可以互相通信。网络编程就是如何在程序中实现两台计算机的通信。
+举个例子，当你使用浏览器访问新浪网时，你的计算机就和新浪的某台服务器通过互联网连接起来了，然后，新浪的服务器把网页内容作为数据通过互联网传输到你的电脑上。
+由于你的电脑上可能不止浏览器，还有QQ、微信、邮件客户端等，不同的程序连接的别的计算机也会不同，所以，更确切地说，网络通信是两台计算机上的两个进程之间的通信。比如，浏览器进程和新浪服务器上的某个Web服务进程在通信，而QQ进程是和腾讯的某个服务器上的某个进程在通信。
+网络编程对所有开发语言都是一样的，Python也不例外。用Python进行网络编程，就是在Python程序本身这个进程内，连接别的服务器进程的通信端口进行通信。
+2 TCP/IP协议基础  计算机为了联网，就必须规定通信协议，早期的计算机网络，都是由各厂商自己规定一套协议，IBM、Apple和Microsoft都有各自的网络协议，互不兼容，这就好比一群人有的说英语，有的说中文，有的说德语，说同一种语言的人可以交流，不同的语言之间就不行了。</description>
+    </item>
+    
+    <item>
+      <title>37-网络编程-UDP编程</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</guid>
+      <description>{% raw %}
+文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程  3.1 构建服务端 3.2 构建客户端 3.3 常用方法   4 聊天室 5 UDP协议应用  1 UDP协议 UDP是面向无连接的协议，使用UDP协议时，不需要建立连接，只需要知道对方的IP地址和端口号，就可以直接发数据包。但是，能不能到达就不知道了。虽然用UDP传输数据不可靠，但它的优点是和TCP比，速度快，对于不要求可靠到达的数据，就可以使用UDP协议。
+2 UDP通信流程 我们先来了解一下，python的socket的通讯流程:
+服务端：
+ 创建Socket对象 绑定IP地址Address和端口Port，使用bind方法，IPv4地址为一个二元组(&amp;lsquo;IP&amp;rsquo;,Port)，一个UDP端口只能被绑定一次 接受数据，recvfrom方法，使用缓冲区接受数据 发送数据，sendto方法，类型为bytes 关闭连接  客户端：
+ 创建Socket对象 连接服务端。connect方法（可选） 发送数据，sendto/send方法，类型为bytes 接受数据，recvfrom/recv方法，使用缓冲区接受数据 关闭连接   我们可以看到UDP不需要维护一个连接，所以比较简单
+ 3 UDP编程  使用udp编程和使用tcp编程用于相似的步骤，而因为udp的特性，它的服务端不需要监听端口，并且客户端也不需要事先连接服务端。根据上图，以及建立服务端的流程，我门来捋一下服务端的逻辑到代码的步骤：
+3.1 构建服务端  创建服务端  socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # socke.AF_INET 指的是使用 IPv4 # socket.SOCK_STREAM 指定使用面向数据报的UDP协议 绑定IP地址和端口。  socket.</description>
+    </item>
+    
+    <item>
+      <title>38-网络编程-socketserver</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</guid>
+      <description>{% raw %}
+文章目录 1 socket编程弊端 2 SocketServer模块  2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口   3 实现EchoServer 4 聊天室  1 socket编程弊端 socket编程过于底层，编程虽然有套路，但是要写出健壮的代码还是比较困难的，所以很多语言都会socket底层API进行封装，Python的封装就是SocketServer模块。它是网络服务编程框架，便于企业级快速开发。
+2 SocketServer模块 SocketServer，网络通信服务器，是Python标准库中的一个高级模块，其作用是创建网络服务器。该模块简化了编写网络服务器的任务。
+2.1 服务器类 SocketServer模块中定义了五种服务器类。
+ BaseServer(server_address, RequestHandlerClass)：服务器的基类，定义了API。 TCPServer(server_address, RequestHandlerClass, bind_and_activate=True)：使用TCP/IP套接字。 UDPServer：使用数据报套接字 UnixStreamServer：使用UNIX套接字，只适用UNIX平台 UnixDatagramServer：使用UNIX套接字，只适用UNIX平台  它们的继承关系：
++------------+ | BaseServer | +------------+ | v +-----------+ +------------------+ | TCPServer |-------&amp;gt;| UnixStreamServer | +-----------+ +------------------+ | v +-----------+ +--------------------+ | UDPServer |-------&amp;gt;| UnixDatagramServer | +-----------+ +--------------------+  除了基类为抽象基类意外，其他四个类都是同步阻塞的。</description>
+    </item>
+    
+    <item>
+      <title>39-同步-异步-IO多路复用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>{% raw %}
+文章目录 1 同步与异步 2 阻塞与非阻塞 3 什么是IO  3.1 内核态用户态 3.2 IO两个阶段 3.3 IO模型  3.3.1 同步阻塞IO 3.3.2 同步非阻塞IO 3.3.3 IO多路复用 3.3.4 异步IO     4 Python中的IO多路复用  4.1 selectors库 4.2 register方法 4.3 利用selectors完成IO多路复用版本的EchoServer 4.4 聊天室    1 同步与异步 同步和异步关注的是程序在执行时的状态：
+ 同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其他的命令。 异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。   同步如打电话，通信双方不能断（我们是同时进行，同步），你一句我一句，这样的好处是，对方想表达的信息我马上能收到，但是，我在打着电话，我无法做别的事情。 异步如收发收短信，对比打电话，打电话我一定要在电话的旁边听着，保证双方都在线，而收发短信，对方不用保证此刻我一定在手机旁，同时，我也不用时刻留意手机有没有来短信。这样的话，我看着视频，然后来了短信，我就处理短信（也可以不处理），接着再看视频。   对于写程序，同步往往会阻塞，没有数据过来，我就等着，异步则不会阻塞，没数据来我干别的事，有数据来去处理这些数据。一句话总结一下就是：函数或方法被调用时，调用者是否得到最终结果的。
+ 直接得到最终结果的就是同步调用； 得到中间结果而非最终结果的，就是异步调用  2 阻塞与非阻塞 阻塞和非阻塞关注的是程序在等待调用结果（消息，返回值）时的状态.
+ 阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。 非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。  一句话总结一下就是：函数或方法被调用时，是否立刻返回
+ 立即返回就是非阻塞调用 不立即返回就是阻塞调用  3 什么是IO linux系统中，所有的设备读写都可以看做文件的读写来操作，对文件的读写一般要经过内核态和用户态的切换，正因为有切换才导致了IO有同步和异步的说法。</description>
+    </item>
+    
+    <item>
+      <title>4-django-orm基本使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+文章目录 1 数据库与ORM 2 orm的配置  2.1 引擎和配置 2.2 mysql驱动程序   3 orm 表模型  3.1 创建表对象 3.2 Django字段类型 3.3 常用字段参数说明 3.4 特殊类型字段参数说明 3.5 Meta信息 3.6 生成表  3.6.1 注册app 3.6.2 修改表结构遇到的问题     4 利用orm完成数据库的增删改查  4.1 orm之增加 4.2 orm之删除 4.3 orm之修改 4.4 orm之查询  4.4.1 查询过滤方法 4.4.2 限制查询集（切片） 4.4.2 字段查询（双下划线） 4.4.3 Q对象     5 表与表之间的关系  5.1 一对多  5.</description>
+    </item>
+    
+    <item>
+      <title>4-docker网络</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/4-docker%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/4-docker%E7%BD%91%E7%BB%9C/</guid>
+      <description>{% raw %}
+brctl show
+docker 网络： docker 四种网络类型：
+ bridge(Bridged Container): NAT桥模式(默认) host(Open Container): 与当前物理机共享网络资源(可以直接管理物理机网卡配置),容器使用宿主机的网络资源 none(Closed container): 以为这容器没有网络，只有lo接口(新买一台主机，没有网卡) 联盟网络(joined Container): 多个容器公用一组资源(NET、IPC、)  docker network inspect web
+ip命令管理网络名称空间 ip netns: 用于管理网络名称空间(模拟容器间通信)
+ ip netns list:显示网络名称空间 ip netns add NAME：添加一个网络名称空间 ip netns set NAME NETNSID：设置一个网络名称名称空间的SID ip [-all] netns exec [NAME] cm d &amp;hellip;：在一个网络名称空间中执行命令 ip link：挪动网络设备到容器中去  当我们使用ip去管理网络名称空间时，只有网络名称空间是被隔离的，其他名称空间都是共享的
+例子： 创建网络名称空间：
+ ip netns add r1 ip netns add r2  添加虚拟网卡：(一对)
+ ip link add name veth1.</description>
+    </item>
+    
+    <item>
+      <title>4-logging模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/4-logging%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/4-logging%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+文章目录 1 logging模块  1.1 日志级别 1.2 日志格式字符串 1.3 快速使用  1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息     2 处理流程 3 logger类  3.1 getLogger工厂方法 3.2 实例常用方法 3.3 层次结构 3.4 为什么是root logger 3.5 root logger是啥？  3.5.1 basicConfig常用参数   3.6 继承关系   4 handler类  4.1 StreamHandler 4.2 FileHandler 4.3 多个Handler 4.4 handler的常用方法   5 Formatter类 6 Filter类 7 信息传递 8 过程分析 9 日志切割  9.</description>
+    </item>
+    
+    <item>
+      <title>4-websocket-flask-websocket</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/4-websocket-flask-websocket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/4-websocket-flask-websocket/</guid>
+      <description>{% raw %}
+文章目录 1 websocket 2 协议 3 websocket协议简单实现  3.1 server与client 2.2 加密与握手 2.3 websocket数据包格式 2.4 解包 2.5 交互 2.6 完整的代码   3 利用flask提供websocket服务  1 websocket  WebSocket是HTML5新增的协议，它的目的是在浏览器和服务器之间建立一个不受限的双向通信的通道，比如说，服务器可以在任意时刻发送消息给浏览器。为什么传统的HTTP协议不能做到WebSocket实现的功能？这是因为HTTP协议是一个请求-响应协议，请求必须先由浏览器发给服务器，服务器才能响应这个请求，再把数据发送给浏览器。换句话说，浏览器不主动请求，服务器是没法主动发数据给浏览器的。这样一来，要在浏览器中搞一个实时聊天，或者在线多人游戏的话就没法实现了，只能借助Flash这些插件。也有人说，HTTP协议其实也能实现啊，比如用轮询或者Comet(长轮询)。
+ 轮询是指浏览器通过JavaScript启动一个定时器，然后以固定的间隔给服务器发请求，询问服务器有没有新消息。这个机制的缺点一是实时性不够，二是频繁的请求会给服务器带来极大的压力。 Comet(长轮询)本质上也是轮询，但是在没有消息的情况下，服务器先拖一段时间，等到有消息了再回复。这个机制暂时地解决了实时性问题，但是它带来了新的问题：以多线程模式运行的服务器会让大部分线程大部分时间都处于挂起状态，极大地浪费服务器资源。另外，一个HTTP连接在长时间没有数据传输的情况下，链路上的任何一个网关都可能关闭这个连接，而网关是我们不可控的，这就要求Comet连接必须定期发一些ping数据表示连接&amp;rsquo;正常工作&#39;。  以上两种机制都治标不治本，所以，HTML5推出了WebSocket标准，让浏览器和服务器之间可以建立无限制的全双工通信，任何一方都可以主动发消息给对方。
+2 协议 WebSocket协议是基于TCP的一种新的协议。WebSocket最初在HTML5规范中被引用为TCP连接，作为基于TCP的套接字API的占位符。它实现了浏览器与服务器全双工(full-duplex)通信。其本质是保持TCP连接，在浏览器和服务端通过Socket进行通信。 它的主要特点有：
+ 数据格式：和html的结构类似 连接：创建连接后不断开 校验：第一次连接时，需要进行校验(魔法字符串) 加密：每次发送/接受的数据都需要一个加密解密的过程  3 websocket协议简单实现 下面我们来一步一步的用代码实现websocket协议的数据交互，基本交互逻辑如下：
+ 客户端发起websocket连接 服务段根据WebSocket-Key与magic_string通过加密计算出结果，发送给客户端。 客户端验证通过连接建立完毕 进入收发数据阶段 客户端加密发送数据 服务段解密接受数据，然后再加密返回数据 客户端解密接受数据，然后循环5-7这个过程  3.1 server与client 首先编写一个socket server，利用浏览器发送websocket协议的数据，看看发送的到底是什么东西
+import socket server_ip = (&amp;#39;127.0.0.1&amp;#39;, 8080) server = socket.</description>
+    </item>
+    
+    <item>
+      <title>4-内置结构-元组-字符串</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>{% raw %}
+文章目录 1 元组概念  1.1 元祖的特点 1.2 元组的定义 1.3 元组的访问 1.4 元组的查询   2 命名元组 3 字符串  3.1 字符串的基本操作  3.1.1 字符串的访问 3.1.2 字符串的拼接   3.2 字符串分割 3.3 字符串大小写 3.4 字符串排版 3.5 字符串修改 3.6 字符串查找 3.7 字符串判断 3.8 字符串格式化  3.8.1 C语言格式化 3.8.2 format格式化 3.8.3 对齐 3.8.9 小数点与进制     4 切片  4.1 切片赋值    1 元组概念  元组（类型为 tuple）和列表十分相似,但是元组和字符串一样是不可变的。</description>
+    </item>
+    
+    <item>
+      <title>40-数据库基础</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/</guid>
+      <description>{% raw %}
+文章目录 1 数据库概述  1.1 关系数据库之ACID理论 1.2 关系数据库之概念  1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constraint 1.2.5 索引   1.3 实体联系 1.4 视图   2 SQL  2.1 分类 2.2 规范   3 MySQL  3.1 安装MySQL 3.2 数据类型 3.4 用户及授权操作 3.5 库操作  3.5.1 创建数据库 3.5.2 删除数据库 3.5.3 其他操作   3.6 表操作  3.6.1 创建单表 3.6.2 创建多表外键关联 3.6.3 删除表 3.6.4 查看表结构 3.</description>
+    </item>
+    
+    <item>
+      <title>41-数据库-pymysql-DBUtils</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</guid>
+      <description>{% raw %}
+文章目录 1 Python操作数据库 2 安装模块 3 基本使用  3.1 创建一个连接 3.2 连接数据库 3.3 游标  3.3.1 利用游标操作数据库 3.3.2 事务管理 3.3.3 执行SQL语句  3.3.3.1 批量执行 3.3.3.2 SQL注入攻击 3.3.3.3 参数化查询     3.4 获取查询结果  3.4.1 带列明的查询   3.5 上下文支持   4 DBUtils连接池  1 Python操作数据库  Python 提供了程序的DB-API，支持众多数据库的操作。由于目前使用最多的数据库为MySQL，所以我们这里以Python操作MySQL为例子，同时也因为有成熟的API,所以我们不必去关注使用什么数据，因为操作逻辑和方法是相同的。
+2 安装模块  Python 程序想要操作数据库，首先需要安装 模块 来进行操作，Python 2 中流行的模块为 MySQLdb，而该模块在Python 3 中将被废弃，而使用PyMySQL，这里以PyMySQL模块为例。下面使用pip命令安装PyMSQL模块
+pip3 install pymysql 如果没有pip3命令那么需要确认环境变量是否有添加，安装完毕后测试是否安装完毕。</description>
+    </item>
+    
+    <item>
+      <title>42-数据库-orm-SQLAlchemy</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/</guid>
+      <description>{% raw %}
+文章目录 1 ORM 2 sqlalchemy 3 基本使用  3.1 创建连接  3.1.1 利用连接池执行sql   3.2 创建基类 3.3 创建实体类  3.3.1 常用字段   3.4 实例化 3.5 创建表 3.6 创建会话Session 3.7 数据操作  3.7.1 增加数据 3.7.2 简单查询 3.7.3 修改数据 3.7.4 删除数据(不建议) 3.7.5 状态 3.7.6 枚举字段 3.7.7 复杂查询  3.7.7.1 where条件查询 3.7.7.2 排序 3.7.7.3 分页(偏移量) 3.7.7.4 消费方法 3.7.7.5 分组及聚合方法 3.7.7.6 关联查询  隐式连接 join连接         4 一对多关系  4.</description>
+    </item>
+    
+    <item>
+      <title>43-celery异步任务队列</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</guid>
+      <description>{% raw %}
+1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供维护这样一个系统的必需工具。
+ 简单来看，是一个基于python开发的分布式异步消息任务队列，持使用任务队列的方式在分布的机器、进程、线程上执行任务调度。通过它可以轻松的实现任务的异步处理， 如果你的业务场景中需要用到异步任务，就可以考虑使用celery， 举几个实例场景中可用的例子:
+ 你想对100台机器执行一条批量命令，可能会花很长时间 ，但你不想让你的程序等着结果返回，而是给你返回 一个任务ID,你过一段时间只需要拿着这个任务id就可以拿到任务执行结果，在任务执行ing进行时，你可以继续做其它的事情。  你想做一个定时任务，比如每天检测一下你们所有客户的资料，如果发现今天 是客户的生日，就给他发个短信祝福 。　  Celery 在执行任务时需要通过一个中间人(消息中间件)来接收和发送任务消息，以及存储任务结果，完整的中间人列表请查阅官方网站
+PS：任务队列是一种在线程或机器间分发任务的机制。 PS：消息队列的输入是工作的一个单元，称为任务，独立的工作（Worker）进程持续监视队列中是否有需要处理的新任务。
+2 Celery简介  Celery 系统可包含多个职程和中间人，以此获得高可用性和横向扩展能力，其基本架构由三部分组成，消息中间件（message broker），任务执行单元（worker）和任务执行结果存储（task result store）组成。
+ 消息中间件，Celery本身不提供消息服务，但是可以方便的和第三方提供的消息中间件集成，一般使用rabbitMQ or Redis，当然其他的还有MySQL以及Mongodb。 任务执行单元，Worker是Celery提供的任务执行的单元，worker并发的运行在分布式的系统节点中。 任务结果存储，Task result store用来存储Worker执行的任务的结果，Celery支持以不同方式存储任务的结果，包括Redis，MongoDB，Django ORM，AMQP等。  Celery的主要特点：
+ 简单：一单熟悉了celery的工作流程后，配置和使用还是比较简单的 高可用：当任务执行失败或执行过程中发生连接中断，celery 会自动尝试重新执行任务 快速：一个单进程的celery每分钟可处理上百万个任务 灵活： 几乎celery的各个组件都可以被扩展及自定制  根据前面的介绍，我们可以得出如下流程图：
+ 用户应用程序将任务(已经在celery app中注册的)放入Broker中。 多个worker通过Broker获取任务并执行。 worker执行完成后，会把任务的结果、状态等信息返回到Broker中存储，供用户程序读取。  PS：Celery 用消息通信，通常使用中间人（Broker）在客户端和职程(worker)间斡旋。这个过程从客户端向队列添加消息开始，之后中间人把消息派送给职程(worker)。
+3 Celery模块的基本使用 要使用Celery需要先安装celery模块，下面的例子使用Python3进行举例,使用redis作为消息中间人的角色。
+3.1 利用pip3命令安装celery模块 pip3 install celery # 测试是否成功安装 [root@namenode ~]# python3 Python 3.</description>
+    </item>
+    
+    <item>
+      <title>44-zookeeper学习笔记</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>{% raw %}
+1 zookeeper  zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。
+2 应用场景  越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。
+3 zookeeper的体系架构  server端集群架构（leader及follower）每个集群仅选出一个leader，其他zk节点均为follower，具有fast fail特性（leader失效，快速在剩下的follower中竞选leader），非常健壮，无单点，不超过半数Server挂掉不影响提供服务（所以建议zookeeper的节点个数为奇数个，比如zk节点为4个，那么挂两个节点，整个集群就会失效，而5个的话，挂3个才会失效），采用master/Slave模式 4 zookeeper的工作原理  zookeeper和核心是原子广播，这个机制保证了各个server之间的同步。实现这个机制的协议叫做zab协议。zab协议有两种模式，分别使用的是恢复模式（选主）和广播模式（同步）。当服务启动或者在领导者崩溃后，zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。
+为保证事务的顺序一致性，zookeeper采用了递增的事务id号(zxid)来标识事务。所有的协议(请求)都在被提出的时候加上了zxid。zxid是一个64位的数字，它的高32位是epoch用来表示leader关系是否改变，每次一个leader被选举出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。简单来说：高32位就是标识当前系统的leader的，低32位就是当前环境下zxid的计数 每个Server在工作过程中有三种状态：
+ LOOKING：当前Server不知道leader是谁，正在搜寻 LEADING：当前Server即为选举出来的leader FOLLOWING：leader已经选举出来，当前Server与之同步  4.1 选主流程  当leader崩溃或者服务刚刚启动时，这时zk进入恢复模式，恢复模式需要重新选举出一个新的leader，让所有的Server都恢复到一个正确的状态。zk的选举算法有两种：一种是基于basic paxos实现的，另外一种是基于fast paxos算法实现的。系统默认的选举算法为fast paxos。流程如下；  选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server； 选举线程首先向所有Server节点发起一次询问（包括自己）； 选举线程收到回复后，验证是否是自己发起的讯问（验证zxid是否一致），然后获取对方的id（myid），并存储到当前询问对象列表中，最后堆取对方提出的leader相关信息（id，zxid）并将这些信息存储到当次选举的投票记录表中； 收到所有Server回复后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server； 线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2+1的Server票数，就设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。 要使Leader获得多数Server的支持，则Server的总数必须是奇数（2n+1），且存活的Server数目不得少于n+1  每个Server启动都会重复以上流程。在恢复模式下，如果是刚存崩溃状态恢复的或者刚启动的Server还会从磁盘快照中恢复数据和会话消息，zk会记录事务日志并定期进行快照，方便在恢复时期进行状态恢复。选主流程图如下：
+ 原理简单来说，就是要选举leader，会生成一个zxid，然后分发给所有的server（所以这里一台server可以接受多台server给他发送要选举leader的请求），然后各个server根据发送给自己的zxid，选择一个值最大的，然后将这个选择返回给发送这个zxid的server，只要这个server收到的答复大于等于2/n+1个（也就是超过半数的同意票），则表明自己当选为leader，然后会向所有server广播自己已经成为leader。
+ 4.2 同步流程 选举完leader以后，zk就进入了状态同步过程。
+ leader等待server链接 follower链接leader，将最大的zxid发送给leader leader根据follower的zxid确定同步点 完成同步后通知follower已经成为up to date状态 follower收到uptodate消息后，就可以接受client的请求进行服务了。  4.3 角色与工作流程    角色 功能     Leader 负责投票的发起和决议，更新系统状态。Leader数据是最新的、最权威的。   Follower 接受客户端读请求并返回结果，写请求转给Leader。参与选主投票   Observer 接受客户端读请求并返回结果，写请求发给Leader。不参与投票。扩展节点，减轻读压力   Client 读写请求的发起方    4.</description>
+    </item>
+    
+    <item>
+      <title>5-django-csrf-session&amp;cookie</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/5-django-csrf-sessioncookie/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/5-django-csrf-sessioncookie/</guid>
+      <description>{% raw %}
+文章目录 1 CSRF跨站请求伪造  1.1 CSRF攻击介绍及防御 1.2 防御CSRF攻击  1.2.1 验证 HTTP Referer 字段 1.2.2 在请求地址中添加 token 并验证 1.2.3 在 HTTP 头中自定义属性并验证 1.2.4 django csrf token   1.3 form表单提交 1.4 ajax提交 1.5 CSRF装饰器   2 Cookie&amp;amp;Session  2.1 cookie/cookies  2.1.1 django中cookies用法介绍 2.1.2 加密的cookies 2.1.3 基于自定义分页的实例 2.1.4 利用cookie进行用户登陆检测   2.2 Session  2.2.1 Django 中的 session 2.2.2 django 中session的操作  2.2.2.1 设置session 2.2.2.2 获取session 2.</description>
+    </item>
+    
+    <item>
+      <title>5-paramiko模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/5-paramiko%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/5-paramiko%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+1 简介  ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6+ 和Python 3.3+ 版本，实现了SSHv2协议(底层使用cryptography)。有了Paramiko以后，我们就可以在Python代码中直接使用SSH协议对远程服务器执行操作，而不是通过ssh命令对远程服务器进行操作。
+由于paramiko属于第三方库，所以需要使用如下命令先行安装
+pip3 install paramiko # 测试 python3 -c &amp;#39;import paramiko&amp;#39; 2 Paramiko介绍  paramiko包含两个核心组件：SSHClient和SFTPClient。
+ SSHClient的作用类似于Linux的ssh命令，是对SSH会话的封装，该类封装了传输(Transport)，通道(Channel)及SFTPClient建立的方法(open_sftp)，通常用于执行远程命令。 SFTPClient的作用类似与Linux的sftp命令，是对SFTP客户端的封装，用以实现远程文件操作，如文件上传、下载、修改文件权限等操作。  2.1 Paramiko中的几个基础名词：  Channel：是一种类Socket，一种安全的SSH传输通道； transport：是一种加密的会话，使用时会同步创建了一个加密的Tunnels(通道)，这个Tunnels叫做Channel； Session：是client与Server保持连接的对象，用connect()/start_client()/start_server()开始会话。  3 Paramiko的基本使用  基于常用的两个核心组件进行说明。
+3.1 SSHClient介绍  下面是一个使用SSHClient连接服务器并执行命令的操作步骤：（支持密码认证和密钥认证）
+import paramiko #实例化SSHClient client = paramiko.SSHClient() #自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接 client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) #连接SSH服务端，以用户名和密码进行认证 client.connect(hostname=&amp;#39;10.0.0.3&amp;#39;,port=22,username=&amp;#39;root&amp;#39;,password=&amp;#39;123456&amp;#39;) #打开一个Channel并执行命令 stdin,stdout,stderr = client.exec_command(&amp;#39;df -h &amp;#39;) # stdout 为正确输出，stderr为错误输出，同时只有1个变量有值 #打印执行结果 print(stdout.read().decode(&amp;#39;utf-8&amp;#39;)) #关闭SSHClient client.close() SSHClient使用私钥连接:
+import paramiko # 配置私人密钥文件位置 private = paramiko.</description>
+    </item>
+    
+    <item>
+      <title>5-Python的封装与解构-集合</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</guid>
+      <description>{% raw %}
+文章目录 1 封装与解构  1.1 封装 1.2 解构 1.3 Python3的解构   2 set类型  2.1 set的定义 2.2 set的基本操作  2.2.1 增加元素 2.2.2 删除元素 2.2.3 修改元素 2.2.4 成员判断   2.3 set小结   3 集合  3.1 集合运算 3.2 并集 3.3 交集 3.3 差集 3.4 对称差集 3.5 集合的其他运算     1 封装与解构  封装与解构属于Python语言的一种特性，它使用起来很像其他语言中的&amp;quot;逗号表达式&amp;quot;，但内部原理是不同的，在某些场景下：比如变量交换复制时使用，显得非常优雅。
+1.1 封装  封装故名思议就是装箱，把多个值使用逗号分隔，组合在一起，本质上来看，其返回的是一个元组，只是省略了小括号。(一定要区别与C语言的逗号表达式)
+In [91]: t1 = (1,2) # 定义一个元组  In [92]: t2 = 1,2 # 省略括号，其内部还是会封装成元组  In [93]: t1 Out[93]: (1, 2) In [94]: t2 Out[94]: (1, 2) In [95]: type(t1) Out[95]: tuple In [96]: type(t2) Out[96]: tuple 1.</description>
+    </item>
+    
+    <item>
+      <title>5-sqlalchemy-flask_sqlalchemy</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/5-sqlalchemy-flask_sqlalchemy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/5-sqlalchemy-flask_sqlalchemy/</guid>
+      <description>{% raw %}
+1 sqlalchemy 关于sqlalchemy的用法请参考：sqlalchemy用法点这里
+2 flask_sqlalchemy  Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。 官方文档点这里
+下面是一个标准的falsk程序的目录结构：
+cmdb ├── cmdb │ ├── __init__.py # 创建db，create_app函数 │ ├── models.py # orm映射文件 │ ├── static │ ├── templates │ └── views # views视图函数 │ ├── __init__.py │ ├── account.py │ └── home.py ├── create_table.py # 用于创建数据库表 ├── manage.py # 管理，启动app └── settings.py 其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。
+2.1 创建对象  新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 pip3 install flask_sqlalchemy 安装</description>
+    </item>
+    
+    <item>
+      <title>5-sqlalchemy-flask_sqlalchemy-wtforms</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/5-sqlalchemy-flask_sqlalchemy-wtforms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/5-sqlalchemy-flask_sqlalchemy-wtforms/</guid>
+      <description>{% raw %}
+1 sqlalchemy 关于sqlalchemy的用法请参考：sqlalchemy用法点这里
+2 flask_sqlalchemy  Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。 官方文档点这里
+下面是一个标准的falsk程序的目录结构：
+cmdb ├── cmdb │ ├── __init__.py # 创建db，create_app函数 │ ├── models.py # orm映射文件 │ ├── static │ ├── templates │ └── views # views视图函数 │ ├── __init__.py │ ├── account.py │ └── home.py ├── create_table.py # 用于创建数据库表 ├── manage.py # 管理，启动app └── settings.py 其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。
+2.1 创建对象  新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 pip3 install flask_sqlalchemy 安装</description>
+    </item>
+    
+    <item>
+      <title>6-Form-ModelForm对象</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/6-form-modelform%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/6-form-modelform%E5%AF%B9%E8%B1%A1/</guid>
+      <description>{% raw %}
+文章目录 1 Form表单验证  1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生成前端标签 1.5 Form字段的widget属性 1.6 Form字段其他的属性 1.7 特别补充-ChoiceField 1.8 自定义验证规则  1.8.1 通过对象来自定义验证规则 1.8.2 通过函数来自定义验证规则 1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证 例子：注册的时候，两次密码一致性的验证 1.8.4 强制触发异常     2 ModelForm表单验证  2.1 基本使用 2.2 自定制字段名 2.3 展示指定的列 2.4 初始化数据 2.5 更新数据 2.6 其他ModelForm配置项    1 Form表单验证  什么是form？django 中的 form 组件 专门用来做对用户通过form表单形式提交的数据的格式进行验证的,还可以提供诸如form表单生成等牛逼的功能。
+ 使用方式为：首先我们定义一个Form模版（可以理解为是匹配数据的模版），其中对字段进行了规范。接下来请求发过来后(request.POST)，我们把request.POST的数据交给form模版，进行验证，form模版验证完成后会产出三个信息。
+ 是否验证成功 所有的正确信息 所有的错误信息  1.</description>
+    </item>
+    
+    <item>
+      <title>6-subprocess模块-tempfile模块</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</guid>
+      <description>{% raw %}
+1 subprocess模块  用于执行命令，它取代了比较老得os.system,commands等模块，它通过启动子进程来完成命令的执行，并且提供了更多灵活，高效的方法。
+2 subprocess.call 功能类似于os.system 无法捕获结果
+subprocess.call(&amp;#39;ls -l&amp;#39;,shell=True) 注意当执行的cmd中有空格的时候，python解释器会认为后面的参数都为第一个命令的参数，这个时候方便起见，都会使用shell=True,它真正的含义是：
+ shell=True参数会让subprocess.call接受字符串类型的变量作为命令，并调用shell去执行这个字符串 当shell=False是，subprocess.call只接受数组变量作为命令，并将数组的第一个元素作为命令，剩下的全部作为该命令的参数。  基于安全考虑，官方的推荐是尽量不要设置shell=True。
+3 subprocess.check_call 功能和call相同，无法捕捉结果,与call不同的是，check_call默认会检查命令的返回值，如果不是0，则会返回异常subprocess.CalledProcessError
+4 subprocess.Popen 用于执行命令，但具有更高的定制化，比如信息的输出，返回码的获取，其调用外部命令的时候，会像C那样fork一个子进程进行执行。
+# 格式： Popen(args, bufsize=-1, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=&amp;lt;object object at 0x1005ac1c0&amp;gt;, shell=False, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=False, pass_fds=(), *, encoding=None, errors=None)  args: 执行的命令 stdin: 输入 stdout: 输出信息（默认到控制台） stderr: 错误输出信息（默认到控制台） cwd: 切换到某个目录后再执行命令  例子：
+subprocess.Popen(&amp;#39;cmd&amp;#39;,shell=True,stdout=subprocess.PIPE) subprocess.Popen([&amp;#39;cmd&amp;#39;],stdout=subprocess.PIPE) --&amp;gt; 一般用这种 上面两行代码功能相同，不写stdout的话，默认会把输出打印到当前的屏幕上,其中PIPE 表示管道符，会把命令的输出方式暂时缓存，然后通过对应的方式.进行读取p.stdout.read()
+ stdout 表示标准输出 stdin 表示标准输入，stdin=subprocess.</description>
+    </item>
+    
+    <item>
+      <title>6-内置结构-字典</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/6-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%AD%97%E5%85%B8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/6-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%AD%97%E5%85%B8/</guid>
+      <description>{% raw %}
+文章目录 1 字典介绍 2 字典的基本操作  2.1 字典的定义 2.2 字典元素的访问 2.3 字典的增删改   3 字典遍历  3.1 遍历字典的key 3.2 遍历字典的value 3.3 变量字典的键值对 3.4 字典遍历小结   4 defaultdict默认值字典 5 OrdereDict有序字典  1 字典介绍  在Python中字典属于一种映射类型，它和set相同，同样属于非线性结构存储，Python官方对dict有如下解释
+ 一个映射对象映射一个可hash的值到任意一个对象上去。 映射是可变的对象。 dict是当前唯一一个标准的映射类型。 字典的键几乎可以任意的值。 字典的值可以不必可hash，也就是说值可以是列表，字典，或者其他任意可变的对象 如果key相同，那么后面的value将会覆盖先前的value 不建议使用float类型作为字典的key  简单来说：字典是由key:value键值对组成的数据的集合，它的主要特点是 可变的、无序的、不重复的。
+ 字典的key必须是可hash对象，之所以快，因为其本质上使用空间换了时间。
+ 2 字典的基本操作  字典是除set集合以外另一种可变的非线性容器模型，在Python中非常强大，适合各种结构数据的存储、嵌套等。
+2.1 字典的定义  字典的每个key到value的键值对用冒号(:)分割，每对之间用逗号(,)分割，整个字典包括在花括号({})中。例：{&#39;a&#39;:1, &#39;b&#39;:2}，Python提供了多种创建字典的方式，如下：
+ 基本格式：d = dict() 或者 d = {} dict(**kwargs): 使用name=value对，来初始化一个字典 dict(iterable, **kwargs)：使用可迭代对象和name=value构造字典，注意可迭代对象必须是一个二元结构 dict(mapping, **kwargs): 使用一个字典构造另一个字典 dic = {&#39;a&#39;:1, &#39;b&#39;:2, &#39;c&#39;:3, &#39;d&#39;:[1,2,3]} dic = dict.</description>
+    </item>
+    
+    <item>
+      <title>6-自定义类admin管理增删改查</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
+      <description>{% raw %}
+文章目录 1 django admin分析 2 django admin源码分析  2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin   3 django admin的接口 4 自定义ayra进行CRUD  4.1 准备工作  4.1.1 文件加载顺序 4.1.2 让我们的程序被优先加载 4.1.3 编写调用文件 4.1.4 更换装载应用的方式 4.1.5 include本质   4.2 为每个model对象生成对应的url  4.2.1 注册model类 4.2.2 service/arya基本实现 4.2.3 添加urls及views函数      1 django admin分析 在每个app下都会存在一个admin.py文件用于注册当前app下的models文件，给django admin来管理，仔细观察Django admin针对不同models的管理页面、URL等信息，我们发现
+ 不同的类对象生成的url是类似的。  # UserInfo /admin/app01/userindo/ /admin/app01/userinfo/add /admin/app01/userinfo/1/change /admin/app01/userinfo/2/delete # Role /admin/role/ /admin/role/add /admin/role/1/change /admin/role/2/delete 不同的类，页面的布局模版也是类似的。 所以，我们分析，admin内部应该是为我们的注册的类，生成了对应的url，以及视图函数，并且通过相同的模版渲染来返回页面的。下面来跟一下源码文件  2 django admin源码分析 2.</description>
+    </item>
+    
+    <item>
+      <title>7-列表解析式-生成器</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/7-%E5%88%97%E8%A1%A8%E8%A7%A3%E6%9E%90%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/7-%E5%88%97%E8%A1%A8%E8%A7%A3%E6%9E%90%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
+      <description>{% raw %}
+文章目录 1 解析式 2 列表解析式  2.1 列表解析式进阶   3 其他解析式  3.1 集合表达式 3.2 字典解析式   4 生成器表达式  4.1 特点 4.2 next函数   5 总结  1 解析式  从一个问题来看解析式，现有如下需求：生成一个列表，元素0-9，对每一个元素自增1后求平方返回新列表。
+lst = list(range(10)) lst2 = [] for value in lst: lst2.append((value + 1) ** 2) print(lst2)  看起来很容易理解，但是这种需求竟然用了5行代码！下面来看一下列表解析式的写法。
+[ (x+1)**2 for x in range(10)]  看起来非常简洁，属于Python的风格！哈哈
+  再来看一下，什么是列表解析式？在Python中列表解析式是一种语法糖，虽然对看似复杂的代码进行了简写，但是编译器会进行优化，不会因为简写而影响效率，反而因为优化提高了效率。另外还介绍了代码量，减少了出错的机会，还简化了代码，增加了代码可读性。
+2 列表解析式  列表解析式的基本语法是如下</description>
+    </item>
+    
+    <item>
+      <title>7-自定义类admin管理增删改查</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
+      <description>{% raw %}
+文章目录 1 django admin分析 2 django admin源码分析  2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin   3 django admin的接口 4 自定义ayra进行CRUD  4.1 准备工作  4.1.1 文件加载顺序 4.1.2 让我们的程序被优先加载 4.1.3 编写调用文件 4.1.4 更换装载应用的方式 4.1.5 include本质   4.2 为每个model对象生成对应的url  4.2.1 注册model类 4.2.2 service/arya基本实现 4.2.3 添加urls及views函数   4.3 定制显示字段 4.4 删除编辑按钮  4.4.1 反向生成url 4.4.2 抽离公共方法 4.4.3 权限接口   4.5 抽离页面显示配置 4.6 添加页面实现  4.</description>
+    </item>
+    
+    <item>
+      <title>8-rbac权限系统</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/</guid>
+      <description>{% raw %}
+文章目录 1 rbac 2 表结构设计 3 初始化权限结构 4 中间件验证 5 生成菜单显示  1 rbac 基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有两个功能：
+ 权限验证 菜单生成  通过将权限信息写入到session中，每次访问时，使用中间件来匹配访问的URL与session中权限列表中的url是否匹配，如果匹配准入，否则提示无权访问，针对菜单的显示功能，通过inclusion_tag渲染的方式，构造一个菜单列表，进行渲染，可以在任何使用的地方，使用templatetags的方式进入，并渲染（样式需要自行调整）。
+2 表结构设计 分析业务逻辑，创建五张表:
+ 用户表：存放用户相关信息，并关联角色表（一个人有多个角色，一个角色可以包含多个人） 角色表：角色信息，关联权限组（一个角色可以关联多个角色组，一个角色组可以关联多个角色） 权限表：存放权限信息，存储带正则表达式的url（一个权限只能关联一个权限组） 权限组表：将权限进行分类，并关联到所属的菜单中（一个组只能关联一个菜单） 菜单表：菜单信息  表关系如下： 下面是字段代码设计：字段可以自行增减。
+from django.db import models class UserInfo(models.Model): name = models.CharField(verbose_name=&amp;#39;用户名&amp;#39;, max_length=8) passwd = models.CharField(verbose_name=&amp;#39;密码&amp;#39;, max_length=32) email = models.CharField(verbose_name=&amp;#39;邮箱&amp;#39;, max_length=32, null=True, blank=True) roles = models.ManyToManyField(verbose_name=&amp;#39;角色&amp;#39;, to=&amp;#39;Role&amp;#39;, related_name=&amp;#39;users&amp;#39;, blank=True, null=True) class Meta: db_table = &amp;#39;rbac_userinfo&amp;#39; verbose_name_plural = &amp;#39;用户表&amp;#39; def __str__(self): return self.</description>
+    </item>
+    
+    <item>
+      <title>9-函数定义-位置参数-返回值</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/9-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89-%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E8%BF%94%E5%9B%9E%E5%80%BC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/9-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89-%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E8%BF%94%E5%9B%9E%E5%80%BC/</guid>
+      <description>{% raw %}
+文章目录 1 函数介绍  1.1 为什么要使用函数 1.2 Python中的函数   2 函数的基本使用 3 函数的参数  3.1 参数的默认值 3.2 可变参数  3.2.1 可变位置传参 3.2.2 可变关键字传参 3.2.3 可变参数混合使用 3.2.4 可变参数小结   3.3 keyword-only参数* 3.4 参数解构   4 函数的返回值  1 函数介绍  函数在编程语言中就是完成特定功能的一个词句组(代码块)，这组语句可以作为一个单位使用，并且给它取一个名字。可以通过函数名在程序的不同地方多次执行（这叫函数的调用）。函数在编程语言中有基本分为：预定义函数，自定义函数。预定义函数可以直接使用，而自定义函数顾名思义需要我们自己定义函数。
+ 在数学中的定义，这里就不介绍了。因为没卵用。哈哈
+ 1.1 为什么要使用函数 在编程中使用函数主要有两个优点：
+ 降低编程难度：通常将一个复杂的大问题分解成一系列的小问题，然后将小问题划分成更小的问题，当问题细化为足够简单时，我们就可以分而治之，各个小问题解决了，大问题就迎刃而解了。 代码重用：避免重复劳作，提供效率 代码更加简洁美观，可读性增加  1.2 Python中的函数  在Python中，函数由若干语句组成代码块、函数名称、参数列表构成，它是组织代码的最小单元,使用函数可以完成一定的功能，在Python中函数主要分为三类：内置函数、第三方函数库、自定义函数。常用的内置函数在前面已经介绍，第三方函数库需要先引入模块，通过模块调用，在模块学习中进行介绍，这里主要说的是如何自定义一个函数。
+2 函数的基本使用  在Python中，定义一个函数要使用def语句，依次写出函数名、括号、括号中的参数和冒号:，然后，在缩进块中编写函数体，函数的返回值用return语句返回。下面是一个函数的基本结构
+def 函数名(参数列表): 函数体(代码块) [return 返回值] # 函数可以无返回值 注意：</description>
+    </item>
+    
+    <item>
+      <title>DNS</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/dns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/dns/</guid>
+      <description>{% raw %}
+ 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明  6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记录？ 6.4 什么是MX记录 6.5 什么是PTR记录   7 DNS相关命令  1 什么是DNS  Domain Name System，域名系统。因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）。DNS协议运行在UDP协议之上，使用端口号53。
+2 DNS域名系统  域名系统DNS(Domain Name System)是因特网使用的命名系统，用来把便于人们使用的机器名字转换成为IP地址。域名系统其实就是名字系统。为什么不叫&amp;quot;名字&amp;quot;而叫&amp;quot;域名&amp;quot;呢？这是因为在这种因特网的命名系统中使用了许多的&amp;quot;域(domain)&amp;quot;，因此就出现了&amp;quot;域名&amp;quot;这个名词。&amp;ldquo;域名系统&amp;quot;明确地指明这种系统是应用在因特网中。 我们都知道，IP地址是由32位的二进制数字组成的。用户与因特网上某台主机通信时，显然不愿意使用很难记忆的长达32位的二进制主机地址。即使是点分十进制IP地址也并不太容易记忆。相反，大家愿意使用比较容易记忆的主机名字。但是，机器在处理IP数据报时，并不是使用域名而是使用IP地址。这是因为IP地址长度固定，而域名的长度不固定，机器处理起来比较困难。 因为因特网规模很大，所以整个因特网只使用一个域名服务器是不可行的。因此，早在1983年因特网开始采用层次树状结构的命名方法，并使用分布式的域名系统DNS。并采用客户服务器方式。DNS使大多数名字都在本地解析(resolve)，仅有少量解析需要在因特网上通信，因此DNS系统的效率很高。由于DNS是分布式系统，即使单个计算机除了故障，也不会妨碍整个DNS系统的正常运行。 域名到IP地址的解析是由分布在因特网上的许多域名服务器程序共同完成的。域名服务器程序在专设的结点上运行，而人们也常把运行域名服务器程序的机器称为域名服务器。 域名到IP地址的解析过程的要点如下：当某一个应用需要把主机名解析为IP地址时，该应用进程就调用解析程序，并称为DNS的一个客户，把待解析的域名放在DNS请求报文中，以UDP用户数据报方式发给本地域名服务器。本地域名服务器在查找域名后，把对应的IP地址放在回答报文中返回。应用程序获得目的主机的IP地址后即可进行通信。 若本地域名服务器不能回答该请求，则此域名服务器就暂时称为DNS的另一个客户，并向其他域名服务器发出查询请求。这种过程直至找到能够回答该请求的域名服务器为止。
+3 DNS域名结构  由于因特网的用户数量较多，所以因特网在命名时采用的是层次树状结构的命名方法。任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)。这里，&amp;ldquo;域&amp;rdquo;(domain)是名字空间中一个可被管理的划分。 从语法上讲，每一个域名都是有标号(label)序列组成，而各标号之间用点(小数点)隔开。 如下例子所示：
+这是中央电视台用于手法电子邮件的计算机的域名，它由三个标号组成，其中标号com是顶级域名，标号cctv是二级域名，标号mail是三级域名。
+DNS规定，域名中的标号都有英文和数字组成，每一个标号不超过63个字符(为了记忆方便，一般不会超过12个字符)，也不区分大小写字母。标号中除连字符(-)外不能使用其他的标点符号。级别最低的域名写在最左边，而级别最高的字符写在最右边。由多个标号组成的完整域名总共不超过255个字符。DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理。用这种方法可使每一个域名在整个互联网范围内是唯一的，并且也容易设计出一种查找域名的机制。 域名只是逻辑概念，并不代表计算机所在的物理地点。据2006年12月统计，现在顶级域名TLD(Top Level Domain)已有265个，分为三大类：
+ 国家顶级域名nTLD：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)。 通用顶级域名gTLD：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)。 基础结构域名(infrastructure domain)：这种顶级域名只有一个，即arpa，用于反向域名解析，因此称为反向域名。
+注：目前全球有13台根服务器。  4 域名服务器  如果采用上述的树状结构，每一个节点都采用一个域名服务器，这样会使得域名服务器的数量太多，使域名服务器系统的运行效率降低。所以在DNS中，采用划分区的方法来解决。 一个服务器所负责管辖(或有权限)的范围叫做区(zone)。各单位根据具体情况来划分自己管辖范围的区。但在一个区中的所有节点必须是能够连通的。每一个区设置相应的权限域名服务器，用来保存该区中的所有主机到域名IP地址的映射。</description>
+    </item>
+    
+    <item>
+      <title>DNS-server</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/dns-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/dns-server/</guid>
+      <description>{% raw %}
+比较好用的dns记录 OpenDNS：
+ 208.67.222.222 208.67.220.220  台湾中华电讯的 DNS：
+ 168.95.192.1 168.95.192.2  香港宽频的 DNS：
+ 203.80.96.9 203.80.96.10  Level 3:
+ 4.2.2.2  {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>gogs安装</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/gogs%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/gogs%E5%AE%89%E8%A3%85/</guid>
+      <description>{% raw %}
+1 Gogs安装 Gogs 是一款极易搭建的自助 Git 服务。Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过独立的二进制分发，并且支持 Go 语言支持的 所有平台，包括 Linux、Mac OS X、Windows 以及 ARM 平台。
+1.1 安装准备  以下步骤均在CentOS 7.6下测试成功
+  更新yum源  curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 安装git  yum install -y git 安装数据库 支持MySQL、Mariadb、PostgreSQL、SQLite等  yum install -y mariadb-server 1.2 启动数据库  启动数据库  systemctl start mariadb-server 验证数据库启动  ps aux | grep mariadb # 检查进程 ss -lanp | grep 3306 # 检查端口 基础配置  # 初始化数据库 mysql_secure_installation 按照提示删除test库，以及创建数据库的root等</description>
+    </item>
+    
+    <item>
+      <title>Linuxcrontab</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxcrontab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxcrontab/</guid>
+      <description>{% raw %}
+1 什么是定时任务  我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚上都要手动的去备份吗？ 服务器上运行的服务都会有日志文件，它会记录程序运行运行时的输出信息，服务器运行久了这些文件就会非常大，那么我们要定期的进行手动删除吗？ 如果我们需要定时执行一些周期性重复性的任务，我们就会用到定时执行任务功能来帮我们自动执行每天、每周等周期性重复性的任务而不需要人为干预即可实现。
+2 Windows的定时任务 作为使用者最多的操作系统，windows下也有定时任务。依次选择开始——&amp;gt;所有程序——&amp;gt;附件——&amp;gt;系统工具——&amp;gt;任务计划程序 3 Linux的定时任务  Linux中的定时任务主要分为两种:
+ 系统定时任务 用户自定义定时任务  3.1 系统定时任务  系统周期自行执行的任务工作，如轮询系统日志、备份系统数据、清理系统缓存等，这些任务无需我们认为干涉。系统定时任务是由/etc/logrotate.conf文件中的定义的，它的文件定义内容为：
+[root@lixin ~]# grep &amp;#39;^[^#]&amp;#39; /etc/logrotate.conf weekly #按周分隔 rotate 4 #最多分成4份，然后覆盖 create #创建新的空文件，供记录 dateext #分隔文件，用日期加后缀名 include /etc/logrotate.d #包涵/etc/logrotato.d下的文件 /var/log/wtmp { monthly #按月分隔 create 0664 root utmp #分隔后,创建权限为0644属主为root，名字为utmp的新文件 minsize 1M #最小1M rotate 1 #分1份 } /var/log/btmp { missingok monthly create 0600 root utmp rotate 1 } # 该文件定义的是系统定时任务，我们一般不更改其内容。 3.</description>
+    </item>
+    
+    <item>
+      <title>LinuxDirs</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxdirs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxdirs/</guid>
+      <description>{% raw %}
+1 概述 1.1 疑问1  为什么某些程序位于/bin下，或者/sbin，或者/usr/bin，或/usr/sbin目录下吗？例如，less命令位于/usr/bin目录下。为什么没在/bin中，或/sbin，或/usr/sbin目录中？所有这些目录之间有什么不同？
+1.2 疑问2  为什么很多发行版本，比如Centos、Red hat、SuSE。它们的/（根）目录下都有相同的目录结构？比如/etc、/home、/dev、/var、/tmp。为什么叫这些名字，这些目录下放的都是什么东西？
+1.3 文件系统目录标准  由于Linux家喻户晓，开发人员众多，目录也越来越多，如果没有一个统一的标准，那么不同的发行版文件放置位置也不同，相同文件的名称也不同，这样看起来会非常的杂乱无章，在这种情况下FHS的出现就是必然的了。
+Filesystem Hierarchy Standard（文件系统目录标准）的缩写，多数Linux版本采用这种文件组织形式，类似于Windows操作系统中c盘的文件目录，FHS采用树形结构组织文件。FHS定义了系统中每个区域的用途、所需要的最小构成的文件和目录，同时还给出了例外处理与矛盾处理。
+FHS定义了两层规范，第一层是/目录下要放置哪些文件数据。第二层则是针对/usr和/var这两个目录的子目录定义。
+2 目录说明 2.1 目录特点  /（根）是所有目录的顶点。 目录结构像一颗倒挂的树。 目录和磁盘分区，默认是没有关联的。 /（根）下不同的目录可能会对应不同的分区或磁盘。 所有的目录都是按照一定的类别和规律组成的。  2.2 目录结构 FHS规定的/(根)目录下各目录结构，如下图
+2.3 目录说明 2.3.1 /(根)目录 每一个文件和目录从根开始，/下的目录有：
+[root@lixin /]# ls bin data etc lib lost+found mnt opt root selinux sys usr boot dev home lib64 media daxin proc sbin srv tmp var 2.3.2 /bin目录 用来存放二进制可执行命令的目录，用户常用的命令都存在该目录下。例如：mkdir（创建目录）、cat（查看文件）、find（查找文件）等。
+[root@lixin bin]# ls alsaunmute egrep mkdir sh arch env mknod sleep awk ex mktemp sort basename false more stty bash fgrep mount su cat find mountpoint sync chgrp findmnt mv tar …… [root@lixin bin]# 2.</description>
+    </item>
+    
+    <item>
+      <title>LinuxPermisson</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxpermisson/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxpermisson/</guid>
+      <description>{% raw %}
+1 概述  我们使用ls –il命令查看的文件列表就是我们文件的简要属性信息。
+[root@lixin ~]# ls –li  total 80 26171 -rw-r--r-- 1 root root 11 Mar 17 22:24 12345.txt 3545 lrwxrwxrwx 1 root root 6 Mar 16 23:24 1234.txt -&amp;gt; 10.txt 3581 -rw-r--r-- 1 root root 149 Mar 16 23:03 123.tar.gz 3563 -rw-r--r-- 1 root root 149 Mar 17 00:21 123.txt.bak 26197 -rw-r--r-- 1 root root 11 Mar 18 00:01 1.txt 26181 -rw-r--r-- 1 root root 0 Mar 16 19:46 2.</description>
+    </item>
+    
+    <item>
+      <title>LinuxRegExp</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxregexp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxregexp/</guid>
+      <description>{% raw %}
+1 什么是正则表达式  正则表达式RE（Regular Expression）是由一串字符和元字符构成的字符串。主要功能是文本查询和字符串操作，它可以匹配文本的一个字符或字符集合。实际上正则表达式完成了数据的过滤，将不满足正则表达式定义的数据拒绝掉，剩下与正则表达式匹配的数据。
+简单的说，正则表达式就是为处理大量的字符串而定义的一套规则和方法。
+1.1 正则表达式特点  正则表达式应用非常广泛，存在于各种语言中，例如：php、python、java等。Linux系统运维工作中的正则表达式，叫做Liunx正则表达式，它与其他语言中的正则表达式有一些不同，在Linux中最常应用正则表达式的是grep（egrep），sed，awk。
+正则表达式和我们常用的通配符特殊字符是有本质区别的。注意设置字符集 LC_ALL=C其作用是为了去除所有本地化的设置，让命令能正确执行。
+2 什么是通配符  通配符是一种特殊语句，主要有星号(*)和问号(?)，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符。当不知道真正字符或者懒得输入完整名字时，常常使用通配符代替一个或多个真正的字符。
+2.1 通配符和正则表达式的区别  通配符一般用于命令行bash环境，用于匹配文件的名称而linux正则表达式一般用于awk、grep（egrep）、sed环境用于匹配字符串。
+3 通配符的含义 3.1 *号 表示任意位任意字符，通常用来匹配任意文件名
+[root@lixin ~]# ls 1 123.txt 1.txt 4 persion.txt 12 123.txt.bak 3 daxin.txt sshd_config [root@lixin ~]# ls *.txt 123.txt 1.txt daxin.txt persion.txt [root@lixin ~]# 3.2 ?号 ？号表示任意一个字符，多个？号可以叠加连用
+[root@lixin ~]# ls ?.txt # ？代表一个字符 1.txt 2.txt 3.txt 4.txt 5.txt [root@lixin ~]# ls ??.txt # ？？代表两个字符 10.</description>
+    </item>
+    
+    <item>
+      <title>Linuxsed</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxsed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxsed/</guid>
+      <description>{% raw %}
+1 功能说明  sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出或者加入i参数。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。 小结：sed的功能是，对字符串进行增加、删除、改变、查找，即增删改查!
+2 语法格式 sed [optian] [sed-command] [input-file] # 注意sed和后面的选项之间至少有一个空格。 # 为了避免混淆，称呼sed为sed软件。sed-commands(sed命令)是sed软件内置的一些命令选项，为了和前面的options(选项)区分，故称为sed命令。 # sed-commands既可以是单个sed命令，也可以是多个sed命令组合。 # input-file(输入文件)是可选项，sed还能够从标准输入如管道获取输入。 3 常用选项 测试文本内容为：
+[root@lixin ~]# cat daxin.txt I am daxin teacher! I teach linux. I like badminton ball ,billiard ball and chinese chess! my blog is http://daxin.blog.51cto.com our site is http://www.cnblogs.org my qq num is 49000448. not 4900000448. my god ,i am not dachenzi,but daxin! gd good gooood [root@lixin ~]# 3.</description>
+    </item>
+    
+    <item>
+      <title>LinuxUser</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/linuxuser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/linuxuser/</guid>
+      <description>{% raw %}
+1 小知识点回顾  Linux 是一个多用户多任务操作系统。 每个文件和进程，都需要对应一个用户和用户组。 Linux系统是通过UID和GID来识别用户和组的。 用户名相当于人名（给人看的）,UID，GID相当于身份证号（系统用的） Linux管理员：root 用户和组的关系：1对1、1对多、多对1、多对多 Linux系统用户的分类：  超级用户：UID为0，代表皇帝。 普通用户：UID为500-65535，由皇帝创建的普通用户，大臣。 虚拟用户：UID为1-499，，为了满足程序启动的需要。   和用户关联的四个文件:/etc/passwd,/etc/shadow,/etc/group,/etc/gshadow  2 环境变量配置文件 /etc/skel  当我们创建一个用户的时候，他的家目录下面默认会有一些隐藏文件，比如.bashrc、.bash_histoy、.bash_profile这些文件从哪来的?
+[root@lixin ~]# ls -la dr-xr-x---. 3 root root 4096 Apr 1 22:39 . dr-xr-xr-x. 25 root root 4096 Apr 1 21:51 .. -rw-------. 1 root root 20481 Apr 1 20:08 .bash_history -rw-r--r--. 1 root root 18 May 20 2009 .bash_logout -rw-r--r--. 1 root root 176 May 20 2009 .</description>
+    </item>
+    
+    <item>
+      <title>nginxbasis</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/nginxbasis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/nginxbasis/</guid>
+      <description>{% raw %}
+1 nginx介绍  HTTP协议包含很多功能。常用的www，world wide web是http功能之一。默认端口为80端口，也被称之为7层协议。
+常用web软件：apache、nginx（静态web服务软件）。
+流行的web组合：
+ LAMP (Linux Apache Mysql Php) =====&amp;gt;经典 LNMP(Linux Nginx Mysql Php)=====&amp;gt;流行（或者LEMP，E（engine X 这样读法） nginx由俄罗斯人开发，是一款开源的，支持高性能，高并发的www服务和代理服务软件，一共780K，C语言开发。nginx本身是一款静态（html。css，js，jpg等）www的软件，不能解析动态的PHP,JSP,DO。因具有高并发（特别是静态资源）占用系统资源少等有点，且功丰富，而流行起来。淘宝，在nginx做了更改（优化）生成 tengine。  1.1 nginx重要特性  支持高并发：能支持几万并发连接（特别是静态小文件业务环境） 资源消耗少：在3万并发连接下，开启10个Nginx线程消耗不到200M内存。 可以做HTTP反向代理及加速缓存，即负载均衡功能，内置对RS节点服务器健康检查功能，这相当于专业的haproxy软件或lvs功能。 具备squid等专业缓存软件等的缓存功能。 支持异步网络IO事件模型epoll（Linux2.6+）  1.2 nginx主要功能  作为web服务软件：  运行HTML、JS、CSS、小图片等静态数据（此功能类似lighttpd软件） 结合FastCGI运行PHP等动态程序（例如使用fastcgi_pass方式）。 结合tomcat/resin等支持Java动态程序（常用）   作为反向代理或负载均衡服务：  为web服务、PHP服务等动态服务及Memcached缓存提供代理。 可以作为邮件代理服务软件。 在1.9.0版本以后支持tcp/IP代理，之前是不支持的。   作为前端的数据缓存服务器：  通过自身的proxy_cache模块实现类squid等专业缓存软件的功能。    1.3 nginx与其他web软件对比 apache
+ 2.2版本非常稳定强大，据官方说，其2.4版本性能超强。 Prefork模式取消了进程创建开销，性能很高。 处理动态业务数据时，因关联到后端的引擎和数据库，瓶颈不在apache本身。 高并发时消耗系统资源相对多一些。 基于传统的select模型。 支持扩展库，DSO方法，apxs方法编译安装额外的插件功能，不需要重新编译 功能多，更稳定，更安全，插件多 市场份额在逐年降低  Nginx</description>
+    </item>
+    
+    <item>
+      <title>README</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/readme/</guid>
+      <description>{% raw %}
+StudyNotes  用于记录学习笔记，以及题目练习，主要包含Linux和Python，其中各个目录存放的内容为：
+ Concept：原理概念性总结，比如DNS原理 Learn_Python_from_Zero：从0开始学习Python Linux：Linux系统相关 MessageQuery：消息队列相关，比如RabbitMQ Web：web相关，比如nginx shell：shell脚本编程 PythonWebFramework: Python web框架· WebFrontEnd: 前端部分 SoftwateDep: 软件部署  {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>rpmforyum_repo</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/rpmforyum_repo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/rpmforyum_repo/</guid>
+      <description>{% raw %}
+1 Linux上安装软件包的方式  Linux下常用的软件包安装方式有三种。
+1.1 编译安装  编译:将源代码变为机器可执行的代码文件。 安装:将可执行文件安装到操作系统里,才可以使用。
+编译安装的优缺点如下:
+ 优点  可以定制化安装目录 按需开启功能   缺点  需要查找并试验出适合的编译参数 编译时间过长 依赖包需要单独安装    1.2 yum安装  yum安装顾名思义，就是使用yum工具进行程序的安装。
+ 优点  自动处理依赖关系 自动化帮我们直接安装在操作系统中   缺点  不能定制化选择我们需要的功能模块 不能自定义安装目录 依赖于网络，网络不通，则无法安装    1.3 rpm安装  rpm，Redhat Packages Manager，红帽包管理工具，使用rpm工具（-i）进行软件程序的安装。
+ 优点  本地安装 强大的查询以及软件包验证的功能 yum安装方式，实质上安装的就是一个个rpm包   缺点  安装软件时，需要首先获取软件包依赖的所有包 无法直接处理依赖关系（需要制定—aid）参数    1.4 rpm定制+yum安装  综合了rpm的优点和yum的优点，定制化rpm包，自定义yum仓库，启用我们自己的yum源，这样可以使用yum帮我们一键安装软件，并执行某些操作，这在批量安装多台服务器的时候是非常有用的。</description>
+    </item>
+    
+    <item>
+      <title>ShellNotes</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/shellnotes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/shellnotes/</guid>
+      <description>{% raw %}
+1 什么是shell  shell是一个命令解释器，位于操作系统的最外层，它负责和用户直接对话，不用户输入的内容解释给操作系统，操作系统处理完毕后，输出结果，输出到屏幕上。分为交互式的和非交互式的。输入命令，得到结果。就是交互式的，执行脚本就是非交互的。 总结：shell就像是一座桥梁，连通用户和操作系统。
+2 什么是shell脚本  把一个或多个linux命令组合起来放在一个程序文件中执行，这样的程序叫做shell脚本。严格来说把命令.变量和流程控制语句等结合在一起，就是shell脚本
+2.1 如何写一个思路缜密的shell脚本  要多去模拟操作，多去想想为什么
+2.2 shell的特点  linux中所有的配置文件.日志文件都是纯文本文件。而shell的特点就是善于处理纯文本的内容。
+2.3 shell的分类  bourne shell(包括 sh,ksh,bash) C shell(csh,tcsh)
+查看系统支持的sh类型：/etc/shells,常用的就是/bin/sh,/bin/bash,/sbin/nologin
+Linux主流的shell就是bash，它是bourne again shell的缩写，是由bonrne shell发展而来，它还包含了csh和ksh的特色。
+目前：通用的bourne shell 已经被bash shell取代
+2.4 其他脚本语言  php：主要用于web页面开发，适合wab前端展示 perl：比shell强大，语法灵活，实现方式很多，不易读，其中mysql的HA就是由perl写的 python：近几年很火的软件，不但可以开发前端，也可以开发后端，属于全能型语言  2.5 常用系统的默认shell  Linux：bash
+solaris：bonrne sh
+AIX：ksh
+HP-unix：posix shell（sh）
+2.6 修改用户默认的shell  可以修改/etc/default/useradd文件的shell字段，更改新添加的用户。也可以直接修改/etc/passwd中的最后一个字段，直接修改某个用户的shell。
+2.7 shell脚本的建立  通过vim编辑器编写shell脚本 ,注意脚本的第一行 #!/bin/bash 表示来指定解释器
+ 注意：python 程序开头 #!/usr/bin/env python因为Linux默认就是使用bash，所以使用bash的话，可以不用加，为了规范还是要添加。如果不指定解释器，就需要用bash test.sh来执行了。</description>
+    </item>
+    
+    <item>
+      <title>Tmux使用</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/tmux%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/tmux%E4%BD%BF%E7%94%A8/</guid>
+      <description>{% raw %}
+1 Tmux  终端复用器类自由软件，功能类似于GUN screen，可以在一个终端内管理多个分离的会话，窗口及窗格，对于同时使用多个命令行，或多个任务时非常方便。
+ 支持多标签，分割窗格(pane),终端环境随时存储，随时恢复
+2 基本概念  tmux主要元素分为三层：
+ Session：一组窗口的集合，通常用来概括同一个任务，session可以有自己的名字便于在任务之间的切换。 Window：单个可见窗口。Window有自己的编号，也可以认为和Iterm2中的Tab类似 Pane: 窗格，被划分成小块的窗口，类似于Vim中C-W +v后的效果  {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>九九乘法表</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/</guid>
+      <description>{% raw %}
+文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7 利用print进行优化 8 三行搞定终极版 9 就这么完了吗？   打印九九乘法表 现在有需求，请使用 Python 尽可能少的代码，打印如下九九乘法表
+1*1=1 2*1=2 2*2=4 3*1=3 3*2=6 3*3=9 4*1=4 4*2=8 4*3=12 4*4=16 5*1=5 5*2=10 5*3=15 5*4=20 5*5=25 6*1=6 6*2=12 6*3=18 6*4=24 6*5=30 6*6=36 7*1=7 7*2=14 7*3=21 7*4=28 7*5=35 7*6=42 7*7=49 8*1=8 8*2=16 8*3=24 8*4=32 8*5=40 8*6=48 8*7=56 8*8=64 9*1=9 9*2=18 9*3=27 9*4=36 9*5=45 9*6=54 9*7=63 9*8=72 9*9=81 1 降低问题复杂度 首先我可以先打一个九乘九的矩阵，假设当前我们只了解字符串拼接</description>
+    </item>
+    
+    <item>
+      <title>双向链表</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</guid>
+      <description>{% raw %}
+用面向对象实现LinkedList链表 (1)单向链表实现append，iternodes方法
+(2)双向链表实现append、pop、insert、remove、iternodes方法
+(1) 分析需求  链表存放数据，那么链表肯定需要一个类，那么数据呢？链表的特质，访问一个对象才能知道下一个对象在哪，那么如果每个元素是一个对象就很方便了 单向链表的话，针对元素对象来说只需要前一个元素记住后一个元素就可以了，所以需要一个next属性来记录 因为迭代是要从起始位开始的，所以我们的链表对象需要一个变量来记录起始位置，那是否要结尾呢？仔细想一下，append的方法就是在链表的结尾处追加一个元素，所以记录结尾元素可以方便追加操作。  下面我们来实现一下单向链表
+class LinkNode: def __init__(self, value, next=None): self.item = value self.next = next def __str__(self): # 打印时的输出 return &amp;#39;{} ==&amp;gt; {}&amp;#39;.format(self.item, self.next.item if self.next else None) class LinkedList: def __init__(self, head=None, tail=None): self.head = head # 链表首位 self.tail = tail # 链表末位 # 追加方法 def append(self, value): # 实例化一个LinkNode 对象 node = LinkNode(value) if self.head is None: # 当链表首位为None,表示当前列表为空 self.</description>
+    </item>
+    
+    <item>
+      <title>双向链表之容器包装</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</guid>
+      <description>{% raw %}
+容器包装  构建双向链表，实现append，pop，insert，remove，iternodes方法 将双向链表链表封装为容器，并且提供__getitem__、__iter__、__setitem__方法  class LinkNode: def __init__(self, value, prev=None, after=None): self.value = value self.prev = prev self.after = after class LinkedList: def __init__(self): self.head = None self.tail = None self.length = 0 def append(self, value): node = LinkNode(value) if self.head == None: self.head = node else: prev = self.tail prev.after = node node.prev = prev self.tail = node self.length += 1 def pop(self): item = self.</description>
+    </item>
+    
+    <item>
+      <title>基础练习题</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E9%A2%98/</guid>
+      <description>{% raw %}
+文章目录 1、给一个半径，求圆的面积和周长。圆周率3.14 2 输入两个数，比较大小后，从小到大升序打印 3 依次输入若干个整数，打印出最大值，如果输入为空，则退出程序 4 输入n个数，求每次输入后的算数平均数 5 打印一个边长为n的正方形 6 求100内所有奇数的和(2500) 7 判断学生成绩，成绩等级A-E,其中90分以上为A,80-89分为B，70-79分为C,60-69分为D，60分以下为E 8 求1到5阶乘之和  1、给一个半径，求圆的面积和周长。圆周率3.14 # 简单版本 radius = float(input(&amp;#39;&amp;gt;&amp;gt;: &amp;#39;).strip()) print(&amp;#39;area: {:.2f},circumference: {:.2f}&amp;#39;.format(3.14*radius**2, 2*3.14*radius)) # 复杂版本 import math while True: radius = input(&amp;#39;半径&amp;gt;&amp;gt;&amp;gt;: &amp;#39;).strip() if radius.isdecimal(): radius = float(radius) area = math.pi * radius ** 2 circumference = 2 * math.pi * radius print(&amp;#39;面积: {:.2f}, 周长：{:.2f}&amp;#39;.format(area, circumference)) elif radius.lower() == &amp;#39;q&amp;#39;: print(&amp;#39;\033[31m bye \033[0m&amp;#39;) break else: print(&amp;#39;input Error ,retry&amp;#39;) 2 输入两个数，比较大小后，从小到大升序打印 # 简单版 number1 = int(input(&amp;#39;&amp;gt;&amp;gt;&amp;gt;: &amp;#39;)) number2 = int(input(&amp;#39;&amp;gt;&amp;gt;&amp;gt;: &amp;#39;)) if number1 &amp;lt; number2: print(number1, number2) else: print(number2, number1) # 负载版 lst = [] for i in range(2): lst.</description>
+    </item>
+    
+    <item>
+      <title>字典练习题</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E5%AD%97%E5%85%B8%E7%BB%83%E4%B9%A0%E9%A2%98/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E5%AD%97%E5%85%B8%E7%BB%83%E4%B9%A0%E9%A2%98/</guid>
+      <description>{% raw %}
+文章目录 1 用户输入一个数字 2 数字重复统计 3 字符串重复统计  1 用户输入一个数字  打印每一位数字及其重复的次数  1.当key不存在时利用0进行初始化(初级) num = input(&amp;#39;&amp;gt;&amp;gt;&amp;gt;: &amp;#39;).strip().lstrip(&amp;#39;0&amp;#39;) dic = {} for i in num: if i not in dic: dic[i] = 0 dic[i] += 1 print(dic) 2. 利用字典的get方法，不存在时返回0，然后统计 num = input(&amp;#39;&amp;gt;&amp;gt;&amp;gt;: &amp;#39;).strip().lstrip(&amp;#39;0&amp;#39;) dic = {} for i in num: dic[i] = dic.get(i, 0) + 1 print(dic) 3. 利用默认值字典直接进行统计 from collections import defaultdict num = input(&amp;#39;&amp;gt;&amp;gt;&amp;gt;: &amp;#39;).strip().lstrip(&amp;#39;0&amp;#39;) dic = defaultdict(int) for i in num: dic[i]+= 1 print(dic) 2 数字重复统计  随机产生100个整数 数字的范围[-1000, 1000] 升序输出这些数字并打印其重复的次数  import random lst = [random.</description>
+    </item>
+    
+    <item>
+      <title>打印菱形</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</guid>
+      <description>{% raw %}
+文章目录 打印菱形 1 分析 2 对称性 3 abs及三元表达式调整 4 完了吗？  打印菱形 现在有需求，请使用 Python 尽可能少的代码，打印如下菱形
+* *** ***** ******* ***** *** * 1 分析 一般让我们打印图形的题目都有窍门，或者说规律可循，刚开始不了解，可以把图形分解，查找其中的关系
+# 行 前空格 星星 后空格 # 1 3 1 3 # 2 2 3 2 # 3 1 5 1 # 4 0 7 0 # 5 1 5 1 # 6 2 3 2 # 7 3 1 3 通过对菱形的分析，我们有如上数据，仔细观察可以发现，他们是基于第四行对称的，从图形上分析，在星星后面的空格可以不用管它，得到这个结果以后，我们发现可以构造1列数据，进行循环控制
+# 行 前空格 星星 后空格 循环控制 # 1 3 1 3 -3 # 2 2 3 2 -2 # 3 1 5 1 -1 # 4 0 7 0 0 # 5 1 5 1 1 # 6 2 3 2 2 # 7 3 1 3 3 2 对称性 for i in range(-3,4): prespace = -i if i &amp;lt; 0 else i line = &amp;#39; &amp;#39; * prespace + &amp;#39;*&amp;#39; * (7 - 2 * prespace ) print(line) # 结果 * *** ***** ******* ***** *** * 代码看起来不是那么美观，合并代码，及使用abs处理负数情况</description>
+    </item>
+    
+    <item>
+      <title>斐波那契序列系列</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</guid>
+      <description>{% raw %}
+1 打印100以内的斐波那契序列 a, b = 0, 1 print(b) while True: c = a + b if c &amp;gt; 100: break print(c) a, b = b, c 2 求斐波那契数列第101项 a, b = 0, 1 count = 1 while True: c = a + b if count == 100: print(c) a, b = b, c count += 1 {% endraw %}</description>
+    </item>
+    
+    <item>
+      <title>无法修改docker监听端口</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/</guid>
+      <description>{% raw %}
+docker daemon启用tcp端口异常  默认情况下docker daemon监听的是本地的sock的，它的位置一般为/var/run/docker.sock，其实docker也是支持监听tcp端口的，今天在修改监听方式时，遇到如下问题：
+ OS:Centos 7.6 Docker:18.04
+ 我的修改方式为，在/etc/docker/daemon.json中添加如下配置
+{ &amp;#34;hosts&amp;#34;:[&amp;#34;tcp://0.0.0.0:2375&amp;#34;,&amp;#34;unix:///var/run/docker.sock&amp;#34;] } 启动docker时，一直启动失败，提示如下错误
+7月 19 22:52:34 localhost.localdomain dockerd[28536]: unable to configure the Docker daemon with file /etc/docker/daemon.json: the following dir ectives are specified both as a flag and in the configuration file: hosts: (from flag: [fd://], from file: [unix:///var/run/docker.sock tcp://12 7.0.0.1:2375]) 7月 19 22:52:34 localhost.localdomain systemd[1]: docker.service: main process exited, code=exited, status=1/FAILURE 7月 19 22:52:34 localhost.</description>
+    </item>
+    
+    <item>
+      <title>素数系列</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</guid>
+      <description>{% raw %}
+1 给一个数、判断它是否是素数(质数) (质数：一个大于1的自然数只能被1和它本身整除)
+(1) 传统方法 n = 12577 flag = False # 假定不是素数，一旦整除就是素数 for i in range(2, n - 1): # 偶数一定不是素数，这里排除 if n % i == 0: # 整除了就不是素数 flag = True break if flag: print(n, &amp;#39;Is not a prime number&amp;#39;) else: print(n, &amp;#39;Is a prime number&amp;#39;) (2) n = 12777 for i in range(3, int(n**0.5)+1, 2): # 奇数是无法被偶数整除的，所以跳过偶数，当计算到开方处时(int会取整，所以为了边界问题，+1)，还没办法整除表示它是一个素数 if n % i == 0: print(&amp;#39;Is not a prime number&amp;#39;) break else: print(&amp;#39;Is a prime number&amp;#39;) 2 求10万以内所有素数 (1) 方法1 n = 100000 lst = [] count = 1 for i in range(3, n, 2): # 排除偶数 for j in range(3, int(n**0.</description>
+    </item>
+    
+    <item>
+      <title>阶段复习-1</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E9%98%B6%E6%AE%B5%E5%A4%8D%E4%B9%A0-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E9%98%B6%E6%AE%B5%E5%A4%8D%E4%B9%A0-1/</guid>
+      <description>{% raw %}
+ 1 求和 2 选取文件 3 转置矩阵 4 生成随机的20个ID 5 去除重复数字 6 排序 7 第6题实现选择排序 8 判断密码强弱 9 日志统计 10 打印矩阵外圈  1 求和 对下面集合中随机取数字，要求取出的数字是3的倍数但不能是4的倍数，成功取到10个数字并对取到的所有数字求和输出 {5,10,3,8,6,10,9,15,24,30,27,48,24}
+import random numbers = {5,10,3,8,6,10,9,15,24,30,27,48,24} numbers = list(numbers) lst = [] while len(lst) != 10: nums = random.choice(numbers) if (nums % 3 == 0) and (nums % 4 != 0): lst.append(nums) print(sum(lst)) 2 选取文件 现有如下文件：
+ftp://ftp.astron.com/pub/file/file-5.14.tar.gz ftp://ftp.gmplib.org/pub/gmp-5.1.2/gmp-5.1.2.tar.xz ftp://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2 http://anduin.linuxfromscratch.org/sources/LFS/lfs-packages/conglomeration//iana-etc/iana-etc-2.30.tar.bz2 http://anduin.linuxfromscratch.org/sources/other/udev-lfs-205-1.tar.bz2 http://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.2.4.tar.gz http://download.</description>
+    </item>
+    
+    <item>
+      <title>面向对象基础</title>
+      <link>https://dachenzi.github.io/blog/1/01/01/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/blog/1/01/01/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</guid>
+      <description>{% raw %}
+ 1 随机整数生成类  1.1 工具类思路 1.2 生成器思路   2 打印坐标 3 车辆信息 4 实现温度的处理 5 模拟购物车 6 面积计算  1 随机整数生成类 描述：创建一个随机整数生成类，可以指定一批生成的个数，可以指定数值的范围，可以调整每批生成数字的个数。
+ 先从搭架子开始，根据题目需求,首先确认至少存在1个类，它有一个功能，可以生成一批数字  class RandomGen: def __init__(self): pass def generate(self): pass 出厂配置，由于实例可以指定范围，可以指定生成的个数，那么最少要有三个属性进行标识  class RandomGen: def __init__(self,start=1, stop=100, count=10): self.start = start self.stop = stop self.count = count def generate(self): pass 生成一批数据，这里通过调用random模块来生成随机数据  import random class RandomGen: def __init__(self,start=1, stop=100, count=10): self.start = start self.</description>
+    </item>
+    
+  </channel>
+</rss>

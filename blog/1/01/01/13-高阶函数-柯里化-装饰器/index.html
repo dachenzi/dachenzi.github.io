@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>13-高阶函数-柯里化-装饰器 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">13-高阶函数-柯里化-装饰器</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 6 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">1 高阶函数</a>
+<ul>
+<li><a href="#11-%E8%87%AA%E5%AE%9A%E4%B9%89sort%E5%87%BD%E6%95%B0">1.1 自定义sort函数</a>
+<ul>
+<li><a href="#111-%E5%B0%86%E8%A7%84%E6%A8%A1%E7%BC%A9%E5%B0%8F%E5%85%88%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F%E5%85%88%E4%B8%8D%E7%AE%A1key%E5%92%8Creverse%E5%8F%82%E6%95%B0">1.1.1 将规模缩小，先实现排序，先不管key和reverse参数</a></li>
+<li><a href="#112-%E6%B7%BB%E5%8A%A0reverse%E5%8F%82%E6%95%B0%E5%88%A4%E6%96%AD">1.1.2 添加reverse参数判断</a></li>
+<li><a href="#113-%E6%B7%BB%E5%8A%A0key%E5%8F%82%E6%95%B0%E5%88%A4%E6%96%AD">1.1.3 添加key参数判断</a></li>
+</ul>
+</li>
+<li><a href="#12-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">1.2 内建函数(高阶函数)</a>
+<ul>
+<li><a href="#121-sorted%E6%8E%92%E5%BA%8F">1.2.1 sorted排序</a></li>
+<li><a href="#122-filter-%E8%BF%87%E6%BB%A4">1.2.2 filter 过滤</a></li>
+<li><a href="#123-map-%E6%98%A0%E5%B0%84">1.2.3 map 映射</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-%E6%9F%AF%E9%87%8C%E5%8C%96">2 柯里化</a></li>
+<li><a href="#3-%E8%A3%85%E9%A5%B0%E5%99%A8">3 装饰器</a>
+<ul>
+<li><a href="#31-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">3.1 需求分析</a></li>
+<li><a href="#32-%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96">3.2 函数柯里化</a></li>
+<li><a href="#33-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95%E7%B3%96">3.3 装饰器函数(语法糖)</a></li>
+<li><a href="#34-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98">3.4 装饰器带来的问题</a></li>
+<li><a href="#35-%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%E5%B1%9E%E6%80%A7">3.5 拷贝函数属性</a></li>
+</ul>
+</li>
+<li><a href="#4-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8">4 代参装饰器</a>
+<ul>
+<li><a href="#41-%E8%BF%98%E6%98%AF%E4%BB%8E%E4%B8%80%E4%B8%AA%E9%9C%80%E6%B1%82%E5%BC%80%E5%A7%8B">4.1 还是从一个需求开始</a></li>
+<li><a href="#42-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8%E7%BC%96%E5%86%99">4.2 代参装饰器编写</a></li>
+<li><a href="#43-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B0%8F%E7%BB%93">4.3 代参装饰器小结</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-高阶函数">1 高阶函数</h1>
+<p>        在Python中一切皆对象，当然也包括函数。函数在Python中是<code>一等公民</code>(First Class Object)。即函数与字符串数组整型无异，它可以被命名可以被赋值可以当作参数被传进另一个函数也可以被另一个函数当作返回值可以放在任何位置，简单来说：</p>
+<ul>
+<li>函数也是一个对象，并且是一个可调用对象(callable)</li>
+<li>函数可以作为普通变量、参数、返回值等等</li>
+</ul>
+<p>        那什么是高阶函数呢？在Python中我们可以理解为：当一个函数接受另一个函数作为参数使用，或者一个函数最后返回了另外一个函数。在这两种情况下，这个函数就可以称之为高阶函数(满足以上任意一种情况即可，不必同时满足)。</p>
+<blockquote>
+<p>数学概念: y = g(f(x))</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(x):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(step<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+        nonlocal x    <span style="color:#75715e"># 声明局部变量x不是一个局部变量，应该在外层寻找 </span>
+        x <span style="color:#f92672">+=</span> step
+        <span style="color:#66d9ef">return</span> x
+    <span style="color:#66d9ef">return</span> inner
+foo1 <span style="color:#f92672">=</span> outer(<span style="color:#ae81ff">10</span>)
+foo2 <span style="color:#f92672">=</span> outer(<span style="color:#ae81ff">10</span>)
+<span style="color:#66d9ef">print</span>(foo1())
+<span style="color:#66d9ef">print</span>(foo2())
+</code></pre></div><p>        内层函数inner还引用了外层函数的自由变量x，形成了闭包，由于外部函数返回了内部函数，所以这就是一个典型的高阶函数。针对上面实例还需要说明是：</p>
+<ul>
+<li>ounter函数每调用一次生成的都是一个新False的函数对象</li>
+<li>foo1和foo2也都是相互独立的两个函数</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">outer</span>(x):
+   <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(step<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+   <span style="color:#f92672">...</span>:         nonlocal x    <span style="color:#75715e"># 声明局部变量x不是一个局部变量，应该在外层寻找</span>
+   <span style="color:#f92672">...</span>:         x <span style="color:#f92672">+=</span> step
+   <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">return</span> x
+   <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">return</span> inner
+   <span style="color:#f92672">...</span>: foo1 <span style="color:#f92672">=</span> outer(<span style="color:#ae81ff">10</span>)
+   <span style="color:#f92672">...</span>: foo2 <span style="color:#f92672">=</span> outer(<span style="color:#ae81ff">10</span>)
+   <span style="color:#f92672">...</span>: foo1 <span style="color:#f92672">is</span> foo2
+</code></pre></div><blockquote>
+<p><code>is</code>的比较做则是：先比较元素的内存地址，然后比较元素的内容。首先 foo1和foo2 属于不同的对象，所以内存地址肯定不同，然后由于函数对象没有实现函数内容的比较所以这里返回False</p>
+</blockquote>
+<h2 id="11-自定义sort函数">1.1 自定义sort函数</h2>
+<p>        从头构建一个类似于内置函数sorted的函数，来体会高阶函数的作用，顺便理解一下sorted的原理。</p>
+<h3 id="111-将规模缩小先实现排序先不管key和reverse参数">1.1.1 将规模缩小，先实现排序，先不管key和reverse参数</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sort</span>(iterable, <span style="color:#f92672">*</span>, key<span style="color:#f92672">=</span>None, reverse<span style="color:#f92672">=</span>False):
+    new_list <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> iterable:
+        <span style="color:#66d9ef">for</span> i, k <span style="color:#f92672">in</span> enumerate(new_list):
+            <span style="color:#66d9ef">if</span> value <span style="color:#f92672">&lt;</span> k:
+                new_list<span style="color:#f92672">.</span>insert(i, value)
+                <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            new_list<span style="color:#f92672">.</span>append(value)
+    <span style="color:#66d9ef">return</span> new_list
+
+<span style="color:#66d9ef">print</span>(sort([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>]))
+</code></pre></div><p>分析：</p>
+<ul>
+<li>sort返回一个新的列表，我们这里构建一个列表，用于存放排序好的列表</li>
+<li>为了练习算法，这里选择使用直接插入排序，注意：直接插入排序是原地排序，这里是变化，直接插入到新的已排序列表中去</li>
+<li>利用enumerate构建索引,用于确认插入位置,注意:因为new_list在我们这个场景下是有序的！所以才可以这样用</li>
+<li>初始情况下，由于new_list为空，所以待排序列表的第一个元素会被直接插入到已排序列表的首位</li>
+<li>后续只需在待排序的列表中，拿出一个数据，和已排序区的元素，从左至右依次对比即可</li>
+<li>如果大于已排序区的所有元素，那么直接追加即可，如果小于某一个元素只需要在对应的元素为插入待排序元素即可</li>
+<li>如果小于的话，因为列表的特性，在一个位置上插入数据，那么原数据会自动向右移动，所以符合直接插入排序的原理</li>
+</ul>
+<h3 id="112-添加reverse参数判断">1.1.2 添加reverse参数判断</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sort</span>(iterable, <span style="color:#f92672">*</span>, key<span style="color:#f92672">=</span>None, reverse<span style="color:#f92672">=</span>False):
+    new_list <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> iterable:
+        <span style="color:#66d9ef">for</span> i, k <span style="color:#f92672">in</span> enumerate(new_list):
+            flag <span style="color:#f92672">=</span> value <span style="color:#f92672">&gt;</span> k <span style="color:#66d9ef">if</span> reverse <span style="color:#66d9ef">else</span> value <span style="color:#f92672">&lt;</span> k
+            <span style="color:#75715e"># if reverse:</span>
+            <span style="color:#75715e">#     flag = value &gt; k</span>
+            <span style="color:#75715e"># else:</span>
+            <span style="color:#75715e">#     flag = value &lt; k</span>
+            <span style="color:#66d9ef">if</span> flag:
+                    new_list<span style="color:#f92672">.</span>insert(i, value)
+                    <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            new_list<span style="color:#f92672">.</span>append(value)
+    <span style="color:#66d9ef">return</span> new_list
+    <span style="color:#75715e"># return new_list[::-1]</span>
+<span style="color:#66d9ef">print</span>(sort([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">5</span>]))
+</code></pre></div><p>分析：</p>
+<ul>
+<li>倒序有两种表达方式，即正序排好，然后倒着截取。或者是按照倒序排列，这里使用倒序排列。</li>
+<li>正序时：如果value大于k，那么需要把value插入到k的位置上</li>
+<li>倒序时，如果value小于k，那么需要把value插入到k的位置上</li>
+<li>所以添加flag来采集用户传入的reverse参数，这里使用了三元表达式来简化代码</li>
+</ul>
+<h3 id="113-添加key参数判断">1.1.3 添加key参数判断</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sort</span>(iterable, <span style="color:#f92672">*</span>, key<span style="color:#f92672">=</span>None, reverse<span style="color:#f92672">=</span>False):
+    new_list <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> iterable:
+        value_new <span style="color:#f92672">=</span> key(value) <span style="color:#66d9ef">if</span> key <span style="color:#66d9ef">else</span> value
+        <span style="color:#66d9ef">for</span> i, k <span style="color:#f92672">in</span> enumerate(new_list):
+            k_new <span style="color:#f92672">=</span> key(k) <span style="color:#66d9ef">if</span> key <span style="color:#66d9ef">else</span> k
+            flag <span style="color:#f92672">=</span> value_new <span style="color:#f92672">&gt;</span> k_new <span style="color:#66d9ef">if</span> reverse <span style="color:#66d9ef">else</span> value_new <span style="color:#f92672">&lt;</span> k_new
+            <span style="color:#66d9ef">if</span> flag:
+                    new_list<span style="color:#f92672">.</span>insert(i, value)
+                    <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            new_list<span style="color:#f92672">.</span>append(value)
+    <span style="color:#66d9ef">return</span> new_list
+    <span style="color:#75715e"># return new_list[::-1]</span>
+<span style="color:#66d9ef">print</span>(sort([<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;b&#39;</span>], key<span style="color:#f92672">=</span>str, reverse<span style="color:#f92672">=</span>True))
+</code></pre></div><p>分析：</p>
+<ul>
+<li>key传入了一个函数，用于对每个key进行转换，然后使用转换后的元素来进行比较，所以我们这里使用了转化后的变量来比较</li>
+<li>当key可以被调用，那么我们认为它是一个函数，那么调用他对元素进行转换。</li>
+<li>这里传入了str函数，如果结合前面所学的知识可以改为lambda表达式。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sort</span>(iterable, <span style="color:#f92672">*</span>, key<span style="color:#f92672">=</span>None, reverse<span style="color:#f92672">=</span>False):
+    new_list <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> value <span style="color:#f92672">in</span> iterable:
+        value_new <span style="color:#f92672">=</span> key(value) <span style="color:#66d9ef">if</span> callable(key) <span style="color:#66d9ef">else</span> value
+        <span style="color:#66d9ef">for</span> i, k <span style="color:#f92672">in</span> enumerate(new_list):
+            k_new <span style="color:#f92672">=</span> key(k) <span style="color:#66d9ef">if</span> callable(key) <span style="color:#66d9ef">else</span> k
+            flag <span style="color:#f92672">=</span> value_new <span style="color:#f92672">&gt;</span> k_new <span style="color:#66d9ef">if</span> reverse <span style="color:#66d9ef">else</span> value_new <span style="color:#f92672">&lt;</span> k_new
+            <span style="color:#66d9ef">if</span> flag:
+                    new_list<span style="color:#f92672">.</span>insert(i, value)
+                    <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            new_list<span style="color:#f92672">.</span>append(value)
+    <span style="color:#66d9ef">return</span> new_list
+<span style="color:#66d9ef">print</span>(sort([<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;b&#39;</span>], key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x:str(x), reverse<span style="color:#f92672">=</span>True))
+</code></pre></div><ul>
+<li>传参时利用了lambda表达式，在函数内部，每次传入一个参数，返回它的str对象，其实效果等同于str,这里只是提一下lambda表达式。</li>
+</ul>
+<h2 id="12-内建函数高阶函数">1.2 内建函数(高阶函数)</h2>
+<p>Python内置了很多高阶函数的应用，这里仅介绍较为常用的。</p>
+<ul>
+<li>sorted: 排序函数，直接返回新的列表</li>
+<li>filter：过滤函数，返回一个迭代器</li>
+<li>map：映射函数，返回一个迭代器</li>
+<li>zip：拉链函数，返回一个迭代器</li>
+</ul>
+<h3 id="121-sorted排序">1.2.1 sorted排序</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sorted(iterable, <span style="color:#f92672">/</span>, <span style="color:#f92672">*</span>, key<span style="color:#f92672">=</span>None, reverse<span style="color:#f92672">=</span>False)
+</code></pre></div><p>立即返回一个新的列表，对一个可迭代对象的所有元素排序。</p>
+<ul>
+<li><code>key</code>: 排序规则为key定义的函数</li>
+<li><code>reverse</code>: 表示是否进行翻转排序</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">49</span>]: lst
+Out[<span style="color:#ae81ff">49</span>]: [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">95</span>]
+In [<span style="color:#ae81ff">50</span>]: <span style="color:#f92672">import</span> random
+In [<span style="color:#ae81ff">51</span>]: random<span style="color:#f92672">.</span>shuffle(lst)
+In [<span style="color:#ae81ff">52</span>]: lst
+Out[<span style="color:#ae81ff">52</span>]: [<span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">0</span>]
+In [<span style="color:#ae81ff">53</span>]: sorted(lst,reverse<span style="color:#f92672">=</span>True)
+Out[<span style="color:#ae81ff">53</span>]: [<span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>]
+In [<span style="color:#ae81ff">54</span>]: lst<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;a&#39;</span>)
+In [<span style="color:#ae81ff">55</span>]: sorted(lst,key<span style="color:#f92672">=</span>str,reverse<span style="color:#f92672">=</span>True)
+Out[<span style="color:#ae81ff">55</span>] :[<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>]
+In [<span style="color:#ae81ff">58</span>]: sorted(lst,key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x:str(x))
+Out[<span style="color:#ae81ff">58</span>]: [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">70</span> <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">95</span>, <span style="color:#e6db74">&#39;a&#39;</span>]
+In [<span style="color:#ae81ff">59</span>]: lst<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;a&#39;</span>)
+In [<span style="color:#ae81ff">61</span>]: sorted(lst,key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x : <span style="color:#ae81ff">100</span> <span style="color:#f92672">-</span> x )
+Out[<span style="color:#ae81ff">61</span>]: [<span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">75</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">60</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>]
+</code></pre></div><ul>
+<li>这里定义了一个接受一个参数的匿名函数，然后返回处理后的元素(<code>这是匿名函数最常用的场景之一</code>)</li>
+<li>功能等同于直接调用str函数</li>
+</ul>
+<blockquote>
+<p>sorted直接返回一个新的列表，而列表也有sort方法，通过<code>list.sort()</code>进行排序是直接原地进行排序的。</p>
+</blockquote>
+<h3 id="122-filter-过滤">1.2.2 filter 过滤</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">filter(function <span style="color:#f92672">or</span> None, iterable) <span style="color:#f92672">--&gt;</span> filter object
+</code></pre></div><p>过滤可迭代对象的元素，返回一个迭代器</p>
+<ul>
+<li><code>function</code>：表示一个函数，它的功能是：每次从可迭代对象iterable取出一个元素交给function函数处理，如果返回True，则保留该元素，否则提出该元素，如果是None,表示剔除等效False的对象</li>
+<li><code>iterable</code>：可迭代对象</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">62</span>]: lst1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">55</span>,<span style="color:#ae81ff">150</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">78</span>,<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">123</span>]
+In [<span style="color:#ae81ff">64</span>]: list(filter(<span style="color:#66d9ef">lambda</span> x:x<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>,lst1))
+Out[<span style="color:#ae81ff">64</span>]: [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">150</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">78</span>, <span style="color:#ae81ff">123</span>]
+
+<span style="color:#75715e"># 等同于</span>
+In [<span style="color:#ae81ff">66</span>]: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(iterable):
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> iterable:
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+    <span style="color:#f92672">...</span>:             <span style="color:#66d9ef">yield</span> i
+    <span style="color:#f92672">...</span>:
+
+In [<span style="color:#ae81ff">67</span>]: list(func(lst1))
+Out[<span style="color:#ae81ff">67</span>]: [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">150</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">78</span>, <span style="color:#ae81ff">123</span>]
+
+<span style="color:#75715e"># 或者</span>
+In [<span style="color:#ae81ff">66</span>]: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(iterable):
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> iterable:
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">（</span><span style="color:#66d9ef">lambda</span> x:x<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)(i):    <span style="color:#75715e">## l这里属于函数调用：func()()</span>
+    <span style="color:#f92672">...</span>:             <span style="color:#66d9ef">yield</span> i
+    <span style="color:#f92672">...</span>:
+</code></pre></div><h3 id="123-map-映射">1.2.3 map 映射</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">map(func, <span style="color:#f92672">*</span>iterables) <span style="color:#f92672">--&gt;</span> map object
+</code></pre></div><p>对多个可迭代对象的元素按照指定的函数进行映射，返回一个迭代器</p>
+<ul>
+<li><code>func</code>：一个函数，用于处理iterable的元素，在指定多个iterable对象是，函数的参数数量与iterable的数量是相等的。</li>
+<li><code>*iterable</code>：一个或多个可迭代对象</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">69</span>]: list(map(str,range(<span style="color:#ae81ff">10</span>)))
+Out[<span style="color:#ae81ff">69</span>]: [<span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;4&#39;</span>, <span style="color:#e6db74">&#39;5&#39;</span>, <span style="color:#e6db74">&#39;6&#39;</span>, <span style="color:#e6db74">&#39;7&#39;</span>, <span style="color:#e6db74">&#39;8&#39;</span>, <span style="color:#e6db74">&#39;9&#39;</span>]
+
+In [<span style="color:#ae81ff">70</span>]: list(map(<span style="color:#66d9ef">lambda</span> x:x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,range(<span style="color:#ae81ff">10</span>)))
+Out[<span style="color:#ae81ff">70</span>]: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>]
+
+In [<span style="color:#ae81ff">73</span>]: dict(list(map(<span style="color:#66d9ef">lambda</span> x,y:(x,y),<span style="color:#e6db74">&#39;abcde&#39;</span>,range(<span style="color:#ae81ff">10</span>))))
+Out[<span style="color:#ae81ff">73</span>]: {<span style="color:#e6db74">&#39;a&#39;</span>: <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;b&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;c&#39;</span>: <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;d&#39;</span>: <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#39;e&#39;</span>: <span style="color:#ae81ff">4</span>}
+
+In [<span style="color:#ae81ff">74</span>]: dict(map(<span style="color:#66d9ef">lambda</span> x:(x<span style="color:#f92672">%</span><span style="color:#ae81ff">5</span>,x),range(<span style="color:#ae81ff">500</span>)))
+Out[<span style="color:#ae81ff">74</span>]: {<span style="color:#ae81ff">0</span>: <span style="color:#ae81ff">495</span>, <span style="color:#ae81ff">1</span>: <span style="color:#ae81ff">496</span>, <span style="color:#ae81ff">2</span>: <span style="color:#ae81ff">497</span>, <span style="color:#ae81ff">3</span>: <span style="color:#ae81ff">498</span>, <span style="color:#ae81ff">4</span>: <span style="color:#ae81ff">499</span>}
+</code></pre></div><blockquote>
+<p>map对象的长度，等同于最小的iterable长度。(木桶效应)</p>
+</blockquote>
+<h1 id="2-柯里化">2 柯里化</h1>
+<p>        在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。&ndash; 来自维基百科的解释
+        总结一下：柯里化指的就是将原来接受两个参数的函数变成新的接受一个参数的函数的过程。新的函数返回一个以原有第二个参数为参数的函数。其数学表达式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">z <span style="color:#f92672">=</span> f(x, y) <span style="color:#960050;background-color:#1e0010">转换成</span> z <span style="color:#f92672">=</span> f(x)(y) <span style="color:#960050;background-color:#1e0010">的形式</span>
+</code></pre></div><p>这里把经典的add函数拿来进行转换：</p>
+<ul>
+<li>想要转换为add(4)(5)，那么add(4)必须要返回一个函数，否则无法将5当作参数传入</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new_add</span>(x):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(y):
+        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+    <span style="color:#66d9ef">return</span> inner
+
+
+<span style="color:#66d9ef">print</span>(add(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>))     <span style="color:#75715e"># 9</span>
+<span style="color:#66d9ef">print</span>(new_add(<span style="color:#ae81ff">4</span>)(<span style="color:#ae81ff">5</span>)) <span style="color:#75715e"># 9</span>
+<span style="color:#66d9ef">print</span>(add(<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> new_add(<span style="color:#ae81ff">4</span>)(<span style="color:#ae81ff">5</span>))  <span style="color:#75715e"># True</span>
+</code></pre></div><p>通过函数嵌套，就可以完成函数的柯里化了，对柯里化有所了解以后，那么我们就可以继续来看Python中对我们小白来说的第一个难点：<code>装饰器</code></p>
+<h1 id="3-装饰器">3 装饰器</h1>
+<p>        什么是装饰器？概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。我们接下来从一个需求开始学习装饰器。</p>
+<h2 id="31-需求分析">3.1 需求分析</h2>
+<p>现在有如下函数，我们需要将这个函数的日志打印到终端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x,y):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;我被调用执行啦&#39;</span>)  <span style="color:#75715e"># 新增打印日志语句</span>
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+add(<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">200</span>)
+</code></pre></div><p>        但是仔细思考，打印日志是一个独立的功能，它和add函数本身并没有什么关联关系，我们说一个函数是为完成一个工程的，所以直接写在函数里面不是不可以，但是不建议，并且打印日志属于调试信息功能，与业务无关，不应该放在业务函数加法中。<br>
+        如果不需要写在函数的里面，那么我们得想办法写在函数的外面</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn, x, y):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数开始执行&#39;</span>)
+    res <span style="color:#f92672">=</span> fn(x, y)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数执行完毕&#39;</span>)
+    <span style="color:#66d9ef">return</span> res
+
+logger(add,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><ul>
+<li>这样就解决了打印语句在函数内定义的问题了。</li>
+<li>但是如果add函数的形参很多，我们要挨个写上吗？所以*args,**kwargs帮了我们很大的忙</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数开始执行&#39;</span>)
+    res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数执行完毕&#39;</span>)
+    <span style="color:#66d9ef">return</span> res
+
+logger(add,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><h2 id="32-函数柯里化">3.2 函数柯里化</h2>
+<p>        使用<code>logger(add,4,5)</code>来调用我们的add函数真是太丑了，给其他人看，可能人家也不知道你要干啥，结合前面所学的柯里化，我们进行如下变动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数被执行了&#39;</span>)
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数执行完毕&#39;</span>)
+        <span style="color:#66d9ef">return</span> res
+    <span style="color:#66d9ef">return</span> wrapper
+
+logger(add)(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><p>        这样看起来是不是就好看多了？当指定logger(add)(4,5)时，才会打印日志，但如果想要在所有调用add函数的地方，我们还需要在所有调用add的地方修改为logger(add)(参数),想一想，如果我能把logger(add)变成add是不是就可以直接写成add(4,5)了呢？</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logger(add)(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+<span style="color:#f92672">--------</span>
+add <span style="color:#f92672">=</span> logger(add)
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)    <span style="color:#75715e"># 将add重新指向了新的函数wrapper</span>
+</code></pre></div><p>        按照柯里化的原型中logger(add)返回了一个函数wrapper，而我们的(4,5)其实是传递给了wrapper，结合我们前面所学的高阶函数，这里的wrapper，是一个闭包函数，因为在内部对fn进行了执行，而且增加了打印日志的功能，我们在执行wrapper的同时，也会执行原来的函数fn，并且添加了打印日志的功能，所以logger就是一个<code>装饰器函数</code>！！！</p>
+<h2 id="33-装饰器函数语法糖">3.3 装饰器函数(语法糖)</h2>
+<p>        语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·蘭丁发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能没有影响，但是更方便程序员使用。 语法糖让程序更加简洁，有更高的可读性。Python针对我们刚刚编写的logger(add)函数，进行了语法糖优化，所以下面是我们使用语法糖之后的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数被执行了&#39;</span>)
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数执行完毕&#39;</span>)
+        <span style="color:#66d9ef">return</span> res
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@logger</span>   <span style="color:#75715e"># 等于 add = logger(add)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><blockquote>
+<p>        当解释器执行到<code>@logger</code>时，会自动把它下面的函数当作参数，传给logger函数，所以这里<code>@logger</code> 其实就等于 <code>add = logger(add)</code> 另外，logger必须要定义在add函数之前才可以被装载！这一点很重要！</p>
+</blockquote>
+<h2 id="34-装饰器带来的问题">3.4 装饰器带来的问题</h2>
+<p>利用装饰器计算如下函数的运行时间</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> datetime
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        total_seconds <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数：{} 执行用时：{}&#39;</span><span style="color:#f92672">.</span>format(wrapper<span style="color:#f92672">.</span>__name__,total_seconds))
+        <span style="color:#66d9ef">return</span> res
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@logger</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+<span style="color:#960050;background-color:#1e0010">执行结果：</span>
+In [<span style="color:#ae81ff">76</span>]: add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+<span style="color:#960050;background-color:#1e0010">函数：</span>wrapper <span style="color:#960050;background-color:#1e0010">执行用时：</span><span style="color:#ae81ff">2.000944</span>
+</code></pre></div><blockquote>
+<p>这里<code>__name__</code>表示函数的名称.</p>
+</blockquote>
+<p>        什么鬼？这里为什么打印的是wrapper啊，为什么不是add呢？这样的话，别人不就发现我把这个函数给偷偷换掉了吗？不行不行，我得想个办法把函数的属性复制过来，由于这个功能和打印用时的装饰器不是一个功能，那么我们还得给装饰器另加一个装饰器。-_-!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> datetime
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">copy_properties</span>(old_fn):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(new_fn):
+        new_fn<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">=</span> old_fn<span style="color:#f92672">.</span>__name__
+        <span style="color:#66d9ef">return</span> new_fn
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#a6e22e">@copy_properties</span>(fn)  <span style="color:#75715e"># wrapper = copy_properties(fn)(wrapper)</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        total_seconds <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数：{} 执行用时：{}&#39;</span><span style="color:#f92672">.</span>format(wrapper<span style="color:#f92672">.</span>__name__,total_seconds))
+        <span style="color:#66d9ef">return</span> res
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@logger</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><ul>
+<li>解释器执行到 <code>@copy_properties(fn)</code> 时，会把下面的wraper装入，等于<code>wrapper = copy_properties(fn)(wrapper)</code></li>
+<li>由于知道了参数的个数(一定是一个函数对象)，这里就没有使用*args, **kwargs</li>
+<li>函数的属性不止__name__一个，其他的怎么办呢？</li>
+</ul>
+<h2 id="35-拷贝函数属性">3.5 拷贝函数属性</h2>
+<p>        Python的内置模块functools中，内置了很多常用的高阶函数，其中wraps就是用来拷贝函数的属性及签名信息的。利用wraps，我们就不需要自己编写copy_properties函数了，下面是修改后的版本</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#a6e22e">@functools.wraps</span>(fn)  <span style="color:#75715e"># wrapper = functools.wraps(fn)(wrapper)</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        total_seconds <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数：{} 执行用时：{}&#39;</span><span style="color:#f92672">.</span>format(wrapper<span style="color:#f92672">.</span>__name__,total_seconds))
+        <span style="color:#66d9ef">return</span> res
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@logger</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><p>通过使用 <code>@functools.wraps(fn)</code> 我们可以方便的拷贝函数的属性签名信息，比如：'<strong>module</strong>', &lsquo;<strong>name</strong>&rsquo;, &lsquo;<strong>qualname</strong>&rsquo;, &lsquo;<strong>doc</strong>&rsquo;,'<strong>annotations</strong>&lsquo;等，这些属性信息，将在后续部分进行讲解，这里知道即可</p>
+<h1 id="4-代参装饰器">4 代参装饰器</h1>
+<p>        上面章节讲到的是带一个参数(函数)的装饰器，在Python中这种装饰器被称为无参装饰器，因为语法糖的表现形式就是 <code>@logger</code>,下面要说的是代参数的装饰器，即<code>@logger(50)</code></p>
+<h2 id="41-还是从一个需求开始">4.1 还是从一个需求开始</h2>
+<p>        以上述函数为例，我们需要记录当函数执行超过一定时间时的日志信息，该怎么办呢？假设这个时间是5秒，那么很显然，我们需要把这个时间变量传入到装饰器中进行判断。也就是说我们需要写成这种形式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logger(<span style="color:#ae81ff">5</span>)(add)
+</code></pre></div><blockquote>
+<p>looger(5)返回的是一个函数，否则无法将add传入</p>
+</blockquote>
+<h2 id="42-代参装饰器编写">4.2 代参装饰器编写</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(var):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inner</span>(func):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+            start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+            res <span style="color:#f92672">=</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+            total_seconds <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+            <span style="color:#66d9ef">if</span> total_seconds <span style="color:#f92672">&gt;</span> var:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数执行时间过长&#39;</span>)
+            <span style="color:#66d9ef">return</span> res
+        <span style="color:#66d9ef">return</span> wrapper
+    <span style="color:#66d9ef">return</span> inner
+
+<span style="color:#a6e22e">@logger</span>(<span style="color:#ae81ff">5</span>)  <span style="color:#75715e"># logger(5)(add)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">6</span>)
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+</code></pre></div><p>是不是很简单？ 在掌握了柯里化以及无参装饰器。</p>
+<h2 id="43-代参装饰器小结">4.3 代参装饰器小结</h2>
+<p>代参装饰器有如下特点：</p>
+<ol>
+<li>它是一个函数</li>
+<li>函数作为它的形参</li>
+<li>返回值是一个不带参数的装饰器函数</li>
+<li>使用@function_name(参数列表)方式调用</li>
+<li>可以看做在装饰器外层又加了一层函数</li>
+</ol>
+<blockquote>
+<p>装饰器什么时候被执行？，还记得@logger等于什么吗？ add = logger(add) 等号等于赋值，是不是要先计算右边的？所以，装饰器在函数定义阶段就已经被执行了！不是等到被装饰的函数执行时，才执行哦！真正执行时，每次都会生成一个新的wrapper被调用而已！
+{% endraw %}</p>
+</blockquote>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

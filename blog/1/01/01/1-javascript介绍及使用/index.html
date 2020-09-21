@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>1-JavaScript介绍及使用 &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">1-JavaScript介绍及使用</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 6 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-javascript%E6%A6%82%E8%BF%B0">1 JavaScript概述</a>
+<ul>
+<li><a href="#11-java%E5%92%8Cjavascript%E7%9A%84%E5%8C%BA%E5%88%AB">1.1 Java和JavaScript的区别</a></li>
+<li><a href="#12-%E4%BB%80%E4%B9%88%E6%98%AFjavascript">1.2 什么是JavaScript</a></li>
+<li><a href="#13-javascript%E7%9A%84%E7%BB%84%E6%88%90">1.3 JavaScript的组成</a></li>
+</ul>
+</li>
+<li><a href="#2-javascript%E5%9F%BA%E7%A1%80">2 JavaScript基础</a>
+<ul>
+<li><a href="#21-javascript%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F">2.1 JavaScript调用方式</a></li>
+<li><a href="#22-javascript%E7%9A%84%E5%8F%98%E9%87%8F%E6%A0%87%E8%AF%86%E7%AC%A6">2.2 JavaScript的变量标识符</a>
+<ul>
+<li><a href="#221-%E5%8F%98%E9%87%8F%E7%9A%84%E5%91%BD%E5%90%8D">2.2.1 变量的命名</a></li>
+<li><a href="#222-%E6%A0%87%E8%AF%86%E7%AC%A6">2.2.2 标识符</a></li>
+</ul>
+</li>
+<li><a href="#23-js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">2.3 JS的数据类型</a>
+<ul>
+<li><a href="#231-%E6%95%B0%E5%AD%97number%E7%B1%BB%E5%9E%8B">2.3.1 数字(Number)类型</a></li>
+<li><a href="#232-%E5%AD%97%E7%AC%A6%E4%B8%B2string%E7%B1%BB%E5%9E%8B">2.3.2 字符串(String)类型</a></li>
+<li><a href="#233-%E5%B8%83%E5%B0%94boolean%E7%B1%BB%E5%9E%8B">2.3.3 布尔(Boolean)类型</a></li>
+<li><a href="#234-%E6%95%B0%E7%BB%84array%E7%B1%BB%E5%9E%8B">2.3.4 数组(Array)类型</a></li>
+<li><a href="#235-%E5%AF%B9%E8%B1%A1object">2.3.5 对象(Object)</a></li>
+<li><a href="#236-%E7%A9%BAnull%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%9C%AA%E5%AE%9A%E4%B9%89undefined%E7%B1%BB%E5%9E%8B">2.3.6 空(Null)类型和未定义(Undefined)类型</a></li>
+<li><a href="#237-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B">2.3.7 声明变量类型</a></li>
+</ul>
+</li>
+<li><a href="#24-%E8%BF%90%E7%AE%97%E7%AC%A6">2.4 运算符</a>
+<ul>
+<li><a href="#241--%E5%92%8C--%E7%9A%84%E5%8C%BA%E5%88%AB">2.4.1 == 和 === 的区别</a></li>
+<li><a href="#242-variable%E5%92%8Cvariable%E7%9A%84%E5%8C%BA%E5%88%AB">2.4.2 variable++和++variable的区别</a></li>
+<li><a href="#243-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6">2.4.3 三元运算符</a></li>
+<li><a href="#244-%E9%80%97%E5%8F%B7%E6%93%8D%E4%BD%9C%E7%AC%A6">2.4.4 逗号操作符</a></li>
+<li><a href="#245-%E5%85%B6%E4%BB%96">2.4.5 其他</a></li>
+</ul>
+</li>
+<li><a href="#25-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">2.5 流程控制</a>
+<ul>
+<li><a href="#251-%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84">2.5.1 顺序结构</a></li>
+<li><a href="#252-%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84">2.5.2 分支结构</a>
+<ul>
+<li><a href="#2521-if---else%E7%BB%93%E6%9E%84">2.5.2.1 if - else结构</a></li>
+<li><a href="#2522-if-else-if---else-%E7%BB%93%E6%9E%84">2.5.2.2 if-else if - else 结构</a></li>
+<li><a href="#2523-switchcase%E7%BB%93%E6%9E%84">2.5.2.3 switch&hellip;case结构</a></li>
+</ul>
+</li>
+<li><a href="#253-%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84">2.5.3 循环结构</a>
+<ul>
+<li><a href="#2531-for%E6%9D%A1%E4%BB%B6%E5%BE%AA%E7%8E%AF">2.5.3.1 for条件循环</a></li>
+<li><a href="#2532-for-in%E5%BE%AA%E7%8E%AF">2.5.3.2 for-in循环</a></li>
+<li><a href="#2533-for-of%E5%BE%AA%E7%8E%AF">2.5.3.3 for-of循环</a></li>
+<li><a href="#2533-whiledo%E5%BE%AA%E7%8E%AF">2.5.3.3 while..do循环</a></li>
+<li><a href="#2533-dowhile%E5%BE%AA%E7%8E%AF">2.5.3.3 do..while循环</a></li>
+</ul>
+</li>
+<li><a href="#254-%E5%B0%8F%E7%BB%83%E4%B9%A0">2.5.4 小练习</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-javascript概述">1 JavaScript概述</h1>
+<p>JavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。</p>
+<h2 id="11-java和javascript的区别">1.1 Java和JavaScript的区别</h2>
+<p>JavaScript 与 Java 是两种完全不同的语言，无论在概念上还是设计上。</p>
+<ul>
+<li>Java（由 Sun 发明）是更复杂的编程语言。</li>
+<li>JavaScript 由 Brendan Eich 发明。它于 1995 年出现在 Netscape 中（该浏览器已停止更新），并于 1997 年被 ECMA（一个标准协会）采纳。ECMA-262 是 JavaScript 标准的官方名称。</li>
+</ul>
+<h2 id="12-什么是javascript">1.2 什么是JavaScript</h2>
+<p>JavaScript 是脚本语言</p>
+<ul>
+<li>JavaScript 是一种轻量级的编程语言。</li>
+<li>JavaScript 是可插入 HTML 页面的编程代码。</li>
+<li>JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。</li>
+<li>JavaScript 可以控制HTML 输出流、对事件的反应、改变 HTML 内容、改变 HTML 图像、改变 HTML 样式、验证输入等等。</li>
+</ul>
+<h2 id="13-javascript的组成">1.3 JavaScript的组成</h2>
+<p>我们说的JavaScript通常由三部分组成：</p>
+<ul>
+<li>ECMAScript：JavaScript标准化部分，主要定义了基础的数据类型，语法，关键字等等。</li>
+<li>DOM(文档对象模型)：整合JS，CSS，HTML。</li>
+<li>BOM(浏览器对象模型)：整合JS 和 浏览器。</li>
+</ul>
+<h1 id="2-javascript基础">2 JavaScript基础</h1>
+<p>JavaScript 是一个程序语言。遵循ECMAScript标准，语法规则定义了语言结构。</p>
+<h2 id="21-javascript调用方式">2.1 JavaScript调用方式</h2>
+<p>HTML中引入JS的方式主要有两种:直接嵌入式编写、通过导入JS文件</p>
+<ul>
+<li>直接嵌入式编写：必须位于 <!-- raw HTML omitted --> 与 <!-- raw HTML omitted --> 标签之间。脚本可被放置在 HTML 页面的 <!-- raw HTML omitted --> 和 <!-- raw HTML omitted --> 部分中。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Title&lt;/<span style="color:#f92672">title</span>&gt;
+    &lt;<span style="color:#f92672">script</span>&gt;
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;hello world&#39;</span>)    <span style="color:#75715e">// 用于弹出告警框，便于调试
+</span><span style="color:#75715e"></span>    &lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+&lt;<span style="color:#f92672">script</span>&gt;
+    <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;hello world&#39;</span>)
+&lt;/<span style="color:#f92672">script</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>注意：通常的做法是把JS函数放入 <!-- raw HTML omitted --> 部分中，或者放在页面底部。这样就可以把它们安置到同一处位置，不会干扰页面的内容。  &ndash;&gt; 建议放在body的最后面，这样不会阻碍网页加载</p>
+<ul>
+<li>导入式：在<!-- raw HTML omitted --><!-- raw HTML omitted -->标签内导入</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;index.js&#39;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>注意：外部脚本不能中不能包含 <!-- raw HTML omitted --> 标签。</p>
+<h2 id="22-javascript的变量标识符">2.2 JavaScript的变量标识符</h2>
+<p>        变量是用于存储信息的&quot;容器&quot;。在代数中，我们使用字母（比如 x）来保存值（比如 5）。通过上面的表达式 z=x+y，我们能够计算出 z 的值为 11。在 JavaScript 中，这些字母被称为变量。声明一个遍变量的方式主要有以下方法：</p>
+<ul>
+<li>使用var关键字： <code>var x = 1</code>; 根据值的类型，x是number类型。（<code>局部变量</code>）</li>
+<li>不使用var关键字： <code>y = 1</code>; 根据值的类型，x是number类型。（<code>全局变量</code>） 严格模式会报错，不建议用</li>
+<li>只定义不赋值：<code>var x</code>; 那么此时该变量的类型为<code>undefine</code>。</li>
+<li>使用let关键字： <code>let x = 1</code>; 和var关键字创建的效果大致相同，属于<code>ES6的新语法</code>，以大括号为作用域</li>
+<li>使用const关键字：<code>const x = 1</code>; 声明一个常量x，不允许更改</li>
+</ul>
+<blockquote>
+<p><code>var会把变量提升</code>到当前全局或函数的作用域的头部先行定义。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">x</span>)  
+<span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">y</span>)<span style="color:#960050;background-color:#1e0010">、</span>
+<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">表示查看对象的类型</span>
+<span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span><span style="color:#960050;background-color:#1e0010">：</span><span style="color:#a6e22e">通了浏览器的console输出</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">便于调试</span>
+</code></pre></div><p>Tips：</p>
+<ul>
+<li>在一行内定义多个变量需要用逗号隔开：var a = 1, b = 2;</li>
+<li>重新声明并不会修改变量的值： var a = 1;  var a      a的值依旧为1</li>
+</ul>
+<h3 id="221-变量的命名">2.2.1 变量的命名</h3>
+<p>变量可以使用短名称（比如 x 和 y），也可以使用描述性更好的名称（比如 age, sum, totalvolume）。</p>
+<ul>
+<li>变量必须以字母开头</li>
+<li>变量也能以 $ 和 _ 符号开头（不过我们不推荐这么做）</li>
+<li>变量名称对大小写敏感（y 和 Y 是不同的变量）</li>
+</ul>
+<p>主要存在以下写法：</p>
+<ul>
+<li>Camel 标记法:首字母是小写的，接下来的字母都以大写字符开头。例如：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myTestValue</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">mySecondValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi&#34;</span>;
+</code></pre></div><ul>
+<li>Pascal 标记法:首字母是大写的，接下来的字母都以大写字符开头。例如：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Var</span> <span style="color:#a6e22e">MyTestValue</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">MySecondValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi&#34;</span>;
+</code></pre></div><ul>
+<li>匈牙利类型标记法:在以 Pascal 标记法命名的变量前附加一个小写字母（或小写字母序列），说明该变量的类型。例如，i 表示整数，s 表示字符串，如下所示“</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">Var</span> <span style="color:#a6e22e">iMyTestValue</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">sMySecondValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hi&#34;</span>;
+</code></pre></div><h3 id="222-标识符">2.2.2 标识符</h3>
+<p>        由不以数字开头的字母、数字、下划线(_)、美元符号($)组成,常用于表示函数、变量等的名称,例如：_abc,$abc,abc,abc123是标识符，而1abc不是,JavaScript语言中代表特定含义的词称为保留字，不允许程序再定义为标识符</p>
+<h2 id="23-js的数据类型">2.3 JS的数据类型</h2>
+<p>数据类型主要有一下几种：字符串（String）、数字(Number)、布尔(Boolean)、数组(Array)、对象(Object)、空（Null）、未定义（Undefined）。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number</td>
+<td>数值型，包括整形和浮点型</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布尔型, true和false</td>
+</tr>
+<tr>
+<td>string</td>
+<td>字符串型</td>
+</tr>
+<tr>
+<td>null</td>
+<td>只有一个值null</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>变量声明未赋值的；对象未定义的属性</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>ES6新引入类型</td>
+</tr>
+<tr>
+<td>object</td>
+<td>是以上基本类型的复合类型，是容器</td>
+</tr>
+</tbody>
+</table>
+<p>javascript的隐式转换</p>
+<ul>
+<li>遇到字符串，加号就是拼接字符串，所有非字符和字符串相加，都是是隐式的转换为字符串。</li>
+<li>如果没有字符串，加号把其他所有类型都当数字处理，非数字类型隐式转换为数字。undefined特殊，因为它没有定义值，所以转换失败会得到一个特殊值NaN</li>
+<li>如果运算符是逻辑运算符，短路符，返回就是短路时的类型。没有隐式转换</li>
+</ul>
+<blockquote>
+<p>除非你十分明确，否则不要依赖隐式转换</p>
+</blockquote>
+<h3 id="231-数字number类型">2.3.1 数字(Number)类型</h3>
+<p>JavaScript 只有一种数字类型(双精度浮点型)。数字可以带小数点，也可以不带：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.14</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</code></pre></div><p>在JS中所有的数字类型均为number，并且都用64位浮点格式来存储。</p>
+<ul>
+<li>NaN类型: js来做数据转换的时候，比如当字符串转换成数字失效的时候，会返回一个 NaN 的值。类型也是属于number的</li>
+<li>在变量前添加 + ，则表示把该变量转换为正数</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a456&#39;</span>;
+<span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> Number(<span style="color:#a6e22e">a</span>)  <span style="color:#75715e">// 无法转换，结果为NaN
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>)
+</code></pre></div><p>数字类型还有三种符号值：+Infinity（正无穷）、-Infinity（负无穷）和 NaN (not-a-number非数字)。</p>
+<table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number.parseFloat()</td>
+<td>把字符串参数解析成浮点数，和全局方法 parseFloat() 作用一致</td>
+</tr>
+<tr>
+<td>Number.parseInt()</td>
+<td>把字符串解析成特定基数对应的整型数字，和全局方法 parseInt() 作用一致</td>
+</tr>
+<tr>
+<td>Number.isFinite()</td>
+<td>判断传递的值是否为有限数字</td>
+</tr>
+<tr>
+<td>Number.isInteger()</td>
+<td>判断传递的值是否为整数</td>
+</tr>
+<tr>
+<td>Number.isNaN()</td>
+<td>判断传递的值是否为NaN</td>
+</tr>
+</tbody>
+</table>
+<p>内置数学对象Math：</p>
+<ul>
+<li>Math提供了绝对值、对数指数运算、三角函数运算、最大值、最小值、随机数、开方等运算函数，提供了PI值。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Math.<span style="color:#a6e22e">PI</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Math.<span style="color:#a6e22e">abs</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Math.<span style="color:#a6e22e">log2</span>(<span style="color:#ae81ff">16</span>))
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Math.<span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">2</span>))
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(Math.<span style="color:#a6e22e">random</span>()) <span style="color:#75715e">// (0, 1)
+</span></code></pre></div><h3 id="232-字符串string类型">2.3.2 字符串(String)类型</h3>
+<p>字符串是存储字符（比如 &ldquo;Lee daxin&rdquo;）的变量。可以是引号中的任意文本。</p>
+<blockquote>
+<p>由于没有字符类型，所以在字符串中表达常用的特殊字符，但是在使用特殊字符时必须加上反斜线\；常用的转义字符 \n:换行 ':单引号 &quot;:双引号 \:右划线</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dachenzi&#39;</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">job</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Linux&#39;</span>;
+</code></pre></div><p>ES6还提供了反引号用来定义一个字符串，可以支持多行，还支持插值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;daxin&#39;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+<span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">,</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">age</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">info</span>)  <span style="color:#75715e">// daxin,20
+</span></code></pre></div><table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj.length</td>
+<td>长度</td>
+</tr>
+<tr>
+<td>obj.trim()</td>
+<td>移除空白</td>
+</tr>
+<tr>
+<td>obj.trimLeft()</td>
+<td>左边移除空白（非ES6官方语法）</td>
+</tr>
+<tr>
+<td>obj.trimRight)</td>
+<td>右边移除空白（非ES6官方语法）</td>
+</tr>
+<tr>
+<td>obj.charAt(n)</td>
+<td>返回字符串中的第n个字符</td>
+</tr>
+<tr>
+<td>obj.concat(value, &hellip;)</td>
+<td>拼接</td>
+</tr>
+<tr>
+<td>obj.indexOf(substring,start)</td>
+<td>子序列位置</td>
+</tr>
+<tr>
+<td>obj.lastIndexOf(substring,start)</td>
+<td>子序列位置</td>
+</tr>
+<tr>
+<td>obj.substring(from, to)</td>
+<td>根据索引获取子序列</td>
+</tr>
+<tr>
+<td>obj.slice(start, end)</td>
+<td>切片</td>
+</tr>
+<tr>
+<td>obj.toLowerCase()</td>
+<td>大写</td>
+</tr>
+<tr>
+<td>obj.toUpperCase()</td>
+<td>小写</td>
+</tr>
+<tr>
+<td>obj.split(delimiter, limit)</td>
+<td>分割</td>
+</tr>
+<tr>
+<td>obj.search(regexp)</td>
+<td>从头开始匹配，返回匹配成功的第一个位置(g无效)</td>
+</tr>
+<tr>
+<td>obj.match(regexp)</td>
+<td>全局搜索，如果正则中有g表示找到全部，否则只找到第一个。</td>
+</tr>
+<tr>
+<td>obj.replace(regexp, replacement)</td>
+<td>替换，正则中有g则替换所有，否则只替换第一个匹配项，<!-- raw HTML omitted -->$数字：匹配的第n个组内容；<!-- raw HTML omitted -->$&amp;：当前匹配的内容；<!-- raw HTML omitted -->$`：位于匹配子串左侧的文本；<!-- raw HTML omitted -->$'：位于匹配子串右侧的文本<!-- raw HTML omitted -->$$：直接量$符号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="233-布尔boolean类型">2.3.3 布尔(Boolean)类型</h3>
+<p>布尔（逻辑）只能有两个值：true 或 false。也代表1和0，实际运算中true=1,false=0 。这点和shell是不同的。主要用于流程控制</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">1</span>) {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#39;True&#39;</span>)
+ }
+ <span style="color:#66d9ef">else</span> {
+         <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;False&#34;</span>)
+ }
+</code></pre></div><h3 id="234-数组array类型">2.3.4 数组(Array)类型</h3>
+<p>类似于其他语言的列表，但是不是一个东西。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//方式1：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Array(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>); 
+<span style="color:#75715e">//方式2:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]; 
+<span style="color:#75715e">//方式3:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Array();
+<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</code></pre></div><p>扩展：列表的索引为数字，而数组的索引可以为任意.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> Array();
+     <span style="color:#a6e22e">arr</span>[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;w&#39;</span>;
+     <span style="color:#a6e22e">arr</span>[<span style="color:#e6db74">&#39;index&#39;</span>]<span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>;
+     <span style="color:#a6e22e">arr</span>[<span style="color:#e6db74">&#39;input&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello world&#39;</span>;
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>)
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><h3 id="235-对象object">2.3.5 对象(Object)</h3>
+<p>对象由花括号分隔。在括号内部，对象的属性以名称和值对的形式 (name : value) 来定义。属性由逗号分隔：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//方式1：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">person</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">firstname</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Bill&#34;</span>, <span style="color:#a6e22e">lastname</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Gates&#34;</span>, <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5566</span>};
+ 
+<span style="color:#75715e">//方式2：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">person</span><span style="color:#f92672">=</span>{
+    <span style="color:#a6e22e">firstname</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bill&#34;</span>,
+    <span style="color:#a6e22e">lastname</span>  <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Gates&#34;</span>,
+    <span style="color:#a6e22e">id</span>        <span style="color:#f92672">:</span>  <span style="color:#ae81ff">5566</span>
+};
+<span style="color:#75715e">//声明中的空格和折行无关紧要
+</span></code></pre></div><p>Persion对象有三个属性：firstname、lastname 以及 id。访问属性的两个方式：</p>
+<ul>
+<li>persion.firstname</li>
+<li>persion[&lsquo;firstname&rsquo;]</li>
+</ul>
+<h3 id="236-空null类型和未定义undefined类型">2.3.6 空(Null)类型和未定义(Undefined)类型</h3>
+<p>Undefined 这个值表示变量不含有值,当声明的变量未初始化时，该变量的默认值是 undefined。当函数无明确返回值时，返回的也是值 &ldquo;undefined。另一种只有一个值的类型是 Null，它只有一个专用值 null，即它的字面量。值 undefined 实际上是从值 null 派生来的,因此 ECMAScript 把它们定义为相等的。可以通过将变量的值设置为 null 来清空变量的值。尽管这两个值相等，但它们的含义不同。undefined 是声明了变量但未对其初始化时赋予该变量的值，null 则用于表示尚未存在的对象。如果函数或方法要返回的是对象，那么找不到该对象时，返回的通常是 null。</p>
+<h3 id="237-声明变量类型">2.3.7 声明变量类型</h3>
+<p>如果我们只定义变量没有进行赋值，那么默认就是undefined类型的，如果想要声明某个类型的变量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span>   <span style="color:#66d9ef">new</span> String;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">=</span>      <span style="color:#66d9ef">new</span> Number;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">y</span><span style="color:#f92672">=</span>      <span style="color:#66d9ef">new</span> Boolean;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span><span style="color:#f92672">=</span>    <span style="color:#66d9ef">new</span> Array;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">person</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Object;
+</code></pre></div><h2 id="24-运算符">2.4 运算符</h2>
+<p>常用的运算符如下:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>包含</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算术运算符</td>
+<td>+  -   *   /   %    ++   &ndash;</td>
+</tr>
+<tr>
+<td>比较运算符</td>
+<td>&gt;   &gt;=   &lt;    &lt;=    !=    ==    ===   !==</td>
+</tr>
+<tr>
+<td>逻辑运算符</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>赋值运算符</td>
+<td>=  +=   -=  *=   /=</td>
+</tr>
+<tr>
+<td>字符串运算符</td>
+<td>+  连接，两边操作数有一个或两个是字符串就做连接运算</td>
+</tr>
+</tbody>
+</table>
+<h3 id="241--和--的区别">2.4.1 == 和 === 的区别</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;123&#39;</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">123</span>;
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">b</span>);
+ 
+<span style="color:#75715e">// JS在做比较运算的时候，会把不同的数据类型进行转换，所以这里a 是等于 b的。
+</span><span style="color:#75715e">// 如果不希望JS完成类型转换，那么可以使用===。
+</span></code></pre></div><p>python强类型语言，js属于弱类型语言。</p>
+<ul>
+<li>强类型定义语言：一种总是强制类型定义的语言。Java和Python是强制类型定义的。如果你有一个整数，如果不显示地进行转换，你不能将其视为一个字符串。</li>
+<li>弱类型定义语言：一种类型可以被忽略的语言，与强类型定义相反。JavaScript是弱类型定义的。在JavaScript中，可以将字符串'12&rsquo;和整数3进行连接得到字符串'123'，然后可以把它看成整数123，而不需要显示转换。</li>
+</ul>
+<h3 id="242-variable和variable的区别">2.4.2 variable++和++variable的区别</h3>
+<p>假如x=2，那么x++表达式执行后的值为3，x&ndash;表达式执行后的值为1；i++相当于i=i+1，i&ndash;相当于i=i-1；递增和递减运算符可以放在变量前也可以放在变量后：&ndash;i</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//区别主要体现在赋值的时候
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">++</span>;
+<span style="color:#75715e">//这里b的值为1，因为是先赋值后a自加
+</span><span style="color:#75715e"></span> 
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#f92672">++</span><span style="color:#a6e22e">a</span>;
+<span style="color:#75715e">//这里b的值为3，因为是先a自加后赋值
+</span></code></pre></div><h3 id="243-三元运算符">2.4.3 三元运算符</h3>
+<p>它的一般格式为：<code>条件表达式?真值:假值</code>，等价于简单的if&hellip;else结构</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">条件表达式</span>) {
+ <span style="color:#a6e22e">真值</span>
+}
+<span style="color:#66d9ef">else</span> {
+ <span style="color:#a6e22e">假值</span>
+}
+</code></pre></div><p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>((<span style="color:#e6db74">&#39;3&#39;</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">30</span>)<span style="color:#f92672">?</span><span style="color:#e6db74">&#39;真&#39;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;假&#39;</span>)
+</code></pre></div><h3 id="244-逗号操作符">2.4.4 逗号操作符</h3>
+<p>JS允许多个表达式写在一起，最终将返回最后一个逗号表达式的值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">+</span><span style="color:#ae81ff">5</span>, <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">c</span><span style="color:#f92672">=</span><span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">20</span> <span style="color:#f92672">?</span><span style="color:#e6db74">&#39;t&#39;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;f&#39;</span>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>) <span style="color:#75715e">//9
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">c</span>) <span style="color:#75715e">//f
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test</span>() {
+ <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">3</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">++</span>  <span style="color:#75715e">// 没有有var/let创建的变量为全局变量，直接修改了全局变量
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">test</span>()) <span style="color:#75715e">// 最终返回的是 c = a++ 的值，为9
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">c</span>) <span style="color:#75715e">// c为9
+</span></code></pre></div><h3 id="245-其他">2.4.5 其他</h3>
+<p>名称|说明
+instanceof|判断是否属于指定类型，但是对象必须是new关键字声明创建的。
+typeof|返回类型字符串
+delete|delete操作符, 删除一个对象(an object)或一个对象的属性(an object&rsquo;s property)或者一个数组中某一个键值(an element at a specified index in an array)。
+in|如果指定的属性在对象内，则返回true</p>
+<h2 id="25-流程控制">2.5 流程控制</h2>
+<p>JS中主要有三种流程控制结构：</p>
+<ul>
+<li>顺序结构（从上到下顺序执行）</li>
+<li>分支结构（比如if，else；switch case）</li>
+<li>循环结构（比如for，while）</li>
+</ul>
+<h3 id="251-顺序结构">2.5.1 顺序结构</h3>
+<p>即从上到下按照顺序执行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;hello&#39;</span>)
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;world&#39;</span>)
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><h3 id="252-分支结构">2.5.2 分支结构</h3>
+<p>和python不同的是，条件表达式的and/or是用  &amp;&amp; / || 表示的</p>
+<h4 id="2521-if---else结构">2.5.2.1 if - else结构</h4>
+<pre><code>if (条件表达式) {
+    语句1；
+    ... ... 
+} else {
+    语句2;
+    ... ...
+}
+</code></pre><p>注意：只要表达式成立，或者返回值是bool都可，即if(1)也是可以的，因为1的bool类型为true；</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+
+<span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">1</span>) {
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;true&#39;</span>)
+ } <span style="color:#66d9ef">else</span> {
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;False&#39;</span>)
+ }
+ 
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/scripts&gt;</span>
+</code></pre></div><h4 id="2522-if-else-if---else-结构">2.5.2.2 if-else if - else 结构</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">条件表达式1</span>) {
+    <span style="color:#a6e22e">语句1</span><span style="color:#960050;background-color:#1e0010">；</span>
+    .... ....
+} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">条件表达式2</span>) {
+    <span style="color:#a6e22e">语句2</span><span style="color:#960050;background-color:#1e0010">；</span>
+    ... ...
+} <span style="color:#66d9ef">else</span> {
+    <span style="color:#a6e22e">语句3</span>;
+    ... ...
+}
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+</code></pre></div><p>下面看一个例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;bigger than 10&#39;</span>)
+ } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;bingger than 5&#39;</span>)
+} <span style="color:#66d9ef">else</span> {
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;smaller than 5&#39;</span>)
+ }
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/scripts&gt;</span>
+</code></pre></div><p>条件的False等效</p>
+<ul>
+<li>false</li>
+<li>undefined</li>
+<li>null</li>
+<li>0</li>
+<li>NaN</li>
+<li>空字符串</li>
+</ul>
+<p>其它值都将被视为True</p>
+<h4 id="2523-switchcase结构">2.5.2.3 switch&hellip;case结构</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">switch</span>  (<span style="color:#a6e22e">条件表达式</span>) {
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">值1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">语句1</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">值2</span><span style="color:#f92672">:</span><span style="color:#a6e22e">语句2</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">值3</span><span style="color:#f92672">:</span><span style="color:#a6e22e">语句3</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">值4</span><span style="color:#f92672">:</span><span style="color:#a6e22e">语句4</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span><span style="color:#a6e22e">语句5</span>;
+}
+</code></pre></div><p>下面来看一个例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span>  <span style="color:#f92672">=</span>  <span style="color:#ae81ff">5</span> ;
+  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">a</span>) {
+      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期一&#39;</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期二&#39;</span>;<span style="color:#66d9ef">break</span>;
+     <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期三&#39;</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期四&#39;</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期五&#39;</span>;<span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期六&#39;</span>;<span style="color:#66d9ef">break</span>;
+     <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">6</span><span style="color:#f92672">:</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;星期七&#39;</span>;<span style="color:#66d9ef">break</span>;
+ }
+ <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">y</span>) <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><p>switch比else if结构更加简洁清晰，使程序可读性更强,效率更高。但是一定要注意恰当的时候break语句，否则会继续顺序向下执行。</p>
+<h3 id="253-循环结构">2.5.3 循环结构</h3>
+<h4 id="2531-for条件循环">2.5.3.1 for条件循环</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">初始化表达式</span>;<span style="color:#a6e22e">条件表达式</span>;<span style="color:#a6e22e">自增或自减</span>) {
+    <span style="color:#a6e22e">执行语句1</span>;
+    <span style="color:#a6e22e">执行语句2</span>;
+    ... ...
+}
+</code></pre></div><p>下面来看一个例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+ 
+ <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> ; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">i</span>);
+ }
+ 
+ <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><p>死循环的例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">for</span>(;;){   <span style="color:#75715e">// 表达式，条件，等全为空
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;abc&#39;</span>)
+}
+</code></pre></div><h4 id="2532-for-in循环">2.5.3.2 for-in循环</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">变量</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">属组或对象</span>) {
+    <span style="color:#a6e22e">执行语句1</span>;
+    <span style="color:#a6e22e">执行语句2</span>;
+}
+</code></pre></div><p>下面来看一个例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>]
+          <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">arr</span>) {
+         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">i</span>)
+     }
+ <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><p>PS：for循环，循环的是对象的索引</p>
+<h4 id="2533-for-of循环">2.5.3.3 for-of循环</h4>
+<p>for &hellip; of 直接取值，只能用于数组，不能作用于对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">arry</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;c&#39;</span>,<span style="color:#ae81ff">6</span>]
+<span style="color:#66d9ef">for</span> ( <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">arry</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">x</span>)
+}
+</code></pre></div><h4 id="2533-whiledo循环">2.5.3.3 while..do循环</h4>
+<p>先判断条件，满足时，再执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">条件表达式</span>) {
+        <span style="color:#a6e22e">执行语句1</span><span style="color:#960050;background-color:#1e0010">；</span>
+        <span style="color:#a6e22e">执行语句2</span><span style="color:#960050;background-color:#1e0010">；</span>
+    }
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><p>下面来看一个例子:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+          <span style="color:#66d9ef">while</span> ( <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">101</span>) {
+         <span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">i</span>
+         <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+     }
+     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">sum</span>)
+ <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><h4 id="2533-dowhile循环">2.5.3.3 do..while循环</h4>
+<p>它的一般格式为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">do</span>
+ <span style="color:#a6e22e">statement</span>
+<span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">condition</span>);
+</code></pre></div><p>先执行语句，然后在进行条件判断。</p>
+<h3 id="254-小练习">2.5.4 小练习</h3>
+<p>打九九乘法表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">&lt;=</span><span style="color:#a6e22e">i</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>) {
+        <span style="color:#a6e22e">str</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">j</span><span style="color:#e6db74">}</span><span style="color:#e6db74">*</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">i</span><span style="color:#e6db74">}</span><span style="color:#e6db74">=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">i</span><span style="color:#f92672">*</span><span style="color:#a6e22e">j</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">10</span><span style="color:#f92672">?</span><span style="color:#a6e22e">i</span><span style="color:#f92672">*</span><span style="color:#a6e22e">j</span> <span style="color:#f92672">+</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">:</span><span style="color:#a6e22e">i</span><span style="color:#f92672">*</span><span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;  &#39;</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> `</span>
+    }
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">str</span>)
+}
+
+
+<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">j</span><span style="color:#f92672">&lt;=</span><span style="color:#a6e22e">i</span>;<span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>){
+        <span style="color:#a6e22e">str</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">j</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> * </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">i</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> = </span><span style="color:#e6db74">${</span>(<span style="color:#a6e22e">a</span><span style="color:#f92672">=</span><span style="color:#a6e22e">i</span><span style="color:#f92672">*</span><span style="color:#a6e22e">j</span>)<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">10</span><span style="color:#f92672">?</span><span style="color:#a6e22e">a</span><span style="color:#f92672">:</span><span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39; &#39;</span> <span style="color:#e6db74">}</span><span style="color:#e6db74">  `</span>
+        }
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">str</span>)
+}
+</code></pre></div><p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

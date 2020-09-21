@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>5-sqlalchemy-flask_sqlalchemy &middot; Lee Xin</title>
+
+  
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/hyde-x.css">
+  <link rel="stylesheet" href="https://dachenzi.github.io/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+  <link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Your default page description">
+  <meta name="keywords" content="your,default,page,keywords">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking code', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Lee Xin</h1>
+      <p class="lead">Your favourite quote or soundbite.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://dachenzi.github.io/">Blog</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      </li>
+    </ul>
+
+    
+    <p><script id='flattr'>
+      (function(id){
+        var s = document.getElementById(id);
+        var f = document.createElement('iframe');
+        f.src = '//api.flattr.com/button/view/?uid=&button=compact&url=https:\/\/dachenzi.github.io\/&title=daxin\u0027s blog';
+        f.title = 'Flattr';
+        f.height = 20;
+        f.width = 110;
+        f.style.borderWidth = 0;
+        s.parentNode.insertBefore(f, s);
+      })('flattr');
+    </script></p>
+    
+
+    <p>Copyright &copy; 2020 <a href="https://dachenzi.github.io/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">5-sqlalchemy-flask_sqlalchemy</h1>
+    <span class="post-date">Jan 1, 0001 &middot; 2 minute read &middot; <a href="https://dachenzi.github.io/blog/1/01/01/5-sqlalchemy-flask_sqlalchemy/#disqus_thread">Comments</a>
+    </span>
+    <p>{% raw %}</p>
+<h1 id="1-sqlalchemy">1 sqlalchemy</h1>
+<p>关于sqlalchemy的用法请参考：<a href="https://www.cnblogs.com/dachenzi/p/10569495.html">sqlalchemy用法点这里</a></p>
+<h1 id="2-flask_sqlalchemy">2 flask_sqlalchemy</h1>
+<p>        Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。
+<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html#id2">官方文档点这里</a></p>
+<p>下面是一个标准的falsk程序的目录结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cmdb
+├── cmdb
+│   ├── __init__.py   <span style="color:#75715e"># 创建db，create_app函数</span>
+│   ├── models.py   <span style="color:#75715e"># orm映射文件</span>
+│   ├── static
+│   ├── templates
+│   └── views   <span style="color:#75715e"># views视图函数</span>
+│       ├── __init__.py
+│       ├── account.py
+│       └── home.py
+├── create_table.py   <span style="color:#75715e"># 用于创建数据库表</span>
+├── manage.py    <span style="color:#75715e"># 管理，启动app</span>
+└── settings.py
+</code></pre></div><p>其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。</p>
+<h2 id="21-创建对象">2.1 创建对象</h2>
+<p>        新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 <code>pip3 install flask_sqlalchemy</code> 安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__.py</span>
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+
+db <span style="color:#f92672">=</span> SQLAlchemy()
+</code></pre></div><p>注意，</p>
+<h2 id="22-初始化init_app">2.2 初始化init_app</h2>
+<p>在一个函数中定义的应用，SQLAlchemy 对象是全局的，后者如何知道前者了？答案就是 init_app()函数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__.py</span>
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+<span style="color:#f92672">import</span> Flask
+
+db <span style="color:#f92672">=</span> SQLAlchemy()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+    app <span style="color:#f92672">=</span> Flask(__name__)
+    db<span style="color:#f92672">.</span>init_app(app)  <span style="color:#75715e"># 需要把app传入，这样SQLAlchemy在内部就可以读取app中的相关配置，比如sql的driver，host等等</span>
+</code></pre></div><p>关于sqlalchemy的配置，这样就可以直接写在app的settings.py中了，可以配置的项目参考:<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html">sqlalchemy配置</a></p>
+<p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>(object):
+    SECRET_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;121212asdsd121dafd&#39;</span>
+    SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    SQLALCHEMY_POOL_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</code></pre></div><h2 id="23-上下文管理">2.3 上下文管理</h2>
+<p>        我们写的model如何创建数据库表呢？在sqlalchemy中，需要使用base.metadata.create_all()，在flask_sqlalchey中，简化了这个过程。利用db.create_all就可以完成创建,注意需要在db所在的地方，引入编写的model的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># cmdb.__init__</span>
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+<span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+
+<span style="color:#75715e"># 实例化一个flash_sqlalchemy对象</span>
+db <span style="color:#f92672">=</span> SQLAlchemy()
+
+<span style="color:#75715e"># 只能放在下面，因为会用到db 对象</span>
+<span style="color:#f92672">from</span> .models <span style="color:#f92672">import</span> User    <span style="color:#75715e"># 倒入编写的model文件中的类</span>
+<span style="color:#f92672">from</span> .views <span style="color:#f92672">import</span> account
+<span style="color:#f92672">from</span> .views <span style="color:#f92672">import</span> home
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+    app <span style="color:#f92672">=</span> Flask(__name__)
+    app<span style="color:#f92672">.</span>config<span style="color:#f92672">.</span>from_object(<span style="color:#e6db74">&#39;settings.Base&#39;</span>)
+
+    <span style="color:#75715e"># 注册蓝图</span>
+    app<span style="color:#f92672">.</span>register_blueprint(account<span style="color:#f92672">.</span>ac)
+    app<span style="color:#f92672">.</span>register_blueprint(home<span style="color:#f92672">.</span>hm)
+
+    <span style="color:#75715e"># 初始化</span>
+    db<span style="color:#f92672">.</span>init_app(app)
+
+    <span style="color:#66d9ef">return</span> app
+</code></pre></div><p>创建数据库表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># create_table.py </span>
+
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> db
+<span style="color:#f92672">from</span> manage <span style="color:#f92672">import</span> app
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    <span style="color:#66d9ef">with</span> app<span style="color:#f92672">.</span>app_context():  <span style="color:#75715e"># 需要上下文环境</span>
+        db<span style="color:#f92672">.</span>create_all()      <span style="color:#75715e"># 初始化表结构</span>
+</code></pre></div><h2 id="24-视图中使用">2.4 视图中使用</h2>
+<p>在views中的视图函数中，通过导入db对象，即可使用它来操作数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># views.account.py</span>
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Blueprint
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> db
+<span style="color:#f92672">from</span> cmdb <span style="color:#f92672">import</span> models
+
+ac <span style="color:#f92672">=</span> Blueprint(<span style="color:#e6db74">&#39;ac&#39;</span>, __name__)
+
+<span style="color:#a6e22e">@ac.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    res <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>query(models<span style="color:#f92672">.</span>User)<span style="color:#f92672">.</span>all()  <span style="color:#75715e"># 直接使用</span>
+    <span style="color:#66d9ef">print</span>(res)
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;login&#39;</span>
+
+<span style="color:#a6e22e">@ac.route</span>(<span style="color:#e6db74">&#39;/logout&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;logout&#39;</span>
+</code></pre></div><h2 id="25-关闭触发信号">2.5 关闭触发信号</h2>
+<p>启动的时候会发送一个信号警告</p>
+<pre><code>FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  'SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and '
+</code></pre><p>在配置文件中关闭出发的信号</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># settings.py</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>(object):
+    SECRET_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;121212asdsd121dafd&#39;</span>
+    SQLALCHEMY_DATABASE_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    SQLALCHEMY_POOL_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+    SQLALCHEMY_TRACK_MODIFICATIONS <span style="color:#f92672">=</span> False   <span style="color:#75715e"># 添加这个配置即可。</span>
+</code></pre></div><p>{% endraw %}</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "your_disqus_shortname";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "your_disqus_shortname";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://dachenzi.github.io/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
