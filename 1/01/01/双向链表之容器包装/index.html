@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>双向链表之容器包装  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="双向链表之容器包装  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "双向链表之容器包装",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  422 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>双向链表之容器包装
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 2 min
+  &middot; (422 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<h1 id="容器包装">容器包装</h1>
+<ol>
+<li>构建双向链表，实现append，pop，insert，remove，iternodes方法</li>
+<li>将双向链表链表封装为容器，并且提供__getitem__、__iter__、__setitem__方法</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinkNode</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, value, prev<span style="color:#f92672">=</span>None, after<span style="color:#f92672">=</span>None):
+        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> value
+        self<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> prev
+        self<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> after
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinkedList</span>:
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>length <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">append</span>(self, value):
+        node <span style="color:#f92672">=</span> LinkNode(value)
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>head <span style="color:#f92672">==</span> None:
+            self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> node
+        <span style="color:#66d9ef">else</span>:
+            prev <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tail
+            prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> node
+            node<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> prev
+        self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> node
+        self<span style="color:#f92672">.</span>length <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pop</span>(self):
+        item <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>tail
+        item<span style="color:#f92672">.</span>prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> None
+        self<span style="color:#f92672">.</span>length <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>prev
+        <span style="color:#66d9ef">return</span> item<span style="color:#f92672">.</span>value
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">insert</span>(self, position, value):
+        node <span style="color:#f92672">=</span> LinkNode(value)
+        <span style="color:#66d9ef">if</span> position <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">IndexError</span>(<span style="color:#e6db74">&#39;Index must ge Zero&#39;</span>)
+        <span style="color:#66d9ef">elif</span> position <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>head <span style="color:#f92672">==</span> None <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>tail <span style="color:#f92672">==</span> None:
+                self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> node
+                self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> node
+            <span style="color:#66d9ef">else</span>:
+                item <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head
+                self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> node
+                node<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> item
+                item<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> node
+            self<span style="color:#f92672">.</span>length <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+        <span style="color:#66d9ef">elif</span> position <span style="color:#f92672">&lt;</span> self<span style="color:#f92672">.</span>length:
+            <span style="color:#66d9ef">for</span> index,item <span style="color:#f92672">in</span> enumerate(self<span style="color:#f92672">.</span>_iternode()):
+                <span style="color:#66d9ef">if</span> index <span style="color:#f92672">==</span> position:
+                    prev <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>prev
+                    prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> node
+                    node<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> prev
+                    node<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> item
+                    item<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> node
+                    self<span style="color:#f92672">.</span>length <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">else</span>:
+            self<span style="color:#f92672">.</span>append(value)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_modify</span>(self, index, value):
+        node <span style="color:#f92672">=</span> LinkNode(value)
+        <span style="color:#66d9ef">for</span> i,item <span style="color:#f92672">in</span> enumerate(self<span style="color:#f92672">.</span>_iternode()):
+            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> index:
+                <span style="color:#66d9ef">if</span> item<span style="color:#f92672">.</span>prev <span style="color:#f92672">==</span> None <span style="color:#f92672">and</span> item<span style="color:#f92672">.</span>after <span style="color:#f92672">==</span> None :
+                    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;1&#39;</span>)
+                    self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> node
+                    self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> node
+                <span style="color:#66d9ef">elif</span> item<span style="color:#f92672">.</span>prev <span style="color:#f92672">==</span> None:
+                    <span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">2</span>)
+                    <span style="color:#66d9ef">print</span>(node<span style="color:#f92672">.</span>value)
+                    item<span style="color:#f92672">.</span>after<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> node
+                    node<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>after
+                    self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> node
+                <span style="color:#66d9ef">elif</span> item<span style="color:#f92672">.</span>after <span style="color:#f92672">==</span> None:
+                    <span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">3</span>)
+                    item<span style="color:#f92672">.</span>prev<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> node
+                    node<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>prev
+                    self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> node
+                <span style="color:#66d9ef">else</span>:
+                    <span style="color:#66d9ef">print</span>(<span style="color:#ae81ff">4</span>)
+                    item<span style="color:#f92672">.</span>prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> node
+                    item<span style="color:#f92672">.</span>after<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> node
+                    node<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>prev
+                    node<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> item<span style="color:#f92672">.</span>after
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remove</span>(self, value):
+        <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_iternode():
+            <span style="color:#66d9ef">if</span> node<span style="color:#f92672">.</span>value <span style="color:#f92672">==</span> value:
+                prev <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span>prev
+                after <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span>after
+                <span style="color:#66d9ef">if</span> prev <span style="color:#f92672">==</span> None:
+                    self<span style="color:#f92672">.</span>head <span style="color:#f92672">=</span> after
+                    after<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> None
+                <span style="color:#66d9ef">elif</span> after <span style="color:#f92672">==</span> None:
+                    self<span style="color:#f92672">.</span>tail <span style="color:#f92672">=</span> prev
+                    prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> None
+                <span style="color:#66d9ef">else</span>:
+                    prev<span style="color:#f92672">.</span>after <span style="color:#f92672">=</span> after
+                    after<span style="color:#f92672">.</span>prev <span style="color:#f92672">=</span> prev
+                self<span style="color:#f92672">.</span>length <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+                <span style="color:#66d9ef">break</span>
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#39;{} is not exists&#39;</span><span style="color:#f92672">.</span>format(value))
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_iternode</span>(self):
+        start <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>head
+        <span style="color:#66d9ef">while</span> start<span style="color:#f92672">.</span>after :
+            <span style="color:#66d9ef">yield</span> start
+            start <span style="color:#f92672">=</span> start<span style="color:#f92672">.</span>after
+        <span style="color:#66d9ef">yield</span> self<span style="color:#f92672">.</span>tail
+
+    <span style="color:#66d9ef">def</span> __getitem__(self, index):
+        <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> index <span style="color:#f92672">&lt;</span> self<span style="color:#f92672">.</span>length:
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_getitem(index)
+        <span style="color:#66d9ef">elif</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> (self<span style="color:#f92672">.</span>length <span style="color:#f92672">+</span> index) <span style="color:#f92672">&lt;</span> self<span style="color:#f92672">.</span>length:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;index&#39;</span>,self<span style="color:#f92672">.</span>length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>  <span style="color:#f92672">+</span> index )
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_getitem(self<span style="color:#f92672">.</span>length <span style="color:#f92672">+</span> index )
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">IndexError</span>(<span style="color:#e6db74">&#39;list index out of range&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> __setitem__(self, index, value):
+        <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> index <span style="color:#f92672">&lt;=</span> self<span style="color:#f92672">.</span>length:
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_modify(index,value)
+        <span style="color:#66d9ef">elif</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> (self<span style="color:#f92672">.</span>length <span style="color:#f92672">+</span> index) <span style="color:#f92672">&lt;=</span> self<span style="color:#f92672">.</span>length:   <span style="color:#75715e"># index = -1 , self.length = 1</span>
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_modify(self<span style="color:#f92672">.</span>length <span style="color:#f92672">+</span> index, value)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">IndexError</span>(<span style="color:#e6db74">&#39;list index out of range&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_getitem</span>(self,index):
+        <span style="color:#66d9ef">for</span> i,value <span style="color:#f92672">in</span> enumerate(self<span style="color:#f92672">.</span>_iternode()):
+            <span style="color:#66d9ef">if</span> index <span style="color:#f92672">==</span> i :
+                <span style="color:#66d9ef">return</span> value<span style="color:#f92672">.</span>value
+
+    <span style="color:#66d9ef">def</span> __len__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>length
+
+    <span style="color:#66d9ef">def</span> __iter__(self):
+        <span style="color:#66d9ef">for</span> node <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_iternode():
+            <span style="color:#66d9ef">yield</span> node<span style="color:#f92672">.</span>value
+
+daxin <span style="color:#f92672">=</span> LinkedList()
+daxin<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">1</span>)
+daxin<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">2</span>)
+daxin<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">3</span>)
+daxin<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">4</span>)
+<span style="color:#66d9ef">print</span>(list(daxin))
+daxin<span style="color:#f92672">.</span>pop()
+<span style="color:#66d9ef">print</span>(list(daxin))
+daxin<span style="color:#f92672">.</span>insert(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">100</span>)
+<span style="color:#66d9ef">print</span>(list(daxin))
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E9%A2%98/" title="基础练习题">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/" title="双向链表">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

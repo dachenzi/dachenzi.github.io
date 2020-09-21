@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2-选择排序  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="2-选择排序  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "2-选择排序",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  450 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>2-选择排序
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 3 min
+  &middot; (450 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E4%BB%8B%E7%BB%8D">1 选择排序介绍</a></li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">2 基本选择排序</a></li>
+<li><a href="#3-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E7%9A%84%E4%BC%98%E5%8C%96">3 选择排序的优化</a>
+<ul>
+<li><a href="#31-%E4%BA%8C%E5%85%83%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F">3.1 二元选择排序</a></li>
+<li><a href="#32-%E5%90%8C%E6%97%B6%E6%8E%92%E5%BA%8F%E6%9C%80%E5%A4%A7%E5%92%8C%E6%9C%80%E5%B0%8F%E5%80%BC">3.2 同时排序最大和最小值</a></li>
+<li><a href="#33-%E7%B4%A2%E5%BC%95%E6%B7%B7%E4%B9%B1">3.3 索引混乱</a></li>
+<li><a href="#34-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96">3.4 代码优化</a></li>
+</ul>
+</li>
+<li><a href="#4-%E6%80%BB%E7%BB%93">4 总结</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-选择排序介绍">1 选择排序介绍</h1>
+<p>        选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理是：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置(升序或者降序)，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则它不会被移动。选择排序每次交换一对元素，它们当中至少有一个将被移到其最终位置上，因此对<code>n</code>个元素的表进行排序总共进行至多<code>n-1</code>次交换，所以它的时间复杂度是<code>n(n-1)</code>,不包括这个函数的低阶项和首项系数后用大O表示法为：<code>O(n^2)</code>。在所有的完全依靠交换去移动元素的排序方法中，选择排序属于非常好的一种。</p>
+<h1 id="2-基本选择排序">2 基本选择排序</h1>
+<p>        现有序列[1, 9, 8, 5, 6, 7, 4, 3, 2]，请使用选择排序对该列表进行排序。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>]
+length <span style="color:#f92672">=</span> len(nums)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    max_index<span style="color:#f92672">=</span>i
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,length):
+        <span style="color:#66d9ef">if</span> nums[max_index] <span style="color:#f92672">&lt;</span> nums[j]:
+            max_index <span style="color:#f92672">=</span> j
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">!=</span> j:
+        nums[max_index], nums[i] <span style="color:#f92672">=</span> nums[i], nums[max_index]
+<span style="color:#66d9ef">print</span>(nums)
+</code></pre></div><h1 id="3-选择排序的优化">3 选择排序的优化</h1>
+<p>        上面的代码，仅仅是针对题中的列表进行的<code>定制化</code>选择排序，真正的要适用各种类型的数字序列，还需要进行进一步优化。</p>
+<h2 id="31-二元选择排序">3.1 二元选择排序</h2>
+<p>        每一次循环找到一个最大值或最小值，存放在排序序列的起始位中去，我们知道，每次在未排序区查找时，都会进行遍历，那么必然会发现最大值，同时也会发现最小值，那么我们是否可以同时对最大值和最小值进行排序呢？</p>
+<h2 id="32-同时排序最大和最小值">3.2 同时排序最大和最小值</h2>
+<p>        由于一次循环要同时判断最大值和最小值，由于循环是从左边开始的，所以最大值的初始位置和i的取值是相同的，但最小值的初始值是从末尾开始，逐渐向右的，所以这里启用一个变量记录最小值的位置便于交换。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>]
+<span style="color:#75715e">#正索引 0  1  2  3  4  5  6  7  8</span>
+<span style="color:#75715e">#负索引-9 -8 -7 -6 -5 -4 -3 -2 -1 </span>
+
+length <span style="color:#f92672">=</span> len(nums)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):
+    max_index <span style="color:#f92672">=</span> i
+    min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> 
+    source_min <span style="color:#f92672">=</span> min_index  <span style="color:#75715e"># 1</span>
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, length):
+        <span style="color:#66d9ef">if</span> nums[max_index] <span style="color:#f92672">&lt;</span> nums[j]:
+            max_index <span style="color:#f92672">=</span> j 
+        <span style="color:#66d9ef">if</span> nums[min_index] <span style="color:#f92672">&gt;</span> nums[<span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]:
+            min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        
+    <span style="color:#66d9ef">if</span> max_index <span style="color:#f92672">!=</span> i:
+        nums[max_index], nums[i] <span style="color:#f92672">=</span> nums[i], nums[max_index]
+    
+    <span style="color:#66d9ef">if</span> min_index <span style="color:#f92672">!=</span> source_min:
+        nums[min_index], nums[source_min] <span style="color:#f92672">=</span> nums[source_min], nums[min_index]
+
+<span style="color:#66d9ef">print</span>(nums)
+</code></pre></div><h2 id="33-索引混乱">3.3 索引混乱</h2>
+<p>        上面虽然已经完成了二元选择排序，但是结果却不是正确的，为什么呢？想一下：如果最小值所在的位置刚好是最大值要交换的位置时，如果直接交换最大值，那么最小值的索引就会变为原最大值的索引。针对这种情况在交换最大值时判断一下最大值要交换的位置是否等于最小值所在的位置，如果是，那么需要在最大值修改完毕后，将最小值的索引进行重置(重置为最大值所在的索引)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>]
+<span style="color:#75715e">#正索引 0  1  2  3  4  5  6  7  8</span>
+<span style="color:#75715e">#负索引-9 -8 -7 -6 -5 -4 -3 -2 -1 </span>
+length <span style="color:#f92672">=</span> len(nums)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):
+    max_index <span style="color:#f92672">=</span> i
+    min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> 
+    source_min <span style="color:#f92672">=</span> min_index
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, length):
+        <span style="color:#66d9ef">if</span> nums[max_index] <span style="color:#f92672">&lt;</span> nums[j]:
+            max_index <span style="color:#f92672">=</span> j 
+        <span style="color:#66d9ef">if</span> nums[min_index] <span style="color:#f92672">&gt;</span> nums[<span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]:
+            min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        
+    <span style="color:#66d9ef">if</span> max_index <span style="color:#f92672">!=</span> i:
+        nums[max_index], nums[i] <span style="color:#f92672">=</span> nums[i], nums[max_index]
+        <span style="color:#66d9ef">if</span> (length <span style="color:#f92672">+</span> min_index) <span style="color:#f92672">==</span> i:
+            min_index <span style="color:#f92672">=</span> max_index
+            
+    <span style="color:#66d9ef">if</span> min_index <span style="color:#f92672">!=</span> source_min:
+        nums[min_index], nums[source_min] <span style="color:#f92672">=</span> nums[source_min], nums[min_index]
+
+<span style="color:#66d9ef">print</span>(nums)
+</code></pre></div><h2 id="34-代码优化">3.4 代码优化</h2>
+<ol>
+<li>思考点1：既然我们一趟可以确定两个元素(1个最大值，1个最小值)，那我们还需要length-1次循环吗？ 如果元素为7个，只需要判断3次即可，如果元素是8个，只需要判断4次即可，根据以上条件得知，只需要循环length//2次就可以完成排序了。</li>
+<li>思考点2：在一次循环的结果中最大值或最小值和要排的位置的值是相同时，就不需要进行修改了。</li>
+<li>思考点3：如果在一次循环中最大值索引和最小值索引对应的元素相同，比如[4,2,1,1,1,1,3] 这种情况下，[1,1,1,1] 就不需要排序了。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>]
+<span style="color:#75715e"># nums = [4, 3, 1, 1, 2, 1, 1, 5, 6, 2]</span>
+<span style="color:#75715e"># 正索引 0  1  2  3  4  5  6  7  8</span>
+<span style="color:#75715e"># 负索引-9 -8 -7 -6 -5 -4 -3 -2 -1</span>
+count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+swap <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+length <span style="color:#f92672">=</span> len(nums)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(length <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):     <span style="color:#75715e"># 优化循环次数</span>
+    max_index <span style="color:#f92672">=</span> i
+    min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    source_min <span style="color:#f92672">=</span> min_index  <span style="color:#75715e"># 1</span>
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, length):
+        count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> nums[max_index] <span style="color:#f92672">&lt;</span> nums[j]:
+            max_index <span style="color:#f92672">=</span> j
+        <span style="color:#66d9ef">if</span> nums[min_index] <span style="color:#f92672">&gt;</span> nums[<span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]:
+            min_index <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> nums[max_index] <span style="color:#f92672">==</span> nums[min_index]:    <span style="color:#75715e"># 最大最小值相同，则排序完毕</span>
+        <span style="color:#66d9ef">break</span>
+    
+    <span style="color:#66d9ef">if</span> max_index <span style="color:#f92672">!=</span> i:
+        nums[max_index], nums[i] <span style="color:#f92672">=</span> nums[i], nums[max_index]
+        swap <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> (length <span style="color:#f92672">+</span> min_index) <span style="color:#f92672">==</span> i:
+            min_index <span style="color:#f92672">=</span> max_index
+
+    <span style="color:#66d9ef">if</span> min_index <span style="color:#f92672">!=</span> source_min <span style="color:#f92672">and</span> nums[min_index] <span style="color:#f92672">!=</span> nums[source_min]:  <span style="color:#75715e"># 如果值相同，就不需要交换了</span>
+        swap <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        nums[min_index], nums[source_min] <span style="color:#f92672">=</span> nums[source_min], nums[min_index]
+<span style="color:#66d9ef">print</span>(count,swap)
+<span style="color:#66d9ef">print</span>(nums)
+</code></pre></div><h1 id="4-总结">4 总结</h1>
+<ul>
+<li>简单排序需要数据一轮轮比较，并在每一轮中发现极值</li>
+<li>没有办法知道当前轮是否已经达到了排序要求，但是可以知道极值是否在目标索引位置上</li>
+<li>遍历次数为n(n-1)/2(二元选择排序)</li>
+<li>时间复杂度为O(n^2)</li>
+<li>减少了交换的次数，提高了效率，性能略好于冒泡算法
+{% endraw %}</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/23-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80-%E5%B0%81%E8%A3%85-%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/" title="23-面向对象基础-封装-属性-方法-访问控制">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/2-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="2-用户注册接口设计与实现">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

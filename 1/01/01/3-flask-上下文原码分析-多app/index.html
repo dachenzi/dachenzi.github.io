@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3-flask-上下文原码分析-多app  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="3-flask-上下文原码分析-多app  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "3-flask-上下文原码分析-多app",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  555 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/3-flask-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90-%E5%A4%9Aapp/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>3-flask-上下文原码分析-多app
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 3 min
+  &middot; (555 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86">1 上下文管理</a>
+<ul>
+<li><a href="#11-threadinglocal">1.1 threading.local</a></li>
+<li><a href="#12-partial%E5%81%8F%E5%87%BD%E6%95%B0">1.2 partial偏函数</a></li>
+<li><a href="#13-__setattr__-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95">1.3 <strong>setattr</strong> 魔术方法</a></li>
+<li><a href="#14-localproxy%E4%BB%A3%E7%90%86">1.4 localproxy代理</a></li>
+<li><a href="#15-%E7%9C%9F%E5%AE%9E%E5%8E%9F%E7%A0%81%E6%B5%81%E7%A8%8B">1.5 真实原码流程</a></li>
+<li><a href="#16-django%E4%BC%A0%E5%8F%82%E4%B8%8Eflask%E7%9A%84%E5%AF%B9%E6%AF%94">1.6 django传参与flask的对比</a></li>
+<li><a href="#17-%E6%80%BB%E7%BB%93">1.7 总结</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%A4%9Aapp%E5%BA%94%E7%94%A8">2 多app应用</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-上下文管理">1 上下文管理</h1>
+<p>        flask的上下文管理非常巧妙，先来说一下前导知识，flask内部实现的方式和threading.local很像，但其内部做了精妙的设置，如果支持协程(greenlet),那么还会使用协程的方式实现。</p>
+<h2 id="11-threadinglocal">1.1 threading.local</h2>
+<p>        在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁(锁住资源，否则一旦在多个线程中修改，会产生无法预期的结果)。但是局部变量也有问题，就是在函数调用的时候，每次都要传递，感觉很麻烦。<br>
+        在主进程中创建ThreadLocal对象，每个Thread对它都可以读写属性，但互不影响。你可以把ThreadLocal看成全局变量，但每个属性都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。即：一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+
+local <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>local()
+local<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">worker</span>():
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+        local<span style="color:#f92672">.</span>x <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} {}&#39;</span><span style="color:#f92672">.</span>format(threading<span style="color:#f92672">.</span>current_thread()<span style="color:#f92672">.</span>name,local<span style="color:#f92672">.</span>x))
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>worker)
+    t<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">print</span>(local<span style="color:#f92672">.</span>x)
+</code></pre></div><p>上面的执行结果是互补不干扰的。为什么local对象可以安全使用？<br>
+        通过分析原码，我们看到：在主线程中创建后local后，threading.local会为实例初始化一个字典管理器，创建一个大字典，用于嵌套每一个线程创建的它自己线程相关的字典。当开启了新的线程时，查找local对象的某个属性时，首先会被__getattribute__方法捕获，在内部又调用了包装为上下文管理器的_path(打补丁)，首先它通过local初始化时构建的key(prefix+id(当前线程))来查找它嵌套的字典。如果不存在说明线程第一次运行，为它初始化一个__dict__属性字典，替换local的属性，如果存在，则把字典管理器拿出来，直接替换local的属性。所以在不同线程内，每个local对象在调用时都会切换到它对应的__dict__上。线程执行完毕后，回到主线程，在_path中重新切换到主线程的小字典，然后继续把local对象的__dict__进行切换。<br>
+        一句话总结：<strong><code>运行时，threading.local实例处在不同的线程中，就从大字典中找到当前线程相关键值对中的字典，覆盖threading.local实例的 __dict__ 。这样就可以在不同的线程中，安全地使用线程独有的数据，做到了线程间数据隔离，如同本地变量一样安全。</code></strong></p>
+<p>简单的模拟thread_local的实现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> threading
+<span style="color:#f92672">import</span> time
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Mylocal</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>storage <span style="color:#f92672">=</span> {}
+
+    <span style="color:#66d9ef">def</span> __getitem__(self, item):
+        process_ident <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>get_ident()
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>storage[process_ident][item]
+
+    <span style="color:#66d9ef">def</span> __setitem__(self, key, value):
+        process_ident <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>get_ident()
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>storage<span style="color:#f92672">.</span>get(process_ident, None):
+            self<span style="color:#f92672">.</span>storage[process_ident][key] <span style="color:#f92672">=</span> value
+        <span style="color:#66d9ef">else</span>:
+            self<span style="color:#f92672">.</span>storage[process_ident] <span style="color:#f92672">=</span> {key: value}
+
+data <span style="color:#f92672">=</span> Mylocal()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum</span>():
+    data[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">if</span> data[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+            data[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+            <span style="color:#66d9ef">print</span>(data[<span style="color:#e6db74">&#39;value&#39;</span>])
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">print</span>(data[<span style="color:#e6db74">&#39;value&#39;</span>])
+            <span style="color:#66d9ef">break</span>
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    threads <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+        t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Thread(target<span style="color:#f92672">=</span>sum, name<span style="color:#f92672">=</span>i)
+        threads<span style="color:#f92672">.</span>append(t)
+        t<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">for</span> thread <span style="color:#f92672">in</span> threads:
+        thread<span style="color:#f92672">.</span>join()
+
+    <span style="color:#66d9ef">print</span>(data<span style="color:#f92672">.</span>storage)  <span style="color:#75715e"># {18900: {&#39;value&#39;: 10}, 22140: {&#39;value&#39;: 10}, 25816: {&#39;value&#39;: 10}, 17784: {&#39;value&#39;: 10}, 20588: {&#39;value&#39;: 10}, 3744: {&#39;value&#39;: 10}, 10448: {&#39;value&#39;: 10}, 15896: {&#39;value&#39;: 10}, 18016: {&#39;value&#39;: 10}, 16824: {&#39;value&#39;: 10}}</span>
+</code></pre></div><h2 id="12-partial偏函数">1.2 partial偏函数</h2>
+<p>        funtools模块中的partial方法就是将函数的<code>部分参数固定下来</code>，相当于为部分的参数添加了一个固定的默认值，形成一个<code>新的函数并返回</code>。从partial方法返回的函数，是对原函数的封装，是一个全新的函数。它的一般结构为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">functools<span style="color:#f92672">.</span>partial(func, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>keywords) <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">返回一个新的被</span>partial函数包装过的func<span style="color:#960050;background-color:#1e0010">，并带有默认值的新函数</span>
+</code></pre></div><p>下面是一个基本的例子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">27</span>]: <span style="color:#f92672">import</span> functools
+    <span style="color:#f92672">...</span>: <span style="color:#f92672">import</span> inspect
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>: new_add <span style="color:#f92672">=</span> functools<span style="color:#f92672">.</span>partial(add,<span style="color:#ae81ff">1</span>)
+    <span style="color:#f92672">...</span>: <span style="color:#66d9ef">print</span>(new_add)
+    <span style="color:#f92672">...</span>:
+functools<span style="color:#f92672">.</span>partial(<span style="color:#f92672">&lt;</span>function add at <span style="color:#ae81ff">0x000002798C757840</span><span style="color:#f92672">&gt;</span>, <span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">28</span>]:
+In [<span style="color:#ae81ff">28</span>]: new_add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">TypeError</span>                                 Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">28</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>d6520b7602a<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> new_add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
+
+<span style="color:#a6e22e">TypeError</span>: add() takes <span style="color:#ae81ff">2</span> positional arguments but <span style="color:#ae81ff">3</span> were given
+
+In [<span style="color:#ae81ff">29</span>]: new_add(<span style="color:#ae81ff">1</span>)
+Out[<span style="color:#ae81ff">29</span>]: <span style="color:#ae81ff">2</span>
+</code></pre></div><ul>
+<li>由于我们包装了函数add，并指定了一个默认参数1，这个参数会按照位置参数，当作默认值赋给x了</li>
+<li>所以当我们再次调用new_add,只需要传入y的值就行了。</li>
+<li>如果再传递两个，那么连同包装前传入的1，一起传给add函数，而add函数只接受两个参数，所以会报异常。</li>
+</ul>
+<blockquote>
+<p>获取一个函数的参数列表，可以使用前面学习的inspect模块</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">30</span>]: inspect<span style="color:#f92672">.</span>signature(new_add)
+Out[<span style="color:#ae81ff">30</span>]: <span style="color:#f92672">&lt;</span>Signature (y)<span style="color:#f92672">&gt;</span>
+</code></pre></div><p>查看new_add的签名信息，发现，它的确只需要传入一个y就可以了。</p>
+<h2 id="13-__setattr__-魔术方法">1.3 <strong>setattr</strong> 魔术方法</h2>
+<p>上面我们举的类threading.Local的写法，用到了__setitem__，并没有使用__setattr__，为的是避免一个坑，现在我们来说看一下是为什么。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> get_ident
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Local</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>__storage__ <span style="color:#f92672">=</span> {}
+        
+    <span style="color:#66d9ef">def</span> __setattr__(self, key, value):
+        ident <span style="color:#f92672">=</span> get_ident()
+        <span style="color:#66d9ef">try</span>:
+            self<span style="color:#f92672">.</span>__storage__[ident][key] <span style="color:#f92672">=</span> value
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span> <span style="color:#66d9ef">as</span> e:
+            self<span style="color:#f92672">.</span>__storage__[ident] <span style="color:#f92672">=</span> {key: value}
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        ident <span style="color:#f92672">=</span> get_ident()
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>__storage__[ident]<span style="color:#f92672">.</span>get(item)
+</code></pre></div><p>这个类会引发的问题：</p>
+<ol>
+<li>类在实例化的时候会执行 self.<strong>storage</strong> = {}</li>
+<li>使用点来设置对象的属性的的时候，都会触发__setattr__方法</li>
+<li>然而在__setattr__内部又通过.设置了__storage__属性</li>
+<li>产生递归不说，<strong>storage</strong> 属性还没有创建。</li>
+</ol>
+<p>如何解决呢？只需要成功创建__storage__即可，那么该如何创建呢，自己不能，那就掉父类解决</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># self.__storage__ = {} </span>
+	<span style="color:#f92672">|</span>
+	<span style="color:#f92672">|</span> 
+object<span style="color:#f92672">.</span>__setattr__(self,<span style="color:#e6db74">&#39;__storage__&#39;</span>,{})
+</code></pre></div><h2 id="14-localproxy代理">1.4 localproxy代理</h2>
+<p>上面的Local对象仅仅是存储用户数据，那么对于操作Local对象的方法集，我们可以抽象出一个proxy(代理类)，来专门用于操作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> threading <span style="color:#f92672">import</span> get_ident
+<span style="color:#f92672">import</span> functools
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Local</span>(object):
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        object<span style="color:#f92672">.</span>__setattr__(self, <span style="color:#e6db74">&#39;__storage__&#39;</span>, {})
+        <span style="color:#75715e"># self.__storage__ = {}</span>
+
+    <span style="color:#66d9ef">def</span> __setattr__(self, key, value):
+        ident <span style="color:#f92672">=</span> get_ident()
+        <span style="color:#66d9ef">try</span>:
+            self<span style="color:#f92672">.</span>__storage__[ident][key] <span style="color:#f92672">=</span> value
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">KeyError</span> <span style="color:#66d9ef">as</span> e:
+            self<span style="color:#f92672">.</span>__storage__[ident] <span style="color:#f92672">=</span> {key: value}
+
+    <span style="color:#66d9ef">def</span> __getattr__(self, item):
+        ident <span style="color:#f92672">=</span> get_ident()
+        <span style="color:#66d9ef">try</span>:
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>__storage__[ident]<span style="color:#f92672">.</span>get(item)
+        <span style="color:#66d9ef">except</span>:
+            <span style="color:#66d9ef">return</span> None
+
+<span style="color:#75715e"># 操作Local类</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LocalStack</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>_local <span style="color:#f92672">=</span> Local()
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">push</span>(self, data):
+        stack <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_local<span style="color:#f92672">.</span>stack
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> stack:
+            self<span style="color:#f92672">.</span>_local<span style="color:#f92672">.</span>stack <span style="color:#f92672">=</span> []
+        self<span style="color:#f92672">.</span>_local<span style="color:#f92672">.</span>stack<span style="color:#f92672">.</span>append(data)
+
+<span style="color:#75715e"># 存储的对象信息</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RequestContent</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>session <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;session&#39;</span>
+        self<span style="color:#f92672">.</span>request <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;request&#39;</span>
+
+
+a <span style="color:#f92672">=</span> LocalStack()
+a<span style="color:#f92672">.</span>push(RequestContent())
+
+
+<span style="color:#75715e"># 操作方法</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_req_object</span>(name):
+    ident <span style="color:#f92672">=</span> get_ident()
+    obj <span style="color:#f92672">=</span> a<span style="color:#f92672">.</span>_local<span style="color:#f92672">.</span>__storage__<span style="color:#f92672">.</span>get(ident)[<span style="color:#e6db74">&#39;stack&#39;</span>][<span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">return</span> getattr(obj, name)
+
+
+<span style="color:#75715e"># 操作接口</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LocalProxy</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, func):
+        self<span style="color:#f92672">.</span>func <span style="color:#f92672">=</span> func
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_obj</span>(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>func()
+
+<span style="color:#75715e"># 通过偏函数固定属性</span>
+session <span style="color:#f92672">=</span> LocalProxy(functools<span style="color:#f92672">.</span>partial(_get_req_object,<span style="color:#e6db74">&#39;session&#39;</span>))
+request <span style="color:#f92672">=</span> LocalProxy(functools<span style="color:#f92672">.</span>partial(_get_req_object,<span style="color:#e6db74">&#39;request&#39;</span>))
+
+<span style="color:#66d9ef">print</span>(session<span style="color:#f92672">.</span>get_obj())
+<span style="color:#66d9ef">print</span>(request<span style="color:#f92672">.</span>get_obj())
+</code></pre></div><h2 id="15-真实原码流程">1.5 真实原码流程</h2>
+<p>基本上综合了上面的所有前导知识，我们看来一下flask的原码流程，代码我就不贴了，下面是根据代码绘制的逻辑图。</p>
+<p><img src="../photo/local.png" alt="local"></p>
+<h2 id="16-django传参与flask的对比">1.6 django传参与flask的对比</h2>
+<p>这里主要说明的是传参方式：</p>
+<ul>
+<li>django的request/session等用户信息都是封装在request对象中，通过参数传递的</li>
+<li>flask的request/session，是请求到来时，先一步取出，然后放在用户相关的空间中，需要的话就可以去取</li>
+</ul>
+<p>他们俩是不同的设计模式；（简图对比）</p>
+<p><img src="../photo/django_flask.png" alt="django_flask"></p>
+<h2 id="17-总结">1.7 总结</h2>
+<p>flask中存在两个上下文：(早期都放在1个上下文中)</p>
+<ul>
+<li>请求上下文：request/session</li>
+<li>app上下文： app,g</li>
+</ul>
+<p>关于g，它的主要作用是在<code>一个请求周期内</code>帮我们传递当前请求的相关的值信息。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.before_request</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>():
+    g<span style="color:#f92672">.</span>permisstion_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;add&#39;</span>, <span style="color:#e6db74">&#39;update&#39;</span>]
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/index&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;--&gt;&#39;</span>, g<span style="color:#f92672">.</span>permisstion_list)
+    <span style="color:#66d9ef">if</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;user&#39;</span>):
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;index.html&#39;</span>)
+    <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/login&#39;</span>)
+</code></pre></div><blockquote>
+<p>g就是一个请求周期内的<code>全局变量</code></p>
+</blockquote>
+<h1 id="2-多app应用">2 多app应用</h1>
+<p>老版本DispatcherMiddleware存放在werkzeug.wsgi中，新版本已经移至werkzeug.middleware.dispatcher中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+<span style="color:#75715e"># from werkzeug.wsgi import DispatcherMiddleware</span>
+<span style="color:#f92672">from</span> werkzeug.middleware.dispatcher <span style="color:#f92672">import</span> DispatcherMiddleware
+<span style="color:#f92672">from</span> werkzeug.serving <span style="color:#f92672">import</span> run_simple
+
+app01 <span style="color:#f92672">=</span> Flask(<span style="color:#e6db74">&#39;app01&#39;</span>)
+app02 <span style="color:#f92672">=</span> Flask(<span style="color:#e6db74">&#39;app02&#39;</span>)
+app03 <span style="color:#f92672">=</span> Flask(<span style="color:#e6db74">&#39;app03&#39;</span>)
+
+
+<span style="color:#a6e22e">@app01.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;app01 index&#39;</span>
+
+
+<span style="color:#a6e22e">@app02.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;app02 index&#39;</span>
+
+
+<span style="color:#a6e22e">@app03.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;app03 index&#39;</span>
+
+
+dm <span style="color:#f92672">=</span> DispatcherMiddleware(
+    app01,
+    {<span style="color:#e6db74">&#39;/app02&#39;</span>: app02,
+     <span style="color:#e6db74">&#39;/app03&#39;</span>: app03}
+)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    run_simple(<span style="color:#e6db74">&#39;localhost&#39;</span>, <span style="color:#ae81ff">5000</span>, dm)
+</code></pre></div><p>通过DispatcherMiddleware来组织app的结构。</p>
+<ul>
+<li>当直接访问/时，匹配的是app01</li>
+<li>当前缀包含app02时，就匹配给app02</li>
+<li>当前缀包含app03时，就匹配给app03</li>
+</ul>
+<blockquote>
+<p>根据前缀的不同来分发路由，和蓝图有异曲同工之处
+{% endraw %}</p>
+</blockquote>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="3-React基本使用">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/3-docker%E9%95%9C%E5%83%8F/" title="3-docker镜像">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

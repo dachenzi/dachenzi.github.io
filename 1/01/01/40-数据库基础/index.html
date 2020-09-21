@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>40-数据库基础  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="40-数据库基础  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "40-数据库基础",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  1585 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>40-数据库基础
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 8 min
+  &middot; (1585 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0">1 数据库概述</a>
+<ul>
+<li><a href="#11-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8Bacid%E7%90%86%E8%AE%BA">1.1 关系数据库之ACID理论</a></li>
+<li><a href="#12-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%8B%E6%A6%82%E5%BF%B5">1.2 关系数据库之概念</a>
+<ul>
+<li><a href="#121-%E5%80%99%E9%80%89%E9%94%AE">1.2.1 候选键</a></li>
+<li><a href="#122-%E4%B8%BB%E9%94%AE">1.2.2 主键</a></li>
+<li><a href="#123-%E5%A4%96%E9%94%AE">1.2.3 外键</a></li>
+<li><a href="#124-%E7%BA%A6%E6%9D%9Fconstraint">1.2.4 约束Constraint</a></li>
+<li><a href="#125-%E7%B4%A2%E5%BC%95">1.2.5 索引</a></li>
+</ul>
+</li>
+<li><a href="#13-%E5%AE%9E%E4%BD%93%E8%81%94%E7%B3%BB">1.3 实体联系</a></li>
+<li><a href="#14-%E8%A7%86%E5%9B%BE">1.4 视图</a></li>
+</ul>
+</li>
+<li><a href="#2-sql">2 SQL</a>
+<ul>
+<li><a href="#21-%E5%88%86%E7%B1%BB">2.1 分类</a></li>
+<li><a href="#22-%E8%A7%84%E8%8C%83">2.2 规范</a></li>
+</ul>
+</li>
+<li><a href="#3-mysql">3 MySQL</a>
+<ul>
+<li><a href="#31-%E5%AE%89%E8%A3%85mysql">3.1 安装MySQL</a></li>
+<li><a href="#32-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">3.2 数据类型</a></li>
+<li><a href="#34-%E7%94%A8%E6%88%B7%E5%8F%8A%E6%8E%88%E6%9D%83%E6%93%8D%E4%BD%9C">3.4 用户及授权操作</a></li>
+<li><a href="#35-%E5%BA%93%E6%93%8D%E4%BD%9C">3.5 库操作</a>
+<ul>
+<li><a href="#351-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93">3.5.1 创建数据库</a></li>
+<li><a href="#352-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93">3.5.2 删除数据库</a></li>
+<li><a href="#353-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C">3.5.3 其他操作</a></li>
+</ul>
+</li>
+<li><a href="#36-%E8%A1%A8%E6%93%8D%E4%BD%9C">3.6 表操作</a>
+<ul>
+<li><a href="#361-%E5%88%9B%E5%BB%BA%E5%8D%95%E8%A1%A8">3.6.1 创建单表</a></li>
+<li><a href="#362-%E5%88%9B%E5%BB%BA%E5%A4%9A%E8%A1%A8%E5%A4%96%E9%94%AE%E5%85%B3%E8%81%94">3.6.2 创建多表外键关联</a></li>
+<li><a href="#363-%E5%88%A0%E9%99%A4%E8%A1%A8">3.6.3 删除表</a></li>
+<li><a href="#364-%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%BB%93%E6%9E%84">3.6.4 查看表结构</a></li>
+<li><a href="#364-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C">3.6.4 其他操作</a></li>
+</ul>
+</li>
+<li><a href="#37-%E6%93%8D%E4%BD%9C%E8%A1%A8%E6%95%B0%E6%8D%AEdml%E8%AF%AD%E5%8F%A5">3.7 操作表数据(DML语句)</a>
+<ul>
+<li><a href="#371-insert%E8%AF%AD%E5%8F%A5">3.7.1 insert语句</a></li>
+<li><a href="#372-update-%E8%AF%AD%E5%8F%A5">3.7.2 update 语句</a></li>
+<li><a href="#373-delete-%E8%AF%AD%E5%8F%A5">3.7.3 delete 语句</a></li>
+<li><a href="#374-select-%E8%AF%AD%E5%8F%A5">3.7.4 select 语句</a>
+<ul>
+<li><a href="#3741-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2">3.7.4.1 简单查询</a></li>
+<li><a href="#3742-limit%E5%AD%90%E5%8F%A5">3.7.4.2 limit子句</a></li>
+<li><a href="#3743-where%E5%AD%90%E5%8F%A5">3.7.4.3 where子句</a></li>
+<li><a href="#3744-order-by%E5%AD%90%E5%8F%A5">3.7.4.4 order by子句</a></li>
+<li><a href="#3745-distinct-%E5%8E%BB%E9%87%8D">3.7.4.5 distinct 去重</a></li>
+<li><a href="#3746-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0">3.7.4.6 聚合函数</a></li>
+<li><a href="#3747-group-by%E5%92%8Chaving">3.7.4.7 group by和having</a></li>
+<li><a href="#3748-%E5%AD%90%E6%9F%A5%E8%AF%A2">3.7.4.8 子查询</a></li>
+</ul>
+</li>
+<li><a href="#3749-inner-join%E5%86%85%E8%BF%9E%E6%8E%A5">3.7.4.9 inner join(内连接)</a></li>
+<li><a href="#37410-outer-join%E5%A4%96%E8%BF%9E%E6%8E%A5">3.7.4.10 outer join(外连接)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E5%82%A8%E8%BF%87%E7%A8%8B%E8%A7%A6%E5%8F%91%E5%99%A8">4 储过程、触发器</a></li>
+<li><a href="#5-%E4%BA%8B%E5%8A%A1transaction">5 事务Transaction</a></li>
+<li><a href="#6-mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB">6 MySQL隔离级别</a>
+<ul>
+<li><a href="#61-%E9%9A%94%E7%A6%BB%E6%80%A7%E4%B8%8D%E5%A5%BD%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98">6.1 隔离性不好，带来的问题</a></li>
+<li><a href="#62-%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB">6.2 隔离级别</a></li>
+<li><a href="#63-%E4%BA%8B%E5%8A%A1%E8%AF%AD%E6%B3%95">6.3 事务语法</a></li>
+<li><a href="#64-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB">6.4 数据仓库和数据库的区别</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-数据库概述">1 数据库概述</h1>
+<p>        数据库指的是按照数据结构来组织、存储、管理数据的仓库，常用的数据库种类为关系型数据库和非关系型数据库。关系型数据库模型是把复杂的数据归结为简单的二元关系(即二维表格形式——)。<br>
+        在关系数据库中，对数据的操作几乎全部建立在一个或多个关系表格上，通过对这些关联的表格分类、合并、连接或选取等运算实现数据的管理。
+<strong>常见的数据库有MySQL</strong>。</p>
+<h2 id="11-关系数据库之acid理论">1.1 关系数据库之ACID理论</h2>
+<p>        ACID，指数据库事务正确执行的四个基本要素的缩写。包含：<code>原子性（Atomicity）</code>、<code>一致性（Consistency）</code>、<code>隔离性（Isolation）</code>、<code>持久性（Durability）</code>。一个支持事务（Transaction）的数据库，必须要具有这四种特性，否则在事务过程（Transaction processing）当中无法保证数据的正确性，交易过程极可能达不到交易方的要求。MySQL的Innode支持事务，所以它遵守ACID原则。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原子性(atomicity)</td>
+<td>一个事务是一个不可分割的工作单位，事务中包括的所有操作要么全部做完，要么什么都不做</td>
+</tr>
+<tr>
+<td>一致性(consistency)</td>
+<td>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的</td>
+</tr>
+<tr>
+<td>隔离性(isolation)</td>
+<td>一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰</td>
+</tr>
+<tr>
+<td>持久性(durability)</td>
+<td>持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-关系数据库之概念">1.2 关系数据库之概念</h2>
+<p>在关系数据库中，关系就是二维表，由行和列组成。</p>
+<ul>
+<li><code>行row</code>，也称为记录Record、元组。</li>
+<li><code>列Column</code>，也称为字段Filed、属性。</li>
+<li><code>域Domain</code>，叫做字段的取值范围 。例如gender字段的取值就是M或者F两个值。</li>
+</ul>
+<p>其他概念性的东西：</p>
+<ul>
+<li>维数：关系的维数指关系中属性的个数</li>
+<li>基数：元组的个数</li>
+</ul>
+<blockquote>
+<p>注意在关系中，属性的顺序并不重要。理论上，元组顺序也不重要，但是由于元组顺序与存储相关，会影响查询效率。</p>
+</blockquote>
+<h3 id="121-候选键">1.2.1 候选键</h3>
+<p>关系中，能唯一标识一条元组(记录)的属性或属性集合，成为候选键可以是多个字段的组合。<br>
+<img src="photo/houxuanjian.png" alt="houxuan"></p>
+<h3 id="122-主键">1.2.2 主键</h3>
+<p>表示一列或者多列组成唯一的key，也就是通过这一个或者多个列能唯一的标识一条记录。即被选择的候选键。</p>
+<ul>
+<li>主键的列不能包含空值null。主键往往设置为整型、长整型，且自增AUTO_INCREMENT。</li>
+<li>表中可以没有主键，但是一般表设计中，往往都会有主键，以免记录重复</li>
+<li>功能主要在于查数据、定位数据</li>
+</ul>
+<p><img src="photo/zhujian.png" alt="zhujian"></p>
+<h3 id="123-外键">1.2.3 外键</h3>
+<p>严格来说，当一个关系中的某个属性或属性的集合与另一个关系（也可以是自身）的候选键匹配时，就称作这个属性或属性集合的外键。</p>
+<ul>
+<li>简单来说，就是A表的某个字段数据来源于B表的主键(候选键)。</li>
+<li>外键约束，和外键不约束。 约束时，字段数据必须来源于关联表的主键(候选键)</li>
+</ul>
+<blockquote>
+<p>虽然可以关联自己，但是并不常用</p>
+</blockquote>
+<p><img src="photo/waijian.png" alt="waijian"></p>
+<p>员工表的FK_depet_no字段就是员工表的外键。</p>
+<h3 id="124-约束constraint">1.2.4 约束Constraint</h3>
+<p>为了保证数据的完整正确，数据模型还必须有完整性约束。必须有值约束，某些列的值必须有值，不许为空null。</p>
+<ul>
+<li><code>域约束Domain Constraint</code>：限定了表中字段的取值范围 &ndash; (一般在代码中判断)</li>
+<li><code>实体完整性Entity Integrity</code>：PRIMARY KEY约束定义了主键，就定义了主键约束。主键不重复且唯一，不能为空。</li>
+<li><code>引用完整性Referential Integrity</code>：外键定义中，可以不是引用另一张表的主键(可以是任意字段)，但往往实际只会关注引用主键。
+<ul>
+<li>插入规则：如果在表B插入一条记录，B的外键列的数据，必须是表A中存在的主键值。（自动生效，不需要指定）</li>
+<li>更新规则：定义外键约束时指定该规则。</li>
+<li>删除规则：定义外键约束时指定该规则。</li>
+</ul>
+</li>
+</ul>
+<p>更新规则和删除规则，可选项如下：</p>
+<ul>
+<li><code>CASCADE</code>:级联删除，删除被关联数据时，从表关联的数据全部删除。</li>
+<li><code>SET NULL</code>:从父表删除或更新行，会设置子表中的外键列为NULL，但必须保证子表没有指定 NOT NULL，也就是说子表的字段可以为NULL才行。</li>
+<li><code>RESTRICT</code>:如果从父表删除主键，如果子表引用了，则拒绝对父表的删除或更新操作。(保护数据)</li>
+<li><code>NO ACTION</code>:表中SQL的关键字，在MySQL中与RESTRICT相同。拒绝对父表的删除或更新操作。</li>
+</ul>
+<p>外键约束，是为了保证数据完整性、一致性、杜绝数据冗余、数据错误。</p>
+<blockquote>
+<p>建议先使用，等到连接的非常深入时，再使用代码逻辑来解决外键约束关系。</p>
+</blockquote>
+<h3 id="125-索引">1.2.5 索引</h3>
+<p>可以看作是一本字典的目录，为了快速检索用的。空间换时间，显著提高查询效率。可以对一列或者多列字段设定索引。(B+树)</p>
+<ul>
+<li><code>主键索引(PRIMARY)</code>：主键会自动建立主键索引，主键本身就是为了快速定位唯一记录。</li>
+<li><code>唯一索引(UNIQUE)</code>：表中的索引列组成的索引必须唯一，但可以为空，非控制必须唯一。</li>
+<li><code>普通索引(KEY)</code>：没有唯一性的要求，就是建了一个字典的目录而已。</li>
+</ul>
+<h2 id="13-实体联系">1.3 实体联系</h2>
+<p>首先来看一下实体和联系：</p>
+<ul>
+<li>实体Entity：现实世界中具有相同属性的一组对象，可以是物理存在的事物或抽象的事物。</li>
+<li>联系Relationship：实体之间的关联集合。</li>
+</ul>
+<p>总结一下：</p>
+<ul>
+<li>实体在数据库中就是一个一个表</li>
+<li>联系在数据库中就是记录与记录的对应关系</li>
+</ul>
+<p>在关系型数据库中实体主要有以下三种联系:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+<th>解决方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>一对多联系</code><!-- raw HTML omitted -->1:n</td>
+<td>一个员工属于一个部门，一个部门有多个员工</td>
+<td>员工外键<!-- raw HTML omitted -->部门主键</td>
+</tr>
+<tr>
+<td><code>多对多联系</code><!-- raw HTML omitted -->m:n</td>
+<td>一个员工属于多个部门，一个部门有多个员工</td>
+<td>建立第三表</td>
+</tr>
+<tr>
+<td>一对一联系<!-- raw HTML omitted -->1:1</td>
+<td>假设有实体管理者，一个管理者管理一个部门，一个部门只有一个管理者</td>
+<td>字段建在哪张表都行</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>一对一很少用。</p>
+</blockquote>
+<h2 id="14-视图">1.4 视图</h2>
+<p>视图、也称虚表、开起来很像表。它是由查询语句生成的。可以通过视图进行CRUD操作。<br>
+作用：</p>
+<ol>
+<li>简化操作，将复杂查询SQL语句定义为视图，可以简化查询。</li>
+<li>数据安全，视图可以只显示真实表的部分列，或计算后的记过，从而隐藏真实表的数据</li>
+</ol>
+<h1 id="2-sql">2 SQL</h1>
+<p>        Structured Query Language,是一种对关系数据库中的数据进行定义和操作的语言方法,是大多数关系数据库管理系统所支持的工业标准。</p>
+<h2 id="21-分类">2.1 分类</h2>
+<ul>
+<li><code>数据查询语言(DQL)</code>:data query language,也成为数据检索语句，作用是从表格中获取数据，确定数据怎么样在应用程序给出。关键字select是SQL用的最多的动词，其他DQL常用的保留字段有where、order by、group by和having</li>
+<li><code>数据操作语言(DML)</code>:data manipulation language,其中包括动词insert、update和delete，他们用于添加、修改、删除表中的行，也称动作查询语句。</li>
+<li><code>数据处理语言(TPL)</code>:它的语句能确保被DML语句影响的表的所有行及时得以更新。TPL语句包括，begin、transaction、commit和rollback</li>
+<li><code>数据控制语言(DCL)</code>:data control languag,它的语句通过grant或revoke 获得许可，确定 单个用户和用户组对数据库对象的访问。某些RDBMS可用GRANT或revoke控制对单个列的访问。</li>
+<li><code>指针控制语言(CCL)</code>:它的语句，像 declare cursor、fetch into、update where current用于对一个或多个表单独执行的操作</li>
+<li><code>数据定义语言(DDL)</code>:data definition language,其语句包括create和drop、alter。在数据库中创建新表或删除表（create table 或者 drop table），为表加入索引等。是动作查询的一部分</li>
+</ul>
+<p>我们日常开发会用到的SQL语言类型为：<code>DML、DQL以及DDL</code></p>
+<blockquote>
+<p>RDBMS的数据库、表的概念其实就相当于目录，文件，及内容</p>
+</blockquote>
+<h2 id="22-规范">2.2 规范</h2>
+<p>编写SQL语句时，我们要遵顼如下规范：</p>
+<ol>
+<li>SQL语句大小写不敏感(一般建议，SQL的关键字、函数等大写)</li>
+<li>SQL语句末尾应该使用分号结束</li>
+<li>注释
+<ul>
+<li>多行注释 /*注释内容*/</li>
+<li>单行注释 &ndash;注释内容</li>
+<li>MySQL 注释可以使用 #</li>
+</ul>
+</li>
+<li>使用空格或缩进来提高可读性</li>
+<li>命名规范
+<ul>
+<li>必须以字母开头</li>
+<li>可以使用数字、#、$和_</li>
+<li>不可使用关键字</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-mysql">3 MySQL</h1>
+<p>MySQL是Web世界中使用最广泛的数据库服务器，访问及管理mysql数据库的最常用标准化语言为SQL结构化查询语句。早先的MySQL使用的是MyISAM引擎，它是一种利用索引顺序存取数据的软件。从MySQL 4.0版本开始支持InnoDB引擎。</p>
+<ul>
+<li>MyISAM，不支持事物，插入、查询速度快</li>
+<li>InnoDB：支持事务，行级锁，MySQL 5.5起的默认引擎</li>
+</ul>
+<h2 id="31-安装mysql">3.1 安装MySQL</h2>
+<p>这里仅列出在Linux下的安装：</p>
+<ul>
+<li>通过yum进行安装</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">1、安装MySQL
+yum install -y mysql-server <span style="color:#f92672">(</span>centos 7以下<span style="color:#f92672">)</span>
+yum install -y mariadb-server <span style="color:#f92672">(</span>centos 7及以上<span style="color:#f92672">)</span>
+
+2、启动服务
+/etc/init.d/mysqld start <span style="color:#f92672">(</span>centos 7以下<span style="color:#f92672">)</span>
+systemctl start maridab <span style="color:#f92672">(</span>centos 7及以上<span style="color:#f92672">)</span>
+
+3、关闭服务
+/etc/init.d/mysqld stop <span style="color:#f92672">(</span>centos 7以下<span style="color:#f92672">)</span>
+systemctl stop maridab <span style="color:#f92672">(</span>centos 7及以上<span style="color:#f92672">)</span>
+</code></pre></div><ul>
+<li>编译安装</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">1.</span><span style="color:#960050;background-color:#1e0010">安装依赖包</span>
+yum install <span style="color:#f92672">-</span>y ncurses<span style="color:#f92672">-</span>devel libaio<span style="color:#f92672">-</span>devel
+rpm <span style="color:#f92672">-</span>qa ncurses<span style="color:#f92672">-</span>devel libaio<span style="color:#f92672">-</span>devel
+
+<span style="color:#ae81ff">2.</span><span style="color:#960050;background-color:#1e0010">安装</span>cmake编译工具
+yum install <span style="color:#f92672">-</span>y cmake
+
+<span style="color:#ae81ff">3.</span><span style="color:#960050;background-color:#1e0010">上传源码包</span>
+rz <span style="color:#f92672">-</span>y mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49.</span>tar<span style="color:#f92672">.</span>gz
+
+<span style="color:#ae81ff">4.</span><span style="color:#960050;background-color:#1e0010">解压并安装</span>
+tar xf mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49.</span>tar<span style="color:#f92672">.</span>gz
+cd mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49</span>
+ 
+cmake <span style="color:#f92672">.</span> <span style="color:#f92672">-</span>DCMAKE_INSTALL_PREFIX<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49</span> \
+<span style="color:#f92672">-</span>DMYSQL_DATADIR<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49</span><span style="color:#f92672">/</span>data \
+<span style="color:#f92672">-</span>DMYSQL_UNIX_ADDR<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49</span><span style="color:#f92672">/</span>tmp<span style="color:#f92672">/</span>mysql<span style="color:#f92672">.</span>sock \
+<span style="color:#f92672">-</span>DDEFAULT_CHARSET<span style="color:#f92672">=</span>utf8 \
+<span style="color:#f92672">-</span>DDEFAULT_COLLATION<span style="color:#f92672">=</span>utf8_general_ci \
+<span style="color:#f92672">-</span>DEXTRA_CHARSETS<span style="color:#f92672">=</span>gbk,gb2312,utf8,ascii \
+<span style="color:#f92672">-</span>DENABLED_LOCAL_INFILE<span style="color:#f92672">=</span>ON \
+<span style="color:#f92672">-</span>DWITH_INNOBASE_STORAGE_ENAINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_FEDERATED_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_BLACKHOLE_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITHOUT_EXAMPLE_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITHOUT_PARTITION_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_FAST_MUTEXES<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_ZLIB<span style="color:#f92672">=</span>bundled \
+<span style="color:#f92672">-</span>DENABLED_LOCAL_INFILE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_EMBEDDED_SERVER<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> \
+<span style="color:#f92672">-</span>DWITH_DEBUG<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+ 
+make <span style="color:#f92672">&amp;&amp;</span> make install <span style="color:#f92672">&amp;&amp;</span> cd <span style="color:#f92672">..</span>
+<span style="color:#ae81ff">5.</span><span style="color:#960050;background-color:#1e0010">创建链接文件</span>
+ln <span style="color:#f92672">-</span>s <span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">-</span><span style="color:#ae81ff">5.5</span><span style="color:#f92672">.</span><span style="color:#ae81ff">49</span><span style="color:#f92672">/</span> <span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql
+
+<span style="color:#ae81ff">6.</span><span style="color:#960050;background-color:#1e0010">创建数据库用户及配置文件</span>
+useradd <span style="color:#f92672">-</span>M <span style="color:#f92672">-</span>s <span style="color:#f92672">/</span>sbin<span style="color:#f92672">/</span>nologin mysql
+
+<span style="color:#ae81ff">7.</span><span style="color:#960050;background-color:#1e0010">初始化数据库</span>
+<span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>scripts<span style="color:#f92672">/</span>mysql_install_db <span style="color:#f92672">--</span>user<span style="color:#f92672">=</span>mysql <span style="color:#f92672">--</span>basedir<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql <span style="color:#f92672">--</span>datadir<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>data
+
+<span style="color:#ae81ff">8.</span><span style="color:#960050;background-color:#1e0010">定义环境变量</span>
+cp <span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>bin<span style="color:#f92672">/*</span> <span style="color:#f92672">/</span>usr<span style="color:#f92672">/</span>local<span style="color:#f92672">/</span>sbin
+<span style="color:#960050;background-color:#1e0010">或者</span>
+PATH<span style="color:#f92672">=/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>bin:<span style="color:#960050;background-color:#1e0010">$</span>PATH
+
+<span style="color:#ae81ff">9.</span><span style="color:#960050;background-color:#1e0010">开启数据库</span>
+<span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>mysql start
+
+<span style="color:#ae81ff">10.</span><span style="color:#960050;background-color:#1e0010">登录数据库</span>
+mysql
+<span style="color:#960050;background-color:#1e0010">如果设置了用户密码</span>
+mysql <span style="color:#f92672">-</span>uroot <span style="color:#f92672">-</span>p123456
+
+<span style="color:#ae81ff">11.</span><span style="color:#960050;background-color:#1e0010">关闭数据库</span>
+<span style="color:#f92672">/</span>application<span style="color:#f92672">/</span>mysql<span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>mysql stop
+
+<span style="color:#ae81ff">12.</span><span style="color:#960050;background-color:#1e0010">设置密码</span>
+mysqladmin password <span style="color:#ae81ff">123456</span> <span style="color:#f92672">-</span>S <span style="color:#f92672">/</span>data<span style="color:#f92672">/</span><span style="color:#ae81ff">3306</span><span style="color:#f92672">/</span>mysql<span style="color:#f92672">.</span>sock
+</code></pre></div><h2 id="32-数据类型">3.2 数据类型</h2>
+<p>MySQL的数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tinyint</td>
+<td>1字节，带符号的范围是-128到127。无符号的范围是0到255。bool或boolean，就是tinyint，0表示假，非0表示真</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>2字节，带符号的范围是-32768到32767。无符号的范围是0到65535</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整型，4字节，同Integer，带符号的范围是-2147483648到2147483647。无符号的范围是0到4294967295</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>长整型，8字节，带符号的范围是-9223372036854775808到9223372036854775807。无符号的范围是0到18446744073709551615</td>
+</tr>
+<tr>
+<td>float</td>
+<td>单精度浮点数精确到大约7位小数位</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度浮点数精确到大约15位小数位</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>日期。支持的范围为'1000-01-01&rsquo;到'9999-12-31'</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>支持的范围是'1000-01-01 00:00:00&rsquo;到'9999-12-31 23:59:59'</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>时间戳。范围是'1970-01-01 00:00:00&rsquo;到2037年</td>
+</tr>
+<tr>
+<td>char(M)</td>
+<td>固定长度，右边填充空格以达到长度要求。M为长度，范围为0~255。M指的是字符个数</td>
+</tr>
+<tr>
+<td>varchar(M)</td>
+<td>变长字符串。M 表示最大列长度。M的范围是0到65,535。但不能突破行最大字节数65535</td>
+</tr>
+<tr>
+<td>text</td>
+<td>大文本。最大长度为65535(2^16-1)个字符</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>大字节。最大长度为65535(2^16–1)字节的BLOB列</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>BLOG：字节类型，存图片，存二进制文件，能不用则不用，只会用一个字符串来存图片的位置</p>
+</blockquote>
+<h2 id="34-用户及授权操作">3.4 用户及授权操作</h2>
+<p>授权用户：grant语句，取消权限：revoke语句</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">on</span> <span style="color:#f92672">*</span>.<span style="color:#f92672">*</span> <span style="color:#66d9ef">to</span> <span style="color:#e6db74">&#39;dahl&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;10.0.0.13&#39;</span> identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;123456&#39;</span>;
+<span style="color:#66d9ef">revoke</span> <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">on</span> <span style="color:#f92672">*</span>.<span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> dahl;
+</code></pre></div><ul>
+<li>all：表示所有权限</li>
+<li>*.*：表示所有库的所有表</li>
+<li>&lsquo;dah&rsquo;@&lsquo;10.0.0.13&rsquo;：表示用户名，和登陆的IP地址，%为通配符，可以表示任意地址</li>
+</ul>
+<p>删除用户：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">user</span> dahl;
+</code></pre></div><h2 id="35-库操作">3.5 库操作</h2>
+<p>数据库在文件系统上就是用目录体现的，所以对库的操作，可以理解为对目录的操作。创建数据库,会在MySQL的data目录下创建同名文件夹</p>
+<h3 id="351-创建数据库">3.5.1 创建数据库</h3>
+<p>语法格式：create database  数据库名称</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> db_name;
+<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> db_name <span style="color:#66d9ef">default</span> charset utf8;
+<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span> db_name character <span style="color:#66d9ef">set</span> utf8;
+<span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">exists</span> db_name character <span style="color:#66d9ef">set</span> utf8mb4 collater utf8mb4_general_ci;
+</code></pre></div><ul>
+<li><code>character set</code>:指定字符集。</li>
+<li><code>utf8mb4</code>：是utf8的扩展，支持4字节utf8mb4，需要mysql5.5.3+</li>
+<li><code>collate</code>:指定字符串的校队规则，用来做字符串的比较的。例如a、A谁大</li>
+</ul>
+<h3 id="352-删除数据库">3.5.2 删除数据库</h3>
+<p>语法格式：drop database 数据库名称</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">database</span> db_name;
+</code></pre></div><p>删除数据库目录，注意会删除库下的所有表文件</p>
+<h3 id="353-其他操作">3.5.3 其他操作</h3>
+<p>查看数据库中存在的数据库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">show</span> databases;
+</code></pre></div><p>使用(切换)当前使用的数据库(激活show tables语句)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">use db_name;
+</code></pre></div><p>查看创建库的信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> test;
+</code></pre></div><h2 id="36-表操作">3.6 表操作</h2>
+<p>表在文件系统上是用文件体现的，所以对表的操作，可以理解为对文件的操作。</p>
+<blockquote>
+<p>创建表,会在对应的库目录下创建表空间文件</p>
+</blockquote>
+<h3 id="361-创建单表">3.6.1 创建单表</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">create table user_info(
+    id int <span style="color:#f92672">not</span> null auto_increment primary key,
+    name char(<span style="color:#ae81ff">20</span>),
+    age int,
+    gender char(<span style="color:#ae81ff">1</span>),
+    deparment_id int,
+    constraint <span style="color:#960050;background-color:#1e0010">约束名称</span> foreign key(deparment_id) references dep_info(id)
+)engine <span style="color:#f92672">=</span> innodb default charset<span style="color:#f92672">=</span>utf8;
+ 
+<span style="color:#f92672">--&gt;</span> <span style="color:#960050;background-color:#1e0010">语法格式：</span>
+<span style="color:#f92672">--&gt;</span> create table <span style="color:#960050;background-color:#1e0010">表名</span>(
+<span style="color:#f92672">--&gt;</span>      <span style="color:#960050;background-color:#1e0010">列名</span>  <span style="color:#960050;background-color:#1e0010">类型</span>  [<span style="color:#960050;background-color:#1e0010">是否为空</span>] [<span style="color:#960050;background-color:#1e0010">是否默认值</span>] [<span style="color:#960050;background-color:#1e0010">自增</span>] [<span style="color:#960050;background-color:#1e0010">主键</span>]  ,
+<span style="color:#f92672">--&gt;</span>      <span style="color:#960050;background-color:#1e0010">列名</span><span style="color:#ae81ff">2</span>  <span style="color:#960050;background-color:#1e0010">类型</span>
+<span style="color:#f92672">--&gt;</span>      <span style="color:#f92672">....</span> <span style="color:#f92672">....</span>
+<span style="color:#f92672">--&gt;</span>      [ constraint <span style="color:#960050;background-color:#1e0010">外键名称</span> foreign key(<span style="color:#960050;background-color:#1e0010">本表的被约束字段</span>) reference <span style="color:#960050;background-color:#1e0010">目标表名</span>(<span style="color:#960050;background-color:#1e0010">字段</span>) ]      
+<span style="color:#f92672">--&gt;</span> ) engine <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">存储引擎名称</span> default charset <span style="color:#f92672">=</span> utf8;
+</code></pre></div><p>各字段含义：</p>
+<ul>
+<li>列名</li>
+<li>数据类型</li>
+<li>是否可以为空(null/not null)</li>
+<li>是否默认值(default value)</li>
+<li>是否自增(auto_icrement)：一个表只能存在一个自增列并且必须有索引(普通索引或主键索引),类型必须是数值型。</li>
+<li>主键(primarr key)：数据不能为空、不能重复，可以加速查找(数据库的B树结构)</li>
+<li>外键(constraint) ：对表内某字段的内容进行约束,必须是某个表的某个字段已有的值,含外键的表可以理解为1对多，注意外键关联的两个字段数据类型要一致　</li>
+</ul>
+<h3 id="362-创建多表外键关联">3.6.2 创建多表外键关联</h3>
+<ul>
+<li>一对多：一个表的某个字段的数据来自于另一个表已存在的数据。</li>
+<li>多对多：一个表的某几个字段的数据来自于另一个或几个表已存在的数据。</li>
+</ul>
+<p>一对多：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> user_info (
+	id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> auto_increment <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+	NAME CHAR (<span style="color:#ae81ff">20</span>),
+	age INT,
+	gender CHAR (<span style="color:#ae81ff">1</span>),
+	deparment_id INT,
+	<span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#960050;background-color:#1e0010">约束名称</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (deparment_id) <span style="color:#66d9ef">REFERENCES</span> dep_info (id)
+) ENGINE <span style="color:#f92672">=</span> INNODB <span style="color:#66d9ef">DEFAULT</span> charset <span style="color:#f92672">=</span> utf8;
+
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> dep_info (
+	id INT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> auto_increment <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+	title CHAR (<span style="color:#ae81ff">32</span>),
+) ENGINE <span style="color:#f92672">=</span> innode <span style="color:#66d9ef">DEFAULT</span> charset <span style="color:#f92672">=</span> utf8;
+</code></pre></div><p>多对多：需要关系表来表明多对多关系</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>boy<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>name<span style="color:#f92672">`</span> char(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+    
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>girl<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>name<span style="color:#f92672">`</span> char(<span style="color:#ae81ff">32</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+    
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>b2g<span style="color:#f92672">`</span> (
+  <span style="color:#f92672">`</span>id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> AUTO_INCREMENT,
+  <span style="color:#f92672">`</span>b_id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#f92672">`</span>g_id<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">11</span>) <span style="color:#66d9ef">DEFAULT</span> <span style="color:#66d9ef">NULL</span>,
+  <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>FK_b<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>b_id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>FK_G<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>g_id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#960050;background-color:#1e0010">约束名称</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>b_id<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span>boy<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>),
+  <span style="color:#66d9ef">CONSTRAINT</span> <span style="color:#960050;background-color:#1e0010">约束名称</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">FOREIGN</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>g_id<span style="color:#f92672">`</span>) <span style="color:#66d9ef">REFERENCES</span> <span style="color:#f92672">`</span>girl<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>)
+) ENGINE<span style="color:#f92672">=</span>InnoDB <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8;
+</code></pre></div><h3 id="363-删除表">3.6.3 删除表</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">drop</span> <span style="color:#66d9ef">table</span> tb_name;
+</code></pre></div><h3 id="364-查看表结构">3.6.4 查看表结构</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">desc</span> <span style="color:#66d9ef">table_name</span> [ col_name ]
+</code></pre></div><p>如果添加列明，表示查看表中某一列的结构。</p>
+<h3 id="364-其他操作">3.6.4 其他操作</h3>
+<p>查看创建表的语句</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">show</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">table_name</span>;
+</code></pre></div><p>查看当前库的所有表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">show</span> tables;
+</code></pre></div><h2 id="37-操作表数据dml语句">3.7 操作表数据(DML语句)</h2>
+<p>针对表的数据进行操作，主要涉及4类：</p>
+<ul>
+<li>增加 insert</li>
+<li>删除 delete</li>
+<li>修改 update</li>
+<li>查找 select</li>
+</ul>
+<blockquote>
+<p>插入内容就相当于在表文件中按照MySQL的格式写数据</p>
+</blockquote>
+<h3 id="371-insert语句">3.7.1 insert语句</h3>
+<p>语法格式1：<code>insert into table_name(col_name1，col_name2)  values(value1,value2)</code><br>
+含义：</p>
+<ul>
+<li>field和value是一一对应的。</li>
+<li>当字段名省略时,表示插入字段所有数据，values后面的值需要列出所有字段</li>
+</ul>
+<p>语法格式2：<code>insert into  table_name(col_name) select field from table_name</code><br>
+含义：</p>
+<ul>
+<li>把select查到的结果,当作数据来赋值给value</li>
+<li>查询到的数据字段要和插入的字段数量一致</li>
+</ul>
+<p>语法格式3：<code>insert into table_name (col_name,...) values (value1,..) on duplicate key update col_name=value1,...;</code></p>
+<ul>
+<li>如果主键冲突、唯一键冲突，就执行update后的语句，这条语句的意思是：主键不存在则新增记录，主键存在，则更新部分字段。</li>
+</ul>
+<p>语法格式4：<code>insert ignore into table_name (col_name1,..) values (values1,..);</code></p>
+<ul>
+<li>如果主键冲突、唯一键冲突，就忽略错误，返回一个警告</li>
+<li>一般用在大批量导入测试数据的场景下</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> <span style="color:#f92672">`</span>test<span style="color:#f92672">`</span>.<span style="color:#f92672">`</span>employees_copy<span style="color:#f92672">`</span> (
+	<span style="color:#f92672">`</span>id<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>emp_no<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>birth_date<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>first_name<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>last_name<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>gender<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>FK_depet_no<span style="color:#f92672">`</span>,
+	<span style="color:#f92672">`</span>hire_date<span style="color:#f92672">`</span>
+)
+<span style="color:#66d9ef">VALUES</span>
+	(
+    <span style="color:#e6db74">&#39;10&#39;</span>,
+    <span style="color:#e6db74">&#39;10010&#39;</span>,
+    <span style="color:#e6db74">&#39;1990-08-02&#39;</span>,
+    <span style="color:#e6db74">&#39;Dahl&#39;</span>,
+    <span style="color:#e6db74">&#39;Lee&#39;</span>,
+    <span style="color:#e6db74">&#39;F&#39;</span>,
+    <span style="color:#e6db74">&#39;d001&#39;</span>,
+    <span style="color:#e6db74">&#39;1990-08-02&#39;</span>
+);
+
+<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> boy (id) <span style="color:#66d9ef">SELECT</span>
+	id
+<span style="color:#66d9ef">FROM</span>
+	employees;
+</code></pre></div><h3 id="372-update-语句">3.7.2 update 语句</h3>
+<p>语法格式：<code>update [ignore] table_name set col_name = value1,... [ where xxx = xxx</code></p>
+<ul>
+<li>注意更新语句一定要带where条件，除非你真的知道你要改什么东西</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> student
+<span style="color:#66d9ef">SET</span> NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dahl&#39;</span>
+<span style="color:#66d9ef">WHERE</span>
+	id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</code></pre></div><h3 id="373-delete-语句">3.7.3 delete 语句</h3>
+<p>语法格式：<code>delete from table_name [ where xxx = xxx ]</code></p>
+<ul>
+<li>删除一定要包含条件</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DELETE</span>
+<span style="color:#66d9ef">FROM</span>
+	student
+<span style="color:#66d9ef">WHERE</span>
+	id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</code></pre></div><blockquote>
+<p>生产中不会真的删除数据，一般都会添加标致位来区分是否删除。除非你真的要删除。</p>
+</blockquote>
+<h3 id="374-select-语句">3.7.4 select 语句</h3>
+<p>select 语句是 SQL中最复杂的语句，因为它非常灵活。下面是select语句的完整格式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
+	[ <span style="color:#66d9ef">DISTINCT</span> ] select_expr ,...
+<span style="color:#66d9ef">FROM</span>
+	table_references 
+<span style="color:#66d9ef">WHERE</span>
+	where_definition  
+<span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span>
+	<span style="color:#960050;background-color:#1e0010">{</span> col_name <span style="color:#f92672">|</span> expr <span style="color:#f92672">|</span> <span style="color:#66d9ef">position</span> <span style="color:#960050;background-color:#1e0010">}</span> [ <span style="color:#66d9ef">ASC</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">DESC</span> ],...[ <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">ROLLUP</span> ]
+<span style="color:#66d9ef">HAVING</span>
+	where_definition 
+<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span>
+	<span style="color:#960050;background-color:#1e0010">{</span> col_name <span style="color:#f92672">|</span> expr <span style="color:#f92672">|</span> <span style="color:#66d9ef">position</span> <span style="color:#960050;background-color:#1e0010">}</span> [ <span style="color:#66d9ef">ASC</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">DESC</span> ] ,...
+<span style="color:#66d9ef">LIMIT</span> <span style="color:#960050;background-color:#1e0010">{</span>[ <span style="color:#66d9ef">OFFSET</span> ,] <span style="color:#66d9ef">row_count</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">row_count</span> <span style="color:#66d9ef">OFFSET</span> <span style="color:#66d9ef">OFFSET</span> <span style="color:#960050;background-color:#1e0010">}</span>
+[ <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">LOCK</span> <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SHARE</span> <span style="color:#66d9ef">MODE</span> ]]
+</code></pre></div><blockquote>
+<p>FOR UPDATE 会把行进行锁定(排他锁)</p>
+</blockquote>
+<h4 id="3741-简单查询">3.7.4.1 简单查询</h4>
+<p>使用select col_name,&hellip; from table_name;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> student;
+<span style="color:#66d9ef">select</span> id,name <span style="color:#66d9ef">from</span> student;
+<span style="color:#66d9ef">select</span> id <span style="color:#66d9ef">as</span> std_no,name <span style="color:#66d9ef">from</span> student;
+<span style="color:#66d9ef">select</span> std.id ,std.name <span style="color:#66d9ef">from</span> student <span style="color:#66d9ef">as</span> std;
+<span style="color:#66d9ef">select</span> id,CONCAT(first_name,last_name) <span style="color:#66d9ef">as</span> name  <span style="color:#66d9ef">from</span> student;
+
+</code></pre></div><ul>
+<li>当仅存在一个表时，select后面的字段可以不用跟表明。</li>
+<li>as 语句表示别名，是可以省略的，但是建议不要省略别名。</li>
+<li>* 表示所有字段。</li>
+<li><code>concat</code>：字符串处理函数，用于合并</li>
+</ul>
+<h4 id="3742-limit子句">3.7.4.2 limit子句</h4>
+<p>对结果集进行过滤，限制输出的条目数</p>
+<ul>
+<li><code>limit</code>：限制输出的条目数</li>
+<li><code>offset</code>：与limit连用，表示偏移量</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">3</span> <span style="color:#75715e">-- 输出3条信息
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">offset</span> <span style="color:#ae81ff">10</span> <span style="color:#75715e">-- 漂移10条以后再输出3条
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">3</span> <span style="color:#75715e">--漂移10条以后再输出3条
+</span></code></pre></div><p>注意：limt还支持: 偏移量,取几条。其实就是简写而已。上面例子第二句和第三句的含义是相同的。</p>
+<blockquote>
+<p>Limit 必须在排序之后，因为排序会改变limit显示的记录</p>
+</blockquote>
+<h4 id="3743-where子句">3.7.4.3 where子句</h4>
+<p><code>where</code>子句主要用于做条件判断，它支持的操作符如下：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>不等于(!=也可以。只不过不太符合SQL的规范)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>、&lt;、&gt;=、&lt;=|大于、小于、大于等于、小于等于
+BETWEEN|在某个范围之内，between a and b等价于[a, b]
+LIKE|字符串模式匹配，%表示任意多个字符，_表示一个字符
+IN|指定针对某个列的多个可能值
+AND|与
+OR|或</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> first_name <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">where</span> emp_no <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">where</span> salary <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50000</span>;
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">where</span> salary <span style="color:#66d9ef">between</span> <span style="color:#ae81ff">60000</span> <span style="color:#66d9ef">and</span> <span style="color:#ae81ff">80000</span>;  <span style="color:#75715e">-- 60000 &lt; salary &lt; 80000
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">where</span> last_name <span style="color:#66d9ef">like</span> <span style="color:#e6db74">&#39;P%&#39;</span>;
+<span style="color:#66d9ef">SELECT</span> emp.emp_no <span style="color:#66d9ef">AS</span> <span style="color:#66d9ef">no</span>,CONCAT(first_name,<span style="color:#e6db74">&#39; &#39;</span>, last_name) <span style="color:#66d9ef">AS</span> name <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">AS</span> emp <span style="color:#66d9ef">where</span> emp.emp_no <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">10009</span>,<span style="color:#ae81ff">100010</span>,<span style="color:#ae81ff">10020</span>); <span style="color:#75715e">-- 类似集合类型
+</span></code></pre></div><p>关于使用like进行模糊匹配：</p>
+<ul>
+<li>建议使用左前缀，因为效率高。('%a%',和'%a&rsquo;效率很低，建议不要使用，除非真的需要)</li>
+<li>能不用like，就不用，效率很低，如果真的要搜索，那么建议使用搜索引擎(solr、lucence、elasticsearch）</li>
+</ul>
+<h4 id="3744-order-by子句">3.7.4.4 order by子句</h4>
+<p>对查询结果进行排序，可以升序<code>ASC</code>、降序<code>DESC</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> salary <span style="color:#66d9ef">limit</span> <span style="color:#ae81ff">3</span>
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">order</span> <span style="color:#66d9ef">by</span> salary <span style="color:#66d9ef">desc</span>;
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">by</span> emp_no <span style="color:#66d9ef">desc</span>,salary <span style="color:#66d9ef">desc</span>
+</code></pre></div><p>默认为升序，当指定多个列时,优先按照第一列排序、当第一列相同时，再使用第二列排序。</p>
+<h4 id="3745-distinct-去重">3.7.4.5 distinct 去重</h4>
+<p>distinct 用于对字段进行去重操作，相同的只取1个</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> emp_no <span style="color:#66d9ef">from</span> salaries;
+<span style="color:#66d9ef">select</span> <span style="color:#66d9ef">distinct</span> emp_no,salary <span style="color:#66d9ef">from</span> salaries;
+</code></pre></div><ul>
+<li>当distinct包含连个字段时，那么就是联合去重了。即以(emp_np,salay)为整体进行去重</li>
+</ul>
+<h4 id="3746-聚合函数">3.7.4.6 聚合函数</h4>
+<p>常用的聚合函数如下表：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COUNT(expr)</td>
+<td>返回记录中记录的数目，如果指定列，则返回非NULL值的行数</td>
+</tr>
+<tr>
+<td>COUNT(DISTINCT</td>
+<td>expr,[expr&hellip;])</td>
+</tr>
+<tr>
+<td>AVG([DISTINCT]</td>
+<td>expr)</td>
+</tr>
+<tr>
+<td>MIN(expr),</td>
+<td>MAX(expr)</td>
+</tr>
+<tr>
+<td>SUM([DISTINCT]</td>
+<td>expr)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>看需求，count一般会和分组进行连用，也常用在统计条数，count(id)，在统计条数时，建议使用主键字段，可以获得更快的统计速度。</p>
+</blockquote>
+<h4 id="3747-group-by和having">3.7.4.7 group by和having</h4>
+<p>group by主要用于分组显示，如果想要对分组后的数据进行再次过滤，可以使用having子句。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> emp_no,<span style="color:#66d9ef">sum</span>(salary) <span style="color:#66d9ef">as</span> sum_sal <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">group</span> <span style="color:#66d9ef">by</span> emp_no <span style="color:#66d9ef">having</span> sum_sal <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1000000</span>;
+</code></pre></div><ul>
+<li>group by 跟多个字段时，可以理解为 将多个字段组合成元组来分组,当元组唯一时，进行聚合统计。</li>
+<li>除分组和聚合字段以外的其他字段（非分组字段），是不可预知的。</li>
+<li>对分组之后的数据再次过滤，就需要使用Having了。可以对聚合后的结果设置别名来在having中引用。</li>
+</ul>
+<h4 id="3748-子查询">3.7.4.8 子查询</h4>
+<p>查询语句可以嵌套，内部查询就是子查询。</p>
+<ul>
+<li>子查询必须在一组小括号中。</li>
+<li>子查询中不能使用Order by。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> f.salary <span style="color:#66d9ef">from</span> (<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> salaries <span style="color:#66d9ef">where</span> salaries.emp_no <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10003</span>) <span style="color:#66d9ef">as</span> f
+<span style="color:#66d9ef">select</span> first_name <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">where</span> emp_no <span style="color:#66d9ef">in</span> (<span style="color:#66d9ef">select</span> emp_no <span style="color:#66d9ef">from</span> salaries);
+</code></pre></div><h3 id="3749-inner-join内连接">3.7.4.9 inner join(内连接)</h3>
+<p>inner join，简写为join ,用于连接两个表的内容,需要注意的是，连接方式为笛卡尔乘积，全部交叉。</p>
+<ul>
+<li>A表有20条数据，B表有20条数据的话，那么a join b 就是 400条数据。</li>
+<li>当B表存在于A表同名的数据时，会被重命名</li>
+</ul>
+<p>有以下两种方式：</p>
+<ul>
+<li>等值连接：只选某些field相等的元组（行），使用<code>on限定关联的结果</code></li>
+<li>自然连接(natural join)：特殊的等值连接，会去掉重复的列。用的很少（一般仅仅会留下两表中主键相同的记录）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">natural</span> <span style="color:#66d9ef">join</span> salaries;
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> employees <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">join</span> salaries <span style="color:#66d9ef">on</span> employees.emp_no <span style="color:#f92672">=</span> salaries.emp_no
+</code></pre></div><h3 id="37410-outer-join外连接">3.7.4.10 outer join(外连接)</h3>
+<p>outer join 外连接，主要分为：</p>
+<ul>
+<li>左外连接(<code>left join</code>)：从左表（table1）返回所有的行，即使右表（table2）中没有匹配。如果右表中没有匹配，则结果为 NULL。</li>
+<li>右外连接(<code>right join</code>)：从右表（table2）返回所有的行，即使左表（table1）中没有匹配。如果左表中没有匹配，则结果为 NULL</li>
+</ul>
+<blockquote>
+<p>在mariadb中，outer join 必须要配合on参数使用，否则会提示语法错误</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span>	employees <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> salaries <span style="color:#66d9ef">on</span> employees.emp_no <span style="color:#f92672">=</span> salaries.emp_no <span style="color:#66d9ef">where</span> employees.emp_no <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10010</span>;
+</code></pre></div><p>在使用left jion时，on和where条件的区别如下：</p>
+<ol>
+<li><code>on条件</code>是在生成临时表时使用的条件，它不管on中的条件是否为真，都会返回左边表中的记录。</li>
+<li><code>where条件</code>是在临时表生成好后，再对临时表进行过滤的条件。</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>表结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">Create</span> <span style="color:#66d9ef">table</span> <span style="color:#66d9ef">If</span> <span style="color:#66d9ef">Not</span> <span style="color:#66d9ef">Exists</span> Employee (Id int, Name varchar(<span style="color:#ae81ff">255</span>), Salary int, ManagerId int)
+<span style="color:#66d9ef">Truncate</span> <span style="color:#66d9ef">table</span> Employee
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> Employee (Id, Name, Salary, ManagerId) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;Joe&#39;</span>, <span style="color:#e6db74">&#39;70000&#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> Employee (Id, Name, Salary, ManagerId) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;2&#39;</span>, <span style="color:#e6db74">&#39;Henry&#39;</span>, <span style="color:#e6db74">&#39;80000&#39;</span>, <span style="color:#e6db74">&#39;4&#39;</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> Employee (Id, Name, Salary, ManagerId) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#e6db74">&#39;Sam&#39;</span>, <span style="color:#e6db74">&#39;60000&#39;</span>, <span style="color:#e6db74">&#39;None&#39;</span>)
+<span style="color:#66d9ef">insert</span> <span style="color:#66d9ef">into</span> Employee (Id, Name, Salary, ManagerId) <span style="color:#66d9ef">values</span> (<span style="color:#e6db74">&#39;4&#39;</span>, <span style="color:#e6db74">&#39;Max&#39;</span>, <span style="color:#e6db74">&#39;90000&#39;</span>, <span style="color:#e6db74">&#39;None&#39;</span>)
+</code></pre></div><p>sql语句：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> emp.Name <span style="color:#66d9ef">as</span> Employee <span style="color:#66d9ef">from</span> Employee  <span style="color:#66d9ef">as</span> emp <span style="color:#66d9ef">left</span> <span style="color:#66d9ef">join</span> Employee <span style="color:#66d9ef">as</span> man_emp <span style="color:#66d9ef">on</span> emp.ManagerID <span style="color:#f92672">=</span> man_emp.Id <span style="color:#66d9ef">where</span> emp.Salary <span style="color:#f92672">&gt;</span> man_emp.Salary;
+</code></pre></div><h1 id="4-储过程触发器">4 储过程、触发器</h1>
+<ul>
+<li>存储过程（Stored Procedure）：数据库系统中，一段完成特定功能的SQL语句。编写成类似函数的方式，可以传参并调用。支持流程控制语句。</li>
+<li>触发器（Trigger）：由事件触发的特殊的存储过程，例如insert数据时触发。</li>
+</ul>
+<p>这两种技术，虽然是数据库高级内容，性能不错，但基本很少用了。它们移植性差，使用时占用的服务器资源，排错、维护不方便。</p>
+<blockquote>
+<p>最大的原因，不太建议把逻辑放在数据库中。</p>
+</blockquote>
+<h1 id="5-事务transaction">5 事务Transaction</h1>
+<p>InnoDB引擎，支持事务。
+事务，由若干条语句组成的，指的是要做的一系列操作。
+关系型数据库中支持事务，必须支持其四个属性（ACID）：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原子性（atomicity）</td>
+<td>一个事务是一个不可分割的工作单位，事务中包括的所有操作要么全部做完，要么什么都不做</td>
+</tr>
+<tr>
+<td>一致性（consistency）</td>
+<td>事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的</td>
+</tr>
+<tr>
+<td>隔离性（isolation）</td>
+<td>一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰</td>
+</tr>
+<tr>
+<td>持久性（durability）</td>
+<td>持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响</td>
+</tr>
+</tbody>
+</table>
+<p>分析：</p>
+<ul>
+<li>原子性:要求事务中的所有操作，不可分割，不能做了一部分操作，还剩一部分操作；</li>
+<li>一致性:多个事务并行执行的结果，应该和事务排队执行的结果一致。如果事务的并行执行和多线程读写共享资源一样不可预期，就不能保证一致性。</li>
+<li>隔离性:就是指多个事务访问共同的数据了，应该互不干扰。隔离性，指的是究竟在一个事务处理期间，其他事务能不能访问的问题</li>
+<li>持久性:比较好理解，就是事务提交后，数据不能丢失。</li>
+</ul>
+<h1 id="6-mysql隔离级别">6 MySQL隔离级别</h1>
+<p>隔离性不好，事务的操作就会互相影响，带来不同严重程度的后果。</p>
+<h2 id="61-隔离性不好带来的问题">6.1 隔离性不好，带来的问题</h2>
+<ol>
+<li><code>更新丢失Lost Update</code>：事务A和B，更新同一个数据，它们都读取了初始值100，A要减10，B要加100，A减去10后更新为90，B加100更新为200，A的更新丢失了，就像从来没有减过10一样。</li>
+<li><code>脏读</code>：事务A和B，事务B读取到了事务A未提交的数据（这个数据可能是一个中间值，也可能事务A后来回滚事务）。事务A是否最后提交并不关心。只要读取到了这个被修改的数据就是脏读。</li>
+<li><code>不可重复读Unrepeatable read</code>：事务A在事务执行中相同查询语句，得到了不同的结果，不能保证同一条查询语句重复读相同的结果就是不可
+以重复读。
+<ul>
+<li>例如，事务A查询了一次后，事务B修改了数据，事务A又查询了一次，发现数据不一致了。</li>
+<li>注意，脏读讲的是可以读到相同的数据的，但是读取的是一个未提交的数据，而不是提交的最终结果。</li>
+</ul>
+</li>
+<li><code>幻读Phantom read</code>：事务A中同一个查询要进行多次，事务B插入数据，导致A返回不同的结果集，如同幻觉，就是幻读。数据集有记录增加了，可以看做是增加了记录的不可重复读。</li>
+</ol>
+<h2 id="62-隔离级别">6.2 隔离级别</h2>
+<p>隔离级别由低到高，如下表</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITTED</td>
+<td>读取到未提交的数据</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>读已经提交的数据，ORACLE默认隔离级别</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>可以重复读，MySQL的 默认隔离级别。</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>可串行化。事务间完全隔离，事务不能并发，只能串行执行</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>隔离级别越高，串行化越高，数据库执行效率低；隔离级别越低，并行度越高，性能越高。</li>
+<li>隔离级别越高，当前事务处理的中间结果对其它事务不可见程度越高。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 设置会话级或者全局隔离级别
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SET</span> [<span style="color:#66d9ef">SESSION</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">GLOBAL</span>] <span style="color:#66d9ef">TRANSACTION</span> <span style="color:#66d9ef">ISOLATION</span> <span style="color:#66d9ef">LEVEL</span>
+<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#66d9ef">READ</span> <span style="color:#66d9ef">UNCOMMITTED</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">READ</span> <span style="color:#66d9ef">COMMITTED</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">REPEATABLE</span> <span style="color:#66d9ef">READ</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">SERIALIZABLE</span><span style="color:#960050;background-color:#1e0010">}</span>
+<span style="color:#75715e">-- 查询隔离级别
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span><span style="color:#66d9ef">global</span>.tx_isolation;
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>tx_isolation;
+<span style="color:#66d9ef">SET</span> <span style="color:#66d9ef">SESSION</span> <span style="color:#66d9ef">TRANSACTION</span> <span style="color:#66d9ef">ISOLATION</span> <span style="color:#66d9ef">LEVEL</span> <span style="color:#66d9ef">READ</span> <span style="color:#66d9ef">COMMITTED</span>;
+<span style="color:#66d9ef">SET</span> <span style="color:#66d9ef">SESSION</span> <span style="color:#66d9ef">TRANSACTION</span> <span style="color:#66d9ef">ISOLATION</span> <span style="color:#66d9ef">LEVEL</span> <span style="color:#66d9ef">REPEATABLE</span> <span style="color:#66d9ef">READ</span>;
+<span style="color:#75715e">-- 禁用自动提交
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">SET</span> AUTOCOMMIT <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>小结：</p>
+<ul>
+<li><code>SERIALIZABLE</code>，串行了，解决所有问题</li>
+<li><code>REPEATABLE READ</code>，事务A中同一条查询语句返回同样的结果，就是可以重复读数据了。例如语句为(select *from user)。解决的办法有：
+<ol>
+<li>对select的数据加锁，不允许其它事务删除、修改的操作</li>
+<li>第一次select的时候，对最后一次确切提交的事务的结果做快照</li>
+<li>解决了不可以重复读，但是有可能出现幻读。因为另一个事务可以增删数据。</li>
+</ol>
+</li>
+<li><code>READ COMMITTED</code>，在事务中，每次select可以读取到别的事务刚提交成功的新的数据。因为读到的是提交后的数据，解决了脏读，但是不能解决 不可重复读 和 幻读 的问题。因为其他事务前后修改了数据或增删了数据。</li>
+<li><code>READ UNCOMMITTED</code>，能读取到别的事务还没有提交的数据，完全没有隔离性可言，出现了脏读，当前其他问题都可能出现。</li>
+</ul>
+<h2 id="63-事务语法">6.3 事务语法</h2>
+<p>START TRANSACTION或BEGIN开始一个事务，START TRANSACTION是标准SQL的语法。
+使用COMMIT提交事务后，变更成为永久变更。
+ROLLBACK可以在提交事务之前，回滚变更，事务中的操作就如同没有发生过一样（原子性）。
+SET AUTOCOMMIT语句可以禁用或启用默认的autocommit模式，用于当前连接。SET AUTOCOMMIT = 0禁用自
+动提交事务。如果开启自动提交，如果有一个修改表的语句执行后，会立即把更新存储到磁盘。</p>
+<h2 id="64-数据仓库和数据库的区别">6.4 数据仓库和数据库的区别</h2>
+<p>本质上来说没有区别，都是存放数据的地方。但是</p>
+<ul>
+<li>数据库关注数据的持久化、数据的关系，为业务系统提供支持，事务支持；</li>
+<li>数据仓库存储数据的是为了分析或者发掘而设计的表结构，可以存储海量数据。</li>
+</ul>
+<p>数据库存储在线交易数据OLTP（联机事务处理OLTP，On-line Transaction Processing）；数据仓库存储历史数据用于分析OLAP（联机分析处理OLAP，On-Line Analytical Processing）。数据库支持在线业务，需要频繁增删改查；数据仓库一般囤积历史数据支持用于分析的SQL，一般不建议删改。</p>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/" title="41-数据库-pymysql-DBUtils">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="4-内置结构-元组-字符串">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

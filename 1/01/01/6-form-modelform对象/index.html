@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>6-Form-ModelForm对象  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="6-Form-ModelForm对象  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/6-form-modelform%E5%AF%B9%E8%B1%A1/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "6-Form-ModelForm对象",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  1593 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/6-form-modelform%E5%AF%B9%E8%B1%A1/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>6-Form-ModelForm对象
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 8 min
+  &middot; (1593 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-form%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81">1 Form表单验证</a>
+<ul>
+<li><a href="#11-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAform%E8%A1%A8%E5%8D%95%E5%AF%B9%E8%B1%A1">1.1 创建一个Form表单对象</a></li>
+<li><a href="#12-%E5%88%A9%E7%94%A8form%E8%A1%A8%E5%8D%95%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">1.2 利用Form表单对象进行验证</a></li>
+<li><a href="#13-%E5%88%A9%E7%94%A8form%E5%AF%B9%E8%B1%A1%E6%89%8B%E5%8A%A8%E7%94%9F%E6%88%90%E5%89%8D%E7%AB%AF%E6%A0%87%E7%AD%BE">1.3 利用Form对象手动生成前端标签</a></li>
+<li><a href="#14-%E5%88%A9%E7%94%A8form%E5%AF%B9%E8%B1%A1%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%89%8D%E7%AB%AF%E6%A0%87%E7%AD%BE">1.4 利用Form对象自动生成前端标签</a></li>
+<li><a href="#15-form%E5%AD%97%E6%AE%B5%E7%9A%84widget%E5%B1%9E%E6%80%A7">1.5 Form字段的widget属性</a></li>
+<li><a href="#16-form%E5%AD%97%E6%AE%B5%E5%85%B6%E4%BB%96%E7%9A%84%E5%B1%9E%E6%80%A7">1.6 Form字段其他的属性</a></li>
+<li><a href="#17-%E7%89%B9%E5%88%AB%E8%A1%A5%E5%85%85-choicefield">1.7 特别补充-ChoiceField</a></li>
+<li><a href="#18-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8 自定义验证规则</a>
+<ul>
+<li><a href="#181-%E9%80%9A%E8%BF%87%E5%AF%B9%E8%B1%A1%E6%9D%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8.1 通过对象来自定义验证规则</a></li>
+<li><a href="#182-%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E6%9D%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8.2 通过函数来自定义验证规则</a></li>
+<li><a href="#183-%E9%80%9A%E8%BF%87%E5%9C%A8%E5%BD%93%E5%89%8D%E7%B1%BB%E7%9A%84%E4%B8%AD%E5%AE%9A%E4%B9%89-clean_%E5%AD%97%E6%AE%B5%E5%90%8D-%E7%9A%84%E6%96%B9%E6%B3%95-%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%AD%A3%E5%88%99%E9%AA%8C%E8%AF%81">1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%A4%E6%AC%A1%E5%AF%86%E7%A0%81%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E9%AA%8C%E8%AF%81">例子：注册的时候，两次密码一致性的验证</a></li>
+<li><a href="#184-%E5%BC%BA%E5%88%B6%E8%A7%A6%E5%8F%91%E5%BC%82%E5%B8%B8">1.8.4 强制触发异常</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-modelform%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81">2 ModelForm表单验证</a>
+<ul>
+<li><a href="#21-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">2.1 基本使用</a></li>
+<li><a href="#22-%E8%87%AA%E5%AE%9A%E5%88%B6%E5%AD%97%E6%AE%B5%E5%90%8D">2.2 自定制字段名</a></li>
+<li><a href="#23-%E5%B1%95%E7%A4%BA%E6%8C%87%E5%AE%9A%E7%9A%84%E5%88%97">2.3 展示指定的列</a></li>
+<li><a href="#24-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE">2.4 初始化数据</a></li>
+<li><a href="#25-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE">2.5 更新数据</a></li>
+<li><a href="#26-%E5%85%B6%E4%BB%96modelform%E9%85%8D%E7%BD%AE%E9%A1%B9">2.6 其他ModelForm配置项</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-form表单验证">1 Form表单验证</h1>
+<p>        什么是form？django 中的  form 组件 专门用来做对用户通过form表单形式提交的数据的格式进行验证的,还可以提供诸如form表单生成等牛逼的功能。</p>
+<p>        使用方式为：首先我们定义一个Form模版（可以理解为是匹配数据的模版），其中对字段进行了规范。接下来请求发过来后(request.POST)，我们把request.POST的数据交给form模版，进行验证，form模版验证完成后会产出三个信息。</p>
+<ol>
+<li>是否验证成功</li>
+<li>所有的正确信息</li>
+<li>所有的错误信息</li>
+</ol>
+<h2 id="11-创建一个form表单对象">1.1 创建一个Form表单对象</h2>
+<p>        使用From模版和model一样，是一个类，使用时需要引入django的form组件，然后继承Form类来获得一些功能。(可以定义在models.py中)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 基本使用</span>
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> Form
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> fields
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FM</span>(Form):
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField()    <span style="color:#75715e"># 创建一个验证对象，用于验证用户提交的数据中的name属性为username的数据</span>
+    password <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField()
+    email <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>EmailField()
+</code></pre></div><p>注意： 这里定义的Form字段名称 必须和 前端form表单中的 input 框的 name 属性的值一致，才能进行验证。</p>
+<h2 id="12-利用form表单对象进行验证">1.2 利用Form表单对象进行验证</h2>
+<p>        当用户使用POST方法提交数据的时候，应该首先交给Form模版进行验证，这时Form模版会返回三个对象：</p>
+<ol>
+<li>验证的结果：formobj.as_valid()</li>
+<li>验证成功的数据：formobj.cleaned_data</li>
+<li>验证失败的数据：formobj.errors</li>
+</ol>
+<p>        使用form对象，那么需要实例化，在实例化时，传入需要验证的数据，这里传入request.POST</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">post</span>(self,request):
+　　obj <span style="color:#f92672">=</span> FM(data<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>POST)    <span style="color:#75715e"># 创建一个FM与用户提交数据的一个对象</span>
+　　<span style="color:#66d9ef">print</span>(obj<span style="color:#f92672">.</span>is_valid())    　　　 <span style="color:#75715e"># 对这个对象进行验证，匹配成功会返回True，否则会返回False</span>
+　　<span style="color:#66d9ef">print</span>(obj<span style="color:#f92672">.</span>cleaned_data)   　　  <span style="color:#75715e"># 存放匹配成功的数据</span>
+　　<span style="color:#66d9ef">print</span>(obj<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>as_json())    <span style="color:#75715e"># 存放错误的数据(默认情况下会输出一个字符串，包含了HTML标签，我们还可以使用Form提供的as_json方法对输出的字符串进行格式化显示)</span>
+</code></pre></div><p>参数有：</p>
+<ul>
+<li>data参数：表示要验证的数据</li>
+<li>Initial参数(可选)：表示的是初始化数据(数据类型为字典嵌套元组)。</li>
+</ul>
+<p>利用initial初始化Form数据</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Login</span>(View):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get</span>(self,request):
+        <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>GET<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;uid&#39;</span>,None):    <span style="color:#75715e"># 判断用户是否提交数据</span>
+            userid <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>GET<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;uid&#39;</span>)   <span style="color:#75715e"># 获取用户请求的数据</span>
+            userinfo <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(id<span style="color:#f92672">=</span>userid)<span style="color:#f92672">.</span>first()   <span style="color:#75715e"># 在数据库中找到对应的数据</span>
+            obj <span style="color:#f92672">=</span> FM(initial<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;username&#39;</span>:userinfo<span style="color:#f92672">.</span>username,<span style="color:#e6db74">&#39;password&#39;</span>:userinfo<span style="color:#f92672">.</span>password,<span style="color:#e6db74">&#39;email&#39;</span>:userinfo<span style="color:#f92672">.</span>email})  <span style="color:#75715e"># 对Form表单进行初始化赋值</span>
+        <span style="color:#66d9ef">else</span>:   
+            obj <span style="color:#f92672">=</span> FM()     <span style="color:#75715e"># 否则不进行初始化</span>
+        <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;login.html&#39;</span>,{<span style="color:#e6db74">&#39;data&#39;</span>:obj})
+</code></pre></div><p>可以得到的结果为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">formobj<span style="color:#f92672">.</span>as_valid()<span style="color:#960050;background-color:#1e0010">的返回结果为：</span>  
+<span style="color:#75715e"># True/False</span>
+
+formobj<span style="color:#f92672">.</span>cleaned_data的返回结果为<span style="color:#960050;background-color:#1e0010">：</span>
+<span style="color:#75715e"># 验证成功会存放通过验证的数据</span>
+{<span style="color:#e6db74">&#39;password&#39;</span>: <span style="color:#e6db74">&#39;asasas&#39;</span>, <span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;asas&#39;</span>, <span style="color:#e6db74">&#39;email&#39;</span>: <span style="color:#e6db74">&#39;asas@abc.com&#39;</span>}
+
+formobj<span style="color:#f92672">.</span>errors的结果为<span style="color:#960050;background-color:#1e0010">：</span>
+<span style="color:#75715e"># 默认的输出格式&lt;br&gt;&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;pwd&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;email&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;user&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</span>
+ 
+<span style="color:#75715e"># 可以使用 as_json()格式化为字典</span>
+{<span style="color:#e6db74">&#34;email&#34;</span>: [{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;This field is required.&#34;</span>, <span style="color:#e6db74">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span>}],
+  <span style="color:#e6db74">&#34;pwd&#34;</span>: [{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;This field is required.&#34;</span>, <span style="color:#e6db74">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span>}],
+  <span style="color:#e6db74">&#34;user&#34;</span>: [{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;This field is required.&#34;</span>, <span style="color:#e6db74">&#34;code&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span>}]}
+</code></pre></div><p>        由于前端提交了空的数据，所以这里message表示错误提示信息， This field is required.(这个字段不能为空)，code 表示的错误代码，required 表示必须的(必填项)。</p>
+<p>        有些同学会说，django返回的是英文的，我看不懂，那么其实我们可以自己进行定义，即针对code字段的类型进行自定义。（在error_message字典中，根据code的类型，定义不同的提示信息即可）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FM</span>(Form):
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;用户名不能为空&#39;</span>})  
+    password <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>,min_length<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>,error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;密码不能为空&#39;</span>,<span style="color:#e6db74">&#39;min_length&#39;</span>:<span style="color:#e6db74">&#39;密码长度不能小于6位&#39;</span>,<span style="color:#e6db74">&#39;max_length&#39;</span>:<span style="color:#e6db74">&#39;密码的长度不能超过12位&#39;</span>})
+    email <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>EmailField(error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;邮箱不能为空&#39;</span>,<span style="color:#e6db74">&#39;invalid&#39;</span>:<span style="color:#e6db74">&#39;邮箱格式错误&#39;</span>})
+</code></pre></div><p>这时，如果错误代码等于我们定义的，那么就会输出对应的错误信息。</p>
+<p>扩展：由于formobj.erros中包含了所有的错误信息，那么我们可以把它传递到前端，然后再进行取值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">post</span>(self,request):
+        <span style="color:#66d9ef">print</span>(request<span style="color:#f92672">.</span>POST)
+        obj <span style="color:#f92672">=</span> FM(data<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>POST)   <span style="color:#75715e"># 创建一个FM</span>
+        <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;login.html&#39;</span>,{<span style="color:#e6db74">&#39;data&#39;</span>:obj<span style="color:#f92672">.</span>errors})
+
+<span style="color:#75715e"># 前端页面</span>
+<span style="color:#f92672">&lt;</span>form id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;form&#39;</span> method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span><span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> csrf_token <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>h1<span style="color:#f92672">&gt;</span>Hello <span style="color:#960050;background-color:#1e0010">用户登陆</span><span style="color:#f92672">&lt;/</span>h1<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">用户名</span>: <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">&gt;</span> {{ data<span style="color:#f92672">.</span>username<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>
+        <span style="color:#960050;background-color:#1e0010">密码</span>:<span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">&gt;</span>
+        {{ data<span style="color:#f92672">.</span>password<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}
+    <span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>
+        <span style="color:#960050;background-color:#1e0010">邮箱</span>:<span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span><span style="color:#f92672">&gt;</span>
+        {{ data<span style="color:#f92672">.</span>email<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}
+    <span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>form<span style="color:#f92672">&gt;</span>
+</code></pre></div><p>        注意：这里用.0 取数据是因为 错误信息 message，其实是个列表，会存放所有的错误信息，对于空的请求，只会返回 非空的 错误信息，但是数据类型也是列表，所以这里取第一个。</p>
+<p>        点击提交后，用户输入正确的数据，会消失，这不是我们想要的，并且form标签看起来也很乱，有没有一种方式直接来生成呢，各位看官，请继续往下看。</p>
+<h2 id="13-利用form对象手动生成前端标签">1.3 利用Form对象手动生成前端标签</h2>
+<p>　　前面可以看到，我们创建FM类的时候，指定了三个Form字段，那么我们可以利用这三个Form字段来生成对应的input输入框。(Form字段其实本身不具有生成HTML标签的功能，它只有验证的功能，真正生成HTML标签的操作，是由Form字段类型(CharField)中的widgets属性定义了textinput插件完成的，详细信息，可以查看widgets的原码，继续了解)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{{ Form对象<span style="color:#f92672">.</span><span style="color:#960050;background-color:#1e0010">字段名</span> }}    <span style="color:#75715e"># 前端渲染时会渲染出对应的HTML标签</span>
+</code></pre></div><p>对例子进行改写：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># get方式要把FM对象传递给前端，否则无法生成HTML</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get</span>(self,request):
+    obj <span style="color:#f92672">=</span> FM()
+    <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;login.html&#39;</span>,{<span style="color:#e6db74">&#39;data&#39;</span>:obj})
+ 
+ 
+<span style="color:#75715e"># 前端调用</span>
+<span style="color:#f92672">&lt;</span>form method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> novalidate<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> csrf_token <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ data<span style="color:#f92672">.</span>username }} {{ data<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>username<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ data<span style="color:#f92672">.</span>password }} {{ data<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>password<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ data<span style="color:#f92672">.</span>email }} {{ data<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>email<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>form<span style="color:#f92672">&gt;</span>
+<span style="color:#75715e"># 默认情况下高版本浏览器会对错误提示进行小窗提示，这里的为了避免浏览器这个行为，所以给form表单添加 novalidate 属性。</span>
+</code></pre></div><h2 id="14-利用form对象自动生成前端标签">1.4 利用Form对象自动生成前端标签</h2>
+<p>Form提供了三种自动生成前端标签的方式：as_p,as_ul,as_table，由于是自动生成的，所以灵活性对比手动，要稍差点。</p>
+<ul>
+<li>as_p：生成的标签为p类型</li>
+<li>as_ul：生成的标签格ul类型</li>
+<li>as_table：生成的标签为tbody类型(注意，需要手动添加外层的<!-- raw HTML omitted --><!-- raw HTML omitted -->标签)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- 1 as_table  --&gt;</span>
+&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">novalidate</span>&gt;
+    {% csrf_token %}
+    &lt;<span style="color:#f92672">table</span>&gt;
+        {{ data.as_table }}
+    &lt;/<span style="color:#f92672">table</span>&gt;
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+# 注意 as_table 的方式需要我们手动的添加table标签
+ 
+<span style="color:#75715e">&lt;!-- 2 as_p  --&gt;</span>
+&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">novalidate</span>&gt;
+    {% csrf_token %}
+    {{ data.as_p }}
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+ 
+<span style="color:#75715e">&lt;!-- 2 as_ul  --&gt;</span>
+&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">novalidate</span>&gt;
+    {% csrf_token %}
+    {{ data.as_ul }}
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span>&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+</code></pre></div><p>注意：as_p,as_ul,as_table这种自动生成标签的方式来自于我们创建的FM对象，所以如果要让Form自动创建，那么需要在get请求模式下把Form对象，传递给Templates，才能引用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get</span>(self,request):
+    obj <span style="color:#f92672">=</span> FM()
+    <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;login.html&#39;</span>,{<span style="color:#e6db74">&#39;data&#39;</span>:obj})
+</code></pre></div><p>使用以上两种方式：用户的输入的正确数据都会被保留。是不是很屌。不屌，因为只能输出input标签，还不能定制HTML标签的属性，真是太low了。No、No、No 你想到的，开发人员早就已经想到了</p>
+<h2 id="15-form字段的widget属性">1.5 Form字段的widget属性</h2>
+<p>由于前面已经说过，生成的标签类型是由widgets来控制的，那么我们就可以对其进行定制，生成我们想要的标签类型，并给标签添加属性信息。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> widgets    <span style="color:#75715e">#导入插件库</span>
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FM</span>(Form):
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;用户名不能为空&#39;</span>},
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>Textarea(attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;c1&#39;</span>})     <span style="color:#75715e"># 设置字段的类型为Textarea，并且添加class属性的值为cl</span>
+    )
+    password <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>,
+        min_length<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>,
+        error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;密码不能为空&#39;</span>,<span style="color:#e6db74">&#39;min_length&#39;</span>:<span style="color:#e6db74">&#39;密码长度不能小于6位&#39;</span>,<span style="color:#e6db74">&#39;max_length&#39;</span>:<span style="color:#e6db74">&#39;密码的长度不能超过12位&#39;</span>},
+        widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>PasswordInput(attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;c1&#39;</span>})  <span style="color:#75715e"># 设置字段类型为Password类型，添加class属性为c1</span>
+    )
+</code></pre></div><p>这里我们修改了username字段的 标签格式，输出的就是一个textarea标签，并且利用了attr参数给标签添加了 class 属性（多个属性可以在attr中继续添加），这个插件里面几乎包含了所有的输入框比如input、radio、select、等等。</p>
+<h2 id="16-form字段其他的属性">1.6 Form字段其他的属性</h2>
+<p>一大波属性来袭：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Field
+    required<span style="color:#f92672">=</span>True,               <span style="color:#960050;background-color:#1e0010">是否允许为空</span>
+    widget<span style="color:#f92672">=</span>None,                 HTML插件
+    label<span style="color:#f92672">=</span>None,                  <span style="color:#960050;background-color:#1e0010">用于生成</span>Label标签或显示内容
+    initial<span style="color:#f92672">=</span>None,                <span style="color:#960050;background-color:#1e0010">初始值</span>
+    help_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>,                <span style="color:#960050;background-color:#1e0010">帮助信息</span>(<span style="color:#960050;background-color:#1e0010">在标签旁边显示</span>)
+    error_messages<span style="color:#f92672">=</span>None,         <span style="color:#960050;background-color:#1e0010">错误信息</span> {<span style="color:#e6db74">&#39;required&#39;</span>: <span style="color:#e6db74">&#39;不能为空&#39;</span>, <span style="color:#e6db74">&#39;invalid&#39;</span>: <span style="color:#e6db74">&#39;格式错误&#39;</span>}
+    show_hidden_initial<span style="color:#f92672">=</span>False,   <span style="color:#960050;background-color:#1e0010">是否在当前插件后面再加一个隐藏的且具有默认值的插件（可用于检验两次输入是否一直）</span>
+    validators<span style="color:#f92672">=</span>[],               <span style="color:#960050;background-color:#1e0010">自定义验证规则</span>
+    localize<span style="color:#f92672">=</span>False,              <span style="color:#960050;background-color:#1e0010">是否支持本地化（比如时区，在存储时区数据时，会匹配本地时区，不常用）</span>
+    disabled<span style="color:#f92672">=</span>False,              <span style="color:#960050;background-color:#1e0010">是否可以编辑</span>
+    label_suffix<span style="color:#f92672">=</span>None            Label内容后缀(<span style="color:#960050;background-color:#1e0010">比如在前端使用</span>formobj<span style="color:#f92672">.</span>as_table生成表单时<span style="color:#960050;background-color:#1e0010">，</span>label和input中间的分隔符<span style="color:#960050;background-color:#1e0010">，默认是冒号，不常用</span>)
+  
+  
+CharField(Field)
+    max_length<span style="color:#f92672">=</span>None,             <span style="color:#960050;background-color:#1e0010">最大长度</span>
+    min_length<span style="color:#f92672">=</span>None,             <span style="color:#960050;background-color:#1e0010">最小长度</span>
+    strip<span style="color:#f92672">=</span>True                   <span style="color:#960050;background-color:#1e0010">是否移除用户输入空白</span>
+  
+IntegerField(Field)
+    max_value<span style="color:#f92672">=</span>None,              <span style="color:#960050;background-color:#1e0010">最大值</span>
+    min_value<span style="color:#f92672">=</span>None,              <span style="color:#960050;background-color:#1e0010">最小值</span>
+  
+FloatField(IntegerField)
+    <span style="color:#f92672">...</span>
+  
+DecimalField(IntegerField)
+    max_value<span style="color:#f92672">=</span>None,              <span style="color:#960050;background-color:#1e0010">最大值</span>
+    min_value<span style="color:#f92672">=</span>None,              <span style="color:#960050;background-color:#1e0010">最小值</span>
+    max_digits<span style="color:#f92672">=</span>None,             <span style="color:#960050;background-color:#1e0010">总长度</span>
+    decimal_places<span style="color:#f92672">=</span>None,         <span style="color:#960050;background-color:#1e0010">小数位长度</span>
+  
+BaseTemporalField(Field)
+    input_formats<span style="color:#f92672">=</span>None          <span style="color:#960050;background-color:#1e0010">时间格式化</span>  
+  
+DateField(BaseTemporalField)    <span style="color:#960050;background-color:#1e0010">格式：</span><span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span>
+TimeField(BaseTemporalField)    <span style="color:#960050;background-color:#1e0010">格式：</span><span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">12</span>
+DateTimeField(BaseTemporalField)<span style="color:#960050;background-color:#1e0010">格式：</span><span style="color:#ae81ff">2015</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span><span style="color:#f92672">-</span><span style="color:#ae81ff">01</span> <span style="color:#ae81ff">11</span>:<span style="color:#ae81ff">12</span>
+  
+DurationField(Field)            <span style="color:#960050;background-color:#1e0010">时间间隔：</span><span style="color:#f92672">%</span>d <span style="color:#f92672">%</span>H:<span style="color:#f92672">%</span>M:<span style="color:#f92672">%</span>S<span style="color:#f92672">.%</span>f
+    <span style="color:#f92672">...</span>
+  
+RegexField(CharField)
+    regex,                      <span style="color:#960050;background-color:#1e0010">自定制正则表达式</span>
+    max_length<span style="color:#f92672">=</span>None,            <span style="color:#960050;background-color:#1e0010">最大长度</span>
+    min_length<span style="color:#f92672">=</span>None,            <span style="color:#960050;background-color:#1e0010">最小长度</span>
+    error_message<span style="color:#f92672">=</span>None,         <span style="color:#960050;background-color:#1e0010">忽略，错误信息使用</span> error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;invalid&#39;</span>: <span style="color:#e6db74">&#39;...&#39;</span>}
+  
+EmailField(CharField)     
+    <span style="color:#f92672">...</span>
+  
+FileField(Field)
+    allow_empty_file<span style="color:#f92672">=</span>False     <span style="color:#960050;background-color:#1e0010">是否允许空文件</span>
+  
+ImageField(FileField)     
+    <span style="color:#f92672">...</span>
+    <span style="color:#960050;background-color:#1e0010">注：需要</span>PIL模块<span style="color:#960050;background-color:#1e0010">，</span>pip3 install Pillow
+    <span style="color:#960050;background-color:#1e0010">以上两个字典使用时，需要注意两点：</span>
+        <span style="color:#f92672">-</span> form表单中 enctype<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;multipart/form-data&#34;</span>
+        <span style="color:#f92672">-</span> view函数中 obj <span style="color:#f92672">=</span> MyForm(request<span style="color:#f92672">.</span>POST, request<span style="color:#f92672">.</span>FILES)
+  
+URLField(Field)
+    <span style="color:#f92672">...</span>
+  
+  
+BooleanField(Field) 
+    <span style="color:#f92672">...</span>
+  
+NullBooleanField(BooleanField)
+    <span style="color:#f92672">...</span>
+  
+ChoiceField(Field)
+    <span style="color:#f92672">...</span>
+    choices<span style="color:#f92672">=</span>(),                <span style="color:#960050;background-color:#1e0010">选项，如：</span>choices <span style="color:#f92672">=</span> ((<span style="color:#ae81ff">0</span>,<span style="color:#e6db74">&#39;上海&#39;</span>),(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;北京&#39;</span>),)
+    required<span style="color:#f92672">=</span>True,             <span style="color:#960050;background-color:#1e0010">是否必填</span>
+    widget<span style="color:#f92672">=</span>None,               <span style="color:#960050;background-color:#1e0010">插件，默认</span>select插件
+    label<span style="color:#f92672">=</span>None,                Label内容
+    initial<span style="color:#f92672">=</span>None,              <span style="color:#960050;background-color:#1e0010">初始值</span>
+    help_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>,              <span style="color:#960050;background-color:#1e0010">帮助提示</span>
+  
+  
+ModelChoiceField(ChoiceField)
+    <span style="color:#f92672">...</span>                        django<span style="color:#f92672">.</span>forms<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>ModelChoiceField
+    queryset,                  <span style="color:#75715e"># 查询数据库中的数据</span>
+    empty_label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;---------&#34;</span>,   <span style="color:#75715e"># 默认空显示内容</span>
+    to_field_name<span style="color:#f92672">=</span>None,        <span style="color:#75715e"># HTML中value的值对应的字段</span>
+    limit_choices_to<span style="color:#f92672">=</span>None      <span style="color:#75715e"># ModelForm中对queryset二次筛选</span>
+      
+ModelMultipleChoiceField(ModelChoiceField)
+    <span style="color:#f92672">...</span>                        django<span style="color:#f92672">.</span>forms<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>ModelMultipleChoiceField
+  
+  
+      
+TypedChoiceField(ChoiceField)
+    coerce <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> val: val   <span style="color:#960050;background-color:#1e0010">对选中的值进行一次转换</span>
+    empty_value<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>            <span style="color:#960050;background-color:#1e0010">空值的默认值</span>
+  
+MultipleChoiceField(ChoiceField)
+    <span style="color:#f92672">...</span>
+  
+TypedMultipleChoiceField(MultipleChoiceField)
+    coerce <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> val: val   <span style="color:#960050;background-color:#1e0010">对选中的每一个值进行一次转换</span>
+    empty_value<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>            <span style="color:#960050;background-color:#1e0010">空值的默认值</span>
+  
+ComboField(Field)
+    fields<span style="color:#f92672">=</span>()                  <span style="color:#960050;background-color:#1e0010">使用多个验证，如下：即验证最大长度</span><span style="color:#ae81ff">20</span><span style="color:#960050;background-color:#1e0010">，又验证邮箱格式</span>
+                               fields<span style="color:#f92672">.</span>ComboField(fields<span style="color:#f92672">=</span>[fields<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>), fields<span style="color:#f92672">.</span>EmailField(),])
+  
+MultiValueField(Field)
+    PS: <span style="color:#960050;background-color:#1e0010">抽象类，子类中可以实现聚合多个字典去匹配一个值，要配合</span>MultiWidget使用
+  
+SplitDateTimeField(MultiValueField)
+    input_date_formats<span style="color:#f92672">=</span>None,   <span style="color:#960050;background-color:#1e0010">格式列表：</span>[<span style="color:#e6db74">&#39;%Y--%m--</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%Y&#39;</span>, <span style="color:#e6db74">&#39;%m/</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">/%y&#39;</span>]
+    input_time_formats<span style="color:#f92672">=</span>None    <span style="color:#960050;background-color:#1e0010">格式列表：</span>[<span style="color:#e6db74">&#39;%H:%M:%S&#39;</span>, <span style="color:#e6db74">&#39;%H:%M:%S.</span><span style="color:#e6db74">%f</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">&#39;%H:%M&#39;</span>]
+  
+FilePathField(ChoiceField)     <span style="color:#960050;background-color:#1e0010">文件选项，目录下文件显示在页面中</span>(<span style="color:#960050;background-color:#1e0010">下拉框显示</span>path指定目录下的文件)<span style="color:#960050;background-color:#1e0010">，提交时</span> <span style="color:#960050;background-color:#1e0010">提交的是</span> <span style="color:#960050;background-color:#1e0010">文件的路径</span>
+    path,                      <span style="color:#960050;background-color:#1e0010">文件夹路径</span>
+    match<span style="color:#f92672">=</span>None,                <span style="color:#960050;background-color:#1e0010">正则匹配</span>
+    recursive<span style="color:#f92672">=</span>False,           <span style="color:#960050;background-color:#1e0010">递归下面的文件夹</span>
+    allow_files<span style="color:#f92672">=</span>True,          <span style="color:#960050;background-color:#1e0010">允许文件</span>
+    allow_folders<span style="color:#f92672">=</span>False,       <span style="color:#960050;background-color:#1e0010">允许文件夹</span>
+    required<span style="color:#f92672">=</span>True,
+    widget<span style="color:#f92672">=</span>None,
+    label<span style="color:#f92672">=</span>None,
+    initial<span style="color:#f92672">=</span>None,
+    help_text<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>
+  
+GenericIPAddressField
+    protocol<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;both&#39;</span>,           both,ipv4,ipv6支持的IP格式
+    unpack_ipv4<span style="color:#f92672">=</span>False          <span style="color:#960050;background-color:#1e0010">解析</span>ipv4地址<span style="color:#960050;background-color:#1e0010">，如果是</span>::ffff:<span style="color:#ae81ff">192.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.1</span><span style="color:#960050;background-color:#1e0010">时候，可解析为</span><span style="color:#ae81ff">192.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.1</span><span style="color:#960050;background-color:#1e0010">，</span> PS<span style="color:#960050;background-color:#1e0010">：</span>protocol必须为both才能启用
+  
+SlugField(CharField)           <span style="color:#960050;background-color:#1e0010">数字，字母，下划线，减号（连字符）</span>
+    <span style="color:#f92672">...</span>
+  
+UUIDField(CharField)           uuid类型
+    <span style="color:#f92672">...</span>
+</code></pre></div><p>Django内置其他插件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">TextInput(Input)
+NumberInput(TextInput)
+EmailInput(TextInput)
+URLInput(TextInput)
+PasswordInput(TextInput)
+HiddenInput(TextInput)
+Textarea(Widget)
+DateInput(DateTimeBaseInput)
+DateTimeInput(DateTimeBaseInput)
+TimeInput(DateTimeBaseInput)
+CheckboxInput
+Select
+NullBooleanSelect
+SelectMultiple
+RadioSelect
+CheckboxSelectMultiple
+FileInput
+ClearableFileInput
+MultipleHiddenInput
+SplitDateTimeWidget
+SplitHiddenDateTimeWidget
+SelectDateWidget
+</code></pre></div><p>label 属性的用法举例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&lt;</span>form action<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/test/&#34;</span> method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> novalidate<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> csrf_token <span style="color:#f92672">%</span>}
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ obj<span style="color:#f92672">.</span>username<span style="color:#f92672">.</span>label }} {{ obj<span style="color:#f92672">.</span>username }} {{ obj<span style="color:#f92672">.</span>username<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>p<span style="color:#f92672">&gt;</span>{{ obj<span style="color:#f92672">.</span>password<span style="color:#f92672">.</span>label }} {{ obj<span style="color:#f92672">.</span>password }} {{ obj<span style="color:#f92672">.</span>password<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span><span style="color:#ae81ff">0</span> }}<span style="color:#f92672">&lt;/</span>p<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>input type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;提交&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>form<span style="color:#f92672">&gt;</span>
+</code></pre></div><h2 id="17-特别补充-choicefield">1.7 特别补充-ChoiceField</h2>
+<p>ChoiceField表示下拉选择类型，针对不同的标签，不同的效果有多种搭配，需要注意的是，当输入框为非ChoiceField类型时，可以使用widget来添加choices选项。如果是ChoiceField类型，那么就可以直接添加choices属性。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 单radio，值为字符串</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+ initial<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,　　<span style="color:#75715e"># 初始数据数量为2</span>
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>RadioSelect(choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;上海&#39;</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;北京&#39;</span>),))
+)
+ 
+<span style="color:#75715e"># 单radio，值为字符串</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>ChoiceField(
+ choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;上海&#39;</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;北京&#39;</span>),),     <span style="color:#75715e"># 定义要展示的数据信息，1表示ID</span>
+ initial<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>RadioSelect
+)
+ 
+<span style="color:#75715e"># 单select，值为字符串</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+ initial<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>Select(choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;上海&#39;</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;北京&#39;</span>),))
+)
+ 
+<span style="color:#75715e"># 单select，值为字符串</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>ChoiceField(
+ choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;上海&#39;</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;北京&#39;</span>),),
+ initial<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>Select
+)
+ 
+<span style="color:#75715e"># 多选select，值为列表</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>MultipleChoiceField(
+ choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;上海&#39;</span>),(<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;北京&#39;</span>),),
+ initial<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,],
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>SelectMultiple
+)
+ 
+ 
+<span style="color:#75715e"># 单checkbox</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>CheckboxInput()
+)
+ 
+ 
+<span style="color:#75715e"># 多选checkbox,值为列表</span>
+user <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>MultipleChoiceField(
+ initial<span style="color:#f92672">=</span>[<span style="color:#ae81ff">2</span>, ],
+ choices<span style="color:#f92672">=</span>((<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;上海&#39;</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;北京&#39;</span>),),
+ widget<span style="color:#f92672">=</span>widgets<span style="color:#f92672">.</span>CheckboxSelectMultiple
+)
+</code></pre></div><p>ChoiceField类型的字段表示的是下拉单选框，它的choice选项表示要提供给用户选择的选项。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># choice 字段格式</span>
+city <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>ChoiceField(
+    choices<span style="color:#f92672">=</span>[(<span style="color:#ae81ff">0</span>,<span style="color:#e6db74">&#39;上海&#39;</span>),(<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;北京&#39;</span>)]
+)
+</code></pre></div><blockquote>
+<p>可以看到choices接收的数据类型为列表嵌套元组，是不是看起来很熟悉，没错，使用value_list获取到的数据，就是这个格式。</p>
+</blockquote>
+<p>        这个时候需要来一波需求了，当choices的数据来源于数据库的时候，我新加了一个城市，ChoiceField 并不！会！动！态！的！重！新！读！取！，为什么呢？</p>
+<p>        这个和类的实例化有关，严格来说的话这些字段都属于类的属性，类属性不会在实例化的时候进行重新读取，那么想要类属性在实例化的时候重新读取该咋办，是的， 没错，定义在__init__ 函数中(每次实例化都会执行)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserForm</span>(Form):
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        required<span style="color:#f92672">=</span>True,
+        error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;用户名不能为空&#39;</span>,<span style="color:#e6db74">&#39;invaild&#39;</span>:<span style="color:#e6db74">&#39;用户名格式不正确&#39;</span>}
+    )
+    password <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        required<span style="color:#f92672">=</span>True,
+        error_messages<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;required&#39;</span>:<span style="color:#e6db74">&#39;密码不能为空&#39;</span>,<span style="color:#e6db74">&#39;invalid&#39;</span>:<span style="color:#e6db74">&#39;密码格式不正确&#39;</span>}
+    )
+ 
+ 
+    ut_id <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>[]) <span style="color:#75715e"># 下面每次初始化都会执行，所以这里可以写空，避免二次查库</span>
+    <span style="color:#75715e"># choices=[(1,&#39;上海&#39;),(2,&#39;北京&#39;),(3,&#39;河南&#39;)] 这里的choices接受这种格式的数据，和values_list的结果很像</span>
+ 
+ 
+    <span style="color:#66d9ef">def</span> __init__(self,<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs):
+        super(UserForm, self)<span style="color:#f92672">.</span>__init__(<span style="color:#f92672">*</span>args,<span style="color:#f92672">**</span>kwargs)
+ 
+        self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74">&#39;ut_id&#39;</span>]<span style="color:#f92672">.</span>choices <span style="color:#f92672">=</span>models<span style="color:#f92672">.</span>UserType<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>values_list(<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;title&#39;</span>)  <span style="color:#75715e"># 由于每次实例化的时候都会执行__init__方法，就可以动态的实时更新了。</span>
+</code></pre></div><blockquote>
+<p>针对下拉列表这种可能会变得数据，让其每次实例化的时候都动态的生成，否则会造成数据不能实时显示的问题</p>
+</blockquote>
+<h2 id="18-自定义验证规则">1.8 自定义验证规则</h2>
+<p>我们知道Form表单对象内置了许多字段类型，根据这些字段类型我们可以知道，其内部是包含了正则表达式的。其中源码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Email字段正则表达式</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EmailValidator</span>(object):
+    message <span style="color:#f92672">=</span> _(<span style="color:#e6db74">&#39;Enter a valid email address.&#39;</span>)
+    code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;invalid&#39;</span>
+    user_regex <span style="color:#f92672">=</span> _lazy_re_compile(
+        <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(^[-!#$%&amp;&#39;*+/=?^_`{}|~0-9A-Z]+(\.[-!#$%&amp;&#39;*+/=?^_`{}|~0-9A-Z]+)*\Z&#34;</span>  <span style="color:#75715e"># dot-atom</span>
+        <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;|^&#34;([\001-\010\013\014\016-\037!#-\[\]-\177]|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">[\001-\011\013\014\016-\177])*&#34;\Z)&#39;</span>,  <span style="color:#75715e"># quoted-string</span>
+        re<span style="color:#f92672">.</span>IGNORECASE)
+    domain_regex <span style="color:#f92672">=</span> _lazy_re_compile(
+        <span style="color:#75715e"># max length for domain name labels is 63 characters per RFC 1034</span>
+        <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;((?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+)(?:[A-Z0-9-]{2,63}(?&lt;!-))\Z&#39;</span>,
+        re<span style="color:#f92672">.</span>IGNORECASE)
+    literal_regex <span style="color:#f92672">=</span> _lazy_re_compile(
+        <span style="color:#75715e"># literal form, ipv4 or ipv6 address (SMTP 4.1.3)</span>
+        <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\[([A-f0-9:\.]+)\]\Z&#39;</span>,
+        re<span style="color:#f92672">.</span>IGNORECASE)
+    domain_whitelist <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;localhost&#39;</span>]
+</code></pre></div><p>那么现在有一个需求，我要验证手机号，可是django Form没有内置这个正则表达式，我们该怎么办？ 能否自定义？答案是可以的。主要有以下三种方式：</p>
+<ol>
+<li>通过validators属性来定义(类型为列表)：主要分为下面两种方式
+<ul>
+<li>对象</li>
+<li>函数</li>
+</ul>
+</li>
+<li>通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</li>
+</ol>
+<h3 id="181-通过对象来自定义验证规则">1.8.1 通过对象来自定义验证规则</h3>
+<p>语法格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">validators<span style="color:#f92672">=</span>[RegexValidator(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;正则表达式&#39;</span>,<span style="color:#e6db74">&#39;错误提示&#39;</span>)]
+</code></pre></div><p>匹配手机号的简单实例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> fields
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> Form
+<span style="color:#f92672">from</span> django.core.validators <span style="color:#f92672">import</span> RegexValidator     <span style="color:#75715e"># 注意需要导入RegexValidator对象</span>
+ 
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfo</span>(Form):
+ 
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>EmailField()
+    phone <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        validators<span style="color:#f92672">=</span>[RegexValidator(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^[0-9]+$&#39;</span>, <span style="color:#e6db74">&#39;请输入数字&#39;</span>), RegexValidator(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^159[0-9]+$&#39;</span>, <span style="color:#e6db74">&#39;数字必须以159开头&#39;</span>)],
+    )
+</code></pre></div><p>注意：</p>
+<ol>
+<li>多个条件并存的时候，顺序为从左到右</li>
+<li>由于指定传递正则表达式对象，所以可定制性不高</li>
+<li>多用于简单的场合下</li>
+</ol>
+<h3 id="182-通过函数来自定义验证规则">1.8.2 通过函数来自定义验证规则</h3>
+<p>语法格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.core.exceptions <span style="color:#f92672">import</span> ValidationError  <span style="color:#75715e"># 需要导入ValidationError</span>
+  
+<span style="color:#66d9ef">def</span> <span style="color:#960050;background-color:#1e0010">函数名</span>(value):
+  
+    <span style="color:#e6db74">&#39;&#39;&#39;匹配规则若干&#39;&#39;&#39;</span>
+    <span style="color:#960050;background-color:#1e0010">如果不匹配</span>:
+        <span style="color:#66d9ef">raise</span> ValiadationError(<span style="color:#e6db74">&#39;error message&#39;</span>)
+  
+validators<span style="color:#f92672">=</span>[<span style="color:#960050;background-color:#1e0010">函数名</span>,]
+  
+<span style="color:#75715e"># 在字段的validators参数中表示正则匹配使用函数</span>
+<span style="color:#75715e"># 在函数中定义正则表达式进行返回</span>
+<span style="color:#75715e"># 匹配成功可以不进行返回</span>
+<span style="color:#75715e"># 匹配失败需要抛出ValidationError异常　</span>
+</code></pre></div><p>为什么要使用ValidationError来抛出异常呢？这里来自于源码，有人要问，为啥老看源码，小白看不懂啊，我想所，人家django都写好了，你不去学习，还好意思问。神经病啊你</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># RegexValidator内部信息</span>
+<span style="color:#66d9ef">def</span> __call__(self, value):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Validate that the input contains a match for the regular expression
+</span><span style="color:#e6db74">        if inverse_match is False, otherwise raise ValidationError.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> (self<span style="color:#f92672">.</span>inverse_match <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> bool(self<span style="color:#f92672">.</span>regex<span style="color:#f92672">.</span>search(
+                force_text(value)))):
+            <span style="color:#66d9ef">raise</span> ValidationError(self<span style="color:#f92672">.</span>message, code<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>code)
+
+<span style="color:#75715e"># 可以看到 RegexValidator 正则表达式对象 匹配不成功的时候会使用raise 主动的抛出ValidationError 异常，并且ValidationError对象接受两个信息，但是code已经有默认值了，所以我们这里只返回错误message即可</span>
+</code></pre></div><p>匹配手机号示例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> fields
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> Form
+<span style="color:#f92672">from</span> django.core.exceptions <span style="color:#f92672">import</span> ValidationError
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_re</span>(value):
+ 
+    mobile_re <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$&#39;</span>)
+ 
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> mobile_re<span style="color:#f92672">.</span>match(value):
+ 
+        <span style="color:#66d9ef">raise</span> ValidationError(<span style="color:#e6db74">&#39;手机号码格式错误&#39;</span>)
+ 
+ 
+ 
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(Form):
+ 
+    username <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField()
+    phone <span style="color:#f92672">=</span> fields<span style="color:#f92672">.</span>CharField(
+        validators<span style="color:#f92672">=</span>[my_re,]       <span style="color:#75715e"># 调用我们定义的my_re函数进行验证</span>
+    )
+</code></pre></div><h3 id="183-通过在当前类的中定义-clean_字段名-的方法-来实现正则验证">1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</h3>
+<p>为什么要定义 clean_字段名 来进行正则验证呢？这里通过form.is_valid() 入口查看form字段的验证规则。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># is_valid</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_valid</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Returns True if the form has no errors. Otherwise, False. If errors are
+</span><span style="color:#e6db74">        being ignored, returns False.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>is_bound <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>errors
+<span style="color:#75715e"># 最后调用了 self.errors</span>
+ 
+ 
+<span style="color:#75715e"># 查看self.errors函数</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">errors</span>(self):
+        <span style="color:#e6db74">&#34;Returns an ErrorDict for the data provided for the form&#34;</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_errors <span style="color:#f92672">is</span> None:
+            self<span style="color:#f92672">.</span>full_clean()
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_errors
+<span style="color:#75715e"># 这里又返回了 full_clean()</span>
+ 
+ 
+<span style="color:#75715e"># 查看full_clean()函数</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">full_clean</span>(self):
+        <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Cleans all of self.data and populates self._errors and
+</span><span style="color:#e6db74">        self.cleaned_data.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>_errors <span style="color:#f92672">=</span> ErrorDict()
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>is_bound:  <span style="color:#75715e"># Stop further processing.</span>
+            <span style="color:#66d9ef">return</span>
+        self<span style="color:#f92672">.</span>cleaned_data <span style="color:#f92672">=</span> {}
+        <span style="color:#75715e"># If the form is permitted to be empty, and none of the form data has</span>
+        <span style="color:#75715e"># changed from the initial data, short circuit any validation.</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>empty_permitted <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>has_changed():
+            <span style="color:#66d9ef">return</span>
+ 
+        self<span style="color:#f92672">.</span>_clean_fields()    <span style="color:#75715e"># 这里执行了 clean_fields() 函数，只要定义了clean_fieldsname 就会自动被执行</span>
+        self<span style="color:#f92672">.</span>_clean_form()
+        self<span style="color:#f92672">.</span>_post_clean()
+</code></pre></div><p>所以这里方法名称有特殊要求，必须为：clean_当前字段,自动会去执行这个方法，定义字段的时候不用显示的调用这个方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> fields
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> widgets
+<span style="color:#f92672">from</span> django.core.exceptions <span style="color:#f92672">import</span> ValidationError
+<span style="color:#f92672">from</span> django.core.validators <span style="color:#f92672">import</span> RegexValidator
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clean_phone</span>(self):
+    <span style="color:#75715e"># 去取用户提交的值：可能是错误是的，也可能是正确的</span>
+    value <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cleaned_data[<span style="color:#e6db74">&#39;phone&#39;</span>]
+    mobile_re <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$&#39;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> mobile_re<span style="color:#f92672">.</span>match(value):
+        <span style="color:#66d9ef">raise</span> ValidationError(<span style="color:#e6db74">&#39;手机号码格式错误&#39;</span>)
+    <span style="color:#66d9ef">if</span> models<span style="color:#f92672">.</span>UserInfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(phone<span style="color:#f92672">=</span>value)<span style="color:#f92672">.</span>count():
+        <span style="color:#66d9ef">raise</span> ValidationError(<span style="color:#e6db74">&#39;手机号码已存在&#39;</span>)   <span style="color:#75715e"># 可以利用数据库对数据唯一性进行验证</span>
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> value   <span style="color:#75715e"># 这里必须要返回正确的值，因为返回值会被重新赋值给cleaned_data中的Phone字段的值</span>
+     
+    <span style="color:#75715e"># 先通过form基础验证，才会继续匹配。 比如字段是必填的，如果没有填写，则不会执行clean_phone函数</span>
+</code></pre></div><p>**切记：</p>
+<ol>
+<li>不要瞎取值，因为不是按照顺序取值的，所以在你取得时候，可能还没有赋值。</li>
+<li>对象.<strong>dict</strong>：通过这种方法去取得值，因为每次顺序都是不一样的。所以可能你取的值，还没有被赋值。</li>
+</ol>
+<p>小结：</p>
+<ol>
+<li>对象，只能添加正则表达式</li>
+<li>函数，不常用</li>
+<li>当前类方法中自定义，可以添加对数据库的操作，注意必须要有返回值。</li>
+<li>对象方法和类方法中定义，是可以同时存在的，先执行对象中定义的，然后再执行类方法中自定义的。</li>
+</ol>
+<h3 id="例子注册的时候两次密码一致性的验证">例子：注册的时候，两次密码一致性的验证</h3>
+<p>由于不能再一个验证规则里面取其他字段的值，所以前面的方法并不可行，这里django提供了其他的form表单的整体验证（细心的人会看到刚刚的full_clean后有一个clean_form函数）</p>
+<p>定义clean函数，来对form进行整体验证(注意这里的数据，表示前面验证都有通过)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.core.exceptions <span style="color:#f92672">import</span> ValidationError
+ 
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clean</span>(self):
+ 
+    pwd <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cleaned_data[<span style="color:#e6db74">&#39;pwd&#39;</span>]
+    pwd_confirm <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cleaned_data[<span style="color:#e6db74">&#39;pwd_confirm&#39;</span>]
+    <span style="color:#66d9ef">if</span> pwd <span style="color:#f92672">==</span> pwd_confirm:
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>cleaned_data   <span style="color:#75715e"># 必须有返回值，事关再次取cleaned_data是否有值</span>
+    <span style="color:#66d9ef">else</span>:
+        self<span style="color:#f92672">.</span>add_error(<span style="color:#e6db74">&#39;pwd&#39;</span>,ValidationError(<span style="color:#e6db74">&#39;密码输入不一致&#39;</span>))   <span style="color:#75715e"># 根据源码中的操作，把错误信息添加到 self.add_errors</span>
+        self<span style="color:#f92672">.</span>add_error(<span style="color:#e6db74">&#39;pwd_confirm&#39;</span>,ValidationError(<span style="color:#e6db74">&#39;密码输入不一致&#39;</span>))  <span style="color:#75715e"># 添加错误信息必须是ValidationError对象</span>
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>cleaned_data
+ 
+    <span style="color:#75715e"># 如果有人添加错误，那么就不能通过</span>
+</code></pre></div><p>扩展：</p>
+<ol>
+<li>由于在full_clean()函数中会执行钩子函数(clean_fields，clean_form，_post_clean)，所以钩子函数存在，就执行，不存在就跳过。【clean_form，_post_clean功能类似，这里不在赘述】</li>
+<li>当对象和类方法 同时存在时，先匹配对象，然后再匹配类方法。　</li>
+</ol>
+<h3 id="184-强制触发异常">1.8.4 强制触发异常</h3>
+<p>在某些场景下比如用户登录，如果用户名或者密码错误，我们需要手动触发一个异常，并提示：‘用户名或者密码错误’。这时可以利用form.add_error() 来进行触发。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.core.exceptions <span style="color:#f92672">import</span> ValidationError
+ 
+form<span style="color:#f92672">.</span>add_error(<span style="color:#e6db74">&#39;password&#39;</span>,ValidationError(<span style="color:#e6db74">&#39;用户名或者密码错误&#39;</span>))
+ 
+ 
+<span style="color:#75715e"># 这样在前端的password字段后面会主动触发异常</span>
+</code></pre></div><p>当然，这里用了ValidationError对象，是因为django提供的 form.is_valid中最后也是用过ValidationError完成添加的，这里其实也可以直接写错误信息，但是推荐和源码保持一致。</p>
+<h1 id="2-modelform表单验证">2 ModelForm表单验证</h1>
+<p>ModelForm顾名思义就是model和form的结合体，所以它包含了form的功能，比如：</p>
+<ul>
+<li>验证</li>
+<li>表单生成</li>
+</ul>
+<p>同时它还包含了model的功能，比如</p>
+<ul>
+<li>数据库操作(比如数据的修改，保存等)</li>
+</ul>
+<h2 id="21-基本使用">2.1 基本使用</h2>
+<p>使用起来比forms简单很多，不需要再编写字段，只需要传入要关联的model类即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+<span style="color:#f92672">from</span> rbac <span style="color:#f92672">import</span> model
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfoModelForm</span>(forms<span style="color:#f92672">.</span>ModelForm):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Userinfo  <span style="color:#75715e"># 与Userinfo建立关系</span>
+        fields <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;__all__&#34;</span>  <span style="color:#75715e"># 要显示的Userinfo字段(__all__表示所有)</span>
+</code></pre></div><p>前端渲染方法和forms相同，这里不再赘述</p>
+<h2 id="22-自定制字段名">2.2 自定制字段名</h2>
+<p>默认渲染出来的字段名称是model类中对应的字段的名称(英文),如果要显示中文名称，可以通过两种方式：</p>
+<ol>
+<li>在model类中添加verbose_name来定义显示的中文名称(djang admin也是读取这个名字的)</li>
+<li>在ModelForm类中定义显示的名称</li>
+</ol>
+<p>ModelForm中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfoModelForm</span>(forms<span style="color:#f92672">.</span>ModelForm):
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Userinfo  <span style="color:#75715e"># 与Userinfo建立关系</span>
+        fields <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;__all__&#34;</span>  <span style="color:#75715e"># 要显示的Userinfo字段(__all__表示所有)</span>
+        labels <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;username&#39;</span>:<span style="color:#e6db74">&#39;你好&#39;</span>,
+            <span style="color:#e6db74">&#39;password&#39;</span>:<span style="color:#e6db74">&#39;世界&#39;</span>,
+            <span style="color:#e6db74">&#39;roles&#39;</span>:<span style="color:#e6db74">&#39;谢谢&#39;</span>
+        }
+</code></pre></div><p>优先级高于字段的verbose_name，如果同时设置，会labels会覆盖verbose_name</p>
+<h2 id="23-展示指定的列">2.3 展示指定的列</h2>
+<p>fields用于指定要在前端渲染的字段，主要有两类值</p>
+<ul>
+<li>__all__: 显示所有字段</li>
+<li>[&lsquo;x&rsquo;,&lsquo;xx&rsquo;]:显示指定字段</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 显示指定列</span>
+fields <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;username&#39;</span>,<span style="color:#e6db74">&#39;email&#39;</span>]  
+
+<span style="color:#75715e"># 排除指定列</span>
+exclude <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;role&#39;</span>]      
+</code></pre></div><h2 id="24-初始化数据">2.4 初始化数据</h2>
+<p>ModelForm对象在实例化的同时，还可以指定两个参数，用于初始化form表单（比如在修改页面，提前把要修改的数据灌入form表单中）</p>
+<ul>
+<li>initial: 类型为字典</li>
+<li>instance: 类型为对象</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">obj <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Userinfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>first()  
+uf <span style="color:#f92672">=</span> UserInfoModelForm(instance<span style="color:#f92672">=</span>obj)
+
+obj <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Userinfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>values(<span style="color:#e6db74">&#39;username&#39;</span>,<span style="color:#e6db74">&#39;password&#39;</span>)<span style="color:#f92672">.</span>first()
+uf <span style="color:#f92672">=</span> UserInfoModelForm(initial<span style="color:#f92672">=</span>obj)
+</code></pre></div><h2 id="25-更新数据">2.5 更新数据</h2>
+<p>需要特别注意更新数据时的操作，如果不传入要更新的实例，就会变成新增数据</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
+    obj <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>Userinfo<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(pk<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>first()
+    <span style="color:#75715e"># uf = UserInfoModelForm(request.POST)  # 直接调用是新增</span>
+    uf <span style="color:#f92672">=</span> UserInfoModelForm(data<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>POST,instance<span style="color:#f92672">=</span>obj)  <span style="color:#75715e"># 这样才是更新数据</span>
+    <span style="color:#66d9ef">if</span> uf<span style="color:#f92672">.</span>is_valid():
+        uf<span style="color:#f92672">.</span>save()
+        <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/arya/rbac/userinfo/&#39;</span>)
+</code></pre></div><h2 id="26-其他modelform配置项">2.6 其他ModelForm配置项</h2>
+<p>下面是ModelForm组件的相关配置项目：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a<span style="color:#f92672">.</span>  <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        model,                           <span style="color:#75715e"># 对应Model的</span>
+        fields<span style="color:#f92672">=</span>None,                     <span style="color:#75715e"># 字段</span>
+        exclude<span style="color:#f92672">=</span>None,                    <span style="color:#75715e"># 排除字段</span>
+        labels<span style="color:#f92672">=</span>None,                     <span style="color:#75715e"># 提示信息</span>
+        help_texts<span style="color:#f92672">=</span>None,                 <span style="color:#75715e"># 帮助提示信息</span>
+        widgets<span style="color:#f92672">=</span>None,                    <span style="color:#75715e"># 自定义插件</span>
+        error_messages<span style="color:#f92672">=</span>None,             <span style="color:#75715e"># 自定义错误信息（整体错误信息from django.core.exceptions import NON_FIELD_ERRORS）</span>
+        field_classes<span style="color:#f92672">=</span>None               <span style="color:#75715e"># 自定义字段类 （也可以自定义字段）</span>
+        localized_fields<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#39;birth_date&#39;</span>,) <span style="color:#75715e"># 本地化，如：根据不同时区显示数据</span>
+        <span style="color:#960050;background-color:#1e0010">如：</span>
+            <span style="color:#960050;background-color:#1e0010">数据库中</span>
+                <span style="color:#ae81ff">2016</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">27</span> <span style="color:#ae81ff">04</span>:<span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">57</span>
+            setting中的配置
+                TIME_ZONE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Asia/Shanghai&#39;</span>
+                USE_TZ <span style="color:#f92672">=</span> True
+            <span style="color:#960050;background-color:#1e0010">则显示：</span>
+                <span style="color:#ae81ff">2016</span><span style="color:#f92672">-</span><span style="color:#ae81ff">12</span><span style="color:#f92672">-</span><span style="color:#ae81ff">27</span> <span style="color:#ae81ff">12</span>:<span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">57</span>
+b<span style="color:#f92672">.</span> <span style="color:#960050;background-color:#1e0010">验证执行过程</span>
+    is_valid <span style="color:#f92672">-&gt;</span> full_clean <span style="color:#f92672">-&gt;</span> <span style="color:#960050;background-color:#1e0010">钩子</span> <span style="color:#f92672">-&gt;</span> <span style="color:#960050;background-color:#1e0010">整体错误</span>
+
+c<span style="color:#f92672">.</span> <span style="color:#960050;background-color:#1e0010">字典字段验证</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clean_字段名</span>(self):
+        <span style="color:#75715e"># 可以抛出异常</span>
+        <span style="color:#75715e"># from django.core.exceptions import ValidationError</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;新值&#34;</span>
+d<span style="color:#f92672">.</span> <span style="color:#960050;background-color:#1e0010">用于验证</span>
+    model_form_obj <span style="color:#f92672">=</span> ModelForm()
+    model_form_obj<span style="color:#f92672">.</span>is_valid()
+    model_form_obj<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>as_json()
+    model_form_obj<span style="color:#f92672">.</span>clean()
+    model_form_obj<span style="color:#f92672">.</span>cleaned_data
+e<span style="color:#f92672">.</span> <span style="color:#960050;background-color:#1e0010">用于创建</span>
+    model_form_obj <span style="color:#f92672">=</span> ModelForm(data<span style="color:#f92672">=</span>request<span style="color:#f92672">.</span>POST)
+    <span style="color:#75715e">#### 页面显示，并提交 #####</span>
+    <span style="color:#75715e"># 默认保存多对多</span>
+        obj <span style="color:#f92672">=</span> form<span style="color:#f92672">.</span>save(commit<span style="color:#f92672">=</span>True)
+    <span style="color:#75715e"># 不做任何操作，内部定义 save_m2m（用于保存多对多）</span>
+        obj <span style="color:#f92672">=</span> form<span style="color:#f92672">.</span>save(commit<span style="color:#f92672">=</span>False)
+        obj<span style="color:#f92672">.</span>save()      <span style="color:#75715e"># 保存单表信息</span>
+        obj<span style="color:#f92672">.</span>save_m2m()  <span style="color:#75715e"># 保存关联多对多信息</span>
+</code></pre></div><p>下面是一个小例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+<span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> widgets <span style="color:#66d9ef">as</span> froms_widgets
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInfoModelForm</span>(forms<span style="color:#f92672">.</span>ModelForm):
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+        model <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>UserInfo
+        fields <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;__all__&#39;</span>
+        <span style="color:#75715e"># fields =  [&#39;username&#39;,&#39;email&#39;]</span>
+        <span style="color:#75715e"># exclude = [&#39;username&#39;]</span>
+        labels <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;用户名&#39;</span>,
+            <span style="color:#e6db74">&#39;email&#39;</span>: <span style="color:#e6db74">&#39;邮箱&#39;</span>,
+        }
+        help_texts <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;username&#39;</span>: <span style="color:#e6db74">&#39;...&#39;</span>
+        }
+        widgets <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;username&#39;</span>: froms_widgets<span style="color:#f92672">.</span>Textarea(attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;c1&#39;</span>})
+        }
+        error_messages <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;__all__&#39;</span>:{    <span style="color:#75715e"># 整体错误信息</span>
+
+            },
+            <span style="color:#e6db74">&#39;email&#39;</span>: {
+                <span style="color:#e6db74">&#39;required&#39;</span>: <span style="color:#e6db74">&#39;邮箱不能为空&#39;</span>,
+                <span style="color:#e6db74">&#39;invalid&#39;</span>: <span style="color:#e6db74">&#39;邮箱格式错误..&#39;</span>,
+            }
+        }
+        field_classes <span style="color:#f92672">=</span> {  <span style="color:#75715e"># 定义字段的类是什么</span>
+            <span style="color:#75715e"># &#39;email&#39;: Ffields.URLField  # 这里只能填类，加上括号就是对象了。</span>
+        }
+
+        <span style="color:#75715e"># localized_fields=(&#39;ctime&#39;,)  # 哪些字段做本地化</span>
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/" title="6-subprocess模块-tempfile模块">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/5-sqlalchemy-flask_sqlalchemy-wtforms/" title="5-sqlalchemy-flask_sqlalchemy-wtforms">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

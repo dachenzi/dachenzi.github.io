@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3-直接插入排序  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="3-直接插入排序  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "3-直接插入排序",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  182 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>3-直接插入排序
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 1 min
+  &middot; (182 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F">1 直接插入排序</a></li>
+<li><a href="#2-%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B">2 分析过程</a></li>
+<li><a href="#3-%E5%85%B3%E4%BA%8E%E5%AD%98%E5%82%A8%E4%B8%AD%E9%97%B4%E5%8F%98%E9%87%8F">3 关于存储中间变量</a></li>
+<li><a href="#4-%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99">4 代码编写</a></li>
+<li><a href="#5-%E6%80%BB%E7%BB%93">5 总结</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-直接插入排序">1 直接插入排序</h1>
+<p>直接插入排序属于比较简单的排序算法，基本原理：</p>
+<ul>
+<li>在未排序序列中，构建一个子排序序列，直至全部数据排列完成。</li>
+<li>将待排序的数，插入到已经排序的序列中合适的位置。</li>
+<li>增加一个哨兵(中间变量)，放入待比较的值，让它和后面已经排好序的序列比较，找到合适的插入点。</li>
+</ul>
+<h1 id="2-分析过程">2 分析过程</h1>
+<p>        看上面的定义可能不是特别清楚其原理，那么请看来自维基百科的动态演示图：<br>
+                <img src="photo/cr.gif" alt="cr"><br>
+以图中列表为例，下面是分析过程：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">5</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">8</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><ul>
+<li>假定已排序序列在列表的最左边初始为空。</li>
+<li>第一趟循环将第一个元素6，赋值给中间变量，然后在已排序区一一比较，由于已排序区初始为空，所以元素6被直接放入已排序区</li>
+<li>第二趟循环将第二个元素5，赋值给中间变量，然后在已排序中开始比较，循环开始，由于已排序区中只有1个元素，所以只需要比对1次，5比6小，先将元素6向右移动一位，然后将5赋值给6的原位上。此时排序后的元素排列如下：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">5</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">8</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><ul>
+<li>第三趟循环将第三个元素3，赋值给中间变量，然后在已排序中开始比较，循环开始，由于已排序区中有2个元素，所以需要比对2次，3比6小，将6向右移动一位，继续循环，3比5小，将5向右移动一位，然后把3放在原来5的位置上。此时排序后的元素排列如下：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><ul>
+<li>第四趟循环将第四个元素1，赋值给中间变量，然后在已排序中开始比较，循环开始，最后把1放在原来3的位置上。此时排序后的元素排列如下：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">5</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><ul>
+<li>第五趟循环将第五个元素8，赋值给中间变量，然后在已排序中开始比较，循环开始，由于8大于6，会直接将8赋给当前已排序区最大值的右边。此时排序后的元素排列如下：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">5</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">6</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><p>以此类推。直到排序完成</p>
+<h1 id="3-关于存储中间变量">3 关于存储中间变量</h1>
+<p>        我们可以单独使用一个中间变量来存储待排序的元素，也可以在列表的首部插入一个变量用来存储待排序的元素。因为代码量以及索引计算方便等原因，这里使用在列表的首部插入一个元素一个变量用来存储待排序的元素的方式编写代码。<br>
+                <img src="photo/crsort.png" alt="sort-1"></p>
+<h1 id="4-代码编写">4 代码编写</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lst <span style="color:#f92672">=</span> [<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>]
+lst <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> lst  <span style="color:#75715e"># [0, 6, 5, 3, 1, 8, 7, 2, 4]</span>
+length <span style="color:#f92672">=</span> len(lst)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>, length):  <span style="color:#75715e">#</span>
+    lst[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> lst[i]
+    j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">if</span> lst[j] <span style="color:#f92672">&gt;</span> lst[<span style="color:#ae81ff">0</span>]:
+        <span style="color:#66d9ef">while</span> lst[j] <span style="color:#f92672">&gt;</span> lst[<span style="color:#ae81ff">0</span>]:
+            lst[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> lst[j]
+            lst[j] <span style="color:#f92672">=</span> lst[<span style="color:#ae81ff">0</span>]
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">print</span>(lst[<span style="color:#ae81ff">1</span>:])
+</code></pre></div><ul>
+<li>因为在列表头部添加了一个元素用于记录待交换元素，所以应该从索引为2的元素，开始，拿来和已经排序好的序列进行比较(认为6已经在排序空间了)</li>
+<li>由于无法判断已排序区到底排了几次，所以只能使用while循环，直到排序区的某个元素比待排序元素小时，表示在上一次插入过后，排序区已经排序完毕，这时就可以退出循环了。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">附上使用单个变量的方法：</span>
+lst <span style="color:#f92672">=</span> [<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>]
+length <span style="color:#f92672">=</span> len(lst)
+temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, length): <span style="color:#75715e"># 7</span>
+    temp <span style="color:#f92672">=</span> lst[i]
+    j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># 6</span>
+    <span style="color:#66d9ef">if</span> lst[j] <span style="color:#f92672">&gt;</span> temp:
+        <span style="color:#66d9ef">while</span> lst[j] <span style="color:#f92672">&gt;</span> temp:
+            lst[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>], lst[j] <span style="color:#f92672">=</span> lst[j], temp
+            j <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+            <span style="color:#66d9ef">if</span> j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:     <span style="color:#75715e"># 不限制j的索引时，j会取到-1..-n，这样就乱了，因为索引为-1的元素，还没有被排序</span>
+                <span style="color:#66d9ef">break</span>
+<span style="color:#66d9ef">print</span>(lst)
+</code></pre></div><h1 id="5-总结">5 总结</h1>
+<ul>
+<li><code>最好</code>情况，正好是升序排列，比较迭代次<code>n-1</code>次</li>
+<li><code>最差</code>情况，正好是降序排列，比较迭代1，2，&hellip; n - 1 次即<code>n(n-1)/2</code>，数据移动会非常多</li>
+<li>使用两层嵌套循环，时间复杂度为<code>O(n^2)</code></li>
+<li>属于稳定的排序算法</li>
+<li>使用在小规模数据比较时</li>
+<li>如果比较操作耗时大的话，可以采用二分查找来提高效率，即二分查找插入排序(由于每次比较还是要进行插入，所以优化效率不是那么高)
+{% endraw %}</li>
+</ul>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/" title="31-gogs安装-git基础">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/" title="3-内置结构-列表">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

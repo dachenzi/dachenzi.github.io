@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>4-websocket-flask-websocket  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="4-websocket-flask-websocket  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/4-websocket-flask-websocket/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "4-websocket-flask-websocket",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  953 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/4-websocket-flask-websocket/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>4-websocket-flask-websocket
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 5 min
+  &middot; (953 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-websocket">1 websocket</a></li>
+<li><a href="#2-%E5%8D%8F%E8%AE%AE">2 协议</a></li>
+<li><a href="#3-websocket%E5%8D%8F%E8%AE%AE%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0">3 websocket协议简单实现</a>
+<ul>
+<li><a href="#31-server%E4%B8%8Eclient">3.1 server与client</a></li>
+<li><a href="#22-%E5%8A%A0%E5%AF%86%E4%B8%8E%E6%8F%A1%E6%89%8B">2.2 加密与握手</a></li>
+<li><a href="#23-websocket%E6%95%B0%E6%8D%AE%E5%8C%85%E6%A0%BC%E5%BC%8F">2.3 websocket数据包格式</a></li>
+<li><a href="#24-%E8%A7%A3%E5%8C%85">2.4 解包</a></li>
+<li><a href="#25-%E4%BA%A4%E4%BA%92">2.5 交互</a></li>
+<li><a href="#26-%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81">2.6 完整的代码</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%88%A9%E7%94%A8flask%E6%8F%90%E4%BE%9Bwebsocket%E6%9C%8D%E5%8A%A1">3 利用flask提供websocket服务</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-websocket">1 websocket</h1>
+<p>        WebSocket是HTML5新增的协议，它的目的是在浏览器和服务器之间建立一个不受限的双向通信的通道，比如说，服务器可以在任意时刻发送消息给浏览器。为什么传统的HTTP协议不能做到WebSocket实现的功能？这是因为HTTP协议是一个<code>请求-响应</code>协议，请求必须先由浏览器发给服务器，服务器才能响应这个请求，再把数据发送给浏览器。换句话说，浏览器不主动请求，服务器是没法主动发数据给浏览器的。这样一来，要在浏览器中搞一个实时聊天，或者在线多人游戏的话就没法实现了，只能借助Flash这些插件。也有人说，HTTP协议其实也能实现啊，比如用轮询或者Comet(长轮询)。</p>
+<ul>
+<li><code>轮询</code>是指浏览器通过JavaScript启动一个定时器，然后以固定的间隔给服务器发请求，询问服务器有没有新消息。这个机制的缺点一是实时性不够，二是频繁的请求会给服务器带来极大的压力。</li>
+<li><code>Comet(长轮询)</code>本质上也是轮询，但是在没有消息的情况下，服务器先拖一段时间，等到有消息了再回复。这个机制暂时地解决了实时性问题，但是它带来了新的问题：以多线程模式运行的服务器会让大部分线程大部分时间都处于挂起状态，极大地浪费服务器资源。另外，一个HTTP连接在长时间没有数据传输的情况下，链路上的任何一个网关都可能关闭这个连接，而网关是我们不可控的，这就要求Comet连接必须定期发一些ping数据表示连接&rsquo;正常工作'。</li>
+</ul>
+<p>以上两种机制都治标不治本，所以，HTML5推出了WebSocket标准，让浏览器和服务器之间可以建立无限制的全双工通信，任何一方都可以主动发消息给对方。</p>
+<h1 id="2-协议">2 协议</h1>
+<p>WebSocket协议是基于TCP的一种新的协议。WebSocket最初在HTML5规范中被引用为TCP连接，作为基于TCP的套接字API的占位符。它实现了浏览器与服务器全双工(full-duplex)通信。其本质是保持TCP连接，在浏览器和服务端通过Socket进行通信。
+它的主要特点有：</p>
+<ul>
+<li>数据格式：和html的结构类似</li>
+<li>连接：创建连接后不断开</li>
+<li>校验：第一次连接时，需要进行校验(魔法字符串)</li>
+<li>加密：每次发送/接受的数据都需要一个加密解密的过程</li>
+</ul>
+<h1 id="3-websocket协议简单实现">3 websocket协议简单实现</h1>
+<p>下面我们来一步一步的用代码实现websocket协议的数据交互，基本交互逻辑如下：</p>
+<ol>
+<li>客户端发起websocket连接</li>
+<li>服务段根据WebSocket-Key与magic_string通过加密计算出结果，发送给客户端。</li>
+<li>客户端验证通过连接建立完毕</li>
+<li>进入收发数据阶段</li>
+<li>客户端加密发送数据</li>
+<li>服务段解密接受数据，然后再加密返回数据</li>
+<li>客户端解密接受数据，然后循环5-7这个过程</li>
+</ol>
+<h2 id="31-server与client">3.1 server与client</h2>
+<p>首先编写一个socket server，利用浏览器发送websocket协议的数据，看看发送的到底是什么东西</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+server_ip <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>)
+server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+server<span style="color:#f92672">.</span>bind(server_ip)
+server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+
+sock, client_addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+
+<span style="color:#66d9ef">while</span> True:
+    data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">print</span>(data)
+
+</code></pre></div><p>客户端使用js，来发送一个websocket请求，它的代码如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">&lt;</span>script type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;application/javascript&#34;</span><span style="color:#f92672">&gt;</span>
+    var socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebSocket<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ws://127.0.0.1:8080&#34;</span><span style="color:#f92672">);</span> <span style="color:#75715e">/* socket server的地址 */</span>
+<span style="color:#f92672">&lt;/</span>script<span style="color:#f92672">&gt;</span>
+</code></pre></div><p>这样页面在加载的时候，就会发起一个websocket协议的请求。服务端收到的数据格式为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">b<span style="color:#e6db74">&#39;GET / HTTP/1.1\r\n
+</span><span style="color:#e6db74">Host: 127.0.0.1:8080\r\n
+</span><span style="color:#e6db74">Connection: Upgrade\r\n
+</span><span style="color:#e6db74">Pragma: no-cache\r\n
+</span><span style="color:#e6db74">Cache-Control: no-cache\r\n
+</span><span style="color:#e6db74">Upgrade: websocket\r\n
+</span><span style="color:#e6db74">Origin: http://localhost:63342\r\n
+</span><span style="color:#e6db74">Sec-WebSocket-Version: 13\r\n
+</span><span style="color:#e6db74">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36\r\nAccept-Encoding: gzip, deflate, br\r\n
+</span><span style="color:#e6db74">Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7\r\n
+</span><span style="color:#e6db74">Cookie: csrftoken=NpT8aNHLFDMaxdtPS6dMkaxkcH9mt3JZaPzxdgGwwDGrusH6TI18yq29Za5DZLTx\r\n
+</span><span style="color:#e6db74">Sec-WebSocket-Key: 6Ahi+8kfm0TBVFrFRshROw==\r\n
+</span><span style="color:#e6db74">Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n
+</span><span style="color:#e6db74">\r\n&#39;</span>
+</code></pre></div><p>重要的头部信息：</p>
+<ul>
+<li>Connection: Upgrade：表示要升级协议</li>
+<li>Upgrade: websocket：表示要升级到 websocket 协议。</li>
+<li>Sec-WebSocket-Key：与后面服务端响应首部的Sec-WebSocket-Accept是配套的，提供基本的防护，比如恶意的连接，或者无意的连接。</li>
+</ul>
+<p>数据格式和html的报文格式相同，最主要的其实是<code>Sec-WebSocket-Key</code>，它就是客户端发送的用于握手的密钥串</p>
+<h2 id="22-加密与握手">2.2 加密与握手</h2>
+<p>websocket的加密与握手，主要分为三个步骤：</p>
+<ul>
+<li>获取客户端传递的Sec-WebSocket-Key</li>
+<li>组合Sec-WebSocket-Key与magic_string成新的字符串，然后使用sha1,加密后，然后使用base64继续加密。</li>
+<li>通过websocket特有的HTTP头部信息返回加密后的数据</li>
+</ul>
+<blockquote>
+<p>magic_string是websocket协议规定的一套指定字符串，<code>258EAFA5-E914-47DA-95CA-C5AB0DC85B11</code>,必须使用它与Sec-WebSocket-Key进行拼接才可以，因为客户端会通过magic_string同样做一遍加密运算，并将结果与服务段返回的信息进行比对，如果相同，表示服务端支持websocket协议，并建立连接。
+将的得到的秘闻信息进行返回</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> base64
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> hashlib
+
+<span style="color:#75715e"># 用于首次发送信息时，将header转换为字典，便于提取数据</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_header</span>(data):
+    res <span style="color:#f92672">=</span> {}
+    request_data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+    header, body <span style="color:#f92672">=</span> request_data<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#39;</span>)
+    header_list <span style="color:#f92672">=</span> header<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(header_list)):
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">if</span> len(header_list[i]<span style="color:#f92672">.</span>split()) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+                res[<span style="color:#e6db74">&#39;method&#39;</span>], res[<span style="color:#e6db74">&#39;url&#39;</span>], res[<span style="color:#e6db74">&#39;protocol&#39;</span>] <span style="color:#f92672">=</span> header_list[i]<span style="color:#f92672">.</span>split()
+        <span style="color:#66d9ef">else</span>:
+            key, value <span style="color:#f92672">=</span> header_list[i]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;:&#39;</span>, <span style="color:#ae81ff">1</span>)
+            res[key] <span style="color:#f92672">=</span> value<span style="color:#f92672">.</span>strip()
+    <span style="color:#66d9ef">return</span> res
+
+server_ip <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>)
+server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+server<span style="color:#f92672">.</span>bind(server_ip)
+server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+
+sock, client_addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">0</span>)
+header <span style="color:#f92672">=</span> get_header(data)
+
+<span style="color:#75715e"># magic_string 及加密方法</span>
+magic_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&#39;</span>   <span style="color:#75715e"># 协议规定的值,无法修改</span>
+res_str <span style="color:#f92672">=</span> header[<span style="color:#e6db74">&#39;Sec-WebSocket-Key&#39;</span>] <span style="color:#f92672">+</span> magic_string
+res_data <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>b64encode(hashlib<span style="color:#f92672">.</span>sha1(res_str<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))<span style="color:#f92672">.</span>digest())  <span style="color:#75715e"># 这里需要使用二进制，十六进制无法握手</span>
+
+<span style="color:#75715e"># 固定的头部信息</span>
+response_tpl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HTTP/1.1 101 Switching Protocols</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Upgrade:websocket</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Connection: Upgrade</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Sec-WebSocket-Accept: {}</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \  
+               <span style="color:#e6db74">&#34;WebSocket-Location: ws://{}:{}</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(res_data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>), <span style="color:#f92672">*</span>server_ip)
+
+<span style="color:#66d9ef">print</span>(response_tpl)
+sock<span style="color:#f92672">.</span>sendall(response_tpl<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+
+</code></pre></div><p>Sec-WebSocket-Accept表示加密后的信息。</p>
+<h2 id="23-websocket数据包格式">2.3 websocket数据包格式</h2>
+<p>下面是websocket的数据包的格式，其中第二个字节的后7位表示数据包信息的大小，但也分三种情况：</p>
+<ol>
+<li>当Payload len等于127时，需要额外占用64位(8个字节)</li>
+<li>当Payload len等于126时，需要额外占用16位(2个字节)</li>
+<li>当Payload len小于等于125时，不需要额外占位</li>
+</ol>
+<p>如果mask bit设置了，那么还需要额外的4位用于存放mask key(默认是设置的)</p>
+<p><img src="../photo/websocketPackage.png" alt="package"></p>
+<p>解密时需要遵循websocket协议的规定格式，否则无法解密出数据格式。</p>
+<h2 id="24-解包">2.4 解包</h2>
+<p>知道了数据包的长度，那么我们就可以通过位运算来解析websocket包了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">while</span> True:
+	info <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">8096</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> info:<span style="color:#66d9ef">break</span>
+    payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">127</span>   <span style="color:#75715e"># 通过位运算得到payload_len长度</span>
+    <span style="color:#66d9ef">if</span> payload_len <span style="color:#f92672">==</span> <span style="color:#ae81ff">126</span>:
+        extend_payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>]
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">8</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">8</span>:]
+    <span style="color:#66d9ef">elif</span> payload_len <span style="color:#f92672">==</span> <span style="color:#ae81ff">127</span>:
+        extend_payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>]
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">14</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">14</span>:]
+    <span style="color:#66d9ef">else</span>:
+        extend_payload_len <span style="color:#f92672">=</span> None
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">6</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">6</span>:]
+
+    bytes_list <span style="color:#f92672">=</span> bytearray()
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(decoded)):
+        chunk <span style="color:#f92672">=</span> decoded[i] <span style="color:#f92672">^</span> mask[i <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>]
+        bytes_list<span style="color:#f92672">.</span>append(chunk)
+     <span style="color:#66d9ef">print</span>(bytes_list<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+</code></pre></div><h2 id="25-交互">2.5 交互</h2>
+<p>数据包是解析出来了，想要回复，那么还需要构建websocket应答包才行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_msg</span>(conn, msg_bytes):
+    <span style="color:#f92672">import</span> struct
+ 
+    token <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x81</span><span style="color:#e6db74">&#34;</span>
+    length <span style="color:#f92672">=</span> len(msg_bytes)
+    <span style="color:#66d9ef">if</span> length <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">126</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;B&#34;</span>, length)
+    <span style="color:#66d9ef">elif</span> length <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0xFFFF</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;!BH&#34;</span>, <span style="color:#ae81ff">126</span>, length)
+    <span style="color:#66d9ef">else</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;!BQ&#34;</span>, <span style="color:#ae81ff">127</span>, length)
+ 
+    msg <span style="color:#f92672">=</span> token <span style="color:#f92672">+</span> msg_bytes
+    conn<span style="color:#f92672">.</span>send(msg)
+    <span style="color:#66d9ef">return</span> True
+</code></pre></div><p>同样是也根据Payload len来构建，那么客户端如何接受呢？(仅为了理解过程)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">&lt;</span>script type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;application/javascript&#34;</span><span style="color:#f92672">&gt;</span>
+    var socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebSocket<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ws://127.0.0.1:8080&#34;</span><span style="color:#f92672">);</span>
+    socket<span style="color:#f92672">.</span><span style="color:#a6e22e">onmessage</span> <span style="color:#f92672">=</span> function <span style="color:#f92672">(</span>ev<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>   <span style="color:#75715e">/* ev.data就是返回的数据 */</span>
+        console<span style="color:#f92672">.</span><span style="color:#a6e22e">log</span><span style="color:#f92672">(</span>ev<span style="color:#f92672">.</span><span style="color:#a6e22e">data</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">&lt;/</span>script<span style="color:#f92672">&gt;</span>
+</code></pre></div><h2 id="26-完整的代码">2.6 完整的代码</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> base64
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> hashlib
+
+<span style="color:#75715e"># 将header转换成字典</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_header</span>(data):
+    res <span style="color:#f92672">=</span> {}
+    request_data <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+    header, body <span style="color:#f92672">=</span> request_data<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#39;</span>)
+    header_list <span style="color:#f92672">=</span> header<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(header_list)):
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">if</span> len(header_list[i]<span style="color:#f92672">.</span>split()) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+                res[<span style="color:#e6db74">&#39;method&#39;</span>], res[<span style="color:#e6db74">&#39;url&#39;</span>], res[<span style="color:#e6db74">&#39;protocol&#39;</span>] <span style="color:#f92672">=</span> header_list[i]<span style="color:#f92672">.</span>split()
+        <span style="color:#66d9ef">else</span>:
+            key, value <span style="color:#f92672">=</span> header_list[i]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;:&#39;</span>, <span style="color:#ae81ff">1</span>)
+            res[key] <span style="color:#f92672">=</span> value<span style="color:#f92672">.</span>strip()
+    <span style="color:#66d9ef">return</span> res
+
+<span style="color:#75715e"># 发送数据时构建websocket包</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_msg</span>(conn, msg_bytes):
+    <span style="color:#f92672">import</span> struct
+
+    token <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x81</span><span style="color:#e6db74">&#34;</span>
+    length <span style="color:#f92672">=</span> len(msg_bytes)
+    <span style="color:#66d9ef">if</span> length <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">126</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;B&#34;</span>, length)
+    <span style="color:#66d9ef">elif</span> length <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0xFFFF</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;!BH&#34;</span>, <span style="color:#ae81ff">126</span>, length)
+    <span style="color:#66d9ef">else</span>:
+        token <span style="color:#f92672">+=</span> struct<span style="color:#f92672">.</span>pack(<span style="color:#e6db74">&#34;!BQ&#34;</span>, <span style="color:#ae81ff">127</span>, length)
+
+    msg <span style="color:#f92672">=</span> token <span style="color:#f92672">+</span> msg_bytes
+    conn<span style="color:#f92672">.</span>send(msg)
+    <span style="color:#66d9ef">return</span> True
+
+
+server_ip <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>, <span style="color:#ae81ff">8080</span>)
+server <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+server<span style="color:#f92672">.</span>bind(server_ip)
+server<span style="color:#f92672">.</span>listen(<span style="color:#ae81ff">5</span>)
+
+sock, client_addr <span style="color:#f92672">=</span> server<span style="color:#f92672">.</span>accept()
+data <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1024</span>, <span style="color:#ae81ff">0</span>)
+header <span style="color:#f92672">=</span> get_header(data)
+
+<span style="color:#75715e"># magic_string 及加密</span>
+magic_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&#39;</span>
+res_str <span style="color:#f92672">=</span> header[<span style="color:#e6db74">&#39;Sec-WebSocket-Key&#39;</span>] <span style="color:#f92672">+</span> magic_string
+<span style="color:#66d9ef">print</span>()
+res_data <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>b64encode(hashlib<span style="color:#f92672">.</span>sha1(res_str<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))<span style="color:#f92672">.</span>digest())
+
+<span style="color:#75715e"># 固定的头部信息</span>
+response_tpl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HTTP/1.1 101 Switching Protocols</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Upgrade:websocket</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Connection: Upgrade</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;Sec-WebSocket-Accept: {}</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span> \
+               <span style="color:#e6db74">&#34;WebSocket-Location: ws://{}:{}</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(res_data<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>), <span style="color:#f92672">*</span>server_ip)
+<span style="color:#75715e"># 发送握手信息</span>
+sock<span style="color:#f92672">.</span>sendall(response_tpl<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+
+
+<span style="color:#75715e"># 收发数据阶段</span>
+<span style="color:#66d9ef">while</span> True:
+    info <span style="color:#f92672">=</span> sock<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">8096</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> info: <span style="color:#66d9ef">break</span>
+    payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">127</span>  <span style="color:#75715e"># 通过位运算得到payload_len长度</span>
+    <span style="color:#66d9ef">if</span> payload_len <span style="color:#f92672">==</span> <span style="color:#ae81ff">126</span>:
+        extend_payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>]
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">8</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">8</span>:]
+    <span style="color:#66d9ef">elif</span> payload_len <span style="color:#f92672">==</span> <span style="color:#ae81ff">127</span>:
+        extend_payload_len <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>]
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">10</span>:<span style="color:#ae81ff">14</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">14</span>:]
+    <span style="color:#66d9ef">else</span>:
+        extend_payload_len <span style="color:#f92672">=</span> None
+        mask <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">6</span>]
+        decoded <span style="color:#f92672">=</span> info[<span style="color:#ae81ff">6</span>:]
+
+    bytes_list <span style="color:#f92672">=</span> bytearray()
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(decoded)):
+        chunk <span style="color:#f92672">=</span> decoded[i] <span style="color:#f92672">^</span> mask[i <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>]
+        bytes_list<span style="color:#f92672">.</span>append(chunk)
+    send_msg(sock, bytes_list<span style="color:#f92672">.</span>upper())
+</code></pre></div><h1 id="3-利用flask提供websocket服务">3 利用flask提供websocket服务</h1>
+<p>flask使用的werkzeug是无法解析websocket协议的，所以如果要使用flask来处理websocket请求，需要更换wsgi，这里使用<code>gevent-websocket</code>。使用前需要先安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install gevent<span style="color:#f92672">-</span>websocket 
+</code></pre></div><p>gevent-websocket主要提供了两个工具类</p>
+<ul>
+<li><code>geventwebsocket.handler.WebSocketHandler</code>：处理websocket的引擎</li>
+<li><code>gevent.pywsgi.WSGIServer</code>：wsgi，可以同时处理http请求和websocket请求</li>
+</ul>
+<p>使用方式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">http_server <span style="color:#f92672">=</span> WSGIServer((<span style="color:#e6db74">&#39;0.0.0.0&#39;</span>, <span style="color:#ae81ff">5000</span>), app, handler_class<span style="color:#f92672">=</span>WebSocketHandler)  <span style="color:#75715e"># 绑定监听地址，应用，处理请求的类</span>
+http_server<span style="color:#f92672">.</span>serve_forever()   <span style="color:#75715e"># 启动服务</span>
+</code></pre></div><p>如果客户端使用websocket协议请求时，WebSocketHandler会帮我们处理，并封装在request对象的<code>wsgi.websocket</code>中，如果我们通过request[&lsquo;wsgi.websocket&rsquo;]获取到None，那么表示当前请求非websocket请求，否则就是websocket的连接对象。我们可以通过这个对象与客户端进行收发数据。</p>
+<ul>
+<li>ws_obj.reveice()：接受数据</li>
+<li>ws_obj.send(): 发送数据</li>
+</ul>
+<p>通过websocket实现在线投票显示代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> uuid
+
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, request, render_template, session, redirect, jsonify
+<span style="color:#f92672">from</span> gevent.pywsgi <span style="color:#f92672">import</span> WSGIServer
+<span style="color:#f92672">from</span> geventwebsocket.handler <span style="color:#f92672">import</span> WebSocketHandler
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+app<span style="color:#f92672">.</span>secret_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;asas1212asa&#39;</span>
+USER_LIST <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;1&#39;</span>: {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;宝哥&#39;</span>, <span style="color:#e6db74">&#39;count&#39;</span>: <span style="color:#ae81ff">0</span>},
+    <span style="color:#e6db74">&#39;2&#39;</span>: {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;史哥&#39;</span>, <span style="color:#e6db74">&#39;count&#39;</span>: <span style="color:#ae81ff">0</span>},
+    <span style="color:#e6db74">&#39;3&#39;</span>: {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;可欣&#39;</span>, <span style="color:#e6db74">&#39;count&#39;</span>: <span style="color:#ae81ff">0</span>}
+}
+
+CLIENT_LIST <span style="color:#f92672">=</span> {}
+
+
+<span style="color:#a6e22e">@app.before_request</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">auth</span>():
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>path <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/login&#39;</span> <span style="color:#f92672">or</span> request<span style="color:#f92672">.</span>path <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/alert&#39;</span>:
+        <span style="color:#66d9ef">return</span> None
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;user_id&#39;</span>):
+        <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/login&#39;</span>)
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/login&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;get&#39;</span>, <span style="color:#e6db74">&#39;post&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
+        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;login.html&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        user_id <span style="color:#f92672">=</span> str(uuid<span style="color:#f92672">.</span>uuid4())
+        session[<span style="color:#e6db74">&#39;user_id&#39;</span>] <span style="color:#f92672">=</span> user_id
+        <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">&#39;/index&#39;</span>)
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/index&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;index.html&#39;</span>, user_list<span style="color:#f92672">=</span>USER_LIST)
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/message&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">message</span>():
+    res <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;type&#39;</span>: <span style="color:#e6db74">&#39;vote&#39;</span>, <span style="color:#e6db74">&#39;data&#39;</span>: None}
+    ws <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;wsgi.websocket&#39;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ws:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;请使用WebSocket协议访问&#39;</span>
+    user <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;user_id&#39;</span>)
+    CLIENT_LIST[user] <span style="color:#f92672">=</span> ws
+    <span style="color:#66d9ef">while</span> True:
+        user_id <span style="color:#f92672">=</span> ws<span style="color:#f92672">.</span>receive()
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> user_id:
+            <span style="color:#66d9ef">del</span> CLIENT_LIST[user]
+            <span style="color:#66d9ef">break</span>
+        old_count <span style="color:#f92672">=</span> USER_LIST[user_id][<span style="color:#e6db74">&#39;count&#39;</span>]
+        new_count <span style="color:#f92672">=</span> old_count <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+        USER_LIST[user_id][<span style="color:#e6db74">&#39;count&#39;</span>] <span style="color:#f92672">=</span> new_count
+        res[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;user_id&#39;</span>: user_id, <span style="color:#e6db74">&#39;count&#39;</span>: new_count}
+        <span style="color:#66d9ef">for</span> ws <span style="color:#f92672">in</span> CLIENT_LIST<span style="color:#f92672">.</span>values():
+            ws<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(res))
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;close&#39;</span>
+
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/alert&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">alert</span>():
+    ret <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;type&#39;</span>: <span style="color:#e6db74">&#39;alert&#39;</span>}
+    <span style="color:#66d9ef">for</span> ws <span style="color:#f92672">in</span> CLIENT_LIST<span style="color:#f92672">.</span>values():
+        ws<span style="color:#f92672">.</span>send(json<span style="color:#f92672">.</span>dumps(ret))
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;ok&#39;</span>
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    server_ip <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;172.16.104.139&#39;</span>, <span style="color:#ae81ff">8080</span>)
+    http_server <span style="color:#f92672">=</span> WSGIServer(server_ip, app, handler_class<span style="color:#f92672">=</span>WebSocketHandler)
+    http_server<span style="color:#f92672">.</span>serve_forever()
+
+</code></pre></div><p>前端代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">!</span>DOCTYPE html<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>html lang<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>head<span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>meta charset<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span>title<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">基于</span>websocket投票系统<span style="color:#f92672">&lt;/</span>title<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>head<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>body<span style="color:#f92672">&gt;</span>
+
+<span style="color:#f92672">&lt;</span>h1<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">西三旗最帅的男人</span><span style="color:#f92672">&lt;/</span>h1<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>ul<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> id,user <span style="color:#f92672">in</span> user_list<span style="color:#f92672">.</span>items() <span style="color:#f92672">%</span>}
+        <span style="color:#f92672">&lt;</span>li style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;margin-top: 10px&#34;</span> id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;user_{{ id }}&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">候选人：</span>{{ user<span style="color:#f92672">.</span>name }} <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">票数：</span><span style="color:#f92672">&lt;</span>span<span style="color:#f92672">&gt;</span> {{ user<span style="color:#f92672">.</span>count }}<span style="color:#f92672">&lt;/</span>span<span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;</span>button onclick<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vote(&#39;{{ id }}&#39;)&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">点击投票</span><span style="color:#f92672">&lt;/</span>button<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;/</span>li<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+<span style="color:#f92672">&lt;/</span>ul<span style="color:#f92672">&gt;</span>
+
+<span style="color:#f92672">&lt;</span>h2<span style="color:#f92672">&gt;</span><span style="color:#960050;background-color:#1e0010">当前在线用户</span><span style="color:#f92672">&lt;/</span>h2<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>ul id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;client&#34;</span><span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> <span style="color:#66d9ef">for</span> client <span style="color:#f92672">in</span> clients <span style="color:#f92672">%</span>}
+        <span style="color:#f92672">&lt;</span>li<span style="color:#f92672">&gt;</span> {{ client }}<span style="color:#f92672">&lt;/</span>li<span style="color:#f92672">&gt;</span>
+    {<span style="color:#f92672">%</span> endfor <span style="color:#f92672">%</span>}
+<span style="color:#f92672">&lt;/</span>ul<span style="color:#f92672">&gt;</span>
+
+
+<span style="color:#f92672">&lt;</span>script src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;static&#39;,filename=&#39;jquery-3.3.1.min.js&#39;) }}&#34;</span><span style="color:#f92672">&gt;&lt;/</span>script<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;</span>script<span style="color:#f92672">&gt;</span>
+    var socket <span style="color:#f92672">=</span> new WebSocket(<span style="color:#e6db74">&#39;ws://172.16.104.139:8080/message&#39;</span>);
+
+    socket<span style="color:#f92672">.</span>onmessage <span style="color:#f92672">=</span> function (ev) {
+        var res <span style="color:#f92672">=</span> JSON<span style="color:#f92672">.</span>parse(ev<span style="color:#f92672">.</span>data);
+        <span style="color:#66d9ef">if</span> (res<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;vote&#39;</span>) {
+            var liid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#user_&#39;</span> <span style="color:#f92672">+</span> res<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>user_id;
+            <span style="color:#960050;background-color:#1e0010">$</span>(liid)<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;span&#39;</span>)<span style="color:#f92672">.</span>text(res<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>count);
+        } <span style="color:#66d9ef">else</span> {
+            alert(<span style="color:#e6db74">&#39;弹窗走一波......&#39;</span>)
+        }
+
+    };
+
+    function vote(user_id) {
+        socket<span style="color:#f92672">.</span>send(user_id)
+    }
+<span style="color:#f92672">&lt;/</span>script<span style="color:#f92672">&gt;</span>
+
+<span style="color:#f92672">&lt;/</span>body<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;/</span>html<span style="color:#f92672">&gt;</span>
+</code></pre></div><p><a href="http://www.cnblogs.com/wupeiqi/p/6558766.html">websocket参考</a></p>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="4-内置结构-元组-字符串">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/4-logging%E6%A8%A1%E5%9D%97/" title="4-logging模块">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

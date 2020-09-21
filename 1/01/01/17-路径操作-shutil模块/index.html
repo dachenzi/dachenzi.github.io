@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>17-路径操作-shutil模块  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="17-路径操作-shutil模块  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "17-路径操作-shutil模块",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  1194 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>17-路径操作-shutil模块
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 6 min
+  &middot; (1194 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C">1 路径操作</a>
+<ul>
+<li><a href="#11-ospath%E6%A8%A1%E5%9D%97">1.1 os.path模块</a></li>
+<li><a href="#12-pathlib%E6%A8%A1%E5%9D%97">1.2 pathlib模块</a>
+<ul>
+<li><a href="#121-%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C">1.2.1 目录操作</a>
+<ul>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E8%B7%AF%E5%BE%84%E5%AF%B9%E8%B1%A1">初始化(一个路径对象)</a></li>
+<li><a href="#%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E5%92%8C%E5%88%86%E8%A7%A3">路径拼接和分解</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84">获取路径</a></li>
+<li><a href="#%E7%88%B6%E7%9B%AE%E5%BD%95">父目录</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86">目录的组成部分</a></li>
+<li><a href="#%E5%85%A8%E5%B1%80%E6%96%B9%E6%B3%95%E5%8F%8A%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95">全局方法及判断方法</a></li>
+<li><a href="#%E9%80%9A%E9%85%8D%E7%AC%A6">通配符</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95%E5%B1%9E%E6%80%A7">目录属性</a></li>
+</ul>
+</li>
+<li><a href="#122-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">1.2.2 文件操作</a></li>
+</ul>
+</li>
+<li><a href="#13-os-%E6%A8%A1%E5%9D%97">1.3 os 模块</a></li>
+</ul>
+</li>
+<li><a href="#2-shutil%E6%A8%A1%E5%9D%97">2 shutil模块</a>
+<ul>
+<li><a href="#21-copy%E5%A4%8D%E5%88%B6">2.1 copy复制</a></li>
+<li><a href="#22-rm%E5%88%A0%E9%99%A4">2.2 rm删除</a></li>
+<li><a href="#23-move%E7%A7%BB%E5%8A%A8">2.3 move移动</a></li>
+<li><a href="#24-%E6%89%93%E5%8C%85">2.4 打包</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-路径操作">1 路径操作</h1>
+<p>        使用Python操作文件系统时,少不了会对路径进行切换,对目录的遍历,以及获取文件的绝对路径的一系列的操作,Python内置了相关的模块完成对应的功能,其中:</p>
+<ul>
+<li>3.4 以前使用os.path模块</li>
+<li>3.4 开始使用pathlib模块</li>
+</ul>
+<h2 id="11-ospath模块">1.1 os.path模块</h2>
+<p>        os.path是os模块中的一个比较重要的用来拼接、判断路径的主要方法，它主要有如下方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74">&#39;dir/file&#39;</span>)    <span style="color:#960050;background-color:#1e0010">获取</span>dir<span style="color:#f92672">/</span>file的绝对路径
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;path&#39;</span>)          <span style="color:#960050;background-color:#1e0010">把路径分割为目录和文件名组成的元组格式，不管</span>path是否存在
+os<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;path&#39;</span>)             <span style="color:#960050;background-color:#1e0010">获取文件的父目录名称，不管</span>path是否存在
+os<span style="color:#f92672">.</span>basename(<span style="color:#e6db74">&#39;path&#39;</span>)            <span style="color:#960050;background-color:#1e0010">获取文件的名称，不管</span>path是否存在
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;path&#39;</span>)         <span style="color:#960050;background-color:#1e0010">判断</span>path是否存在,<span style="color:#66d9ef">return</span> bool
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isabs(<span style="color:#e6db74">&#39;path&#39;</span>)          <span style="color:#960050;background-color:#1e0010">判断</span>path是否是从根开始,<span style="color:#66d9ef">return</span> bool
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isfile(<span style="color:#e6db74">&#39;path&#39;</span>)         <span style="color:#960050;background-color:#1e0010">判断</span>path是否是一个文件
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>isdir(<span style="color:#e6db74">&#39;path&#39;</span>)          <span style="color:#960050;background-color:#1e0010">判断</span>path是否是一个目录
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;path1&#39;</span>,<span style="color:#e6db74">&#39;path2&#39;</span>,<span style="color:#e6db74">&#39;path3&#39;</span>)<span style="color:#960050;background-color:#1e0010">：把</span>path1和path2及path3进行组合<span style="color:#960050;background-color:#1e0010">，但如果</span>path2中包含了根路径<span style="color:#960050;background-color:#1e0010">，那么就会舍弃</span>path1,<span style="color:#960050;background-color:#1e0010">从</span>path2开始组合
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getatime(<span style="color:#e6db74">&#39;path&#39;</span>)       <span style="color:#960050;background-color:#1e0010">获取文件的</span>atime时间<span style="color:#960050;background-color:#1e0010">，返回时间戳</span>
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getmtime(<span style="color:#e6db74">&#39;path&#39;</span>)       <span style="color:#960050;background-color:#1e0010">获取文件的</span>mtime时间<span style="color:#960050;background-color:#1e0010">，返回时间戳</span>
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getsize(filename)      <span style="color:#960050;background-color:#1e0010">获取文件的大小，单位是字节</span>
+</code></pre></div><blockquote>
+<p>Linux下：从/开始,Windows下从C,D,E盘开始</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: <span style="color:#f92672">import</span> os                                                            
+
+In [<span style="color:#ae81ff">2</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;sysconfig&#39;</span>,<span style="color:#e6db74">&#39;network-scripts&#39;</span>)                   
+Out[<span style="color:#ae81ff">2</span>]: <span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>
+
+In [<span style="color:#ae81ff">3</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;/sysconfig&#39;</span>,<span style="color:#e6db74">&#39;network-scripts&#39;</span>)                  
+Out[<span style="color:#ae81ff">3</span>]: <span style="color:#e6db74">&#39;/sysconfig/network-scripts&#39;</span>
+
+In [<span style="color:#ae81ff">8</span>]: p <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;sysconfig&#39;</span>,<span style="color:#e6db74">&#39;network-scripts&#39;</span>)               
+
+In [<span style="color:#ae81ff">9</span>]: p                                                                    
+Out[<span style="color:#ae81ff">9</span>]: <span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>
+
+In [<span style="color:#ae81ff">10</span>]: type(p)                                                             
+Out[<span style="color:#ae81ff">10</span>]: str
+
+In [<span style="color:#ae81ff">12</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(p)                                                   
+Out[<span style="color:#ae81ff">12</span>]: True
+
+In [<span style="color:#ae81ff">13</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>split(p)                                                    
+Out[<span style="color:#ae81ff">13</span>]: (<span style="color:#e6db74">&#39;/etc/sysconfig&#39;</span>, <span style="color:#e6db74">&#39;network-scripts&#39;</span>)
+
+In [<span style="color:#ae81ff">14</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74">&#39;.&#39;</span>)                                                
+Out[<span style="color:#ae81ff">14</span>]: <span style="color:#e6db74">&#39;/home/python/py368&#39;</span>
+
+In [<span style="color:#ae81ff">16</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(p)                                                  
+Out[<span style="color:#ae81ff">16</span>]: <span style="color:#e6db74">&#39;/etc/sysconfig&#39;</span>
+
+In [<span style="color:#ae81ff">17</span>]: os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(p)                                                 
+Out[<span style="color:#ae81ff">17</span>]: <span style="color:#e6db74">&#39;network-scripts&#39;</span>
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>splitdrive(<span style="color:#e6db74">&#39;c:/etc/sysconfig/network-script&#39;</span>)   <span style="color:#75715e"># windows </span>
+(<span style="color:#e6db74">&#39;c:&#39;</span>, <span style="color:#e6db74">&#39;/etc/sysconfig/network-script&#39;</span>)
+</code></pre></div><blockquote>
+<p>__file__：变量比较特殊，存放的是当前的Python文件的名称，我们可以使用os.path.abspath(<strong>file</strong>)来获取当前python文件的绝对路径，然后进行打包或者进行相对调用。</p>
+</blockquote>
+<h2 id="12-pathlib模块">1.2 pathlib模块</h2>
+<p>        3.4以后建议使用pathlib模块，它提供Path对象来对路径进行操作，还包括了目录和文件。</p>
+<blockquote>
+<p>在使用时需要实现导入： from pathlib import Path</p>
+</blockquote>
+<h3 id="121-目录操作">1.2.1 目录操作</h3>
+<p>下面来说一下日常的目录相关操作</p>
+<h4 id="初始化一个路径对象">初始化(一个路径对象)</h4>
+<p>通过构建一个Path对象来对路径进行初始化</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+In [<span style="color:#ae81ff">19</span>]: <span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path                                            
+In [<span style="color:#ae81ff">20</span>]: p <span style="color:#f92672">=</span> Path()  <span style="color:#75715e"># 当前目录                                              </span>
+In [<span style="color:#ae81ff">21</span>]: p1 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;a&#39;</span>,<span style="color:#e6db74">&#39;b&#39;</span>,<span style="color:#e6db74">&#39;c&#39;</span>)   <span style="color:#75715e"># 当前目录下的a/b/c                                            </span>
+In [<span style="color:#ae81ff">22</span>]: p2 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;sysconfig&#39;</span>,<span style="color:#e6db74">&#39;network-scripts&#39;</span>)  <span style="color:#75715e"># /etc/sysconfig/network-scripts</span>
+
+In [<span style="color:#ae81ff">23</span>]: p                                                                   
+Out[<span style="color:#ae81ff">23</span>]: PosixPath(<span style="color:#e6db74">&#39;.&#39;</span>)
+
+In [<span style="color:#ae81ff">24</span>]: p1                                                                  
+Out[<span style="color:#ae81ff">24</span>]: PosixPath(<span style="color:#e6db74">&#39;a/b/c&#39;</span>)
+
+In [<span style="color:#ae81ff">25</span>]: p2                                                                  
+Out[<span style="color:#ae81ff">25</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>)
+
+</code></pre></div><h4 id="路径拼接和分解">路径拼接和分解</h4>
+<p><code>/</code>: Path对象支持使用<code>/</code>来进行路径的拼接，拼接规则应遵循：</p>
+<ul>
+<li>Path对象 / Path对象</li>
+<li>Path对象 / 字符串 或者 字符串 / Path对象</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">30</span>]: p2 <span style="color:#f92672">/</span> <span style="color:#e6db74">&#39;ifcfg-eth0&#39;</span>                                                   
+Out[<span style="color:#ae81ff">30</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifcfg-eth0&#39;</span>)
+
+In [<span style="color:#ae81ff">35</span>]: p2 <span style="color:#f92672">/</span> p1                                                             
+Out[<span style="color:#ae81ff">35</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/a/b/c&#39;</span>)
+
+In [<span style="color:#ae81ff">37</span>]: <span style="color:#e6db74">&#39;/root&#39;</span> <span style="color:#f92672">/</span> p2                                                        
+Out[<span style="color:#ae81ff">37</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>)
+</code></pre></div><p>需要注意的是：</p>
+<ol>
+<li>拼接的顺序和路径的顺序是一致的</li>
+<li>p1 是相对路径，而p2是从根开始，如果p1/p2 那么返回的将会是p2</li>
+<li>如果当 字符串 / Path对象这种格式时，如果Path对象是一个绝对路径，那么将无法进行拼接</li>
+</ol>
+<p><code>parts属性</code>: 将Path对象按照当前操作系统的分隔符进行分割返回一个元组</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">39</span>]: p2<span style="color:#f92672">.</span>parts                                                            
+Out[<span style="color:#ae81ff">39</span>]: (<span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#e6db74">&#39;etc&#39;</span>, <span style="color:#e6db74">&#39;sysconfig&#39;</span>, <span style="color:#e6db74">&#39;network-scripts&#39;</span>)
+</code></pre></div><p><code>joinpath(*other)</code>: 在Path对象中使用当前操作系统的路径分隔符分割并追加多个字符串。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">43</span>]: p2<span style="color:#f92672">.</span>joinpath(<span style="color:#e6db74">&#39;/etc&#39;</span>)                                                 
+Out[<span style="color:#ae81ff">43</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc&#39;</span>)
+
+In [<span style="color:#ae81ff">44</span>]: p2<span style="color:#f92672">.</span>joinpath(<span style="color:#e6db74">&#39;etc&#39;</span>)                                                  
+Out[<span style="color:#ae81ff">44</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/etc&#39;</span>)
+
+In [<span style="color:#ae81ff">50</span>]: p2<span style="color:#f92672">.</span>joinpath(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;/proc&#39;</span>)                                        
+Out[<span style="color:#ae81ff">50</span>]: PosixPath(<span style="color:#e6db74">&#39;/proc&#39;</span>)
+</code></pre></div><p>需要注意的是：</p>
+<ol>
+<li>如果添加的的路径都为/开始，那么最后添加的路径将会覆盖前面所有添加的路径字符串</li>
+</ol>
+<h4 id="获取路径">获取路径</h4>
+<p>        Path返回的是一个路径对象，那么如何才可以只打印路径的字符串格式呢，我们可以通过<code>str(Path对象)</code>进行转换，当需要bytes格式时，也可以使用<code>bytes(Path对象)</code>转换。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">51</span>]: bytes(p2)                                                           
+Out[<span style="color:#ae81ff">51</span>]: <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>
+
+In [<span style="color:#ae81ff">52</span>]: str(p2)                                                             
+Out[<span style="color:#ae81ff">52</span>]: <span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>
+</code></pre></div><h4 id="父目录">父目录</h4>
+<p><code>parent</code>: 当前目录的逻辑父目录<br>
+<code>parents</code>: 所以父目录的序列，索引0时为当前目录的父目录，依次类推</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">53</span>]: p2<span style="color:#f92672">.</span>parent                                                           
+Out[<span style="color:#ae81ff">53</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig&#39;</span>)
+
+In [<span style="color:#ae81ff">54</span>]: p2<span style="color:#f92672">.</span>parent<span style="color:#f92672">.</span>parent                                                    
+Out[<span style="color:#ae81ff">54</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc&#39;</span>)
+
+In [<span style="color:#ae81ff">55</span>]: p2<span style="color:#f92672">.</span>parent<span style="color:#f92672">.</span>parent<span style="color:#f92672">.</span>parent    <span style="color:#75715e"># 链式操作                                         </span>
+Out[<span style="color:#ae81ff">55</span>]: PosixPath(<span style="color:#e6db74">&#39;/&#39;</span>)
+
+In [<span style="color:#ae81ff">57</span>]: p2<span style="color:#f92672">.</span>parents                                                          
+Out[<span style="color:#ae81ff">57</span>]: <span style="color:#f92672">&lt;</span>PosixPath<span style="color:#f92672">.</span>parents<span style="color:#f92672">&gt;</span>   <span style="color:#75715e"># 可迭代对象</span>
+
+In [<span style="color:#ae81ff">58</span>]: list(p2<span style="color:#f92672">.</span>parents)                                                    
+Out[<span style="color:#ae81ff">58</span>]: [PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig&#39;</span>), PosixPath(<span style="color:#e6db74">&#39;/etc&#39;</span>), PosixPath(<span style="color:#e6db74">&#39;/&#39;</span>)]
+
+In [<span style="color:#ae81ff">59</span>]:     
+</code></pre></div><blockquote>
+<p>parent属性，看似支持类js的链式操作，主要还是因为每次使用parent属性时，返回的还是一个Path对象，所以才可以一直parent下去。</p>
+</blockquote>
+<h4 id="目录的组成部分">目录的组成部分</h4>
+<p>        在一个目录的绝对路径中我们可能会单独使用目录的名称、目录的后缀名等等，Path对象提供了专门的属性及方法便于获取或者对它们进行修改。</p>
+<ul>
+<li><code>name</code>: 目录的最后一个部分</li>
+<li><code>suffix</code>：目录中最后一个部分的扩展名</li>
+<li><code>stem</code>：目录中最后一个部分，不包含后缀名</li>
+<li><code>suffixes</code>: 多个后缀名形成的列表</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">1</span>]: <span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path                                             
+
+In [<span style="color:#ae81ff">2</span>]: p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/tmp/mysql.tar.gz&#39;</span>)                                        
+
+In [<span style="color:#ae81ff">3</span>]: p<span style="color:#f92672">.</span>name                                                               
+Out[<span style="color:#ae81ff">3</span>]: <span style="color:#e6db74">&#39;mysql.tar.gz&#39;</span>
+
+In [<span style="color:#ae81ff">4</span>]: p<span style="color:#f92672">.</span>suffix                                                             
+Out[<span style="color:#ae81ff">4</span>]: <span style="color:#e6db74">&#39;.gz&#39;</span>  
+
+In [<span style="color:#ae81ff">5</span>]: p<span style="color:#f92672">.</span>stem                                                               
+Out[<span style="color:#ae81ff">5</span>]: <span style="color:#e6db74">&#39;mysql.tar&#39;</span>
+
+In [<span style="color:#ae81ff">6</span>]: p<span style="color:#f92672">.</span>suffixes                                                           
+Out[<span style="color:#ae81ff">6</span>]: [<span style="color:#e6db74">&#39;.tar&#39;</span>, <span style="color:#e6db74">&#39;.gz&#39;</span>]
+</code></pre></div><ul>
+<li><code>with_suffix(suffix)</code>: 有扩展名则替换，无则补充扩展名(注意后缀名要加点)</li>
+<li><code>with_name(name)</code>：替换目录最后一个部分并返回一个新的路径</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">9</span>]: p                                                                    
+Out[<span style="color:#ae81ff">9</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/mysql.tar.gz&#39;</span>)
+
+In [<span style="color:#ae81ff">10</span>]: p<span style="color:#f92672">.</span>with_suffix(<span style="color:#e6db74">&#39;.abc&#39;</span>)                                               
+Out[<span style="color:#ae81ff">10</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/mysql.tar.abc&#39;</span>)
+
+In [<span style="color:#ae81ff">11</span>]: p1 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/tmp/nginx&#39;</span>)                                             
+
+In [<span style="color:#ae81ff">12</span>]: p1<span style="color:#f92672">.</span>with_suffix(<span style="color:#e6db74">&#39;.abc&#39;</span>)                                              
+Out[<span style="color:#ae81ff">12</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/nginx.abc&#39;</span>)
+
+In [<span style="color:#ae81ff">15</span>]: p                                                                   
+Out[<span style="color:#ae81ff">15</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/mysql.tar.gz&#39;</span>)
+
+In [<span style="color:#ae81ff">16</span>]: p<span style="color:#f92672">.</span>with_name(<span style="color:#e6db74">&#39;nginx.tar.gz&#39;</span>)                                         
+Out[<span style="color:#ae81ff">16</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/nginx.tar.gz&#39;</span>)
+</code></pre></div><h4 id="全局方法及判断方法">全局方法及判断方法</h4>
+<ul>
+<li><code>cwd()</code>: 返回当前工作目录</li>
+<li><code>home()</code>: 返回当前家目录</li>
+<li><code>is_dir()</code>: 是否是目录，是目录且存在，则返回True</li>
+<li><code>is_file()</code>: 是否是普通文件，是文件且存在，则返回True</li>
+<li><code>is_symlink()</code>: 是否是阮链接</li>
+<li><code>is_socket()</code>: 是否是socket文件</li>
+<li><code>is_block_device()</code>: 是否是块设备</li>
+<li><code>is_char_device()</code>: 是否是字符设备</li>
+<li><code>is_absolute()</code>: 是否是绝对路径</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">34</span>]: p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;sysconfig&#39;</span>)                                            
+
+In [<span style="color:#ae81ff">35</span>]: p2 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;hosts&#39;</span>)                                               
+
+In [<span style="color:#ae81ff">36</span>]: p3 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/etc&#39;</span>,<span style="color:#e6db74">&#39;rc.d&#39;</span>,<span style="color:#e6db74">&#39;rc3.d&#39;</span>,<span style="color:#e6db74">&#39;S10network&#39;</span>)                           
+
+In [<span style="color:#ae81ff">37</span>]: p<span style="color:#f92672">.</span>is_dir()                                                              
+Out[<span style="color:#ae81ff">37</span>]: True
+
+In [<span style="color:#ae81ff">38</span>]: p1<span style="color:#f92672">.</span>is_file()                                                            
+Out[<span style="color:#ae81ff">38</span>]: False
+
+In [<span style="color:#ae81ff">39</span>]: p2<span style="color:#f92672">.</span>is_file()                                                            
+Out[<span style="color:#ae81ff">39</span>]: True
+
+In [<span style="color:#ae81ff">44</span>]: p3<span style="color:#f92672">.</span>is_symlink()                                                         
+Out[<span style="color:#ae81ff">44</span>]: True
+
+In [<span style="color:#ae81ff">45</span>]: p<span style="color:#f92672">.</span>is_absolute()                                                         
+Out[<span style="color:#ae81ff">45</span>]: True 
+</code></pre></div><ul>
+<li><code>resolve()</code>: 返回当前Path对象的绝对路径。如果是软连接，则直接被解析</li>
+<li><code>absolute()</code>: 获取Path对象的绝对路径</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">28</span>]: p3 <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;hosts&#39;</span>)                                                      
+
+In [<span style="color:#ae81ff">29</span>]: p3                                                                      
+Out[<span style="color:#ae81ff">29</span>]: PosixPath(<span style="color:#e6db74">&#39;hosts&#39;</span>)
+
+In [<span style="color:#ae81ff">30</span>]: p3<span style="color:#f92672">.</span>resolve()          <span style="color:#75715e"># 软链接的真正路径                                                    </span>
+Out[<span style="color:#ae81ff">30</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/hosts&#39;</span>)
+
+In [<span style="color:#ae81ff">31</span>]: p3<span style="color:#f92672">.</span>absolute()         <span style="color:#75715e"># 软链接的绝对路径                                                 </span>
+Out[<span style="color:#ae81ff">31</span>]: PosixPath(<span style="color:#e6db74">&#39;/home/python/py368/hosts&#39;</span>)
+</code></pre></div><ul>
+<li><code>exists()</code>: 文件或者目录是否存在</li>
+<li><code>rmdir()</code>: 删除空目录(没有提供目录为空的方法)</li>
+<li><code>touch(mode=0o666，exist_ok=False)</code>: 创建一个文件
+<ul>
+<li><code>mode</code>: 文件的属性，默认为666</li>
+<li><code>exist_ok</code>: 在3.5版本加入，False时，路径存在，抛出FileExistsError;True时，异常将被忽略</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">47</span>]: p <span style="color:#f92672">=</span> Path(<span style="color:#e6db74">&#39;/tmp&#39;</span>,<span style="color:#e6db74">&#39;hello.py&#39;</span>)                                                                                                         
+In [<span style="color:#ae81ff">49</span>]: p<span style="color:#f92672">.</span>exists()                                                              
+Out[<span style="color:#ae81ff">49</span>]: False
+
+In [<span style="color:#ae81ff">50</span>]: p<span style="color:#f92672">.</span>touch(mode<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>o666,exist_ok<span style="color:#f92672">=</span>False)                                      
+
+In [<span style="color:#ae81ff">51</span>]: p<span style="color:#f92672">.</span>exists()                                                              
+Out[<span style="color:#ae81ff">51</span>]: True
+
+In [<span style="color:#ae81ff">52</span>]: p<span style="color:#f92672">.</span>touch(mode<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>o666,exist_ok<span style="color:#f92672">=</span>False)                                      
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+FileExistsError                           Traceback (most recent call last)
+<span style="color:#f92672">...</span>
+FileExistsError: [Errno <span style="color:#ae81ff">17</span>] File exists: <span style="color:#e6db74">&#39;/tmp/hello.py&#39;</span>
+
+In [<span style="color:#ae81ff">53</span>]:  
+</code></pre></div><ul>
+<li>as_uri(): 将路径返回成URI</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">56</span>]: p2<span style="color:#f92672">.</span>as_uri()                                                             
+Out[<span style="color:#ae81ff">56</span>]: <span style="color:#e6db74">&#39;file:///etc/hosts&#39;</span>
+</code></pre></div><ul>
+<li><code>mkdir(mode=0o777,parents=False,exist_ok=False)</code>: 创建一个目录
+<ul>
+<li><code>parents</code>：是否创建父目录，True等同于<code>mkdir -p</code>, False时，父目录不存在曝出FileNotFoundError</li>
+<li><code>exist_ok</code>: 在3.5版本加入，False时，路径存在，抛出FileExistsError;True时，异常将被忽略</li>
+</ul>
+</li>
+<li><code>iterdir()</code>: 迭代当前目录，不递归。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">74</span>]: <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> p4<span style="color:#f92672">.</span>parents[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>iterdir(): 
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">if</span> x<span style="color:#f92672">.</span>is_dir(): 
+    <span style="color:#f92672">...</span>:         flag <span style="color:#f92672">=</span> False 
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> x<span style="color:#f92672">.</span>iterdir(): 
+    <span style="color:#f92672">...</span>:             flag <span style="color:#f92672">=</span> True 
+    <span style="color:#f92672">...</span>:             <span style="color:#66d9ef">break</span> 
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;dir: {} , is {}&#39;</span><span style="color:#f92672">.</span>format(x,<span style="color:#e6db74">&#39;not empty &#39;</span> <span style="color:#66d9ef">if</span> flag <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;empt</span>
+    <span style="color:#f92672">...</span>: y<span style="color:#e6db74">&#39; )) </span>
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">elif</span> x<span style="color:#f92672">.</span>is_file(): 
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} is a file&#39;</span><span style="color:#f92672">.</span>format(x)) 
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">else</span>: 
+    <span style="color:#f92672">...</span>:         <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;other file&#39;</span>)
+</code></pre></div><blockquote>
+<p>判断文件类型，当文件为目录时，判断其是否为空目录。</p>
+</blockquote>
+<h4 id="通配符">通配符</h4>
+<ul>
+<li><code>glob(partten)</code>: 在<code>目录下</code>通配给定的格式</li>
+<li><code>rglob(partten)</code>: 在<code>目录下</code>递归通配给定的格式(递归目录)</li>
+<li><code>match(partten)</code>: 模式匹配(对当前Path对象进行匹配)，成功返回True
+支持的通配符与Linux下相同：</li>
+<li>？ 表示一个字符</li>
+<li>* 表示任意个字符</li>
+<li>[abc]或[a-z] 表示区间内的任意一个字符</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">84</span>]: p4                                                                      
+Out[<span style="color:#ae81ff">84</span>]: PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts&#39;</span>)
+
+In [<span style="color:#ae81ff">85</span>]: list(p4<span style="color:#f92672">.</span>glob(<span style="color:#e6db74">&#39;ifu?-*&#39;</span>))                                                 
+Out[<span style="color:#ae81ff">85</span>]: 
+[PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-aliases&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-bnep&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-eth&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-ippp&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-ipv6&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-isdn&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-plip&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-plusb&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-post&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-ppp&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-routes&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-sit&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-tunnel&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-wireless&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-ib&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-Team&#39;</span>),
+ PosixPath(<span style="color:#e6db74">&#39;/etc/sysconfig/network-scripts/ifup-TeamPort&#39;</span>)]
+
+In [<span style="color:#ae81ff">87</span>]: p4<span style="color:#f92672">.</span>match(<span style="color:#e6db74">&#39;/etc/*/network-script?&#39;</span>)                                      
+Out[<span style="color:#ae81ff">87</span>]: True
+</code></pre></div><h4 id="目录属性">目录属性</h4>
+<ul>
+<li><code>stat()</code>: 查看目录的详细信息，相当于stat命令</li>
+<li><code>lstat()</code>: 如果是符号链接，则显示符号链接本身的文件信息</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">88</span>]: p4<span style="color:#f92672">.</span>stat()                                                               
+Out[<span style="color:#ae81ff">88</span>]: os<span style="color:#f92672">.</span>stat_result(st_mode<span style="color:#f92672">=</span><span style="color:#ae81ff">16877</span>, st_ino<span style="color:#f92672">=</span><span style="color:#ae81ff">67533402</span>, st_dev<span style="color:#f92672">=</span><span style="color:#ae81ff">2050</span>, st_nlink<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, st_uid<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, st_gid<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, st_size<span style="color:#f92672">=</span><span style="color:#ae81ff">4096</span>, st_atime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550229289</span>, st_mtime<span style="color:#f92672">=</span><span style="color:#ae81ff">1545830238</span>, st_ctime<span style="color:#f92672">=</span><span style="color:#ae81ff">1545830238</span>)
+</code></pre></div><h3 id="122-文件操作">1.2.2 文件操作</h3>
+<p>        Path对象同样提供了打开文件的函数，功能类似于内建函数open。返回一个文件对象。当我们创建一个Path对象时，这个文件已经被打开，当我们写入数据时，文件不存在会新建，重名或者是目录，会有相应的异常提示，它的语法是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Path<span style="color:#f92672">.</span>open(mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>,buffering<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>,encoding<span style="color:#f92672">=</span>None,errors<span style="color:#f92672">=</span>None,newline<span style="color:#f92672">=</span>None)
+</code></pre></div><p>例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">115</span>]: p5                                                                     
+Out[<span style="color:#ae81ff">115</span>]: PosixPath(<span style="color:#e6db74">&#39;/tmp/123&#39;</span>)
+
+In [<span style="color:#ae81ff">116</span>]: p <span style="color:#f92672">=</span> p5<span style="color:#f92672">.</span>open(mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)                                                  
+
+In [<span style="color:#ae81ff">117</span>]: p                                                                      
+Out[<span style="color:#ae81ff">117</span>]: <span style="color:#f92672">&lt;</span>_io<span style="color:#f92672">.</span>TextIOWrapper name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/tmp/123&#39;</span> mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span> encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;UTF-8&#39;</span><span style="color:#f92672">&gt;</span>
+
+In [<span style="color:#ae81ff">118</span>]: p<span style="color:#f92672">.</span>read()                                                               
+Out[<span style="color:#ae81ff">118</span>]: <span style="color:#e6db74">&#39;123&#39;</span>
+
+In [<span style="color:#ae81ff">119</span>]: p5<span style="color:#f92672">.</span>read_text()     <span style="color:#75715e"># 不存在时报异常，存在则直接打开并读取                                                      </span>
+Out[<span style="color:#ae81ff">119</span>]: <span style="color:#e6db74">&#39;123&#39;</span>
+
+</code></pre></div><p>3.5以后新增加的函数方法：</p>
+<ul>
+<li><code>Path.read_bytes()</code>: 以&rsquo;rb&rsquo;方式读取路径对应文件，并返回二进制流。</li>
+<li><code>Path.read_text()</code>: 以&rsquo;rt&rsquo;方式读取路径文件， 并返回文件。<strong>无视指针</strong></li>
+<li><code>Path.write_bytes()</code>: 以&rsquo;wb&rsquo;方式写入数据到路径对应文件中。</li>
+<li><code>Path.write_text()</code>: 以&rsquo;wt&rsquo;方式写入数据到路径对应文件中。</li>
+</ul>
+<h2 id="13-os-模块">1.3 os 模块</h2>
+<p>os模块的常用方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">os<span style="color:#f92672">.</span>getcwd():        <span style="color:#960050;background-color:#1e0010">获取当前路径</span>
+os<span style="color:#f92672">.</span>chdir()<span style="color:#960050;background-color:#1e0010">：</span>        <span style="color:#960050;background-color:#1e0010">切换当前目录，当路径中存在</span>\<span style="color:#960050;background-color:#1e0010">的时候，由于是转意的意思，那么就需要对</span>\<span style="color:#960050;background-color:#1e0010">进行转意，那么路径就是</span>c:\\User,<span style="color:#960050;background-color:#1e0010">或者在目录前面加</span>r<span style="color:#960050;background-color:#1e0010">，表示后面的字符串不进行解释</span>
+os<span style="color:#f92672">.</span>curdir():        <span style="color:#960050;background-color:#1e0010">获取当前目录名</span>
+os<span style="color:#f92672">.</span>pardir():        <span style="color:#960050;background-color:#1e0010">获取上级目录名</span>
+os<span style="color:#f92672">.</span>mkdir(<span style="color:#e6db74">&#39;dir&#39;</span>):    <span style="color:#960050;background-color:#1e0010">创建目录，注意只能创建一级目录</span>
+os<span style="color:#f92672">.</span>makedirs(<span style="color:#e6db74">&#39;dir_path&#39;</span>):<span style="color:#960050;background-color:#1e0010">创建多级目录</span>
+os<span style="color:#f92672">.</span>rmdir(<span style="color:#e6db74">&#39;dir&#39;</span>):    <span style="color:#960050;background-color:#1e0010">删除一个目录</span>
+os<span style="color:#f92672">.</span>removedir(<span style="color:#e6db74">&#39;dir_path&#39;</span>)<span style="color:#960050;background-color:#1e0010">：删除多级目录（目录为空的话）</span>
+os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;dir&#39;</span>):  <span style="color:#960050;background-color:#1e0010">显示目录下的所有文件</span>,<span style="color:#960050;background-color:#1e0010">默认为当前目录</span>,<span style="color:#960050;background-color:#1e0010">返回的结果为</span>list
+os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;file&#39;</span>):  <span style="color:#960050;background-color:#1e0010">删除一个文件</span>
+os<span style="color:#f92672">.</span>rename(<span style="color:#e6db74">&#39;old_name&#39;</span>,<span style="color:#e6db74">&#39;new_name&#39;</span>):<span style="color:#960050;background-color:#1e0010">修改文件名称</span>
+os<span style="color:#f92672">.</span>stat(<span style="color:#e6db74">&#39;file/dir&#39;</span>)<span style="color:#960050;background-color:#1e0010">：获取文件</span><span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">目录的</span>stat信息(<span style="color:#960050;background-color:#1e0010">调用的是系统的</span>stat)
+os<span style="color:#f92672">.</span>sep:             <span style="color:#960050;background-color:#1e0010">返回当前操作系统的路径分隔符</span>(Windows下<span style="color:#960050;background-color:#1e0010">：</span>\\ , Linux下:<span style="color:#f92672">/</span><span style="color:#960050;background-color:#1e0010">）</span>
+os<span style="color:#f92672">.</span>linesep:         <span style="color:#960050;background-color:#1e0010">返回当前操作系统的换行符（</span>Windows下:\r\n  ,Linux下:\n<span style="color:#960050;background-color:#1e0010">）</span>
+os<span style="color:#f92672">.</span>pathsep:         <span style="color:#960050;background-color:#1e0010">返回当前操作系统环境变量分隔符（</span>Windows下是; ,Linux下是:<span style="color:#960050;background-color:#1e0010">）</span>
+os<span style="color:#f92672">.</span>name:            <span style="color:#960050;background-color:#1e0010">返回当前系统的类型（</span>nt <span style="color:#960050;background-color:#1e0010">表示</span>Windows,  posix表示Linux<span style="color:#960050;background-color:#1e0010">）</span>
+os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;Commmand&#39;</span>):<span style="color:#960050;background-color:#1e0010">执行命令</span>
+os<span style="color:#f92672">.</span>environ:         <span style="color:#960050;background-color:#1e0010">获取系统环境变量，使用字典存储</span>
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(<span style="color:#e6db74">&#39;dir/file&#39;</span>):<span style="color:#960050;background-color:#1e0010">获取</span>dir<span style="color:#f92672">/</span>file的绝对路径
+os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;path&#39;</span>):<span style="color:#960050;background-color:#1e0010">把路径分割为目录和文件名组成的元组格式，不管</span>path是否存在
+os<span style="color:#f92672">.</span>dirname(<span style="color:#e6db74">&#39;path&#39;</span>)<span style="color:#960050;background-color:#1e0010">：获取文件的父目录名称，不管</span>path是否存在
+os<span style="color:#f92672">.</span>basename(<span style="color:#e6db74">&#39;path&#39;</span>):<span style="color:#960050;background-color:#1e0010">获取文件的名称，不管</span>path是否存在
+</code></pre></div><blockquote>
+<p>os.stat(follow_symlinks=True)，返回源文件本身信息，False时，显示链接文件的信息,对于软连接本身，还可以使用os.lstat方法</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">133</span>]: os<span style="color:#f92672">.</span>lstat(<span style="color:#e6db74">&#39;hosts&#39;</span>)                                                      
+Out[<span style="color:#ae81ff">133</span>]: os<span style="color:#f92672">.</span>stat_result(st_mode<span style="color:#f92672">=</span><span style="color:#ae81ff">41471</span>, st_ino<span style="color:#f92672">=</span><span style="color:#ae81ff">2083428</span>, st_dev<span style="color:#f92672">=</span><span style="color:#ae81ff">2050</span>, st_nlink<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, st_uid<span style="color:#f92672">=</span><span style="color:#ae81ff">1001</span>, st_gid<span style="color:#f92672">=</span><span style="color:#ae81ff">1001</span>, st_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, st_atime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259162</span>, st_mtime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259161</span>, st_ctime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259161</span>)
+
+In [<span style="color:#ae81ff">134</span>]: os<span style="color:#f92672">.</span>stat(<span style="color:#e6db74">&#39;hosts&#39;</span>)                                                       
+Out[<span style="color:#ae81ff">134</span>]: os<span style="color:#f92672">.</span>stat_result(st_mode<span style="color:#f92672">=</span><span style="color:#ae81ff">33188</span>, st_ino<span style="color:#f92672">=</span><span style="color:#ae81ff">67245317</span>, st_dev<span style="color:#f92672">=</span><span style="color:#ae81ff">2050</span>, st_nlink<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, st_uid<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, st_gid<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, st_size<span style="color:#f92672">=</span><span style="color:#ae81ff">158</span>, st_atime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550229294</span>, st_mtime<span style="color:#f92672">=</span><span style="color:#ae81ff">1370615492</span>, st_ctime<span style="color:#f92672">=</span><span style="color:#ae81ff">1545666279</span>)
+
+In [<span style="color:#ae81ff">136</span>]: os<span style="color:#f92672">.</span>stat(<span style="color:#e6db74">&#39;hosts&#39;</span>,follow_symlinks<span style="color:#f92672">=</span>False)      <span style="color:#75715e"># 等同于os.lstat()                            </span>
+Out[<span style="color:#ae81ff">136</span>]: os<span style="color:#f92672">.</span>stat_result(st_mode<span style="color:#f92672">=</span><span style="color:#ae81ff">41471</span>, st_ino<span style="color:#f92672">=</span><span style="color:#ae81ff">2083428</span>, st_dev<span style="color:#f92672">=</span><span style="color:#ae81ff">2050</span>, st_nlink<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, st_uid<span style="color:#f92672">=</span><span style="color:#ae81ff">1001</span>, st_gid<span style="color:#f92672">=</span><span style="color:#ae81ff">1001</span>, st_size<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, st_atime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259162</span>, st_mtime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259161</span>, st_ctime<span style="color:#f92672">=</span><span style="color:#ae81ff">1550259161</span>)
+
+In [<span style="color:#ae81ff">137</span>]:    
+</code></pre></div><h1 id="2-shutil模块">2 shutil模块</h1>
+<p>        根据前面所学的知识，我们如果想要进行文件拷贝，需要先打开两个文件对象对象，源文件读取内容，写入到目标文件中去。 这种方式虽然完成了文件的拷贝，但是却丢失了文件的属性信息，比如属组、权限等，因为我们根本没有进行复制。所以，python提供了一个用于高级文件操作的库，它的名字就叫做shutil。</p>
+<h2 id="21-copy复制">2.1 copy复制</h2>
+<ul>
+<li><code>shutil.copyfileobj(fsrc,fdes,length)</code>: 将文件内容拷贝到另一个文件中，可以只拷贝部分内容，需要我们自行打开文件对象进行copy,length表示buffer的大小，需要注意的是fdes必须可写</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> os<span style="color:#f92672">,</span>shutil
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls&#39;</span>)
+<span style="color:#ae81ff">1.</span>txt
+<span style="color:#f92672">&gt;&gt;&gt;</span> shutil<span style="color:#f92672">.</span>copyfileobj(open(<span style="color:#e6db74">&#39;1.txt&#39;</span>),open(<span style="color:#e6db74">&#39;2.txt&#39;</span>,<span style="color:#e6db74">&#39;w&#39;</span>))
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls&#39;</span>)
+<span style="color:#ae81ff">1.</span>txt  <span style="color:#ae81ff">2.</span>txt
+<span style="color:#f92672">&gt;&gt;&gt;</span> 
+</code></pre></div><ul>
+<li><code>shutil.copyfile(fsrc,fdes)</code>: 复制文件，我们只需要传入文件名称即可进行复制，不用自行预先打开，等于创建一个新的文件，把老文件写入到新文件中然后关闭，新创建的文件权限和属主等信息遵循操作系统规定(本质上还是调用copyfileobj)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> shutil<span style="color:#f92672">.</span>copyfile(<span style="color:#e6db74">&#39;1.txt&#39;</span>,<span style="color:#e6db74">&#39;3.txt&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls&#39;</span>)
+<span style="color:#ae81ff">1.</span>txt  <span style="color:#ae81ff">2.</span>txt  <span style="color:#ae81ff">3.</span>txt
+</code></pre></div><ul>
+<li><code>shutil.copymode(src,des)</code>: 复制文件权限，既把src文件的权限复制给 des文件，只改变权限，不改变其他比如属组，内容等(des文件必须存在)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls -l&#39;</span>)
+total <span style="color:#ae81ff">12</span>
+<span style="color:#f92672">-</span>rwxrwxrwx <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">35</span> <span style="color:#ae81ff">1.</span>txt
+<span style="color:#f92672">-</span>rw<span style="color:#f92672">-</span>r<span style="color:#f92672">--</span>r<span style="color:#f92672">--</span> <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">36</span> <span style="color:#ae81ff">2.</span>txt
+<span style="color:#f92672">-</span>rw<span style="color:#f92672">-</span>r<span style="color:#f92672">--</span>r<span style="color:#f92672">--</span> <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">38</span> <span style="color:#ae81ff">3.</span>txt
+<span style="color:#f92672">&gt;&gt;&gt;</span> shutil<span style="color:#f92672">.</span>copymode(<span style="color:#e6db74">&#39;1.txt&#39;</span>,<span style="color:#e6db74">&#39;2.txt&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls -l&#39;</span>)
+total <span style="color:#ae81ff">12</span>
+<span style="color:#f92672">-</span>rwxrwxrwx <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">35</span> <span style="color:#ae81ff">1.</span>txt
+<span style="color:#f92672">-</span>rwxrwxrwx <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">36</span> <span style="color:#ae81ff">2.</span>txt
+<span style="color:#f92672">-</span>rw<span style="color:#f92672">-</span>r<span style="color:#f92672">--</span>r<span style="color:#f92672">--</span> <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">6</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">38</span> <span style="color:#ae81ff">3.</span>txt
+<span style="color:#f92672">&gt;&gt;&gt;</span> 
+</code></pre></div><ul>
+<li><code>shutil.copystat(src,des)</code>: 复制文件的权限，还包括，atime，mtime，flags等信息，不改变文件内容（des需存在）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;stat 1.txt&#39;</span>)
+  File: <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#ae81ff">1.</span>txt<span style="color:#e6db74">&#39;</span>
+  Size: <span style="color:#ae81ff">6</span>             Blocks: <span style="color:#ae81ff">8</span>          IO Block: <span style="color:#ae81ff">4096</span>   regular file
+Device: fd00h<span style="color:#f92672">/</span><span style="color:#ae81ff">64768</span>d    Inode: <span style="color:#ae81ff">926326</span>      Links: <span style="color:#ae81ff">1</span>
+Access: (<span style="color:#ae81ff">0777</span><span style="color:#f92672">/-</span>rwxrwxrwx)  Uid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)   Gid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)
+Access: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">36</span>:<span style="color:#ae81ff">59.223738919</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Modify: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">35</span>:<span style="color:#ae81ff">23.148738381</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Change: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">39</span>:<span style="color:#ae81ff">59.061738605</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;stat 3.txt&#39;</span>)
+  File: <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#ae81ff">3.</span>txt<span style="color:#e6db74">&#39;</span>
+  Size: <span style="color:#ae81ff">6</span>             Blocks: <span style="color:#ae81ff">8</span>          IO Block: <span style="color:#ae81ff">4096</span>   regular file
+Device: fd00h<span style="color:#f92672">/</span><span style="color:#ae81ff">64768</span>d    Inode: <span style="color:#ae81ff">940237</span>      Links: <span style="color:#ae81ff">1</span>
+Access: (<span style="color:#ae81ff">0644</span><span style="color:#f92672">/-</span>rw<span style="color:#f92672">-</span>r<span style="color:#f92672">--</span>r<span style="color:#f92672">--</span>)  Uid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)   Gid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)
+Access: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">39</span>:<span style="color:#ae81ff">42.214738376</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Modify: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">38</span>:<span style="color:#ae81ff">13.862738316</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Change: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">38</span>:<span style="color:#ae81ff">13.862738316</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> shutil<span style="color:#f92672">.</span>copystat(<span style="color:#e6db74">&#39;1.txt&#39;</span>,<span style="color:#e6db74">&#39;3.txt&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;stat 3.txt&#39;</span>)
+  File: <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#ae81ff">3.</span>txt<span style="color:#e6db74">&#39;</span>
+  Size: <span style="color:#ae81ff">6</span>             Blocks: <span style="color:#ae81ff">8</span>          IO Block: <span style="color:#ae81ff">4096</span>   regular file
+Device: fd00h<span style="color:#f92672">/</span><span style="color:#ae81ff">64768</span>d    Inode: <span style="color:#ae81ff">940237</span>      Links: <span style="color:#ae81ff">1</span>
+Access: (<span style="color:#ae81ff">0777</span><span style="color:#f92672">/-</span>rwxrwxrwx)  Uid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)   Gid: (    <span style="color:#ae81ff">0</span><span style="color:#f92672">/</span>    root)
+Access: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">36</span>:<span style="color:#ae81ff">59.223738000</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Modify: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">35</span>:<span style="color:#ae81ff">23.148738000</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+Change: <span style="color:#ae81ff">2017</span><span style="color:#f92672">-</span><span style="color:#ae81ff">03</span><span style="color:#f92672">-</span><span style="color:#ae81ff">09</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">44</span>:<span style="color:#ae81ff">33.286738354</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">0800</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> 
+</code></pre></div><ul>
+<li><code>shutil.copy(src,des)</code>: 复制文件的同时复制权限信息,等同于执行了如下命令:
+<ol>
+<li><strong>shutil.copyfile(src,dest,follow_symlinks=True)</strong></li>
+<li><strong>shutil.copymode(src,dest,follow_symlinks=True)</strong></li>
+</ol>
+</li>
+<li><code>shutil.copy2(src,des)</code>: 比copy对了全部原数据，但需要平台支持,等同于执行了如下命令:
+<ol>
+<li><strong>shutil.copyfile(src,dest,follow_symlinks=True)</strong></li>
+<li><strong>shutil.copystat(src,dest,follow_symlinks=True)</strong></li>
+</ol>
+</li>
+<li><code>shutil.copytree(src,dest,symlinks=False,ignore=None,copy_function=copy2,ignore_dangling_symlinks=False)</code>: 递归复制文件，类似于copy -r，默认使用copy2
+<ul>
+<li>src必须存在，dest必须不存在。</li>
+<li><code>ignore = func</code>, 提供一个callable(src,namnes) &ndash;&gt; ignoted_names。提供一个函数，它会被调用。src是原目录，names是原目录下的文件列表(os.listdir(src))，返回值是要被过滤的文件名的set类型数据</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">146</span>]: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(src,names): 
+     <span style="color:#f92672">...</span>:     ig <span style="color:#f92672">=</span> filter(<span style="color:#66d9ef">lambda</span> x: <span style="color:#f92672">not</span> x<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;conf&#39;</span>),names) 
+     <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">return</span> set(ig)
+
+In [<span style="color:#ae81ff">164</span>]: os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;old&#39;</span>)                                                      
+Out[<span style="color:#ae81ff">164</span>]: 
+[<span style="color:#e6db74">&#39;123.txt&#39;</span>,
+ <span style="color:#e6db74">&#39;456.txt&#39;</span>,
+ <span style="color:#e6db74">&#39;asound.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;brltty.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;chrony.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;dleyna-server-service.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;dnsmasq.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;dracut.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;e2fsck.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;fprintd.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;fuse.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;GeoIP.conf&#39;</span>,
+ <span style="color:#e6db74">&#39;host.conf&#39;</span>]
+
+In [<span style="color:#ae81ff">161</span>]: shutil<span style="color:#f92672">.</span>copytree(<span style="color:#e6db74">&#39;old&#39;</span>,<span style="color:#e6db74">&#39;new&#39;</span>,ignore<span style="color:#f92672">=</span>func)                               
+Out[<span style="color:#ae81ff">161</span>]: <span style="color:#e6db74">&#39;new&#39;</span>
+
+In [<span style="color:#ae81ff">163</span>]: os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;new&#39;</span>)                                                      
+Out[<span style="color:#ae81ff">163</span>]: [<span style="color:#e6db74">&#39;123.txt&#39;</span>, <span style="color:#e6db74">&#39;456.txt&#39;</span>]
+</code></pre></div><blockquote>
+<p>shutil模块自己也实现了一个过滤某些特征的方法，<code>shutil.ignore_patterns('*py')</code>，表示过滤*py的文件。</p>
+</blockquote>
+<h2 id="22-rm删除">2.2 rm删除</h2>
+<ul>
+<li><code>shutil.rmtree(path, ignore_errors=False, onerror=None)</code>: 递归的删除文件，类似于rm -rf，需要注意的是它不是原子操作，如果删除错误，就会中断，已经删除的就删除了。
+<ul>
+<li>ignore_errors：为True时，忽略错误。 为omitted/False时，onerror生效</li>
+<li>onerror为callabe，接受三个参数function、path和sys.exc_info。(不常用)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls -l&#39;</span>)
+total <span style="color:#ae81ff">8</span>
+drwxr<span style="color:#f92672">-</span>xr<span style="color:#f92672">-</span>x <span style="color:#ae81ff">2</span> root root <span style="color:#ae81ff">4096</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">46</span> test
+drwxr<span style="color:#f92672">-</span>xr<span style="color:#f92672">-</span>x <span style="color:#ae81ff">2</span> root root <span style="color:#ae81ff">4096</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">46</span> test1
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> shutil<span style="color:#f92672">.</span>rmtree(<span style="color:#e6db74">&#39;test1&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> os<span style="color:#f92672">.</span>system(<span style="color:#e6db74">&#39;ls -l&#39;</span>)
+total <span style="color:#ae81ff">4</span>
+drwxr<span style="color:#f92672">-</span>xr<span style="color:#f92672">-</span>x <span style="color:#ae81ff">2</span> root root <span style="color:#ae81ff">4096</span> Mar  <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">18</span>:<span style="color:#ae81ff">46</span> test
+<span style="color:#f92672">&gt;&gt;&gt;</span> 
+</code></pre></div><h2 id="23-move移动">2.3 move移动</h2>
+<ul>
+<li><code>shutil.move(src,des,copy_function=copy2)</code>: 递归移动文件、目录到目标、返回目标，类似于mv 命令，本身使用的是os.rename方法，如果不支持rename，如果是目录则copytree再删除原目录。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">3</span>]: <span style="color:#f92672">import</span> shutil                                                                                                            
+In [<span style="color:#ae81ff">4</span>]: ls                                                                                                                       
+new<span style="color:#f92672">/</span>  old<span style="color:#f92672">/</span>
+
+In [<span style="color:#ae81ff">5</span>]: shutil<span style="color:#f92672">.</span>move(<span style="color:#e6db74">&#39;new&#39;</span>,<span style="color:#e6db74">&#39;/tmp/new&#39;</span>)                                                                                            
+Out[<span style="color:#ae81ff">5</span>]: <span style="color:#e6db74">&#39;/tmp/new&#39;</span>
+
+In [<span style="color:#ae81ff">6</span>]: ls                                                                                                                       
+old<span style="color:#f92672">/</span>
+
+In [<span style="color:#ae81ff">7</span>]: shutil<span style="color:#f92672">.</span>move(<span style="color:#e6db74">&#39;old&#39;</span>,<span style="color:#e6db74">&#39;new_old&#39;</span>)                                                                                             
+Out[<span style="color:#ae81ff">7</span>]: <span style="color:#e6db74">&#39;new_old&#39;</span>
+</code></pre></div><h2 id="24-打包">2.4 打包</h2>
+<ul>
+<li><code>shutil.make_archive(base_name, format, root_dir=None, base_dir=None, verbose=0, owner=None, group=None, )</code>: 打包压缩,支持&quot;zip&quot;, &ldquo;tar&rdquo;, &ldquo;gztar&rdquo;,&ldquo;bztar&rdquo;, or &ldquo;xztar&rdquo;
+<ul>
+<li>base_name: 打包后的包名</li>
+<li>format：打包/压缩的格式，gztar就是tar.gz</li>
+<li>root_dir: 要打包的目录</li>
+<li>owner：包的属主</li>
+<li>group：包的属组</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">14</span>]: shutil<span style="color:#f92672">.</span>make_archive(<span style="color:#e6db74">&#39;abc&#39;</span>,<span style="color:#e6db74">&#39;gztar&#39;</span>,root_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;new_old&#39;</span>)                                                                   
+Out[<span style="color:#ae81ff">14</span>]: <span style="color:#e6db74">&#39;/home/python/py368/abc.tar.gz&#39;</span>
+
+In [<span style="color:#ae81ff">15</span>]: ls                                                                                                                      
+<span style="color:#ae81ff">123</span><span style="color:#f92672">/</span>  abc<span style="color:#f92672">.</span>tar<span style="color:#f92672">.</span>gz  new_old<span style="color:#f92672">/</span>
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" title="18-csv文件-ini文件处理">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/" title="16-文件操作-StringIO-BytesIO">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

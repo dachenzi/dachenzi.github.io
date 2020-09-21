@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2-用户注册接口设计与实现  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="2-用户注册接口设计与实现  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/2-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "2-用户注册接口设计与实现",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  522 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/2-%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>2-用户注册接口设计与实现
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 3 min
+  &middot; (522 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#1-%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0">1 注册接口设计与实现</a>
+<ul>
+<li><a href="#11-%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE">1.1 路由配置</a></li>
+<li><a href="#12-%E6%B6%89%E5%8F%8A%E7%9F%A5%E8%AF%86">1.2 涉及知识</a>
+<ul>
+<li><a href="#121-csrf-token">1.2.1 csrf token</a></li>
+<li><a href="#122-%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86">1.2.2 密码加密</a>
+<ul>
+<li><a href="#1221-%E5%AE%89%E8%A3%85bcrypt">1.2.2.1 安装bcrypt</a></li>
+<li><a href="#1222-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">1.2.2.2 基本使用</a></li>
+</ul>
+</li>
+<li><a href="#123-jwt">1.2.3 JWT</a>
+<ul>
+<li><a href="#1231-%E4%BC%A0%E7%BB%9F%E7%9A%84session-cookie%E6%9C%BA%E5%88%B6">1.2.3.1 传统的session-cookie机制</a></li>
+<li><a href="#1232-%E6%97%A0session%E6%96%B9%E6%A1%88">1.2.3.2 无session方案</a></li>
+<li><a href="#1233-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">1.2.3.3 基本使用</a></li>
+<li><a href="#1234-jwt%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">1.2.3.4 Jwt使用场景</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#13-%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99">1.3 视图函数编写</a>
+<ul>
+<li><a href="#131-%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99">1.3.1 工具函数编写</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="1-注册接口设计与实现">1 注册接口设计与实现</h1>
+<p>由于我们现阶段还没有web页面，为了方便测试，这里使用postman来发起http的请求，注册接口使用json作为认证及返回的数据格式</p>
+<h2 id="11-路由配置">1.1 路由配置</h2>
+<p>不同应用的路由应该由应用自行处理，所以在blog项目的urls文件中，使用include来分发路由</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url, include
+<span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> admin
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^user/&#39;</span>, include(<span style="color:#e6db74">&#39;user.urls&#39;</span>)),  <span style="color:#75715e"># /user/ 分发给user.urls</span>
+    url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;^post/&#39;</span>, include(<span style="color:#e6db74">&#39;post.urls&#39;</span>))   <span style="color:#75715e"># /post/ 分发给post.urls</span>
+]
+</code></pre></div><p>user.urls的配置：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.conf.urls <span style="color:#f92672">import</span> url
+<span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> views
+
+urlpatterns <span style="color:#f92672">=</span> [
+    url(<span style="color:#e6db74">&#39;^register&#39;</span>, views<span style="color:#f92672">.</span>register),   <span style="color:#75715e"># 指定 /user/register 的处理函数</span>
+    url(<span style="color:#e6db74">&#39;^login&#39;</span>, views<span style="color:#f92672">.</span>login)   <span style="color:#75715e"># 指定 /user/login 的处理函数</span>
+]
+</code></pre></div><h2 id="12-涉及知识">1.2 涉及知识</h2>
+<p>下面对用户注册中遇到的其他知识进行说明</p>
+<h3 id="121-csrf-token">1.2.1 csrf token</h3>
+<p>django中，通过使用 django.middleware.csrf.CsrfViewMiddleware 中间件来对CSRF进行验证的。</p>
+<ul>
+<li>如果是用django的template来渲染页面时，我们可以在使用render返回页面中，在form的表单内使用{% csrf_toke %} 来返回并渲染。</li>
+<li>如果是前后端分离项目，我们可以专门写一个接口，给前端界面在网页渲染时，发送ajax异步请求，来获取csrf_token</li>
+<li>关闭cstf_token</li>
+</ul>
+<p>通过接口返回csrf_token，在视图函数中返回</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_token</span>(request):
+    token <span style="color:#f92672">=</span> django<span style="color:#f92672">.</span>middleware<span style="color:#f92672">.</span>csrf<span style="color:#f92672">.</span>get_token(request)
+    <span style="color:#66d9ef">return</span> JsonResponse({<span style="color:#e6db74">&#39;token&#39;</span>: token})
+</code></pre></div><p>获取到csrf_token以后，可以在post数据时添加到header中发送，注意key的名称为<code>X-CSRFToken</code></p>
+<p>关闭csrf_token</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">MIDDLEWARE <span style="color:#f92672">=</span> [
+    <span style="color:#e6db74">&#39;django.middleware.security.SecurityMiddleware&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span>,
+    <span style="color:#e6db74">&#39;django.middleware.common.CommonMiddleware&#39;</span>,
+    <span style="color:#75715e"># &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,  # 注销即关闭</span>
+    <span style="color:#e6db74">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span>,
+    <span style="color:#e6db74">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span>,
+    <span style="color:#e6db74">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span>,
+]
+</code></pre></div><p>方便起见，这里关闭csrf_token</p>
+<h3 id="122-密码加密">1.2.2 密码加密</h3>
+<p>        使用邮箱+密码方式登录。邮箱要求唯一就行了，但是密码如何存储？早期，都是明文的密码存储。后来使用MD5存储，但是目前也不安全，网上有很多MD5的网站，使用反查方式找到密码。目前大多数的使用方式是加盐，使用hash(password + salt)的结果存入数据库中，就算拿到数据库的密码反查，也没有用了。如果是固定加盐，还是容易被找到规律，或者从源码中泄露。随机加盐，每一次盐都变，就增加了破解的难度。这里我们使用bcrypt模块来完成加密与解密的过程.</p>
+<blockquote>
+<p>暴力破解，什么密码都不能保证不被暴力破解，例如穷举。所以要使用慢hash算法，例如bcrypt，就会让每一次计算都很慢，都是秒级的，这样穷举的时间就会很长，为了一个密码破解的时间在当前CPU或者GPU的计算能力下可能需要几十年以上。</p>
+</blockquote>
+<h4 id="1221-安装bcrypt">1.2.2.1 安装bcrypt</h4>
+<p>使用pip命令即可完成bcrypt模块的安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install bcrypt
+</code></pre></div><h4 id="1222-基本使用">1.2.2.2 基本使用</h4>
+<p><code>bcrypt.gensalt()</code>：获取一个盐(salt)，每次拿到的盐都不相同，如果盐相同，那么的道德结果也相同。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(bcrypt<span style="color:#f92672">.</span>gensalt()) <span style="color:#75715e"># b&#39;$2b$12$dFswcWeiCabBuoDkmcdsfO&#39;</span>
+<span style="color:#66d9ef">print</span>(bcrypt<span style="color:#f92672">.</span>gensalt()) <span style="color:#75715e"># b&#39;$2b$12$zwU9FRZ06SR5HajNe5/JUe&#39;</span>
+</code></pre></div><p><code>bcrypt.hashpw(password,bcrypt.gensalt())</code>: 通过盐对密码进行加密，密码需要是bytes格式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(bcrypt<span style="color:#f92672">.</span>hashpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, bcrypt<span style="color:#f92672">.</span>gensalt())) <span style="color:#75715e"># b&#39;$2b$12$w68zvSdjE2eb7rLaro8qtOtP1XsoawrVE.1yyjg7YsRy0q1E8pn3a&#39;</span>
+<span style="color:#66d9ef">print</span>(bcrypt<span style="color:#f92672">.</span>hashpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, bcrypt<span style="color:#f92672">.</span>gensalt())) <span style="color:#75715e"># b&#39;$2b$12$fJzdDhZ5BFsB/MgB3pVxnu72j1BFNsDg6kwvRMPr144G.2ruETPZ6&#39;</span>
+</code></pre></div><p>虽然密码相同，但由于盐不同，所以密文结果也不相同
+<code>bcrypt.checkpw(password,hash_password)</code>：校验密码，如果密码校验成功返回True，否则返回False</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">password <span style="color:#f92672">=</span> bcrypt<span style="color:#f92672">.</span>hashpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, bcrypt<span style="color:#f92672">.</span>gensalt())
+<span style="color:#66d9ef">print</span>(bcrypt<span style="color:#f92672">.</span>checkpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, password))
+</code></pre></div><p>通过下面的例子，我们知道</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+password <span style="color:#f92672">=</span> bcrypt<span style="color:#f92672">.</span>hashpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, bcrypt<span style="color:#f92672">.</span>gensalt())
+<span style="color:#66d9ef">print</span>((datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds())  <span style="color:#75715e"># 0.280215</span>
+
+start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+bcrypt<span style="color:#f92672">.</span>checkpw(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;123456&#39;</span>, password)
+<span style="color:#66d9ef">print</span>((datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds())  <span style="color:#75715e"># 0.332113</span>
+</code></pre></div><p>加解密非常耗时所以如果穷举，非常耗时。而且碰巧攻破一个密码，由于盐不一样，还
+得穷举另一个。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 密文格式简析</span>
+
+salt <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;$2b$12$jwBD7mg9stvIPydF2bqoPO&#39;</span>
+hash_pwd <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;$2b$12$jwBD7mg9stvIPydF2bqoPOodPwWYVvdmZb5uWWuWvlf9iHqNlKSQO&#39;</span>
+<span style="color:#960050;background-color:#1e0010">$是分隔符</span>
+<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">2</span>b<span style="color:#960050;background-color:#1e0010">$，加密算法</span>
+<span style="color:#ae81ff">12</span><span style="color:#960050;background-color:#1e0010">，表示</span><span style="color:#ae81ff">2</span><span style="color:#f92672">^</span><span style="color:#ae81ff">12</span> key expansion rounds
+<span style="color:#960050;background-color:#1e0010">这是盐</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;jwBD7mg9stvIPydF2bqoPO&#39;</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">22</span><span style="color:#960050;background-color:#1e0010">个字符，</span>Base64
+<span style="color:#960050;background-color:#1e0010">这是密文</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;odPwWYVvdmZb5uWWuWvlf9iHqNlKSQO&#39;</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#ae81ff">31</span><span style="color:#960050;background-color:#1e0010">个字符，</span>Base64
+</code></pre></div><h3 id="123-jwt">1.2.3 JWT</h3>
+<p>HTTP协议是无状态协议，为了解决它产生了cookie和session技术。</p>
+<h4 id="1231-传统的session-cookie机制">1.2.3.1 传统的session-cookie机制</h4>
+<p>        浏览器发起第一次请求到服务器，服务器发现浏览器没有提供session id，就认为这是第一次请求，会返回一个新的session id给浏览器端。浏览器只要不关闭，这个session id就会随着每一次请求重新发给服务器端，服务器端查找这个session id，如果查到，就认为是同一个会话。如果没有查到，就认为是新的请求。session是会话级的，可以在这个会话session中创建很多数据，连接断开session清除，包括session id。这个session id还得有过期的机制，一段时间如果没有发起请求，认为用户已经断开，就清除session。浏览器端也会清除响应的cookie信息。服务器端保存着大量session信息，很消耗服务器内存，而且如果多服务器部署，还要考虑session共享的问题，比如redis、memcached等方案。</p>
+<h4 id="1232-无session方案">1.2.3.2 无session方案</h4>
+<p>        既然服务端就是需要一个ID来表示身份，那么不使用session也可以创建一个ID返回给客户端。但是，要保证客户端不可篡改。服务端生成一个标识，并使用某种算法对标识签名。服务端收到客户端发来的标识，需要检查签名。这种方案的缺点是，加密、解密需要消耗CPU计算资源，无法让浏览器自己主动检查过期的数据以清除。这种技术称作JWT（Json WEB Token）。</p>
+<h4 id="1233-基本使用">1.2.3.3 基本使用</h4>
+<p>JWT（Json WEB Token）是一种采用Json方式安装传输信息的方式。这里使用PyJWT，它是Python对JWT的实现。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip instal pyjwt
+</code></pre></div><p><code>jwt.encode()</code>：生成token
+参数：</p>
+<ul>
+<li><code>payload</code>：封装的字典类型的信息（注意json的字符串是用双引号引起来的）</li>
+<li><code>key</code>：用于对token进行签名的密钥串（最好是复杂的密码）</li>
+<li><code>algorithm='HS256'</code>：计算token的算法</li>
+<li>headers=None</li>
+<li>json_encoder=None</li>
+</ul>
+<p>django的settings.py中存在一个常量SECRET_KEY，是一个强度很高的字符串，可以用来做JWT的密钥串.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Dahl&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span>: <span style="color:#ae81ff">20</span>}   <span style="color:#75715e"># 自定义存放用户数据的字典</span>
+jwt_token <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>encode(payload<span style="color:#f92672">=</span>payload, key<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>SECRET_KEY, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HS256&#34;</span>)
+<span style="color:#66d9ef">print</span>(jwt_token)  <span style="color:#75715e"># b&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiRGFobCIsImFnZSI6MjB9.eNN-AABay6u8Cxflvx7CGfItqBavH47mmkl6dTrxwUI&#39;</span>
+</code></pre></div><p><code>jwt.decode()</code>: 解密验证
+参数：</p>
+<ul>
+<li><code>jwt</code>：jwt_token</li>
+<li><code>key=''</code>：jwt密钥穿</li>
+<li>verify=True</li>
+<li><code>algorithms=None</code>：加密的算法，类型为list，即便是1个元素</li>
+</ul>
+<p>解密成功后，会返回加密时的payload信息，<code>否则会抛出jwt.exceptions.DecodeError异常</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">payload <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>decode(<span style="color:#f92672">+</span>jwt_token, settings<span style="color:#f92672">.</span>SECRET_KEY, algorithms<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;HS256&#39;</span>])
+<span style="color:#66d9ef">print</span>(payload)  <span style="color:#75715e"># {&#34;name&#34;: &#34;Dahl&#34;, &#34;age&#34;: 20}</span>
+</code></pre></div><p>观察jwt生成的token我们有如下发现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 使用点来分割加密后的字符串得到三段</span>
+a <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#39;</span>
+b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eyJuYW1lIjoiRGFobCIsImFnZSI6MjB9&#39;</span>
+c <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eNN-AABay6u8Cxflvx7CGfItqBavH47mmkl6dTrxwUI&#39;</span>
+</code></pre></div><p>看起来很像base64编码，不过为什么没有等号？下面来凑一下等号试试，看是否是base64的加密</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#39;</span>
+b <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eyJuYW1lIjoiRGFobCIsImFnZSI6MjB9&#39;</span>
+c <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;eNN-AABay6u8Cxflvx7CGfItqBavH47mmkl6dTrxwUI&#39;</span>
+
+<span style="color:#75715e"># 判断是否是4的倍数，然后补等号</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_bs64_str</span>(token):
+    eq_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">-</span> (len(token) <span style="color:#f92672">%</span> <span style="color:#ae81ff">4</span>)
+    <span style="color:#66d9ef">return</span> token <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;=&#39;</span> <span style="color:#f92672">*</span> eq_
+
+a <span style="color:#f92672">=</span> get_bs64_str(a)
+b <span style="color:#f92672">=</span> get_bs64_str(b)
+c <span style="color:#f92672">=</span> get_bs64_str(c)
+
+<span style="color:#66d9ef">print</span>(base64<span style="color:#f92672">.</span>urlsafe_b64decode(a))  <span style="color:#75715e"># b&#39;{&#34;typ&#34;:&#34;JWT&#34;,&#34;alg&#34;:&#34;HS256&#34;}&#39;</span>
+<span style="color:#66d9ef">print</span>(base64<span style="color:#f92672">.</span>urlsafe_b64decode(b))  <span style="color:#75715e"># b&#39;{&#34;name&#34;:&#34;Dahl&#34;,&#34;age&#34;:20}&#39;</span>
+<span style="color:#66d9ef">print</span>(base64<span style="color:#f92672">.</span>urlsafe_b64decode(c))  <span style="color:#75715e">#</span>
+</code></pre></div><p>由此，可知jwt生成的token分为三部分</p>
+<ol>
+<li>header，由数据类型、加密算法构成</li>
+<li>payload，负载就是要传输的数据，一般来说放入python对象即可，会被json序列化的</li>
+<li>signature，签名部分。是前面2部分数据分别base64编码后使用点号连接后，加密算法使用key计算好一个结果，再被base64编码，得到签名</li>
+</ol>
+<blockquote>
+<p>所有数据都是明文传输的，只是做了base64，如果是敏感信息，请不要使用jwt。数据签名的目的不是为了隐藏数据，而是保证数据不被篡改。如果数据篡改了，发回到服务器端，服务器使用自己的key再计算一遍，然后进行签名比对，一定对不上签名。</p>
+</blockquote>
+<h4 id="1234-jwt使用场景">1.2.3.4 Jwt使用场景</h4>
+<ul>
+<li><code>认证</code>：这是Jwt最常用的场景，一旦用户登录成功，就会得到Jwt，然后请求中就可以带上这个Jwt。服务器中Jwt验证通过，就可以被允许访问资源。甚至可以在不同域名中传递，在单点登录（Single Sign On）中应用广泛。</li>
+<li><code>数据交换</code>：Jwt可以防止数据被篡改，它还可以使用公钥、私钥，确保请求的发送者是可信的</li>
+</ul>
+<h2 id="13-视图函数编写">1.3 视图函数编写</h2>
+<p>先来分析一下我们需要怎么做：</p>
+<ul>
+<li>用户提交json格式的注册数据，包含用户名、密码、邮箱等信息</li>
+<li>在数据库中查询是否已存在</li>
+<li>不存在，则注册成功，返回成功信息200</li>
+<li>存在，则注册失败，返回失败信息401</li>
+</ul>
+<h3 id="131-工具函数编写">1.3.1 工具函数编写</h3>
+<p>由于jwt_token和密码的加密等可以共多个应用使用，所以这里抽出来构建工具包，在项目目录下创建common模块，创建tools.py文件用于存放这些工具函数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> base64
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> bcrypt
+<span style="color:#f92672">import</span> jwt
+<span style="color:#f92672">from</span> blog <span style="color:#f92672">import</span> settings
+
+<span style="color:#75715e"># 密码加密</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pwd_bcrypt</span>(password):
+    salt <span style="color:#f92672">=</span> bcrypt<span style="color:#f92672">.</span>gensalt()
+    pwd <span style="color:#f92672">=</span> bcrypt<span style="color:#f92672">.</span>hashpw(password<span style="color:#f92672">.</span>encode(), salt)
+    <span style="color:#66d9ef">return</span> pwd
+
+<span style="color:#75715e"># 获取jwt_token</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_token</span>(user_id):
+    payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;user_id&#39;</span>: user_id, <span style="color:#e6db74">&#39;exp&#39;</span>: int(datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>timestamp() <span style="color:#f92672">+</span> settings<span style="color:#f92672">.</span>token_expire)}
+    token <span style="color:#f92672">=</span> jwt<span style="color:#f92672">.</span>encode(payload, settings<span style="color:#f92672">.</span>SECRET_KEY, <span style="color:#e6db74">&#39;HS256&#39;</span>)
+    <span style="color:#66d9ef">return</span> token<span style="color:#f92672">.</span>decode()
+</code></pre></div><p>下面是注册接口代码,传输的json数据，这里使用simplejson来处理，基本使用方式和json模块相同</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> django.http <span style="color:#f92672">import</span> HttpResponse, HttpRequest, HttpResponseBadRequest, JsonResponse
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> simplejson
+<span style="color:#f92672">from</span> common <span style="color:#f92672">import</span> tools
+<span style="color:#f92672">from</span> user <span style="color:#f92672">import</span> models
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>(request: HttpRequest):
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
+        content_type <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>META<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;CONTENT_TYPE&#39;</span>)  
+        <span style="color:#66d9ef">try</span>:
+            <span style="color:#75715e"># 针对不同类型的数据</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;json&#39;</span> <span style="color:#f92672">in</span> content_type:
+                payload <span style="color:#f92672">=</span> simplejson<span style="color:#f92672">.</span>loads(request<span style="color:#f92672">.</span>body)
+                username <span style="color:#f92672">=</span> payload[<span style="color:#e6db74">&#39;name&#39;</span>]
+                password <span style="color:#f92672">=</span> payload[<span style="color:#e6db74">&#39;password&#39;</span>]
+                email <span style="color:#f92672">=</span> payload[<span style="color:#e6db74">&#39;email&#39;</span>]
+            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;form-data&#39;</span> <span style="color:#f92672">in</span> content_type:
+                username <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>POST<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)
+                password <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>POST<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;password&#39;</span>)
+                email <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>POST<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;email&#39;</span>)
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:   <span style="color:#75715e"># 如果提交的数据不完整直接返回400</span>
+            <span style="color:#66d9ef">print</span>(e)   
+            <span style="color:#66d9ef">return</span> HttpResponseBadRequest(<span style="color:#e6db74">&#39;Error&#39;</span>)
+        password <span style="color:#f92672">=</span> tools<span style="color:#f92672">.</span>pwd_bcrypt(password)  <span style="color:#75715e"># 对密码进行加密</span>
+        res <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(email<span style="color:#f92672">=</span>email)<span style="color:#f92672">.</span>first()  <span style="color:#75715e"># 查询用户名是否存在</span>
+
+        <span style="color:#66d9ef">if</span> res:  <span style="color:#75715e"># 用户名存在返回400</span>
+            <span style="color:#66d9ef">return</span> HttpResponseBadRequest(<span style="color:#e6db74">&#39;email is exists&#39;</span>)
+
+        <span style="color:#75715e"># 不存在则写入数据库</span>
+        user <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>User(name<span style="color:#f92672">=</span>username, password<span style="color:#f92672">=</span>password, email<span style="color:#f92672">=</span>email)
+        <span style="color:#66d9ef">try</span>:
+            user<span style="color:#f92672">.</span>save()
+            token <span style="color:#f92672">=</span> tools<span style="color:#f92672">.</span>get_token(user<span style="color:#f92672">.</span>id)  <span style="color:#75715e"># 构建jwt_token</span>
+            <span style="color:#66d9ef">return</span> JsonResponse({
+                <span style="color:#e6db74">&#39;user&#39;</span>: user<span style="color:#f92672">.</span>id,
+                <span style="color:#e6db74">&#39;token&#39;</span>: token
+            })  <span style="color:#75715e"># 返回user_id表示注册成功</span>
+        <span style="color:#66d9ef">except</span>:  <span style="color:#75715e"># 如果写入报错，那么就抛出异常</span>
+            <span style="color:#66d9ef">raise</span>
+</code></pre></div><p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" title="2-选择排序">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E6%93%8D%E4%BD%9C%E7%AC%A6-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6/" title="2-基础语法-操作符-循环控制">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

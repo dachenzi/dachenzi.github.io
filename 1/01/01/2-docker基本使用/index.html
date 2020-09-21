@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2-docker基本使用  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="2-docker基本使用  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "2-docker基本使用",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  178 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>2-docker基本使用
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 1 min
+  &middot; (178 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<h1 id="1-docker的基本结构">1 docker的基本结构</h1>
+<p>docker的架构图如下：
+<img src="../photo/docker.jpg" alt="docker"></p>
+<ul>
+<li>Client端  &ndash;&gt; docker client</li>
+<li>Hosts(Docker_Host,server端)  &ndash;&gt; docker daemon</li>
+<li>Registries  &ndash;&gt; docker registries</li>
+</ul>
+<p>        docker是一个采用C/S结构的应用程序。当我们运行docker daemon是，这台主机变成了Server端，它默认情况下通过监听socket来接受client端的请求，当然服务器端还支持其他两种类型套接字(IPv4，IPv6)，默认是unix socket套接字文件</p>
+<p>PS：docker client 到 docker Host 使用的是也是HTTPS（docker HOST 遵循Restful风格）</p>
+<p>docker中的资源和对象：（restful中的资源是可以支持增删改查的操作)</p>
+<ul>
+<li>images：镜像</li>
+<li>containers：容器</li>
+<li>networks：网络</li>
+<li>volumes：存储卷</li>
+<li>plugins：插件</li>
+</ul>
+<h2 id="11-server端">1.1 server端</h2>
+<p>        运行docker daemon的主机就变成了DOCKER_HOST主机,也就是server端，它内部主要包含两部分：</p>
+<ul>
+<li>Containers:容器</li>
+<li>Images:镜像，来自于registry，镜像仓库，默认为docker hub，初始化是空的从远端下载(HTTP,HTTPS),默认为HTTPS，除非明确确认安全。</li>
+</ul>
+<p>PS：镜像是静态的(文件)，容器是动态的，包含生命周期（类似进程）</p>
+<h2 id="12-仓库">1.2 仓库</h2>
+<p>        docker提供的公共存储空间叫做docker hub,默认情况下我们的server都是从它那来下载镜像的，但是docker称它为 registry,那么为什么不不叫repository，而叫registry呢，其实它还包含了如下功能</p>
+<ul>
+<li>镜像存储</li>
+<li>用户认证</li>
+<li>可用镜像的索引(搜索索引)</li>
+</ul>
+<p>        所以registry不仅仅是一个仓库，而是一个应用程序，包含多个仓库(repository)，一个仓库用于存放一个应用程序的镜像(一般仓库名就是应用程序名)，单个仓库加标签，唯一标示一个镜像(图)，如果没有执行标签，那么就是最新版,当然还有稳定版的标签(stable)指向对应的版本。</p>
+<h1 id="2-安装及使用docker">2 安装及使用docker</h1>
+<p>基础平台需求：</p>
+<ul>
+<li>64bits CPU</li>
+<li>Linux Kernel 3.10+</li>
+<li>Linux Kernel cgroups and namespaces</li>
+</ul>
+<p>这里使用Centos 7来安装，在centos 7的Extras repository源已经收录了docker-ce，所以只需要使用yum安装docker-ce即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install -y docker-ce
+</code></pre></div><h2 id="21-配置文件">2.1 配置文件</h2>
+<p>        docker默认配置文件是json格式的，位置为：<code>/etc/docker/daemon.json</code>,第一次启动前时不存在的，可以手动创建</p>
+<p>国内的主机访问dockerhub都很慢的，所以这里配置镜像站，来加速下载</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim /etc/docker/daemon.json
+<span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;registry-mirrors:[&#34;</span>https://xxx.com<span style="color:#e6db74">&#34;]&#34;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e"># 阿里云的需要自己注册账号来获取专属的加速链接</span>
+</code></pre></div><p>启动docker: <code>systemctl start docker.service</code></p>
+<h2 id="22-主要命令">2.2 主要命令</h2>
+<p>docker的命令主要分两类：</p>
+<ul>
+<li>杂乱无章的(早期)</li>
+<li>分类管理(后期)</li>
+</ul>
+<h3 id="221-常用操作">2.2.1 常用操作</h3>
+<p>docker image 系列包含如下命令：</p>
+<ul>
+<li>docker search: 在docker Hub中搜索镜像(docker image search)</li>
+<li>docker pull: 从仓库中拉取镜像(下载到本地)(docker image pill)</li>
+<li>docker images: 显示本地images列表(docker image ls)</li>
+<li>docker rmi: 删除一个或多个镜像(docker image rm)</li>
+</ul>
+<p>docker container 系列命令包含如下命令</p>
+<ul>
+<li>docker create: 创建一个新的容器</li>
+<li>docker start: 启动一个容器</li>
+<li>docker run: 在一个新的容器中运行一个命令（创建并启动容器)</li>
+<li>docker attach:</li>
+<li>docker ps: 列出容器</li>
+<li>docker logs: 列出容器日志(输出到控制台的日志)</li>
+<li>docker restart: 重启容器</li>
+<li>docker stop: 停止一个或多个运行的容器</li>
+<li>docker kill: 杀掉一个或多个运行的容器</li>
+<li>docker rm: 删除一个或多个容器</li>
+</ul>
+<h3 id="222-其他">2.2.2 其他</h3>
+<p>在容器中执行命令：</p>
+<ul>
+<li>docker exec -it ContainerName /bin/bash: 在容器内执行一个shell</li>
+</ul>
+<p>从其他仓库拉去镜像</p>
+<ul>
+<li>docker pull [仓库][端口(5000)]/[命名空间][镜像名]:[tag]</li>
+</ul>
+<p>进入一个docker镜像</p>
+<ul>
+<li>docker exec -it 容器名称 /bin/bash</li>
+</ul>
+<p>docker容器状态转换机制命令：
+图 docker event state</p>
+<p>{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/" title="2-flask-蓝图-闪现-中间件-session">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="2-django-urls路由系统基本使用">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+

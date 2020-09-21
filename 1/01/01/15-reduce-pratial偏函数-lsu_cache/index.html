@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>15-reduce-pratial偏函数-lsu_cache  &middot; dahl&#39;s blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="15-reduce-pratial偏函数-lsu_cache  &middot; dahl&#39;s blog ">
+<meta property="og:site_name" content="dahl&#39;s blog"/>
+<meta property="og:url" content="https://dachenzi.github.io/1/01/01/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
+
+  
+    
+  
+
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "15-reduce-pratial偏函数-lsu_cache",
+    "author": {
+      "@type": "Person",
+      "name": "daxin.li"
+    },
+    "datePublished": "0001-01-01",
+    "description": "",
+    "wordCount":  939 
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://dachenzi.github.io/1/01/01/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dachenzi.github.io/touch-icon-144-precomposed.png">
+<link href="https://dachenzi.github.io/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight/default.css">
+
+  
+  
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'Your Google Analytics tracking code', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://dachenzi.github.io">
+  foobar
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  few words about your site
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://dachenzi.github.io">home</a>
+
+
+  
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" rel="me" aria-label="Email" href="mailto:dahlhin.li@gmail.com">
+  <span class="fa fa-envelope-square"></span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" rel="me" aria-label="Github" href="https://github.com/enten/hugo-boilerplate">
+  <span class="fa fa-github-square"></span></a>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>15-reduce-pratial偏函数-lsu_cache
+</h1>
+
+  <div class="metas">
+<time datetime="0001-01-01">1 Jan, 0001</time>
+
+
+  
+  &middot; Read in about 5 min
+  &middot; (939 Words)
+  <br>
+  
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>{% raw %}</p>
+<p><!-- raw HTML omitted --><strong>文章目录</strong><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#1-reduce%E6%96%B9%E6%B3%95">1 reduce方法</a></li>
+<li><a href="#2-partial%E6%96%B9%E6%B3%95%E5%81%8F%E5%87%BD%E6%95%B0">2 partial方法(偏函数)</a>
+<ul>
+<li><a href="#21-partial%E6%96%B9%E6%B3%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">2.1 partial方法基本使用</a></li>
+<li><a href="#22-partial%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90">2.2 partial原码分析</a></li>
+<li><a href="#23-functoolswarps%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90">2.3 functools.warps实现分析</a></li>
+</ul>
+</li>
+<li><a href="#3-lsu_cache%E6%96%B9%E6%B3%95">3 lsu_cache方法</a>
+<ul>
+<li><a href="#31-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">3.1 基本使用</a></li>
+<li><a href="#32-lru_cache%E5%8E%9F%E7%A0%81%E5%88%86%E6%9E%90">3.2 lru_cache原码分析</a></li>
+<li><a href="#33-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%9A%84lru%E6%94%B9%E9%80%A0">3.3 斐波那契序列的lru改造</a></li>
+<li><a href="#34-lsu_cache%E7%9A%84%E6%80%BB%E7%BB%93">3.4 lsu_cache的总结</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="介绍">介绍</h1>
+<p>        functools模块存放着很多工具函数，大部分都是高阶函数，其作用于或返回其他函数的函数。一般来说，对于这个模块，任何可调用的对象都可以被视为函数。</p>
+<h1 id="1-reduce方法">1 reduce方法</h1>
+<p>        其含义是减少，它接受一个两个参数的函数，初始时从可迭代对象中取两个元素交给函数，下一次会将本次函数返回值和下一个元素传入函数进行计算，直到将可迭代对象减少为一个值，然后返回：<code>reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates ((((1+2)+3)+4)+5)</code>,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">reduce(function, sequence[, initial]) <span style="color:#f92672">-&gt;</span> value
+</code></pre></div><ul>
+<li>function: 两个参数的函数</li>
+<li>sequence：可迭代对象(不能为空)</li>
+<li>initital：初始值(可以理解为给函数的第一个参数指定默认值)，否则第一次会在可迭代对象中再取一个元素</li>
+</ul>
+<p>下面是一个求1到100累加的栗子</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 普通版</span>
+In [<span style="color:#ae81ff">24</span>]: sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+In [<span style="color:#ae81ff">25</span>]: <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">101</span>):
+    <span style="color:#f92672">...</span>:     sum <span style="color:#f92672">+=</span> i
+    <span style="color:#f92672">...</span>:
+In [<span style="color:#ae81ff">26</span>]: <span style="color:#66d9ef">print</span>(sum)
+<span style="color:#ae81ff">5050</span>
+
+<span style="color:#75715e"># 利用reduce版</span>
+In [<span style="color:#ae81ff">22</span>]: <span style="color:#f92672">import</span> functools
+In [<span style="color:#ae81ff">23</span>]: functools<span style="color:#f92672">.</span>reduce(<span style="color:#66d9ef">lambda</span> x,y:x<span style="color:#f92672">+</span>y,range(<span style="color:#ae81ff">101</span>))
+Out[<span style="color:#ae81ff">23</span>]: <span style="color:#ae81ff">5050</span>
+</code></pre></div><h1 id="2-partial方法偏函数">2 partial方法(偏函数)</h1>
+<p>        在前面学习函数参数的时候，通过设定参数的默认值，可以降低函数调用的难度。而偏函数也可以做到这一点，funtools模块中的partial方法就是将函数的<code>部分参数固定下来</code>，相当于为部分的参数添加了一个固定的默认值，形成一个<code>新的函数并返回</code>。从partial方法返回的函数，是对原函数的封装，是一个全新的函数。</p>
+<blockquote>
+<p>注意：这里的偏函数和数学意义上的偏函数不一样。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">partial(func, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>keywords) <span style="color:#f92672">-</span> <span style="color:#960050;background-color:#1e0010">返回一个新的被</span>partial函数包装过的func<span style="color:#960050;background-color:#1e0010">，并带有默认值的新函数</span>
+</code></pre></div><h2 id="21-partial方法基本使用">2.1 partial方法基本使用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">27</span>]: <span style="color:#f92672">import</span> functools
+    <span style="color:#f92672">...</span>: <span style="color:#f92672">import</span> inspect
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>:
+    <span style="color:#f92672">...</span>: new_add <span style="color:#f92672">=</span> functools<span style="color:#f92672">.</span>partial(add,<span style="color:#ae81ff">1</span>)
+    <span style="color:#f92672">...</span>: <span style="color:#66d9ef">print</span>(new_add)
+    <span style="color:#f92672">...</span>:
+functools<span style="color:#f92672">.</span>partial(<span style="color:#f92672">&lt;</span>function add at <span style="color:#ae81ff">0x000002798C757840</span><span style="color:#f92672">&gt;</span>, <span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">28</span>]:
+In [<span style="color:#ae81ff">28</span>]: new_add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
+<span style="color:#f92672">---------------------------------------------------------------------------</span>
+<span style="color:#a6e22e">TypeError</span>                                 Traceback (most recent call last)
+<span style="color:#f92672">&lt;</span>ipython<span style="color:#f92672">-</span>input<span style="color:#f92672">-</span><span style="color:#ae81ff">28</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>d6520b7602a<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">----&gt;</span> <span style="color:#ae81ff">1</span> new_add(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
+
+<span style="color:#a6e22e">TypeError</span>: add() takes <span style="color:#ae81ff">2</span> positional arguments but <span style="color:#ae81ff">3</span> were given
+
+In [<span style="color:#ae81ff">29</span>]: new_add(<span style="color:#ae81ff">1</span>)
+Out[<span style="color:#ae81ff">29</span>]: <span style="color:#ae81ff">2</span>
+</code></pre></div><ul>
+<li>由于我们包装了函数add，并指定了一个默认参数1，这个参数会按照位置参数，当作默认值赋给x了</li>
+<li>所以当我们再次调用new_add,只需要传入y的值就行了。</li>
+<li>如果再传递两个，那么连同包装前传入的1，一起传给add函数，而add函数只接受两个参数，所以会报异常。</li>
+</ul>
+<blockquote>
+<p>获取一个函数的参数列表，可以使用前面学习的inspect模块</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">30</span>]: inspect<span style="color:#f92672">.</span>signature(new_add)
+Out[<span style="color:#ae81ff">30</span>]: <span style="color:#f92672">&lt;</span>Signature (y)<span style="color:#f92672">&gt;</span>
+</code></pre></div><ul>
+<li>查看new_add的签名信息，发现，它的确只需要传入一个y就可以了。</li>
+</ul>
+<p>根据前面我们所学的函数知识，我们知道函数传参的方式有很多种，利用偏函数包装后产生的新函数的传参会有所不同，下面会列举不同传参方式被偏函数包装后的签名信息。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 最复杂的函数的形参定义方式</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y, <span style="color:#f92672">*</span>args, m, n, <span style="color:#f92672">**</span>kwargs):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+</code></pre></div><ul>
+<li>add1 = <code>functools.partial(add,x=1)</code>：包装后的签名信息(*, x=1, y, m, n, **kwargs)，只接受keyword-only的方式赋值了</li>
+<li>add2 = <code>functools.partial(add,1,y=20)</code>：包装后的签名信息(*, y=20, m, n, **kwargs)，1已经被包装给x了其他参数只接受keyword-only的方式赋值了</li>
+<li>add3 = <code>functools.partial(add,1,2,3,m=10,n=20,a=30,b=40)</code>：包装后的签名信息(*args, m=10, n=20, **kwargs),1给了x，2给了y， 3给了args，可以直接调用add3，而不用传递任何参数</li>
+<li>add4 = <code>functools.partial(add,m=10,n=20,a='10')</code>：包装后的签名信息(x, y, *args, m=10, n=20, **kwargs),a=&lsquo;10&rsquo;已被kwargs收集，依旧可以使用位置加关键字传递实参。</li>
+</ul>
+<h2 id="22-partial原码分析">2.2 partial原码分析</h2>
+<p>上面我们已经了解了partial的基本使用，下面我们来学习一下partial的原码，看它到底是怎么实现的，partial的原码存在于documentation中，下面是原码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partial</span>(func, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>keywords):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">newfunc</span>(<span style="color:#f92672">*</span>fargs, <span style="color:#f92672">**</span>fkeywords):
+        newkeywords <span style="color:#f92672">=</span> keywords<span style="color:#f92672">.</span>copy()    <span style="color:#75715e"># 偏函数包装时指定的位置位置参数进行拷贝</span>
+        newkeywords<span style="color:#f92672">.</span>update(fkeywords)    <span style="color:#75715e"># 将包装完后，传递给偏函数的关键字参数更新到keyword字典中去（key相同的被替换）</span>
+        <span style="color:#66d9ef">return</span> func(<span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span>fargs, <span style="color:#f92672">**</span>newkeywords)  <span style="color:#75715e"># 把偏函数包装的位置参数优先传递给被包装函数，然后是偏函数的位置参数，然后是关键字参数</span>
+    newfunc<span style="color:#f92672">.</span>func <span style="color:#f92672">=</span> func    <span style="color:#75715e"># 新增函数属性，将被包装的函数绑定在了偏函数上，可以直接通过偏函数的func属性来调用原函数</span>
+    newfunc<span style="color:#f92672">.</span>args <span style="color:#f92672">=</span> args    <span style="color:#75715e"># 记录包装指定的位置参数</span>
+    newfunc<span style="color:#f92672">.</span>keywords <span style="color:#f92672">=</span> keywords <span style="color:#75715e"># 记录包装指定的关键字参数</span>
+    <span style="color:#66d9ef">return</span> newfunc
+</code></pre></div><p>上面是偏函数的原码注释，如果不是很理解，请看下图
+<img src="photo/partial.png" alt="partial"></p>
+<h2 id="23-functoolswarps实现分析">2.3 functools.warps实现分析</h2>
+<p>现在我们在来看一下functools.warps函数的原码实现，前面我们已经说明了，它是用来拷贝函数签名信息的装饰器，它在内部是使用了偏函数实现的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wraps</span>(wrapped,
+          assigned <span style="color:#f92672">=</span> WRAPPER_ASSIGNMENTS,
+          updated <span style="color:#f92672">=</span> WRAPPER_UPDATES):
+
+    <span style="color:#66d9ef">return</span> partial(update_wrapper, wrapped<span style="color:#f92672">=</span>wrapped,
+                   assigned<span style="color:#f92672">=</span>assigned, updated<span style="color:#f92672">=</span>updated)  
+</code></pre></div><p>使用偏函数包装了update_wrapper函数，并设置了下面参数的默认值：</p>
+<ul>
+<li>wrapped=wrapped：将传入给wraps的函数，使用偏函数，当作update_wrapper的默认值。</li>
+<li>assigned=assigned：要拷贝的信息<code>'__module__', '__name__', '__qualname__', '__doc__','__annotations__'</code></li>
+<li>updated=updated: 这里使用的是<code>'__dict__'</code>,用来拷贝函数的属性信息</li>
+</ul>
+<blockquote>
+<p>__dict__是用来存储对象属性的一个字典，其键为属性名，值为属性的值</p>
+</blockquote>
+<p>下面来看一下update_wrapper函数，因为真正执行的就是它:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_wrapper</span>(wrapper,
+                   wrapped,
+                   assigned <span style="color:#f92672">=</span> WRAPPER_ASSIGNMENTS,
+                   updated <span style="color:#f92672">=</span> WRAPPER_UPDATES):
+    <span style="color:#66d9ef">for</span> attr <span style="color:#f92672">in</span> assigned:
+        <span style="color:#66d9ef">try</span>:
+            value <span style="color:#f92672">=</span> getattr(wrapped, attr)
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
+            <span style="color:#66d9ef">pass</span>
+        <span style="color:#66d9ef">else</span>:
+            setattr(wrapper, attr, value)
+    <span style="color:#66d9ef">for</span> attr <span style="color:#f92672">in</span> updated:
+        getattr(wrapper, attr)<span style="color:#f92672">.</span>update(getattr(wrapped, attr, {}))
+    wrapper<span style="color:#f92672">.</span>__wrapped__ <span style="color:#f92672">=</span> wrapped   <span style="color:#75715e"># 将被包装的函数，绑定在__wrapped__属性上。</span>
+    <span style="color:#66d9ef">return</span> wrapper
+</code></pre></div><ul>
+<li>update_wrapper在外层被wraps包装，实际上只需要传入wrapper即可</li>
+<li>后面的代码可以理解为是通过反射获取wrapped的属性值，然后update到wrapper中(拷贝属性的过程)</li>
+<li>最后返回包装好的函数wrapper</li>
+</ul>
+<p>update_wrapper返回的就是我们的wrapper对象，所以如果不想用wraps，我们可以直接使用update_wrapper</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logger</span>(fn):
+    <span style="color:#75715e"># @functools.wraps(fn)  # wrapper = functools.wraps(fn)(wrapper)</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+        res <span style="color:#f92672">=</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+        total_seconds <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;函数：{} 执行用时：{}&#39;</span><span style="color:#f92672">.</span>format(wrapper<span style="color:#f92672">.</span>__name__,total_seconds))
+        <span style="color:#66d9ef">return</span> res
+
+    wrapper <span style="color:#f92672">=</span> functools<span style="color:#f92672">.</span>update_wrapper(wrapper, fn)  <span style="color:#75715e"># 这里进行调用，但是很难看有木有？</span>
+    <span style="color:#66d9ef">return</span> wrapper
+
+<span style="color:#a6e22e">@logger</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+
+add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+</code></pre></div><blockquote>
+<p>这里之所以使用偏函数实现，是因为对于拷贝这个过程来说，要拷贝的属性一般是不会改变的，那么针对这些不长改变的东西进行偏函数包装，那么在使用起来会非常方便，我觉得这就是偏函数的精髓吧。</p>
+</blockquote>
+<p>结合前面参数检查的例子，来加深functools.wraps的实现过程理解。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check</span>(fn):
+    <span style="color:#a6e22e">@functools.wraps</span>(fn) 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+        sig <span style="color:#f92672">=</span> inspect<span style="color:#f92672">.</span>signature(fn) 
+        params <span style="color:#f92672">=</span> sig<span style="color:#f92672">.</span>parameters  
+        values <span style="color:#f92672">=</span> list(params<span style="color:#f92672">.</span>values()) 
+        <span style="color:#66d9ef">for</span> i, k <span style="color:#f92672">in</span> enumerate(args): 
+            <span style="color:#66d9ef">if</span> values[i]<span style="color:#f92672">.</span>annotation <span style="color:#f92672">!=</span> inspect<span style="color:#f92672">.</span>_empty: 
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(k, values[i]<span style="color:#f92672">.</span>annotation): 
+                    <span style="color:#66d9ef">raise</span> (<span style="color:#e6db74">&#39;Key Error&#39;</span>)
+        <span style="color:#66d9ef">for</span> k, v <span style="color:#f92672">in</span> kwargs<span style="color:#f92672">.</span>items():
+            <span style="color:#66d9ef">if</span> params[k]<span style="color:#f92672">.</span>annotation <span style="color:#f92672">!=</span> inspect<span style="color:#f92672">.</span>_empty:
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(v, params[k]<span style="color:#f92672">.</span>annotation):
+                    <span style="color:#66d9ef">raise</span> (<span style="color:#e6db74">&#39;Key Error&#39;</span>)
+        <span style="color:#66d9ef">return</span> fn(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+
+    <span style="color:#66d9ef">return</span> wrapper
+</code></pre></div><ul>
+<li><code>@functools.wraps(fn)</code> 表示一个有参装饰器，在这里实际上等于：<code>wrapper = functools.wraps(fn)(wrapper)</code></li>
+<li><code>functools.wraps(fn)</code> 的返回值就是偏函数<code>update_wrapper</code> , 所以也可以理解为这里实际上：<code>update_wrapper(wrapper)</code></li>
+<li><code>update_wrapper</code> 在这里将wrapped的属性(也就是fn)，拷贝到了wrapper上，并返回了wrapper。</li>
+</ul>
+<p>经过上述数说明 <code>@functools.wraps(fn)</code> 就等价于 <code>wrapper = update_wrapper(wrapper)</code>，那么再来看拷贝的过程，就很好理解了。</p>
+<h1 id="3-lsu_cache方法">3 lsu_cache方法</h1>
+<p>        学习lsu_cache方法，那么不得不提cache，那什么是cache呢？我们说数据是存放在磁盘上的，CPU如果需要提取数据那么需要从磁盘上拿，磁盘速度很慢，直接拿的话，就很耗时间，所以操作系统会把一些数据提前存储到内存中，当CPU需要时，直接从内存中读取即可，但是内存毕竟是有限的，不是所有空间都用来存这些数据，所以内存中的一小部分用来存储磁盘上读写频繁的数据的空间，就可以简单的理解为cache(这里就不提CPU的L1,L2,L3 cache了).<br>
+        lsu_cache方法简单来说，就是当执行某一个函数时，把它的计算结果缓存到cache中，当下次调用时，就直接从缓存中拿就可以了，不用再次进行计算。这种特性对于那种计算非常耗时的场景时非常友好的。</p>
+<blockquote>
+<p>把函数的计算结果缓存，需要的时候直接调用，这种模式该如何实现呢？简单来讲就是通过一个东西来获取它对应的值，是不是和字典的元素很像？通过一个key获取它对应的value！实际上大多数缓存软件都是这种key-value结构！！！</p>
+</blockquote>
+<h2 id="31-基本使用">3.1 基本使用</h2>
+<p>它作为装饰器作用于需要缓存的函数，用法格式如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">functools<span style="color:#f92672">.</span>lru_cache(maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, typed<span style="color:#f92672">=</span>False)
+</code></pre></div><ul>
+<li><code>maxsize</code>:限制不同参数和结果缓存的总量，如果设置为<code>None</code>，则<code>禁用LRU功能</code>，并且缓存可以无限制增长，当maxsize是二的幂时，LRU功能执行的最好，当超过maxsize设置的总数量时，LRU会把最近最少用的缓存弹出的。</li>
+<li><code>typed</code>:如果设置为True，则不同类型的函数参数将单独缓存，例如f(3)和f(3.0)将被视为具有不同结果的不同调用</li>
+</ul>
+<blockquote>
+<p>使用<code>被装饰的函数.cache_info()</code>来查看缓存命中的次数，以及结果缓存的数量。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">33</span>]: <span style="color:#f92672">import</span> functools
+
+In [<span style="color:#ae81ff">34</span>]: <span style="color:#a6e22e">@functools.lru_cache</span>()
+    <span style="color:#f92672">...</span>: <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x: int, y: int) <span style="color:#f92672">-&gt;</span> int:
+    <span style="color:#f92672">...</span>:     time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+    <span style="color:#f92672">...</span>:     <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+    <span style="color:#f92672">...</span>:
+
+In [<span style="color:#ae81ff">35</span>]: <span style="color:#f92672">import</span> time
+
+In [<span style="color:#ae81ff">36</span>]: add<span style="color:#f92672">.</span>cache_info()   <span style="color:#75715e"># 没有执行，没有缓存，也就没有命中了</span>
+Out[<span style="color:#ae81ff">36</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+
+In [<span style="color:#ae81ff">37</span>]: add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)    <span style="color:#75715e"># 执行一次，缓存中不存在，所以miss1次，本次结果将会被缓存</span>
+Out[<span style="color:#ae81ff">37</span>]: <span style="color:#ae81ff">9</span>
+
+In [<span style="color:#ae81ff">38</span>]: add<span style="color:#f92672">.</span>cache_info()   <span style="color:#75715e"># 验证缓存信息，currsize表示当前缓存1个，misses表示错过1次</span>
+Out[<span style="color:#ae81ff">38</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">39</span>]: add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)  <span style="color:#75715e"># 本次执行速度很快，因为读取的是缓存，被命中一次，所以瞬间返回</span>
+Out[<span style="color:#ae81ff">39</span>]: <span style="color:#ae81ff">9</span>
+
+In [<span style="color:#ae81ff">40</span>]: add<span style="color:#f92672">.</span>cache_info()  <span style="color:#75715e"># 命中加1次</span>
+Out[<span style="color:#ae81ff">40</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><p>cache_info各参数含义：</p>
+<ul>
+<li>hits: 缓存命中次数。当次传入计算的参数，如果在缓存中存在，则表示命中</li>
+<li>misses: 未命中次数。当次传入计算的参数，如果在缓存中存在，则表示未命中</li>
+<li>maxsize：表示缓存的key最大数量</li>
+<li>currsize：已经缓存的key的数量</li>
+</ul>
+<h2 id="32-lru_cache原码分析">3.2 lru_cache原码分析</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lru_cache</span>(maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, typed<span style="color:#f92672">=</span>False):
+    <span style="color:#66d9ef">if</span> maxsize <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> isinstance(maxsize, int):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">TypeError</span>(<span style="color:#e6db74">&#39;Expected maxsize to be an integer or None&#39;</span>)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decorating_function</span>(user_function):
+        wrapper <span style="color:#f92672">=</span> _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo)
+        <span style="color:#66d9ef">return</span> update_wrapper(wrapper, user_function)
+
+    <span style="color:#66d9ef">return</span> decorating_function
+</code></pre></div><p>        这里的返回的 <code>decorating_function</code> 函数中返回的 <code>update_wrapper</code> 是不是看起来很熟悉，没错，这里同样利用了偏函数对被包装函数的属性签名信息进行了拷贝，而传入的wrapper是才是缓存的结果，所以我们进一步查看_lru_cache_wrapper到底是怎么完成缓存的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_lru_cache_wrapper</span>(user_function, maxsize, typed, _CacheInfo):
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+
+    cache <span style="color:#f92672">=</span> {}
+    hits <span style="color:#f92672">=</span> misses <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    full <span style="color:#f92672">=</span> False
+
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>(<span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwds):
+        <span style="color:#75715e"># Size limited caching that tracks accesses by recency</span>
+        nonlocal root, hits, misses, full
+        key <span style="color:#f92672">=</span> make_key(args, kwds, typed)
+        <span style="color:#66d9ef">with</span> lock:
+       
+    <span style="color:#f92672">...</span> <span style="color:#f92672">...</span>
+</code></pre></div><p>        这里截取部分代码进行简要说明：cache是个字典，那么就印证了之前我们的设想，的确是使用字典key-value的形式进行缓存的。字典的key是来自于make_key函数的，那么我们接下来看一看这个函数都做了哪些事</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_make_key</span>(args, kwds, typed,
+             kwd_mark <span style="color:#f92672">=</span> (object(),),
+             fasttypes <span style="color:#f92672">=</span> {int, str, frozenset, type(None)},
+             tuple<span style="color:#f92672">=</span>tuple, type<span style="color:#f92672">=</span>type, len<span style="color:#f92672">=</span>len):
+    key <span style="color:#f92672">=</span> args
+    <span style="color:#66d9ef">if</span> kwds:     <span style="color:#75715e"># 在使用关键字传参时，遍历kwds</span>
+        key <span style="color:#f92672">+=</span> kwd_mark  <span style="color:#75715e"># 使用一个特殊的对象obkect() 来 作为位置传参和关键字传参的&#39;分隔符&#39;</span>
+        <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> kwds<span style="color:#f92672">.</span>items():
+            key <span style="color:#f92672">+=</span> item
+    <span style="color:#66d9ef">if</span> typed:
+        key <span style="color:#f92672">+=</span> tuple(type(v) <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> args)
+        <span style="color:#66d9ef">if</span> kwds:
+            key <span style="color:#f92672">+=</span> tuple(type(v) <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> kwds<span style="color:#f92672">.</span>values())
+    <span style="color:#66d9ef">elif</span> len(key) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> type(key[<span style="color:#ae81ff">0</span>]) <span style="color:#f92672">in</span> fasttypes:
+        <span style="color:#66d9ef">return</span> key[<span style="color:#ae81ff">0</span>]
+    <span style="color:#66d9ef">return</span> _HashedSeq(key)
+</code></pre></div><ul>
+<li>args: 是我们给函数进行的位置传参，这里是元组类型（因为不希望被修改）。</li>
+<li>kwargs: 关键字传参的字典。</li>
+<li>_HashedSeq: 可以理解为对hash()函数的封装，仅仅是计算构建好的key的hash值，并将这个值作为key进行存储的。</li>
+</ul>
+<blockquote>
+<p>注意，这里的函数_make_key是以_开头的函数，目的仅仅是告诉你，不要擅自使用，但是为了学习cache的key是怎么生成的，我们可以直接调用它，来查看生成key的样子(这里只模拟参数的传递，理解过程即可)</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">41</span>]: functools<span style="color:#f92672">.</span>_make_key((<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),{<span style="color:#e6db74">&#39;a&#39;</span>:<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;b&#39;</span>:<span style="color:#ae81ff">2</span>},typed<span style="color:#f92672">=</span>False)  <span style="color:#75715e"># 不限制类型</span>
+Out[<span style="color:#ae81ff">41</span>]: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#f92672">&lt;</span>object at <span style="color:#ae81ff">0x2798734b0b0</span><span style="color:#f92672">&gt;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#ae81ff">2</span>]    <span style="color:#75715e"># 缓存的key不带类型</span>
+
+In [<span style="color:#ae81ff">49</span>]: functools<span style="color:#f92672">.</span>_HashedSeq(functools<span style="color:#f92672">.</span>_make_key((<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),{<span style="color:#e6db74">&#39;a&#39;</span>:<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;b&#39;</span>:<span style="color:#ae81ff">2</span>},typed<span style="color:#f92672">=</span>True))     <span style="color:#75715e"># 限制类型</span>
+Out[<span style="color:#ae81ff">49</span>]: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#f92672">&lt;</span>object at <span style="color:#ae81ff">0x2798734b0b0</span><span style="color:#f92672">&gt;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#ae81ff">2</span>, int, int, int, int, int]  <span style="color:#75715e"># 缓存的key带类型</span>
+</code></pre></div><p>key构建完毕了，_HashedSeq是如何对一个列表进行hash的呢？下面来阅读以下_HashedSeq原码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_HashedSeq</span>(list):
+    __slots__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hashvalue&#39;</span>
+
+    <span style="color:#66d9ef">def</span> __init__(self, tup, hash<span style="color:#f92672">=</span>hash):
+        self[:] <span style="color:#f92672">=</span> tup
+        self<span style="color:#f92672">.</span>hashvalue <span style="color:#f92672">=</span> hash(tup)
+
+    <span style="color:#66d9ef">def</span> __hash__(self):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>hashvalue
+</code></pre></div><p>这里发现_HashedSeq，是一个类，当对其进行hash时，实际上调用的就是它的__hash__方法，返回的是hashvalue这个值，而这个值在__init__函数中赋值时，又来自于hash函数(这不是多此一举吗，哈哈)，tup是元组类型，这里还是对元组进行了hash，只是返回了一个list类型而已。这里为了测试，我们使用_HashedSeq对象的hashvalue属性和hash函数来对比生成的hash值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">54</span>]: value <span style="color:#f92672">=</span> functools<span style="color:#f92672">.</span>_HashedSeq(functools<span style="color:#f92672">.</span>_make_key((<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),{<span style="color:#e6db74">&#39;a&#39;</span>:<span style="color:#ae81ff">1</span>,<span style="color:#e6db74">&#39;b&#39;</span>:<span style="color:#ae81ff">2</span>},typed<span style="color:#f92672">=</span>True))
+In [<span style="color:#ae81ff">55</span>]: value
+Out[<span style="color:#ae81ff">55</span>]: [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#f92672">&lt;</span>object at <span style="color:#ae81ff">0x2798734b0b0</span><span style="color:#f92672">&gt;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#ae81ff">2</span>, int, int, int, int, int]
+
+In [<span style="color:#ae81ff">56</span>]: value<span style="color:#f92672">.</span>hashvalue
+Out[<span style="color:#ae81ff">56</span>]: <span style="color:#ae81ff">3337684084446775700</span>
+In [<span style="color:#ae81ff">57</span>]: hash(value)
+Out[<span style="color:#ae81ff">57</span>]: <span style="color:#ae81ff">3337684084446775700</span>    <span style="color:#75715e"># 这里两次执行的结果是相同的！</span>
+</code></pre></div><p>小结：</p>
+<ol>
+<li>通过对原码分析我们知道，lru_cache是通过构建字典来完成key到value的映射的</li>
+<li>构建字典的key来源于在_make_key函数中处理过得args，kwargs参数列表</li>
+<li>最后对列表进行<code>hash</code>，得到key，然后在字典中作为key对应函数的计算机结果</li>
+</ol>
+<blockquote>
+<p>由于_make_key在内部是通过args和kwargs拼接来完成key的构建的，也就是说args参数位置不同或者kwargs位置不同，构建出来的key都不相同，那么对应的hash值也就不同了！！！，这一点要特别注意</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">In [<span style="color:#ae81ff">60</span>]: add<span style="color:#f92672">.</span>cache_info()
+Out[<span style="color:#ae81ff">60</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">61</span>]: add(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>)
+Out[<span style="color:#ae81ff">61</span>]: <span style="color:#ae81ff">9</span>
+
+In [<span style="color:#ae81ff">62</span>]: add<span style="color:#f92672">.</span>cache_info()
+Out[<span style="color:#ae81ff">62</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">63</span>]: add(<span style="color:#ae81ff">4.0</span>,<span style="color:#ae81ff">5.0</span>)
+Out[<span style="color:#ae81ff">63</span>]: <span style="color:#ae81ff">9</span>
+
+In [<span style="color:#ae81ff">64</span>]: add<span style="color:#f92672">.</span>cache_info()   <span style="color:#75715e"># 由于我们没有对类型的限制，所以int和float构建的key是相同的，这里就命中了！</span>
+Out[<span style="color:#ae81ff">64</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+In [<span style="color:#ae81ff">65</span>]: add(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>) 
+Out[<span style="color:#ae81ff">65</span>]: <span style="color:#ae81ff">9</span>
+
+In [<span style="color:#ae81ff">66</span>]: add<span style="color:#f92672">.</span>cache_info()    <span style="color:#75715e"># 当5，4调换时，key不同，那么就要重新缓存了！</span>
+Out[<span style="color:#ae81ff">66</span>]: CacheInfo(hits<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, misses<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, maxsize<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, currsize<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><h2 id="33-斐波那契序列的lru改造">3.3 斐波那契序列的lru改造</h2>
+<p>前面我们讲递归的时候，使用递归的方法编写fib序列，是非常优美的但是由于每次要重新计很多值，效率非常低，如果把计算过后的值进行缓存，那么会有什么不同的呢？</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#960050;background-color:#1e0010">普通版：</span>
+<span style="color:#f92672">import</span> datetime
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">else</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+
+
+start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+<span style="color:#66d9ef">print</span>(fib(<span style="color:#ae81ff">40</span>))
+times <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+<span style="color:#66d9ef">print</span>(times)  <span style="color:#75715e"># 31.652353</span>
+
+
+lru_cache加成版本<span style="color:#960050;background-color:#1e0010">：</span>
+<span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">import</span> functools
+
+
+<span style="color:#a6e22e">@functools.lru_cache</span>()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fib</span>(n):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span> <span style="color:#66d9ef">else</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+
+
+start <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+<span style="color:#66d9ef">print</span>(fib(<span style="color:#ae81ff">40</span>))
+times <span style="color:#f92672">=</span> (datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now() <span style="color:#f92672">-</span> start)<span style="color:#f92672">.</span>total_seconds()
+<span style="color:#66d9ef">print</span>(times)  <span style="color:#75715e"># 0.0</span>
+</code></pre></div><blockquote>
+<p>速度简直要起飞了！</p>
+</blockquote>
+<h2 id="34-lsu_cache的总结">3.4 lsu_cache的总结</h2>
+<p>lru_cache使用的前提是：</p>
+<ul>
+<li>同样函数参数一定得到同样的结果</li>
+<li>函数执行时间很长，且要多次执行</li>
+<li>其本质就是函数调用的参数到函数返回值的映射</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>不支持缓存过期，key无法过期、失效。</li>
+<li>不支持清楚操作</li>
+<li>不支持分布式，是一个单机缓存</li>
+</ul>
+<p>适用场景：单机上需要空间换时间的地方，可以用缓存来将计算变成快速查询。
+{% endraw %}</p>
+
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://dachenzi.github.io/1/01/01/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/" title="16-文件操作-StringIO-BytesIO">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://dachenzi.github.io/1/01/01/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/" title="14-函数参数检测-inspect模块">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  
+<div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+  code with <!-- raw HTML omitted --><!-- raw HTML omitted -->
+
+
+</div>
+
+
+  
+<div class="container copyright">
+  
+  (c) 2015 Lee xin.
+
+
+</div>
+
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//your_disqus_shortname.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+</html>
+
