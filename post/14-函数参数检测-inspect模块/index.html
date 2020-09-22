@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 python类型注解 2 函数定义的弊端 3 函数文档 4 函数注解 4.1 annotation属性 5 inspect模块 5.1 常用方法 5.2 signatur">
 <meta itemprop="datePublished" content="2017-04-29T09:21:22+00:00" />
 <meta itemprop="dateModified" content="2017-04-29T09:21:22+00:00" />
-<meta itemprop="wordCount" content="3049">
+<meta itemprop="wordCount" content="6160">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 3049 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span class="more-meta"> 约 6160 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
         
@@ -356,6 +356,31 @@
     <li><a href="#52-signature类">5.2 signature类</a></li>
     <li><a href="#53-parameters属性">5.3 parameters属性</a></li>
     <li><a href="#54-获取对象的参数签名">5.4 获取对象的参数签名</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mathjax-true">title: 14-函数参数检测-inspect模块
+date: 2019-02-25 15:35:23
+lastmod: 2019-02-25 15:35:23
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-annotation属性-1">4.1 annotation属性</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-常用方法-1">5.1 常用方法</a></li>
+    <li><a href="#52-signature类-1">5.2 signature类</a></li>
+    <li><a href="#53-parameters属性-1">5.3 parameters属性</a></li>
+    <li><a href="#54-获取对象的参数签名-1">5.4 获取对象的参数签名</a></li>
   </ul>
 </nav>
   </div>
@@ -713,6 +738,425 @@
 </div>
 </div><p>通过它的属性，搭配<code>有序字典</code>这个特性,有没有很兴奋？参数有序，传入的实参有序，还能获取参数注解的类型，那么就可以开工进行参数检查了！</p>
 <h1 id="6-检查参数">6 检查参数</h1>
+<p>以上面函数为例子，当给add函数传入的x，y时进行参数检查，如果x，y不是int类型，那么返回异常，并退出函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>   <span class="c1"># 等于 wrapper.__annotation__ = fn.__annotation__ 还有其他的属性比如__doc__，__module__等</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>   <span class="c1"># 获取add函数签名信息</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>     <span class="c1"># 获取add函数的参数信息</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>   <span class="c1"># 由于params是个有序字典，那么values也是有序的，只需根据索一一对应判断即可</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>   <span class="c1"># 遍历用户传入的位置参数</span>
+            <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">_empty</span><span class="p">:</span>   <span class="c1"># 如果定义了参数注解，则开始检查</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span><span class="p">):</span>   <span class="c1"># 如果检查不通过，曝出异常</span>
+                    <span class="k">raise</span><span class="p">(</span><span class="s1">&#39;Key Error&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">_empty</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span><span class="p">):</span>
+                    <span class="k">raise</span><span class="p">(</span><span class="s1">&#39;Key Error&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@check</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 14-函数参数检测-inspect模块
+date: 2019-02-25 15:35:23
+lastmod: 2019-02-25 15:35:23
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-python%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3">1 python类型注解</a></li>
+<li><a href="#2-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E5%BC%8A%E7%AB%AF">2 函数定义的弊端</a></li>
+<li><a href="#3-%E5%87%BD%E6%95%B0%E6%96%87%E6%A1%A3">3 函数文档</a></li>
+<li><a href="#4-%E5%87%BD%E6%95%B0%E6%B3%A8%E8%A7%A3">4 函数注解</a>
+<ul>
+<li><a href="#41-annotation%E5%B1%9E%E6%80%A7">4.1 annotation属性</a></li>
+</ul>
+</li>
+<li><a href="#5-inspect%E6%A8%A1%E5%9D%97">5 inspect模块</a>
+<ul>
+<li><a href="#51-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">5.1 常用方法</a></li>
+<li><a href="#52-signature%E7%B1%BB">5.2 signature类</a></li>
+<li><a href="#53-parameters%E5%B1%9E%E6%80%A7">5.3 parameters属性</a></li>
+<li><a href="#54-%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%8F%82%E6%95%B0%E7%AD%BE%E5%90%8D">5.4 获取对象的参数签名</a></li>
+</ul>
+</li>
+<li><a href="#6-%E6%A3%80%E6%9F%A5%E5%8F%82%E6%95%B0">6 检查参数</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-python类型注解-1">1 python类型注解</h1>
+<p>        类型注解，即对变量的类型，进行标注或者说明，因为Python是一门动态编译型语言，我们无法在赋值时就定义它的变量类型，所以在<code>Python3.5</code>以上版本新增了类型注解，但仅仅是提示作用，并不能严格控制，这是动态编译型语言的通病，下面来仔细看一下什么是Python的类型注解。</p>
+<h1 id="2-函数定义的弊端-1">2 函数定义的弊端</h1>
+<p>        Python是动态语言，变量随时可以被赋值，且赋值为不同的类型，这就与静态语言不同了，变量的类型是在运行期决定的，而静态语言事先就已经定义好了变量的类型了。这是动态语言方便之处，但也是一种弊端，我们无法控制变量的类型，也就无法控制异常的产生。举个栗子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        当用户传入两个数字时，返回它们的和，但是如果我们传递其他变量呢？比如字符串，因为Python中实现了+号的类型重载，所以说两个字符串的确可以加，但是如果是数字和字符串呢？在Python这种强类型语言中来说，属于非法操作(javascript会隐式转换)，而这时，我们就需要对用户传入的数据进行类型判断，不符合本函数的需求，那么就抛个异常，或者提示等等操作，这样就不会引起后续代码在执行期崩溃。如何解决呢？其实主要有两种方式。</p>
+<ul>
+<li>函数文档</li>
+<li>函数注解</li>
+</ul>
+<h1 id="3-函数文档-1">3 函数文档</h1>
+<p>        在函数中插入说明性文档的方式成为函数文档。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    This function used to add something
+</span><span class="s2">    :param x: int object
+</span><span class="s2">    :param y: int object
+</span><span class="s2">    :return: int object
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在函数中，一般是定义语句后的首行使用三对双引号表示。通常存储在函数的__doc__属性中。当用户使用help(函数)时，会被打印在屏幕上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    ...:     This function used to add something
+</span><span class="s2">    ...:     :param x: int object
+</span><span class="s2">    ...:     :param y: int object
+</span><span class="s2">    ...:     :return: int object
+</span><span class="s2">    ...:     &#34;&#34;&#34;</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">...</span><span class="p">:</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">help</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">function</span> <span class="n">add</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">__main__</span><span class="p">:</span>
+
+<span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">This</span> <span class="n">function</span> <span class="n">used</span> <span class="n">to</span> <span class="n">add</span> <span class="n">something</span>
+    <span class="p">:</span><span class="n">param</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+    <span class="p">:</span><span class="n">param</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+    <span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+
+    <span class="n">This</span> <span class="n">function</span> <span class="n">used</span> <span class="n">to</span> <span class="n">add</span> <span class="n">something</span>
+    <span class="p">:</span><span class="n">param</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+    <span class="p">:</span><span class="n">param</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+    <span class="p">:</span><span class="k">return</span><span class="p">:</span> <span class="nb">int</span> <span class="nb">object</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>每次都要使用help来查看函数的说明，的确可以让使用者了解函数的参数以及返回值的类型，但并不是所有人都愿意写doc的，在这个所谓的敏捷开发时代，人们大多会以敏捷开发为借口没时间写，所以这种方法不是很用。</p>
+</blockquote>
+<h1 id="4-函数注解-1">4 函数注解</h1>
+<p>        Python的函数注解是什么呢？首先来看一下如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数的位置形参，和默认值形参后使用冒号分隔，后面用于标识变量期望的类型。</li>
+<li>在def语句末尾，使用-&gt;符号后 指定用于标识函数执行后的返回值类型。</li>
+</ul>
+<p>完成以上定义后，，主要的差别如下图：<br>
+<img src="photo/zhushi.png" alt="zhushi1"></p>
+<blockquote>
+<p>当我们在IDE中准备传入非注释类型变量时，IDE会帮我们进行颜色提示，用于表示这里传入的变量有点问题。在编写时我们尚且可以使用这种方式，对我们产生一点&rsquo;警示'，但是当我们写的函数被其他人调用的时候，那么就无法进行&rsquo;提示&rsquo;了，这个时候，我们就需要对传入的参数进行类型检查了。</p>
+</blockquote>
+<p>我们来总结一下：</p>
+<ul>
+<li>函数注解在Python3.5中引入</li>
+<li>对函数的参数、返回值进行类型注解</li>
+<li>只对函数的参数做一个辅助的说明，并不对函数参数进行类型检查</li>
+<li>提供给第三方工具，做代码分析，发现隐藏的BUG</li>
+<li>函数注解的信息，保存在函数的<code>__annotation__</code>属性中。</li>
+</ul>
+<blockquote>
+<p><code>python3.6</code> 以上还添加了变量的注解：<code>i:int = 10</code>,当然也只是提示的作用。</p>
+</blockquote>
+<h2 id="41-annotation属性-1">4.1 annotation属性</h2>
+<p>在Python中使用__开头的表示符一般被用特殊属性，<code>__annotation__</code>存储的就是函数的签名信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">...</span><span class="p">:</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="n">add</span><span class="o">.</span><span class="n">__annotations__</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        当我们使用变量注释时，变量名和类型就会存放在函数的__annotations__属性中。那么即然有变量存储，那么我们是不是只需要获取传入的参数，然后和annotations中存储的变量类型进行比较是不是就达到目的了呢？仔细思考一下：</p>
+<ol>
+<li>参数检查势必要在函数执行前，想要在add执行前添加参数判断那么就需要使用装饰器了</li>
+<li>__annotations__的值是一个字典，字典是无序的，用户按照位置传进来参数是有序的，如何让它们形成对应关系方便我们检测呢？</li>
+</ol>
+<p>下面我们来了解一下inspect模块，它可以帮我们完成这个事情。</p>
+<h1 id="5-inspect模块-1">5 inspect模块</h1>
+<p>        官方解释如下：inspect模块提供了几个有用的函数来帮助获取关于活动对象的信息，例如模块、类、方法、函数、回溯、框架对象和代码对象。例如，它可以帮助您检查类的内容、检索方法的源代码、提取并格式化函数的参数列表，或者获取显示详细回溯所需的所有信息。</p>
+<h2 id="51-常用方法-1">5.1 常用方法</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">方法名称</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">判断</td>
+<td style="text-align:left">inspect.getmodulename(path)</td>
+<td style="text-align:left">获取模块名称</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.ismodule(object)</td>
+<td style="text-align:left">是不是个模块</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.isclass(object)</td>
+<td style="text-align:left">是不是个类</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.ismethod(object)</td>
+<td style="text-align:left">是不是一个方法</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.isfunction(object)</td>
+<td style="text-align:left">是不是一个函数</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.isgeneratorfunction(object)</td>
+<td style="text-align:left">是不是一个生成器函数</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.isgenerator(object)</td>
+<td style="text-align:left">是不是一个生成器</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.iscoroutinefunction(object)</td>
+<td style="text-align:left">是不是一个协程函数</td>
+</tr>
+<tr>
+<td style="text-align:left">获取信息</td>
+<td style="text-align:left">inspect.getmodulename(path)</td>
+<td style="text-align:left">获取模块名称</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">inspect.getsource(object)</td>
+<td style="text-align:left">获取对象的原码(并不会解析装饰器原码)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-signature类-1">5.2 signature类</h2>
+<p>        首先我们要说的是函数的签名信息：它包含了了函数的函数名、它的参数类型，它所在的类和名称空间及其他信息，签名对象(signature object)表示可调用对象的调用签名信息和它的注解信息，当我们使用signature()时，它会重新返回一个包含可调用对象信息的签名对象。</p>
+<h2 id="53-parameters属性-1">5.3 parameters属性</h2>
+<p>        signature类的<code>parameters</code>属性，它里面存放的是函数的参数注解和返回值注解，组成的有序字典，其中参数注解的格式为：参数名称，使用inspect.Parameters类包装的参数注解，这个参数注解很强大，它包含如下常用的方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名称</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">empty</td>
+<td style="text-align:left">等同于inspect._empty表示一个参数没有被类型注释</td>
+</tr>
+<tr>
+<td style="text-align:left">name</td>
+<td style="text-align:left">参数的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">default</td>
+<td style="text-align:left">参数的默认值，如果一个参数没有默认值，这个属性的值为inspect.empty</td>
+</tr>
+<tr>
+<td style="text-align:left">annotation</td>
+<td style="text-align:left">参数的注解类型，如果参数没有定义注解，这个属性的值为inspect.empty</td>
+</tr>
+<tr>
+<td style="text-align:left">kind</td>
+<td style="text-align:left">参数的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">这里的参数类型表示的是inspect内置参数类型(其实就是几个常用的函数参数定义类型而已，只是换个名字而已)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">_POSITIONAL_ONLY</span>         <span class="o">=</span> <span class="n">_ParameterKind</span><span class="o">.</span><span class="n">POSITIONAL_ONLY</span>       <span class="c1"># 位置参数_only</span>
+<span class="n">_POSITIONAL_OR_KEYWORD</span>   <span class="o">=</span> <span class="n">_ParameterKind</span><span class="o">.</span><span class="n">POSITIONAL_OR_KEYWORD</span> <span class="c1"># 位置或关键字参数</span>
+<span class="n">_VAR_POSITIONAL</span>          <span class="o">=</span> <span class="n">_ParameterKind</span><span class="o">.</span><span class="n">VAR_POSITIONAL</span>        <span class="c1"># 可变位置参数</span>
+<span class="n">_KEYWORD_ONLY</span>            <span class="o">=</span> <span class="n">_ParameterKind</span><span class="o">.</span><span class="n">KEYWORD_ONLY</span>          <span class="c1"># keyword-only参数</span>
+<span class="n">_VAR_KEYWORD</span>             <span class="o">=</span> <span class="n">_ParameterKind</span><span class="o">.</span><span class="n">VAR_KEYWORD</span>           <span class="c1"># 可变关键字参数</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其中POSITIONAL_ONLY，Python中没有被实现。</p>
+</blockquote>
+<h2 id="54-获取对象的参数签名-1">5.4 获取对象的参数签名</h2>
+<p>根据上面讲的方法，我们可以通过如下方式，简单的获取参数的签名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">inspect</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span> <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+    <span class="o">...</span><span class="p">:</span> <span class="n">params</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
+    <span class="o">...</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Parameter</span> <span class="s2">&#34;x:int&#34;</span><span class="o">&gt;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Parameter</span> <span class="s2">&#34;y:int&#34;</span><span class="o">&gt;</span><span class="p">)])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="nb">int</span>    <span class="c1"># 如果没有定义x的参数注解，那么这里就是inspect._empty</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过它的属性，搭配<code>有序字典</code>这个特性,有没有很兴奋？参数有序，传入的实参有序，还能获取参数注解的类型，那么就可以开工进行参数检查了！</p>
+<h1 id="6-检查参数-1">6 检查参数</h1>
 <p>以上面函数为例子，当给add函数传入的x，y时进行参数检查，如果x，y不是int类型，那么返回异常，并退出函数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

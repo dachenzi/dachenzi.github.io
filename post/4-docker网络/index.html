@@ -69,7 +69,7 @@
 <meta itemprop="description" content="brctl show docker 网络： docker 四种网络类型： bridge(Bridged Container): NAT桥模式(默认) host(Open Container): 与当前物理机共享网络资源(可以直接管理物理机网卡配置),容器使用宿主机的网络资源 none(Closed container):">
 <meta itemprop="datePublished" content="2019-03-31T05:27:23+00:00" />
 <meta itemprop="dateModified" content="2019-03-31T05:27:23+00:00" />
-<meta itemprop="wordCount" content="756">
+<meta itemprop="wordCount" content="1545">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 756 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1545 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
         
@@ -346,13 +346,115 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 4-docker网络
+date: 2018-04-07 14:06:12
+lastmod: 2018-04-07 14:06:12
+draft: false
+tags: [Container,]
+categories: [Container,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
     
     <div class="post-content">
       <p>brctl show</p>
+<p>docker 网络：
+docker 四种网络类型：</p>
+<ul>
+<li>bridge(Bridged Container): NAT桥模式(默认)</li>
+<li>host(Open Container): 与当前物理机共享网络资源(可以直接管理物理机网卡配置),容器使用宿主机的网络资源</li>
+<li>none(Closed container): 以为这容器没有网络，只有lo接口(新买一台主机，没有网卡)</li>
+<li>联盟网络(joined Container): 多个容器公用一组资源(NET、IPC、)</li>
+</ul>
+<p>docker network inspect web</p>
+<p>ip命令管理网络名称空间
+ip netns: 用于管理网络名称空间(模拟容器间通信)</p>
+<ul>
+<li>ip netns list:显示网络名称空间</li>
+<li>ip netns add NAME：添加一个网络名称空间</li>
+<li>ip netns set NAME NETNSID：设置一个网络名称名称空间的SID</li>
+<li>ip [-all] netns exec [NAME] cm d &hellip;：在一个网络名称空间中执行命令</li>
+<li>ip link：挪动网络设备到容器中去</li>
+</ul>
+<p>当我们使用ip去管理网络名称空间时，只有网络名称空间是被隔离的，其他名称空间都是共享的</p>
+<p>例子：
+创建网络名称空间：</p>
+<ul>
+<li>ip netns add r1</li>
+<li>ip netns add r2</li>
+</ul>
+<p>添加虚拟网卡：(一对)</p>
+<ul>
+<li>ip link add name veth1.1 type veth peer name veth1.2</li>
+<li>ip link show：会看到创建的一对儿的网卡</li>
+</ul>
+<p>移动虚拟网卡到网络命名空间中去：</p>
+<ul>
+<li>ip link set dev veth1.2 netns r1</li>
+<li>ip netns exec r1 ip a:验证</li>
+</ul>
+<p>修改网络名称空间中的网卡名称：</p>
+<ul>
+<li>ip netns exec r1 ip link set dev veth1.2 name eth0</li>
+</ul>
+<p>设置主机的veth的网卡的地址</p>
+<ul>
+<li>ip addr add 192.168.0.2/24 dev veth1.1</li>
+<li>ip link set veth1.1 up</li>
+</ul>
+<p>设置网络名称空间中的veth的网卡地址</p>
+<ul>
+<li>ip netns exec r1 ip addr add 192.168.0.3/24 dev eth0</li>
+<li>ip nets exec r1 ip link set dev eth0 up</li>
+</ul>
+<p>把创建的veth1.1移动到r2中，并设置IP地址，那么两个网络名称空间就可以通信了</p>
+<ul>
+<li>ip link set dev veth1.1 netns r1</li>
+<li>ip netns exec r1 ip addr add 192.168.0.3/24 dev veth1.1</li>
+<li>ip netns exec r1 ping 192.168.0.2</li>
+</ul>
+<p>启动容器时指定容器的网络模型</p>
+<ul>
+<li>docker run -it &ndash;rm &ndash;name t1 &ndash;network bridge/none/host busybox:latest</li>
+</ul>
+<p>指定容器的主机名，默认时，容器的主机名为它的容器ID</p>
+<ul>
+<li>docker run -it &ndash;rm &ndash;name t1 -h t1 &ndash;network none busybox:latest</li>
+<li>自动生成hosts文件中的本地解析</li>
+<li>自动将宿主机设置为nameserver(未浮现)</li>
+</ul>
+<p>设置自定义的dns,指定dns的搜索域</p>
+<ul>
+<li>docker run -it &ndash;rm &ndash;hostname t1 &ndash;network bridge &ndash;dns 114.114.114.114 busybox:latest</li>
+<li>docker run -it &ndash;rm &ndash;hostname <a href="mailto:t1@daxin.com">t1@daxin.com</a> &ndash;network bridge &ndash;dns-search ilinux.io busybox:latest</li>
+<li>docker run -it &ndash;rm &ndash;name t1 &ndash;hostname <a href="mailto:t1@daxin.com">t1@daxin.com</a> &ndash;network bridge &ndash;dns 114.114.114.114 &ndash;dns 223.5.5.5 &ndash;dns-search ilinux.io busybox:latest</li>
+</ul>
+<p>hosts文件解析记录</p>
+<ul>
+<li>docker run -it &ndash;rm &ndash;name t1 &ndash;hostname <a href="mailto:t1@daxin.com">t1@daxin.com</a> &ndash;network bridge &ndash;dns 114.114.114.114 &ndash;dns 223.5.5.5 &ndash;dns-search ilinux.io &ndash;add-host <a href="http://www.baidu.com">www.baidu.com</a>:1.1.1.1 busybox:latest</li>
+</ul>
+<hr>
+<h2 id="mathjax-true">title: 4-docker网络
+date: 2018-04-07 14:06:12
+lastmod: 2018-04-07 14:06:12
+draft: false
+tags: [Container,]
+categories: [Container,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p>brctl show</p>
 <p>docker 网络：
 docker 四种网络类型：</p>
 <ul>

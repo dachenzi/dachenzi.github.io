@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1、给一个半径，求圆的面积和周长。圆周率3.14 2 输入两个数，比较大小后，从小到大升序打印 3 依次输入若干个整数，打印出最大值，如果输">
 <meta itemprop="datePublished" content="2017-05-02T00:59:31+00:00" />
 <meta itemprop="dateModified" content="2017-05-02T00:59:31+00:00" />
-<meta itemprop="wordCount" content="950">
+<meta itemprop="wordCount" content="1945">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 950 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1945 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 基础
+date: 2016-11-15 20:45:16
+lastmod: 2016-11-15 20:45:16
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -615,6 +629,319 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="8-求1到5阶乘之和">8 求1到5阶乘之和</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 每循环一个数求一次阶乘，然后累加</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">*=</span> <span class="n">j</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">result</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="c1"># 3的阶乘实际上就是2的阶乘结果乘3即可，利用这种规律计算</span>
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="nb">sum</span> <span class="o">*=</span> <span class="n">i</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="nb">sum</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 基础
+date: 2016-11-15 20:45:16
+lastmod: 2016-11-15 20:45:16
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1%E7%BB%99%E4%B8%80%E4%B8%AA%E5%8D%8A%E5%BE%84%E6%B1%82%E5%9C%86%E7%9A%84%E9%9D%A2%E7%A7%AF%E5%92%8C%E5%91%A8%E9%95%BF%E5%9C%86%E5%91%A8%E7%8E%87314">1、给一个半径，求圆的面积和周长。圆周率3.14</a></li>
+<li><a href="#2-%E8%BE%93%E5%85%A5%E4%B8%A4%E4%B8%AA%E6%95%B0%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E5%90%8E%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E5%8D%87%E5%BA%8F%E6%89%93%E5%8D%B0">2 输入两个数，比较大小后，从小到大升序打印</a></li>
+<li><a href="#3-%E4%BE%9D%E6%AC%A1%E8%BE%93%E5%85%A5%E8%8B%A5%E5%B9%B2%E4%B8%AA%E6%95%B4%E6%95%B0%E6%89%93%E5%8D%B0%E5%87%BA%E6%9C%80%E5%A4%A7%E5%80%BC%E5%A6%82%E6%9E%9C%E8%BE%93%E5%85%A5%E4%B8%BA%E7%A9%BA%E5%88%99%E9%80%80%E5%87%BA%E7%A8%8B%E5%BA%8F">3 依次输入若干个整数，打印出最大值，如果输入为空，则退出程序</a></li>
+<li><a href="#4-%E8%BE%93%E5%85%A5n%E4%B8%AA%E6%95%B0%E6%B1%82%E6%AF%8F%E6%AC%A1%E8%BE%93%E5%85%A5%E5%90%8E%E7%9A%84%E7%AE%97%E6%95%B0%E5%B9%B3%E5%9D%87%E6%95%B0">4 输入n个数，求每次输入后的算数平均数</a></li>
+<li><a href="#5-%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E8%BE%B9%E9%95%BF%E4%B8%BAn%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2">5 打印一个边长为n的正方形</a></li>
+<li><a href="#6-%E6%B1%82100%E5%86%85%E6%89%80%E6%9C%89%E5%A5%87%E6%95%B0%E7%9A%84%E5%92%8C2500">6 求100内所有奇数的和(2500)</a></li>
+<li><a href="#7-%E5%88%A4%E6%96%AD%E5%AD%A6%E7%94%9F%E6%88%90%E7%BB%A9%E6%88%90%E7%BB%A9%E7%AD%89%E7%BA%A7a-e%E5%85%B6%E4%B8%AD90%E5%88%86%E4%BB%A5%E4%B8%8A%E4%B8%BAa80-89%E5%88%86%E4%B8%BAb70-79%E5%88%86%E4%B8%BAc60-69%E5%88%86%E4%B8%BAd60%E5%88%86%E4%BB%A5%E4%B8%8B%E4%B8%BAe">7 判断学生成绩，成绩等级A-E,其中90分以上为A,80-89分为B，70-79分为C,60-69分为D，60分以下为E</a></li>
+<li><a href="#8-%E6%B1%821%E5%88%B05%E9%98%B6%E4%B9%98%E4%B9%8B%E5%92%8C">8 求1到5阶乘之和</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1给一个半径求圆的面积和周长圆周率314-1">1、给一个半径，求圆的面积和周长。圆周率3.14</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 简单版本</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;area: {:.2f},circumference: {:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">3.14</span><span class="o">*</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="mf">3.14</span><span class="o">*</span><span class="n">radius</span><span class="p">))</span>
+
+<span class="c1"># 复杂版本</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;半径&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">radius</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">():</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">circumference</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;面积: {:.2f}, 周长：{:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">circumference</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">radius</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m bye </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;input Error ,retry&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-输入两个数比较大小后从小到大升序打印-1">2 输入两个数，比较大小后，从小到大升序打印</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 简单版</span>
+<span class="n">number1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">))</span>
+<span class="n">number2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">number1</span> <span class="o">&lt;</span> <span class="n">number2</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="n">number2</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">number2</span><span class="p">,</span> <span class="n">number1</span><span class="p">)</span>
+
+<span class="c1"># 负载版</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;{} &gt;&gt;&gt;:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())))</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">lst</span><span class="p">)))</span>
+
+<span class="c1"># 三元表达式</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-依次输入若干个整数打印出最大值如果输入为空则退出程序-1">3 依次输入若干个整数，打印出最大值，如果输入为空，则退出程序</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 简单版</span>
+<span class="n">max_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;:&#39;</span><span class="p">))</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">new_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;:&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">new_number</span> <span class="o">&gt;</span> <span class="n">max_number</span><span class="p">:</span>
+        <span class="n">max_number</span> <span class="o">=</span> <span class="n">new_number</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">max_number</span><span class="p">)</span>
+
+<span class="c1"># 稍微复杂版</span>
+<span class="n">max_number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">new_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">new_number</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">():</span>
+        <span class="n">new_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_number</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_number</span> <span class="o">&gt;</span> <span class="n">max_number</span><span class="p">:</span>
+            <span class="n">max_number</span> <span class="o">=</span> <span class="n">new_number</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">max_number</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">new_number</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31mbye</span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;input Error, retury&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-输入n个数求每次输入后的算数平均数-1">4 输入n个数，求每次输入后的算数平均数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;{} &gt;&gt;&gt;:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;avg: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="o">/</span><span class="n">count</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-打印一个边长为n的正方形-1">5 打印一个边长为n的正方形</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">side</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;len of side &gt;&gt;&gt;: &#39;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">side</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">side</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="o">*</span><span class="n">side</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">*</span><span class="p">(</span><span class="n">side</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-求100内所有奇数的和2500-1">6 求100内所有奇数的和(2500)</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-判断学生成绩成绩等级a-e其中90分以上为a80-89分为b70-79分为c60-69分为d60分以下为e-1">7 判断学生成绩，成绩等级A-E,其中90分以上为A,80-89分为B，70-79分为C,60-69分为D，60分以下为E</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;score: &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+
+<span class="c1"># 二分</span>
+<span class="n">score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;score: &#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="8-求1到5阶乘之和-1">8 求1到5阶乘之和</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

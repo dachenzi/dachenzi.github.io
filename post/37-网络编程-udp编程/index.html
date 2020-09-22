@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协">
 <meta itemprop="datePublished" content="2017-04-18T09:40:11+00:00" />
 <meta itemprop="dateModified" content="2017-04-18T09:40:11+00:00" />
-<meta itemprop="wordCount" content="3172">
+<meta itemprop="wordCount" content="6400">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 3172 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span class="more-meta"> 约 6400 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
         
@@ -351,6 +351,26 @@
     <li><a href="#31-构建服务端">3.1 构建服务端</a></li>
     <li><a href="#32-构建客户端">3.2 构建客户端</a></li>
     <li><a href="#33-常用方法">3.3 常用方法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mathjax-true">title: 37-网络编程-UDP编程
+date: 2016-03-06 11:28:53
+lastmod: 2016-03-06 11:28:53
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-构建服务端-1">3.1 构建服务端</a></li>
+    <li><a href="#32-构建客户端-1">3.2 构建客户端</a></li>
+    <li><a href="#33-常用方法-1">3.3 常用方法</a></li>
   </ul>
 </nav>
   </div>
@@ -1001,6 +1021,676 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="5-udp协议应用">5 UDP协议应用</h1>
+<p>UDP是无连接协议，它基于以下假设：</p>
+<ul>
+<li>网络足够好</li>
+<li>消息不会丢包</li>
+<li>包不会乱序</li>
+</ul>
+<p>但是，即使在局域网，也不能保证不丢包，而且包的到达不一定有序。</p>
+<p>应用场景：</p>
+<ol>
+<li>视频音频传输，一般来说，丢些包，问题不大，最多丢些图像，听不清话语。</li>
+<li>海量采集数据，例如传感器发来的数据，丢几十、几百条数据也没有关系。</li>
+<li>DNS协议，数据内容小，一个包就能查到结果，不存在乱序，丢包时重新请求解析即可。</li>
+</ol>
+<p>一般来说，UDP性能优于TCP，但是可靠性要求高的场合还是要选择TCP协议。
+　　</p>
+<hr>
+<h2 id="mathjax-true">title: 37-网络编程-UDP编程
+date: 2016-03-06 11:28:53
+lastmod: 2016-03-06 11:28:53
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-udp%E5%8D%8F%E8%AE%AE">1 UDP协议</a></li>
+<li><a href="#2-udp%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B">2 UDP通信流程</a></li>
+<li><a href="#3-udp%E7%BC%96%E7%A8%8B">3 UDP编程</a>
+<ul>
+<li><a href="#31-%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E7%AB%AF">3.1 构建服务端</a></li>
+<li><a href="#32-%E6%9E%84%E5%BB%BA%E5%AE%A2%E6%88%B7%E7%AB%AF">3.2 构建客户端</a></li>
+<li><a href="#33-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">3.3 常用方法</a></li>
+</ul>
+</li>
+<li><a href="#4-%E8%81%8A%E5%A4%A9%E5%AE%A4">4 聊天室</a></li>
+<li><a href="#5-udp%E5%8D%8F%E8%AE%AE%E5%BA%94%E7%94%A8">5 UDP协议应用</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-udp协议-1">1 UDP协议</h1>
+<p>UDP是面向无连接的协议，<code>使用UDP协议时，不需要建立连接，只需要知道对方的IP地址和端口号，就可以直接发数据包</code>。但是，能不能到达就不知道了。虽然用UDP传输数据不可靠，但它的优点是和TCP比，速度快，对于不要求可靠到达的数据，就可以使用UDP协议。</p>
+<h1 id="2-udp通信流程-1">2 UDP通信流程</h1>
+<p>我们先来了解一下，python的socket的通讯流程:<br>
+<img src="photo/udpsocket.png" alt="tcp_socket"></p>
+<p>服务端：</p>
+<ol>
+<li>创建Socket对象</li>
+<li>绑定IP地址Address和端口Port，使用bind方法，IPv4地址为一个二元组(&lsquo;IP&rsquo;,Port)，<code>一个UDP端口只能被绑定一次</code></li>
+<li>接受数据，recvfrom方法，使用缓冲区接受数据</li>
+<li>发送数据，sendto方法，类型为bytes</li>
+<li>关闭连接</li>
+</ol>
+<p>客户端：</p>
+<ol>
+<li>创建Socket对象</li>
+<li>连接服务端。connect方法（可选）</li>
+<li>发送数据，sendto/send方法，类型为bytes</li>
+<li>接受数据，recvfrom/recv方法，使用缓冲区接受数据</li>
+<li>关闭连接</li>
+</ol>
+<blockquote>
+<p>我们可以看到UDP不需要维护一个连接，所以比较简单</p>
+</blockquote>
+<h1 id="3-udp编程-1">3 UDP编程</h1>
+<p>        使用udp编程和使用tcp编程用于相似的步骤，而因为udp的特性，它的服务端不需要监听端口，并且客户端也不需要事先连接服务端。根据上图，以及建立服务端的流程，我门来捋一下服务端的逻辑到代码的步骤：</p>
+<h2 id="31-构建服务端-1">3.1 构建服务端</h2>
+<ol>
+<li>创建服务端</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+<span class="c1"># socke.AF_INET 指的是使用 IPv4</span>
+<span class="c1"># socket.SOCK_STREAM 指定使用面向数据报的UDP协议</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>绑定IP地址和端口。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span>  
+<span class="c1"># 小于1024的端口只有管理员才可以指定</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>接受数据(阻塞)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span><span class="p">,</span> <span class="n">client_info</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span> 
+<span class="c1"># 返回一个元组，数据和客户端的地址，因为UDP没有连接，所以只能通过提取消息的发送的源地址，才能在应答时指定对方地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>发送数据</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span> <span class="c1"># bytes格式</span>
+<span class="c1"># 第二个参数为客户端地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>关闭连接</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>完成的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>      <span class="c1"># 指定socket的协议，UDP使用的是SOCK_DGRAM</span>
+<span class="n">server</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">))</span>                               <span class="c1"># 绑定端口</span>
+ 
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;UDP Server is Starting...&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>                             <span class="c1"># 接受(包含数据以及客户端的地址)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Received from {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addr</span><span class="p">))</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s1">&#39;hello,{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">addr</span><span class="p">)</span>   <span class="c1"># 应答，格式为(应答的数据，客户端的IP和Port元组)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么要使用recvfrom/sendto?</p>
+<ol>
+<li>UDP无连接的特性，当服务端收到一条消息时，不会为它维护一个socket的，那么如何应答呢？</li>
+<li>UDP报文中包含对方的IP和Port信息，使用recvfrom，就会返回对方发送的数据和对方的地址</li>
+<li>sendto由于没有socket的特性，所以应答时也需要传递client的地址和端口</li>
+</ol>
+<h2 id="32-构建客户端-1">3.2 构建客户端</h2>
+<ol>
+<li>创建客户端</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+<span class="c1"># socke.AF_INET 指的是使用 IPv4</span>
+<span class="c1"># socket.SOCK_STREAM 指定使用面向数据报的UDP协议</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>添加服务端地址信息（可选）。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span>  
+<span class="c1"># UDP不会创建连接，所以这里仅仅是在socket上添加了本段/对端的地址而已，并不会发起连接</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>接受数据(阻塞)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">data</span><span class="p">,</span> <span class="n">client_info</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span> 
+<span class="c1"># 返回一个元组，数据和客户端的地址，因为UDP没有连接，所以只能通过提取消息的发送的源地址，才能在应答时指定对方地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>发送数据</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(),(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="mi">999</span><span class="p">))</span> <span class="c1"># bytes格式</span>
+<span class="c1"># 第二个参数为客户端地址</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>关闭连接</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么connect是可选的？</p>
+<ol>
+<li>当执行connect时，由于UDP的特性，并不会为我们创建连接，这里仅仅是在socket上添加了对端的地址而已，并不会发起连接</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">client</span><span class="p">)</span> <span class="c1"># &lt;socket.socket fd=140, family=AddressFamily.AF_INET, type=SocketKind.SOCK_DGRAM, proto=0&gt;</span>
+<span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">client</span><span class="p">)</span> <span class="c1"># &lt;socket.socket fd=140, family=AddressFamily.AF_INET, type=SocketKind.SOCK_DGRAM, proto=0, laddr=(&#39;127.0.0.1&#39;, 51859), raddr=(&#39;127.0.0.1&#39;, 9999)&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>如果不执行connect，那么在使用send发生时，就无法知道对端的IP地址，那么只能使用sendto来指定了。</li>
+<li>为什么接收时使用recv，因为是client，只会有server应答消息，所以就不需要来区分了。</li>
+<li>如果指定了connect，sendto已久可以发给任意终端，但recv只能接受connect指定的对端，发来的消息。</li>
+</ol>
+<p>完整的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+ 
+<span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>            <span class="c1"># 指定socket的协议，UDP使用的是SOCK_DGRAM</span>
+<span class="n">client</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">))</span>    <span class="c1"># 发送数据，格式为(发送的数据，服务端的IP和Port元组)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>                             <span class="c1"># 同样使用recv来接受服务端的应答数据</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>UDP的使用与TCP类似，但是不需要建立连接。此外，服务器绑定UDP端口和TCP端口互不冲突，也就是说，UDP的9999端口与TCP的9999端口可以各自绑定。　</p>
+</blockquote>
+<h2 id="33-常用方法-1">3.3 常用方法</h2>
+<p>服务器端套接字:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.bind()</code></td>
+<td>绑定地址（host,port）到套接字， 在AF_INET下,以元组（host,port）的形式表示地址。</td>
+</tr>
+</tbody>
+</table>
+<p>客户端套接字:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.connect()</code></td>
+<td>初始化UDP连接对象的，本段/对端地址。</td>
+</tr>
+<tr>
+<td>s.connect_ex()</td>
+<td>connect()函数的扩展版本,出错时返回出错码,而不是抛出异常</td>
+</tr>
+</tbody>
+</table>
+<p>公共用途的套接字函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s.recv()</code></td>
+<td>接收TCP/UDP数据，数据以字符串形式返回，bufsize指定要接收的最大数据量。flag提供有关消息的其他信息，通常可以忽略。</td>
+</tr>
+<tr>
+<td><code>s.send()</code></td>
+<td>发送TCP/UDP数据，将string中的数据发送到连接的套接字。返回值是要发送的字节数量，该数量可能小于string的字节大小。</td>
+</tr>
+<tr>
+<td><code>s.recvfrom()</code></td>
+<td>接收UDP数据，与recv()类似，但返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。</td>
+</tr>
+<tr>
+<td><code>s.sendto()</code></td>
+<td>发送UDP数据，将数据发送到套接字，address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。</td>
+</tr>
+<tr>
+<td><code>s.close()</code></td>
+<td>关闭套接字</td>
+</tr>
+<tr>
+<td>s.fileno()</td>
+<td>返回套接字的文件描述符。</td>
+</tr>
+<tr>
+<td><code>s.setblocking(flag)</code></td>
+<td>如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。</td>
+</tr>
+<tr>
+<td><code>s.makefile()</code></td>
+<td>创建一个与该套接字相关连的文件</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-聊天室-1">4 聊天室</h1>
+<p>下面来模仿上一篇TCP版本的聊天室的结构来创建一个UDP版本的聊天室
+服务端：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ChatUDPServer</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clients</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="c1"># 待清理的列表</span>
+            <span class="n">clean</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+            <span class="c1"># 远程主机关闭连接时，这里会触发异常。不知道为啥</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">client_addr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">ConnectionResetError</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">client_addr</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">client_addr</span><span class="p">,</span> <span class="s1">&#39;is down&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># 心跳包，内容越小越好</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;@im@&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="p">[</span><span class="n">client_addr</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+                <span class="k">continue</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">client_addr</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="p">[</span><span class="n">client_addr</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&#34;{}:{} {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">client_addr</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">client</span><span class="p">,</span> <span class="n">date</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c1"># 如果10s内没有发送心跳包，则进行清理</span>
+                <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="n">date</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">clean</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+            <span class="c1"># 清理超时连接</span>
+            <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="n">clean</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">cus</span> <span class="o">=</span> <span class="n">ChatUDPServer</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
+    <span class="n">cus</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
+            <span class="n">cus</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>客户端:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ChatUDPClient</span><span class="p">:</span>
+
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    self.ip: 服务端地址
+</span><span class="s2">    self.port：服务端端口
+</span><span class="s2">    self.socket：创建一个socket对象，用于socket通信
+</span><span class="s2">    self.event：创建一个事件对象，用于控制链接循环
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;recv&#39;</span><span class="p">,</span><span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_heart</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;heart&#39;</span><span class="p">,</span><span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_heart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;@im@&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+
+            <span class="c1"># 某些服务端强制关闭时，会出b&#39;&#39;，这里进行判断</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;{}:{} is down&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+                    <span class="k">break</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+
+            <span class="c1"># 有些服务端在关闭时不会触发b&#39;&#39;，这里会直接提示异常，这里进行捕捉</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">ConnectionResetError</span><span class="p">,</span><span class="ne">OSError</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;{}:{} is down&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;quit&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">ctc</span> <span class="o">=</span> <span class="n">ChatUDPClient</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
+    <span class="n">ctc</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">info</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;bye bye&#39;</span><span class="p">)</span>
+            <span class="n">ctc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctc</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="n">ctc</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Server is down...&#39;</span><span class="p">)</span>
+            <span class="k">break</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-udp协议应用-1">5 UDP协议应用</h1>
 <p>UDP是无连接协议，它基于以下假设：</p>
 <ul>
 <li>网络足够好</li>

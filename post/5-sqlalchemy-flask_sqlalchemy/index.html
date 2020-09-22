@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 sqlalchemy 关于sqlalchemy的用法请参考：sqlalchemy用法点这里 2 flask_sqlalchemy Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。">
 <meta itemprop="datePublished" content="2017-11-30T02:25:40+00:00" />
 <meta itemprop="dateModified" content="2017-11-30T02:25:40+00:00" />
-<meta itemprop="wordCount" content="1168">
+<meta itemprop="wordCount" content="2378">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 1168 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span class="more-meta"> 约 2378 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
 
         
         
@@ -353,6 +353,25 @@
     <li><a href="#23-上下文管理">2.3 上下文管理</a></li>
     <li><a href="#24-视图中使用">2.4 视图中使用</a></li>
     <li><a href="#25-关闭触发信号">2.5 关闭触发信号</a></li>
+    <li><a href="#mathjax-true">title: 5-sqlalchemy-flask_sqlalchemy
+date: 2017-07-25 08:33:11
+lastmod: 2017-07-25 08:33:11
+draft: false
+tags: [Flask框架,]
+categories: [Flask框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-创建对象-1">2.1 创建对象</a></li>
+    <li><a href="#22-初始化init_app-1">2.2 初始化init_app</a></li>
+    <li><a href="#23-上下文管理-1">2.3 上下文管理</a></li>
+    <li><a href="#24-视图中使用-1">2.4 视图中使用</a></li>
+    <li><a href="#25-关闭触发信号-1">2.5 关闭触发信号</a></li>
   </ul>
 </nav>
   </div>
@@ -586,6 +605,274 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="25-关闭触发信号">2.5 关闭触发信号</h2>
+<p>启动的时候会发送一个信号警告</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">FSADeprecationWarning: SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True or False to suppress this warning.
+  &#39;SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and &#39;
+</code></pre></td></tr></table>
+</div>
+</div><p>在配置文件中关闭出发的信号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings.py</span>
+<span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;121212asdsd121dafd&#39;</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    <span class="n">SQLALCHEMY_POOL_SIZE</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">SQLALCHEMY_TRACK_MODIFICATIONS</span> <span class="o">=</span> <span class="bp">False</span>   <span class="c1"># 添加这个配置即可。</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 5-sqlalchemy-flask_sqlalchemy
+date: 2017-07-25 08:33:11
+lastmod: 2017-07-25 08:33:11
+draft: false
+tags: [Flask框架,]
+categories: [Flask框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-sqlalchemy-1">1 sqlalchemy</h1>
+<p>关于sqlalchemy的用法请参考：<a href="https://www.cnblogs.com/dachenzi/p/10569495.html">sqlalchemy用法点这里</a></p>
+<h1 id="2-flask_sqlalchemy-1">2 flask_sqlalchemy</h1>
+<p>        Flask-SQLAlchemy 是一个为您的 Flask 应用增加 SQLAlchemy 支持的扩展。它需要 SQLAlchemy 0.6 或者更高的版本。它致力于简化在 Flask 中 SQLAlchemy 的使用，提供了有用的默认值和额外的助手来更简单地完成常见任务。
+<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html#id2">官方文档点这里</a></p>
+<p>下面是一个标准的falsk程序的目录结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cmdb
+├── cmdb
+│   ├── __init__.py   <span class="c1"># 创建db，create_app函数</span>
+│   ├── models.py   <span class="c1"># orm映射文件</span>
+│   ├── static
+│   ├── templates
+│   └── views   <span class="c1"># views视图函数</span>
+│       ├── __init__.py
+│       ├── account.py
+│       └── home.py
+├── create_table.py   <span class="c1"># 用于创建数据库表</span>
+├── manage.py    <span class="c1"># 管理，启动app</span>
+└── settings.py
+</code></pre></td></tr></table>
+</div>
+</div><p>其内部封装简化了很多sqlalchemy的操作，比如创建session，线程安全的scope_session，链接池等，都被封装好了，直接用就好了。</p>
+<h2 id="21-创建对象-1">2.1 创建对象</h2>
+<p>        新版本需要安装flask_sqlalchemy，并且倒入方式也和老版本有些区别，上面的官方文档我本地无法进行倒入。使用 <code>pip3 install flask_sqlalchemy</code> 安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># cmdb.__init__.py</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意，</p>
+<h2 id="22-初始化init_app-1">2.2 初始化init_app</h2>
+<p>在一个函数中定义的应用，SQLAlchemy 对象是全局的，后者如何知道前者了？答案就是 init_app()函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># cmdb.__init__.py</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">import</span> <span class="nn">Flask</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>  <span class="c1"># 需要把app传入，这样SQLAlchemy在内部就可以读取app中的相关配置，比如sql的driver，host等等</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>关于sqlalchemy的配置，这样就可以直接写在app的settings.py中了，可以配置的项目参考:<a href="http://www.pythondoc.com/flask-sqlalchemy/config.html">sqlalchemy配置</a></p>
+<p>比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># settings.py</span>
+
+<span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;121212asdsd121dafd&#39;</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="s1">&#39;mysql+pymysql://dahl:123456@10.0.0.10:3306/test&#39;</span>
+    <span class="n">SQLALCHEMY_POOL_SIZE</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="23-上下文管理-1">2.3 上下文管理</h2>
+<p>        我们写的model如何创建数据库表呢？在sqlalchemy中，需要使用base.metadata.create_all()，在flask_sqlalchey中，简化了这个过程。利用db.create_all就可以完成创建,注意需要在db所在的地方，引入编写的model的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># cmdb.__init__</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+
+<span class="c1"># 实例化一个flash_sqlalchemy对象</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+
+<span class="c1"># 只能放在下面，因为会用到db 对象</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span>    <span class="c1"># 倒入编写的model文件中的类</span>
+<span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">account</span>
+<span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">home</span>
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="s1">&#39;settings.Base&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 注册蓝图</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">ac</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">home</span><span class="o">.</span><span class="n">hm</span><span class="p">)</span>
+
+    <span class="c1"># 初始化</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建数据库表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># create_table.py </span>
+
+<span class="kn">from</span> <span class="nn">cmdb</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">manage</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>  <span class="c1"># 需要上下文环境</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>      <span class="c1"># 初始化表结构</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-视图中使用-1">2.4 视图中使用</h2>
+<p>在views中的视图函数中，通过导入db对象，即可使用它来操作数据库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># views.account.py</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+<span class="kn">from</span> <span class="nn">cmdb</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">cmdb</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">ac</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;ac&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@ac.route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>  <span class="c1"># 直接使用</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;login&#39;</span>
+
+<span class="nd">@ac.route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;logout&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="25-关闭触发信号-1">2.5 关闭触发信号</h2>
 <p>启动的时候会发送一个信号警告</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解释器 5. Python版本区别 6. Pytho">
 <meta itemprop="datePublished" content="2019-08-29T00:41:19+00:00" />
 <meta itemprop="dateModified" content="2019-08-29T00:41:19+00:00" />
-<meta itemprop="wordCount" content="7348">
+<meta itemprop="wordCount" content="14750">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 7348 字 </span>
-          <span class="more-meta"> 预计阅读 15 分钟 </span>
+        <span class="more-meta"> 约 14750 字 </span>
+          <span class="more-meta"> 预计阅读 30 分钟 </span>
 
         
         
@@ -368,6 +368,43 @@
   <ul>
     <li><a href="#81-命令说明">8.1. 命令说明</a></li>
     <li><a href="#82-配置说明">8.2. 配置说明</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mathjax-true">title: 1-基础概念及环境部署
+date: 2019-01-04 02:19:19
+lastmod: 2019-01-04 02:19:19
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-基本概念-1">1.1. 基本概念</a></li>
+    <li><a href="#12-语言分类-1">1.2. 语言分类</a></li>
+    <li><a href="#13-高级语言的发展-1">1.3. 高级语言的发展</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#61-windows安装-1">6.1. windows安装</a></li>
+    <li><a href="#62-linux安装-1">6.2. Linux安装</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#71-pyenv介绍及安装-1">7.1. pyenv介绍及安装</a></li>
+    <li><a href="#72-virtualenv-1">7.2. virtualenv</a></li>
+    <li><a href="#73-导出项目依赖包-1">7.3. 导出项目依赖包</a></li>
+    <li><a href="#74-pyenv安装位置-1">7.4. pyenv安装位置　</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#81-命令说明-1">8.1. 命令说明</a></li>
+    <li><a href="#82-配置说明-1">8.2. 配置说明</a></li>
   </ul>
 </nav>
   </div>
@@ -1069,6 +1106,736 @@ General Options:
 </div><h1 id="9-pycharm安装及基本使用">9. pycharm安装及基本使用</h1>
 <p>请参考博文: <a href="http://www.cnblogs.com/dachenzi/articles/7684064.html">http://www.cnblogs.com/dachenzi/articles/7684064.html</a> , 安装过程中遇到的问题，欢迎邮件咨询 <a href="mailto:beyondlee2011@126.com">beyondlee2011@126.com</a></p>
 <h1 id="10-第一个python程序">10. 第一个Python程序</h1>
+<p>        既然Python语言安装完毕了，那么小伙伴肯定已经跃跃欲试了，那么我们就来写一个吊炸天的Python程序吧<br>
+        首先这个程序很牛逼，为什么这么说呢？因为会用到一个我们以后几乎天天用的命令，那就是print。有的同学英文好，一下就知道是打印的意思。那么该如何使用呢？</p>
+<p>这个吊炸天的例子如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Python 2.x</span>
+print <span class="s1">&#39;hello world&#39;</span>
+ 
+<span class="c1"># python 3.x</span>
+print<span class="o">(</span><span class="s1">&#39;hello world&#39;</span><span class="o">)</span>
+
+<span class="c1"># 这里：引号扩起来的就表示要打印到屏幕上的代码，快去试试吧。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>OK，你已经精通Python了！厉害了我的哥。哈哈</strong></p>
+<hr>
+<h2 id="mathjax-true">title: 1-基础概念及环境部署
+date: 2019-01-04 02:19:19
+lastmod: 2019-01-04 02:19:19
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80">1. 编程基础</a>
+<ul>
+<li><a href="#11-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">1.1. 基本概念</a></li>
+<li><a href="#12-%E8%AF%AD%E8%A8%80%E5%88%86%E7%B1%BB">1.2. 语言分类</a></li>
+<li><a href="#13-%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95">1.3. 高级语言的发展</a></li>
+</ul>
+</li>
+<li><a href="#2-%E7%A8%8B%E5%BA%8F">2. 程序</a></li>
+<li><a href="#3-python%E7%9A%84%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D">3. python的语言介绍</a></li>
+<li><a href="#4-python%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8">4. Python的解释器</a></li>
+<li><a href="#5-python%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB">5. Python版本区别</a></li>
+<li><a href="#6-python%E5%AE%89%E8%A3%85">6. Python安装</a>
+<ul>
+<li><a href="#61-windows%E5%AE%89%E8%A3%85">6.1. windows安装</a></li>
+<li><a href="#62-linux%E5%AE%89%E8%A3%85">6.2. Linux安装</a></li>
+</ul>
+</li>
+<li><a href="#7-pyenv%E5%A4%9A%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86">7. pyenv多版本管理</a>
+<ul>
+<li><a href="#71-pyenv%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85">7.1. pyenv介绍及安装</a></li>
+<li><a href="#72-virtualenv">7.2. virtualenv</a></li>
+<li><a href="#73-%E5%AF%BC%E5%87%BA%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%E5%8C%85">7.3. 导出项目依赖包</a></li>
+<li><a href="#74-pyenv%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE">7.4. pyenv安装位置</a></li>
+</ul>
+</li>
+<li><a href="#8-pip%E5%91%BD%E4%BB%A4">8. pip命令</a>
+<ul>
+<li><a href="#81-%E5%91%BD%E4%BB%A4%E8%AF%B4%E6%98%8E">8.1. 命令说明</a></li>
+<li><a href="#82-%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E">8.2. 配置说明</a></li>
+</ul>
+</li>
+<li><a href="#9-pycharm%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">9. pycharm安装及基本使用</a></li>
+<li><a href="#10-%E7%AC%AC%E4%B8%80%E4%B8%AApython%E7%A8%8B%E5%BA%8F">10. 第一个Python程序</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-编程基础-1">1. 编程基础</h1>
+<p>        首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得&rsquo;翻译&rsquo;成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。<br>
+        比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。<br>
+        所以Python是一种相当高级的语言。<br>
+        你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。<br>
+        那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。<br>
+        用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。下面我们了解一下计算机的基础概念</p>
+<h2 id="11-基本概念-1">1.1. 基本概念</h2>
+<p>        程序：是一组能让计算机识别和执行的指令。 <br>
+        计算机五大部件：<code>输入设备</code>、<code>输出设备</code>、<code>运算器</code>、<code>控制器</code>、<code>存储器</code>，各部分主要作用：</p>
+<ul>
+<li><code>运算器</code>：完成各种算数运算、逻辑运算、数据传输等数据加工处理</li>
+<li><code>控制器</code>：控制程序的执行</li>
+<li><code>存储器</code>：用于记忆程序和数据，例如内存</li>
+<li><code>输入设备</code>：将数据或者程序输入到计算机中，例如鼠标、键盘</li>
+<li><code>输出设备</code>：将数据或程序的处理结果展示给用户，例如显示器、打印机等</li>
+</ul>
+<p>        <strong>注：CPU有运算器和控制器组成，其中还有寄存器以及多级缓存，其中我们所熟知的L1、L2缓存是每个CPU核心独占的，而L3缓存则是所有核心共享的，缓存的速度依次降低，新版的CPU还会把北桥芯片集成在CPU中。</strong><br>
+        计算机语言:人与计算机之间交互的语言，机器语言、汇编语言等属于早期语言的代表，机器语言由一定位数组成的二进制0和1的序列组成，这中语言非常晦涩，难以理解，难以记录，而汇编语言则借助了一些助记符来替代机器指令，虽然好记了一点，但还是难以学习，后来经过时代的变迁，各大伟人的突出贡献，慢慢的针对不同场景的编程语言共同绽放。</p>
+<h2 id="12-语言分类-1">1.2. 语言分类</h2>
+<p>        从距离机器和人类可读的两种方向，主要分为<code>低级语言</code>和<code>高级语言</code>。<br>
+        从运行方式来看又分为<code>编译型语言</code>和<code>解释型语言</code>。</p>
+<ul>
+<li><code>低级语言</code>：面向的机器的语言，比如机器语言、汇编语言，不同的及其不能通用。</li>
+<li><code>高级语言</code>：接近人类可读的自然和数字结合的计算机语言,由编译程序转换成机器指令来进行执行，我们只需要关注如何书写源程序，剩下编译的事情就交给编译器进行处理。</li>
+<li><code>编译语言</code>：把代码转换成目标及其的CPU指令</li>
+<li><code>解释语言</code>：解释后转换成字节码，运行在虚拟机上，解释器执行中间代码</li>
+</ul>
+<p><img src="photo/low-and-high.png" alt="language"><br>
+        <strong>语言越高级，越接近人类的自然语言和数学语言，越低级则越能让及其理解，高级语言和低级语言之间需要的一个转换的工具：编译器、解释器，例如C、C++等语言的源代码需要本地编译，而Java、Python、C#的源代码需要被解释器编译成中间代码，在虚拟机上运行</strong></p>
+<h2 id="13-高级语言的发展-1">1.3. 高级语言的发展</h2>
+<p>        高级语言根据发展历程主要分为四个阶段或者说是四种类型：<code>非结构化</code>、<code>结构化</code>、<code>面向对象</code>、<code>函数式</code>。</p>
+<ul>
+<li><code>非结构化语言</code>:编号或标签、GOTO、子程序可以有多个入口和出口，有分支、循环。</li>
+<li><code>结构化语言</code>：任何基本语句只允许是唯一入口和出口，有顺序、分支、循环、废弃GOTO</li>
+<li><code>面向对象的语言</code>：更加接近人类认知世界的方式，万事万物抽象成对象，对象间关系抽象成类和继承。而类具有封装、继承、多态等特性</li>
+<li><code>函数式语言</code>：属于一种古老的编程范式，应用在数据计算、并行处理等场景，在这种语言中，函数是&rsquo;一等公民'，利用函数的特性，还有更高级的比如高阶函数等。</li>
+</ul>
+<h1 id="2-程序-1">2. 程序</h1>
+<p>        什么是程序呢？一般我们所说的程序是：算法+数据结构。可以总结出如下特点：</p>
+<ol>
+<li>数据是一切程序的核心</li>
+<li>数据结构是数据在计算机中的类型和组织方式</li>
+<li>算法是处理数据的方式，算法有优劣之分</li>
+</ol>
+<h1 id="3-python的语言介绍-1">3. python的语言介绍</h1>
+<p>        Python是著名的“龟叔”Guido van Rossum在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言。<br>
+        和C语言相比：C语言适合开发那些追求运行速度、充分发挥硬件性能的程序。而Python是用来编写应用程序的高级编程语言。<br>
+Python的优点：</p>
+<ul>
+<li>为我们提供了非常完善的基础代码库，覆盖了网络、文件、GUI、数据库、文本等大量内容，被形象地称作“内置电池（batteries included）”。用Python开发，许多功能不必从零编写，直接使用现成的即可，除了内置的库外，Python还有大量的第三方库，也就是别人开发的，供你直接使用的东西。当然，如果你开发的代码通过很好的封装，也可以作为第三方库给别人使用。</li>
+</ul>
+<p>Python的缺点：</p>
+<ul>
+<li>运行速度慢，和C程序相比非常慢，因为Python是解释型语言，你的代码在执行时会一行一行地翻译成CPU能理解的机器码，这个翻译过程非常耗时，所以很慢。而C程序是运行前直接编译成CPU能执行的机器码，所以非常快，但是大量的应用程序不需要这么快的运行速度，因为用户根本感觉不出来。</li>
+<li>代码不能加密。如果要发布你的Python程序，实际上就是发布源代码，这一点跟C语言不同，C语言不用发布源代码，只需要把编译后的机器码（也就是你在Windows上常见的xxx.exe文件）发布出去。要从机器码反推出C代码是不可能的，所以，凡是编译型的语言，都没有这个问题，而解释型的语言，则必须把源码发布出去。</li>
+</ul>
+<p>另外<code>Python还是一种动态编译的、强类型的语言</code>，那么什么是动态语言，什么是强类型语言呢？</p>
+<ul>
+<li><code>静态编译语言</code>：实现声明变量类型，类型不能再改变，编译时检查</li>
+<li><code>动态编译语言</code>：不用事先声明类型，随时可以赋值为其他类型，但编程时不能准确确定是什么类型，很难推断</li>
+<li><code>强类型语言</code>：不同类型之间操作，必须先强制类型转换为同一类 比如print(1+&lsquo;a&rsquo;),这种是无法执行的</li>
+<li><code>弱类型语言</code>：不同类型间可以操作，自动隐士转换，比如javascript中Console
+.log(1+&lsquo;a&rsquo;)</li>
+</ul>
+<h1 id="4-python的解释器-1">4. Python的解释器</h1>
+<p>        Python这种高级语言需要编译成字节码然后由Python虚拟机(解释器)去执行的，针对解释器，有多种不同的版本。</p>
+<ul>
+<li><code>官方的CPython</code>: C语言开发，最广泛的Python解释器</li>
+<li><code>IPython</code>：一个交互式、功能增强的CPython</li>
+<li><code>PyPy</code>：Python语言写的Python解释器，并且针对性的进行了优化，比如JIT技术，动态编译Python代码</li>
+<li><code>Jpython</code>：Python的源码编译成Java的字节码，跑在JVM上</li>
+<li><code>IronPython</code>：与Jpython类似运行再.Net平台上的解释器，Python代码被编译成.Net的字节码</li>
+</ul>
+<p><strong>        虽然列举了这么多编译器，但是目前主流的还是官方提供的Cpython，但pypi由于使用Python语言编写，针对性的进行了许多优化，据说速度可以达到Cpython的10倍以上，建议后期可以研究一下</strong></p>
+<h1 id="5-python版本区别-1">5. Python版本区别</h1>
+<p>        Python是很多Linux系统默认安装的语言，以Centos为例由于其yum包管理工具使用的是Python开发，所以其内置了Python2.x版本，但是Python目前已经发展到了3.7版本了，并且Python官方对2.x的支持也快到期，所以建议学习ython的3.x版本。<br>
+        Python 3.x的在本质上和Python 2.x有很大的变化，2.x的程序是不能直接在3.x的版本上运行的，它们的主要区别有：</p>
+<ul>
+<li>语句函数化。例如<code>print</code>的打印，在3.x中是个函数，要打印的内容会被当作参数传递进入，而2.x中的含义是<code>print</code>语句打印元祖</li>
+<li>整除。在3.x中，/为自然除，//为整除。2.x中/和//都为整除。</li>
+<li><code>input</code>函数。3.x中把2.x中的<code>raw_input</code>舍去，功能合并到<code>input</code>函数中去。</li>
+<li><code>round</code>函数。在3.x中的取整变为距离最近的偶数</li>
+<li>字符串统一使用unicode。2.x中如果想要输入中文，还需要在文件头显示声明(<code>_*_coding:utf-8 _*_</code>)</li>
+<li>异常的捕获、抛出的语法改变</li>
+</ul>
+<h1 id="6-python安装-1">6. Python安装</h1>
+<p>不同平台需要安装不同版本的Python，比如windows，需要用exe的应用程序，而Linux可以有源码编译安装，或者yum安装。</p>
+<h2 id="61-windows安装-1">6.1. windows安装</h2>
+<p>安装方法
+　　windows由于都是图形界面，这里就不一一截图了，只文字说明安装步骤。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">1、下载安装包
+访问 https://www.python.org/ 在 Downloads标签页下选择 windows，然后根据自己需求，下载对应的 <span class="sb">`</span>Windows x86-64 executable installer<span class="sb">`</span> 版本
+ 
+2、安装
+双击下载好的 Windows x86-64 executable installer，一直next即可。
+<span class="c1"># 安装路径默认即可，不要自作聪明修改</span>
+ 
+3、配置环境变量
+在安装程序中选择 add to PATH，就是把python命令安装在PATH变量中，让我们可以在任意地方通过命令访问，如果忘记选择，也可以通过下面的方法进行设置
+右击我的电脑 -- 属性 -- 高级系统设置 -- 环境变量 -- 编辑 PATH 变量 -- 添加 python 的安装路径 C:<span class="se">\P</span>ython36 （以分号隔开）-- 确定
+
+4、测试
+打开 cmd <span class="o">(</span>命令提示符，快捷键windows+r<span class="o">)</span> ，输入 python ，可以进入解释器表示安装成功
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="62-linux安装-1">6.2. Linux安装</h2>
+<p>        Linux的安装有yum和编译安装两种方式：</p>
+<ol>
+<li>yum方式</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>20:08:40 python@centos7 ~<span class="o">]</span><span class="nv">$yum</span> install -y python36
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>编译安装</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">## 安装Python命令行退格键、HTTPS等依赖包(自由选择可以不装)</span>
+<span class="o">[</span>20:10:12 root@centos7 Python-3.6.7rc2<span class="o">]</span><span class="c1">#yum install -y readline readline-devel openssl-devel</span>
+
+
+
+<span class="c1"># 下载Python源码包</span>
+<span class="o">[</span>20:11:49 python@centos7 ~<span class="o">]</span><span class="nv">$wget</span> https://www.python.org/ftp/python/3.6.7/Python-3.6.7rc2.tgz -P /tmp
+--2018-12-31 20:12:31--  https://www.python.org/ftp/python/3.6.7/Python-3.6.7rc2.tgz
+Resolving www.python.org <span class="o">(</span>www.python.org<span class="o">)</span>... 151.101.72.223, 2a04:4e42:11::223
+Connecting to www.python.org <span class="o">(</span>www.python.org<span class="o">)</span><span class="p">|</span>151.101.72.223<span class="p">|</span>:443... connected.
+HTTP request sent, awaiting response... <span class="m">200</span> OK
+Length: <span class="m">22969389</span> <span class="o">(</span>22M<span class="o">)</span> <span class="o">[</span>application/octet-stream<span class="o">]</span>
+Saving to: ‘/tmp/Python-3.6.7rc2.tgz’
+
+100%<span class="o">[===========================================================================================================================================================================================</span>&gt;<span class="o">]</span> 22,969,389   365KB/s   in 33s    
+
+2018-12-31 20:13:04 <span class="o">(</span><span class="m">678</span> KB/s<span class="o">)</span> - ‘/tmp/Python-3.6.7rc2.tgz’ saved <span class="o">[</span>22969389/22969389<span class="o">]</span>
+
+<span class="o">[</span>20:13:04 python@centos7 ~<span class="o">]</span>$
+
+<span class="c1"># 解压文件</span>
+<span class="o">[</span>20:14:17 root@centos7 tmp<span class="o">]</span><span class="c1">#tar xf /tmp/Python-3.6.7rc2.tgz -C /usr/local/</span>
+<span class="o">[</span>20:14:24 root@centos7 tmp<span class="o">]</span><span class="c1">#cd /usr/local/</span>
+<span class="o">[</span>20:14:27 root@centos7 local<span class="o">]</span><span class="c1">#ls</span>
+bin  etc  games  include  lib  lib64  libexec  Python-3.6.7rc2  sbin  share  src
+<span class="o">[</span>20:16:28 root@centos7 local<span class="o">]</span><span class="c1">#cd Python-3.6.7rc2/</span>
+
+
+<span class="c1"># 执行编译配置检查</span>
+<span class="o">[</span>20:17:20 root@centos7 local<span class="o">]</span><span class="c1">#./configure  --with-ssl --prefix=/usr/local/python3</span>
+
+<span class="c1"># 编译</span>
+<span class="o">[</span>20:19:28 root@centos7 Python-3.6.7rc2<span class="o">]</span><span class="c1">#make</span>
+ 
+<span class="c1"># 安装</span>
+<span class="o">[</span>20:20:28 root@centos7 Python-3.6.7rc2<span class="o">]</span><span class="c1">#make install</span>
+
+<span class="c1"># 环境变量配置(添加/usr/local/python3/bin 到 PATH 路径中)</span>
+<span class="o">[</span>20:22:23 root@centos7 bin<span class="o">]</span><span class="c1">#vim ~/.bash_profile </span>
+  <span class="m">1</span> <span class="c1"># .bash_profile</span>
+  <span class="m">2</span> 
+  <span class="m">3</span> <span class="c1"># Get the aliases and functions</span>
+  <span class="m">4</span> <span class="k">if</span> <span class="o">[</span> -f ~/.bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="m">5</span>         . ~/.bashrc
+  <span class="m">6</span> <span class="k">fi</span>
+  <span class="m">7</span> 
+  <span class="m">8</span> <span class="c1"># User specific environment and startup programs</span>
+  <span class="m">9</span> 
+ <span class="m">10</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin:/usr/local/python3/bin                                
+ <span class="m">11</span> 
+ <span class="m">12</span> <span class="nb">export</span> PATH
+
+ <span class="c1"># 测试</span>
+<span class="o">[</span>20:24:28 root@centos7 ~<span class="o">]</span><span class="c1">#source .bash_profile </span>
+<span class="o">[</span>20:24:36 root@centos7 ~<span class="o">]</span><span class="c1">#python36</span>
+bash: python36: <span class="nb">command</span> not found...
+<span class="o">[</span>20:24:40 root@centos7 ~<span class="o">]</span><span class="c1">#python3</span>
+Python 3.6.7rc2 <span class="o">(</span>default, Dec <span class="m">31</span> 2018, 20:20:36<span class="o">)</span> 
+<span class="o">[</span>GCC 4.8.5 <span class="m">20150623</span> <span class="o">(</span>Red Hat 4.8.5-36<span class="o">)]</span> on linux
+Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34;</span>, <span class="s2">&#34;credits&#34;</span> or <span class="s2">&#34;license&#34;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; 
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-pyenv多版本管理-1">7. pyenv多版本管理</h1>
+<p>        在很多工作的情况下，由于每个项目用的可能不是一个版本的Python，并且不同应用程序所以来的第三方程序包都不同，如何让多版本Python进行共存，并且保证每个项目依赖的第三方包
+想要让多个Python版本共存，我们想到的方法有如下两种：</p>
+<ul>
+<li>编译安装新版本至某一个路径</li>
+<li>多版本python管理工具</li>
+</ul>
+<p>        <strong>如果每添加一个新的Python版本就编译一次的话，大大增加了环境切换的成本，并且还需要区分命令(python3.5, python 2.7)等等，所以就凸显出了多版本管理工具的优点</strong></p>
+<h2 id="71-pyenv介绍及安装-1">7.1. pyenv介绍及安装</h2>
+<p>        pyenv是一个多版本Python管理工具，它可以帮我们安装想要的Python版本，并且可以一键切换，属于现在比较流行的工具。pyenv是一个开源的项目，其代码托管在github上，我们可以访问它的github站点来根据install的步骤进行安装。pyenv的github地址：<code>https://github.com/pyenv/pyenv</code>
+<strong>pyenv官方还提供了便捷的安装方式，它的项目地址是：<code>https://github.com/pyenv/pyenv-installer</code>，仅需要简单几步就可以完成安装，下面以这种方式进行说明。</strong></p>
+<p><strong>下面的步骤已在CentOS 6.7上测试，并安装成功</strong></p>
+<ol>
+<li>安装依赖的包(由于pyenv默认使用编译的方式安装Python，所以它需要的依赖包需要提前安装)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@Python ~<span class="o">]</span><span class="c1"># yum install -y gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>安装GIT(由于pyenv-installer中调用git使用clone的方式拉拉取pyenv的代码，所以这里需要进行安装)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@Python ~<span class="o">]</span><span class="c1"># yum install -y git</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>安装Pyenv</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 执行如下命令安装pyenv</span>
+<span class="o">[</span>root@Python ~<span class="o">]</span><span class="c1"># curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash</span>
+
+<span class="c1"># 这里建议使用普通用户进行安装</span>
+<span class="c1"># 如果遇到 curl: (35) SSL connect error ，尝试更新nss，如果问题依旧，尝试更新curl</span>
+<span class="o">[</span>python@Python ~<span class="o">]</span><span class="c1"># yum update nss</span>
+<span class="o">[</span>python@Python ~<span class="o">]</span><span class="c1"># yum update curl</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>修改环境变量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@Python ~<span class="o">]</span><span class="c1"># vim /etc/profile.d/pyenv.sh</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># Define environment variable</span>
+<span class="nb">export</span> <span class="nv">PYENV_ROOT</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/.pyenv&#34;</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$PYENV_ROOT</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
+<span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>pyenv init -<span class="k">)</span><span class="s2">&#34;</span>
+  
+<span class="o">[</span>root@Python~<span class="o">]</span><span class="c1"># source /etc/profile.d/pyenv.sh</span>
+<span class="c1"># PS：这里直接更新了/etc/profile.d，如果是单个用户安装并使用，建议添加到用户家目录中的profile文件中去</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>验证</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@Python ~<span class="o">]</span><span class="c1"># pyenv version</span>
+system <span class="o">(</span><span class="nb">set</span> by /root/.pyenv/version<span class="o">)</span>  <span class="c1"># 表示当前使用的是系统的Python版本</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>pyenv命令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pyenv -h                <span class="c1"># 即可列出命令信息</span>
+pyenv install -l        <span class="c1"># 列出安装的版本信息</span>
+pyenv install 3.3.5     <span class="c1"># 即可安装</span>
+pyenv versions          <span class="c1"># 查看系统python版本（pyenv install 安装的版本都可以在这里看到）</span>
+pyenv global 3.3.5      <span class="c1"># 切换Python默认版本为3.3.5</span>
+pyenv <span class="nb">local</span> 3.3.5       <span class="c1"># 切换当前目录下的Python版本为3.3.5(和目录绑定,子目录继承环境设定)</span>
+pyenv shell 3.3.5       <span class="c1"># 仅仅针对当前shell环境(会话级别)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>离线安装python版本<br>
+        通过 <code>pyenv install 3.5.3</code> 进行安装时，它会联网下载 <code>Python 3.5.3</code> 的源码包，如果机器不能上网的话，可以采用离线的方式,预先下载号Python 要安装的Python的版本包（注意需要<code>gz,xz,bz</code>，三种格式都需要) 在pyenv的安装目录下，一般在用户的家目录下<code>.pyenv</code>目录中，进入后新建子目录cache，然后把三个包考进去即可，然后再次执行 <code>pyenv install 3.5.3</code> 即可</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@Python ~<span class="o">]</span>$ <span class="nb">cd</span> .pyenv
+<span class="o">[</span>root@Python ~<span class="o">]</span>$ mkdir cache
+<span class="o">[</span>root@Python ~<span class="o">]</span>$ rz    <span class="c1"># 上传三个下载好的Python包</span>
+<span class="o">[</span>root@Python ~<span class="o">]</span>$ pyenv install 3.5.3
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="72-virtualenv-1">7.2. virtualenv</h2>
+<p>        当多个项目公用一台主机的时候，就会产生很多问题，当你的项目和其他人的项目共用python 3.5.3时，假如每个项目都安装了很多依赖包，你如何区分哪些包是你的项目需要的？这时virtualenv就很重要了，它可以在pyenv的环境中，再造一个虚拟环境，这个环境是基于pyenv中管理的某个主环境，派生出来的独立子环境，你对virtualenv进行的操作，和其他的virtualenv没有任何关联。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"> <span class="c1"># 创建一个virtualenv环境，名字为daxin，基于pyenv管理的3.5.3版本</span>
+<span class="o">[</span>python@localhost .pip<span class="o">]</span>$ pyenv virtualenv 3.5.3 daxin     
+<span class="o">[</span>python@localhost .pip<span class="o">]</span>$ pyenv versions
+* system <span class="o">(</span><span class="nb">set</span> by /home/python/.pyenv/version<span class="o">)</span>
+3.5.3
+3.5.3/envs/daxin
+daxin
+
+<span class="c1"># 这时，我们再对某个项目进行切换时，如下</span>
+<span class="o">[</span>python@localhost .pip<span class="o">]</span>$ pyenv versions
+* system <span class="o">(</span><span class="nb">set</span> by /home/python/.pyenv/version<span class="o">)</span>
+  3.5.3
+  3.5.3/envs/dachenzi
+  3.5.3/envs/daxin
+  dachenzi
+  daxin
+ 
+<span class="o">[</span>python@localhost ~<span class="o">]</span>$ mkdir cmdb
+<span class="o">[</span>python@localhost ~<span class="o">]</span>$ <span class="nb">cd</span> cmdb
+<span class="o">[</span>python@localhost cmdb<span class="o">]</span>$ pyenv <span class="nb">local</span> daxin
+<span class="o">(</span>daxin<span class="o">)</span> <span class="o">[</span>python@localhost cmdb<span class="o">]</span>$ ls                <span class="c1"># 最前面多了个virtualenv环境的名称</span>
+<span class="c1"># 这样我们就可以放心的安装和下载依赖包了，</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="73-导出项目依赖包-1">7.3. 导出项目依赖包</h2>
+<p>        如果某一天我要导出我当前环境安装的所有依赖包，该怎么办呢？Python已经提供了一个工具，供我们导出当前Python版本安装的所有依赖包及名称，它就是pip命令(python 3.x中已经内置该命令),使用它的<code>freeze</code>参数即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用freeze可以直接导出当前安装的依赖包以及</span>
+<span class="o">(</span>daxin<span class="o">)</span> <span class="o">[</span>python@localhost cmdb<span class="o">]</span>$ pip freeze &gt; requirement.txt    对应的版本
+<span class="o">(</span>daxin<span class="o">)</span> <span class="o">[</span>python@localhost cmdb<span class="o">]</span>$ cat requirement.txt
+<span class="nv">backcall</span><span class="o">==</span>0.1.0
+<span class="nv">decorator</span><span class="o">==</span>4.3.0
+<span class="nv">ipython</span><span class="o">==</span>7.1.1
+ipython-genutils<span class="o">==</span>0.2.0
+<span class="nv">jedi</span><span class="o">==</span>0.13.1
+<span class="nv">parso</span><span class="o">==</span>0.3.1
+<span class="nv">pexpect</span><span class="o">==</span>4.6.0
+<span class="nv">pickleshare</span><span class="o">==</span>0.7.5
+prompt-toolkit<span class="o">==</span>2.0.7
+<span class="nv">ptyprocess</span><span class="o">==</span>0.6.0
+<span class="nv">Pygments</span><span class="o">==</span>2.2.0
+<span class="nv">six</span><span class="o">==</span>1.11.0
+<span class="nv">traitlets</span><span class="o">==</span>4.3.2
+<span class="nv">wcwidth</span><span class="o">==</span>0.1.7
+</code></pre></td></tr></table>
+</div>
+</div><p>        <strong>注意：再新的项目中，只需要使用<code> pip install -r requirement.txt</code> 即可，让pip按照requirement.txt文件中标识的包和版本进行安装了。</strong></p>
+<h2 id="74-pyenv安装位置-1">7.4. pyenv安装位置　</h2>
+<p>        virtualenv创建的虚拟环境都存放在<code>pyenv</code>安装目录的<code>versions</code>下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>python@localhost versions<span class="o">]</span>$ <span class="nb">pwd</span>
+/home/python/.pyenv/versions
+<span class="o">[</span>python@localhost versions<span class="o">]</span>$ ll
+total <span class="m">4</span>
+drwxr-xr-x. <span class="m">7</span> python python <span class="m">4096</span> Nov  <span class="m">3</span> 18:07 3.5.3
+lrwxrwxrwx. <span class="m">1</span> python python   <span class="m">48</span> Nov  <span class="m">3</span> 18:12 dachenzi -&gt; /home/python/.pyenv/versions/3.5.3/envs/dachenzi
+lrwxrwxrwx. <span class="m">1</span> python python   <span class="m">45</span> Nov  <span class="m">3</span> 18:07 daxin -&gt; /home/python/.pyenv/versions/3.5.3/envs/daxin
+<span class="o">[</span>python@localhost versions<span class="o">]</span>$
+</code></pre></td></tr></table>
+</div>
+</div><p>        而你在<code>virtualenv</code>中安装的包，则存放在<code>virtualenv</code>环境中对应的<code>situ-package</code>目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>python@localhost site-packages<span class="o">]</span>$ <span class="nb">pwd</span>
+/home/python/.pyenv/versions/3.5.3/envs/daxin/lib/python3.5/site-packages
+<span class="o">[</span>python@localhost site-packages<span class="o">]</span>$ ls
+backcall                          parso-0.3.1.dist-info           __pycache__
+backcall-0.1.0-py3.5.egg-info     pexpect                         pygments
+decorator-4.3.0.dist-info         pexpect-4.6.0.dist-info         Pygments-2.2.0.dist-info
+decorator.py                      pickleshare-0.7.5.dist-info     setuptools
+easy_install.py                   pickleshare.py                  setuptools-28.8.0.dist-info
+IPython                           pip                             six-1.11.0.dist-info
+ipython-7.1.1.dist-info           pip-18.1.dist-info              six.py
+ipython_genutils                  pkg_resources                   traitlets
+ipython_genutils-0.2.0.dist-info  prompt_toolkit                  traitlets-4.3.2.dist-info
+jedi                              prompt_toolkit-2.0.7.dist-info  wcwidth
+jedi-0.13.1.dist-info             ptyprocess                      wcwidth-0.1.7.dist-info
+parso                             ptyprocess-0.6.0.dist-info
+<span class="o">[</span>python@localhost site-packages<span class="o">]</span>$
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="8-pip命令-1">8. pip命令</h1>
+<p>        pip命令对应Python来说，就像Yum和CentOS的关系，它是Python的包管理工具，我们可以使用pip命令安装几乎所有的Python第三方包。</p>
+<h2 id="81-命令说明-1">8.1. 命令说明</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">(</span>daxin353<span class="o">)</span> <span class="o">[</span>21:01:10 python@centos7 cmdb<span class="o">]</span><span class="nv">$pip</span> -h
+
+Usage:   
+  pip &lt;command&gt; <span class="o">[</span>options<span class="o">]</span>
+
+Commands:
+  install                    <span class="c1"># 安装第三方包</span>
+  download                   <span class="c1"># 下载第三方包</span>
+  uninstall                  <span class="c1"># 卸载第三方包</span>
+  freeze                     <span class="c1"># 输出包的名称还版本信息，可以重定向到文件中去</span>
+  list                       <span class="c1"># 显示已安装的第三方包</span>
+  show                       <span class="c1"># 显示安装包信息</span>
+  search                     <span class="c1"># 在Pypi库中查找第三方包</span>
+  <span class="nb">help</span>                       <span class="c1"># 查看帮助信息</span>
+
+General Options:
+  -h, --help                 <span class="c1"># 显示帮助</span>
+  -v, --verbose              <span class="c1"># 显示详细信息</span>
+  -V, --version              <span class="c1"># 显示版本信息</span>
+  -q, --quiet                <span class="c1"># 安静模式,不输出任何提示信息</span>
+  --log &lt;path&gt;               <span class="c1"># 把输出信息追加log文件中</span>
+  --proxy &lt;proxy&gt;            <span class="c1"># 使用代理，格式为： [user:passwd@]proxy.server:port.</span>
+  --retries &lt;retries&gt;        <span class="c1"># 最大连接失败重试次数，默认5次</span>
+  --timeout &lt;sec&gt;            <span class="c1"># 设置最大超时时间，默认是15秒</span>
+  --cache-dir &lt;dir&gt;          <span class="c1"># 指定缓存目录</span>
+  --no-cache-dir             <span class="c1"># 禁用缓存</span>
+<span class="o">(</span>daxin353<span class="o">)</span> <span class="o">[</span>21:01:16 python@centos7 cmdb<span class="o">]</span>$
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="82-配置说明-1">8.2. 配置说明</h2>
+<p>        pip命名默认是从Python官方提供的Pypi仓库进行第三方软件包，由于官方源在国外，访问速度可能会很慢，我们可以把Pypi源换成国内的阿里源，来增加访问速度。 配置起来也很简单，只需要新增pip的配置文件，指定源为阿里源即可。</p>
+<ul>
+<li>创建pip配置文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>21:14:53 python@centos7 ~<span class="o">]</span><span class="nv">$mkdir</span> ~/.pip
+<span class="o">[</span>21:15:21 python@centos7 ~<span class="o">]</span><span class="nv">$cd</span> .pip
+<span class="o">[</span>21:15:23 python@centos7 .pip<span class="o">]</span><span class="nv">$vim</span> pip.conf 
+   <span class="o">[</span>global<span class="o">]</span>                  <span class="c1"># 全局配置段</span>
+   index-url<span class="o">=</span>https://mirrors.aliyun.com/pypi/simple/     <span class="c1"># pypi仓库地址</span>
+   trusted-host<span class="o">=</span>mirrors.aliyun.com            <span class="c1"># 信任主机(防止https输出烦人的信息)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="9-pycharm安装及基本使用-1">9. pycharm安装及基本使用</h1>
+<p>请参考博文: <a href="http://www.cnblogs.com/dachenzi/articles/7684064.html">http://www.cnblogs.com/dachenzi/articles/7684064.html</a> , 安装过程中遇到的问题，欢迎邮件咨询 <a href="mailto:beyondlee2011@126.com">beyondlee2011@126.com</a></p>
+<h1 id="10-第一个python程序-1">10. 第一个Python程序</h1>
 <p>        既然Python语言安装完毕了，那么小伙伴肯定已经跃跃欲试了，那么我们就来写一个吊炸天的Python程序吧<br>
         首先这个程序很牛逼，为什么这么说呢？因为会用到一个我们以后几乎天天用的命令，那就是print。有的同学英文好，一下就知道是打印的意思。那么该如何使用呢？</p>
 <p>这个吊炸天的例子如下：</p>

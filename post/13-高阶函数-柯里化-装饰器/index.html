@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 高阶函数 1.1 自定义sort函数 1.1.1 将规模缩小，先实现排序，先不管key和reverse参数 1.1.2 添加reverse参数判断 1.1.3 添加key参数">
 <meta itemprop="datePublished" content="2017-02-05T11:28:04+00:00" />
 <meta itemprop="dateModified" content="2017-02-05T11:28:04+00:00" />
-<meta itemprop="wordCount" content="6022">
+<meta itemprop="wordCount" content="12108">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 6022 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        <span class="more-meta"> 约 12108 字 </span>
+          <span class="more-meta"> 预计阅读 25 分钟 </span>
 
         
         
@@ -376,6 +376,48 @@
     <li><a href="#41-还是从一个需求开始">4.1 还是从一个需求开始</a></li>
     <li><a href="#42-代参装饰器编写">4.2 代参装饰器编写</a></li>
     <li><a href="#43-代参装饰器小结">4.3 代参装饰器小结</a></li>
+    <li><a href="#mathjax-true">title: 13-高阶函数-柯里化-装饰器
+date: 2019-04-04 01:17:28
+lastmod: 2019-04-04 01:17:28
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-自定义sort函数-1">1.1 自定义sort函数</a>
+      <ul>
+        <li><a href="#111-将规模缩小先实现排序先不管key和reverse参数-1">1.1.1 将规模缩小，先实现排序，先不管key和reverse参数</a></li>
+        <li><a href="#112-添加reverse参数判断-1">1.1.2 添加reverse参数判断</a></li>
+        <li><a href="#113-添加key参数判断-1">1.1.3 添加key参数判断</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-内建函数高阶函数-1">1.2 内建函数(高阶函数)</a>
+      <ul>
+        <li><a href="#121-sorted排序-1">1.2.1 sorted排序</a></li>
+        <li><a href="#122-filter-过滤-1">1.2.2 filter 过滤</a></li>
+        <li><a href="#123-map-映射-1">1.2.3 map 映射</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-需求分析-1">3.1 需求分析</a></li>
+    <li><a href="#32-函数柯里化-1">3.2 函数柯里化</a></li>
+    <li><a href="#33-装饰器函数语法糖-1">3.3 装饰器函数(语法糖)</a></li>
+    <li><a href="#34-装饰器带来的问题-1">3.4 装饰器带来的问题</a></li>
+    <li><a href="#35-拷贝函数属性-1">3.5 拷贝函数属性</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-还是从一个需求开始-1">4.1 还是从一个需求开始</a></li>
+    <li><a href="#42-代参装饰器编写-1">4.2 代参装饰器编写</a></li>
+    <li><a href="#43-代参装饰器小结-1">4.3 代参装饰器小结</a></li>
   </ul>
 </nav>
   </div>
@@ -1269,6 +1311,915 @@
 </div>
 </div><p>是不是很简单？ 在掌握了柯里化以及无参装饰器。</p>
 <h2 id="43-代参装饰器小结">4.3 代参装饰器小结</h2>
+<p>代参装饰器有如下特点：</p>
+<ol>
+<li>它是一个函数</li>
+<li>函数作为它的形参</li>
+<li>返回值是一个不带参数的装饰器函数</li>
+<li>使用@function_name(参数列表)方式调用</li>
+<li>可以看做在装饰器外层又加了一层函数</li>
+</ol>
+<blockquote>
+<p>装饰器什么时候被执行？，还记得@logger等于什么吗？ add = logger(add) 等号等于赋值，是不是要先计算右边的？所以，装饰器在函数定义阶段就已经被执行了！不是等到被装饰的函数执行时，才执行哦！真正执行时，每次都会生成一个新的wrapper被调用而已！</p>
+</blockquote>
+<hr>
+<h2 id="mathjax-true">title: 13-高阶函数-柯里化-装饰器
+date: 2019-04-04 01:17:28
+lastmod: 2019-04-04 01:17:28
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">1 高阶函数</a>
+<ul>
+<li><a href="#11-%E8%87%AA%E5%AE%9A%E4%B9%89sort%E5%87%BD%E6%95%B0">1.1 自定义sort函数</a>
+<ul>
+<li><a href="#111-%E5%B0%86%E8%A7%84%E6%A8%A1%E7%BC%A9%E5%B0%8F%E5%85%88%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F%E5%85%88%E4%B8%8D%E7%AE%A1key%E5%92%8Creverse%E5%8F%82%E6%95%B0">1.1.1 将规模缩小，先实现排序，先不管key和reverse参数</a></li>
+<li><a href="#112-%E6%B7%BB%E5%8A%A0reverse%E5%8F%82%E6%95%B0%E5%88%A4%E6%96%AD">1.1.2 添加reverse参数判断</a></li>
+<li><a href="#113-%E6%B7%BB%E5%8A%A0key%E5%8F%82%E6%95%B0%E5%88%A4%E6%96%AD">1.1.3 添加key参数判断</a></li>
+</ul>
+</li>
+<li><a href="#12-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">1.2 内建函数(高阶函数)</a>
+<ul>
+<li><a href="#121-sorted%E6%8E%92%E5%BA%8F">1.2.1 sorted排序</a></li>
+<li><a href="#122-filter-%E8%BF%87%E6%BB%A4">1.2.2 filter 过滤</a></li>
+<li><a href="#123-map-%E6%98%A0%E5%B0%84">1.2.3 map 映射</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-%E6%9F%AF%E9%87%8C%E5%8C%96">2 柯里化</a></li>
+<li><a href="#3-%E8%A3%85%E9%A5%B0%E5%99%A8">3 装饰器</a>
+<ul>
+<li><a href="#31-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90">3.1 需求分析</a></li>
+<li><a href="#32-%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96">3.2 函数柯里化</a></li>
+<li><a href="#33-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%87%BD%E6%95%B0%E8%AF%AD%E6%B3%95%E7%B3%96">3.3 装饰器函数(语法糖)</a></li>
+<li><a href="#34-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98">3.4 装饰器带来的问题</a></li>
+<li><a href="#35-%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%E5%B1%9E%E6%80%A7">3.5 拷贝函数属性</a></li>
+</ul>
+</li>
+<li><a href="#4-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8">4 代参装饰器</a>
+<ul>
+<li><a href="#41-%E8%BF%98%E6%98%AF%E4%BB%8E%E4%B8%80%E4%B8%AA%E9%9C%80%E6%B1%82%E5%BC%80%E5%A7%8B">4.1 还是从一个需求开始</a></li>
+<li><a href="#42-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8%E7%BC%96%E5%86%99">4.2 代参装饰器编写</a></li>
+<li><a href="#43-%E4%BB%A3%E5%8F%82%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B0%8F%E7%BB%93">4.3 代参装饰器小结</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-高阶函数-1">1 高阶函数</h1>
+<p>        在Python中一切皆对象，当然也包括函数。函数在Python中是<code>一等公民</code>(First Class Object)。即函数与字符串数组整型无异，它可以被命名可以被赋值可以当作参数被传进另一个函数也可以被另一个函数当作返回值可以放在任何位置，简单来说：</p>
+<ul>
+<li>函数也是一个对象，并且是一个可调用对象(callable)</li>
+<li>函数可以作为普通变量、参数、返回值等等</li>
+</ul>
+<p>        那什么是高阶函数呢？在Python中我们可以理解为：当一个函数接受另一个函数作为参数使用，或者一个函数最后返回了另外一个函数。在这两种情况下，这个函数就可以称之为高阶函数(满足以上任意一种情况即可，不必同时满足)。</p>
+<blockquote>
+<p>数学概念: y = g(f(x))</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">nonlocal</span> <span class="n">x</span>    <span class="c1"># 声明局部变量x不是一个局部变量，应该在外层寻找 </span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">step</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">inner</span>
+<span class="n">foo1</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">foo2</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo1</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo2</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        内层函数inner还引用了外层函数的自由变量x，形成了闭包，由于外部函数返回了内部函数，所以这就是一个典型的高阶函数。针对上面实例还需要说明是：</p>
+<ul>
+<li>ounter函数每调用一次生成的都是一个新False的函数对象</li>
+<li>foo1和foo2也都是相互独立的两个函数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">nonlocal</span> <span class="n">x</span>    <span class="c1"># 声明局部变量x不是一个局部变量，应该在外层寻找</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="n">x</span> <span class="o">+=</span> <span class="n">step</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">return</span> <span class="n">x</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">inner</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">foo1</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">foo2</span> <span class="o">=</span> <span class="n">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">foo1</span> <span class="ow">is</span> <span class="n">foo2</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><code>is</code>的比较做则是：先比较元素的内存地址，然后比较元素的内容。首先 foo1和foo2 属于不同的对象，所以内存地址肯定不同，然后由于函数对象没有实现函数内容的比较所以这里返回False</p>
+</blockquote>
+<h2 id="11-自定义sort函数-1">1.1 自定义sort函数</h2>
+<p>        从头构建一个类似于内置函数sorted的函数，来体会高阶函数的作用，顺便理解一下sorted的原理。</p>
+<h3 id="111-将规模缩小先实现排序先不管key和reverse参数-1">1.1.1 将规模缩小，先实现排序，先不管key和reverse参数</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">new_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：</p>
+<ul>
+<li>sort返回一个新的列表，我们这里构建一个列表，用于存放排序好的列表</li>
+<li>为了练习算法，这里选择使用直接插入排序，注意：直接插入排序是原地排序，这里是变化，直接插入到新的已排序列表中去</li>
+<li>利用enumerate构建索引,用于确认插入位置,注意:因为new_list在我们这个场景下是有序的！所以才可以这样用</li>
+<li>初始情况下，由于new_list为空，所以待排序列表的第一个元素会被直接插入到已排序列表的首位</li>
+<li>后续只需在待排序的列表中，拿出一个数据，和已排序区的元素，从左至右依次对比即可</li>
+<li>如果大于已排序区的所有元素，那么直接追加即可，如果小于某一个元素只需要在对应的元素为插入待排序元素即可</li>
+<li>如果小于的话，因为列表的特性，在一个位置上插入数据，那么原数据会自动向右移动，所以符合直接插入排序的原理</li>
+</ul>
+<h3 id="112-添加reverse参数判断-1">1.1.2 添加reverse参数判断</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_list</span><span class="p">):</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">k</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">k</span>
+            <span class="c1"># if reverse:</span>
+            <span class="c1">#     flag = value &gt; k</span>
+            <span class="c1"># else:</span>
+            <span class="c1">#     flag = value &lt; k</span>
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+                    <span class="n">new_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+    <span class="c1"># return new_list[::-1]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sort</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：</p>
+<ul>
+<li>倒序有两种表达方式，即正序排好，然后倒着截取。或者是按照倒序排列，这里使用倒序排列。</li>
+<li>正序时：如果value大于k，那么需要把value插入到k的位置上</li>
+<li>倒序时，如果value小于k，那么需要把value插入到k的位置上</li>
+<li>所以添加flag来采集用户传入的reverse参数，这里使用了三元表达式来简化代码</li>
+</ul>
+<h3 id="113-添加key参数判断-1">1.1.3 添加key参数判断</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">value_new</span> <span class="o">=</span> <span class="n">key</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_list</span><span class="p">):</span>
+            <span class="n">k_new</span> <span class="o">=</span> <span class="n">key</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span> <span class="k">else</span> <span class="n">k</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">value_new</span> <span class="o">&gt;</span> <span class="n">k_new</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="n">value_new</span> <span class="o">&lt;</span> <span class="n">k_new</span>
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+                    <span class="n">new_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+    <span class="c1"># return new_list[::-1]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sort</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：</p>
+<ul>
+<li>key传入了一个函数，用于对每个key进行转换，然后使用转换后的元素来进行比较，所以我们这里使用了转化后的变量来比较</li>
+<li>当key可以被调用，那么我们认为它是一个函数，那么调用他对元素进行转换。</li>
+<li>这里传入了str函数，如果结合前面所学的知识可以改为lambda表达式。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">new_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="n">value_new</span> <span class="o">=</span> <span class="n">key</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_list</span><span class="p">):</span>
+            <span class="n">k_new</span> <span class="o">=</span> <span class="n">key</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">else</span> <span class="n">k</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">value_new</span> <span class="o">&gt;</span> <span class="n">k_new</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="n">value_new</span> <span class="o">&lt;</span> <span class="n">k_new</span>
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+                    <span class="n">new_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_list</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sort</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>传参时利用了lambda表达式，在函数内部，每次传入一个参数，返回它的str对象，其实效果等同于str,这里只是提一下lambda表达式。</li>
+</ul>
+<h2 id="12-内建函数高阶函数-1">1.2 内建函数(高阶函数)</h2>
+<p>Python内置了很多高阶函数的应用，这里仅介绍较为常用的。</p>
+<ul>
+<li>sorted: 排序函数，直接返回新的列表</li>
+<li>filter：过滤函数，返回一个迭代器</li>
+<li>map：映射函数，返回一个迭代器</li>
+<li>zip：拉链函数，返回一个迭代器</li>
+</ul>
+<h3 id="121-sorted排序-1">1.2.1 sorted排序</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sorted</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>立即返回一个新的列表，对一个可迭代对象的所有元素排序。</p>
+<ul>
+<li><code>key</code>: 排序规则为key定义的函数</li>
+<li><code>reverse</code>: 表示是否进行翻转排序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="n">lst</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">49</span><span class="p">]:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">random</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="n">lst</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">53</span><span class="p">]:</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">54</span><span class="p">]:</span> <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">55</span><span class="p">]:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">55</span><span class="p">]</span> <span class="p">:[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">59</span><span class="p">]:</span> <span class="n">lst</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">61</span><span class="p">]:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">x</span> <span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">61</span><span class="p">]:</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这里定义了一个接受一个参数的匿名函数，然后返回处理后的元素(<code>这是匿名函数最常用的场景之一</code>)</li>
+<li>功能等同于直接调用str函数</li>
+</ul>
+<blockquote>
+<p>sorted直接返回一个新的列表，而列表也有sort方法，通过<code>list.sort()</code>进行排序是直接原地进行排序的。</p>
+</blockquote>
+<h3 id="122-filter-过滤-1">1.2.2 filter 过滤</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">filter</span><span class="p">(</span><span class="n">function</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">,</span> <span class="n">iterable</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">filter</span> <span class="nb">object</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>过滤可迭代对象的元素，返回一个迭代器</p>
+<ul>
+<li><code>function</code>：表示一个函数，它的功能是：每次从可迭代对象iterable取出一个元素交给function函数处理，如果返回True，则保留该元素，否则提出该元素，如果是None,表示剔除等效False的对象</li>
+<li><code>iterable</code>：可迭代对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">123</span><span class="p">]</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span><span class="n">lst1</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">123</span><span class="p">]</span>
+
+<span class="c1"># 等同于</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>         <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>             <span class="k">yield</span> <span class="n">i</span>
+    <span class="o">...</span><span class="p">:</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">lst1</span><span class="p">))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">123</span><span class="p">]</span>
+
+<span class="c1"># 或者</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>         <span class="k">if</span> <span class="err">（</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="p">)(</span><span class="n">i</span><span class="p">):</span>    <span class="c1">## l这里属于函数调用：func()()</span>
+    <span class="o">...</span><span class="p">:</span>             <span class="k">yield</span> <span class="n">i</span>
+    <span class="o">...</span><span class="p">:</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="123-map-映射-1">1.2.3 map 映射</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">iterables</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">map</span> <span class="nb">object</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对多个可迭代对象的元素按照指定的函数进行映射，返回一个迭代器</p>
+<ul>
+<li><code>func</code>：一个函数，用于处理iterable的元素，在指定多个iterable对象是，函数的参数数量与iterable的数量是相等的。</li>
+<li><code>*iterable</code>：一个或多个可迭代对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">70</span><span class="p">]:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="s1">&#39;abcde&#39;</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="o">%</span><span class="mi">5</span><span class="p">,</span><span class="n">x</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)))</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">495</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">496</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">497</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">498</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">499</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>map对象的长度，等同于最小的iterable长度。(木桶效应)</p>
+</blockquote>
+<h1 id="2-柯里化-1">2 柯里化</h1>
+<p>        在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。&ndash; 来自维基百科的解释
+        总结一下：柯里化指的就是将原来接受两个参数的函数变成新的接受一个参数的函数的过程。新的函数返回一个以原有第二个参数为参数的函数。其数学表达式为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="err">转换成</span> <span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)(</span><span class="n">y</span><span class="p">)</span> <span class="err">的形式</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里把经典的add函数拿来进行转换：</p>
+<ul>
+<li>想要转换为add(4)(5)，那么add(4)必须要返回一个函数，否则无法将5当作参数传入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">new_add</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+    <span class="k">return</span> <span class="n">inner</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>     <span class="c1"># 9</span>
+<span class="k">print</span><span class="p">(</span><span class="n">new_add</span><span class="p">(</span><span class="mi">4</span><span class="p">)(</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># 9</span>
+<span class="k">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">new_add</span><span class="p">(</span><span class="mi">4</span><span class="p">)(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过函数嵌套，就可以完成函数的柯里化了，对柯里化有所了解以后，那么我们就可以继续来看Python中对我们小白来说的第一个难点：<code>装饰器</code></p>
+<h1 id="3-装饰器-1">3 装饰器</h1>
+<p>        什么是装饰器？概括的讲，装饰器的作用就是为已经存在的对象添加额外的功能。我们接下来从一个需求开始学习装饰器。</p>
+<h2 id="31-需求分析-1">3.1 需求分析</h2>
+<p>现在有如下函数，我们需要将这个函数的日志打印到终端</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;我被调用执行啦&#39;</span><span class="p">)</span>  <span class="c1"># 新增打印日志语句</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        但是仔细思考，打印日志是一个独立的功能，它和add函数本身并没有什么关联关系，我们说一个函数是为完成一个工程的，所以直接写在函数里面不是不可以，但是不建议，并且打印日志属于调试信息功能，与业务无关，不应该放在业务函数加法中。<br>
+        如果不需要写在函数的里面，那么我们得想办法写在函数的外面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数开始执行&#39;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数执行完毕&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">logger</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>这样就解决了打印语句在函数内定义的问题了。</li>
+<li>但是如果add函数的形参很多，我们要挨个写上吗？所以*args,**kwargs帮了我们很大的忙</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数开始执行&#39;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数执行完毕&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">logger</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-函数柯里化-1">3.2 函数柯里化</h2>
+<p>        使用<code>logger(add,4,5)</code>来调用我们的add函数真是太丑了，给其他人看，可能人家也不知道你要干啥，结合前面所学的柯里化，我们进行如下变动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数被执行了&#39;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数执行完毕&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="n">logger</span><span class="p">(</span><span class="n">add</span><span class="p">)(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        这样看起来是不是就好看多了？当指定logger(add)(4,5)时，才会打印日志，但如果想要在所有调用add函数的地方，我们还需要在所有调用add的地方修改为logger(add)(参数),想一想，如果我能把logger(add)变成add是不是就可以直接写成add(4,5)了呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">logger</span><span class="p">(</span><span class="n">add</span><span class="p">)(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">--------</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">logger</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>    <span class="c1"># 将add重新指向了新的函数wrapper</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        按照柯里化的原型中logger(add)返回了一个函数wrapper，而我们的(4,5)其实是传递给了wrapper，结合我们前面所学的高阶函数，这里的wrapper，是一个闭包函数，因为在内部对fn进行了执行，而且增加了打印日志的功能，我们在执行wrapper的同时，也会执行原来的函数fn，并且添加了打印日志的功能，所以logger就是一个<code>装饰器函数</code>！！！</p>
+<h2 id="33-装饰器函数语法糖-1">3.3 装饰器函数(语法糖)</h2>
+<p>        语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·蘭丁发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能没有影响，但是更方便程序员使用。 语法糖让程序更加简洁，有更高的可读性。Python针对我们刚刚编写的logger(add)函数，进行了语法糖优化，所以下面是我们使用语法糖之后的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数被执行了&#39;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数执行完毕&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@logger</span>   <span class="c1"># 等于 add = logger(add)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>        当解释器执行到<code>@logger</code>时，会自动把它下面的函数当作参数，传给logger函数，所以这里<code>@logger</code> 其实就等于 <code>add = logger(add)</code> 另外，logger必须要定义在add函数之前才可以被装载！这一点很重要！</p>
+</blockquote>
+<h2 id="34-装饰器带来的问题-1">3.4 装饰器带来的问题</h2>
+<p>利用装饰器计算如下函数的运行时间</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">total_seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数：{} 执行用时：{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">total_seconds</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@logger</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="err">执行结果：</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="err">函数：</span><span class="n">wrapper</span> <span class="err">执行用时：</span><span class="mf">2.000944</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这里<code>__name__</code>表示函数的名称.</p>
+</blockquote>
+<p>        什么鬼？这里为什么打印的是wrapper啊，为什么不是add呢？这样的话，别人不就发现我把这个函数给偷偷换掉了吗？不行不行，我得想个办法把函数的属性复制过来，由于这个功能和打印用时的装饰器不是一个功能，那么我们还得给装饰器另加一个装饰器。-_-!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="k">def</span> <span class="nf">copy_properties</span><span class="p">(</span><span class="n">old_fn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">new_fn</span><span class="p">):</span>
+        <span class="n">new_fn</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">old_fn</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">return</span> <span class="n">new_fn</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="nd">@copy_properties</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>  <span class="c1"># wrapper = copy_properties(fn)(wrapper)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">total_seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数：{} 执行用时：{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">total_seconds</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@logger</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>解释器执行到 <code>@copy_properties(fn)</code> 时，会把下面的wraper装入，等于<code>wrapper = copy_properties(fn)(wrapper)</code></li>
+<li>由于知道了参数的个数(一定是一个函数对象)，这里就没有使用*args, **kwargs</li>
+<li>函数的属性不止__name__一个，其他的怎么办呢？</li>
+</ul>
+<h2 id="35-拷贝函数属性-1">3.5 拷贝函数属性</h2>
+<p>        Python的内置模块functools中，内置了很多常用的高阶函数，其中wraps就是用来拷贝函数的属性及签名信息的。利用wraps，我们就不需要自己编写copy_properties函数了，下面是修改后的版本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>  <span class="c1"># wrapper = functools.wraps(fn)(wrapper)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">total_seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数：{} 执行用时：{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">total_seconds</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@logger</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过使用 <code>@functools.wraps(fn)</code> 我们可以方便的拷贝函数的属性签名信息，比如：'<strong>module</strong>&rsquo;, &lsquo;<strong>name</strong>&rsquo;, &lsquo;<strong>qualname</strong>&rsquo;, &lsquo;<strong>doc</strong>&rsquo;,'<strong>annotations</strong>&lsquo;等，这些属性信息，将在后续部分进行讲解，这里知道即可</p>
+<h1 id="4-代参装饰器-1">4 代参装饰器</h1>
+<p>        上面章节讲到的是带一个参数(函数)的装饰器，在Python中这种装饰器被称为无参装饰器，因为语法糖的表现形式就是 <code>@logger</code>,下面要说的是代参数的装饰器，即<code>@logger(50)</code></p>
+<h2 id="41-还是从一个需求开始-1">4.1 还是从一个需求开始</h2>
+<p>        以上述函数为例，我们需要记录当函数执行超过一定时间时的日志信息，该怎么办呢？假设这个时间是5秒，那么很显然，我们需要把这个时间变量传入到装饰器中进行判断。也就是说我们需要写成这种形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">logger</span><span class="p">(</span><span class="mi">5</span><span class="p">)(</span><span class="n">add</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>looger(5)返回的是一个函数，否则无法将add传入</p>
+</blockquote>
+<h2 id="42-代参装饰器编写-1">4.2 代参装饰器编写</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">total_seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">total_seconds</span> <span class="o">&gt;</span> <span class="n">var</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数执行时间过长&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">inner</span>
+
+<span class="nd">@logger</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># logger(5)(add)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>是不是很简单？ 在掌握了柯里化以及无参装饰器。</p>
+<h2 id="43-代参装饰器小结-1">4.3 代参装饰器小结</h2>
 <p>代参装饰器有如下特点：</p>
 <ol>
 <li>它是一个函数</li>

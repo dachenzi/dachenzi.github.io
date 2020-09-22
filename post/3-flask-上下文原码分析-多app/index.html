@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 上下文管理 1.1 threading.local 1.2 partial偏函数 1.3 setattr 魔术方法 1.4 localproxy代理 1.5 真实原码流程 1.6 django传参与flask的对比 1.7 总结">
 <meta itemprop="datePublished" content="2016-09-25T21:38:27+00:00" />
 <meta itemprop="dateModified" content="2016-09-25T21:38:27+00:00" />
-<meta itemprop="wordCount" content="3031">
+<meta itemprop="wordCount" content="6123">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 3031 字 </span>
-          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span class="more-meta"> 约 6123 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
         
@@ -355,6 +355,30 @@
     <li><a href="#15-真实原码流程">1.5 真实原码流程</a></li>
     <li><a href="#16-django传参与flask的对比">1.6 django传参与flask的对比</a></li>
     <li><a href="#17-总结">1.7 总结</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mathjax-true">title: 3-flask-上下文原码分析-多app
+date: 2017-03-05 02:47:57
+lastmod: 2017-03-05 02:47:57
+draft: false
+tags: [Flask框架,]
+categories: [Flask框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-threadinglocal-1">1.1 threading.local</a></li>
+    <li><a href="#12-partial偏函数-1">1.2 partial偏函数</a></li>
+    <li><a href="#13-__setattr__-魔术方法-1">1.3 <strong>setattr</strong> 魔术方法</a></li>
+    <li><a href="#14-localproxy代理-1">1.4 localproxy代理</a></li>
+    <li><a href="#15-真实原码流程-1">1.5 真实原码流程</a></li>
+    <li><a href="#16-django传参与flask的对比-1">1.6 django传参与flask的对比</a></li>
+    <li><a href="#17-总结-1">1.7 总结</a></li>
   </ul>
 </nav>
   </div>
@@ -858,6 +882,596 @@
 <p>g就是一个请求周期内的<code>全局变量</code></p>
 </blockquote>
 <h1 id="2-多app应用">2 多app应用</h1>
+<p>老版本DispatcherMiddleware存放在werkzeug.wsgi中，新版本已经移至werkzeug.middleware.dispatcher中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="c1"># from werkzeug.wsgi import DispatcherMiddleware</span>
+<span class="kn">from</span> <span class="nn">werkzeug.middleware.dispatcher</span> <span class="kn">import</span> <span class="n">DispatcherMiddleware</span>
+<span class="kn">from</span> <span class="nn">werkzeug.serving</span> <span class="kn">import</span> <span class="n">run_simple</span>
+
+<span class="n">app01</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;app01&#39;</span><span class="p">)</span>
+<span class="n">app02</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;app02&#39;</span><span class="p">)</span>
+<span class="n">app03</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;app03&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@app01.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;app01 index&#39;</span>
+
+
+<span class="nd">@app02.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;app02 index&#39;</span>
+
+
+<span class="nd">@app03.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;app03 index&#39;</span>
+
+
+<span class="n">dm</span> <span class="o">=</span> <span class="n">DispatcherMiddleware</span><span class="p">(</span>
+    <span class="n">app01</span><span class="p">,</span>
+    <span class="p">{</span><span class="s1">&#39;/app02&#39;</span><span class="p">:</span> <span class="n">app02</span><span class="p">,</span>
+     <span class="s1">&#39;/app03&#39;</span><span class="p">:</span> <span class="n">app03</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">run_simple</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过DispatcherMiddleware来组织app的结构。</p>
+<ul>
+<li>当直接访问/时，匹配的是app01</li>
+<li>当前缀包含app02时，就匹配给app02</li>
+<li>当前缀包含app03时，就匹配给app03</li>
+</ul>
+<blockquote>
+<p>根据前缀的不同来分发路由，和蓝图有异曲同工之处</p>
+</blockquote>
+<hr>
+<h2 id="mathjax-true">title: 3-flask-上下文原码分析-多app
+date: 2017-03-05 02:47:57
+lastmod: 2017-03-05 02:47:57
+draft: false
+tags: [Flask框架,]
+categories: [Flask框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86">1 上下文管理</a>
+<ul>
+<li><a href="#11-threadinglocal">1.1 threading.local</a></li>
+<li><a href="#12-partial%E5%81%8F%E5%87%BD%E6%95%B0">1.2 partial偏函数</a></li>
+<li><a href="#13-__setattr__-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95">1.3 <strong>setattr</strong> 魔术方法</a></li>
+<li><a href="#14-localproxy%E4%BB%A3%E7%90%86">1.4 localproxy代理</a></li>
+<li><a href="#15-%E7%9C%9F%E5%AE%9E%E5%8E%9F%E7%A0%81%E6%B5%81%E7%A8%8B">1.5 真实原码流程</a></li>
+<li><a href="#16-django%E4%BC%A0%E5%8F%82%E4%B8%8Eflask%E7%9A%84%E5%AF%B9%E6%AF%94">1.6 django传参与flask的对比</a></li>
+<li><a href="#17-%E6%80%BB%E7%BB%93">1.7 总结</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%A4%9Aapp%E5%BA%94%E7%94%A8">2 多app应用</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-上下文管理-1">1 上下文管理</h1>
+<p>        flask的上下文管理非常巧妙，先来说一下前导知识，flask内部实现的方式和threading.local很像，但其内部做了精妙的设置，如果支持协程(greenlet),那么还会使用协程的方式实现。</p>
+<h2 id="11-threadinglocal-1">1.1 threading.local</h2>
+<p>        在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁(锁住资源，否则一旦在多个线程中修改，会产生无法预期的结果)。但是局部变量也有问题，就是在函数调用的时候，每次都要传递，感觉很麻烦。<br>
+        在主进程中创建ThreadLocal对象，每个Thread对它都可以读写属性，但互不影响。你可以把ThreadLocal看成全局变量，但每个属性都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。即：一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="n">local</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">local</span><span class="p">()</span>
+<span class="n">local</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">local</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">local</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">worker</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">local</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的执行结果是互补不干扰的。为什么local对象可以安全使用？<br>
+        通过分析原码，我们看到：在主线程中创建后local后，threading.local会为实例初始化一个字典管理器，创建一个大字典，用于嵌套每一个线程创建的它自己线程相关的字典。当开启了新的线程时，查找local对象的某个属性时，首先会被__getattribute__方法捕获，在内部又调用了包装为上下文管理器的_path(打补丁)，首先它通过local初始化时构建的key(prefix+id(当前线程))来查找它嵌套的字典。如果不存在说明线程第一次运行，为它初始化一个__dict__属性字典，替换local的属性，如果存在，则把字典管理器拿出来，直接替换local的属性。所以在不同线程内，每个local对象在调用时都会切换到它对应的__dict__上。线程执行完毕后，回到主线程，在_path中重新切换到主线程的小字典，然后继续把local对象的__dict__进行切换。<br>
+        一句话总结：<strong><code>运行时，threading.local实例处在不同的线程中，就从大字典中找到当前线程相关键值对中的字典，覆盖threading.local实例的 __dict__ 。这样就可以在不同的线程中，安全地使用线程独有的数据，做到了线程间数据隔离，如同本地变量一样安全。</code></strong></p>
+<p>简单的模拟thread_local的实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="k">class</span> <span class="nc">Mylocal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">process_ident</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="n">process_ident</span><span class="p">][</span><span class="n">item</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">process_ident</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">process_ident</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="n">process_ident</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="n">process_ident</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Mylocal</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">sum</span><span class="p">():</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+            <span class="k">break</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="nb">sum</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>  <span class="c1"># {18900: {&#39;value&#39;: 10}, 22140: {&#39;value&#39;: 10}, 25816: {&#39;value&#39;: 10}, 17784: {&#39;value&#39;: 10}, 20588: {&#39;value&#39;: 10}, 3744: {&#39;value&#39;: 10}, 10448: {&#39;value&#39;: 10}, 15896: {&#39;value&#39;: 10}, 18016: {&#39;value&#39;: 10}, 16824: {&#39;value&#39;: 10}}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="12-partial偏函数-1">1.2 partial偏函数</h2>
+<p>        funtools模块中的partial方法就是将函数的<code>部分参数固定下来</code>，相当于为部分的参数添加了一个固定的默认值，形成一个<code>新的函数并返回</code>。从partial方法返回的函数，是对原函数的封装，是一个全新的函数。它的一般结构为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">keywords</span><span class="p">)</span> <span class="o">-</span> <span class="err">返回一个新的被</span><span class="n">partial函数包装过的func</span><span class="err">，并带有默认值的新函数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是一个基本的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">functools</span>
+    <span class="o">...</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">inspect</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span> <span class="n">new_add</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">...</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">new_add</span><span class="p">)</span>
+    <span class="o">...</span><span class="p">:</span>
+<span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span> <span class="n">add</span> <span class="n">at</span> <span class="mh">0x000002798C757840</span><span class="o">&gt;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">new_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">28</span><span class="o">-</span><span class="mi">2</span><span class="n">d6520b7602a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">new_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">add</span><span class="p">()</span> <span class="n">takes</span> <span class="mi">2</span> <span class="n">positional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="mi">3</span> <span class="n">were</span> <span class="n">given</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">new_add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="mi">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>由于我们包装了函数add，并指定了一个默认参数1，这个参数会按照位置参数，当作默认值赋给x了</li>
+<li>所以当我们再次调用new_add,只需要传入y的值就行了。</li>
+<li>如果再传递两个，那么连同包装前传入的1，一起传给add函数，而add函数只接受两个参数，所以会报异常。</li>
+</ul>
+<blockquote>
+<p>获取一个函数的参数列表，可以使用前面学习的inspect模块</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">new_add</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Signature</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>查看new_add的签名信息，发现，它的确只需要传入一个y就可以了。</p>
+<h2 id="13-__setattr__-魔术方法-1">1.3 <strong>setattr</strong> 魔术方法</h2>
+<p>上面我们举的类threading.Local的写法，用到了__setitem__，并没有使用__setattr__，为的是避免一个坑，现在我们来说看一下是为什么。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">get_ident</span>
+
+
+<span class="k">class</span> <span class="nc">Local</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span> <span class="o">=</span> <span class="p">{}</span>
+        
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">ident</span> <span class="o">=</span> <span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">ident</span> <span class="o">=</span> <span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个类会引发的问题：</p>
+<ol>
+<li>类在实例化的时候会执行 self.<strong>storage</strong> = {}</li>
+<li>使用点来设置对象的属性的的时候，都会触发__setattr__方法</li>
+<li>然而在__setattr__内部又通过.设置了__storage__属性</li>
+<li>产生递归不说，<strong>storage</strong> 属性还没有创建。</li>
+</ol>
+<p>如何解决呢？只需要成功创建__storage__即可，那么该如何创建呢，自己不能，那就掉父类解决</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># self.__storage__ = {} </span>
+	<span class="o">|</span>
+	<span class="o">|</span> 
+<span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;__storage__&#39;</span><span class="p">,{})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="14-localproxy代理-1">1.4 localproxy代理</h2>
+<p>上面的Local对象仅仅是存储用户数据，那么对于操作Local对象的方法集，我们可以抽象出一个proxy(代理类)，来专门用于操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">get_ident</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+
+<span class="k">class</span> <span class="nc">Local</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__storage__&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="c1"># self.__storage__ = {}</span>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">ident</span> <span class="o">=</span> <span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="n">ident</span> <span class="o">=</span> <span class="n">get_ident</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__storage__</span><span class="p">[</span><span class="n">ident</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c1"># 操作Local类</span>
+<span class="k">class</span> <span class="nc">LocalStack</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_local</span> <span class="o">=</span> <span class="n">Local</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">stack</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stack</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># 存储的对象信息</span>
+<span class="k">class</span> <span class="nc">RequestContent</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="s1">&#39;session&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;request&#39;</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">LocalStack</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">RequestContent</span><span class="p">())</span>
+
+
+<span class="c1"># 操作方法</span>
+<span class="k">def</span> <span class="nf">_get_req_object</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">ident</span> <span class="o">=</span> <span class="n">get_ident</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">_local</span><span class="o">.</span><span class="n">__storage__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ident</span><span class="p">)[</span><span class="s1">&#39;stack&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+
+<span class="c1"># 操作接口</span>
+<span class="k">class</span> <span class="nc">LocalProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span> <span class="nf">get_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">()</span>
+
+<span class="c1"># 通过偏函数固定属性</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_get_req_object</span><span class="p">,</span><span class="s1">&#39;session&#39;</span><span class="p">))</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">LocalProxy</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_get_req_object</span><span class="p">,</span><span class="s1">&#39;request&#39;</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get_obj</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">get_obj</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="15-真实原码流程-1">1.5 真实原码流程</h2>
+<p>基本上综合了上面的所有前导知识，我们看来一下flask的原码流程，代码我就不贴了，下面是根据代码绘制的逻辑图。</p>
+<p><img src="../photo/local.png" alt="local"></p>
+<h2 id="16-django传参与flask的对比-1">1.6 django传参与flask的对比</h2>
+<p>这里主要说明的是传参方式：</p>
+<ul>
+<li>django的request/session等用户信息都是封装在request对象中，通过参数传递的</li>
+<li>flask的request/session，是请求到来时，先一步取出，然后放在用户相关的空间中，需要的话就可以去取</li>
+</ul>
+<p>他们俩是不同的设计模式；（简图对比）</p>
+<p><img src="../photo/django_flask.png" alt="django_flask"></p>
+<h2 id="17-总结-1">1.7 总结</h2>
+<p>flask中存在两个上下文：(早期都放在1个上下文中)</p>
+<ul>
+<li>请求上下文：request/session</li>
+<li>app上下文： app,g</li>
+</ul>
+<p>关于g，它的主要作用是在<code>一个请求周期内</code>帮我们传递当前请求的相关的值信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.before_request</span>
+<span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">permisstion_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">]</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">permisstion_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>g就是一个请求周期内的<code>全局变量</code></p>
+</blockquote>
+<h1 id="2-多app应用-1">2 多app应用</h1>
 <p>老版本DispatcherMiddleware存放在werkzeug.wsgi中，新版本已经移至werkzeug.middleware.dispatcher中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

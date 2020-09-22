@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 功能说明 sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接">
 <meta itemprop="datePublished" content="2019-04-12T17:41:41+00:00" />
 <meta itemprop="dateModified" content="2019-04-12T17:41:41+00:00" />
-<meta itemprop="wordCount" content="4733">
+<meta itemprop="wordCount" content="9490">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 4733 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        <span class="more-meta"> 约 9490 字 </span>
+          <span class="more-meta"> 预计阅读 19 分钟 </span>
 
         
         
@@ -378,6 +378,47 @@
     <li><a href="#52-l">5.2 l</a></li>
     <li><a href="#53">5.3</a></li>
     <li><a href="#54-g">5.4 G</a></li>
+    <li><a href="#mathjax-true">title: Linuxsed
+date: 2016-01-29 22:24:32
+lastmod: 2016-01-29 22:24:32
+draft: false
+tags: [Os,]
+categories: [Os,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+    <li><a href="#1-功能说明-1">1 功能说明</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-取消标准输出-1">3.1 取消标准输出</a></li>
+    <li><a href="#32-支持扩展正则表达式-1">3.2 支持扩展正则表达式</a></li>
+    <li><a href="#33-直接修改文件内容-1">3.3 直接修改文件内容</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-增加-1">4.1 增加</a>
+      <ul>
+        <li><a href="#411-限定区域添加-1">4.1.1 限定区域添加</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-删除-1">4.2 删除</a></li>
+    <li><a href="#43-查找-1">4.3 查找</a></li>
+    <li><a href="#44-改-1">4.4 改</a>
+      <ul>
+        <li><a href="#441-文本替换-1">4.4.1 文本替换</a></li>
+        <li><a href="#442-后向引用-1">4.4.2 后向引用</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#51--1">5.1 =</a></li>
+    <li><a href="#52-l-1">5.2 l</a></li>
+    <li><a href="#53-1">5.3</a></li>
+    <li><a href="#54-g-1">5.4 G</a></li>
   </ul>
 </nav>
   </div>
@@ -1322,6 +1363,978 @@ ntp❌38:38::/etc/ntp:/sbin/nologin
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="54-g">5.4 G</h2>
+<p>在sed中G表示在一行后面追加一行空行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># head -n 3 /etc/passwd | sed G</span>
+root❌0:0:root:/root:/bin/bash
+
+bin❌1:1:bin:/bin:/sbin/nologin
+
+daemon❌2:2:daemon:/sbin:/sbin/nologin
+
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: Linuxsed
+date: 2016-01-29 22:24:32
+lastmod: 2016-01-29 22:24:32
+draft: false
+tags: [Os,]
+categories: [Os,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h2 id="1-功能说明-1">1 功能说明</h2>
+<p>        sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出或者加入i参数。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。   <br>
+        <strong>小结：sed的功能是，对字符串进行增加、删除、改变、查找，即增删改查!</strong></p>
+<h1 id="2-语法格式-1">2 语法格式</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sed <span class="o">[</span>optian<span class="o">]</span> <span class="o">[</span>sed-command<span class="o">]</span> <span class="o">[</span>input-file<span class="o">]</span>
+
+<span class="c1"># 注意sed和后面的选项之间至少有一个空格。</span>
+<span class="c1"># 为了避免混淆，称呼sed为sed软件。sed-commands(sed命令)是sed软件内置的一些命令选项，为了和前面的options(选项)区分，故称为sed命令。</span>
+<span class="c1"># sed-commands既可以是单个sed命令，也可以是多个sed命令组合。</span>
+<span class="c1"># input-file(输入文件)是可选项，sed还能够从标准输入如管道获取输入。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-常用选项-1">3 常用选项</h1>
+<p>测试文本内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@lixin ~]# cat daxin.txt 
+I am daxin teacher!
+I teach linux.
+
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.cnblogs.org
+my qq num is 49000448.
+
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+gd
+good
+gooood
+[root@lixin ~]#
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="31-取消标准输出-1">3.1 取消标准输出</h2>
+<p>-n：表示取消标准输出（默认情况下sed替换后会把文件所有内容包括更改过的内容一起输出到屏幕上，我们使用-n后，让它只输出匹配表达式的字符串，一般和p连用，p表示print，打印表达式结果）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed  &#39;/old/p&#39; daxin.txt    </span>
+I am daxin teacher!
+I am daxin teacher!
+I teach linux.
+
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+my blog is http://daxin.blog.51cto.com
+our site is http://www.cnblogs.org
+my qq num is 49000448.
+
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+my god ,i am not dachenzi,but daxin!
+gd
+good
+gooood
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed  -n &#39;/old/p&#39; daxin.txt </span>
+I am daxin teacher!
+my blog is http://daxin.blog.51cto.com
+my god ,i am not dachenzi,but daxin!
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#     //-n和p连用后表示只打印符合表达式规则的行</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-支持扩展正则表达式-1">3.2 支持扩展正则表达式</h2>
+<p>-r：参数用来支持扩展正则表达式，比如{}符号，如果不加-r参数需要使用\来进行转意。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed -n &#39;/o\{1,2\}/p&#39; daxin.txt </span>
+I am daxin teacher!
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.cnblogs.org
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+good
+gooood
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed -nr &#39;/o{1,2}/p&#39; daxin.txt    </span>
+I am daxin teacher!
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.cnblogs.org
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+good
+gooood
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#  //表达式含义：o最少重复1次，最多重复2次</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-直接修改文件内容-1">3.3 直接修改文件内容</h2>
+<p>-i：表示直接对目标文件进行操作（增删改查），加上这个参数之后，不会在屏幕上输出信息，会直接对源文件进行更改(慎用)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed -i &#39;/^$/d&#39; daxin.txt   //直接删除文件内的空行，并没有打印。</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat daxin.txt  </span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.cnblogs.org
+my qq num is 49000448.
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+gd
+good
+gooood
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-sed-command-1">4 sed-command</h1>
+<p>测试文本内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat study.txt </span>
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="41-增加-1">4.1 增加</h2>
+<p>-i：表示插入，插入到目标行之前。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2i she is a girl&#39; study.txt </span>
+1,I am a Linux student
+she is a girl
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //2i表示在第二行插入，不加行号表示在每一行之前插入</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>-a：表示在目标行之后添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed  &#39;3a he is a boy&#39; study.txt  </span>
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+he is a boy
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>多行增加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 方法一：利用\n,表示换行符</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2i 1\n2\n3&#39; study.txt </span>
+1,I am a Linux student
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法二：利用shell特性（\回车）表示接着下一行。</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2i 1\</span>
+&gt; 2<span class="se">\
+</span><span class="se"></span>&gt; <span class="m">3</span> <span class="se">\&#39;</span> study.txt
+1,I am a Linux student
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="411-限定区域添加-1">4.1.1 限定区域添加</h3>
+<p>sed软件可以对单行或多行进行处理。如果在sed命令前面不指定地址范围，那么默认会匹配所有行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">n1<span class="o">[</span>,n2<span class="o">]{</span>sed-commands<span class="o">}</span>
+<span class="c1"># 注：地址用逗号分隔的，n1,n2可以用数字、正则表达式、或二者的组合表示。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例子：<br>
+<code>n{sed-commands}</code> 对第n行操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;5c she is a girl &#39; study.txt </span>
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+she is a girl 
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示针对第武行进行替换，替换为she is a girl</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>n,m{sed-commands}</code>对n到m行操作,包括第n,m行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2,4c she is a girl &#39; study.txt </span>
+1,I am a Linux student
+she is a girl 
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示把2到4行替换成she is a girl。</span>
+<span class="sb">```</span>　　　
+<span class="sb">`</span>n，+m<span class="o">{</span>sed-commands<span class="o">}</span><span class="sb">`</span>对n到n+m行操作,包括第n,m行
+<span class="sb">```</span>bash
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2,3d&#39; study.txt </span>
+1,I am a Linux student
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># //表示2到3行删除</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>1~2{sed-commands}</code> 对1,3,5,7,……行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2~2d&#39; study.txt  </span>
+1,I am a Linux student
+3,I like movice
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示对2,4,6,8等偶数行进行操作</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>n，${sed-commands}</code> 对n到最后一行($代表最后一行)操作,包括第n行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2,$d&#39; study.txt </span>
+1,I am a Linux student
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># //删除2行到$(尾行)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/Linux/{sed-commands}</code> 对匹配daxin的行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/Linux/d&#39; study.txt </span>
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示把包涵Linux的行删掉</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/Linux/,/movice/{sed-commands}</code>对匹配daxin的行到匹配Alex的行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/Linux/,/movice/d&#39; study.txt  </span>
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示把第一个包涵Linux到第一个包涵movice的行删掉</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/movice/,${sed-commands}</code>对匹配daxin的行到最后一行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/movice/,$d&#39; study.txt </span>
+1,I am a Linux student
+2,I am studying Linux
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># //表示从movice到最后一行删掉</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/games/,10{sed-commands}</code>对匹配daxin的行到第10行操作，注意：如果前10行没有匹配到daxin，sed软件会显示10行以后的匹配daxin的所有行，如果有。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/games/,4d&#39; study.txt    </span>
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>1,/am/{sed-commands}</code> 对第1行到匹配Alex的行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;1,/am/d&#39; study.txt </span>
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //表示从1行到第一个匹配到am的行删除</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>/student/,+2{sed-commands}</code> 对匹配daxin的行到其后的2行操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/student/,+2d&#39; study.txt </span>
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># //表示从匹配student的第一项到它的后两行进行删除</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-删除-1">4.2 删除</h2>
+<p>-d：表示删除，可以直接删除行，可以删除包涵关键字的行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;2d&#39; study.txt </span>
+1,I am a Linux student
+3,I like movice
+4,I am super man
+5,I like computer games
+games       //删除第2行
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/am/d&#39; study.txt </span>
+3,I like movice
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //删除包涵am的行</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-查找-1">4.3 查找</h2>
+<p>p表示打印，把符合我们表达式的项目打印出来，由于sed默认输出所有，再使用拍的话会打印两遍，所以一般和-n参数连用，表示只打印匹配到的行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;/am/p&#39; study.txt  //由于没有-n所以会把匹配到的行和默认输出一起打印</span>
+1,I am a Linux student
+1,I am a Linux student
+2,I am studying Linux
+2,I am studying Linux
+3,I like movice
+4,I am super man
+4,I am super man
+5,I like computer games
+5,I like computer games
+games
+games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed -n &#39;/am/p&#39; study.txt  //-n取消默认输出，p打印，所以只显示匹配项</span>
+1,I am a Linux student
+2,I am studying Linux
+4,I am super man
+5,I like computer games
+games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed –nr ‘/am|student/’ study.txt  //查找包含am或student的行</span>
+1,I am a Linux student
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed -n &#39;2p&#39; study.txt </span>
+2,I am studying Linux
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#   //只显示第二行</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="44-改-1">4.4 改</h2>
+<p>-c：按行替换，表示一次替换一整行的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;1c she is a girl&#39; study.txt </span>
+she is a girl
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># //表示把第1行，替换成she is a girl </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="441-文本替换-1">4.4.1 文本替换</h3>
+<p>s：表示全局查找某个关键字，并替换每行第一个匹配项。<br>
+g：表示全局替换，不属于sed命令，一般搭配s使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 格式：</span>
+sed  ‘s#1#2#g’
+<span class="c1">#:表示定界符，可以是/、@、或者其他成对符号。</span>
+<span class="c1"># 1：表示要替换的源文件中的字符串（可以是正则表达式）。</span>
+<span class="c1"># 2：表示要替换成的文件，必须是给定的字符串。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>文本替换实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># !ca</span>
+cat study.txt 
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed  &#39;1s#a#b#&#39; study.txt    //把第一个a替换为b</span>
+1,I bm a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed  &#39;1s#a#b#g&#39; study.txt  //把第一行所有a替换为b</span>
+1,I bm b Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>变量替换实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># n=a       //设定变量n的值为a</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># m=c     //设定变量m的值为c</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo $n   //验证变量n的值</span>
+a
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo $m   //验证变量b的值</span>
+c
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#39;1s#$n#$m#g&#39; study.txt  //由于’’单引号，不解释内部变量值所以没有替换</span>
+1,I am a Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sed &#34;1s#$n#$m#g&#34; study.txt  // “” 双引号表示引用内部的变量，所以替换了 </span>
+1,I cm c Linux student
+2,I am studying Linux
+3,I like movice
+4,I am super man
+5,I like computer games
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#  //表示可以利用变量的值来对字符串进行过滤或替换（必须用””双引号）</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="442-后向引用-1">4.4.2 后向引用</h3>
+<p>        sed软件的( )的功能可以记住正则表达式的一部分，其中，\1为第一个记住的模式即第一个小括号中的匹配内容，\2第二记住的模式，即第二个小括号中的匹配内容，sed最多可以记住9个。这种在后面调用的方式，叫做后向引用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 格式：</span>
+sed ‘s#<span class="o">()()</span><span class="c1">#\1\2#g’</span>
+<span class="c1"># 第一个（）表示第一项，第二个（）表示第二项，一次类推，最多九个，不想匹配的可以写在括号后面。</span>
+<span class="c1"># \1表示引用前面第一个（）括号内的内容，\2表示引用前面第二个（）括号内的内容。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 获取ip地址信息</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0</span>
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:E4:83:06  
+    inet addr:10.0.0.8  Bcast:10.0.0.255  Mask:255.255.255.0
+    inet6 addr: fe80::20c:29ff:fee4:8306/64 Scope:Link
+    UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+    RX packets:981 errors:0 dropped:0 overruns:0 frame:0
+    TX packets:562 errors:0 dropped:0 overruns:0 carrier:0
+    collisions:0 txqueuelen:1000 
+    RX bytes:85039 <span class="o">(</span>83.0 KiB<span class="o">)</span>  TX bytes:62853 <span class="o">(</span>61.3 KiB<span class="o">)</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | sed -nr &#39;2s#^.*r:(.*).?B.*$#\1#gp&#39;</span>
+10.0.0.8  
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+<span class="c1"># ^.*r: 表示以任意字符开头到r：为止。</span>
+<span class="c1"># (.*) 表示任意字符，这里就是我们要取得ip信息。</span>
+<span class="c1"># .?B.*$ ，.?表示匹配任意两个字符，B.*$表示从B到结尾。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>特殊符号的使用:<br>
+批量进行文件后缀名更改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin lixin<span class="o">]</span><span class="c1"># ls </span>
+LinuxAdministartor10.bak  LinuxAdministartor2.bak  LinuxAdministartor4.bak  LinuxAdministartor6.bak  LinuxAdministartor8.bak
+LinuxAdministartor1.bak   LinuxAdministartor3.bak  LinuxAdministartor5.bak  LinuxAdministartor7.bak  LinuxAdministartor9.bak
+<span class="o">[</span>root@lixin lixin<span class="o">]</span><span class="c1"># ls | sed -nr &#39;s#(^L.*[0-9])(.*$)#mv &amp; \1.txt#gp&#39;</span>
+mv LinuxAdministartor10.bak LinuxAdministartor10.txt
+mv LinuxAdministartor1.bak LinuxAdministartor1.txt
+mv LinuxAdministartor2.bak LinuxAdministartor2.txt
+mv LinuxAdministartor3.bak LinuxAdministartor3.txt
+mv LinuxAdministartor4.bak LinuxAdministartor4.txt
+mv LinuxAdministartor5.bak LinuxAdministartor5.txt
+mv LinuxAdministartor6.bak LinuxAdministartor6.txt
+mv LinuxAdministartor7.bak LinuxAdministartor7.txt
+mv LinuxAdministartor8.bak LinuxAdministartor8.txt
+mv LinuxAdministartor9.bak LinuxAdministartor9.txt
+<span class="o">[</span>root@lixin lixin<span class="o">]</span><span class="c1"># ls | sed -nr &#39;s#(^L.*[0-9])(.*$)#mv &amp; \1.txt#gp&#39; | bash</span>
+<span class="o">[</span>root@lixin lixin<span class="o">]</span><span class="c1"># ls</span>
+LinuxAdministartor10.txt  LinuxAdministartor2.txt  LinuxAdministartor4.txt  LinuxAdministartor6.txt  LinuxAdministartor8.txt
+LinuxAdministartor1.txt   LinuxAdministartor3.txt  LinuxAdministartor5.txt  LinuxAdministartor7.txt  LinuxAdministartor9.txt
+<span class="o">[</span>root@lixin lixin<span class="o">]</span><span class="c1">#</span>
+<span class="c1"># &amp;符号表示前面两个分隔符中间的所有内容</span>
+<span class="c1">#shell的命令都是bash在执行，所以把命令拼出来后直接交给bash处理即可</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-特定含义的符号-1">5 特定含义的符号</h1>
+<h2 id="51--1">5.1 =</h2>
+<p>在sed中=号表示显示行号，但是会换行显示，只是显示行号可以省略“”（引号）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># head -n 3 /etc/passwd | sed =</span>
+<span class="m">1</span>
+root❌0:0:root:/root:/bin/bash
+<span class="m">2</span>
+bin❌1:1:bin:/bin:/sbin/nologin
+<span class="m">3</span>
+daemon❌2:2:daemon:/sbin:/sbin/nologin
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="52-l-1">5.2 l</h2>
+<p>在sed中l表示显示隐藏字符，只是显示隐藏符号可以省略“”（引号）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># head -3 /etc/passwd | sed -n l </span>
+root❌0:0:root:/root:/bin/bash$
+bin❌1:1:bin:/bin:/sbin/nologin$
+daemon❌2:2:daemon:/sbin:/sbin/nologin$
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="53-1">5.3</h2>
+<p>在sed中，{}符号表示要执行的sed内置command的集合，之间用；（分号）隔开。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># sed -n &#39;10,20{=;p}&#39; /etc/passwd   </span>
+<span class="m">10</span>
+uucp❌10:14:uucp:/var/spool/uucp:/sbin/nologin
+<span class="m">11</span>
+operator❌11:0:operator:/root:/sbin/nologin
+<span class="m">12</span>
+games❌12💯games:/usr/games:/sbin/nologin
+<span class="m">13</span>
+gopher❌13:30:gopher:/var/gopher:/sbin/nologin
+<span class="m">14</span>
+ftp❌14:50:FTP User:/var/ftp:/sbin/nologin
+<span class="m">15</span>
+nobody❌99:99:Nobody:/:/sbin/nologin
+<span class="m">16</span>
+dbus❌81:81:System message bus:/:/sbin/nologin
+<span class="m">17</span>
+vcsa❌69:69:virtual console memory owner:/dev:/sbin/nologin
+<span class="m">18</span>
+abrt❌173:173::/etc/abrt:/sbin/nologin
+<span class="m">19</span>
+haldaemon❌68:68:HAL daemon:/:/sbin/nologin
+<span class="m">20</span>
+ntp❌38:38::/etc/ntp:/sbin/nologin
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#  //{=;p}表示，先打印行号，在输出</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="54-g-1">5.4 G</h2>
 <p>在sed中G表示在一行后面追加一行空行。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

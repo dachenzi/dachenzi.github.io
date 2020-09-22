@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 路由系统(urls控制) 1.1 正则字符串参数 1.2 url的分组 1.2.1 无名分组 1.2.2 有名分组 1.3 URLconf 在什么上查找 1.4 include(路由分发) 1.5 别名(name参数">
 <meta itemprop="datePublished" content="2018-05-07T20:33:43+00:00" />
 <meta itemprop="dateModified" content="2018-05-07T20:33:43+00:00" />
-<meta itemprop="wordCount" content="2992">
+<meta itemprop="wordCount" content="6048">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 2992 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span class="more-meta"> 约 6048 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
         
@@ -360,6 +360,32 @@
     <li><a href="#15-别名name参数">1.5 别名(name参数)</a></li>
     <li><a href="#16-反推url">1.6 反推URL</a></li>
     <li><a href="#17-命名空间">1.7 命名空间</a></li>
+    <li><a href="#mathjax-true">title: 2-django-urls路由系统基本使用
+date: 2018-03-15 09:05:09
+lastmod: 2018-03-15 09:05:09
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-正则字符串参数-1">1.1 正则字符串参数</a></li>
+    <li><a href="#12-url的分组-1">1.2 url的分组</a>
+      <ul>
+        <li><a href="#121-无名分组-1">1.2.1 无名分组</a></li>
+        <li><a href="#122-有名分组-1">1.2.2 有名分组</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-urlconf-在什么上查找-1">1.3 URLconf 在什么上查找</a></li>
+    <li><a href="#14-include路由分发-1">1.4 include(路由分发)</a></li>
+    <li><a href="#15-别名name参数-1">1.5 别名(name参数)</a></li>
+    <li><a href="#16-反推url-1">1.6 反推URL</a></li>
+    <li><a href="#17-命名空间-1">1.7 命名空间</a></li>
   </ul>
 </nav>
   </div>
@@ -799,6 +825,498 @@ name=&lsquo;LOGIN&rsquo; 就是把前面匹配的url保存到LOGIN中，然后Dj
 </div>
 </div><p>还有一个方法是利用request对象的path_info，因为其中存放的是用户提交的url。</p>
 <h2 id="17-命名空间">1.7 命名空间</h2>
+<p>        当在url(路由系统)中使用了include时，在views函数中，我们就无法单独的利用name参数来反推url了，因为在include时，是无法使用name关键字的，不过django提供了其他关键字提供类似功能：namespace，称作命名空间。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># urls.py</span>
+ 
+<span class="n">url</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;crm/&#39;</span><span class="p">,</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;crm.urls&#39;</span><span class="p">),</span><span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;crm&#39;</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;cmdb/&#39;</span><span class="p">,</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;cmdb.urls&#39;</span><span class="p">),</span><span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;cmdb&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+ 
+<span class="c1"># crm 中的 urls.py</span>
+ 
+<span class="n">app_name</span> <span class="o">=</span> <span class="n">crm</span>
+<span class="n">url</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;index/&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+ 
+<span class="c1"># crm 中的views.py</span>
+ 
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;crm:index&#39;</span><span class="p">)</span>    <span class="c1"># 这里通过namespace:name 来反向获取url</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>PS：在html中，通过{% url &lsquo;crm:index&rsquo; %} 也是通过namespace：name来获取url的。</p>
+<hr>
+<h2 id="mathjax-true">title: 2-django-urls路由系统基本使用
+date: 2018-03-15 09:05:09
+lastmod: 2018-03-15 09:05:09
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9Furls%E6%8E%A7%E5%88%B6">1 路由系统(urls控制)</a>
+<ul>
+<li><a href="#11-%E6%AD%A3%E5%88%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%82%E6%95%B0">1.1 正则字符串参数</a></li>
+<li><a href="#12-url%E7%9A%84%E5%88%86%E7%BB%84">1.2 url的分组</a>
+<ul>
+<li><a href="#121-%E6%97%A0%E5%90%8D%E5%88%86%E7%BB%84">1.2.1 无名分组</a></li>
+<li><a href="#122-%E6%9C%89%E5%90%8D%E5%88%86%E7%BB%84">1.2.2 有名分组</a></li>
+</ul>
+</li>
+<li><a href="#13-urlconf-%E5%9C%A8%E4%BB%80%E4%B9%88%E4%B8%8A%E6%9F%A5%E6%89%BE">1.3 URLconf 在什么上查找</a></li>
+<li><a href="#14-include%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91">1.4 include(路由分发)</a></li>
+<li><a href="#15-%E5%88%AB%E5%90%8Dname%E5%8F%82%E6%95%B0">1.5 别名(name参数)</a></li>
+<li><a href="#16-%E5%8F%8D%E6%8E%A8url">1.6 反推URL</a></li>
+<li><a href="#17-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">1.7 命名空间</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-路由系统urls控制-1">1 路由系统(urls控制)</h1>
+<p>url控制其实就是把不同的url对应到不同的views函数中去</p>
+<p>格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 项目目录下的urls.py文件中</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="o">...</span> <span class="o">...</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>url可以有多个，每个url都是一个独立的规则。
+参数如下：</p>
+<ul>
+<li><code>regex</code>(url正则表达式):与之匹配的 URL 会执行对应的第二个参数 view。</li>
+<li><code>view</code>(views视图函数): 用于执行与正则表达式匹配的 URL 请求。</li>
+<li><code>kwargs</code>(参数列表): 视图使用的字典类型的参数。  &ndash;&gt; 很少使用</li>
+<li><code>name</code>(别名): 用来反向获取 URL。</li>
+</ul>
+<h2 id="11-正则字符串参数-1">1.1 正则字符串参数</h2>
+<p>url的第一个参数为正则表达式，所以常用的正则表达式符号都可以进行匹配</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">user</span> <span class="kn">import</span> <span class="n">views</span>  <span class="c1"># 导入我们的app的views，才可以调用</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^articles/2003/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">special_case_2003</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^articles/[0-9]{4}/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">year_archive</span><span class="p">),</span> 
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^articles/([0-9]{4})/([0-9]{2})/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">month_archive</span><span class="p">),</span> <span class="c1"># 传递两个位置参数</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">article_detail</span><span class="p">),</span>  <span class="c1"># 传递三个位置参数</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里对url表达式使用括号，表示取出匹配到的路径字符串（分组）</p>
+<p>注意：</p>
+<ul>
+<li>一旦<code>匹配成功则不再继续匹配</code></li>
+<li><code>不需要添加一个前导的反斜杠</code>，因为每个URL 都有。例如，应该是^articles 而不是 ^/articles。</li>
+<li>每个正则表达式前面的&rsquo;r'，是可选的但是建议加上。</li>
+</ul>
+<h2 id="12-url的分组-1">1.2 url的分组</h2>
+<p>        在url正则表达式上加上括号，就表示对括号内的元素进行取出，然后传给后面的views函数，根据传递参数的方式不同，分为<code>无名分组</code>和<code>有名分组</code>:</p>
+<blockquote>
+<p>若要从URL中捕获一个值，只需要在它周围放置一对圆括号。</p>
+</blockquote>
+<h3 id="121-无名分组-1">1.2.1 无名分组</h3>
+<p>只需要把要分组的正则字符串用括号括起来即可。这样，括号内的匹配的内容会当作位置参数传递给后面指定的views函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^articles/([0-9]{4})/([0-9]{2})/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">year_month</span><span class="p">),</span>
+<span class="p">]</span>
+ 
+<span class="c1"># ([0-9]{4}) 第一个位置参数</span>
+<span class="c1"># ([0-9]{2}) 第二个位置参数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>views函数需要定义位置参数来一一对应,否则将会抛出TypeError异常</p>
+<h3 id="122-有名分组-1">1.2.2 有名分组</h3>
+<p>        即捕获url中的一个值时，并赋予其名称，使用关键字参数来进行传递。在Python 正则表达式中，命名正则表达式组的语法是(?P<name>pattern)，其中 name 是组的名称，pattern 是要匹配的模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^index/(?P&lt;year&gt;201[0-9])&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># 会把 {&#39;year&#39;:201[0-9]} 当作关键字参数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这种方式可以在views中的处理函数内，直接定义关键字变量来接受，而不用在意参数的位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
+    <span class="o">...</span> <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果year没有捕获到数据，那么views函数index将会报错，所以我们一般可以在index中为year，配置默认值来避免这种错误。当然也可以在urls内，指定默认参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^index/year(?P&lt;year&gt;[0-9]?)&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="mi">2019</span><span class="p">})</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>但是这样就把前面匹配到的year的值给覆盖了。请慎重选用</p>
+<h2 id="13-urlconf-在什么上查找-1">1.3 URLconf 在什么上查找</h2>
+<p>请求的URL被看做是一个普通的Python 字符串， URLconf在其上查找并匹配。进行匹配时将不包括GET或POST请求方式的参数以及域名。</p>
+<ul>
+<li>GET:把用户发送的参数放在URL中进行传递，在URL中一般用?隔开。</li>
+<li>POST:把用户发送的参数放在请求头中传递。</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><a href="https://www.example.com/myapp/">https://www.example.com/myapp/</a> 请求中，URLconf 将查找 myapp/</li>
+<li><a href="https://www.example.com/myapp/?page=3">https://www.example.com/myapp/?page=3</a> 请求中，URLconf 仍将查找 myapp/ 。</li>
+</ul>
+<p>URLconf 不检查使用了哪种请求方法。换句话讲，所有的请求方法,即对同一个URL的无论是 POST请求、GET请求、或是HEAD请求方法等等，都将路由到相同的函数。</p>
+<h2 id="14-include路由分发-1">1.4 include(路由分发)</h2>
+<p>        当项目中的应用变得越来越多的时候，如果所有的应用的URL都通过项目的urls统一进行分配，那么耦合度会很高，另外也不利于管理，所以这里通过include来交给应用的urls来处理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 项目的urls.py</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+ 
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^user/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;user.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+ 
+<span class="c1"># 通过include 来指定交给那个应用的urls来处理</span>
+<span class="c1"># include 包涵在 django.conf.urls中</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在应用user下创建urls.py文件，写入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">user</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s1">&#39;^login&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：路由分发后，子路径的起始位置就从分发的URL开始了。上面匹配到的路径为：<code>user/login</code></p>
+<h2 id="15-别名name参数-1">1.5 别名(name参数)</h2>
+<p>当我们在做路径匹配然后配合form表单等需要提交的数据的元素的时候会遇到以下问题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#urls.py</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^login/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login</span><span class="p">),</span>      <span class="c1">#  匹配路径</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>返回的页面文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+ 
+ 
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>登录页面<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;/login/&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span><span class="p">&gt;</span>     <span class="c">&lt;!--   根据路径进行提交 --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>姓名<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>密码<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;登录&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+ 
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果我们某一天改了url匹配的路径，那么,就绪要修改页面中所有的提交路径，否则将会提交失败.而url的name就是解决这个问题的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^login/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LOGIN&#39;</span><span class="p">),</span>  <span class="c1"># 添加name关键字</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>返回的html文件如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+ 
+ 
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>登录页面<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;{% url &#39;LOGIN&#39; %}&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span><span class="p">&gt;</span>      <span class="c">&lt;!-- 这里使用name关键字来动态的传递url --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>姓名<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>密码<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;登录&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+ 
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就算URL后期更改，也会动态指向最新的URL。</p>
+<ul>
+<li>个人觉得说白了就是一个变量的替换，只不过是用的是django特有的语法格式。
+name=&lsquo;LOGIN&rsquo; 就是把前面匹配的url保存到LOGIN中，然后Django 在返回html文件的时候再进行替换。
+补充：</li>
+<li>当url存在正则表达式的时候，只使用name参数是不行的。因为正则部分无法进行渲染。目前的解决方法是在url部分进行拼接</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># --------------------------- url ---------------------------</span>
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">app01</span> <span class="kn">import</span> <span class="n">views</span>
+ 
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^abc/(\d+)/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">login</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;LOGIN&#34;</span><span class="p">),</span>
+<span class="p">]</span>
+ 
+ 
+ 
+<span class="c1"># -------------------------- Teamplates ---------------------------</span>
+ 
+<span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;{</span><span class="si">% u</span><span class="s2">rl &#34;</span><span class="n">LOGIN</span><span class="s2">&#34; 4 %}&#34;</span><span class="o">&gt;</span>     <span class="c1"># 这里正则匹配了几个部分，那么就需要传递几个参数</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Username</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;username&#34;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Password</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;password&#34;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&#34;提交&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="16-反推url-1">1.6 反推URL</h2>
+<p>        什么叫反推url？在views函数中，如果想要获取当前函数对应的url，该怎么办呢？还记得前面的name属性吗，反推url就是在views中根据name属性的值，获得对应的url</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+ 
+<span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然reverse还有两个参数(args,kwargs)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">args</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+ 
+<span class="c1"># 参数是配合urls中的正则表达式的</span>
+<span class="n">url</span><span class="p">(</span><span class="s1">&#39;^detail/(\d+)&#39;</span> <span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;i1&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">detail</span><span class="p">)</span>          <span class="o">--</span> <span class="o">&gt;</span>   <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;i1&#39;</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,))</span>
+<span class="c1"># 反推的URL为： detail/10</span>
+ 
+<span class="c1"># kwargs则表示在命名关键字的情况下</span>
+<span class="n">url</span><span class="p">(</span><span class="s1">&#39;^detail/(?P&lt;nid&gt;\d+)&#39;</span> <span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;i2&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">detail</span><span class="p">)</span>   <span class="o">--</span> <span class="o">&gt;</span>   <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;i1&#39;</span><span class="p">,</span><span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;nid&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
+<span class="c1"># 反推的url为： detail/10</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>还有一个方法是利用request对象的path_info，因为其中存放的是用户提交的url。</p>
+<h2 id="17-命名空间-1">1.7 命名空间</h2>
 <p>        当在url(路由系统)中使用了include时，在views函数中，我们就无法单独的利用name参数来反推url了，因为在include时，是无法使用name关键字的，不过django提供了其他关键字提供类似功能：namespace，称作命名空间。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

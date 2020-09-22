@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 conturrent包 2 future模块 3 ThreadPoolExecutor对象 4 Future对象 5 ProcessPoolExe">
 <meta itemprop="datePublished" content="2017-08-02T10:49:35+00:00" />
 <meta itemprop="dateModified" content="2017-08-02T10:49:35+00:00" />
-<meta itemprop="wordCount" content="1423">
+<meta itemprop="wordCount" content="2903">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 1423 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span class="more-meta"> 约 2903 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 3-concurrent模块
+date: 2018-09-30 03:06:03
+lastmod: 2018-09-30 03:06:03
+draft: false
+tags: [Python模块,]
+categories: [Python模块,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -609,6 +623,321 @@
 <p>该库统一了线程池，进程池的调用，简化了编程。唯一的缺点是无法设置线程的名称，但这都无所谓了。</p>
 </blockquote>
 <h1 id="7-异步爬网站的小例子">7 异步爬网站的小例子</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+<span class="k">def</span> <span class="nf">get_html</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">length</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">url_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;http://www.baidu.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;http://www.sina.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;http://www.qq.com&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="p">[</span><span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_html</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_list</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 3-concurrent模块
+date: 2018-09-30 03:06:03
+lastmod: 2018-09-30 03:06:03
+draft: false
+tags: [Python模块,]
+categories: [Python模块,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-conturrent%E5%8C%85">1 conturrent包</a></li>
+<li><a href="#2-future%E6%A8%A1%E5%9D%97">2 future模块</a></li>
+<li><a href="#3-threadpoolexecutor%E5%AF%B9%E8%B1%A1">3 ThreadPoolExecutor对象</a></li>
+<li><a href="#4-future%E5%AF%B9%E8%B1%A1">4 Future对象</a></li>
+<li><a href="#5-processpoolexecutor%E5%AF%B9%E8%B1%A1">5 ProcessPoolExecutor对象</a></li>
+<li><a href="#6-%E6%94%AF%E6%8C%81%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86">6 支持上下文管理</a></li>
+<li><a href="#7-%E5%BC%82%E6%AD%A5%E7%88%AC%E7%BD%91%E7%AB%99%E7%9A%84%E5%B0%8F%E4%BE%8B%E5%AD%90">7 异步爬网站的小例子</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-conturrent包-1">1 conturrent包</h1>
+<p>conturrent包内只包含了一个future模块，它为异步执行调用提供了高级的接口。</p>
+<h1 id="2-future模块-1">2 future模块</h1>
+<p>主要提供了两个用于异步执行的类：</p>
+<ul>
+<li>ThreadpPoolExecutor：异步调用的线程池的执行器</li>
+<li>ProcessPoolExecutor：异步调用的进程池的执行器</li>
+</ul>
+<blockquote>
+<p>两者实现相同的接口，该接口由抽象Executor类定义。</p>
+</blockquote>
+<h1 id="3-threadpoolexecutor对象-1">3 ThreadPoolExecutor对象</h1>
+<p>提供了以下方法用于构建和执行多线程任务：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ThreadpPoolExecutor(max_workers=None, thread_name_prefix='')</td>
+<td>池中至多创建max_workers个线程的池来同时异步执行，返回Executor实例，<code>如果max_workers没有指定，那么会开启cpu核数(或1) * 5 个线程</code></td>
+</tr>
+<tr>
+<td>submit(fn, *args, **kwargs)</td>
+<td>提交执行的函数及其参数，返回Future类的实例</td>
+</tr>
+<tr>
+<td>shutdown(wait=True)</td>
+<td>清理池</td>
+</tr>
+</tbody>
+</table>
+<p>基本使用:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">total</span>
+
+<span class="n">fs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">executor</span> <span class="o">=</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 线程池为3</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;worker-{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">10000</span><span class="p">)</span>    <span class="c1"># 提交即异步执行</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>    <span class="c1"># 获取结果</span>
+    
+<span class="n">executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>  <span class="c1"># 等待所有进程执行完毕后，关闭线程池。</span>
+
+<span class="c1"># (&#39;worker-0&#39;, 10000)</span>
+<span class="c1"># (&#39;worker-1&#39;, 10000)</span>
+<span class="c1"># (&#39;worker-2&#39;, 10000)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>submit返回的是一个Future对象。当执行的任务多余线程池的数量时，超出的任务会被阻塞，即等待执行状态，打印对象即可查看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">Future</span> <span class="n">at</span> <span class="mh">0x2456e953cc0</span> <span class="n">state</span><span class="o">=</span><span class="n">running</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Future</span> <span class="n">at</span> <span class="mh">0x2456ec65588</span> <span class="n">state</span><span class="o">=</span><span class="n">running</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Future</span> <span class="n">at</span> <span class="mh">0x2456ec6d7b8</span> <span class="n">state</span><span class="o">=</span><span class="n">running</span><span class="o">&gt;</span>  <span class="c1"># 运行</span>
+<span class="o">&lt;</span><span class="n">Future</span> <span class="n">at</span> <span class="mh">0x2456ec6dac8</span> <span class="n">state</span><span class="o">=</span><span class="n">pending</span><span class="o">&gt;</span>  <span class="c1"># 阻塞等待</span>
+<span class="o">&lt;</span><span class="n">Future</span> <span class="n">at</span> <span class="mh">0x2456eeba0f0</span> <span class="n">state</span><span class="o">=</span><span class="n">pending</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-future对象-1">4 Future对象</h1>
+<p>包含了许多针对多进程/线程执行的相关结果的方法。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>done()</td>
+<td>如果调用被成功取消或者执行完成，返回True</td>
+</tr>
+<tr>
+<td>cancelled()</td>
+<td>如果调用被成功取消，返回True</td>
+</tr>
+<tr>
+<td>running()</td>
+<td>如果正在运行且不能被取消，返回True</td>
+</tr>
+<tr>
+<td>cancel()</td>
+<td>尝试取消调用。如果已经执行且不能取消返回False，否则成功取消返回True</td>
+</tr>
+<tr>
+<td>result(timeout=None)</td>
+<td>获取执行结果，timeout为None，表示阻塞等待。<br>timeout到期还未返回，抛出concurrent.futures._base.TimeoutError异常</td>
+</tr>
+<tr>
+<td>exception(timeout=None)</td>
+<td>获取返回的异常，timeout为None，表示阻塞等待。<br>timeout到期还未返回，抛出concurrent.futures._base.TimeoutError异常</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-processpoolexecutor对象-1">5 ProcessPoolExecutor对象</h1>
+<p>实现了和ThreadPoolExecutor一样的接口，所以只需要把上面例子的ThreadPoolExecutor换为ProcessPoolExecutor即可完成进程的创建。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">total</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">executor</span> <span class="o">=</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;worker-{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+
+<span class="c1"># (&#39;worker-0&#39;, 10000)</span>
+<span class="c1"># (&#39;worker-1&#39;, 10000)</span>
+<span class="c1"># (&#39;worker-2&#39;, 10000)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-支持上下文管理-1">6 支持上下文管理</h1>
+<p>当进程吃使用完毕时，我们需要调用shutdown方法来关闭它。ThreadPoolExecutor和ProcessPoolExecutor实现了上下文管理，当我们离开时，会自动调用shutdown方法，非常方便</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">concurrent.futures</span>
+
+<span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">total</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">executor</span> <span class="o">=</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;worker-{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">10000</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">fs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>该库统一了线程池，进程池的调用，简化了编程。唯一的缺点是无法设置线程的名称，但这都无所谓了。</p>
+</blockquote>
+<h1 id="7-异步爬网站的小例子-1">7 异步爬网站的小例子</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

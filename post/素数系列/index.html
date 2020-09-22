@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 给一个数、判断它是否是素数(质数) (质数：一个大于1的自然数只能被1和它本身整除) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 (1) 传统方法 n">
 <meta itemprop="datePublished" content="2019-11-12T03:09:55+00:00" />
 <meta itemprop="dateModified" content="2019-11-12T03:09:55+00:00" />
-<meta itemprop="wordCount" content="619">
+<meta itemprop="wordCount" content="1285">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 619 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1285 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 素数系列
+date: 2019-08-07 03:01:23
+lastmod: 2019-08-07 03:01:23
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -405,6 +419,147 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="2-求10万以内所有素数">2 求10万以内所有素数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="err">方法</span><span class="mi">1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>  <span class="c1"># 排除偶数</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>  <span class="c1"># 奇数是无法被偶数整除的，所以跳过偶数，当计算到开方处时(int会取整，所以为了边界问题，+1)，还没办法整除表示它是一个素数</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 如果可以整除，那么说明不是素数</span>
+            <span class="k">break</span>    <span class="c1"># 终止后续的计算</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>   <span class="c1"># 否则，都不能整除，那么表示是素数，追加到列表中去(当然这里也可以直接打印)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="err">在整数范畴内</span><span class="p">(</span><span class="err">非自然数</span><span class="p">)</span><span class="err">，合数一定可以分解成几个质数的乘积，所以说，合数一定可以找到一个质数来整除的，换句话说，如果一个数不能被素数整除，那么这个数就不是合数（大于</span><span class="mi">4</span><span class="err">，不是合数就是素数）</span> 
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">primenumbers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">edge</span> <span class="o">=</span> <span class="n">i</span> <span class="o">**</span> <span class="mf">0.5</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">primenumbers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">edge</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">primenumbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;算法2&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">primenumbers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 素数系列
+date: 2019-08-07 03:01:23
+lastmod: 2019-08-07 03:01:23
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-给一个数判断它是否是素数质数-1">1 给一个数、判断它是否是素数(质数)</h1>
+<p>(质数：一个大于1的自然数只能被1和它本身整除)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="err">传统方法</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">12577</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># 假定不是素数，一旦整除就是素数</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># 偶数一定不是素数，这里排除</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 整除了就不是素数</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">break</span>
+<span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;Is not a prime number&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;Is a prime number&#39;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">12777</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="c1"># 奇数是无法被偶数整除的，所以跳过偶数，当计算到开方处时(int会取整，所以为了边界问题，+1)，还没办法整除表示它是一个素数</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Is not a prime number&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Is a prime number&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-求10万以内所有素数-1">2 求10万以内所有素数</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

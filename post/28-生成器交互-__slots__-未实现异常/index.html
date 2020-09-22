@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 生成器交互 2 slots 3 未实现和未实现异常 4 Python的对象模型 1 生成器交互 生成器提供了一个send方法用于动态的和生成器对象进行交互。">
 <meta itemprop="datePublished" content="2017-07-21T22:21:27+00:00" />
 <meta itemprop="dateModified" content="2017-07-21T22:21:27+00:00" />
-<meta itemprop="wordCount" content="2174">
+<meta itemprop="wordCount" content="4411">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 2174 字 </span>
-          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        <span class="more-meta"> 约 4411 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 28-生成器交互-<strong>slots</strong>-未实现异常
+date: 2018-06-16 06:02:49
+lastmod: 2018-06-16 06:02:49
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -645,6 +659,319 @@
 <li>NotImplemented是个单值，一般在算数方法中告诉解释器，没有实现。解释器转而执行右边操作对象的radd方法。</li>
 </ul>
 <h1 id="4-python的对象模型">4 Python的对象模型</h1>
+<p>        在Python中，任何对象都有类型，可以使用type()或者__class__查看。但是类型也是对象及类对象，它也有自己的类型。下图为Python中的类型与继承关系：<br>
+<img src="photo/object.png" alt="object"><br>
+所以新类型的缺省类型都是type(可以使用元类来改变)</p>
+<ul>
+<li>特殊类型type是所有对象的缺省类型，也包括type自己。但它又是一个对象，因此从object继承。</li>
+<li>特殊类型object是继承树的顶层，它是Python所有类型的最终基类。</li>
+</ul>
+<p>也就是说：<strong><code>继承都来自object,类型都看type，type也是对象继承自object，object也有类型，是type，这俩又很特殊，type的类型是它自己，object没有基类。</code></strong></p>
+<hr>
+<h2 id="mathjax-true">title: 28-生成器交互-<strong>slots</strong>-未实现异常
+date: 2018-06-16 06:02:49
+lastmod: 2018-06-16 06:02:49
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92">1 生成器交互</a></li>
+<li><a href="#2-__slots__">2 <strong>slots</strong></a></li>
+<li><a href="#3-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8">3 未实现和未实现异常</a></li>
+<li><a href="#4-python%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">4 Python的对象模型</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-生成器交互-1">1 生成器交互</h1>
+<p>生成器提供了一个send方法用于动态的和生成器对象进行交互。怎么理解的呢？看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">a</span>   <span class="c1"># 格式</span>
+        <span class="k">if</span> <span class="n">position</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="n">g</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        上面的 变量 = yield 返回值，是生成器提供的交互格式，当我们使用生成器对象的send方法时，实参就会被传递给这里的position变量，从而在函数外部来控制函数内部的运行，同时send和next一样可以推动生成器的运行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">something</span> <span class="o">=</span> <span class="k">yield</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} is eating {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">something</span><span class="p">))</span>
+
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">daxin</span><span class="o">.</span><span class="n">eat</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;包子-{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个例子看起来很鸡肋，但是想一下，如果count以上的代码在另一个线程中，是不是就实现了不同线程之间的切换？</p>
+<h1 id="2-__slots__-1">2 <strong>slots</strong></h1>
+<p>        字典为了提升查询效率，必须用空间换时间。一般来说一个实例，属性多一点，都存储在字典中便于查询，问题不大，但是如果数百万个实例，那么字典占用的空间就很大了，那么是否可以把类的__dict__属性省了？__slots__就是干这个事情的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>  <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;China&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;Chinese&#39;</span>
+        <span class="o">...</span> <span class="o">...</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        实例化对象时，它的属性信息都会存放在实例自己的__dict__字典中去，由于没办法固定实例的属性个数，所以这个字典就会很大。比如__dict__申请了300间客房，而只有4个客人住，并且每个实例都是这样。当使用了__slots__时</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>  <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="k">def</span> <span class="nf">say</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;tom&#39;</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="s1">&#39;Man&#39;</span>  <span class="c1"># 无法设置，因为__slots__没有允许</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>  <span class="c1"># {&#39;__module__&#39;: &#39;__main__&#39;, &#39;__slots__&#39;: [&#39;name&#39;, &#39;age&#39;], &#39;__init__&#39;: &lt;function A.__init__ at 0x0000022422379950&gt;, &#39;say&#39;: &lt;function A.say at 0x00000224223799D8&gt;, &#39;hello&#39;: &lt;function A.hello at 0x0000022422379A60&gt;, &#39;age&#39;: &lt;member &#39;age&#39; of &#39;A&#39; objects&gt;, &#39;name&#39;: &lt;member &#39;name&#39; of &#39;A&#39; objects&gt;, &#39;__doc__&#39;: None}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当类使用了__slots__属性时：</p>
+<ol>
+<li>实例的属性被__slots__约束，包括在__init__函数中使用self设置的属性。</li>
+<li>实例的__dict__是在实例化时由__new__方法构建的，当设置了__slots__属性时，__new__方法不会为实例创建__dict__属性字典</li>
+<li>父类的__slots__对应着子类属性名称(列表或元组)。</li>
+<li>另外还存在属性名称对应的<member descriptor>对象，可以理解为类描述器东西。</li>
+<li>__slots__只约束实例的属性，并不约束实例的方法（实例没有方法，实例是被绑定在类中定义的方法上的）。</li>
+<li>访问实例属性时，会被映射到对应的类的描述器上(数据描述器)，其内部为每个实例构建了专门的对象存储。(具体实现是用偏移地址来记录描述器，通过公式可以直接计算出其在内存中的实际地址,通过直接访问内存获得。)</li>
+</ol>
+<blockquote>
+<p>定义了__slots__时，指定的属性都变为了描述器。</p>
+</blockquote>
+<p>        换句话说：<strong>slots__告诉解释器，实例的属性都叫什么，一般来说，既然要节约内存，最好还是使用元组比较好，一旦类提供了__slots</strong>，就阻止实例产生__dict__来保存实例的属性。__slots__不影响子类，不会被继承，但如果父类没有实现__slots__方法，那么子类的就无法生效.</p>
+<p>        使用建议：为了正确使用__slots__，最好直接继承object。如有需要用到其他父类，则父类和子类都要定义__slots__，还要记得子类的__slots__会覆盖父类的__slots__。除非所有父类的__slots__都为空，否则不要使用多继承。</p>
+<p>以上参考自：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">stackoverflow</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">questions</span><span class="o">/</span><span class="mi">472000</span><span class="o">/</span><span class="n">usage</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">slots</span>
+<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">code</span><span class="o">.</span><span class="n">activestate</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">recipes</span><span class="o">/</span><span class="mi">532903</span><span class="o">-</span><span class="n">how</span><span class="o">-</span><span class="vm">__slots__</span><span class="o">-</span><span class="n">are</span><span class="o">-</span><span class="n">implemented</span><span class="o">/</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">cnblogs</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rainfd</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">slots</span><span class="o">.</span><span class="n">html</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-未实现和未实现异常-1">3 未实现和未实现异常</h1>
+<p>未实现和未实现的异常是两个东西他们的含义是：</p>
+<ul>
+<li>NotImplementedError:未实现异常类，是一个类。</li>
+<li>NotImplemented：未实现实例，是一个单值。</li>
+</ul>
+<p>具体的区别看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">other</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">a</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么是3呢。看下面的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Handsome&#39;</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">daxin</span><span class="p">)</span>  <span class="c1"># Handsome</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>明白了吗？</p>
+<ol>
+<li>b+daxin，其实调用的是b.<strong>add</strong>(daxin)。</li>
+<li>由于daxin没有data属性，所以一定会报异常。但是我们做了异常捕捉，最后会抛出NotImplemented(未实现)。</li>
+<li>解释器不找到该值，并不会出发异常，而会转而调用daxin的__radd__方法。</li>
+</ol>
+<p>所以：</p>
+<ul>
+<li>NotImplementedError一般和raise连用，定义在抽象基类中，用于告诉实例，该方法没有实现。</li>
+<li>NotImplemented是个单值，一般在算数方法中告诉解释器，没有实现。解释器转而执行右边操作对象的radd方法。</li>
+</ul>
+<h1 id="4-python的对象模型-1">4 Python的对象模型</h1>
 <p>        在Python中，任何对象都有类型，可以使用type()或者__class__查看。但是类型也是对象及类对象，它也有自己的类型。下图为Python中的类型与继承关系：<br>
 <img src="photo/object.png" alt="object"><br>
 所以新类型的缺省类型都是type(可以使用元类来改变)</p>

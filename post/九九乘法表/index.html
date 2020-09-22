@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7">
 <meta itemprop="datePublished" content="2018-09-17T01:15:30+00:00" />
 <meta itemprop="dateModified" content="2018-09-17T01:15:30+00:00" />
-<meta itemprop="wordCount" content="1796">
+<meta itemprop="wordCount" content="3640">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 1796 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span class="more-meta"> 约 3640 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 九九乘法表
+date: 2018-01-11 11:56:25
+lastmod: 2018-01-11 11:56:25
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -720,6 +734,442 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="9-就这么完了吗">9 就这么完了吗？</h1>
+<p>你以为就这么简单？学会了这种方法，当然会有变式，请使用足够少的代码打印下列九九乘法表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">  1*1<span class="o">=</span><span class="m">1</span>  1*2<span class="o">=</span><span class="m">2</span>  1*3<span class="o">=</span><span class="m">3</span>  1*4<span class="o">=</span><span class="m">4</span>  1*5<span class="o">=</span><span class="m">5</span>  1*6<span class="o">=</span><span class="m">6</span>  1*7<span class="o">=</span><span class="m">7</span>  1*8<span class="o">=</span><span class="m">8</span>  1*9<span class="o">=</span><span class="m">9</span>  
+         2*2<span class="o">=</span><span class="m">4</span>  2*3<span class="o">=</span><span class="m">6</span>  2*4<span class="o">=</span><span class="m">8</span>  2*5<span class="o">=</span><span class="m">10</span> 2*6<span class="o">=</span><span class="m">12</span> 2*7<span class="o">=</span><span class="m">14</span> 2*8<span class="o">=</span><span class="m">16</span> 2*9<span class="o">=</span><span class="m">18</span> 
+                3*3<span class="o">=</span><span class="m">9</span>  3*4<span class="o">=</span><span class="m">12</span> 3*5<span class="o">=</span><span class="m">15</span> 3*6<span class="o">=</span><span class="m">18</span> 3*7<span class="o">=</span><span class="m">21</span> 3*8<span class="o">=</span><span class="m">24</span> 3*9<span class="o">=</span><span class="m">27</span> 
+                       4*4<span class="o">=</span><span class="m">16</span> 4*5<span class="o">=</span><span class="m">20</span> 4*6<span class="o">=</span><span class="m">24</span> 4*7<span class="o">=</span><span class="m">28</span> 4*8<span class="o">=</span><span class="m">32</span> 4*9<span class="o">=</span><span class="m">36</span> 
+                              5*5<span class="o">=</span><span class="m">25</span> 5*6<span class="o">=</span><span class="m">30</span> 5*7<span class="o">=</span><span class="m">35</span> 5*8<span class="o">=</span><span class="m">40</span> 5*9<span class="o">=</span><span class="m">45</span> 
+                                     6*6<span class="o">=</span><span class="m">36</span> 6*7<span class="o">=</span><span class="m">42</span> 6*8<span class="o">=</span><span class="m">48</span> 6*9<span class="o">=</span><span class="m">54</span> 
+                                            7*7<span class="o">=</span><span class="m">49</span> 7*8<span class="o">=</span><span class="m">56</span> 7*9<span class="o">=</span><span class="m">63</span> 
+                                                   8*8<span class="o">=</span><span class="m">64</span> 8*9<span class="o">=</span><span class="m">72</span> 
+                                                          9*9<span class="o">=</span><span class="m">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>参考答案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="s2">&#34;{}*{}={:&lt;{}}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">i</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{:&gt;65}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{}{}*{}={:&lt;{}}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">7</span><span class="o">*</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">i</span> <span class="k">else</span> <span class="mi">2</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">9</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 九九乘法表
+date: 2018-01-11 11:56:25
+lastmod: 2018-01-11 11:56:25
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#%E6%89%93%E5%8D%B0%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8">打印九九乘法表</a></li>
+<li><a href="#1-%E9%99%8D%E4%BD%8E%E9%97%AE%E9%A2%98%E5%A4%8D%E6%9D%82%E5%BA%A6">1 降低问题复杂度</a></li>
+<li><a href="#2-%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%A7%92%E7%BA%BF%E4%B8%8B%E5%8D%8A%E9%83%A8%E9%83%A8%E5%88%86">2 获取对角线下半部部分</a></li>
+<li><a href="#3-%E8%B0%83%E6%95%B4%E5%BE%AA%E7%8E%AF%E6%AC%A1%E6%95%B0">3 调整循环次数</a></li>
+<li><a href="#4-%E8%B0%83%E6%95%B4%E9%97%B4%E8%B7%9D">4 调整间距</a></li>
+<li><a href="#5-%E4%BD%BF%E7%94%A8%E4%B8%89%E5%85%83%E4%BA%91%E7%AE%97%E7%AC%A6%E6%83%8A%E5%96%9C%E8%B0%83%E6%95%B4%E9%97%B4%E9%9A%94">5 使用三元云算符惊喜调整间隔</a></li>
+<li><a href="#6-%E5%88%A9%E7%94%A8format%E4%BC%98%E5%8C%96%E6%98%BE%E7%A4%BA">6 利用format优化显示</a></li>
+<li><a href="#7-%E5%88%A9%E7%94%A8print%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96">7 利用print进行优化</a></li>
+<li><a href="#8-%E4%B8%89%E8%A1%8C%E6%90%9E%E5%AE%9A%E7%BB%88%E6%9E%81%E7%89%88">8 三行搞定终极版</a></li>
+<li><a href="#9-%E5%B0%B1%E8%BF%99%E4%B9%88%E5%AE%8C%E4%BA%86%E5%90%97">9 就这么完了吗？</a></li>
+</ul>
+<!-- /TOC -->
+<hr>
+<h1 id="打印九九乘法表-1">打印九九乘法表</h1>
+<p>现在有需求，请使用 Python 尽可能少的代码，打印如下九九乘法表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">1*1<span class="o">=</span><span class="m">1</span>  
+2*1<span class="o">=</span><span class="m">2</span>  2*2<span class="o">=</span><span class="m">4</span>  
+3*1<span class="o">=</span><span class="m">3</span>  3*2<span class="o">=</span><span class="m">6</span>  3*3<span class="o">=</span><span class="m">9</span>  
+4*1<span class="o">=</span><span class="m">4</span>  4*2<span class="o">=</span><span class="m">8</span>  4*3<span class="o">=</span><span class="m">12</span> 4*4<span class="o">=</span><span class="m">16</span> 
+5*1<span class="o">=</span><span class="m">5</span>  5*2<span class="o">=</span><span class="m">10</span> 5*3<span class="o">=</span><span class="m">15</span> 5*4<span class="o">=</span><span class="m">20</span> 5*5<span class="o">=</span><span class="m">25</span> 
+6*1<span class="o">=</span><span class="m">6</span>  6*2<span class="o">=</span><span class="m">12</span> 6*3<span class="o">=</span><span class="m">18</span> 6*4<span class="o">=</span><span class="m">24</span> 6*5<span class="o">=</span><span class="m">30</span> 6*6<span class="o">=</span><span class="m">36</span> 
+7*1<span class="o">=</span><span class="m">7</span>  7*2<span class="o">=</span><span class="m">14</span> 7*3<span class="o">=</span><span class="m">21</span> 7*4<span class="o">=</span><span class="m">28</span> 7*5<span class="o">=</span><span class="m">35</span> 7*6<span class="o">=</span><span class="m">42</span> 7*7<span class="o">=</span><span class="m">49</span> 
+8*1<span class="o">=</span><span class="m">8</span>  8*2<span class="o">=</span><span class="m">16</span> 8*3<span class="o">=</span><span class="m">24</span> 8*4<span class="o">=</span><span class="m">32</span> 8*5<span class="o">=</span><span class="m">40</span> 8*6<span class="o">=</span><span class="m">48</span> 8*7<span class="o">=</span><span class="m">56</span> 8*8<span class="o">=</span><span class="m">64</span> 
+9*1<span class="o">=</span><span class="m">9</span>  9*2<span class="o">=</span><span class="m">18</span> 9*3<span class="o">=</span><span class="m">27</span> 9*4<span class="o">=</span><span class="m">36</span> 9*5<span class="o">=</span><span class="m">45</span> 9*6<span class="o">=</span><span class="m">54</span> 9*7<span class="o">=</span><span class="m">63</span> 9*8<span class="o">=</span><span class="m">72</span> 9*9<span class="o">=</span><span class="m">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="1-降低问题复杂度-1">1 降低问题复杂度</h1>
+<p>首先我可以先打一个九乘九的矩阵，假设当前我们只了解字符串拼接</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> <span class="mi">2</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">2</span> <span class="mi">3</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">3</span> <span class="mi">4</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">4</span> <span class="mi">5</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">5</span> <span class="mi">6</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">6</span> <span class="mi">7</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">7</span> <span class="mi">8</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">8</span> <span class="mi">9</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">9</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span> <span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">6</span> <span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">8</span> <span class="mi">5</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">10</span> <span class="mi">6</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">12</span> <span class="mi">7</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">14</span> <span class="mi">8</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">16</span> <span class="mi">9</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">18</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span> <span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span> <span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">12</span> <span class="mi">5</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">15</span> <span class="mi">6</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">18</span> <span class="mi">7</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">21</span> <span class="mi">8</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">24</span> <span class="mi">9</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">27</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span> <span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> <span class="mi">5</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">20</span> <span class="mi">6</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">24</span> <span class="mi">7</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">28</span> <span class="mi">8</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">32</span> <span class="mi">9</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> <span class="mi">6</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">30</span> <span class="mi">7</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">35</span> <span class="mi">8</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">40</span> <span class="mi">9</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">45</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> <span class="mi">7</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">42</span> <span class="mi">8</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">48</span> <span class="mi">9</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">54</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> <span class="mi">8</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">56</span> <span class="mi">9</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">63</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> <span class="mi">9</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">72</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>通过字符串拼接我们打印出了一个9*9的矩形，我们观察这个矩形和目标图形的差别，发现只需要从对角线分割，取下半部分即可，观察i和j的关系，发现只需要满足i&gt;=j即可</p>
+<h1 id="2-获取对角线下半部部分-1">2 获取对角线下半部部分</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span> <span class="mi">3</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span> <span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>虽然打出了我们想要的形状，但是我们发现内层循环依旧多循环了10-i次，这是无用的，我们需要对内层循环继续进行优化</p>
+<h1 id="3-调整循环次数-1">3 调整循环次数</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span> <span class="mi">3</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span> <span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>追求完美的人绝不会这么轻易的放弃，我们发现第3列的数据没有和其他行对其，那么我们考虑如何进行对齐显示</p>
+<h1 id="4-调整间距-1">4 调整间距</h1>
+<p>我们在每一行段的默认添加一个<code>\t制表符</code>，用于对其</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 追加符号版本</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span>	<span class="mi">5</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span>	<span class="mi">5</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span>	<span class="mi">6</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span>	<span class="mi">5</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span>	<span class="mi">6</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span>	<span class="mi">7</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span>	<span class="mi">5</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span>	<span class="mi">6</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span>	<span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span>	<span class="mi">8</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span>	
+<span class="mi">1</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span>	<span class="mi">2</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span>	<span class="mi">3</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span>	<span class="mi">4</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span>	<span class="mi">5</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span>	<span class="mi">6</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span>	<span class="mi">7</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span>	<span class="mi">8</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span>	<span class="mi">9</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>间距太大了有木有啊，如何精细的调整</p>
+<h1 id="5-使用三元云算符惊喜调整间隔-1">5 使用三元云算符惊喜调整间隔</h1>
+<p>观察乘法表，我们发现，当j等于1时，乘积结果都为个位数，为了好看，只需要空2个空格即可，而当乘积大于10时就需要使用3个空格了，这是我们使用三元运算符进行修改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span>
+        <span class="n">spaces</span> <span class="o">=</span> <span class="s1">&#39;  &#39;</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">product</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="s1">&#39; &#39;</span> <span class="c1"># 三元表达式</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">product</span><span class="p">)</span> <span class="o">+</span> <span class="n">spaces</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span>  
+<span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span>  <span class="mi">3</span><span class="o">+</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span>  
+<span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span>  <span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">+</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">+</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">+</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">+</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">+</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">+</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>是不是好看多了？但是代码看起来太臃肿了，用字符串拼接看起来也太low，这时我们可以使用字符串格式化优化代码</p>
+<h1 id="6-利用format优化显示-1">6 利用format优化显示</h1>
+<p>字符串的format函数功能非常强大，如果在python3中你使用<code>占位符%</code>进行替换，那么你也太不pythoner了，python3中推荐使用format函数，具体方法可以自行百度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">+=</span> <span class="s1">&#39;{}*{}={:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1">#结果</span>
+<span class="mi">1</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="7-利用print进行优化-1">7 利用print进行优化</h1>
+<p>很多人做到这里就会很满意，但是代码还有优化的空间，每趟循环我们直接打印，不进行字符串拼接可以吗？当然可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{}*{}={:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">3</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">()</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="8-三行搞定终极版-1">8 三行搞定终极版</h1>
+<p>代码是否还有缩减的空间？当然是可以的，下面就是三行终极版</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{}*{}={:&lt;{}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">3</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># 结果</span>
+<span class="mi">1</span><span class="o">*</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">=</span><span class="mi">4</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">3</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">6</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">3</span><span class="o">=</span><span class="mi">9</span>  
+<span class="mi">1</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">4</span> <span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">8</span>  <span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">12</span> <span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="o">=</span><span class="mi">16</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">5</span> <span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">10</span> <span class="mi">3</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">15</span> <span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">20</span> <span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="o">=</span><span class="mi">25</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">6</span> <span class="mi">2</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">12</span> <span class="mi">3</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">18</span> <span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">24</span> <span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">30</span> <span class="mi">6</span><span class="o">*</span><span class="mi">6</span><span class="o">=</span><span class="mi">36</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">7</span> <span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">14</span> <span class="mi">3</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">21</span> <span class="mi">4</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">28</span> <span class="mi">5</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">35</span> <span class="mi">6</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">42</span> <span class="mi">7</span><span class="o">*</span><span class="mi">7</span><span class="o">=</span><span class="mi">49</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">8</span> <span class="mi">2</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">16</span> <span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">24</span> <span class="mi">4</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">32</span> <span class="mi">5</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">40</span> <span class="mi">6</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">48</span> <span class="mi">7</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">56</span> <span class="mi">8</span><span class="o">*</span><span class="mi">8</span><span class="o">=</span><span class="mi">64</span> 
+<span class="mi">1</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">9</span> <span class="mi">2</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">18</span> <span class="mi">3</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">27</span> <span class="mi">4</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">36</span> <span class="mi">5</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">45</span> <span class="mi">6</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">54</span> <span class="mi">7</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">63</span> <span class="mi">8</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">72</span> <span class="mi">9</span><span class="o">*</span><span class="mi">9</span><span class="o">=</span><span class="mi">81</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="9-就这么完了吗-1">9 就这么完了吗？</h1>
 <p>你以为就这么简单？学会了这种方法，当然会有变式，请使用足够少的代码打印下列九九乘法表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

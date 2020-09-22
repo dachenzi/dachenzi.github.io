@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 django admin分析 2 django admin源码分析 2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin 3 django admin的接口 4 自定义ayra进行C">
 <meta itemprop="datePublished" content="2018-07-22T14:45:51+00:00" />
 <meta itemprop="dateModified" content="2018-07-22T14:45:51+00:00" />
-<meta itemprop="wordCount" content="5422">
+<meta itemprop="wordCount" content="10904">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 5422 字 </span>
-          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        <span class="more-meta"> 约 10904 字 </span>
+          <span class="more-meta"> 预计阅读 22 分钟 </span>
 
         
         
@@ -369,6 +369,43 @@
         <li><a href="#421-注册model类">4.2.1 注册model类</a></li>
         <li><a href="#422-servicearya基本实现">4.2.2 service/arya基本实现</a></li>
         <li><a href="#423-添加urls及views函数">4.2.3 添加urls及views函数</a></li>
+      </ul>
+    </li>
+    <li><a href="#mathjax-true">title: 6-自定义类admin管理增删改查
+date: 2016-01-08 03:36:56
+lastmod: 2016-01-08 03:36:56
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-注册部分-1">2.1 注册部分</a></li>
+    <li><a href="#22-路由分发部分-1">2.2 路由分发部分</a></li>
+    <li><a href="#23-流程总结-1">2.3 流程总结</a></li>
+    <li><a href="#24-定制admin-1">2.4 定制admin</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-准备工作-1">4.1 准备工作</a>
+      <ul>
+        <li><a href="#411-文件加载顺序-1">4.1.1 文件加载顺序</a></li>
+        <li><a href="#412-让我们的程序被优先加载-1">4.1.2 让我们的程序被优先加载</a></li>
+        <li><a href="#413-编写调用文件-1">4.1.3 编写调用文件</a></li>
+        <li><a href="#414-更换装载应用的方式-1">4.1.4 更换装载应用的方式</a></li>
+        <li><a href="#415-include本质-1">4.1.5 include本质</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-为每个model对象生成对应的url-1">4.2 为每个model对象生成对应的url</a>
+      <ul>
+        <li><a href="#421-注册model类-1">4.2.1 注册model类</a></li>
+        <li><a href="#422-servicearya基本实现-1">4.2.2 service/arya基本实现</a></li>
+        <li><a href="#423-添加urls及views函数-1">4.2.3 添加urls及views函数</a></li>
       </ul>
     </li>
   </ul>
@@ -1482,6 +1519,1268 @@ admin.site.register(models.UserInfo)
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="423-添加urls及views函数">4.2.3 添加urls及views函数</h3>
+<p>下面从入口继续编写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 项目的urls.py文件</span>
+<span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^arya/&#39;</span><span class="p">,</span><span class="n">arya</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>根据前面include的本质，和adjango admin的源码我们知道，这里的url返回的是一个三元组，即[],None,None。列表就是urlpatterns</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># service/arya.py</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">class</span> <span class="nc">AryaConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_class</span> <span class="o">=</span> <span class="n">model_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">site</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+
+        <span class="c1"># 为不同的model对象，生成不同的urls</span>
+        <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">changelist_view</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^add/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_view</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(\d+)/change/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_view</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(\d+)/delete/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete_view</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">patterns</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>   <span class="c1"># 必须返回三元组</span>
+
+    <span class="c1"># 真正处理CRUD的 views函数</span>
+    <span class="k">def</span> <span class="nf">changelist_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;列表页面&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;增加页面&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">change_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;修改页面&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;删除页面&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">AryaSite</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;执行了&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">arya_class</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">[</span><span class="n">model_class</span><span class="p">]</span> <span class="o">=</span> <span class="n">arya_class</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+        <span class="n">patterns</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 为不同modellei 生成不同的include对象，包含CRUD的urls</span>
+        <span class="k">for</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">arya_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pt</span> <span class="o">=</span> <span class="n">url</span><span class="p">(</span><span class="s1">&#39;^{}/{}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_class</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span> <span class="n">model_class</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">model_name</span><span class="p">),</span> <span class="n">arya_class</span><span class="o">.</span><span class="n">urls</span><span class="p">)</span>
+            <span class="n">patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">patterns</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+<span class="n">site</span> <span class="o">=</span> <span class="n">AryaSite</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：urls路径匹配结尾处，要添加/</p>
+</blockquote>
+<p>为什么要保存model呢？ 观察上面的views函数，内部存在model类对象的话，是不是就可以进行CRUD了呢？配上一个templates模版，就可以完成页面渲染了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">self</span><span class="o">.</span><span class="n">model_class</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 6-自定义类admin管理增删改查
+date: 2016-01-08 03:36:56
+lastmod: 2016-01-08 03:36:56
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-django-admin%E5%88%86%E6%9E%90">1 django admin分析</a></li>
+<li><a href="#2-django-admin%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90">2 django admin源码分析</a>
+<ul>
+<li><a href="#21-%E6%B3%A8%E5%86%8C%E9%83%A8%E5%88%86">2.1 注册部分</a></li>
+<li><a href="#22-%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91%E9%83%A8%E5%88%86">2.2 路由分发部分</a></li>
+<li><a href="#23-%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93">2.3 流程总结</a></li>
+<li><a href="#24-%E5%AE%9A%E5%88%B6admin">2.4 定制admin</a></li>
+</ul>
+</li>
+<li><a href="#3-django-admin%E7%9A%84%E6%8E%A5%E5%8F%A3">3 django admin的接口</a></li>
+<li><a href="#4-%E8%87%AA%E5%AE%9A%E4%B9%89ayra%E8%BF%9B%E8%A1%8Ccrud">4 自定义ayra进行CRUD</a>
+<ul>
+<li><a href="#41-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">4.1 准备工作</a>
+<ul>
+<li><a href="#411-%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F">4.1.1 文件加载顺序</a></li>
+<li><a href="#412-%E8%AE%A9%E6%88%91%E4%BB%AC%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%A2%AB%E4%BC%98%E5%85%88%E5%8A%A0%E8%BD%BD">4.1.2 让我们的程序被优先加载</a></li>
+<li><a href="#413-%E7%BC%96%E5%86%99%E8%B0%83%E7%94%A8%E6%96%87%E4%BB%B6">4.1.3 编写调用文件</a></li>
+<li><a href="#414-%E6%9B%B4%E6%8D%A2%E8%A3%85%E8%BD%BD%E5%BA%94%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F">4.1.4 更换装载应用的方式</a></li>
+<li><a href="#415-include%E6%9C%AC%E8%B4%A8">4.1.5 include本质</a></li>
+</ul>
+</li>
+<li><a href="#42-%E4%B8%BA%E6%AF%8F%E4%B8%AAmodel%E5%AF%B9%E8%B1%A1%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E7%9A%84url">4.2 为每个model对象生成对应的url</a>
+<ul>
+<li><a href="#421-%E6%B3%A8%E5%86%8Cmodel%E7%B1%BB">4.2.1 注册model类</a></li>
+<li><a href="#422-servicearya%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0">4.2.2 service/arya基本实现</a></li>
+<li><a href="#423-%E6%B7%BB%E5%8A%A0urls%E5%8F%8Aviews%E5%87%BD%E6%95%B0">4.2.3 添加urls及views函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-django-admin分析-1">1 django admin分析</h1>
+<p>在每个app下都会存在一个admin.py文件用于注册当前app下的models文件，给django admin来管理，仔细观察Django admin针对不同models的管理页面、URL等信息，我们发现</p>
+<ol>
+<li>不同的类对象生成的url是类似的。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># UserInfo</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">app01</span><span class="o">/</span><span class="n">userindo</span><span class="o">/</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">app01</span><span class="o">/</span><span class="n">userinfo</span><span class="o">/</span><span class="n">add</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">app01</span><span class="o">/</span><span class="n">userinfo</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">change</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">app01</span><span class="o">/</span><span class="n">userinfo</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">delete</span>
+<span class="c1"># Role</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">role</span><span class="o">/</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">role</span><span class="o">/</span><span class="n">add</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">role</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">change</span>
+<span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">role</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">delete</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>不同的类，页面的布局模版也是类似的。
+所以，我们分析，admin内部应该是为我们的注册的类，生成了对应的url，以及视图函数，并且通过相同的模版渲染来返回页面的。下面来跟一下源码文件</li>
+</ol>
+<h1 id="2-django-admin源码分析-1">2 django admin源码分析</h1>
+<h2 id="21-注册部分-1">2.1 注册部分</h2>
+<p>首先从注册开始，看下我们的admin.py文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Userinfo</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注册是通过site的register方法完成的，那么从这个入口开始看它内部是怎么完成的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">site</span> <span class="o">=</span> <span class="n">AdminSite</span><span class="p">()</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>查看他的register方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"> <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_or_iterable</span><span class="p">,</span> <span class="n">admin_class</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="o">...</span> <span class="o">...</span> 
+    <span class="bp">self</span><span class="o">.</span><span class="n">_registry</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="n">admin_class</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>内部把我们的model类使用字典存储起来(self._registry = {}),而admin_class默认情况下的值为ModelAdmin</p>
+<h2 id="22-路由分发部分-1">2.2 路由分发部分</h2>
+<p>查看项目的urls.py文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里的site和admin.py里的site是同一个对象,而在urls代码内部调用了get_urls方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"> <span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span> <span class="o">...</span>
+        <span class="n">valid_app_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_admin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registry</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">/&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">model_name</span><span class="p">),</span> <span class="n">include</span><span class="p">(</span><span class="n">model_admin</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
+            <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>内部为每一个model类封装了一个url(inclue)路由：</p>
+<ul>
+<li>model._meta.app_label:就是app的名称</li>
+<li>model._meta.model_name：就是model的名称
+最后调用的是model_admin的urls方法，其实也就是封装的ModelAdmin对象的urls方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+        <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">changelist_view</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_changelist&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^add/$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_view</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_add&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.+)/history/$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">history_view</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_history&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.+)/delete/$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_view</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_delete&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">),</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.+)/change/$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">change_view</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_change&#39;</span> <span class="o">%</span> <span class="n">info</span><span class="p">),</span>
+            <span class="c1"># For backwards compatibility (was the change url before 1.9)</span>
+            <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.+)/$&#39;</span><span class="p">,</span> <span class="n">wrap</span><span class="p">(</span><span class="n">RedirectView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span>
+                <span class="n">pattern_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">_change&#39;</span> <span class="o">%</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">admin_site</span><span class="o">.</span><span class="n">name</span><span class="p">,)</span> <span class="o">+</span> <span class="n">info</span><span class="p">)</span>
+            <span class="p">))),</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">urlpatterns</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里才是，为每个model类生成的url列表，对应的就是处理方法。</p>
+<h2 id="23-流程总结-1">2.3 流程总结</h2>
+<p>整个流程如下：</p>
+<ol>
+<li>site 是一个 AdminSite()对象</li>
+<li>查看AdminSite()对象的register方法，使用字典封装了我们的model类{model类,ModelAdmin(model类，site对象)}</li>
+<li>访问urls时，admin为每个model类创建一个以'/app名称/model类名&rsquo;为前缀的url</li>
+<li>映射到包装好的ModelAdmin对象的get_url方法内</li>
+<li>在内部为CRUD操作，定义了url列表以及对应的views方法。</li>
+</ol>
+<h2 id="24-定制admin-1">2.4 定制admin</h2>
+<p>根据分析，我们知道，真正完成数据库的增删改查的任务，其实是ModelAdmin对象，而在我们注册我们的model时，django提供了一个额外的参数admin_class，用于让我们定制自己的admin。
+所以，我们可以通过继承ModelAdmin来定制，比如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib.admin.options</span> <span class="kn">import</span> <span class="n">ModelAdmin</span>
+<span class="k">class</span> <span class="nc">MyModelAdmin</span><span class="p">(</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">changelist_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">extra_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HTTPResponse</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span> <span class="n">admin_class</span><span class="o">=</span><span class="n">MyModelAdmin</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样，Permission表的，list页面就会被我们修改。</p>
+<h1 id="3-django-admin的接口-1">3 django admin的接口</h1>
+<p>上面的方法比较麻烦，django admin提供了不少接口和参数用于控制admin页面的展示
+定制Admin
+在admin.py中只需要讲Mode中的某个类注册，即可在Admin中实现增删改查的功能，如：
+admin.site.register(models.UserInfo)
+但是，这种方式比较简单，如果想要进行更多的定制操作，需要利用ModelAdmin进行操作，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">方式一：</span>
+    <span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+        <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,)</span>
+ 
+    <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span> <span class="c1"># 第一个参数可以是列表</span>
+     
+ 
+<span class="err">方式二：</span>
+    <span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>                <span class="c1"># 第一个参数可以是列表</span>
+    <span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+        <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ModelAdmin中提供了大量的可定制功能，如</p>
+<ol>
+<li>list_display，列表时，定制显示的列。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxxx&#39;</span><span class="p">)</span>
+ 
+    <span class="k">def</span> <span class="nf">xxxxx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&#34;xxxxx&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>list_display_links，列表时，定制列可以点击跳转。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,</span> <span class="s1">&#39;xxxxx&#39;</span><span class="p">)</span>
+    <span class="n">list_display_links</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;pwd&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>list_filter，列表时，定制右侧快速筛选。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">ugettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+ 
+<span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">)</span>
+ 
+    <span class="k">class</span> <span class="nc">Ugg</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">SimpleListFilter</span><span class="p">):</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;decade born&#39;</span><span class="p">)</span>
+        <span class="n">parameter_name</span> <span class="o">=</span> <span class="s1">&#39;xxxxxx&#39;</span>
+ 
+        <span class="k">def</span> <span class="nf">lookups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">model_admin</span><span class="p">):</span>
+            <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">            显示筛选选项
+</span><span class="s2">            :param request:
+</span><span class="s2">            :param model_admin:
+</span><span class="s2">            :return:
+</span><span class="s2">            &#34;&#34;&#34;</span>
+            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">UserGroup</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span>
+ 
+        <span class="k">def</span> <span class="nf">queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+            <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">            点击查询时，进行筛选
+</span><span class="s2">            :param request:
+</span><span class="s2">            :param queryset:
+</span><span class="s2">            :return:
+</span><span class="s2">            &#34;&#34;&#34;</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ug</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+ 
+    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="n">Ugg</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>list_select_related，列表时，连表查询是否自动select_related</li>
+<li>分页相关</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 分页，每页显示条数</span>
+    <span class="n">list_per_page</span> <span class="o">=</span> <span class="mi">100</span>
+ 
+<span class="c1"># 分页，显示全部（真实数据&lt;该值时，才会有显示全部）</span>
+    <span class="n">list_max_show_all</span> <span class="o">=</span> <span class="mi">200</span>
+ 
+<span class="c1"># 分页插件</span>
+    <span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>list_editable，列表时，可以编辑的列</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,</span><span class="s1">&#39;ug&#39;</span><span class="p">,)</span>
+    <span class="n">list_editable</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ug&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>search_fields，列表时，模糊搜索的功能</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+     
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>date_hierarchy，列表时，对Date和DateTime类型进行搜索</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="n">date_hierarchy</span> <span class="o">=</span> <span class="s1">&#39;ctime&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="9">
+<li>preserve_filters，详细页面，删除、修改，更新后跳转回列表后，是否保留原搜索条件</li>
+<li>save_as = False，详细页面，按钮为“Sava as new” 或 “Sava and add another”</li>
+<li>save_as_continue = True，点击保存并继续编辑</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">save_as_continue</span> <span class="o">=</span> <span class="bp">True</span>
+ 
+<span class="c1"># 如果 save_as=True，save_as_continue = True， 点击Sava as new 按钮后继续编辑。</span>
+<span class="c1"># 如果 save_as=True，save_as_continue = False，点击Sava as new 按钮后返回列表。</span>
+ 
+<span class="n">New</span> <span class="ow">in</span> <span class="n">Django</span> <span class="mf">1.10</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="12">
+<li>save_on_top = False，详细页面，在页面上方是否也显示保存删除等按钮</li>
+<li>inlines，详细页面，如果有其他表和当前表做FK，那么详细页面可以进行动态增加和删除</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">UserInfoInline</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">StackedInline</span><span class="p">):</span> <span class="c1"># TabularInline</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span>
+ 
+ 
+<span class="k">class</span> <span class="nc">GroupAdminMode</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,)</span>
+    <span class="n">inlines</span> <span class="o">=</span> <span class="p">[</span><span class="n">UserInfoInline</span><span class="p">,</span> <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="14">
+<li>action，列表时，定制action中的操作</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="c1"># 定制Action行为具体方法</span>
+    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s1">&#39;_selected_action&#39;</span><span class="p">))</span>
+ 
+    <span class="n">func</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s2">&#34;中文显示自定义Actions&#34;</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">func</span><span class="p">,</span> <span class="p">]</span>
+ 
+    <span class="c1"># Action选项都是在页面上方显示</span>
+    <span class="n">actions_on_top</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="c1"># Action选项都是在页面下方显示</span>
+    <span class="n">actions_on_bottom</span> <span class="o">=</span> <span class="bp">False</span>
+ 
+    <span class="c1"># 是否显示选择个数</span>
+    <span class="n">actions_selection_counter</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="15">
+<li>定制HTML模板</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">add_form_template</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">change_form_template</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">change_list_template</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">delete_confirmation_template</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">delete_selected_confirmation_template</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">object_history_template</span> <span class="o">=</span> <span class="bp">None</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="16">
+<li>raw_id_fields，详细页面，针对FK和M2M字段变成以Input框形式</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="n">raw_id_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;FK字段&#39;</span><span class="p">,</span> <span class="s1">&#39;M2M字段&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="17">
+<li>fields，详细页面时，显示字段的字段</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="18">
+<li>exclude，详细页面时，排除的字段</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="19">
+<li>readonly_fields，详细页面时，只读字段</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">readonly_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="20">
+<li>fieldsets，详细页面时，使用fieldsets标签对数据进行分割显示</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">fieldsets</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;基本数据&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">,</span> <span class="s1">&#39;ctime&#39;</span><span class="p">,)</span>
+        <span class="p">}),</span>
+        <span class="p">(</span><span class="s1">&#39;其他&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;classes&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;collapse&#39;</span><span class="p">,</span> <span class="s1">&#39;wide&#39;</span><span class="p">,</span> <span class="s1">&#39;extrapretty&#39;</span><span class="p">),</span>  <span class="c1"># &#39;collapse&#39;,&#39;wide&#39;, &#39;extrapretty&#39;</span>
+            <span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pwd&#39;</span><span class="p">),</span>
+        <span class="p">}),</span>
+    <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="21">
+<li>详细页面时，M2M显示时，数据移动选择（方向：上下和左右）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">filter_vertical</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&#34;m2m字段&#34;</span><span class="p">,)</span> <span class="c1"># 或filter_horizontal = (&#34;m2m字段&#34;,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="22">
+<li>ordering，列表时，数据排序规则</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-id&#39;</span><span class="p">,)</span>
+    <span class="err">或</span>
+    <span class="k">def</span> <span class="nf">get_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;-id&#39;</span><span class="p">,</span> <span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="23">
+<li>view_on_site，编辑时，是否在页面上显示view on set</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">view_on_site</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="err">或</span>
+<span class="k">def</span> <span class="nf">view_on_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;https://www.baidu.com&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="24">
+<li>radio_fields，详细页面时，使用radio显示选项（FK默认使用select）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">radio_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;ug&#34;</span><span class="p">:</span> <span class="n">admin</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">}</span> <span class="c1"># 或admin.HORIZONTAL</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="25">
+<li>show_full_result_count = True，列表时，模糊搜索后面显示的数据个数样式</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="c1"># show_full_result_count = True # 1 result (12 total)</span>
+    <span class="c1"># show_full_result_count = False  # 1 result (Show all)</span>
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="26">
+<li>formfield_overrides = {}，详细页面时，指定现实插件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">widgets</span>
+<span class="kn">from</span> <span class="nn">django.utils.html</span> <span class="kn">import</span> <span class="n">format_html</span>
+ 
+<span class="k">class</span> <span class="nc">MyTextarea</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># Use slightly better defaults than HTML&#39;s 20x2 box</span>
+        <span class="n">default_attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cols&#39;</span><span class="p">:</span> <span class="s1">&#39;40&#39;</span><span class="p">,</span> <span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">attrs</span><span class="p">:</span>
+            <span class="n">default_attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyTextarea</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">default_attrs</span><span class="p">)</span>
+ 
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">final_attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_attrs</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">format_html</span><span class="p">(</span><span class="s1">&#39;&lt;textarea {}&gt;</span><span class="se">\r\n</span><span class="s1">{}&lt;/textarea&gt;&#39;</span><span class="p">,</span><span class="n">final_attrs</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+ 
+ 
+ 
+<span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="n">formfield_overrides</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">models</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;widget&#39;</span><span class="p">:</span> <span class="n">MyTextarea</span><span class="p">},</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="27">
+<li>prepopulated_fields = {}，添加页面，当在某字段填入值后，自动会将值填充到指定字段。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="n">prepopulated_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;email&#34;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&#34;user&#34;</span><span class="p">,</span><span class="s2">&#34;pwd&#34;</span><span class="p">,)}</span>
+<span class="n">PS</span><span class="p">:</span> <span class="n">DjangoAdmin中使用js实现功能</span><span class="err">，页面</span><span class="n">email字段的值会在输入</span><span class="err">：</span><span class="n">user</span><span class="err">、</span><span class="n">pwd时自动填充</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="28">
+<li>form = ModelForm，用于定制用户请求时候表单验证</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">app01</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">fields</span>
+ 
+ 
+<span class="k">class</span> <span class="nc">MyForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="n">others</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+ 
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&#34;__all__&#34;</span>
+ 
+<span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+ 
+    <span class="n">form</span> <span class="o">=</span> <span class="n">MyForm</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="29">
+<li>empty_value_display = &ldquo;列数据为空时，显示默认值&rdquo;</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@admin.register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">empty_value_display</span> <span class="o">=</span> <span class="s2">&#34;列数据为空时，默认显示&#34;</span>
+ 
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="s1">&#39;pwd&#39;</span><span class="p">,</span><span class="s1">&#39;up&#39;</span><span class="p">)</span>
+ 
+    <span class="k">def</span> <span class="nf">up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">up</span><span class="o">.</span><span class="n">empty_value_display</span> <span class="o">=</span> <span class="s2">&#34;指定列数据为空时，默认显示&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-自定义ayra进行crud-1">4 自定义ayra进行CRUD</h1>
+<p>django admin的功能比较强大，比较重，我们可以自己写一个轻量级的类admin的管理工具。</p>
+<h2 id="41-准备工作-1">4.1 准备工作</h2>
+<h3 id="411-文件加载顺序-1">4.1.1 文件加载顺序</h3>
+<p>分析djando admin的代码我们知道，在请求进来之前，我们注册的model就已经被包装好了，所以admin.py这个文件是最先被加载的，然后才才可以创建url，完成url的映射</p>
+<h3 id="412-让我们的程序被优先加载-1">4.1.2 让我们的程序被优先加载</h3>
+<p>每个应用下的admin.py总是在应用启动的时候就被加载了，我们的程序如何加载呢。观察admin的源码我们发现其内部有一个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">autodiscover</span><span class="p">():</span>
+    <span class="n">autodiscover_modules</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">register_to</span><span class="o">=</span><span class="n">site</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个方法看名字是自动发现，并加载模块的。它是在哪里调用了呢,通过查看源码，我们发现在django.contrib.admin.apps下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">
+<span class="k">class</span> <span class="nc">AdminConfig</span><span class="p">(</span><span class="n">SimpleAdminConfig</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;The default AppConfig for admin which does autodiscovery.&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AdminConfig</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">autodiscover</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ready方法调用了autodiscover.</p>
+<h3 id="413-编写调用文件-1">4.1.3 编写调用文件</h3>
+<p>知道了怎么被调用的，那么我们先来在每个app下定义一个ayra文件.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># arya.py</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;被加载了&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后我们创建一个arya app，然后在他的apps.py文件中做如下修改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">AryaConfig</span><span class="p">(</span><span class="n">AppConfig</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;arya&#39;</span>
+
+    <span class="k">def</span> <span class="nf">ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">django.utils.module_loading</span> <span class="kn">import</span> <span class="n">autodiscover_modules</span>
+        <span class="n">autodiscover_modules</span><span class="p">(</span><span class="s1">&#39;arya&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="414-更换装载应用的方式-1">4.1.4 更换装载应用的方式</h3>
+<p>在settings.py重，更换下面的导入方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;arya.apps.AryaConfig&#39;</span><span class="p">,</span>    <span class="c1"># 通过app来导入（顺序无所谓）</span>
+    <span class="s1">&#39;rbac&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;main&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样，准备工作就做好了，启动的django的时候，同时也会加载每个项目目录下的arya.py 文件了</p>
+<h3 id="415-include本质-1">4.1.5 include本质</h3>
+<p>观察include源码，我们知道include是一个函数，最后返回的是<code>一个三元组</code>，通过观察源码，可以的指导它们代表的值是：</p>
+<ul>
+<li>urlconf_module：url列表</li>
+<li>app_name：None</li>
+<li>namespace：None</li>
+</ul>
+<p>所以，不使用include时，我们可以有如下操作来分发路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 测试代码</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;test1&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test2</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;test2&#39;</span><span class="p">)</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^login/&#39;</span><span class="p">,</span> <span class="n">main</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">login</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^index/&#39;</span><span class="p">,</span> <span class="n">main</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+    <span class="c1"># url(r&#39;^rbac/&#39;, include(&#39;rbac.urls&#39;)) # 等于下面的</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;rbac/&#39;</span><span class="p">,</span> <span class="p">([</span>
+                       <span class="n">url</span><span class="p">(</span><span class="s1">&#39;user/info&#39;</span><span class="p">,</span> <span class="n">test1</span><span class="p">),</span>
+                       <span class="n">url</span><span class="p">(</span><span class="s1">&#39;user/add&#39;</span><span class="p">,</span> <span class="p">([</span>
+                                            <span class="n">url</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="n">test2</span><span class="p">),</span>
+                                        <span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)),</span>
+                   <span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>看起来有些杂乱，分析一下产生的url</p>
+<ol>
+<li>/rbac/user/info 对应test1</li>
+<li>/rbac/user/add/list 对应test2</li>
+</ol>
+<p>这就是include的本质</p>
+<h2 id="42-为每个model对象生成对应的url-1">4.2 为每个model对象生成对应的url</h2>
+<p>根据django admin的源码的编写方式，我们来模仿一下，用于动态的生成对应的urls。创建arya app，然后创建service模块，用于存放arya.py文件，在该文件内部编写主要实现逻辑</p>
+<h3 id="421-注册model类-1">4.2.1 注册model类</h3>
+<p>首先在每一个app下的arya.py中，模仿admin的方式，注册model类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">arya.service</span> <span class="kn">import</span> <span class="n">arya</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">arya</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Userinfo</span><span class="p">,</span> <span class="n">arya</span><span class="o">.</span><span class="n">AryaConfig</span><span class="p">)</span>
+<span class="n">arya</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span> <span class="n">arya</span><span class="o">.</span><span class="n">AryaConfig</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>不同的app中调用的是相同的site对象，一般称它为单例模式，并且它存在一个register方法，通过了解admin的源码， 我们知道它包含两个参数，一个是model类，还有一个是默认的一个类对象。</p>
+<h3 id="422-servicearya基本实现-1">4.2.2 service/arya基本实现</h3>
+<p>根据上一部的分析，注册功能就实现了，我们的arya如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="c1"># 根据admin site的源码实现</span>
+<span class="k">class</span> <span class="nc">AryaConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_class</span> <span class="o">=</span> <span class="n">model_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">site</span>
+
+<span class="c1"># 根据admin site的源码实现</span>
+<span class="k">class</span> <span class="nc">AryaSite</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_class</span><span class="p">,</span> <span class="n">arya_class</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_register</span><span class="p">[</span><span class="n">model_class</span><span class="p">]</span> <span class="o">=</span> <span class="n">arya_class</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1"># 接受两个参数</span>
+
+<span class="c1"># 单例模式</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">AryaSite</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="423-添加urls及views函数-1">4.2.3 添加urls及views函数</h3>
 <p>下面从入口继续编写：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

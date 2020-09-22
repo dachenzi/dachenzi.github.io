@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 nginx介绍 HTTP协议包含很多功能。常用的www，world wide web是http功能之一。默认端口为80端口，也被称之为7层协议。 常用w">
 <meta itemprop="datePublished" content="2016-01-07T11:42:35+00:00" />
 <meta itemprop="dateModified" content="2016-01-07T11:42:35+00:00" />
-<meta itemprop="wordCount" content="6782">
+<meta itemprop="wordCount" content="13588">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 6782 字 </span>
-          <span class="more-meta"> 预计阅读 14 分钟 </span>
+        <span class="more-meta"> 约 13588 字 </span>
+          <span class="more-meta"> 预计阅读 28 分钟 </span>
 
         
         
@@ -387,6 +387,59 @@
     <li><a href="#54-nginx记录错误日志">5.4 nginx记录错误日志</a></li>
     <li><a href="#55-nginx访问日志">5.5 nginx访问日志</a></li>
     <li><a href="#56-访问日志轮训切割">5.6 访问日志轮训切割</a></li>
+    <li><a href="#mathjax-true">title: nginxbasis
+date: 2019-05-11 15:28:26
+lastmod: 2019-05-11 15:28:26
+draft: false
+tags: [Web,]
+categories: [Web,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-nginx重要特性-1">1.1 nginx重要特性</a></li>
+    <li><a href="#12-nginx主要功能-1">1.2 nginx主要功能</a></li>
+    <li><a href="#13-nginx与其他web软件对比-1">1.3 nginx与其他web软件对比</a></li>
+    <li><a href="#14-select和epoll的区别-1">1.4 select和epoll的区别</a></li>
+    <li><a href="#15-web服务器选择-1">1.5 web服务器选择</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-安装前的准备工作-1">2.1 安装前的准备工作</a></li>
+    <li><a href="#22-安装nginx-1">2.2 安装nginx</a>
+      <ul>
+        <li><a href="#221-使用yum安装-1">2.2.1 使用yum安装</a></li>
+        <li><a href="#222-使用rpm安装-1">2.2.2 使用rpm安装</a></li>
+        <li><a href="#223-编译安装-1">2.2.3 编译安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-启动nginx服务-1">2.3 启动nginx服务</a></li>
+    <li><a href="#24-检查启动结果-1">2.4 检查启动结果</a></li>
+    <li><a href="#25-客户端验证-1">2.5 客户端验证</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-nginx目录结构-1">3.1 nginx目录结构</a></li>
+    <li><a href="#32-主配置文件-1">3.2 主配置文件</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-配置基于域名的虚拟主机-1">4.1 配置基于域名的虚拟主机</a></li>
+    <li><a href="#42-配置基于端口的虚拟主机-1">4.2 配置基于端口的虚拟主机</a></li>
+    <li><a href="#43-配置基于ip的虚拟主机-1">4.3 配置基于ip的虚拟主机</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-虚拟主机规范化-1">5.1 虚拟主机规范化</a></li>
+    <li><a href="#52-nginx主机别名-1">5.2 nginx主机别名</a></li>
+    <li><a href="#53-nginx状态信息-1">5.3 nginx状态信息</a></li>
+    <li><a href="#54-nginx记录错误日志-1">5.4 nginx记录错误日志</a></li>
+    <li><a href="#55-nginx访问日志-1">5.5 nginx访问日志</a></li>
+    <li><a href="#56-访问日志轮训切割-1">5.6 访问日志轮训切割</a></li>
   </ul>
 </nav>
   </div>
@@ -1413,6 +1466,1065 @@ location / <span class="o">{</span>
 </div>
 </div><p>注意：在高并发场合，添加buffer和flush选项，可以提升网站性能 <code>access_log logs/www_access.log main gzip buffer=32K flush=5s;</code></p>
 <h2 id="56-访问日志轮训切割">5.6 访问日志轮训切割</h2>
+<p>        由于nginx没有自带的日志切割工具，那么只能我们手动的进行切割了，要用到cron+mv.<br>
+写一个脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="nv">d</span><span class="o">=</span><span class="sb">`</span>date -d <span class="s2">&#34;-1 day&#34;</span> +%Y%m%d<span class="sb">`</span>
+<span class="o">[</span> -d /usr/local/nginx/access-log<span class="o">]</span> <span class="o">||</span> mkdir -p /usr/local/nginx/access-log
+mv /tmp/access.log /usr/local/nginx/access-log/<span class="nv">$d</span>.log
+/etc/init.d/nginx reload 2&gt;/dev/null
+
+<span class="c1"># 然后每天晚上0点运行</span>
+crontab –l
+<span class="c1">#######cut for nginx by lixin######</span>
+<span class="m">00</span> <span class="m">00</span> * * * /bin/bash  /server/scripts/nginx_log_cut.sh  <span class="p">&amp;</span>&gt;/dev/null
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: nginxbasis
+date: 2019-05-11 15:28:26
+lastmod: 2019-05-11 15:28:26
+draft: false
+tags: [Web,]
+categories: [Web,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-nginx介绍-1">1 nginx介绍</h1>
+<p>        HTTP协议包含很多功能。常用的www，world wide web是http功能之一。默认端口为80端口，也被称之为7层协议。<br>
+常用web软件：apache、nginx（静态web服务软件）。<br>
+流行的web组合：</p>
+<ul>
+<li>LAMP (Linux Apache Mysql Php) =====&gt;经典</li>
+<li>LNMP(Linux Nginx Mysql Php)=====&gt;流行（或者LEMP，E（engine X 这样读法）</li>
+<li>nginx由俄罗斯人开发，是一款开源的，支持高性能，高并发的www服务和代理服务软件，一共780K，C语言开发。nginx本身是一款静态（html。css，js，jpg等）www的软件，不能解析动态的PHP,JSP,DO。因具有高并发（特别是静态资源）占用系统资源少等有点，且功丰富，而流行起来。淘宝，在nginx做了更改（优化）生成 tengine。</li>
+</ul>
+<h2 id="11-nginx重要特性-1">1.1 nginx重要特性</h2>
+<ol>
+<li>支持高并发：能支持几万并发连接（特别是静态小文件业务环境）</li>
+<li>资源消耗少：在3万并发连接下，开启10个Nginx线程消耗不到200M内存。</li>
+<li>可以做HTTP反向代理及加速缓存，即负载均衡功能，内置对RS节点服务器健康检查功能，这相当于专业的haproxy软件或lvs功能。</li>
+<li>具备squid等专业缓存软件等的缓存功能。</li>
+<li>支持异步网络IO事件模型epoll（Linux2.6+）</li>
+</ol>
+<h2 id="12-nginx主要功能-1">1.2 nginx主要功能</h2>
+<ol>
+<li>作为web服务软件：
+<ul>
+<li>运行HTML、JS、CSS、小图片等静态数据（此功能类似lighttpd软件）</li>
+<li>结合FastCGI运行PHP等动态程序（例如使用fastcgi_pass方式）。</li>
+<li>结合tomcat/resin等支持Java动态程序（常用）</li>
+</ul>
+</li>
+<li>作为反向代理或负载均衡服务：
+<ul>
+<li>为web服务、PHP服务等动态服务及Memcached缓存提供代理。</li>
+<li>可以作为邮件代理服务软件。</li>
+<li>在1.9.0版本以后支持tcp/IP代理，之前是不支持的。</li>
+</ul>
+</li>
+<li>作为前端的数据缓存服务器：
+<ul>
+<li>通过自身的proxy_cache模块实现类squid等专业缓存软件的功能。</li>
+</ul>
+</li>
+</ol>
+<h2 id="13-nginx与其他web软件对比-1">1.3 nginx与其他web软件对比</h2>
+<p><strong><code>apache</code></strong></p>
+<ol>
+<li>2.2版本非常稳定强大，据官方说，其2.4版本性能超强。</li>
+<li>Prefork模式取消了进程创建开销，性能很高。</li>
+<li>处理动态业务数据时，因关联到后端的引擎和数据库，瓶颈不在apache本身。</li>
+<li>高并发时消耗系统资源相对多一些。</li>
+<li>基于传统的select模型。</li>
+<li>支持扩展库，DSO方法，apxs方法编译安装额外的插件功能，不需要重新编译</li>
+<li>功能多，更稳定，更安全，插件多</li>
+<li>市场份额在逐年降低</li>
+</ol>
+<p><strong><code>Nginx</code></strong></p>
+<ol>
+<li>基于异步IO模型(epoll,kqueue),性能强，能够支持上万并发。</li>
+<li>对小文件支持很好，性能很高（限静态小文件1M）。</li>
+<li>代码优美，扩展库必须编译进主程序。</li>
+<li>消耗系统资源比较低。</li>
+<li>支持web、proxy、cache三大重点功能，并且都很优秀。</li>
+<li>市场份额在逐年增加</li>
+</ol>
+<p><strong><code>Lighttpd</code></strong></p>
+<ol>
+<li>基于异步I/O模型，性能和Nginx相近。</li>
+<li>扩展库是SO模式，比Nginx要灵活。</li>
+<li>目前国内的使用率比较低，安全性没有apache和nginx好。</li>
+<li>通过插件（mod_secdownload）可实现文件URL地址加密。</li>
+<li>社区不活跃，市场份额较低。</li>
+</ol>
+<h2 id="14-select和epoll的区别-1">1.4 select和epoll的区别</h2>
+<p>select和epoll的区别就相当于同步和异步的区别，apache使用select模型，nginx使用epoll模型。
+Apache select和Nginx epoll区别技术对比：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指标</th>
+<th style="text-align:center">select</th>
+<th style="text-align:center">epoll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">性能</td>
+<td style="text-align:center">随着连接数增加，急剧下降。处理成千上万并发连接数时，性能很差</td>
+<td style="text-align:center">随着连接数增加，性能基本没有下降。处理成千上万并发连接时，性能很好。</td>
+</tr>
+<tr>
+<td style="text-align:center">连接数</td>
+<td style="text-align:center">连接数有限制，处理的最大连接数不超过1024.如果要处理超过1024个连接数，则需要修改FD_SETSIZE宏，并重新编译。</td>
+<td style="text-align:center">连接数无限制。</td>
+</tr>
+<tr>
+<td style="text-align:center">内在处理机制</td>
+<td style="text-align:center">线性轮训</td>
+<td style="text-align:center">回调callback</td>
+</tr>
+<tr>
+<td style="text-align:center">开发复杂性</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">中</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-web服务器选择-1">1.5 web服务器选择</h2>
+<ul>
+<li>静态业务：高并发，采用nginx或lighttpd，根据自己的掌握程度或公司的要求，首选nginx。</li>
+<li>动态业务：理论上采用nginx和apache均可，建议选择Nginx，要避免相同业务服务软件多样化，额外增加维护成本，动态业务可以由Nginx兼作前端代理，再根据页面元素的类型或者目录，向后转发到后端相应的服务器进行处理。</li>
+</ul>
+<p>        既有静态业务又有动态业务：nginx。动态业务可以由前端代理（haproxy），根据页面元素的类型，向后转发相应的服务器进行处理。如果并发不是很大，又对apache很熟悉，采用apache也是可以的，apache2.4版本也很强大，并发连接数也有所增加。总的来说，在满足需求的前提下，先选择自己最擅长的软件，若看上了更好的软件，可在掌握新软件之后逐步替换。虽然动态和静态业务都倾向于选择Nginx，但是大前提是自己要熟悉掌握Nginx。切记企业工作中不要盲从，这可能最终会导致自己无法控制给企业带来灾难的恶果。</p>
+<h1 id="2-安装nginx-1">2 安装nginx</h1>
+<h2 id="21-安装前的准备工作-1">2.1 安装前的准备工作</h2>
+<p>        首先要安装<code>PCRE</code>包，PCRE(Perl Compatible Regular Expressions)是一个Perl库，包括 <code>perl</code> 兼容的正则表达式库。安装pcre库是为了使<code>nginx</code>支持<code>HTTP rewrite</code>（域名跳转）模块。其次还要安装<code>openssl</code>包，因为nginx在使用HTTPS服务的时候要用到此模块（http over ssl ）需要用到ssl进行加密。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># yum install -y pcre pcre-devel</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># yum install -y openssl openssl-devel</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="22-安装nginx-1">2.2 安装nginx</h2>
+<h3 id="221-使用yum安装-1">2.2.1 使用yum安装</h3>
+<p>        使用yum安装nginx，首先需要有配置epel源（因为默认源里面没有nginx包）<br>
+<strong>安装epel源的方法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install -y epel-release
+wget -O /etc/yum.repos.d/epel.repo http:#mirrors.aliyun.com/repo/epel-6.repo
+<span class="c1"># 安装完epel源后，就可以使用yum安装nginx了</span>
+yum install -y nginx
+<span class="c1"># 由于yum安装无法自定义编译参数，所以一般不用这种方法。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="222-使用rpm安装-1">2.2.2 使用rpm安装</h3>
+<p>        使用rpm安装nginx，首先需要自行下载rpm类型的nginx安装包，然后通过 <code>rpm –ivh </code>进行安装，但是rpm无法解决软件间的依赖关系，所以一般也不用这种方法。</p>
+<h3 id="223-编译安装-1">2.2.3 编译安装</h3>
+<p>        编译安装的好处在于，我们在编译的时候可以自行制定需要以及不需要的功能模块。在nginx官网下载nginx源码包，解压之后进入到目录中进行编译。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># ls</span>
+auto     CHANGES.ru  configure  html     Makefile  objs    sbin
+CHANGES  conf        contrib    LICENSE  man       README  src
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#</span>
+<span class="c1"># 使用./confiruare命令进行配置编译参数</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#./configure --user=nginx --group=nginx --prefix=/application/nginx1.6.3 --with-http_stub_status_module --with-http_ssl_module</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#make &amp;&amp; make install 编译完毕后直接安装</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#ln –s /application/nginx-1.6.3 /application/nginx</span>
+<span class="c1"># 注意：</span>
+<span class="c1"># 由于我们指定了软件的用户，所以我们首先要创建这个用户</span>
+<span class="c1"># 创建链接目录是为了让其他人员调用时方便（比如我升级了nginx版本，我只需要把新的版本链接到nginx目录，这样上层程序不用# 更改。</span>
+<span class="c1"># 在每一步之后，都可以使用echo $?来测试结果，0表示成功。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>编译参数说明：</strong></p>
+<ul>
+<li>&ndash;prefix=：表示软件的安装路径。</li>
+<li>&ndash;user=：启动进程时的用户。</li>
+<li>&ndash;group=：启动进程时的用户组。</li>
+<li>&ndash;with-http_stub_status_module：启动状态信息模块。</li>
+<li>&ndash;with-http_ssl_module：启动ssl加密模块。</li>
+</ul>
+<h2 id="23-启动nginx服务-1">2.3 启动nginx服务</h2>
+<p>        安装完毕后，并不能直接提供服务，需要我们手动的开启服务。
+        开启服务之前，首先要测试配置文件的正确性（如果修改了配置文件之后）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># /application/nginx/sbin/nginx -t</span>
+nginx: the configuration file /application/nginx-1.6.3/conf/nginx.conf syntax is ok
+nginx: configuration file /application/nginx-1.6.3/conf/nginx.conf <span class="nb">test</span> is successful
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#    #显示OK，表示正确</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># /application/nginx/sbin/nginx  #开启服务</span>
+<span class="c1"># 如果修改配置文件，不想停服，可以用 -s reload 来进行优雅重启</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-检查启动结果-1">2.4 检查启动结果</h2>
+<p>        在启动完毕后，我们要进行验证。</p>
+<ol>
+<li>检查进程是否开启</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># ps aux | grep nginx</span>
+root       <span class="m">1514</span>  0.0  0.4  <span class="m">45256</span>  <span class="m">1784</span> ?        Ss   15:02   0:00 nginx: master process /application/nginx/sbin/nginx
+www        <span class="m">1546</span>  0.0  0.4  <span class="m">45256</span>  <span class="m">1696</span> ?        S    15:06   0:00 nginx: worker process       
+root       <span class="m">2096</span>  0.0  0.2 <span class="m">103308</span>   <span class="m">844</span> pts/1    S+   17:29   0:00 grep nginx
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>检查端口是否监听</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># lsof -i :80</span>
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+nginx   <span class="m">1514</span> root    6u  IPv4  <span class="m">11354</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+nginx   <span class="m">1546</span>  www    6u  IPv4  <span class="m">11354</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1"># netstat -lntup | grep nginx</span>
+tcp        <span class="m">0</span>      <span class="m">0</span> 0.0.0.0:80                  0.0.0.0:*                   LISTEN      1514/nginx         
+<span class="o">[</span>root@web01 nginx-1.6.3<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这时，我们就可以使用crul命令来测试默认页面了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 www<span class="o">]</span><span class="c1"># !curl</span>
+curl 127.0.0.1
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+body <span class="o">{</span>
+width: 35em<span class="p">;</span>
+margin: <span class="m">0</span> auto<span class="p">;</span>
+font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span>
+<span class="o">}</span>
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://nginx.org/&#34;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://nginx.com/&#34;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="k">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+<span class="o">[</span>root@web01 www<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="25-客户端验证-1">2.5 客户端验证</h2>
+<p>        开启了服务，由于nginx有默认页面，这时，我们就可使用浏览器进行访问了。打开浏览器直接访问我们web服务器监听的IP地址，就可以获得请求页面。<br>
+<strong>如果无法获取：</strong></p>
+<ol>
+<li>ping 服务器地址 物理通不通</li>
+<li>telnet 服务器地址 80 浏览器到web通不通（防火墙）</li>
+<li>服务器本地curl 127.0.0.1</li>
+<li>更换浏览器进行尝试</li>
+</ol>
+<h1 id="3-nginx基本信息-1">3 nginx基本信息</h1>
+<p>        nginx之所以强大，是因为它有各种更能区块。</p>
+<ol>
+<li>Nginx core modules 必需的<br>
+包括Main、Events</li>
+<li>Standard HTTP modules 缺省都会安装，不建议改动<br>
+常用的包括<code>core</code>（核心的http参数），<code>access</code>（访问控制模块），<code>fastCGI</code>（动态应用相关，PHP），<code>proxy</code>（代理模块），<code>upstream</code>（负载均衡模块），<code>rewrite</code>（URL重写模块）,<code>stub_status</code>（静态信息模块），<code>ssl</code>（ssl模块）</li>
+</ol>
+<h2 id="31-nginx目录结构-1">3.1 nginx目录结构</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 /<span class="o">]</span><span class="c1"># tree /application/nginx</span>
+/application/nginx
+├── client_body_temp
+├── conf                      <span class="c1">#配置文件</span>
+│   ├── fastcgi.conf                  <span class="c1">#fastCGI配置文件</span>
+│   ├── fastcgi.conf.default
+│   ├── fastcgi_params           <span class="c1">#fastCGI参数文件</span>
+│   ├── fastcgi_params.default
+│   ├── koi-utf
+│   ├── koi-win
+│   ├── mime.types                  <span class="c1">#支持的mine类型</span>
+│   ├── mime.types.default
+│   ├── nginx.conf           <span class="c1">#主配置文件</span>
+│   ├── nginx.conf.bak
+│   ├── nginx.conf.basename
+│   ├── nginx.conf.default
+│   ├── scgi_params                <span class="c1">#scgi支持的参数</span>
+│   ├── scgi_params.default
+│   ├── uwsgi_params            <span class="c1">#uwsgi支持的参数</span>
+│   ├── uwsgi_params.default
+│   └── win-utf
+├── fastcgi_temp
+├── html                      <span class="c1">#网站的根目录</span>
+│   ├── 1.html
+│   ├── 1.jpg
+│   ├── 50x.html
+│   ├── bbs
+│   │   └── index.html
+│   ├── blog
+│   │   └── index.html
+│   ├── index7.html
+│   ├── index.html
+│   ├── index.html.28
+│   ├── index.html.bak
+│   └── www
+│       └── index.html
+├── logs                                <span class="c1">#日志</span>
+│   ├── access.log                    <span class="c1">#默认的访问日志</span>
+│   ├── error.log                       <span class="c1">#默认的错误日志</span>
+│   └── nginx.pid                       <span class="c1">#nginx的进程文件</span>
+├── proxy_temp
+├── sbin                       <span class="c1">#命令目录</span>
+│   └── nginx
+├── scgi_temp
+└── uwsgi_temp
+
+<span class="m">12</span> directories, <span class="m">31</span> files
+<span class="o">[</span>root@web01 /<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-主配置文件-1">3.2 主配置文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cat nginx.conf</span>
+worker_processes  1<span class="p">;</span>    <span class="c1">#nginx进程数，建议设置为等于CPU总核心数。</span>
+error_log /tmp/error.log info<span class="p">;</span>          <span class="c1">#全局错误日志定义类型</span>
+events <span class="o">{</span>                                <span class="c1">#事件区块开始</span>
+    worker_connections  1024<span class="p">;</span>            <span class="c1">#单个进程最大连接数</span>
+<span class="o">}</span>
+http <span class="o">{</span>                  <span class="c1">#http区段开始</span>
+    include       mime.types<span class="p">;</span>            <span class="c1">#包含类型文件</span>
+    default_type  application/octet-stream<span class="p">;</span>       <span class="c1">#默认媒体类型</span>
+    sendfile        on<span class="p">;</span>                                   <span class="c1">#开启高效传输模式</span>
+    keepalive_timeout  65<span class="p">;</span>                             <span class="c1">#连接超时时间</span>
+<span class="c1">#############www.beyondlee.org#############</span>
+server <span class="o">{</span>                                          <span class="c1">#server模块开始</span>
+    listen       80<span class="p">;</span>                       <span class="c1">#监听端口80</span>
+    server_name www.beyondlee.org<span class="p">;</span>                    <span class="c1">#提供服务的域名</span>
+    location / <span class="o">{</span>                                    <span class="c1">#location区块开始（可以有多个location区块）</span>
+        root   html/www<span class="p">;</span>          <span class="c1">#该server站点根目录</span>
+        index  index.html index.htm<span class="p">;</span>         <span class="c1">#该server站点主页</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-nginx虚拟主机-1">4 nginx虚拟主机</h1>
+<p>        虚拟主机，在web服务里就是一个独立的web站点，这个站点对应独立的域名，独立的IP，以及独立的资源，可以独立的对外提供服务。这个站点使用server{}来进行标记的，而在apache中用<code>&lt;virtualHost&gt;&lt;/virtualHost&gt;</code>来标记<br>
+        nginx虚拟主机分为三个类型：</p>
+<ul>
+<li>基于域名的虚拟主机。通过域名来区分虚拟主机，应用：外部网站</li>
+<li>基于端口的虚拟主机。通过端口来区分虚拟主机，应用：公司内部网站，外部网站的后台</li>
+<li>基于ip的虚拟主机。不常用。</li>
+</ul>
+<h2 id="41-配置基于域名的虚拟主机-1">4.1 配置基于域名的虚拟主机</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 ~<span class="o">]</span><span class="c1"># cat /application/nginx/conf/nginx.conf</span>
+worker_processes  1<span class="p">;</span>
+events <span class="o">{</span>
+    worker_connections  1024<span class="p">;</span>
+<span class="o">}</span>
+http <span class="o">{</span>
+    include       mime.types<span class="p">;</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    sendfile        on<span class="p">;</span>
+    keepalive_timeout  65<span class="p">;</span>
+    server <span class="o">{</span>
+        listen       80<span class="p">;</span>
+        server_name  www.beyondlee.org<span class="p">;</span>
+    location / <span class="o">{</span>
+        root   html/www<span class="p">;</span>
+        index  index.html index.htm<span class="p">;</span>    
+        <span class="o">}</span>
+    <span class="o">}</span>
+    server <span class="o">{</span>
+    listen       80<span class="p">;</span>
+    server_name  bbs.beyondlee.org<span class="p">;</span>
+    location / <span class="o">{</span>
+        root   html/bbs<span class="p">;</span>
+        index  index.html index.htm<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    server <span class="o">{</span>
+        listen       80<span class="p">;</span>
+        server_name  blog.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/blog<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ol>
+<li>复制一个完整的server标签段，到结尾，注意：要放在http的结束大括号前，也就是server标签段放入http标签</li>
+<li>更改server_name及对应网页的root根目录。</li>
+<li>检查配置文件语法，平滑重启服务reload。</li>
+<li>创建server_name对应网页的根目录，并且建立测试文件，如果没有index首页会出现403错误。</li>
+<li>在客户端对server_name的主机名做host解析或DNS配置，并检查（ping域名看返回的IP对不对）。</li>
+<li>windows浏览器访问，或者在linux客户端做host解析，用wget或curl访问。</li>
+</ol>
+<h2 id="42-配置基于端口的虚拟主机-1">4.2 配置基于端口的虚拟主机</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cat nginx.conf</span>
+worker_processes  1<span class="p">;</span>
+events <span class="o">{</span>
+    worker_connections  1024<span class="p">;</span>
+<span class="o">}</span>
+http <span class="o">{</span>
+    include       mime.types<span class="p">;</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    sendfile        on<span class="p">;</span>
+    keepalive_timeout  65<span class="p">;</span>
+    server <span class="o">{</span>
+        listen       80<span class="p">;</span>
+        server_name  www.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/www<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    server <span class="o">{</span>
+        listen       81<span class="p">;</span>
+        server_name  bbs.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/bbs<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+        <span class="o">}</span>   
+    <span class="o">}</span>
+    server <span class="o">{</span>
+        listen       82<span class="p">;</span>
+        server_name  blog.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/blog<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-配置基于ip的虚拟主机-1">4.3 配置基于ip的虚拟主机</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cat nginx.conf</span>
+worker_processes  1<span class="p">;</span>
+events <span class="o">{</span>
+    worker_connections  1024<span class="p">;</span>
+<span class="o">}</span>
+http <span class="o">{</span>
+    include       mime.types<span class="p">;</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    sendfile        on<span class="p">;</span>
+    keepalive_timeout  65<span class="p">;</span>
+    server <span class="o">{</span>
+        listen       10.0.0.8:80<span class="p">;</span>
+        server_name  www.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/www<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    server <span class="o">{</span>
+        listen       10.0.0.101:80<span class="p">;</span>
+        server_name  www.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/bbs<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    server <span class="o">{</span>
+        listen       10.0.0.102:80<span class="p">;</span>
+        server_name  www.beyondlee.org<span class="p">;</span>
+        location / <span class="o">{</span>
+            root   html/blog<span class="p">;</span>
+            index  index.html index.htm<span class="p">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ul>
+<li>不同的虚拟主机监听不同的IP地址。</li>
+<li>客户端请求不同的IP地址获取不同的界面。</li>
+<li>可以使用ip或ifconfig命令给一个网卡配置多个IP地址（临时）
+<ul>
+<li><code>ip addr add 192.168.1.1/24 dev eth0 label eth0:0</code></li>
+<li><code>ifconfig eth0:1 192.168.1.2/24 up</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="5-nignx常用功能-1">5 nignx常用功能</h1>
+<h2 id="51-虚拟主机规范化-1">5.1 虚拟主机规范化</h2>
+<p>        生产场景中会针对不同的虚拟主机建立不同的配置文件以及虚拟主机根目录、日志等，这个时候如果再把server写在主配置文件中会非常的乱，这样我们就可以把虚拟主机写在某个目录下，然后在主配置文件中定义它们的位置就可以了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cat nginx.conf</span>
+worker_processes  1<span class="p">;</span>
+error_log /tmp/error.log info<span class="p">;</span>
+events <span class="o">{</span>
+    worker_connections  1024<span class="p">;</span>
+<span class="o">}</span>
+http <span class="o">{</span>
+    include       mime.types<span class="p">;</span>
+    include      vhost/*.conf<span class="p">;</span>          <span class="c1">#包含vhost下的*.conf配置文件</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    sendfile        on<span class="p">;</span>
+    keepalive_timeout  65<span class="p">;</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cd vhost/</span>
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1"># ls</span>
+bbs.conf  blog.conf  www.conf
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1"># cat www.conf              #只定义虚拟主机配置文件</span>
+server <span class="o">{</span>
+    listen       80<span class="p">;</span>
+    server_name www.beyondlee.org<span class="p">;</span>
+    location / <span class="o">{</span>
+        root   html/www<span class="p">;</span>
+        index  index.html index.htm<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="52-nginx主机别名-1">5.2 nginx主机别名</h2>
+<p>        所谓主机别名就是为虚拟主机配置多个名称，这样就能实现用户访问的多个域名对应统一虚拟主机网站的功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1"># cat www.conf</span>
+server <span class="o">{</span>
+    listen       80<span class="p">;</span>
+    server_name www.beyondlee.org lixin.beyondlee.org<span class="p">;</span>
+    location / <span class="o">{</span>
+        root   html/www<span class="p">;</span>
+        index  index.html index.htm<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="53-nginx状态信息-1">5.3 nginx状态信息</h2>
+<p>在配置文件里配置如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1"># cat www.conf</span>
+server <span class="o">{</span>
+    listen       80<span class="p">;</span>
+    server_name www.beyondlee.org lixin.beyondlee.org<span class="p">;</span>
+    location / <span class="o">{</span>
+        root   html/www<span class="p">;</span>
+        index  index.html index.htm<span class="p">;</span>
+        stub_status on<span class="p">;</span>
+        access_log off<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>打开：lixin.beyondlee.com有如下显示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Active connections: <span class="m">145</span>
+server accepts handled requests
+<span class="m">1749</span>    <span class="m">1749</span>         <span class="m">3198</span>
+Reading: <span class="m">0</span> Writing: <span class="m">3</span> Waiting: <span class="m">142</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>各字段含义：</strong></p>
+<ol>
+<li><code>Active connections</code>: nginx正处理的活动连接数145个。</li>
+<li><code>Server</code>: nginx启动到现在共处理了 1749个连接</li>
+<li><code>accepts</code>: nginx启动到现在共成功创建 1749次握手 请求丢失数=(握手-连接),可以看出，我们没丢请求;</li>
+<li><code>handled requests</code>: 总共处理了3198 次请求。</li>
+<li><code>Reading</code> ：nginx读取到客户端的Header信息数。</li>
+<li><code>Writing</code> ： nginx返回给客户端的Header信息数。</li>
+<li><code>Waiting</code> ： Nginx已经处理完正在等候下一次请求指令的驻留连接.开启keep-alive的情况下,这个值等于active–(reading+writing)。</li>
+</ol>
+<h2 id="54-nginx记录错误日志-1">5.4 nginx记录错误日志</h2>
+<p>        nginx软件会把自身运行的故障信息（main区域的时候）及用户访问的日志信息（server区域的时候）记录到指定的日志文件里。nginx错误日志，属于核心功能模块的参数，该参数名称为error_log，可以放在main区块中的全局配置，也可以放在不同的虚拟主机中单独记录。<br>
+error_log的语法格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># error_log       logs/error.log       error;</span>
+<span class="c1"># 关键字              日志文件         日志级别</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1"># cat nginx.conf</span>
+worker_processes  1<span class="p">;</span>
+error_log /tmp/error.log info<span class="p">;</span>
+events <span class="o">{</span>
+    worker_connections  1024<span class="p">;</span>
+<span class="o">}</span>
+http <span class="o">{</span>
+    include       mime.types<span class="p">;</span>
+    include      vhost/*.conf<span class="p">;</span>
+    default_type  application/octet-stream<span class="p">;</span>
+    sendfile        on<span class="p">;</span>
+    keepalive_timeout  65<span class="p">;</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 conf<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>error_log的日志级别有：[ <code>debug</code> | <code>info</code> | <code>notice</code> | <code>warn</code> | <code>error</code> | <code>crit</code> | <code>alert</code>| <code>emesg</code> ]，常用的有warn,error,crit。注意不要使用info，会使磁盘I/O增加。</strong></p>
+<h2 id="55-nginx访问日志-1">5.5 nginx访问日志</h2>
+<p>        nginx会把每个访问信息记录到访问日志中，提供给分析者进行分析。<br>
+主要有两个参数负责：</p>
+<ol>
+<li>log_formart：用来定义记录信息的格式。</li>
+<li>access_log：用来指定记录日志文件的路径以及格式。<br>
+默认的日志格式如下：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">log_format access <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+<span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+<span class="s1">&#39;”$http_user_agent&#34; “$http_x_forwarded_for”&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>各字段含义如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">$remote_addr</span> 记录访问客户端的IP地址
+<span class="nv">$remote_user</span> 远程客户端用户名称
+<span class="nv">$time_local</span> 记录访问时间与时区
+<span class="nv">$request</span> 用户的HTTP请求信息
+<span class="nv">$status</span> http状态码
+<span class="nv">$body_bytes_sent</span> 服务发给客户端的响应body字节数
+<span class="nv">$http_referer</span> 记录客户端是从哪个连接访问过来的（可以根据它来进行防盗链的设置）
+<span class="nv">$http_user_agent</span> 用户浏览器标识
+<span class="nv">$http_x_forwarded_for</span> 当前端有代理服务器时，设置web节点记录客户端的地址的配置，参数生效的前提是代理服务器也进行了相关X_forwarded_for的设置
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：先定义格式，然后包含的主机配置文件才能使用，所以要先定义log_format定义格式， 再 include  vhost/*.conf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1"># cat www.conf</span>
+server <span class="o">{</span>
+listen       80<span class="p">;</span>
+server_name www.beyondlee.org<span class="p">;</span>
+log_format  main  <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+          <span class="s1">&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+          <span class="s1">&#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
+location / <span class="o">{</span>
+    root   html/www<span class="p">;</span>
+    index  index.html index.htm<span class="p">;</span>
+    <span class="c1">#stub_status on;</span>
+    <span class="o">}</span>
+
+    access_log logs/www_access.log main<span class="p">;</span>
+<span class="o">}</span>
+<span class="o">[</span>root@web01 vhost<span class="o">]</span><span class="c1">#    #定义完毕后，就可以直接调用了</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：在高并发场合，添加buffer和flush选项，可以提升网站性能 <code>access_log logs/www_access.log main gzip buffer=32K flush=5s;</code></p>
+<h2 id="56-访问日志轮训切割-1">5.6 访问日志轮训切割</h2>
 <p>        由于nginx没有自带的日志切割工具，那么只能我们手动的进行切割了，要用到cron+mv.<br>
 写一个脚本：</p>
 <div class="highlight"><div class="chroma">

@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 什么是web框架 2 WSGI 3 MVC与MTV模式 3.1 MVC框架 3.2 MTV框架 3.3 区别 4 django介绍 4.1 Django处理顺序 4.2 创建django站">
 <meta itemprop="datePublished" content="2019-06-02T19:24:21+00:00" />
 <meta itemprop="dateModified" content="2019-06-02T19:24:21+00:00" />
-<meta itemprop="wordCount" content="6409">
+<meta itemprop="wordCount" content="12890">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 6409 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        <span class="more-meta"> 约 12890 字 </span>
+          <span class="more-meta"> 预计阅读 26 分钟 </span>
 
         
         
@@ -386,6 +386,60 @@
         <li><a href="#453-本地化配置可选">4.5.3 本地化配置(可选)</a></li>
         <li><a href="#454-注册应用模块">4.5.4 注册应用模块</a></li>
         <li><a href="#455-启动django">4.5.5 启动django</a></li>
+      </ul>
+    </li>
+    <li><a href="#mathjax-true">title: 1-django-介绍-MTV-命令-基础配置-admin
+date: 2016-09-16 01:15:03
+lastmod: 2016-09-16 01:15:03
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-mvc框架-1">3.1 MVC框架</a></li>
+    <li><a href="#32-mtv框架-1">3.2 MTV框架</a></li>
+    <li><a href="#33-区别-1">3.3 区别</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-django处理顺序-1">4.1 Django处理顺序</a></li>
+    <li><a href="#42-创建django站点-1">4.2 创建django站点</a>
+      <ul>
+        <li><a href="#421-安装django-1">4.2.1 安装Django</a></li>
+        <li><a href="#422-创建一个project-1">4.2.2 创建一个project</a></li>
+        <li><a href="#423-创建一个app-1">4.2.3 创建一个app</a></li>
+        <li><a href="#423-启动django项目-1">4.2.3 启动Django项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#43-django-版的-hello-world-1">4.3 Django 版的 hello world</a>
+      <ul>
+        <li><a href="#431-定义url选择器-1">4.3.1 定义URL选择器</a></li>
+        <li><a href="#432-定义views函数-1">4.3.2 定义views函数</a></li>
+        <li><a href="#433-启动服务-1">4.3.3 启动服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#44-基础配置-1">4.4 基础配置</a>
+      <ul>
+        <li><a href="#441-配置静态文件存放路径-1">4.4.1 配置静态文件存放路径</a></li>
+        <li><a href="#442-配置模板路径-1">4.4.2 配置模板路径</a></li>
+        <li><a href="#443-关闭csrftoken-1">4.4.3 关闭csrftoken</a></li>
+        <li><a href="#444-连接数据库-1">4.4.4 连接数据库</a></li>
+        <li><a href="#445-加载静态文件-1">4.4.5 加载静态文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#45-django-admin配置-1">4.5 django admin配置</a>
+      <ul>
+        <li><a href="#451-创建django-admin用户-1">4.5.1 创建django-admin用户</a></li>
+        <li><a href="#452-初始化django-admin需要的表-1">4.5.2 初始化django-admin需要的表</a></li>
+        <li><a href="#453-本地化配置可选-1">4.5.3 本地化配置(可选)</a></li>
+        <li><a href="#454-注册应用模块-1">4.5.4 注册应用模块</a></li>
+        <li><a href="#455-启动django-1">4.5.5 启动django</a></li>
       </ul>
     </li>
   </ul>
@@ -1097,6 +1151,730 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="455-启动django">4.5.5 启动django</h3>
+<p>这时，重新启动django，那么就可以访问admin了。(项目根目录下)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python manage.py runserver <span class="m">8080</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在浏览器中输入127.0.0.1:8080/admim 输入刚刚创建的superuser即可。</p>
+<hr>
+<h2 id="mathjax-true">title: 1-django-介绍-MTV-命令-基础配置-admin
+date: 2016-09-16 01:15:03
+lastmod: 2016-09-16 01:15:03
+draft: false
+tags: [Django框架,]
+categories: [Django框架,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AFweb%E6%A1%86%E6%9E%B6">1 什么是web框架</a></li>
+<li><a href="#2-wsgi">2 WSGI</a></li>
+<li><a href="#3-mvc%E4%B8%8Emtv%E6%A8%A1%E5%BC%8F">3 MVC与MTV模式</a>
+<ul>
+<li><a href="#31-mvc%E6%A1%86%E6%9E%B6">3.1 MVC框架</a></li>
+<li><a href="#32-mtv%E6%A1%86%E6%9E%B6">3.2 MTV框架</a></li>
+<li><a href="#33-%E5%8C%BA%E5%88%AB">3.3 区别</a></li>
+</ul>
+</li>
+<li><a href="#4-django%E4%BB%8B%E7%BB%8D">4 django介绍</a>
+<ul>
+<li><a href="#41-django%E5%A4%84%E7%90%86%E9%A1%BA%E5%BA%8F">4.1 Django处理顺序</a></li>
+<li><a href="#42-%E5%88%9B%E5%BB%BAdjango%E7%AB%99%E7%82%B9">4.2 创建django站点</a>
+<ul>
+<li><a href="#421-%E5%AE%89%E8%A3%85django">4.2.1 安装Django</a></li>
+<li><a href="#422-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAproject">4.2.2 创建一个project</a></li>
+<li><a href="#423-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAapp">4.2.3 创建一个app</a></li>
+<li><a href="#423-%E5%90%AF%E5%8A%A8django%E9%A1%B9%E7%9B%AE">4.2.3 启动Django项目</a></li>
+</ul>
+</li>
+<li><a href="#43-django-%E7%89%88%E7%9A%84-hello-world">4.3 Django 版的 hello world</a>
+<ul>
+<li><a href="#431-%E5%AE%9A%E4%B9%89url%E9%80%89%E6%8B%A9%E5%99%A8">4.3.1 定义URL选择器</a></li>
+<li><a href="#432-%E5%AE%9A%E4%B9%89views%E5%87%BD%E6%95%B0">4.3.2 定义views函数</a></li>
+<li><a href="#433-%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1">4.3.3 启动服务</a></li>
+</ul>
+</li>
+<li><a href="#44-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE">4.4 基础配置</a>
+<ul>
+<li><a href="#441-%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%AD%98%E6%94%BE%E8%B7%AF%E5%BE%84">4.4.1 配置静态文件存放路径</a></li>
+<li><a href="#442-%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF%E8%B7%AF%E5%BE%84">4.4.2 配置模板路径</a></li>
+<li><a href="#443-%E5%85%B3%E9%97%ADcsrftoken">4.4.3 关闭csrftoken</a></li>
+<li><a href="#444-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93">4.4.4 连接数据库</a></li>
+<li><a href="#445-%E5%8A%A0%E8%BD%BD%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6">4.4.5 加载静态文件</a></li>
+</ul>
+</li>
+<li><a href="#45-django-admin%E9%85%8D%E7%BD%AE">4.5 django admin配置</a>
+<ul>
+<li><a href="#451-%E5%88%9B%E5%BB%BAdjango-admin%E7%94%A8%E6%88%B7">4.5.1 创建django-admin用户</a></li>
+<li><a href="#452-%E5%88%9D%E5%A7%8B%E5%8C%96django-admin%E9%9C%80%E8%A6%81%E7%9A%84%E8%A1%A8">4.5.2 初始化django-admin需要的表</a></li>
+<li><a href="#453-%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%85%8D%E7%BD%AE%E5%8F%AF%E9%80%89">4.5.3 本地化配置(可选)</a></li>
+<li><a href="#454-%E6%B3%A8%E5%86%8C%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9D%97">4.5.4 注册应用模块</a></li>
+<li><a href="#455-%E5%90%AF%E5%8A%A8django">4.5.5 启动django</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-什么是web框架-1">1 什么是web框架</h1>
+<p>        众所周知，所有的Web应用基本都是基于B/S结构，其本质上其实就是一个socket服务端(web服务器)，一个socket客户端(用户浏览器)。下面的代码就是一个简单的web端，运行后，使用浏览器访问，会打印hello world</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#_*_coding:utf-8_*_</span>
+    
+<span class="kn">import</span> <span class="nn">socket</span>
+    
+<span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;HTTP/1.1 200 OK</span><span class="se">\r\n\r\n</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;Hello, world&#34;</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span><span class="mi">8000</span><span class="p">))</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">connection</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="n">handle_request</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        上述代码通过socket实现了web服务端的本质，而对于真实开发中的Python Web程序来说，一般会分为两部分：服务器程序和应用程序。</p>
+<ul>
+<li>服务器程序负责对socket服务器进行封装，并在请求到来时，对请求的各种数据进行整理。</li>
+<li>应用程序则负责具体的逻辑处理。</li>
+</ul>
+<p>        为了方便应用程序的开发，就出现了众多的Web框架，例如：Django、Flask、web.py 等。不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。这样，服务器程序就需要为不同的框架提供不同的支持。这样混乱的局面无论对于服务器还是框架，都是不好的。对服务器来说，需要支持各种不同框架，对框架来说，只有支持它的服务器才能被开发出的应用使用。这时候，标准化就变得尤为重要。我们可以设立一个标准，只要服务器程序支持这个标准，框架也支持这个标准，那么他们就可以配合使用。一旦标准确定，双方各自实现。这样，服务器可以支持更多支持标准的框架，框架也可以使用更多支持标准的服务器。</p>
+<h1 id="2-wsgi-1">2 WSGI</h1>
+<p>        WSGI全称为：The Python Web Server Gateway Interface，单从名字来看就是一种网关，而网关的作用就是在协议之间进行转换。<br>
+        WSGI是为 Python 语言定义的 Web 服务器和 Web 应用程序或框架之间的一种简单而通用的接口，是一种规范，定义了使用Python编写的Web app与Web server之间接口格式，实现web app与web server间的解耦。</p>
+<blockquote>
+<p>Python标准库提供的独立WSGI服务器称为wsgiref。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 利用wsgiref完成上面简单的web服务程序</span>
+ 
+<span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
+  
+<span class="k">def</span> <span class="nf">RunServer</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>                         <span class="c1"># environ 存放的是用户访问时提交的信息，包涵http header等</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s1">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">)])</span>   <span class="c1"># 构建http response头部信息</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="s1">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="p">]</span>  <span class="c1"># 返回给用户的信息，注意是 bytes 格式。</span>
+  
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">httpd</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">RunServer</span><span class="p">)</span>       <span class="c1"># 启动一个服务，监听8000端口，请求进来交给RunServer函数处理</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Serving HTTP on port 8000...&#34;</span><span class="p">)</span>
+    <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>                          <span class="c1"># 启动服务开始接受请求</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-mvc与mtv模式-1">3 MVC与MTV模式</h1>
+<p>说到web开发，就需要遵循一定的开发模式。著名的MVC/MTV模式，其本质是使各组件之间保持松耦合关系。</p>
+<h2 id="31-mvc框架-1">3.1 MVC框架</h2>
+<p>MVC 是一种使用 MVC（Model View Controller 模型-视图-控制器）设计创建 Web 应用程序的模式</p>
+<ul>
+<li>Model（模型）表示应用程序核心（比如数据库记录列表）</li>
+<li>View（视图）显示数据（数据库记录）</li>
+<li>Controller（控制器）处理输入（写入数据库记录)</li>
+</ul>
+<p>MVC 模式同时提供了对 HTML、CSS 和 JavaScript 的完全控制。</p>
+<ul>
+<li>Model（模型）是应用程序中用于处理应用程序数据逻辑的部分。通常模型对象负责在数据库中存取数据。</li>
+<li>View（视图）是应用程序中处理数据显示的部分。通常视图是依据模型数据创建的前端网页。</li>
+<li>Controller（控制器）是应用程序中处理用户交互的部分。通常控制器负责从视图读取数据，控制用户输入，并向模型发送数据映射，模式渲染等。</li>
+</ul>
+<h2 id="32-mtv框架-1">3.2 MTV框架</h2>
+<p>MTV是一种使用MTV（Model Templates Views 模型-模版-视图）设计创建 Web 应用程序的模式</p>
+<ul>
+<li>Model(模型)：负责业务对象与数据库的对象(ORM)</li>
+<li>Template(模版)：负责如何把页面展示给用户</li>
+<li>View(视图)：负责业务逻辑，并在适当的时候调用Model和Template</li>
+</ul>
+<p>此外，Django还有一个url分发器，它的作用是将一个个URL的页面请求分发给不同的view处理，view再调用相应的Model和Template，逻辑处理如下：<br>
+<img src="../photo/mtv.png" alt="mtv"></p>
+<h2 id="33-区别-1">3.3 区别</h2>
+<p>        MVC即模型－视图－控制器模式，就是为那些需要为同样的数据提供多个视图的应用程序而设计的。它很好地实现了数据层与表示层的分离，特别适用于开发与用户图形界面有关的应用程序。控制器用来处理用户命令以及程序事件；模型维护数据并提供数据访问方法；视图用于数据的显示。<br>
+        MTV即模型-模版-视图模式，其标准名称是有争议的。在MVC的解释中，视图描述了展现给用户的数据，是指所看到的数据，而不是如何看见它。在python中视图是指对某一特定URL的回调函数，因为回调函数描述了所要展现的数据。模版用于将内容与展现分离。在django中，视图描述了要展现的数据，而视图一般转交给模版。模版描述了数据如何展现。控制器则是指django框架本身，通过URL配置，系统将一个请求发送到一个合适的视图。</p>
+<h1 id="4-django介绍-1">4 django介绍</h1>
+<p>        Django是重量级选手中最有代表性的一位。许多成功的网站和APP都基于Django。是一个开放源代码的Web应用框架，由Python写成。遵守BSD版权，初次发布于2005年7月, 并于2008年9月发布了第一个正式版本1.0 。</p>
+<blockquote>
+<p>本次选择djang 1.11.20 版本，进行学习</p>
+</blockquote>
+<h2 id="41-django处理顺序-1">4.1 Django处理顺序</h2>
+<p>Django是标准的MTV框架。</p>
+<ul>
+<li>wsgi：socket请求处理</li>
+<li>控制器（django框架本身）：控制用户输入，url匹配，通过映射列表将一个请求发送到一个合适的视图；</li>
+<li>views &ndash;Views：python程序，向模型和模板发送（或获取）数据；</li>
+<li>模型绑定 &ndash;Model：数据库存取数据</li>
+<li>模板引擎 &ndash;Templates：用于将内容与展现分离，描述了数据如何展现（如网页模板）；</li>
+<li>模式渲染 &ndash;Views：将模板和数据整合，形成最终网页；</li>
+<li>控制器（django框架本身）：返回用户展示。</li>
+</ul>
+<h2 id="42-创建django站点-1">4.2 创建django站点</h2>
+<p>下面使用django创建服务端站点，并显示hello world页面信息。</p>
+<h3 id="421-安装django-1">4.2.1 安装Django</h3>
+<p>使用命令行执行如下命令进行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install <span class="nv">Django</span><span class="o">==</span>1.11.20
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：会安装在python安装目录的scripts目录下。针对多环境的情况下，使用哪个解释器安装，那么就会安装在哪个版本下。安装完毕后会在scripts下产生一个django-admin.py文件，利用该文件可以在命令行下创建一个Django项目。</p>
+<h3 id="422-创建一个project-1">4.2.2 创建一个project</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">django-admin.py startproject PEOJECTNAME
+</code></pre></td></tr></table>
+</div>
+</div><p>创建完毕后：会产生PROJECTNAME命名的文件夹，里面包含 PROJECTNAME 目录 和 manager.py文件。
+其中：</p>
+<ul>
+<li>manager.py  用来管理我们项目相关的所有命令的文件（比如应用创建、数据库迁移等)</li>
+<li>PROJECTNAME：存放此项目全局的相关文件
+<ul>
+<li>settings.py：项目的配置信息文件</li>
+<li>urls.py：把用户发过来的url通过urls文件来过滤(控制),交给某个view函数来处理  &ndash;&gt;控制器</li>
+<li>wsgi.py：处理socket相关的任务(类nginx/apache的功能)  &ndash;&gt;  一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。 生产上一般不会使用wsgi（第三方模块），一般会使用uwsgi + nginx 来运行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="423-创建一个app-1">4.2.3 创建一个app</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">startapp</span> <span class="n">APPNAME</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        为什么一个项目里要创建一个应用？举个例子：微信是一个项目，那么通讯录，钱包，朋友圈就是一个个相互独立功能，这里叫做应用。一个项目是所有应用的集合。
+        创建一个应用之后会产生同名目录，目录下的主要文件功能如下：</p>
+<ul>
+<li>models.py：MTV框架，存放和数据进行操作的代码</li>
+<li>admin.py：django的数据库后台管理工具</li>
+<li>views.py：MTV框架，包含所有的视图函数，由urls.py 来选择发送给具体哪个view函数</li>
+<li>test.py：用来测试的</li>
+</ul>
+<p>        views.py 中的函数：一定是来根据用户输入的内容来返回一个具体的页面，wsgi模块用来负责HTTP协议的解析，然后放在views视图函数中，作为一个固定的参数(request)使用。</p>
+<h3 id="423-启动django项目-1">4.2.3 启动Django项目</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python manage.py runserver PORT
+</code></pre></td></tr></table>
+</div>
+</div><p>启动一个web应用服务，并监听8800端口，这样就启动了一个django项目了，但这是我们测试时的启动方式，生产上不会这么用。</p>
+<h2 id="43-django-版的-hello-world-1">4.3 Django 版的 hello world</h2>
+<p>下面来实现一个站点，当我们访问时，输出hello world信息</p>
+<h3 id="431-定义url选择器-1">4.3.1 定义URL选择器</h3>
+<p>        定义url选择器是为了能在用户输入url的时候把对应的url映射到指定的views函数中去处理，所以urls.py会存放在项目全局的目录下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># urls.py文件</span>
+
+<span class="kn">from</span> <span class="nn">blog</span> <span class="kn">import</span> <span class="n">views</span>   <span class="c1"># blog为项目名，导入views模块</span>
+ 
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span><span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>          <span class="c1"># 就可以表示首页</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>url的参数：</p>
+<ul>
+<li>第一个参数是正则表达式</li>
+<li>第二个参数表示匹配后，要触发的函数或者类</li>
+</ul>
+<h3 id="432-定义views函数-1">4.3.2 定义views函数</h3>
+<p>        经过项目的urls控制，那么请求将会分配给具体的应用(函数)来处理，所以需要在应用的目录中的views.py文件中进行添加。由于我们返回的是静态页面，不需要进行数据库相关的处理，所以在index函数内，可以直接返回页面给客户端。
+这里有两种方式：</p>
+<ul>
+<li>直接返回html标签</li>
+<li>返回html文件</li>
+</ul>
+<p>返回html标签：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># blog/models.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+ 
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+ 
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;&lt;h1&gt;hello world&lt;/h1&gt;&#39;</span><span class="p">)</span><span class="o">&lt;</span><span class="n">br</span><span class="o">&gt;</span>
+ 
+<span class="c1"># 注意：用户的请求经由wsgi处理后，会返回一个对象标识，一般这里使用request来接受这个对象。</span>
+ 
+<span class="c1"># HttpResponse 用户对客户的相应</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>request:请求信息对象</li>
+<li>HttpResponse：响应信息对象</li>
+</ul>
+<p>返回html文件：
+所有的html文件是由Templates来进行处理的，所以需要现在Templates目录下创建要返回的html文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>hello world<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对应的models.py修改为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span><span class="n">HttpResponse</span>
+ 
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+ 
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+ 
+<span class="c1"># render,的第一个参数就是request，标识把后面的index文件返回给这个request</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>答复的html文件，render会去Templates下寻找，因为在setting.py文件中已经定义了Templates的路径</p>
+<h3 id="433-启动服务-1">4.3.3 启动服务</h3>
+<p>在项目目录下执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python manage.py runserver <span class="m">8080</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>启动完毕后，使用浏览器访问。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">http://127.0.0.1:8080
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="44-基础配置-1">4.4 基础配置</h2>
+<p>为了使我们的项目依赖的文件放在特定的地方提供访问，那么我们在创建完项目还需要做一些基础的配置。</p>
+<h3 id="441-配置静态文件存放路径-1">4.4.1 配置静态文件存放路径</h3>
+<p>        静态文件：比如css，js文件都是要提供给用户进行下载的，所以我们一般规定静态文件，存放在django项目的一级子目录static中，需要手动创建这个目录，然后做如下配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 修改settings.py文件</span>
+<span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span><span class="s1">&#39;static&#39;</span><span class="p">),</span>    <span class="c1"># 添加静态文件路径</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这样配置以后，我们还可以为每个应用创建自己的static目录，在前端渲染方式是相同的（django会为我们优先查找项目下的static目录来加载)</p>
+</blockquote>
+<h3 id="442-配置模板路径-1">4.4.2 配置模板路径</h3>
+<p>        用来集中存放用于返回给用户的模板文件（如果是利用pycharm创建的项目，它会自动帮我们创建template目录，并自动进行关联）,创建templates目录（同样存放在django项目的一级子目录下）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 修改settings.py文件</span>
+<span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;templates&#39;</span><span class="p">)]</span>     <span class="c1"># 添加templates文件的路径</span>
+        <span class="p">,</span>
+        <span class="s1">&#39;APP_DIRS&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;context_processors&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;django.template.context_processors.debug&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.request&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.contrib.auth.context_processors.auth&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.contrib.messages.context_processors.messages&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>这样配置以后，我们还可以为每个应用创建自己的templates目录，在前端渲染方式是相同的（django会为我们优先查找项目下的templates目录来加载)</p>
+</blockquote>
+<h3 id="443-关闭csrftoken-1">4.4.3 关闭csrftoken</h3>
+<p>csrftoken用于防止csrf攻击，csrf的相关配置将在后面进行说明，所以这里可以先关闭csrftoken。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 修改settings.py文件</span>
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.middleware.security.SecurityMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span><span class="p">,</span>
+    <span class="c1"># &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,      #  注释掉csrf中间件即可(需要重启django项目)</span>
+    <span class="s1">&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages.middleware.MessageMiddleware&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="444-连接数据库-1">4.4.4 连接数据库</h3>
+<p>django支持MySQL 5.5+ 官方建议使用mysqlclient 1.3.7+ 来驱动，所以这里需要先安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install myclient
+</code></pre></td></tr></table>
+</div>
+</div><p>web站点最重要的数据库连接配置，需要在settings.py中设置所连接的数据库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.mysql&#39;</span><span class="p">,</span>  <span class="c1"># 引擎</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span>    <span class="c1"># 库名</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;dahl&#39;</span><span class="p">,</span>    <span class="c1"># 数据库用户名</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>  <span class="c1"># 数据库密码</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>   <span class="c1"># 数据库地址</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;3306&#39;</span><span class="p">,</span>        <span class="c1"># 数据库端口</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>支持的数据库引擎有:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;django.db.backends.postgresql&#39;</span>
+<span class="s1">&#39;django.db.backends.mysql&#39;</span>
+<span class="s1">&#39;django.db.backends.sqlite3&#39;</span>
+<span class="s1">&#39;django.db.backends.oracle&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更多的配置方法参考：https://docs.djangoproject.com/en/1.11/ref/settings/#databases</p>
+<blockquote>
+<p>如果安装mysqlclient失败，提示缺少C++，那么不建议安装所有的编译环境，因为即便是安装所以，可能无法编译成功，所以可以在一下网站中直接查找现成的whl包。https://www.lfd.uci.edu/~gohlke/pythonlibs/</p>
+</blockquote>
+<h3 id="445-加载静态文件-1">4.4.5 加载静态文件</h3>
+<p>配置模版文件加载静态文件，比如css,js文件</p>
+<ol>
+<li>首先加载静态文件配置（需要先完成4.4.1）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">{% load static %}
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>动态获取配置文件的路径</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{% static &#39;css/login.css&#39; %}&#34;</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里的static关键字，标示的就是，当前项目static目录的路径，这样做的好处是，当你修改了static目录在前台的显示路径时，这里的static会自动关联到新的url上。无需修改</p>
+<h2 id="45-django-admin配置-1">4.5 django admin配置</h2>
+<p>Django 提供了基于 web 的管理工具即django-admin，它可以通过web页面来管理我们项目中的表，但前提是你已经把表注册给admin管辖了。</p>
+<p>默认情况下，django-admin是随django一起安装的，要使用它，还需要经过以下步骤：</p>
+<h3 id="451-创建django-admin用户-1">4.5.1 创建django-admin用户</h3>
+<p>在项目根目录下执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python manage.py createsuperuser
+</code></pre></td></tr></table>
+</div>
+</div><p>按照提示创建django-admin的管理用户</p>
+<h3 id="452-初始化django-admin需要的表-1">4.5.2 初始化django-admin需要的表</h3>
+<p>django-admin需要一些表来处理admin后台的登录、认证等信息，所以我们需要在数据库中把这些表创建。django的自带的orm可以帮我们完成这项操作，如果你的项目需要创建表，那么请首先确保项目的配置文件settings.py中的INSTALLAPP列表中包含你的应用名称</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;user&#39;</span>  <span class="c1"># 这个就是我们的应用名称，注意它的路径是从项目的顶级目录开始的</span>
+<span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>项目自己的models中需要自行编写数据库表的映射类，django-admin的映射类已经内置。</p>
+</blockquote>
+<p>执行如下命令生成迁移文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python manage.py makemigrations
+</code></pre></td></tr></table>
+</div>
+</div><p>执行完毕后，会在项目目录下生成migrations目录，里面存放的是所以的迁移记录，不要随意删除。</p>
+<p>执行如下命令完成表迁移(在数据库中创建)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>当我们对models.py中的映射类结构进行修改时，那么每次都需要进行上述两步操作</code></p>
+<p>注意：</p>
+<ol>
+<li>要创建的表的应用必须在INSTALLED_APPS中注册。</li>
+<li>不要随便删除migrations下的迁移文件。</li>
+</ol>
+<h3 id="453-本地化配置可选-1">4.5.3 本地化配置(可选)</h3>
+<p>默认情况下django-admin的后台管理是英文的，可以在settings.py文件中修改为中文显示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># LANGUAGE_CODE = &#39;en-us&#39;</span>
+<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;zh-Hans&#39;</span>
+
+<span class="c1"># TIME_ZONE = &#39;UTC&#39;</span>
+<span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;Asia/Shanghai&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="454-注册应用模块-1">4.5.4 注册应用模块</h3>
+<p>如果想要django-admin管理项目自己的表信息，那么需要将表注册给django-admin，那么就需要在应用目录下的admin.py中进行如下操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">user.models</span> <span class="kn">import</span> <span class="n">User</span>  <span class="c1"># 导入models.py中要被管理的类</span>
+
+<span class="c1"># Register your models here.</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">)</span> <span class="c1"># 注册给amdin</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>附User表:(models.py中)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;User {} {}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="455-启动django-1">4.5.5 启动django</h3>
 <p>这时，重新启动django，那么就可以访问admin了。(项目根目录下)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

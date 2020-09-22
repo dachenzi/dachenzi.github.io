@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 魔术方法 2 类的魔术方法 2.1 基本的魔法方法和常用属性 2.2 有关属性 2.3 比较操作符 2.4 算数运算符 2.5 反运算 2.6 增量赋值运算 2.7 一元操作符 2.8 类型转换 2.9 上">
 <meta itemprop="datePublished" content="2018-02-01T23:17:39+00:00" />
 <meta itemprop="dateModified" content="2018-02-01T23:17:39+00:00" />
-<meta itemprop="wordCount" content="7511">
+<meta itemprop="wordCount" content="15081">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 7511 字 </span>
-          <span class="more-meta"> 预计阅读 15 分钟 </span>
+        <span class="more-meta"> 约 15081 字 </span>
+          <span class="more-meta"> 预计阅读 31 分钟 </span>
 
         
         
@@ -382,6 +382,54 @@
     </li>
     <li><a href="#37-容器相关方法">3.7 容器相关方法</a></li>
     <li><a href="#38-可调用对象">3.8 可调用对象</a></li>
+    <li><a href="#mathjax-true">title: 25-面向对象高级-魔术方法基础
+date: 2019-07-14 19:11:13
+lastmod: 2019-07-14 19:11:13
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-基本的魔法方法和常用属性-1">2.1 基本的魔法方法和常用属性</a></li>
+    <li><a href="#22-有关属性-1">2.2 有关属性</a></li>
+    <li><a href="#23-比较操作符-1">2.3 比较操作符</a></li>
+    <li><a href="#24-算数运算符-1">2.4 算数运算符</a></li>
+    <li><a href="#25-反运算-1">2.5 反运算</a></li>
+    <li><a href="#26-增量赋值运算-1">2.6 增量赋值运算</a></li>
+    <li><a href="#27-一元操作符-1">2.7 一元操作符</a></li>
+    <li><a href="#28-类型转换-1">2.8 类型转换</a></li>
+    <li><a href="#29-上下文管理with-语句-1">2.9 上下文管理（with 语句）</a></li>
+    <li><a href="#210-容器类型-1">2.10 容器类型</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-查看属性-1">3.1 查看属性</a></li>
+    <li><a href="#32-实例化-1">3.2 实例化</a></li>
+    <li><a href="#33-hash相关-1">3.3 hash相关</a>
+      <ul>
+        <li><a href="#331-hash相同能否去重-1">3.3.1 hash相同能否去重</a></li>
+        <li><a href="#332-比较内容是否相同-1">3.3.2 比较内容是否相同</a></li>
+        <li><a href="#333-坐标轴小例子-1">3.3.3 坐标轴小例子</a></li>
+      </ul>
+    </li>
+    <li><a href="#34-bool类型-1">3.4 bool类型</a></li>
+    <li><a href="#35-可视化-1">3.5 可视化</a></li>
+    <li><a href="#36-运算符重载-1">3.6 运算符重载</a>
+      <ul>
+        <li><a href="#361-实现两个实例相减-1">3.6.1 实现两个实例相减</a></li>
+        <li><a href="#362-坐标轴小例子-1">3.6.2 坐标轴小例子</a></li>
+        <li><a href="#363-应用场景-1">3.6.3 应用场景</a></li>
+        <li><a href="#364-total_ordering装饰器-1">3.6.4 total_ordering装饰器</a></li>
+      </ul>
+    </li>
+    <li><a href="#37-容器相关方法-1">3.7 容器相关方法</a></li>
+    <li><a href="#38-可调用对象-1">3.8 可调用对象</a></li>
   </ul>
 </nav>
   </div>
@@ -1822,6 +1870,1563 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="38-可调用对象">3.8 可调用对象</h2>
+<p>Python中一切皆对象,函数也不例外,函数名加上(),就表示调用函数对象的__call__方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span><span class="n">func</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>
+
+<span class="n">func</span><span class="p">()</span>  <span class="c1"># func __main__</span>
+<span class="err">等于</span> <span class="n">func</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__call__</td>
+<td>类中定义一个该方法,实例就可以像函数一样调用</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Call</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;hello world&#39;</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Call</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">())</span>  <span class="c1"># 调用c.__call__方法</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>定义一个斐波那契数列的类,方便调用计算第N项,增加迭代方法,返回容器长度,支持索引方法.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Fib</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># 3  4</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="n">length</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">,</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 3,5</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="c1"># return self[index]  # 这里调用直接通过key的方式访问元素，其实还是会调用__getitem__方法。self[index] == self.__getitem__(index)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fib</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">101</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 25-面向对象高级-魔术方法基础
+date: 2019-07-14 19:11:13
+lastmod: 2019-07-14 19:11:13
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95">1 魔术方法</a></li>
+<li><a href="#2-%E7%B1%BB%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95">2 类的魔术方法</a>
+<ul>
+<li><a href="#21-%E5%9F%BA%E6%9C%AC%E7%9A%84%E9%AD%94%E6%B3%95%E6%96%B9%E6%B3%95%E5%92%8C%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7">2.1 基本的魔法方法和常用属性</a></li>
+<li><a href="#22-%E6%9C%89%E5%85%B3%E5%B1%9E%E6%80%A7">2.2 有关属性</a></li>
+<li><a href="#23-%E6%AF%94%E8%BE%83%E6%93%8D%E4%BD%9C%E7%AC%A6">2.3 比较操作符</a></li>
+<li><a href="#24-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6">2.4 算数运算符</a></li>
+<li><a href="#25-%E5%8F%8D%E8%BF%90%E7%AE%97">2.5 反运算</a></li>
+<li><a href="#26-%E5%A2%9E%E9%87%8F%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97">2.6 增量赋值运算</a></li>
+<li><a href="#27-%E4%B8%80%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6">2.7 一元操作符</a></li>
+<li><a href="#28-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">2.8 类型转换</a></li>
+<li><a href="#29-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86with-%E8%AF%AD%E5%8F%A5">2.9 上下文管理（with 语句）</a></li>
+<li><a href="#210-%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%9E%8B">2.10 容器类型</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">3 常用方法</a>
+<ul>
+<li><a href="#31-%E6%9F%A5%E7%9C%8B%E5%B1%9E%E6%80%A7">3.1 查看属性</a></li>
+<li><a href="#32-%E5%AE%9E%E4%BE%8B%E5%8C%96">3.2 实例化</a></li>
+<li><a href="#33-hash%E7%9B%B8%E5%85%B3">3.3 hash相关</a>
+<ul>
+<li><a href="#331-hash%E7%9B%B8%E5%90%8C%E8%83%BD%E5%90%A6%E5%8E%BB%E9%87%8D">3.3.1 hash相同能否去重</a></li>
+<li><a href="#332-%E6%AF%94%E8%BE%83%E5%86%85%E5%AE%B9%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C">3.3.2 比较内容是否相同</a></li>
+<li><a href="#333-%E5%9D%90%E6%A0%87%E8%BD%B4%E5%B0%8F%E4%BE%8B%E5%AD%90">3.3.3 坐标轴小例子</a></li>
+</ul>
+</li>
+<li><a href="#34-bool%E7%B1%BB%E5%9E%8B">3.4 bool类型</a></li>
+<li><a href="#35-%E5%8F%AF%E8%A7%86%E5%8C%96">3.5 可视化</a></li>
+<li><a href="#36-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD">3.6 运算符重载</a>
+<ul>
+<li><a href="#361-%E5%AE%9E%E7%8E%B0%E4%B8%A4%E4%B8%AA%E5%AE%9E%E4%BE%8B%E7%9B%B8%E5%87%8F">3.6.1 实现两个实例相减</a></li>
+<li><a href="#362-%E5%9D%90%E6%A0%87%E8%BD%B4%E5%B0%8F%E4%BE%8B%E5%AD%90">3.6.2 坐标轴小例子</a></li>
+<li><a href="#363-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">3.6.3 应用场景</a></li>
+<li><a href="#364-total_ordering%E8%A3%85%E9%A5%B0%E5%99%A8">3.6.4 total_ordering装饰器</a></li>
+</ul>
+</li>
+<li><a href="#37-%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95">3.7 容器相关方法</a></li>
+<li><a href="#38-%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1">3.8 可调用对象</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-魔术方法-1">1 魔术方法</h1>
+<p>　　在Python中以两个下划线开头和结尾的方法，比如：__init__、__str__、__doc__、__new__等，被称为&quot;魔术方法&quot;（Magic methods）。魔术方法在类或对象的某些事件出发后会自动执行，如果希望根据自己的程序定制自己特殊功能的类，那么就需要对这些方法进行重写。</p>
+<blockquote>
+<p>Python 将所有以 __（两个下划线）开头和结尾的类方法保留为魔术方法。所以在定义类方法时，除了上述魔术方法，建议不要以 __ 为前缀。</p>
+</blockquote>
+<h1 id="2-类的魔术方法-1">2 类的魔术方法</h1>
+<p>我们将不同类型的魔术方法进行归类，那么会分为以下几类。</p>
+<h2 id="21-基本的魔法方法和常用属性-1">2.1 基本的魔法方法和常用属性</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__new__(cls[, &hellip;])</td>
+<td>1. __new__ 是在一个对象实例化的时候所调用的第一个方法<br>2. 它的第一个参数是这个类，其他的参数是用来直接传递给 __init__ 方法<br>3. __new__ 决定是否要使用该 __init__ 方法，因为 __new__ 可以调用其他类的构造方法或者直接返回别的实例对象来作为本类的实例，如果 __new__ 没有返回实例对象，则 __init__ 不会被调用<br>4. __new__ 主要是用于继承一个不可变的类型比如一个 tuple 或者 string</td>
+</tr>
+<tr>
+<td>__init__(self[, &hellip;])</td>
+<td>构造器，当一个实例被创建的时候调用的初始化方法</td>
+</tr>
+<tr>
+<td>__del__(self)</td>
+<td>析构器，当一个实例被销毁的时候调用的方法</td>
+</tr>
+<tr>
+<td>__call__(self[, args&hellip;])</td>
+<td>允许一个类的实例像函数一样被调用：x(a, b) 调用 x.__call__(a, b)</td>
+</tr>
+<tr>
+<td>__len__(self)</td>
+<td>定义当被 len() 调用时的行为</td>
+</tr>
+<tr>
+<td>__repr__(self)</td>
+<td>定义当被 repr() 调用或者直接执行对象时的行为</td>
+</tr>
+<tr>
+<td>__str__(self)</td>
+<td>定义当被 str() 调用或者打印对象时的行为</td>
+</tr>
+<tr>
+<td>__bytes__(self)</td>
+<td>定义当被 bytes() 调用时的行为</td>
+</tr>
+<tr>
+<td>__hash__(self)</td>
+<td>定义当被 hash() 调用时的行为</td>
+</tr>
+<tr>
+<td>__bool__(self)</td>
+<td>定义当被 bool() 调用时的行为，应该返回 True 或 False</td>
+</tr>
+<tr>
+<td>__format__(self, format_spec)</td>
+<td>定义当被 format() 调用时的行为</td>
+</tr>
+<tr>
+<td>__name__</td>
+<td>类、函数、方法等的名字</td>
+</tr>
+<tr>
+<td>__module__</td>
+<td>类定义所在的模块名</td>
+</tr>
+<tr>
+<td>__class__</td>
+<td>对象或类所属的类</td>
+</tr>
+<tr>
+<td>__bases__</td>
+<td>类的基类元组，顺序为它们在基类列表中出现的顺序</td>
+</tr>
+<tr>
+<td>__doc__</td>
+<td>类、函数的文档字符串，如果没有定义则为None</td>
+</tr>
+<tr>
+<td>__mro__</td>
+<td>类的mro,class.mro()返回的结果保存在__mro__中</td>
+</tr>
+<tr>
+<td>__dict__</td>
+<td>类或实例的属性，可写的字典</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-有关属性-1">2.2 有关属性</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__getattr__(self, name)</td>
+<td>定义当用户试图获取一个不存在的属性时的行为</td>
+</tr>
+<tr>
+<td>__getattribute__(self, name)</td>
+<td>定义当该类的属性被访问时的行为</td>
+</tr>
+<tr>
+<td>__setattr__(self, name, value)</td>
+<td>定义当一个属性被设置时的行为</td>
+</tr>
+<tr>
+<td>__delattr__(self, name)</td>
+<td>定义当一个属性被删除时的行为</td>
+</tr>
+<tr>
+<td>__dir__(self)</td>
+<td>定义当 dir() 被调用时的行为</td>
+</tr>
+<tr>
+<td>__get__(self, instance, owner)</td>
+<td>定义当描述符的值被取得时的行为</td>
+</tr>
+<tr>
+<td>__set__(self, instance, value)</td>
+<td>定义当描述符的值被改变时的行为</td>
+</tr>
+<tr>
+<td>__delete__(self, instance)</td>
+<td>定义当描述符的值被删除时的行为</td>
+</tr>
+</tbody>
+</table>
+<h2 id="23-比较操作符-1">2.3 比较操作符</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__lt__(self, other)</td>
+<td>定义小于号的行为：x &lt; y 调用 x.__lt__(y)</td>
+</tr>
+<tr>
+<td>__le__(self, other)</td>
+<td>定义小于等于号的行为：x &lt;= y 调用 x.__le__(y)</td>
+</tr>
+<tr>
+<td>__eq__(self, other)</td>
+<td>定义等于号的行为：x == y 调用 x.__eq__(y)</td>
+</tr>
+<tr>
+<td>__ne__(self, other)</td>
+<td>定义不等号的行为：x != y 调用 x.__ne__(y)</td>
+</tr>
+<tr>
+<td>__gt__(self, other)</td>
+<td>定义大于号的行为：x &gt; y 调用 x.__gt__(y)</td>
+</tr>
+<tr>
+<td>__ge__(self, other)</td>
+<td>定义大于等于号的行为：x &gt;= y 调用 x.__ge__(y)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="24-算数运算符-1">2.4 算数运算符</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__add__(self, other)</td>
+<td>定义加法的行为：+</td>
+</tr>
+<tr>
+<td>__sub__(self, other)</td>
+<td>定义减法的行为：-</td>
+</tr>
+<tr>
+<td>__mul__(self, other)</td>
+<td>定义乘法的行为：*</td>
+</tr>
+<tr>
+<td>__truediv__(self, other)</td>
+<td>定义真除法的行为：/</td>
+</tr>
+<tr>
+<td>__floordiv__(self, other)</td>
+<td>定义整数除法的行为：//</td>
+</tr>
+<tr>
+<td>__mod__(self, other)</td>
+<td>定义取模算法的行为：%</td>
+</tr>
+<tr>
+<td>__divmod__(self, other)</td>
+<td>定义当被 divmod() 调用时的行为</td>
+</tr>
+<tr>
+<td>__pow__(self, other[, modulo])</td>
+<td>定义当被 power() 调用或 ** 运算时的行为</td>
+</tr>
+<tr>
+<td>__lshift__(self, other)</td>
+<td>定义按位左移位的行为：&laquo;</td>
+</tr>
+<tr>
+<td>__rshift__(self, other)</td>
+<td>定义按位右移位的行为：&raquo;</td>
+</tr>
+<tr>
+<td>__and__(self, other)</td>
+<td>定义按位与操作的行为：&amp;</td>
+</tr>
+<tr>
+<td>__xor__(self, other)</td>
+<td>定义按位异或操作的行为：^</td>
+</tr>
+<tr>
+<td>__or__(self, other)</td>
+<td>定义按位或操作的行为：</td>
+</tr>
+</tbody>
+</table>
+<h2 id="25-反运算-1">2.5 反运算</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__radd__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rsub__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rmul__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rtruediv__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rfloordiv__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rmod__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rdivmod__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rpow__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rlshift__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rrshift__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rand__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__rxor__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+<tr>
+<td>__ror__(self, other)</td>
+<td>（与上方相同，当左操作数不支持相应的操作时被调用）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="26-增量赋值运算-1">2.6 增量赋值运算</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__iadd__(self, other)</td>
+<td>定义赋值加法的行为：+=</td>
+</tr>
+<tr>
+<td>__isub__(self, other)</td>
+<td>定义赋值减法的行为：-=</td>
+</tr>
+<tr>
+<td>__imul__(self, other)</td>
+<td>定义赋值乘法的行为：*=</td>
+</tr>
+<tr>
+<td>__itruediv__(self, other)</td>
+<td>定义赋值真除法的行为：/=</td>
+</tr>
+<tr>
+<td>__ifloordiv__(self, other)</td>
+<td>定义赋值整数除法的行为：//=</td>
+</tr>
+<tr>
+<td>__imod__(self, other)</td>
+<td>定义赋值取模算法的行为：%=</td>
+</tr>
+<tr>
+<td>__ipow__(self, other[, modulo])</td>
+<td>定义赋值幂运算的行为：**=</td>
+</tr>
+<tr>
+<td>__ilshift__(self, other)</td>
+<td>定义赋值按位左移位的行为：&laquo;=</td>
+</tr>
+<tr>
+<td>__irshift__(self, other)</td>
+<td>定义赋值按位右移位的行为：&raquo;=</td>
+</tr>
+<tr>
+<td>__iand__(self, other)</td>
+<td>定义赋值按位与操作的行为：&amp;=</td>
+</tr>
+<tr>
+<td>__ixor__(self, other)</td>
+<td>定义赋值按位异或操作的行为：^=</td>
+</tr>
+<tr>
+<td>__ior__(self, other)</td>
+<td>定义赋值按位或操作的行为：</td>
+</tr>
+</tbody>
+</table>
+<h2 id="27-一元操作符-1">2.7 一元操作符</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__pos__(self)</td>
+<td>定义正号的行为：+x</td>
+</tr>
+<tr>
+<td>__neg__(self)</td>
+<td>定义负号的行为：-x</td>
+</tr>
+<tr>
+<td>__abs__(self)</td>
+<td>定义当被 abs() 调用时的行为</td>
+</tr>
+<tr>
+<td>__invert__(self)</td>
+<td>定义按位求反的行为：~x</td>
+</tr>
+</tbody>
+</table>
+<h2 id="28-类型转换-1">2.8 类型转换</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__complex__(self)</td>
+<td>定义当被 complex() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td>__int__(self)</td>
+<td>定义当被 int() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td>__float__(self)</td>
+<td>定义当被 float() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td>__round__(self[, n])</td>
+<td>定义当被 round() 调用时的行为（需要返回恰当的值）</td>
+</tr>
+<tr>
+<td>__index__(self)</td>
+<td>1. 当对象是被应用在切片表达式中时，实现整形强制转换<br>2. 如果你定义了一个可能在切片时用到的定制的数值型,你应该定义 __index__<br>3. 如果 __index__ 被定义，则 __int__ 也需要被定义，且返回相同的值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="29-上下文管理with-语句-1">2.9 上下文管理（with 语句）</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__enter__(self)</td>
+<td>1. 定义当使用 with 语句时的初始化行为<br>2. __enter__ 的返回值被 with 语句的目标或者 as 后的名字绑定</td>
+</tr>
+<tr>
+<td>__exit__(self, exc_type, exc_value, traceback)</td>
+<td>1. 定义当一个代码块被执行或者终止后上下文管理器应该做什么<br>2. 一般被用来处理异常，清除工作或者做一些代码块执行完毕之后的日常工作</td>
+</tr>
+</tbody>
+</table>
+<h2 id="210-容器类型-1">2.10 容器类型</h2>
+<table>
+<thead>
+<tr>
+<th>魔术方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__len__(self)</td>
+<td>定义当被 len() 调用时的行为（返回容器中元素的个数）</td>
+</tr>
+<tr>
+<td>__getitem__(self, key)</td>
+<td>定义获取容器中指定元素的行为，相当于 self[key]</td>
+</tr>
+<tr>
+<td>__setitem__(self, key, value)</td>
+<td>定义设置容器中指定元素的行为，相当于 self[key] = value</td>
+</tr>
+<tr>
+<td>__delitem__(self, key)</td>
+<td>定义删除容器中指定元素的行为，相当于 del self[key]</td>
+</tr>
+<tr>
+<td>__iter__(self)</td>
+<td>定义当迭代容器中的元素的行为</td>
+</tr>
+<tr>
+<td>__reversed__(self)</td>
+<td>定义当被 reversed() 调用时的行为</td>
+</tr>
+<tr>
+<td>__contains__(self, item)</td>
+<td>定义当使用成员测试运算符（in 或 not in）时的行为</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-常用方法-1">3 常用方法</h1>
+<p>上面基本上是Python中类的所有魔术方法了，下面针对一些重要的常用的方法进行说明。</p>
+<h2 id="31-查看属性-1">3.1 查看属性</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__dir__()</td>
+<td>返回类或者对象的所有成员的名称列表<br>dir()函数操作实例调用的就是__dir__()</td>
+</tr>
+</tbody>
+</table>
+<p>        当dir(obj)时，obj的__dir__()方法被调用，如果当前实例不存在该方法，则按照mro开始查找，如果父类都没有定义，那么最终会找到object.__dir__()方法，该方法会最大程度的收集属性信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;ab&#39;</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="c1"># [&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">B</span><span class="p">()))</span> <span class="c1"># [&#39;a&#39;, &#39;b&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>dir(obj)对于不同类型的对象obj具有不同的行为：</p>
+<ol>
+<li>如果对象是模块对象，返回的列表包含模块的属性和变量名</li>
+<li>如果对象是类型或者说是类对象，返回的列表包含类的属性名，及它的祖先类的属性名</li>
+<li>如果是类的实例
+<ul>
+<li>有__dir__方法，则返回__dir__方法的返回值(<code>必须可迭代</code>)</li>
+<li>没有__dir__方法，则尽可能的收集实例的属性名、类的属性和祖先类的属性名，<code>组成列表返回</code>。</li>
+</ul>
+</li>
+<li>如果dir没有参数，返回列表包含的内容也不同。
+<ul>
+<li>在模块中，返回模块的属性和变量名(和<code>globals()</code>结果相同)</li>
+<li>在函数中，返回本地作用域的变量名(和<code>locals()</code>结果相同)</li>
+<li>在方法中，返回本地作用域的变量名(和<code>locals()</code>结果相同)</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>locals()运行在全局时，结果和globals()相同</p>
+</blockquote>
+<h2 id="32-实例化-1">3.2 实例化</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__new__</td>
+<td>实例化一个对象<br>该方法需要返回一个值，如果该值不是cls的实现，则不会调用__init__<br>该方法永远都是静态方法</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>  <span class="c1"># &lt;class &#39;__main__.A&#39;&gt;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># (&#39;daxin&#39;,)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># {&#39;age&#39;: 20}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># &#39;NoneType&#39; object has no attribute &#39;name&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：</p>
+<ol>
+<li>实例化时执行__new__函数，进行实例化操作。</li>
+<li>前面学的__init__函数，我们知道它必须返回None，所以构建好的实例应该是在__new__函数中返回的。</li>
+<li>顺序：__new__构建实例，调用__init__函数进行初始化，然后由__new__函数返回实例。</li>
+<li>我们不知道实例到底是如何实例化的，所以这里可以使用super函数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>  <span class="c1"># &lt;class &#39;__main__.A&#39;&gt;</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># (&#39;daxin&#39;,)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># {&#39;age&#39;: 20}</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>    <span class="c1"># 只需要传递cls即可</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># &#39;NoneType&#39; object has no attribute &#39;name&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># &#39;NoneType&#39; object has no attribute &#39;name&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：__new__方法很少用，即使创建了该方法，也会使用return super().__new__(cls)，调用基类objct的__new__方法来创建实例并返回。除非使用元类编程。</p>
+<h2 id="33-hash相关-1">3.3 hash相关</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__hash__</td>
+<td>内建函数hash()调用的返回值，返回一个整数。如果定义这个方法该类的实例就可hash。</td>
+</tr>
+<tr>
+<td>__eq__</td>
+<td>对应==操作符，判断2个对象是否相等，返回bool值</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">123</span>   <span class="c1"># 返回值必须是数字</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># 123</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一般来说提供__hash__方法是为了作为set或者dict的key的。但是key是不重复的，所以怎么去重呢？</p>
+<h3 id="331-hash相同能否去重-1">3.3.1 hash相同能否去重</h3>
+<p>前面我们知道，set类型是不允许有重复数据的，那么它是怎么去重的呢？我们说每个元素的hash值都不相同，是通过hash值来去重的吗？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">123</span>  <span class="c1"># 返回值必须是数字</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 为了打印方便，这里使用repr定义类型输出格式</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;{}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>   <span class="c1"># {&lt;daxin&gt;, &lt;daxin&gt;}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="332-比较内容是否相同-1">3.3.2 比较内容是否相同</h3>
+<p>        hash值相同的情况下，从结果看并没有去重。所以，去重，并不是只看hash值，还需要使用__eq__来判断2个对象是否相等。hash值相等，只是说明hash冲突，并不能说明两个对象是相等的。判断内容是否相等一般使用的是 == , 使用 == 进行比较时，就会触发对象的__eq__方法。所以我们来测试一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">123</span>  <span class="c1"># 返回值必须是数字</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 为了打印方便，这里使用repr定义类型输出格式</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;{} {}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self是实例本身，other就是等式右边的对象</span>
+        <span class="k">return</span> <span class="bp">True</span>   <span class="c1"># 衡返回True，就表示只要进行比较就相等</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># &lt;daxin 2621275933832&gt; &lt;daxin 2621275933888&gt;</span>
+<span class="k">print</span><span class="p">({</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">})</span>  <span class="c1"># {&lt;daxin 2621275933832&gt;}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以：去重的条件，首先判断的是hash值，hash值相同的情况下，判断内容是否相等，确认是否是同一个元素。所以__eq__方法就很重要了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ol>
+<li>__eq__：返回值必须是一个bool类型。</li>
+<li>只写__eq__方法，那么当前实例就无法可hash了，所以就无法去重了。</li>
+<li>如果要去重，还需要配合__hash__方法，才可以变为可hash对象。</li>
+</ol>
+<blockquote>
+<p>判断是否是不可hash对象，可以使用：isinstance(a, collection.Hashable)，False表示不可hash。</p>
+</blockquote>
+<p>想一下为什么list对象不可hash？ 来看一下List的原码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">...</span>
+    <span class="fm">__hash__</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在list内部，它把__hash__属性置为None了，学到一招，所以如果一个对象，不能被hash，那就把它置为None把。</p>
+<h3 id="333-坐标轴小例子-1">3.3.3 坐标轴小例子</h3>
+<p>设计二维坐标类Ponit, 使其成为可hash类型，并比较2个坐标的实例，是否相等？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>    <span class="c1"># 使用+拼接有很大几率相同，这里可以使用 return hash((self.x, self.y))</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+        <span class="c1"># 如果id相同，那么就不需要再比较属性了，因为肯定是同一个数据</span>
+        <span class="c1"># return self is other or (self.x == other.x and self.y == other.y)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{} {} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-bool类型-1">3.4 bool类型</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__bool__</td>
+<td>内建函数bool(),或者被当作逻辑表达式时，调用这个__bool__函数的返回值。<br>如果没有定义__bool__函数，那么就会寻找__len__返回长度，非0为真。<br>如果__len__()也没有定义，那么所有实例都返回真</td>
+</tr>
+</tbody>
+</table>
+<p>即：使用bool时，先判断__bool__，然后再判断__len__，否则True</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">A</span><span class="p">()))</span>   <span class="c1"># False</span>
+
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># 只有len</span>
+        <span class="k">return</span> <span class="mi">1</span>   
+    
+<span class="k">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">A</span><span class="p">()))</span>   <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>__len__的返回值必须为大于0的整数。</p>
+<h2 id="35-可视化-1">3.5 可视化</h2>
+<p>可视化就是指实例的表现形式，比如print的时候实例如何显示，被当作参数传递时又该如何显示</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__str__</td>
+<td>str、format、print函数调用，需要返回对象字符串表达式。<br>如果没有定义，就去调用__repr__方法，返回字符串表达。<br>如果__repr__没有定义，就直接返回对象的内存地址信息。</td>
+</tr>
+<tr>
+<td>__repr__</td>
+<td>内建函数repr()对一个对象获取字符串表达式。<br>调用__repr__方法返回字符串表达式，如果__repr__也没有定义，就直接返回object的定义的(就是内存地址)</td>
+</tr>
+<tr>
+<td>__bytes__</td>
+<td>bytes()函数调用，返回一个对象的bytes表达，即返回bytes对象。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{} from str method&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># 必须返回字符串</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="p">)</span>          <span class="c1"># daxin from str method</span>
+<span class="k">print</span><span class="p">([</span><span class="n">daxin</span><span class="p">,</span><span class="n">daxin</span><span class="p">])</span>  <span class="c1"># [&lt;__main__.A object at 0x00000207946A8EB8&gt;, &lt;__main__.A object at 0x00000207946A8EB8&gt;]</span>
+
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{} from repr method&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># 必须返回字符串</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span><span class="p">)</span>          <span class="c1"># daxin from repr method</span>
+<span class="k">print</span><span class="p">([</span><span class="n">daxin</span><span class="p">,</span><span class="n">daxin</span><span class="p">])</span>  <span class="c1"># [daxin from repr method, daxin from repr method]</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1"># 必须是一个bytes对象</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">daxin</span><span class="p">))</span>   <span class="c1"># b&#39;daxin&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>不能通过判断是否在引号来判断输出值的类型，类型判断要使用type和instance。</p>
+<h2 id="36-运算符重载-1">3.6 运算符重载</h2>
+<p>        用于使我们自己定义的类支持运算符的操作。比如加减乘除这类运算符，需要注意的是一般的操作数都为2个，符号左边的称之为左实例，而右边的成为右实例。</p>
+<h3 id="361-实现两个实例相减-1">3.6.1 实现两个实例相减</h3>
+<p>        当使用左实例减右实例时，会触发左实例的__sub__方法(如果左实例不存在__sub__方法，则会执行右实例的__rsub__方法)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>   
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">100</span> 
+
+<span class="n">a</span><span class="o">=</span><span class="n">A</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">b</span><span class="o">=</span><span class="n">B</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">)</span>   <span class="c1"># 执行a的__sub__方法，如果没有就执行b的__rsub__方法。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当使用-=(减等)触发的是__isub__方法了，如果没有定义__isub__方法，那么最后调用__sub__方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">-=</span> <span class="n">b</span> 
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1">#  8 &lt;class &#39;int&#39;&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ol>
+<li>使用了减等之后，我们发现连实例的a的类型都被修改了。</li>
+<li>__isub__的返回值会返回给a。</li>
+<li>仅仅在数字计算时可以使用这种方式，如果是实例相减，一般会in-place修改(就地修改)</li>
+</ol>
+<h3 id="362-坐标轴小例子-1">3.6.2 坐标轴小例子</h3>
+<p>完成坐标轴设计，实现向量的相等判断，以及加法运算</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Ponit</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span> <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># return self.x + other.x,self.y + other.y   # 直接返回(2,4)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># 返回一个新的实例</span>
+
+    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;{},{}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Ponit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Ponit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span>   <span class="c1"># True</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="n">b</span>        <span class="c1"># 调用a的__iadd__方法，原地修改</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>      <span class="c1"># &lt;2,4&gt;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>     <span class="c1"># 调用a的__add__方法，可以返回结果，也可以返回一个新的对象，看自己需求</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>      <span class="c1"># &lt;3,6&gt;</span>
+
+<span class="c1"># 注意</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>  <span class="c1"># 之所以可以这样一直加，是因为__add__方法，返回了一个新的实例。执行+发时，调用的就是实例的__add__方法</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="363-应用场景-1">3.6.3 应用场景</h3>
+<p>        当我们使用面向对象定义的类，需要大量的运算时，可以使用这种运算符重载的方式编写，因为这中运算符是数学上最常见的表达方式。上面的例子就实现了Point类的二元操作，重新定义了Point + Point 甚至 Point + Point + Ponit。</p>
+<blockquote>
+<p>int类，几乎实现了所有操作符。</p>
+</blockquote>
+<h3 id="364-total_ordering装饰器-1">3.6.4 total_ordering装饰器</h3>
+<p>        __lt__，__le__，__eq__，__ne__，__gt__，__ge__等是大小比较常用的方法，但是全部写完比较麻烦，使用functools模块提供的total_ordering装饰器就是可以简化代码<br>
+<strong><code>但是要求__eq__必须实现，其他方法__lt__，__le__，__gt__，__ge__,实现其一。</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="nd">@functools.total_ordering</span>
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span><span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">dachenzi</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;dachenzi&#39;</span><span class="p">,</span><span class="mi">66</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">==</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&lt;</span> <span class="n">dachenzi</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&gt;</span> <span class="n">dachenzi</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&gt;=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&lt;=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">!=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>虽然简化了很多代码，但是一般来说实现等于或者小于方法也就够了，其他的可以不实现，这个装饰器只是看着很美好，且可能会带来性能问题，建议需要用到什么方法就自己创建，少用这个装饰器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span><span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">dachenzi</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;dachenzi&#39;</span><span class="p">,</span><span class="mi">66</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">==</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&lt;</span> <span class="n">dachenzi</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&gt;</span> <span class="n">dachenzi</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&gt;=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">&lt;=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># False</span>
+<span class="k">print</span><span class="p">(</span><span class="n">daxin</span> <span class="o">!=</span> <span class="n">dachenzi</span><span class="p">)</span>   <span class="c1"># True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么这样写可以的呢？想一下:</p>
+<ol>
+<li>通过 __eq__ 就可以推断出 __ne__</li>
+<li>通过 __gt__ 就可以推断出 __lt__</li>
+<li>通过 __ge__ 就可以推断出 __le__</li>
+</ol>
+<p>仅仅添加了一个__ge__方法，就完成了需求，所以还是建议自己写吧。</p>
+<h2 id="37-容器相关方法-1">3.7 容器相关方法</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__len__</td>
+<td>内建函数len(),返回对象的长度(&gt;=0的整数)<br>如果把对象当作容器类型看，就如同list或者dict。在bool()函数调用的时候，如果对象没有__bool__()方法，就会看__len__()方法是否存在，返回非0时，表示真</td>
+</tr>
+<tr>
+<td>__iter__</td>
+<td>迭代容器时，调用，返回一个<code>新的迭代器对象</code>。</td>
+</tr>
+<tr>
+<td>__contains__</td>
+<td>in成员操作符，没有实现，就用__iter__犯法遍历。</td>
+</tr>
+<tr>
+<td>__getitem__</td>
+<td>实现self[key]方式的访问，对于list对象，key为index，对于dict来说，key为hashable，key不存在引发KeyError异常</td>
+</tr>
+<tr>
+<td>__setitem__</td>
+<td>和__getitem__的访问类似，是设置值时调用的方法。</td>
+</tr>
+<tr>
+<td>__missing__</td>
+<td>字典和其子类使用__getitm__()调用时，key不存在执行该方法。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Contain</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return  (item for item in self.items)  # 生成器是一个特殊的迭代器</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># 或者直接包装新的迭代器</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Contain</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Contain</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Contain</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">+</span> <span class="n">d</span> <span class="o">+</span> <span class="n">e</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="38-可调用对象-1">3.8 可调用对象</h2>
 <p>Python中一切皆对象,函数也不例外,函数名加上(),就表示调用函数对象的__call__方法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

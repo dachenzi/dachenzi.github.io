@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 docker的基本结构 docker的架构图如下： Client端 &ndash;&gt; docker client Hosts(Docker_Host,server端) &ndash;&gt; docker daemon Registries &ndash;&gt; docker registries do">
 <meta itemprop="datePublished" content="2016-08-21T06:03:55+00:00" />
 <meta itemprop="dateModified" content="2016-08-21T06:03:55+00:00" />
-<meta itemprop="wordCount" content="1468">
+<meta itemprop="wordCount" content="2971">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 1468 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span class="more-meta"> 约 2971 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -358,6 +358,32 @@
       <ul>
         <li><a href="#221-常用操作">2.2.1 常用操作</a></li>
         <li><a href="#222-其他">2.2.2 其他</a></li>
+      </ul>
+    </li>
+    <li><a href="#mathjax-true">title: 2-docker基本使用
+date: 2016-09-17 21:55:27
+lastmod: 2016-09-17 21:55:27
+draft: false
+tags: [Container,]
+categories: [Container,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11-server端-1">1.1 server端</a></li>
+    <li><a href="#12-仓库-1">1.2 仓库</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-配置文件-1">2.1 配置文件</a></li>
+    <li><a href="#22-主要命令-1">2.2 主要命令</a>
+      <ul>
+        <li><a href="#221-常用操作-1">2.2.1 常用操作</a></li>
+        <li><a href="#222-其他-1">2.2.2 其他</a></li>
       </ul>
     </li>
   </ul>
@@ -464,6 +490,129 @@
 <li>docker rm: 删除一个或多个容器</li>
 </ul>
 <h3 id="222-其他">2.2.2 其他</h3>
+<p>在容器中执行命令：</p>
+<ul>
+<li>docker exec -it ContainerName /bin/bash: 在容器内执行一个shell</li>
+</ul>
+<p>从其他仓库拉去镜像</p>
+<ul>
+<li>docker pull [仓库][端口(5000)]/[命名空间][镜像名]:[tag]</li>
+</ul>
+<p>进入一个docker镜像</p>
+<ul>
+<li>docker exec -it 容器名称 /bin/bash</li>
+</ul>
+<p>docker容器状态转换机制命令：
+图 docker event state</p>
+<hr>
+<h2 id="mathjax-true">title: 2-docker基本使用
+date: 2016-09-17 21:55:27
+lastmod: 2016-09-17 21:55:27
+draft: false
+tags: [Container,]
+categories: [Container,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-docker的基本结构-1">1 docker的基本结构</h1>
+<p>docker的架构图如下：
+<img src="../photo/docker.jpg" alt="docker"></p>
+<ul>
+<li>Client端  &ndash;&gt; docker client</li>
+<li>Hosts(Docker_Host,server端)  &ndash;&gt; docker daemon</li>
+<li>Registries  &ndash;&gt; docker registries</li>
+</ul>
+<p>        docker是一个采用C/S结构的应用程序。当我们运行docker daemon是，这台主机变成了Server端，它默认情况下通过监听socket来接受client端的请求，当然服务器端还支持其他两种类型套接字(IPv4，IPv6)，默认是unix socket套接字文件</p>
+<p>PS：docker client 到 docker Host 使用的是也是HTTPS（docker HOST 遵循Restful风格）</p>
+<p>docker中的资源和对象：（restful中的资源是可以支持增删改查的操作)</p>
+<ul>
+<li>images：镜像</li>
+<li>containers：容器</li>
+<li>networks：网络</li>
+<li>volumes：存储卷</li>
+<li>plugins：插件</li>
+</ul>
+<h2 id="11-server端-1">1.1 server端</h2>
+<p>        运行docker daemon的主机就变成了DOCKER_HOST主机,也就是server端，它内部主要包含两部分：</p>
+<ul>
+<li>Containers:容器</li>
+<li>Images:镜像，来自于registry，镜像仓库，默认为docker hub，初始化是空的从远端下载(HTTP,HTTPS),默认为HTTPS，除非明确确认安全。</li>
+</ul>
+<p>PS：镜像是静态的(文件)，容器是动态的，包含生命周期（类似进程）</p>
+<h2 id="12-仓库-1">1.2 仓库</h2>
+<p>        docker提供的公共存储空间叫做docker hub,默认情况下我们的server都是从它那来下载镜像的，但是docker称它为 registry,那么为什么不不叫repository，而叫registry呢，其实它还包含了如下功能</p>
+<ul>
+<li>镜像存储</li>
+<li>用户认证</li>
+<li>可用镜像的索引(搜索索引)</li>
+</ul>
+<p>        所以registry不仅仅是一个仓库，而是一个应用程序，包含多个仓库(repository)，一个仓库用于存放一个应用程序的镜像(一般仓库名就是应用程序名)，单个仓库加标签，唯一标示一个镜像(图)，如果没有执行标签，那么就是最新版,当然还有稳定版的标签(stable)指向对应的版本。</p>
+<h1 id="2-安装及使用docker-1">2 安装及使用docker</h1>
+<p>基础平台需求：</p>
+<ul>
+<li>64bits CPU</li>
+<li>Linux Kernel 3.10+</li>
+<li>Linux Kernel cgroups and namespaces</li>
+</ul>
+<p>这里使用Centos 7来安装，在centos 7的Extras repository源已经收录了docker-ce，所以只需要使用yum安装docker-ce即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install -y docker-ce
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="21-配置文件-1">2.1 配置文件</h2>
+<p>        docker默认配置文件是json格式的，位置为：<code>/etc/docker/daemon.json</code>,第一次启动前时不存在的，可以手动创建</p>
+<p>国内的主机访问dockerhub都很慢的，所以这里配置镜像站，来加速下载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">vim /etc/docker/daemon.json
+<span class="o">{</span>
+    <span class="s2">&#34;registry-mirrors:[&#34;</span>https://xxx.com<span class="s2">&#34;]&#34;</span>
+<span class="o">}</span>
+<span class="c1"># 阿里云的需要自己注册账号来获取专属的加速链接</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>启动docker: <code>systemctl start docker.service</code></p>
+<h2 id="22-主要命令-1">2.2 主要命令</h2>
+<p>docker的命令主要分两类：</p>
+<ul>
+<li>杂乱无章的(早期)</li>
+<li>分类管理(后期)</li>
+</ul>
+<h3 id="221-常用操作-1">2.2.1 常用操作</h3>
+<p>docker image 系列包含如下命令：</p>
+<ul>
+<li>docker search: 在docker Hub中搜索镜像(docker image search)</li>
+<li>docker pull: 从仓库中拉取镜像(下载到本地)(docker image pill)</li>
+<li>docker images: 显示本地images列表(docker image ls)</li>
+<li>docker rmi: 删除一个或多个镜像(docker image rm)</li>
+</ul>
+<p>docker container 系列命令包含如下命令</p>
+<ul>
+<li>docker create: 创建一个新的容器</li>
+<li>docker start: 启动一个容器</li>
+<li>docker run: 在一个新的容器中运行一个命令（创建并启动容器)</li>
+<li>docker attach:</li>
+<li>docker ps: 列出容器</li>
+<li>docker logs: 列出容器日志(输出到控制台的日志)</li>
+<li>docker restart: 重启容器</li>
+<li>docker stop: 停止一个或多个运行的容器</li>
+<li>docker kill: 杀掉一个或多个运行的容器</li>
+<li>docker rm: 删除一个或多个容器</li>
+</ul>
+<h3 id="222-其他-1">2.2.2 其他</h3>
 <p>在容器中执行命令：</p>
 <ul>
 <li>docker exec -it ContainerName /bin/bash: 在容器内执行一个shell</li>

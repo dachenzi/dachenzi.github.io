@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 什么是正则表达式 正则表达式RE（Regular Expression）是由一串字符和元字符构成的字符串。主要功能是文本查询和字符串操作，它可">
 <meta itemprop="datePublished" content="2016-07-01T00:55:02+00:00" />
 <meta itemprop="dateModified" content="2016-07-01T00:55:02+00:00" />
-<meta itemprop="wordCount" content="4879">
+<meta itemprop="wordCount" content="9782">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 4879 字 </span>
-          <span class="more-meta"> 预计阅读 10 分钟 </span>
+        <span class="more-meta"> 约 9782 字 </span>
+          <span class="more-meta"> 预计阅读 20 分钟 </span>
 
         
         
@@ -393,6 +393,67 @@
     <li><a href="#51取出ip地址信息">5.1取出IP地址信息</a>
       <ul>
         <li><a href="#52取出文件或目录的权限">5.2取出文件或目录的权限</a></li>
+      </ul>
+    </li>
+    <li><a href="#mathjax-true">title: LinuxRegExp
+date: 2018-03-08 00:35:19
+lastmod: 2018-03-08 00:35:19
+draft: false
+tags: [Os,]
+categories: [Os,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#11---正则表达式特点-1">1.1   正则表达式特点</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21---通配符和正则表达式的区别-1">2.1   通配符和正则表达式的区别</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31---号-1">3.1   *号</a></li>
+    <li><a href="#32---号-1">3.2   ?号</a></li>
+    <li><a href="#33---号-1">3.3   {}号</a></li>
+    <li><a href="#34---特殊符号-1">3.4   特殊符号</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41基础正则表达式bre-1">4.1基础正则表达式（BRE）</a>
+      <ul>
+        <li><a href="#411-word-1">4.1.1 ^word</a></li>
+        <li><a href="#412--word-1">4.1.2  word$</a></li>
+        <li><a href="#413---1">4.1.3  ^$</a></li>
+        <li><a href="#414---1">4.1.4  .</a></li>
+        <li><a href="#415--1">4.1.5 \</a></li>
+        <li><a href="#416--1">4.1.6 *</a></li>
+        <li><a href="#417--1">4.1.7 .*</a></li>
+        <li><a href="#418-abc-1">4.1.8 [abc]</a></li>
+        <li><a href="#419--abc-1">4.1.9  [^abc]</a></li>
+        <li><a href="#4110--anm-1">4.1.10  a{n,m}</a></li>
+        <li><a href="#4111--an-1">4.1.11  a{n,}</a></li>
+        <li><a href="#4113--am-1">4.1.13  a{,m}</a></li>
+      </ul>
+    </li>
+    <li><a href="#42-扩展正则表达式ere-1">4.2 扩展正则表达式（ERE）</a>
+      <ul>
+        <li><a href="#421--1">4.2.1 +</a></li>
+        <li><a href="#422--1">4.2.2 ？</a></li>
+        <li><a href="#423--1">4.2.3 |</a></li>
+        <li><a href="#424--1">4.2.4 ()</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#51取出ip地址信息-1">5.1取出IP地址信息</a>
+      <ul>
+        <li><a href="#52取出文件或目录的权限-1">5.2取出文件或目录的权限</a></li>
       </ul>
     </li>
   </ul>
@@ -1409,6 +1470,1090 @@ ip addr show eth0<span class="p">|</span> awk -F <span class="s1">&#39;[ /]+&#39
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="52取出文件或目录的权限">5.2取出文件或目录的权限</h3>
+<p>        当命令结果包含我们需要的内容的时候，我们要想到命令的参数是否有具有的参数能够一步达到我们需要的结果呢？通常在manual中会记录，这时可以使用man command查寻。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># stat daxin.txt      </span>
+File: <span class="sb">`</span>daxin.txt<span class="s1">&#39;
+</span><span class="s1">Size: 261             Blocks: 8          IO Block: 4096   regular file
+</span><span class="s1">Device: 803h/2051d      Inode: 25401       Links: 1
+</span><span class="s1">Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+</span><span class="s1">Access: 2016-03-21 14:47:16.710194978 +0800
+</span><span class="s1">Modify: 2016-03-21 14:47:15.268186883 +0800
+</span><span class="s1">Change: 2016-03-21 14:47:15.281186631 +0800
+</span><span class="s1">[root@lixin ~]#                   //测试文本
+</span><span class="s1">
+</span><span class="s1"># 方法一：使用stat内置参数-c，配合%a来用数字显示文件的权限信息（最佳）
+</span><span class="s1">[root@lixin ~]# stat -c %a daxin.txt
+</span><span class="s1">644
+</span><span class="s1">[root@lixin ~]#
+</span><span class="s1">
+</span><span class="s1"># 方法二：利用awk指定多分隔符，去目标项左右两边的字符为分隔符
+</span><span class="s1">[root@lixin ~]# stat daxin.txt | awk -F &#39;</span><span class="o">[</span>0/<span class="o">]</span><span class="s1">&#39; &#39;</span><span class="nv">NR</span><span class="o">==</span><span class="m">4</span> <span class="o">{</span>print <span class="nv">$2</span><span class="o">}</span><span class="s1">&#39;
+</span><span class="s1">644
+</span><span class="s1">[root@lixin ~]#
+</span><span class="s1">
+</span><span class="s1"># 方法三：利用sed的后向引用
+</span><span class="s1">[root@lixin ~]# stat daxin.txt | sed -nr &#39;</span>4s#^A.*<span class="se">\(</span>0<span class="o">(</span>.*<span class="o">)</span>/-.*<span class="nv">$#</span><span class="se">\1</span><span class="c1">#gp&#39;</span>
+<span class="m">644</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法四：使用ls –l列出字母方式权限，替换成数字，相加完成（比较low，但思路特别）</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls -l daxin.txt | awk &#39;{print $1}&#39;|cut -c 2- | tr &#34;rwx-&#34; &#34;4210&#34; | awk -F &#34;&#34; &#39;{print $1+$2+$3$4+$5+$6$7+$8+$9}&#39;</span>
+<span class="m">644</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: LinuxRegExp
+date: 2018-03-08 00:35:19
+lastmod: 2018-03-08 00:35:19
+draft: false
+tags: [Os,]
+categories: [Os,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-什么是正则表达式-1">1 什么是正则表达式</h1>
+<p>        正则表达式RE（Regular Expression）是由一串字符和元字符构成的字符串。主要功能是文本查询和字符串操作，它可以匹配文本的一个字符或字符集合。实际上正则表达式完成了数据的过滤，将不满足正则表达式定义的数据拒绝掉，剩下与正则表达式匹配的数据。<br>
+        <strong>简单的说，正则表达式就是为处理大量的字符串而定义的一套规则和方法。</strong></p>
+<h2 id="11---正则表达式特点-1">1.1   正则表达式特点</h2>
+<p>        正则表达式应用非常广泛，存在于各种语言中，例如：php、python、java等。Linux系统运维工作中的正则表达式，叫做Liunx正则表达式，它与其他语言中的正则表达式有一些不同，在Linux中最常应用正则表达式的是grep（egrep），sed，awk。<br>
+        <strong>正则表达式和我们常用的通配符特殊字符是有本质区别的。注意设置字符集 LC_ALL=C其作用是为了去除所有本地化的设置，让命令能正确执行。</strong></p>
+<h1 id="2--什么是通配符-1">2  什么是通配符</h1>
+<p>        通配符是一种特殊语句，主要有星号(*)和问号(?)，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符。当不知道真正字符或者懒得输入完整名字时，常常使用通配符代替一个或多个真正的字符。</p>
+<h2 id="21---通配符和正则表达式的区别-1">2.1   通配符和正则表达式的区别</h2>
+<p>        通配符一般用于命令行bash环境，用于匹配文件的名称而linux正则表达式一般用于awk、grep（egrep）、sed环境用于匹配字符串。</p>
+<h1 id="3--通配符的含义-1">3  通配符的含义</h1>
+<h2 id="31---号-1">3.1   *号</h2>
+<p>表示任意位任意字符，通常用来匹配任意文件名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls</span>
+<span class="m">1</span>   123.txt      1.txt  <span class="m">4</span>           persion.txt
+<span class="m">12</span>  123.txt.bak  <span class="m">3</span>      daxin.txt  sshd_config
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls *.txt</span>
+123.txt  1.txt  daxin.txt  persion.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32---号-1">3.2   ?号</h2>
+<p>？号表示任意一个字符，多个？号可以叠加连用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls ?.txt       # ？代表一个字符</span>
+1.txt  2.txt  3.txt  4.txt  5.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls ??.txt     # ？？代表两个字符</span>
+10.txt  11.txt  12.txt  13.txt  14.txt  15.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33---号-1">3.3   {}号</h2>
+<p>{}表示一个命令的区块组合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls {1,2}.txt  # 表示ls 1.txt 和2.txt的组合</span>
+1.txt  2.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls {1..5}.txt   # 两个点表示1到5</span>
+1.txt  2.txt  3.txt  4.txt  5.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34---特殊符号-1">3.4   特殊符号</h2>
+<p><strong>；号表示两个命令的分隔。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls 1.txt</span>
+1.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls 2.txt</span>
+2.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls 1.txt;ls 2.txt</span>
+1.txt
+2.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1">#号表示注释，常用在配置文件中注释掉一些内容，比如一些提示信息。</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># head -5 /etc/inittab</span>
+<span class="c1"># inittab is only used by upstart for the default runlevel.</span>
+<span class="c1">#</span>
+<span class="c1"># ADDING OTHER CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span>
+<span class="c1">#</span>
+<span class="c1"># System initialization is started by /etc/init/rcS.conf</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>|管道符，用于把管道符前面的数据传递给管道符后面的命令。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls -l</span>
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:57 10.txt
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:57 11.txt
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:57 12.txt
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:56 3.txt
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:56 4.txt
+-rw-r--r-- <span class="m">1</span> root root    <span class="m">0</span> Mar <span class="m">21</span> 12:56 5.txt
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Mar <span class="m">21</span> 13:08 lixin
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls -l | grep &#39;^d&#39;</span>
+drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Mar <span class="m">21</span> 13:08 lixin
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>~号表示当前用户的家目录，不管在在任何路径下使用cd ~都可以回到用户的家目录（cd后面什么也不加默认就是回到用户的家目录），同时也可以指定进入某个用户的家目录下。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin sysconfig<span class="o">]</span><span class="c1"># pwd</span>
+/etc/sysconfig
+<span class="o">[</span>root@lixin sysconfig<span class="o">]</span><span class="c1"># cd     # 回到用户家目录</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># pwd</span>
+/root
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls /home</span>
+admins  lixin  daxin  dachenzi  tmpdir  tmpdir1
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cd ~daxin     #进入到daxin用户的家目录下</span>
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># pwd</span>
+/home/daxin
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>-号表示上一次切换前的路径，同时由OLDPWD这个变量记录。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># pwd</span>
+/home/daxin
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># cd /etc/sysconfig</span>
+<span class="o">[</span>root@lixin sysconfig<span class="o">]</span><span class="c1"># pwd</span>
+/etc/sysconfig
+<span class="o">[</span>root@lixin sysconfig<span class="o">]</span><span class="c1"># cd -</span>
+/home/daxin
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># echo $OLDPWD    # -调用的就是OLDPWD变量的值</span>
+/etc/sysconfig
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>$号，表示引用一个变量的值。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># echo $OLDPWD    # 记录上一次切换目录的变量</span>
+/etc/sysconfig
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># echo $LANG             # 记录字符集的变量</span>
+en_US.UTF-8
+<span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1">#     </span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>/号，路径的分隔符，同时也表示根目录</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin daxin<span class="o">]</span><span class="c1"># cd /etc/sysconfig</span>
+<span class="o">[</span>root@lixin sysconfig<span class="o">]</span><span class="c1"># ls -l /</span>
+total <span class="m">110</span>
+drwxr-xr-x   <span class="m">3</span> root root  <span class="m">4096</span> Mar <span class="m">15</span> 12:32 app
+dr-xr-xr-x.  <span class="m">2</span> root root  <span class="m">4096</span> Mar <span class="m">13</span> 01:51 bin
+dr-xr-xr-x.  <span class="m">5</span> root root  <span class="m">1024</span> Mar  <span class="m">3</span> 23:29 boot
+drwxr-xr-x  <span class="m">17</span> root root  <span class="m">3640</span> Mar <span class="m">21</span> 11:58 dev
+drwxr-xr-x. <span class="m">91</span> root root  <span class="m">4096</span> Mar <span class="m">21</span> 11:58 etc
+drwxr-xr-x   <span class="m">2</span> root root  <span class="m">4096</span> Mar <span class="m">19</span> 01:57 etiantian
+drwxr-xr-x.  <span class="m">8</span> root root  <span class="m">4096</span> Mar <span class="m">19</span> 20:02 home
+dr-xr-xr-x. <span class="m">12</span> root root  <span class="m">4096</span> Mar  <span class="m">4</span> 17:17 lib
+dr-xr-xr-x.  <span class="m">9</span> root root <span class="m">12288</span> Mar  <span class="m">4</span> 17:17 lib64
+……
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&gt;号表示输出重定向，在重定向到文件中的时候会覆盖文件的内容</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat 1.txt</span>
+I am studying Linux
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo I love you &gt; 1.txt</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat 1.txt</span>
+I love you                                      <span class="c1"># 已经覆盖</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&gt;&gt;号表示追加输出重定向，在重定向到文件中的时候不会覆盖文件的内容，只会在末尾追加。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat 1.txt</span>
+I love you
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo I am studying Linux &gt;&gt; 1.txt</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat 1.txt</span>
+I love you
+I am studying Linux                    <span class="c1"># 没有覆盖</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&lt;号表示输入重定向，将原本应该由键盘输入的数据经由文件读入。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat &lt; 1.txt</span>
+I love you
+I am studying Linux
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&laquo;号表示追加输入重定向。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat &gt;&gt; 2.txt &lt;&lt; EOF   //</span>
+&gt; I am a good boy
+&gt; EOF
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat 2.txt</span>
+I am a good boy
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&lsquo;&lsquo;号（单引号）表示不解释引号中的内容，所见即所得。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo &#39;$PATH&#39;</span>
+<span class="nv">$PATH</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo $PATH</span>
+/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>&ldquo;&ldquo;号（双引号）表示如果引号中有变量则解释变量的内容。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo &#39;$PATH&#39;</span>
+<span class="nv">$PATH</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># echo &#34;$PATH&#34;</span>
+/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>··号（反引号）一般用来解释引号中的命令的。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># touch xiaoming_`date +%F`.txt # 表示引用date +%F的值，可以用$()表示引用</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls</span>
+xiaoming_2016-03-21.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+<span class="sb">``</span>
+__！号表示逻辑上的“非“。__
+<span class="sb">```</span>bash
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># find . -type f               </span>
+./.lesshst
+./.tcshrc
+./4.txt
+./.bash_profile
+./.cshrc
+./.bash_history
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># find . -type f ! -name &#39;.*&#39;</span>
+./1.txt
+./5.txt
+./3.txt
+./2.txt
+./4.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         # 显示出文件名是非.开头的目录</span>
+<span class="c1"># &amp;&amp; 号表示并且的意思，两边条件同时满足，当前一个命令执行成功时，执行后一个命令。（类似于and）</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># mkdir lixin &amp;&amp; touch lixin/xiaoming</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls -l lixin/xiaoming</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">0</span> Mar <span class="m">21</span> 13:39 lixin/xiaoming
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         # 表示lixin这个目录创建成功，我才会去新建一个xiaoming文件</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>||号表示或者的意思，当前一个命令执行失败时，执行后一个命令。类似于（or）</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls</span>
+1.txt  2.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls 1.txt || ls 2.txt</span>
+1.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># rm 1.txt</span>
+rm: remove regular empty file <span class="sb">`</span>1.txt<span class="sb">`</span>? y
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls 1.txt || ls 2.txt</span>
+ls: cannot access 1.txt: No such file or directory
+2.txt
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#     # 表示目录下有1.txt则查看，若没有1.txt则执行ls 2.txt</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>.号表示当前目录，..号表示上一级目录。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># pwd</span>
+/root
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cd .</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># pwd</span>
+/root
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cd ..</span>
+<span class="o">[</span>root@lixin /<span class="o">]</span><span class="c1"># pwd</span>
+/
+<span class="o">[</span>root@lixin /<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4--正则表达式含义-1">4  正则表达式含义</h1>
+<p>        Linux中正则表达式分为基础正则表达式（Basic Regular Expression）和扩展正则表达式(Extended Regular Experssion)。</p>
+<h2 id="41基础正则表达式bre-1">4.1基础正则表达式（BRE）</h2>
+<p>下面以grep为实例，使用grep的—color=auto参数把匹配到的字符以红色显示便于观察。
+测试文本为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">I</span> <span class="nx">am</span> <span class="nx">daxin</span> <span class="nx">teacher</span><span class="o">!</span>
+<span class="nx">I</span> <span class="nx">teach</span> <span class="nx">linux</span><span class="p">.</span>
+
+<span class="nx">I</span> <span class="nx">like</span> <span class="nx">badminton</span> <span class="nx">ball</span> <span class="p">,</span><span class="nx">billiard</span> <span class="nx">ball</span> <span class="nx">and</span> <span class="nx">chinese</span> <span class="nx">chess</span><span class="o">!</span>
+<span class="nx">my</span> <span class="nx">blog</span> <span class="nx">is</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//daxin.blog.51cto.com
+</span><span class="c1"></span><span class="nx">our</span> <span class="nx">site</span> <span class="nx">is</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//www.etiantian.org
+</span><span class="c1"></span><span class="nx">my</span> <span class="nx">qq</span> <span class="nx">num</span> <span class="nx">is</span> <span class="mf">49000448.</span>
+
+<span class="nx">not</span> <span class="mf">4900000448.</span>
+<span class="nx">my</span> <span class="nx">god</span> <span class="p">,</span><span class="nx">i</span> <span class="nx">am</span> <span class="nx">not</span> <span class="nx">dachenzi</span><span class="p">,</span><span class="nx">but</span> <span class="nx">daxin</span><span class="o">!</span>
+<span class="nx">gd</span>
+<span class="nx">good</span>
+<span class="nx">gooood</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="411-word-1">4.1.1 ^word</h3>
+<p>匹配以word开头的内容。vi/vim 里面^代表一行的开头。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -i &#39;^i&#39; daxin.txt </span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#                   # grep –I 表示忽略大小写</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="412--word-1">4.1.2  word$</h3>
+<p>word$ 匹配以word结尾的内容，vim/vi里面$代表一行的末尾。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -i &#39;m$&#39; daxin.txt</span>
+my blog is http://daxin.blog.51cto.com
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="413---1">4.1.3  ^$</h3>
+<p>^$表示以结尾为开头，以开头为结尾，表示空行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -n &#39;^$&#39; daxin.txt</span>
+3:
+8:
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         # -n表示匹配到的行添加行号，为了显示去匹配到了空行</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="414---1">4.1.4  .</h3>
+<p>.表示代表任意一个字符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;o.d&#39; daxin.txt</span>
+I am daxin teacher!
+my blog is http://daxin.blog.51cto.com
+my god ,i am not dachenzi,but daxin!
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="415--1">4.1.5 \</h3>
+<p>\表示转意符号，在正则里面加入我们真的要使用.这个符号，由于它有特别的意义，需要使用\号，让它脱掉马甲，还原真意。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;.$&#39; daxin.txt </span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+my qq num is 49000448.
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+gd
+good                  //不转意的话，由于.表示任意字符，所以都能匹配到
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;\.$&#39; daxin.txt</span>
+I teach linux.
+my qq num is 49000448.
+not 4900000448.
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#  //转意之后只能匹配.结尾</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="416--1">4.1.6 *</h3>
+<p>*号，表示前面的字符0次或多次出现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;go*d&#39; daxin.txt</span>
+my god ,i am not dachenzi,but daxin!
+gd
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#  //可以匹配到0次o，或者多次o</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="417--1">4.1.7 .*</h3>
+<p>.*号，为组合符号，.表示匹配任意字符，*表示前面的字符0次或多次出现，加在一起一般会匹配所有，Linux中一般成它们的组合为贪婪匹配。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -n &#39;.*&#39; daxin.txt</span>
+1:I am daxin teacher!
+2:I teach linux.
+3:
+4:I like badminton ball ,billiard ball and chinese chess!
+5:my blog is http://daxin.blog.51cto.com
+6:our site is http://www.etiantian.org
+7:my qq num is 49000448.
+8:
+9:not 4900000448.
+10:my god ,i am not dachenzi,but daxin!
+11:gd
+12:good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         //贪婪匹配，所以连空行也能匹配到</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="418-abc-1">4.1.8 [abc]</h3>
+<p>[abc]表示匹配括号内任意的一个内容，也可以写为[0-9]，表示任意的数字。[a-z]表示任意的小写字母，[A-Z]表示任意的大写字母。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;[abc]&#39; daxin.txt</span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+my god ,i am not dachenzi,but daxin!            <span class="c1"># 仅仅匹配到了abc</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;[0-9]&#39; daxin.txt     </span>
+my blog is http://daxin.blog.51cto.com
+my qq num is 49000448.
+not 4900000448.                        <span class="c1"># 匹配到了数字</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;[a-z]&#39; daxin.txt   </span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+my qq num is 49000448.
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+gd
+good                                    <span class="c1"># 匹配到所有小写字母</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="419--abc-1">4.1.9  [^abc]</h3>
+<p>[^abc]表示匹配非abc的字符，^放在[]里面表示非。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;[^0-9]&#39; daxin.txt</span>
+I am daxin teacher!
+I teach linux.
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+my qq num is 49000448.
+not 4900000448.
+gd
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4110--anm-1">4.1.10  a{n,m}</h3>
+<p>a{n,m}表示括号外的a重复至少n次，最多m次，因为使用了扩展正则表达式的{}的符号，所以要用转意符号。如果是grep的话可以使用grep –E（egrep）来支持扩展正则表达式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;b\{1,2\}&#39; daxin.txt </span>
+I am daxin teacher!
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+my god ,i am not dachenzi,but daxin!
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;b{1,2}&#39; daxin.txt</span>
+I am daxin teacher!
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+my god ,i am not dachenzi,but daxin!
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#    # grep –E==egrep，表示b匹配最少出现1次，最多出现2次。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4111--an-1">4.1.11  a{n,}</h3>
+<p>a{n,}表示括号外的内容最少出现n次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;o{2,}&#39; daxin.txt </span>
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>4.1.12  a{n}
+a{n}表示重复前面的字符a等于n次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;o{1}&#39; daxin.txt</span>
+I am daxin teacher!
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+good  //匹配了两次，不是一次匹配了2个。
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4113--am-1">4.1.13  a{,m}</h3>
+<p>a{,m}表示匹配前面的字符a最多m次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;0{,3}&#39; daxin.txt  </span>
+I am daxin teacher!
+I teach linux.
+
+I like badminton ball ,billiard ball and chinese chess!
+my blog is http://daxin.blog.51cto.com
+our site is http://www.etiantian.org
+my qq num is 49000448.
+
+not 4900000448.
+my god ,i am not dachenzi,but daxin!
+gd
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-扩展正则表达式ere-1">4.2 扩展正则表达式（ERE）</h2>
+<h3 id="421--1">4.2.1 +</h3>
+<p>+号，表示前面的字符1次或多次出现，注意和*区分开，*表示的是0次或多次出现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;go+d&#39; daxin.txt</span>
+my god ,i am not dachenzi,but daxin!
+good
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#     //表示g和d之前的后出现1次以上</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="422--1">4.2.2 ？</h3>
+<p>?表示重复前面的字符0次或1次。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;go?d&#39; daxin.txt </span>
+my god ,i am not dachenzi,but daxin!
+gd
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#  //表示g和d之间的o出现o次或1次</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="423--1">4.2.3 |</h3>
+<p>|表示或，用于同时查找多个字符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;daxin|dachenzi&#39; daxin.txt</span>
+I am daxin teacher!
+my blog is http://daxin.blog.51cto.com
+my god ,i am not dachenzi,but daxin!
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         //表示匹配daxin或dachenzi的列</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="424--1">4.2.4 ()</h3>
+<p>()表示用户组，括号中的内用以组的形式出现。但是在sed中一般用来表示后巷引用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep -E &#39;g(oo)d&#39; daxin.txt</span>
+good       
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#                 //只匹配g和d之间是oo的列</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="5-扩展实例-1">5 扩展实例</h1>
+<h2 id="51取出ip地址信息-1">5.1取出IP地址信息</h2>
+<p>        思路：一般用^.<em>表示目标项前面的部分，^表示开头，后面写上目标项前面的字母。目标项后面的字符用.</em>$表示，$表示结尾，前面写上目标项后面的字母即可。使用grep、awk、sed命令或搭配其他命令取出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0</span>
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:E4:83:06 
+   inet addr:10.0.0.8  Bcast:10.0.0.255  Mask:255.255.255.0
+   inet6 addr: fe80::20c:29ff:fee4:8306/64 Scope:Link
+   UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+   RX packets:1993 errors:0 dropped:0 overruns:0 frame:0
+   TX packets:960 errors:0 dropped:0 overruns:0 carrier:0
+   collisions:0 txqueuelen:1000
+   RX bytes:172487 <span class="o">(</span>168.4 KiB<span class="o">)</span>  TX bytes:107575 <span class="o">(</span>105.0 KiB<span class="o">)</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#                   //测试文本</span>
+
+<span class="c1"># 方法一：使用sed后项引用方式，先把IP用（）匹配到，然后再引用</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | sed -nr &#39;2s#^.*r:(.*).?B.*$#\1#gp&#39;</span>
+10.0.0.8 
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法二：利用awk多分隔符的方式，最好取目标项左右两边的字符为分隔符 (最佳)</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | awk -F &#34;[ :]+&#34; &#39;NR==2 {print $4}&#39;</span>
+10.0.0.8
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法三：利用grep过滤出目标行，使用cut数字符（比较low的方法）</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | grep &#39;inet addr&#39; | cut -c 21-28</span>
+10.0.0.8
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法四：由于cut只能识别一个分隔符，所以我们利用tr把多分隔符转换成一个进行分割</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | sed -n 2p | tr &#39;:&#39; &#39; &#39;|cut -d &#34; &#34; -f13</span>
+10.0.0.8                
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法五：利用awk过滤关键行，利用sed把目标项之前的项，替换成空</span>
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ifconfig eth0 | awk &#39;/inet addr/&#39;&#39;{print $2}&#39; | sed &#39;s#^a.*:##g&#39;</span>
+10.0.0.8
+<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
+
+<span class="c1"># 方法六：使用ip命令查看网卡IP地址，然后awk多分隔符取出IP地址</span>
+ip addr show eth0<span class="p">|</span> awk -F <span class="s1">&#39;[ /]+&#39;</span> <span class="s1">&#39;NR==3{print $3}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="52取出文件或目录的权限-1">5.2取出文件或目录的权限</h3>
 <p>        当命令结果包含我们需要的内容的时候，我们要想到命令的参数是否有具有的参数能够一步达到我们需要的结果呢？通常在manual中会记录，这时可以使用man command查寻。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

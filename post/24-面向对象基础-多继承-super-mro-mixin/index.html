@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 类的继承 2 不同版本的类 3 基本概念 4 特殊属性和方法 5 继承中的访问控制 6 方法的重写(override) 6.1 super 6.2 继承中的初始化 7 多继承 7.1 多">
 <meta itemprop="datePublished" content="2019-03-03T11:49:16+00:00" />
 <meta itemprop="dateModified" content="2019-03-03T11:49:16+00:00" />
-<meta itemprop="wordCount" content="6420">
+<meta itemprop="wordCount" content="12912">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 6420 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        <span class="more-meta"> 约 12912 字 </span>
+          <span class="more-meta"> 预计阅读 26 分钟 </span>
 
         
         
@@ -360,6 +360,34 @@
       <ul>
         <li><a href="#741-利用装饰器新增功能">7.4.1 利用装饰器新增功能</a></li>
         <li><a href="#742-mixin类">7.4.2 Mixin类</a></li>
+      </ul>
+    </li>
+    <li><a href="#mathjax-true">title: 24-面向对象基础-多继承-super-mro-Mixin
+date: 2017-06-07 03:33:32
+lastmod: 2017-06-07 03:33:32
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#61-super-1">6.1 super</a></li>
+    <li><a href="#62-继承中的初始化-1">6.2 继承中的初始化</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#71-多继承弊端-1">7.1 多继承弊端</a></li>
+    <li><a href="#72-mro-1">7.2 MRO</a></li>
+    <li><a href="#73-多继承的建议-1">7.3 多继承的建议</a></li>
+    <li><a href="#74-mixin-1">7.4 Mixin</a>
+      <ul>
+        <li><a href="#741-利用装饰器新增功能-1">7.4.1 利用装饰器新增功能</a></li>
+        <li><a href="#742-mixin类-1">7.4.2 Mixin类</a></li>
       </ul>
     </li>
   </ul>
@@ -1221,6 +1249,1010 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="742-mixin类">7.4.2 Mixin类</h3>
+<p>先来看代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">TalkMixin</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say I Love You too&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">TalkMan</span><span class="p">(</span><span class="n">TalkMixin</span><span class="p">,</span> <span class="n">Human</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">TalkMan</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>PS: 感觉就是写了一个类给别人继承了？</p>
+<p>        Mixin体现的就是一种<code>组合的设计模式</code>，本质上就是多继承实现的。核心思想就是把其它类混合进来，同时带来了类的属性和方法。这里的Mixin看起来和装饰器的效果是一样的，也没什么特别的，但是Mixin是类，它可以继承。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">TalkMixin</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say I Love You&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">SingMixin</span><span class="p">(</span><span class="n">TalkMixin</span><span class="p">):</span>  <span class="c1"># 通过继承来添加新的功能</span>
+    <span class="k">def</span> <span class="nf">sing_a_song</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} want sing a song&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Go out,Now&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">TalkMan</span><span class="p">(</span><span class="n">TalkMixin</span><span class="p">,</span> <span class="n">Human</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">SingMan</span><span class="p">(</span><span class="n">SingMixin</span><span class="p">,</span><span class="n">Human</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">SingMan</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">sing_a_song</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用原则:</p>
+<ol>
+<li>Mixin类中不应该显示的出现__init__初始化方法</li>
+<li>Mixin类通常不能独立工作，因为它是准备混入别的类中的部分功能实现</li>
+<li>Mixin类的祖先类也应该是Mixin类</li>
+<li><strong><code>使用时Mixin类通常在继承列表的第一个位置</code></strong>。</li>
+</ol>
+<p>小结：</p>
+<ol>
+<li>在面向对象的设计中，一个复杂的类，往往需要很多功能，而这些功能又来自于不同类的提供，这就需要很多的类组合在一起。</li>
+<li>从设计模式的角度来看，多组合，少继承。</li>
+<li>Mixin和装饰器都可以使用，看个人喜好，如果还需要继承，就是用Mixin的方式。</li>
+</ol>
+<hr>
+<h2 id="mathjax-true">title: 24-面向对象基础-多继承-super-mro-Mixin
+date: 2017-06-07 03:33:32
+lastmod: 2017-06-07 03:33:32
+draft: false
+tags: [Python基础,]
+categories: [Python基础,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF">1 类的继承</a></li>
+<li><a href="#2-%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84%E7%B1%BB">2 不同版本的类</a></li>
+<li><a href="#3-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">3 基本概念</a></li>
+<li><a href="#4-%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95">4 特殊属性和方法</a></li>
+<li><a href="#5-%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6">5 继承中的访问控制</a></li>
+<li><a href="#6-%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99override">6 方法的重写(override)</a>
+<ul>
+<li><a href="#61-super">6.1 super</a></li>
+<li><a href="#62-%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96">6.2 继承中的初始化</a></li>
+</ul>
+</li>
+<li><a href="#7-%E5%A4%9A%E7%BB%A7%E6%89%BF">7 多继承</a>
+<ul>
+<li><a href="#71-%E5%A4%9A%E7%BB%A7%E6%89%BF%E5%BC%8A%E7%AB%AF">7.1 多继承弊端</a></li>
+<li><a href="#72-mro">7.2 MRO</a></li>
+<li><a href="#73-%E5%A4%9A%E7%BB%A7%E6%89%BF%E7%9A%84%E5%BB%BA%E8%AE%AE">7.3 多继承的建议</a></li>
+<li><a href="#74-mixin">7.4 Mixin</a>
+<ul>
+<li><a href="#741-%E5%88%A9%E7%94%A8%E8%A3%85%E9%A5%B0%E5%99%A8%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD">7.4.1 利用装饰器新增功能</a></li>
+<li><a href="#742-mixin%E7%B1%BB">7.4.2 Mixin类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-类的继承-1">1 类的继承</h1>
+<p>        继承是面向对象的重要特性之一，是相对两个类而言的父子关系，子类继承了父类的所有的属性和方法，继承最大的好处是实现了代码的重用，可以重用已经存在的数据和行为，减少代码的重复编写。</p>
+<h1 id="2-不同版本的类-1">2 不同版本的类</h1>
+<p>        在Python2.2之前，类是没有共同的祖先的，之后，引入了object类，它是所有类的共同祖先类。Python2中为了兼容，分为古典类(旧式类)和新式类。而在Python 3中全部都为新式类，新式类都是继承object类的，并且可以使用super函数(后面会说)。下面是Python2.x中的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>  <span class="c1"># 查看类的__dict__</span>
+<span class="p">[</span><span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在Python2.x中 A和B是不同的两个类。A没有继承，被称为古典类，B继承自object，被称为新式类。不止少了很多方法，连实例对象的属性也是不太相同的。Python 3中的代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+ 
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init_subclass__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">,</span> <span class="s1">&#39;__delattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dict__&#39;</span><span class="p">,</span> <span class="s1">&#39;__dir__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__eq__&#39;</span><span class="p">,</span> <span class="s1">&#39;__format__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ge__&#39;</span><span class="p">,</span> <span class="s1">&#39;__getattribute__&#39;</span><span class="p">,</span> <span class="s1">&#39;__gt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__hash__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;__init_subclass__&#39;</span><span class="p">,</span> <span class="s1">&#39;__le__&#39;</span><span class="p">,</span> <span class="s1">&#39;__lt__&#39;</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">,</span> <span class="s1">&#39;__ne__&#39;</span><span class="p">,</span> <span class="s1">&#39;__new__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce__&#39;</span><span class="p">,</span> <span class="s1">&#39;__reduce_ex__&#39;</span><span class="p">,</span> <span class="s1">&#39;__repr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__setattr__&#39;</span><span class="p">,</span> <span class="s1">&#39;__sizeof__&#39;</span><span class="p">,</span> <span class="s1">&#39;__str__&#39;</span><span class="p">,</span> <span class="s1">&#39;__subclasshook__&#39;</span><span class="p">,</span> <span class="s1">&#39;__weakref__&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>在Python 3中，都为新式类，所以A和A(object)是两个结果相同的不同写法而已 <code>class A:pass  ==  class A(object):pass</code>。</p>
+<blockquote>
+<p>更多的区别这里就不在详述，Python 3是未来，忘记旧式类吧。</p>
+</blockquote>
+<h1 id="3-基本概念-1">3 基本概念</h1>
+<p>Python在类名后使用一对括号来表示继承关系，括号中的类即为父类。先来看看不用继承的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} shout&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} shout&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} shout&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+
+<span class="n">a</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从上面例子来看，虽然猫狗动物都可以叫，但是却分别实现了叫这个动作，那么下一步使用继承来优化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} shout&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+
+<span class="n">a</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过继承，猫类、狗类就不用写代码，直接继承了父类Animal类的叫方法了。所以，在上面的例子中：</p>
+<ul>
+<li>父类：Animal是Cat和Dog的父类，也成为基类、超类</li>
+<li>子类：Cat和Dog是Animal的子类，也成为派生类</li>
+</ul>
+<h1 id="4-特殊属性和方法-1">4 特殊属性和方法</h1>
+<p>和继承相关的常用特殊属性和方法如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特殊属性和方法</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>__base__</code></td>
+<td style="text-align:left">类的基类</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>__bases__</code></td>
+<td style="text-align:left">类的基类们(元组)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>__mro__</code></td>
+<td style="text-align:left">方法解析顺序(基类们的元组)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>mro()</code></td>
+<td style="text-align:left">方法解析顺序(基类们的列表)</td>
+<td style="text-align:left">int.mro()</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>__subclasses__()</code></td>
+<td style="text-align:left">类的子类列表</td>
+<td style="text-align:left"><code>int.__subclasses__()</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-继承中的访问控制-1">5 继承中的访问控制</h1>
+<p>通过一个例子来看继承中的访问控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="n">__COUNT</span> <span class="o">=</span> <span class="mi">100</span>   <span class="c1"># _Animal__COUNT = 100</span>
+    <span class="n">HEIGHT</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span><span class="n">weight</span><span class="p">,</span><span class="n">height</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__COUNT</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># self._Animal_COUNT = self._Animal_COUNT + 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__weight</span> <span class="o">=</span> <span class="n">weight</span>  <span class="c1"># self._Animal__weight = weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">HEIGHT</span> <span class="o">=</span> <span class="n">height</span>
+
+    <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} eat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__getweight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    <span class="c1"># def _Animal__getweight(self):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__weight</span><span class="p">)</span>  <span class="c1">#     print(self._Animal__weight)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">showcount1</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__COUNT</span><span class="p">)</span>    <span class="c1"># print(cls._Animal__COUNT)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">__showcount2</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>    <span class="c1"># def _Animal__showcount2(cls):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__COUNT</span><span class="p">)</span>    <span class="c1">#     print(cls._Animal__COUNT)</span>
+
+    <span class="k">def</span> <span class="nf">showcount3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__COUNT</span><span class="p">)</span>   <span class="c1"># print(self._Animal__COUNT)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="n">NAME</span> <span class="o">=</span> <span class="s1">&#39;CAT&#39;</span>
+    <span class="n">__COUNT</span> <span class="o">=</span> <span class="mi">200</span>   <span class="c1"># _Cat__Count = 200</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">eat</span><span class="p">()</span>          <span class="c1"># 1 </span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">HEIGHT</span><span class="p">)</span>  <span class="c1"># 2 </span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">__COUNT</span><span class="p">)</span> <span class="c1"># 3</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;c:&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;cat:&#39;</span><span class="p">,</span><span class="n">Cat</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal:&#39;</span><span class="p">,</span><span class="n">Animal</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">showcount1</span><span class="p">()</span>   <span class="c1"># 4</span>
+<span class="n">c</span><span class="o">.</span><span class="n">showcount2</span><span class="p">()</span>   <span class="c1"># 5</span>
+<span class="n">c</span><span class="o">.</span><span class="n">showcount3</span><span class="p">()</span>   <span class="c1"># 6</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">NAME</span><span class="p">)</span>    <span class="c1"># 7 </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：</p>
+<ol>
+<li>通过c调用eat方法，c没有eat方法，在类Cat中寻找，Cat中没有，在Cat的父类Animal中寻找，找到eat方法，把c绑定在eat上，执行是把c传入eat，在eat内部self是c，所以self.__class__就是Cat,所以会打印<code>'Cat eat'</code>。</li>
+<li>在查找属性时，优先在c.__dict__中寻找，因为c实例化时设置了HEIGHT属性，所以，这里是<code>15</code>。</li>
+<li>__COUNT是私有属性，定义完毕后会被改名，所以在外部访问时，会提示<code>没有该属性</code>。</li>
+<li>使用c调用类方法时，@classmethod会把c的类传入到cls中去，所以cls就是<code>Cat类</code>，cls.__dict__就是<code>Cat.__dict__</code>,而Cat中只定义两个属性，所以值为<code>{'__module__': '__main__', 'NAME': 'CAT', '_Cat__COUNT': 200, '__doc__': None}</code>(魔术方法先不考虑),类方法定义在哪个类中，那么私有变量就会被改成以那个类为前缀的变量名，所以showcount1方法定义在Animal中，__COUNT就变成了_Animal__COUNT。cls.__COUNT就是在寻找cls._Animal__COUNT属性，而Cat类中的__COUNT被改名为_Cat__COUNT,所以最后只能在Animal中找到，所以值为<code>100</code>。</li>
+<li>和私有属性相同，私有方法也会被改名为_类名__方法，所以直接从外部访问，会提示<code>没有该属性方法</code>。</li>
+<li>showcount3定义在Animal中，所以self.__COUNT实际上为self._Animal__COUNT，c在实例化的同时进行了初始化，Cat没了__init__函数，所以继承了父类Animal的__init__，在初始化过程中定义的self.__COUNT，实际上就是self._Animal__COUNT，这里self._Animal__COUNT = self._Animal__COUNT + 1，先算等式右边，在执行时c还没有_Animal__COUNT属性，所以会从Cat类开始找直到Animal类，Cat类的__COUNT改名为了_Cat__COUNT,不是我们想要的，然后找到了Animal的100，然后加1，再赋给实例c(等于c._Animal__COUNT = Animal._Animal__COUNT + 1)，所以实例c来说，它自己就已经拥有_Animal__COUNT属性，它的值为<code>101</code>。</li>
+</ol>
+<blockquote>
+<p>一般情况下不会这么写，这里只是练习知识点。分析这种情况时，直接把私有变量/方法改名后就非常好分析了。</p>
+</blockquote>
+<p>总结：</p>
+<ol>
+<li>从父类继承，自己没有的，就可以到父类中寻找。</li>
+<li>私有的都是不可以直接在外部进行访问的，但是本质上依然是改了名称后放在这个属性所在的类或实例的__dict__中，如果知道这个新名称，就可以直接找到这个隐藏的变量。不建议使用。</li>
+<li>继承时，公有的，子类和实例都可以随意访问；私有成员被吟唱，子类和实例不可直接访问，但私有变量所在的类内的方法可以直接访问这个私有变量。</li>
+<li>实例属性查找顺序：实例的__dict__ , 类的__dict__  , 父类的__dict__(如果有继承)。</li>
+</ol>
+<blockquote>
+<p><strong><code>遇到私有变量/方法看定义的位置，直接进行改名就比较好分析了。</code></strong></p>
+</blockquote>
+<h1 id="6-方法的重写override-1">6 方法的重写(override)</h1>
+<p>        方法重写，顾名思义就是重写继承来的方法，Python和其他语言不同的是，在Java中，要重写的方法，参数数量和类型要和原方法完全相同才行，否则会被认为是方法重载。Python由于其动态的语言的特性，只要方法相同，则表示的就是方法重写。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal shout&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;miaomiao&#39;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        上面的例子中，Cat继承了Animal类的shout方法，但是由于Animal中定义的shout不符合Cat的需求，所以在Cat中重写了shout方法，但是需要注意的是，重写不是覆盖，严格来说的话应该算是遮盖，因为Python的类查找顺序是按照当前实例-&gt;父类-&gt;基类等来的，所以当给Cat类定义shout方法后，实例调用方法shout时，父类中已经包含了shout方法，所以就直接调用了，而Animal中的shout依旧在，只是Cat的shout方法被预先发现了。</p>
+<p>        如果我们并不是要改写，而是要增强原方法的功能呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal shout&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># 需要手动传入self</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;miaomiao&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>通过查找父类然后传入实例调用，是可以的，但是不建议这样使用,在这种情况下,我们一般会使用<code>super</code>.</p>
+<h2 id="61-super-1">6.1 super</h2>
+<p>        <code>super</code>函数(类)是用于调用父类(超类)的一个方法的。主要的两种写法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">super</span><span class="p">()</span>   <span class="c1"># 指代父类</span>
+<span class="nb">super</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>  <span class="c1"># 同样指代父类，super接受两个参数，第一个是类型，第二个是实例对象。</span>
+
+<span class="nb">super</span><span class="p">()</span> <span class="o">==</span> <span class="nb">super</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>super(type, obj) 一般写为super(self.__class__, self) 按照上面Animal的例子的话，就为super(Cat, self)</p>
+</blockquote>
+<p>利用super完成增强方法的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal shout&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+        <span class="c1"># super().shout()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;miaomiao&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>静态方法和类方法都可以被覆盖，原理都相同，都是在属性字典__dict__中搜索。</p>
+</blockquote>
+<h2 id="62-继承中的初始化-1">6.2 继承中的初始化</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal shout&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> 
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;miaomiao&#39;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请问这种情况是可以执行吗？答案是不行的，因为Cat重写了__init__方法，所以在c实例化时，只能访问Cat类的__init__方法，所以，就需要显示的调用父类的__init__方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Animal shout&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>   <span class="c1"># 等于把实例和name变量，传递给Animal.__init__(self,name)</span>
+        <span class="c1"># super().__init__(name)    #  效果相同</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> 
+
+    <span class="k">def</span> <span class="nf">shout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;miaomiao&#39;</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">shout</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，如果有同名属性，那么后执行的会覆盖先执行的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">Cat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">age</span>     <span class="c1"># 覆盖父类初始化的name属性</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>另外在私有属性继承的情况下，请注意真正的变量名称(因为会改名)。</p>
+</blockquote>
+<h1 id="7-多继承-1">7 多继承</h1>
+<p>        一个类继承自多个类就是多继承，它将具有多个类的特征。面向对象的设计的开闭原则(实体应该对扩展开放，而对修改封闭)，就可以利用继承来设计，即多用&rsquo;继承'，少修改(并不是一般的多继承，后面会详述)。它的定义个数如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="o">...</span><span class="p">):</span><span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        Python中的继承关系，分为多继承和单继承，如图所示：
+<img src="photo/duojicheng.png" alt="duojicheng"></p>
+<h2 id="71-多继承弊端-1">7.1 多继承弊端</h2>
+<p>        多继承很好的模拟了世界，因为事物很少是单一继承，但是舍弃简单，必然引入复杂性，带来了冲突。举个简单的例子：如果一个孩子继承了来自父母双方的特称，那么到底眼睛像爸爸还是妈妈呢，孩子究竟像谁多一点呢？</p>
+<blockquote>
+<p>多继承的实现或导致编译器设计的复杂度增加，所以现在很多语言也舍弃了类的多继承。</p>
+</blockquote>
+<p>        C++支持多继承，而Java舍弃了多继承。有些人说Java支持的多继承的，其实他说的是接口，在Java中，一个类可以实现多个接口，一个接口也可以继承多个接口。Java的接口很纯粹，只是方法的生命，继承者必须实现这些方法，就具有了这些能力，就能干什么。<br>
+        多继承带来的问题，最主要的就是二义性，例如猫和狗都继承自动物类，现在如果一个类继承了猫和狗类，猫和狗都有shout方法，子类究竟继承谁的shout呢？</p>
+<blockquote>
+<p>实现多继承的语言，要解决二义性，主要有两种方法<code>深度优先</code>和<code>广度优先</code>。</p>
+</blockquote>
+<h2 id="72-mro-1">7.2 MRO</h2>
+<p>        MRO：方法解析顺序，Python使用MRO来解决多继承带来的二义性问题。因为Python 2.x的旧式类和新式类等历史原因(旧式类不会继承object对想)，MRO有三个搜索算法：</p>
+<ol>
+<li>经典算法(2.2之前)：按照定义从左至右，深度优先策略。左图的MRO为：<code>MyClass、D、B、A、C</code></li>
+<li>新式类算法(2.2版本)：经典算法的升级，深度优先，重复的只保留最后一个。左图的MRO为：<code>MyClass、D、B、C、A、object</code></li>
+<li>C3算法(2.3之后)：在类被创建出来的时候，就计算一个MRO有序列表。Python3唯一支持的算法。左图的MRO为：<code>MyClass、D、B、C、A、object</code></li>
+</ol>
+<p>        经典算法有很大的问题。如果C中有覆盖A的方法，就不会访问到C，因为深度优先，会先访问A。新式类算法算法，依然采用了深度优先，解决了重复问题，但是同经典算法一样，么有解决继承和单调性的问题。</p>
+<blockquote>
+<p>单调性：如果在D的解析顺序中，B排在A的前面，那么在D的所有子类里，也必须满足这个顺序。</p>
+</blockquote>
+<p>        C3算法，解决了继承的单调性，它阻止创建之前版本产生的二义性代码，求得MRO是为了线性化，且确定了顺序。关于MRO和C3可以参考：<a href="https://blog.csdn.net/beyondlee2011/article/details/87713671">Python的多重继承问题-MRO和C3算法</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">:</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">B</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">C</span><span class="p">):</span><span class="k">pass</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">MyClass</span><span class="o">.</span><span class="n">mro</span><span class="p">())</span>  <span class="c1"># [&lt;class &#39;__main__.MyClass&#39;&gt;, &lt;class &#39;__main__.D&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;class &#39;object&#39;&gt;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ol>
+<li>MyClass.mro() 和 MyClass.__mro__结果相同，一个是方法，一个是属性。</li>
+<li>D的解析顺序中，B在A的前面，那么在D的所有资料，都将保持这个顺序。</li>
+<li>序列是有序的，当执行一个方法，子类不存在时，会按照mro列表开始寻找。</li>
+</ol>
+<h2 id="73-多继承的建议-1">7.3 多继承的建议</h2>
+<p>当类很多，继承很复杂的情况下，继承路径太多，很难说清什么样的继承路线。Python语法是允许多继承的，但是Python代码是解释执行，只有执行时，才发现错误，如果团队协作开发，并且引入多继承，那么代码将有可能会变得不可控。所以在Python日常开发规范中建议：</p>
+<ol>
+<li>避免多继承</li>
+<li>由于Python语言本身过于灵活，所以最好遵循一定的团队开发规范。</li>
+</ol>
+<h2 id="74-mixin-1">7.4 Mixin</h2>
+<p>从一个需求开始了解Mixin。现有如下继承关系：<br>
+<img src="photo/Mixin-1.png" alt="Mixin"><br>
+假设已经有了三个类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>   <span class="c1"># raise表示抛出异常，NotImplementedError表示没有被实现。</span>
+
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>解释：</p>
+<ol>
+<li><strong><code>没有实现的方法称为抽象方法，拥有抽象方法的类，叫做抽象类(抽象类不是用来实例化的，而是用来继承的，所以又叫做抽象基类)</code></strong></li>
+<li>子类直接执行talk方法时会产生异常(方法没有被实现)</li>
+</ol>
+<blockquote>
+<p>Python中如果采用上面的方式定义抽象方法，子类可以不实现，但是到子类使用该方法的时候才会报错。</p>
+</blockquote>
+<p>        Animal类是抽象基类，基类的方法可以不具体实现，因为它未必适合所有子类，在子类中一般需要重写。Human类和Monkey类属于Animal的子类，现在需要为Human类添加说话的功能，该怎么办呢？如果在Humman类上直接添加，虽然可以，但是却违反了OCP原则，所以我们只能继承了</p>
+<p><img src="photo/Mixin-2.png" alt="Mixin-2"></p>
+<p>下面对代码进行改写</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">TalkHuman</span><span class="p">(</span><span class="n">Human</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say something&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">TalkHuman</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>疑问：看似完成了需求，但是如果Human又要唱歌、跳舞、吃饭等方法呢？每次都要继承吗？这样类会不会太多了？能否用其他的方法呢？</p>
+<h3 id="741-利用装饰器新增功能-1">7.4.1 利用装饰器新增功能</h3>
+<p>        前面我们利用装饰器为函数新增了功能，在Python中一切皆对象，函数和类都是对象，那么我们是否可以利用装饰器为类添加新功能呢？答案当然是可以的。使用装饰器为Human类添加talk方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">talkhuman</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="c1"># def talk(self):</span>
+    <span class="c1">#     print(&#39;{} say I Love You&#39;.format(self.name))</span>
+    <span class="c1"># cls.talk = talk</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">talk</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say I Love You&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">cls</span>
+
+<span class="nd">@talkhuman</span>  <span class="c1"># Human = talk(human)</span>
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        使用柯里化很容易就可以写出为类添加方法的装饰器，这种装饰器还有一个好处，哪里需要talk功能，直接装饰就好。有多个功能的话，那就写多个装饰器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 抽象方法，没有真正被实现，需要子类自己去实现</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">talkhuman</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">talk</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say I Love You&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">cls</span>
+
+<span class="k">def</span> <span class="nf">sleephuman</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">sleep</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} will sleep with you&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">cls</span>
+
+<span class="nd">@sleephuman</span>  
+<span class="nd">@talkhuman</span>  
+<span class="k">class</span> <span class="nc">Human</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Monkey</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">Human</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="n">daxin</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="742-mixin类-1">7.4.2 Mixin类</h3>
 <p>先来看代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

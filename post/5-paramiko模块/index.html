@@ -69,7 +69,7 @@
 <meta itemprop="description" content="1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6&#43; 和Python 3.3&#43; 版本，实">
 <meta itemprop="datePublished" content="2016-09-01T01:21:05+00:00" />
 <meta itemprop="dateModified" content="2016-09-01T01:21:05+00:00" />
-<meta itemprop="wordCount" content="2685">
+<meta itemprop="wordCount" content="5425">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 2685 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span class="more-meta"> 约 5425 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
 
         
         
@@ -367,6 +367,39 @@
 
   <ul>
     <li><a href="#41-解决方法">4.1 解决方法</a></li>
+    <li><a href="#mathjax-true">title: 5-paramiko模块
+date: 2016-02-26 01:21:31
+lastmod: 2016-02-26 01:21:31
+draft: false
+tags: [Python模块,]
+categories: [Python模块,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-paramiko中的几个基础名词-1">2.1 Paramiko中的几个基础名词：</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-sshclient介绍-1">3.1 SSHClient介绍</a>
+      <ul>
+        <li><a href="#311-常用的方法-1">3.1.1 常用的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#32-sftpclient介绍-1">3.2 SFTPClient介绍</a>
+      <ul>
+        <li><a href="#321-常用的方法-1">3.2.1 常用的方法</a></li>
+        <li><a href="#322-使用paramiko部署监控程序-1">3.2.2 使用paramiko部署监控程序</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-解决方法-1">4.1 解决方法</a></li>
   </ul>
 </nav>
   </div>
@@ -713,6 +746,371 @@
 </div><h1 id="4-新版ssh-keygent生成的key的问题">4 新版ssh-keygent生成的key的问题</h1>
 <p>        现在使用命令 ssh-keygen -t rsa  生成ssh，默认是以新的格式生成，id_rsa的第一行变成了“BEGIN OPENSSH PRIVATE KEY” 而不在是“BEGIN RSA PRIVATE KEY”，此时用来msyql、MongoDB，配置ssh登陆的话，可能会报 “Resource temporarily unavailable. Authentication by key (/Users/youname/.ssh/id_rsa) failed (Error -16). (Error #35)” 提示资源不可用，这就是id_rsa 格式不对造成的。<code>Paramiko也会认为这个key，不是一个合法的RSA密钥</code>。</p>
 <h2 id="41-解决方法">4.1 解决方法</h2>
+<p>使用 ssh-keygen -m PEM -t rsa -b 4096 来生成</p>
+<ul>
+<li>-m 参数指定密钥的格式，PEM（也就是RSA格式）是之前使用的旧格式</li>
+<li>-b：指定密钥长度；</li>
+<li>-e：读取openssh的私钥或者公钥文件；</li>
+<li>-C：添加注释；</li>
+<li>-f：指定用来保存密钥的文件名；</li>
+<li>-i：读取未加密的ssh-v2兼容的私钥/公钥文件，然后在标准输出设备上显示openssh兼容的私钥/公钥；</li>
+<li>-l：显示公钥文件的指纹数据；</li>
+<li>-N：提供一个新密语；</li>
+<li>-P：提供（旧）密语；</li>
+<li>-q：静默模式；</li>
+<li>-t：指定要创建的密钥类型</li>
+</ul>
+<hr>
+<h2 id="mathjax-true">title: 5-paramiko模块
+date: 2016-02-26 01:21:31
+lastmod: 2016-02-26 01:21:31
+draft: false
+tags: [Python模块,]
+categories: [Python模块,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h1 id="1-简介-1">1 简介</h1>
+<p>        ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6+ 和Python 3.3+ 版本，实现了SSHv2协议(底层使用cryptography)。有了Paramiko以后，我们就可以在Python代码中直接使用SSH协议对远程服务器执行操作，而不是通过ssh命令对远程服务器进行操作。<br>
+        由于paramiko属于第三方库，所以需要使用如下命令先行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip3</span> <span class="n">install</span> <span class="n">paramiko</span>
+ 
+<span class="c1"># 测试</span>
+<span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;import paramiko&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-paramiko介绍-1">2 Paramiko介绍</h1>
+<p>        paramiko包含两个核心组件：SSHClient和SFTPClient。</p>
+<ul>
+<li>SSHClient的作用类似于Linux的ssh命令，是对SSH会话的封装，该类封装了传输(Transport)，通道(Channel)及SFTPClient建立的方法(open_sftp)，通常用于执行远程命令。</li>
+<li>SFTPClient的作用类似与Linux的sftp命令，是对SFTP客户端的封装，用以实现远程文件操作，如文件上传、下载、修改文件权限等操作。</li>
+</ul>
+<h2 id="21-paramiko中的几个基础名词-1">2.1 Paramiko中的几个基础名词：</h2>
+<ol>
+<li>Channel：是一种类Socket，一种安全的SSH传输通道；</li>
+<li>transport：是一种加密的会话，使用时会同步创建了一个加密的Tunnels(通道)，这个Tunnels叫做Channel；</li>
+<li>Session：是client与Server保持连接的对象，用connect()/start_client()/start_server()开始会话。</li>
+</ol>
+<h1 id="3-paramiko的基本使用-1">3 Paramiko的基本使用</h1>
+<p>        基于常用的两个核心组件进行说明。</p>
+<h2 id="31-sshclient介绍-1">3.1 SSHClient介绍</h2>
+<p>        下面是一个使用SSHClient连接服务器并执行命令的操作步骤：（支持密码认证和密钥认证）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">paramiko</span>
+ 
+<span class="c1">#实例化SSHClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+ 
+<span class="c1">#自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+ 
+<span class="c1">#连接SSH服务端，以用户名和密码进行认证</span>
+<span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">&#39;10.0.0.3&#39;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;123456&#39;</span><span class="p">)</span>
+
+<span class="c1">#打开一个Channel并执行命令</span>
+<span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s1">&#39;df -h &#39;</span><span class="p">)</span>      <span class="c1"># stdout 为正确输出，stderr为错误输出，同时只有1个变量有值</span>
+ 
+<span class="c1">#打印执行结果</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+ 
+<span class="c1">#关闭SSHClient</span>
+<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>SSHClient使用私钥连接:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">paramiko</span>
+
+<span class="c1"># 配置私人密钥文件位置</span>
+<span class="n">private</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">RSAKey</span><span class="o">.</span><span class="n">from_private_key_file</span><span class="p">(</span><span class="s1">&#39;/Users/DahlHin/.ssh/id_rsa&#39;</span><span class="p">)</span>
+
+<span class="c1">#实例化SSHClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+
+<span class="c1">#自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接</span>
+<span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+
+<span class="c1">#连接SSH服务端，以用户名和密码进行认证</span>
+<span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">&#39;10.0.0.3&#39;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="n">pkey</span><span class="o">=</span><span class="n">private</span><span class="p">)</span>
+
+<span class="c1">#打开一个Channel并执行命令</span>
+<span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s1">&#39;df -h &#39;</span><span class="p">)</span>      <span class="c1"># stdout 为正确输出，stderr为错误输出，同时是有1个变量有值</span>
+
+<span class="c1">#打印执行结果</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+<span class="c1">#关闭SSHClient</span>
+<span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># 在登陆的时候传递还可以利用key_filename直接来指定私钥的位置比如</span>
+<span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">IP</span><span class="p">,</span><span class="n">Port</span><span class="p">,</span><span class="n">Username</span><span class="p">,</span><span class="n">key_filename</span><span class="o">=</span><span class="s1">&#39;~/.ssh/id_rsa&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="311-常用的方法-1">3.1.1 常用的方法</h3>
+<p><code>connect()</code>：实现远程服务器的连接与认证，对于该方法只有hostname是必传参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hostname</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="n">SSH_PORT</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">pkey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">key_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">allow_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">look_for_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">compress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">sock</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">gss_auth</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">gss_kex</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">gss_deleg_creds</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">gss_host</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">banner_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">auth_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>set_missing_host_key_policy()</code>：设置远程服务器没有在know_hosts文件中记录时的应对策略。目前支持三种策略：
+<code>AutoAddPolicy</code>：自动添加服务器到know_hosts文件中
+<code>RejectPolicy(默认策略)</code>：拒绝本次连接
+<code>WarningPolicy</code>：警告并将服务器添加到know_hosts文件中
+<code>exec_command()</code>：在远程服务器执行Linux命令的方法。
+<code>open_sftp()</code>：在当前ssh会话的基础上创建一个sftp会话。该方法会返回一个SFTPClient对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 利用SSHClient对象的open_sftp()方法，可以直接返回一个基于当前连接的sftp对象，可以进行文件的上传等操作.</span>
+<span class="n">sftp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+<span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;text.txt&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-sftpclient介绍-1">3.2 SFTPClient介绍</h2>
+<p>        下面是一个使用SFTPClient连接服务器并传输文件的操作步骤：（支持密码认证和密钥认证）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">paramiko</span>
+ 
+<span class="c1"># 获取Transport实例</span>
+<span class="n">tran</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">Transport</span><span class="p">((</span><span class="s1">&#39;10.0.0.3&#39;</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+ 
+<span class="c1"># 连接SSH服务端，使用pkey指定私钥</span>
+<span class="n">tran</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;123456)</span>
+ 
+<span class="c1"># 获取SFTP实例</span>
+<span class="n">sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="n">tran</span><span class="p">)</span>
+ 
+<span class="c1"># 设置上传的本地/远程文件路径</span>
+<span class="n">localpath</span><span class="o">=</span><span class="s2">&#34;/Users/DahlHin/Downloads/daxin.txt&#34;</span>
+<span class="n">remotepath</span><span class="o">=</span><span class="s2">&#34;/tmp/daxin.txt&#34;</span>
+ 
+<span class="c1"># 执行上传动作</span>
+<span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">localpath</span><span class="p">,</span><span class="n">remotepath</span><span class="p">)</span>
+ 
+<span class="n">tran</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>配置SFTPClient使用密钥</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">paramiko</span>
+
+<span class="c1"># 配置私人密钥文件位置</span>
+<span class="n">private</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">RSAKey</span><span class="o">.</span><span class="n">from_private_key_file</span><span class="p">(</span><span class="s1">&#39;/Users/DahlHin/.ssh/id_rsa&#39;</span><span class="p">)</span>
+
+<span class="c1"># 获取Transport实例</span>
+<span class="n">tran</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">Transport</span><span class="p">((</span><span class="s1">&#39;10.0.0.3&#39;</span><span class="p">,</span><span class="mi">22</span><span class="p">))</span>
+
+<span class="c1"># 连接SSH服务端，使用pkey指定私钥</span>
+<span class="n">tran</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;root&#34;</span><span class="p">,</span> <span class="n">pkey</span><span class="o">=</span><span class="n">private</span><span class="p">)</span>
+
+<span class="c1"># 获取SFTP实例</span>
+<span class="n">sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="n">tran</span><span class="p">)</span>
+
+<span class="c1"># 设置上传的本地/远程文件路径</span>
+<span class="n">localpath</span><span class="o">=</span><span class="s2">&#34;/Users/DahlHin/Downloads/daxin.txt&#34;</span>
+<span class="n">remotepath</span><span class="o">=</span><span class="s2">&#34;/tmp/daxin.txt&#34;</span>
+
+<span class="c1"># 执行上传动作</span>
+<span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">localpath</span><span class="p">,</span><span class="n">remotepath</span><span class="p">)</span>
+
+<span class="n">tran</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="321-常用的方法-1">3.2.1 常用的方法</h3>
+<p><code>put()</code>：上传本地文件到远程服务器
+<code>get()</code>：从远程服务器下载文件到本地
+<code>mkdir()</code>：在远程服务器上创建目录
+<code>remove()</code>：删除远程服务器中的文件
+<code>rmdir()</code>：删除远程服务器中的目录
+<code>rename()</code>：重命名远程服务器中的文件或目录
+<code>stat()</code>：获取远程服务器中文件的详细信息
+<code>listdir()</code>：列出远程服务器中指定目录下的内容</p>
+<h3 id="322-使用paramiko部署监控程序-1">3.2.2 使用paramiko部署监控程序</h3>
+<p>        现有如下需求：在所有的主机上部署monitor.py监控程序。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">paramiko</span>
+<span class="kn">from</span> <span class="nn">paramiko.ssh_exception</span> <span class="kn">import</span> <span class="n">AuthenticationException</span>
+ 
+<span class="k">def</span> <span class="nf">deploy_monitor</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+ 
+    <span class="k">with</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>     <span class="c1"># 利用上下文管理的方式，可以不用显示的进行链接的关闭</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="s1">&#39;......&#39;</span><span class="p">)</span>
+ 
+            <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span><span class="p">,</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s1">&#39;ls -l&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+ 
+            <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span> <span class="k">as</span> <span class="n">sftp</span><span class="p">:</span>
+                <span class="n">sftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;sendmail.py&#39;</span><span class="p">,</span><span class="s1">&#39;sendmail.py&#39;</span><span class="p">)</span>
+                <span class="n">sftp</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="s1">&#39;sendmail.py&#39;</span><span class="p">,</span><span class="mi">0</span><span class="n">o755</span><span class="p">)</span>      <span class="c1"># 注意这里的权限是八进制的，八进制需要使用0o作为前缀</span>
+        <span class="k">except</span> <span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;用户名或者密码不正确&#39;</span><span class="p">)</span>
+ 
+ 
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;x.x.x.x&#39;</span>   <span class="c1"># 多IP的情况可以读取文件中的IP列表,利用for循环或者配合多线程就可以完成分发。</span>
+    <span class="n">deploy_monitor</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+ 
+ 
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-新版ssh-keygent生成的key的问题-1">4 新版ssh-keygent生成的key的问题</h1>
+<p>        现在使用命令 ssh-keygen -t rsa  生成ssh，默认是以新的格式生成，id_rsa的第一行变成了“BEGIN OPENSSH PRIVATE KEY” 而不在是“BEGIN RSA PRIVATE KEY”，此时用来msyql、MongoDB，配置ssh登陆的话，可能会报 “Resource temporarily unavailable. Authentication by key (/Users/youname/.ssh/id_rsa) failed (Error -16). (Error #35)” 提示资源不可用，这就是id_rsa 格式不对造成的。<code>Paramiko也会认为这个key，不是一个合法的RSA密钥</code>。</p>
+<h2 id="41-解决方法-1">4.1 解决方法</h2>
 <p>使用 ssh-keygen -m PEM -t rsa -b 4096 来生成</p>
 <ul>
 <li>-m 参数指定密钥的格式，PEM（也就是RSA格式）是之前使用的旧格式</li>

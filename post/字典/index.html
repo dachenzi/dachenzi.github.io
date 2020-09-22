@@ -69,7 +69,7 @@
 <meta itemprop="description" content="文章目录 1 用户输入一个数字 2 数字重复统计 3 字符串重复统计 1 用户输入一个数字 打印每一位数字及其重复的次数 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19">
 <meta itemprop="datePublished" content="2018-09-26T04:11:11+00:00" />
 <meta itemprop="dateModified" content="2018-09-26T04:11:11+00:00" />
-<meta itemprop="wordCount" content="513">
+<meta itemprop="wordCount" content="1071">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 513 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 1071 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
         
@@ -346,7 +346,21 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mathjax-true">title: 字典
+date: 2020-01-24 22:17:15
+lastmod: 2020-01-24 22:17:15
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+  </ul>
+</nav>
   </div>
 </div>
 
@@ -445,6 +459,140 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="3-字符串重复统计">3 字符串重复统计</h1>
+<ul>
+<li>字符表&rsquo;abcdefghigklmnopqrstuvwxyz'</li>
+<li>随机挑选2个字母组成字符串，共挑选100个</li>
+<li>降序输出所有不同的字符串及重复的次数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># import string</span>
+<span class="c1"># import random</span>
+<span class="c1"># alphabet = [ &#39;&#39;.join([ random.choice(string.ascii_lowercase) for _ in range(2)]) for _ in range(100)]  # 方法1，通过string方法的ascii_lowercase方法</span>
+<span class="c1"># alphabet = [ &#39;&#39;.join([ chr(random.randrange(97,123)) for _ in range(2)]) for _ in range(100)]   # 方法2，通过对应的ascii码表</span>
+<span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">123</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="p">]</span> <span class="c1"># 方法3，通过bytes的解码</span>
+<span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphabet</span><span class="p">:</span>
+    <span class="n">dic</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">reverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mathjax-true">title: 字典
+date: 2020-01-24 22:17:15
+lastmod: 2020-01-24 22:17:15
+draft: false
+tags: [Python练习,]
+categories: [Python练习,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97">1 用户输入一个数字</a></li>
+<li><a href="#2-%E6%95%B0%E5%AD%97%E9%87%8D%E5%A4%8D%E7%BB%9F%E8%AE%A1">2 数字重复统计</a></li>
+<li><a href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8D%E5%A4%8D%E7%BB%9F%E8%AE%A1">3 字符串重复统计</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-用户输入一个数字-1">1 用户输入一个数字</h1>
+<ul>
+<li>打印每一位数字及其重复的次数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">1.</span><span class="err">当</span><span class="n">key不存在时利用0进行初始化</span><span class="p">(</span><span class="err">初级</span><span class="p">)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span>
+        <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>    
+<span class="k">print</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+
+<span class="mf">2.</span> <span class="err">利用字典的</span><span class="n">get方法</span><span class="err">，不存在时返回</span><span class="mi">0</span><span class="err">，然后统计</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num</span><span class="p">:</span>
+    <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+
+<span class="mf">3.</span> <span class="err">利用默认值字典直接进行统计</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">num</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">dic</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num</span><span class="p">:</span>
+    <span class="n">dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-数字重复统计-1">2 数字重复统计</h1>
+<ul>
+<li>随机产生100个整数</li>
+<li>数字的范围[-1000, 1000]</li>
+<li>升序输出这些数字并打印其重复的次数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+    <span class="n">total</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1"># 这里用defaultdict字典也可以</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">total</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-字符串重复统计-1">3 字符串重复统计</h1>
 <ul>
 <li>字符表&rsquo;abcdefghigklmnopqrstuvwxyz'</li>
 <li>随机挑选2个字母组成字符串，共挑选100个</li>

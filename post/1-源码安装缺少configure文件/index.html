@@ -69,7 +69,7 @@
 <meta itemprop="description" content="源代码中没有configure的软件安装方法 今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里">
 <meta itemprop="datePublished" content="2019-12-10T19:01:32+00:00" />
 <meta itemprop="dateModified" content="2019-12-10T19:01:32+00:00" />
-<meta itemprop="wordCount" content="353">
+<meta itemprop="wordCount" content="748">
 
 
 
@@ -330,8 +330,8 @@
             <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 353 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span class="more-meta"> 约 748 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
         
@@ -350,6 +350,19 @@
   <ul>
     <li><a href="#源代码中没有configure的软件安装方法">源代码中没有configure的软件安装方法</a></li>
     <li><a href="#生成configure文件的步骤">生成configure文件的步骤</a></li>
+    <li><a href="#mathjax-true">title: 1-源码安装缺少configure文件
+date: 2019-11-16 03:16:38
+lastmod: 2019-11-16 03:16:38
+draft: false
+tags: [Questions,]
+categories: [Questions,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</a></li>
+    <li><a href="#源代码中没有configure的软件安装方法-1">源代码中没有configure的软件安装方法</a></li>
+    <li><a href="#生成configure文件的步骤-1">生成configure文件的步骤</a></li>
   </ul>
 </nav>
   </div>
@@ -361,6 +374,32 @@
 <p>今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里记录一下安装遇到的问题
 网上大部分GeoIP下载地址已经失效，因为GeoIP新版本GeoIP2，所以这里附旧版Geoip的下载地址：<a href="https://github.com/maxmind/geoip-api-c/releases">GeoIP下载地址</a></p>
 <h2 id="生成configure文件的步骤">生成configure文件的步骤</h2>
+<p>在软件包内执行如下命令：</p>
+<ul>
+<li><code>aclocal</code></li>
+<li><code>autoconf</code> &ndash;&gt; 生成configure文件</li>
+<li><code>autoheader</code>(出现什么AC_CONFIG_HEADERS not found in configure.ac 可以忽略)</li>
+<li><code>automake --add-missing</code>(出现ltmain.sh not found，需要执行<code>autoreconf  -ivf</code>)  &ndash;&gt; 会生成Makefile
+.in 文件</li>
+</ul>
+<p>然后就会生成configure文件，继续按照软件的INSTALL/README文件开始安装即可</p>
+<p>参考： <a href="https://blog.csdn.net/BabyBirdToFly/article/details/69941756">生成configure</a></p>
+<hr>
+<h2 id="mathjax-true">title: 1-源码安装缺少configure文件
+date: 2019-11-16 03:16:38
+lastmod: 2019-11-16 03:16:38
+draft: false
+tags: [Questions,]
+categories: [Questions,]
+author: &ldquo;daxin.li&rdquo;
+comment: true
+toc: true
+reward: true
+mathjax: true</h2>
+<h2 id="源代码中没有configure的软件安装方法-1">源代码中没有configure的软件安装方法</h2>
+<p>今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里记录一下安装遇到的问题
+网上大部分GeoIP下载地址已经失效，因为GeoIP新版本GeoIP2，所以这里附旧版Geoip的下载地址：<a href="https://github.com/maxmind/geoip-api-c/releases">GeoIP下载地址</a></p>
+<h2 id="生成configure文件的步骤-1">生成configure文件的步骤</h2>
 <p>在软件包内执行如下命令：</p>
 <ul>
 <li><code>aclocal</code></li>

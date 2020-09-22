@@ -23,3 +23,29 @@ for file in $filelist
         sed -i "1,5d" $file
     fi
 done
+
+---
+title: a.sh
+date: 2017-09-11 22:44:46
+lastmod: 2017-09-11 22:44:46
+draft: false
+tags: [content_b,]
+categories: [content_b,]
+author: "daxin.li"
+comment: true
+toc: true
+reward: true
+mathjax: true
+---
+#!/bin/bash
+
+filelist=`find /usr/local/blog/hugo/content_b -name "*.md"`
+for file in $filelist
+  do 
+    line=`awk 'NR==1{print}' $file`
+    if [ a$line == 'a---' ]
+      then
+       echo $file
+       # sed -i "1,5d" $file
+    fi
+done
