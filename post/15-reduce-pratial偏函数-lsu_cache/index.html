@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war" />
+  <meta name="description" content="title: 15-reduce-pratial偏函数-lsu_cache data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 p" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="15-reduce-pratial偏函数-lsu_cache" />
-<meta property="og:description" content="文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war" />
+<meta property="og:description" content="title: 15-reduce-pratial偏函数-lsu_cache data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 p" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/" />
-
+<meta property="article:published_time" content="2018-08-27T06:15:30+00:00" />
+<meta property="article:modified_time" content="2018-08-27T06:15:30+00:00" />
 <meta itemprop="name" content="15-reduce-pratial偏函数-lsu_cache">
-<meta itemprop="description" content="文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war">
+<meta itemprop="description" content="title: 15-reduce-pratial偏函数-lsu_cache data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 p">
+<meta itemprop="datePublished" content="2018-08-27T06:15:30+00:00" />
+<meta itemprop="dateModified" content="2018-08-27T06:15:30+00:00" />
+<meta itemprop="wordCount" content="5903">
 
-<meta itemprop="wordCount" content="5865">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="15-reduce-pratial偏函数-lsu_cache"/>
-<meta name="twitter:description" content="文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war"/>
+<meta name="twitter:description" content="title: 15-reduce-pratial偏函数-lsu_cache data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 p"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">15-reduce-pratial偏函数-lsu_cache</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2018-08-27" class="post-time">
+          2018-08-27
         </time>
-        
-        <span class="more-meta"> 约 5865 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 5903 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 15-reduce-pratial偏函数-lsu_cache
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#21-partial方法基本使用">2.1 partial方法基本使用</a></li>
     <li><a href="#22-partial原码分析">2.2 partial原码分析</a></li>
@@ -360,7 +371,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 15-reduce-pratial偏函数-lsu_cache
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
@@ -1148,7 +1164,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2018-08-27
       
     </span>
   </p>
@@ -1169,24 +1185,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/">
+          <a class="prev" href="/post/linuxsed/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1196,12 +1215,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">14-函数参数检测-inspect模块</span>
+            <span class="prev-text nav-default">Linuxsed</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/">
-            <span class="next-text nav-default">16-文件操作-StringIO-BytesIO</span>
+          <a class="next" href="/post/1-ansible/">
+            <span class="next-text nav-default">1-ansible</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1376,6 +1395,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

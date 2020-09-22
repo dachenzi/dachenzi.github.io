@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Questions on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/tags/questions/</link>
+    <description>Recent content in Questions on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 11 Sep 2016 06:03:14 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/questions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-源码安装缺少configure文件</title>
+      <link>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sun, 11 Sep 2016 06:03:14 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</guid>
+      <description>源代码中没有configure的软件安装方法 今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里</description>
+    </item>
+    
+    <item>
+      <title>2-nginx安装echo模块</title>
+      <link>https://dachenzi.github.io/post/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Wed, 29 Jun 2016 01:54:50 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/</guid>
+      <description>nginx 安装第三方echo模块 openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，</description>
+    </item>
+    
+  </channel>
+</rss>

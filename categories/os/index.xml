@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Os on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/categories/os/</link>
+    <description>Recent content in Os on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 07 Jun 2019 04:01:16 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LinuxUser</title>
+      <link>https://dachenzi.github.io/post/linuxuser/</link>
+      <pubDate>Fri, 07 Jun 2019 04:01:16 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxuser/</guid>
+      <description>1 小知识点回顾 Linux 是一个多用户多任务操作系统。 每个文件和进程，都需要对应一个用户和用户组。 Linux系统是通过UID和GID来识别用户和组的。</description>
+    </item>
+    
+    <item>
+      <title>rpmforyum_repo</title>
+      <link>https://dachenzi.github.io/post/rpmforyum_repo/</link>
+      <pubDate>Mon, 20 May 2019 20:12:49 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/rpmforyum_repo/</guid>
+      <description>1 Linux上安装软件包的方式 Linux下常用的软件包安装方式有三种。 1.1 编译安装 编译:将源代码变为机器可执行的代码文件。 安装:将可执行文件安</description>
+    </item>
+    
+    <item>
+      <title>LinuxDirs</title>
+      <link>https://dachenzi.github.io/post/linuxdirs/</link>
+      <pubDate>Sun, 27 Jan 2019 08:07:48 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxdirs/</guid>
+      <description>1 概述 1.1 疑问1 为什么某些程序位于/bin下，或者/sbin，或者/usr/bin，或/usr/sbin目录下吗？例如，less命令位于/us</description>
+    </item>
+    
+    <item>
+      <title>Linuxsed</title>
+      <link>https://dachenzi.github.io/post/linuxsed/</link>
+      <pubDate>Wed, 26 Sep 2018 11:57:48 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxsed/</guid>
+      <description>1 功能说明 sed 是一种在线编辑器，它一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接</description>
+    </item>
+    
+    <item>
+      <title>LinuxPermisson</title>
+      <link>https://dachenzi.github.io/post/linuxpermisson/</link>
+      <pubDate>Wed, 15 Mar 2017 03:50:12 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxpermisson/</guid>
+      <description>1 概述 我们使用ls –il命令查看的文件列表就是我们文件的简要属性信息。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 [root@lixin ~]# ls –li total 80 26171 -rw-r--r-- 1 root root 11 Mar 17</description>
+    </item>
+    
+    <item>
+      <title>LinuxRegExp</title>
+      <link>https://dachenzi.github.io/post/linuxregexp/</link>
+      <pubDate>Sat, 22 Oct 2016 17:37:42 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxregexp/</guid>
+      <description>1 什么是正则表达式 正则表达式RE（Regular Expression）是由一串字符和元字符构成的字符串。主要功能是文本查询和字符串操作，它可</description>
+    </item>
+    
+    <item>
+      <title>Linuxcrontab</title>
+      <link>https://dachenzi.github.io/post/linuxcrontab/</link>
+      <pubDate>Wed, 29 Jun 2016 22:59:05 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/linuxcrontab/</guid>
+      <description>1 什么是定时任务 我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚</description>
+    </item>
+    
+  </channel>
+</rss>

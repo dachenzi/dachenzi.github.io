@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管" />
+  <meta name="description" content="title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="16-文件操作-StringIO-BytesIO" />
-<meta property="og:description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管" />
+<meta property="og:description" content="title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/" />
-
+<meta property="article:published_time" content="2019-07-19T15:25:35+00:00" />
+<meta property="article:modified_time" content="2019-07-19T15:25:35+00:00" />
 <meta itemprop="name" content="16-文件操作-StringIO-BytesIO">
-<meta itemprop="description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管">
+<meta itemprop="description" content="title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲">
+<meta itemprop="datePublished" content="2019-07-19T15:25:35+00:00" />
+<meta itemprop="dateModified" content="2019-07-19T15:25:35+00:00" />
+<meta itemprop="wordCount" content="6370">
 
-<meta itemprop="wordCount" content="6338">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="16-文件操作-StringIO-BytesIO"/>
-<meta name="twitter:description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管"/>
+<meta name="twitter:description" content="title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">16-文件操作-StringIO-BytesIO</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2019-07-19" class="post-time">
+          2019-07-19
         </time>
-        
-        <span class="more-meta"> 约 6338 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 6370 字 </span>
           <span class="more-meta"> 预计阅读 13 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 16-文件操作-StringIO-BytesIO
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-open函数介绍">1.1 open函数介绍</a></li>
     <li><a href="#12-打开操作">1.2 打开操作</a>
@@ -364,7 +375,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 16-文件操作-StringIO-BytesIO
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">1 文件操作</a>
@@ -1295,7 +1311,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2019-07-19
       
     </span>
   </p>
@@ -1316,24 +1332,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/">
+          <a class="prev" href="/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1343,12 +1362,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">15-reduce-pratial偏函数-lsu_cache</span>
+            <span class="prev-text nav-default">6-subprocess模块-tempfile模块</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/">
-            <span class="next-text nav-default">17-路径操作-shutil模块</span>
+          <a class="next" href="/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">4-django-orm基本使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1523,6 +1542,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协" />
+  <meta name="description" content="title: 37-网络编程-UDP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="37-网络编程-UDP编程" />
-<meta property="og:description" content="文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协" />
+<meta property="og:description" content="title: 37-网络编程-UDP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/" />
-
+<meta property="article:published_time" content="2018-11-12T15:36:40+00:00" />
+<meta property="article:modified_time" content="2018-11-12T15:36:40+00:00" />
 <meta itemprop="name" content="37-网络编程-UDP编程">
-<meta itemprop="description" content="文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协">
+<meta itemprop="description" content="title: 37-网络编程-UDP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP">
+<meta itemprop="datePublished" content="2018-11-12T15:36:40+00:00" />
+<meta itemprop="dateModified" content="2018-11-12T15:36:40+00:00" />
+<meta itemprop="wordCount" content="3193">
 
-<meta itemprop="wordCount" content="3172">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="37-网络编程-UDP编程"/>
-<meta name="twitter:description" content="文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协"/>
+<meta name="twitter:description" content="title: 37-网络编程-UDP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">37-网络编程-UDP编程</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2018-11-12" class="post-time">
+          2018-11-12
         </time>
-        
-        <span class="more-meta"> 约 3172 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 3193 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
@@ -343,6 +348,12 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#tags">title: 37-网络编程-UDP编程
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
+  <ul>
     <li><a href="#31-构建服务端">3.1 构建服务端</a></li>
     <li><a href="#32-构建客户端">3.2 构建客户端</a></li>
     <li><a href="#33-常用方法">3.3 常用方法</a></li>
@@ -353,7 +364,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 37-网络编程-UDP编程
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-udp%E5%8D%8F%E8%AE%AE">1 UDP协议</a></li>
@@ -1024,7 +1040,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2018-11-12
       
     </span>
   </p>
@@ -1045,24 +1061,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/">
+          <a class="prev" href="/post/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1072,12 +1091,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">36-网络编程-TCP编程</span>
+            <span class="prev-text nav-default">无法修改docker监听端口</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/">
-            <span class="next-text nav-default">38-网络编程-socketserver</span>
+          <a class="next" href="/post/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
+            <span class="next-text nav-default">3-直接插入排序</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1252,6 +1271,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

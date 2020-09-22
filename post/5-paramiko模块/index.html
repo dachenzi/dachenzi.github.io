@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6&#43; 和Python 3.3&#43; 版本，实" />
+  <meta name="description" content="title: 5-paramiko模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="5-paramiko模块" />
-<meta property="og:description" content="1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6&#43; 和Python 3.3&#43; 版本，实" />
+<meta property="og:description" content="title: 5-paramiko模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/5-paramiko%E6%A8%A1%E5%9D%97/" />
-
+<meta property="article:published_time" content="2016-06-07T17:55:25+00:00" />
+<meta property="article:modified_time" content="2016-06-07T17:55:25+00:00" />
 <meta itemprop="name" content="5-paramiko模块">
-<meta itemprop="description" content="1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6&#43; 和Python 3.3&#43; 版本，实">
+<meta itemprop="description" content="title: 5-paramiko模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支">
+<meta itemprop="datePublished" content="2016-06-07T17:55:25+00:00" />
+<meta itemprop="dateModified" content="2016-06-07T17:55:25+00:00" />
+<meta itemprop="wordCount" content="2705">
 
-<meta itemprop="wordCount" content="2685">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python模块," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="5-paramiko模块"/>
-<meta name="twitter:description" content="1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6&#43; 和Python 3.3&#43; 版本，实"/>
+<meta name="twitter:description" content="title: 5-paramiko模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">5-paramiko模块</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2016-06-07" class="post-time">
+          2016-06-07
         </time>
-        
-        <span class="more-meta"> 约 2685 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E6%A8%A1%E5%9D%97/"> Python模块 </a>
+            
+          </div>
+        <span class="more-meta"> 约 2705 字 </span>
           <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 5-paramiko模块
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#21-paramiko中的几个基础名词">2.1 Paramiko中的几个基础名词：</a></li>
   </ul>
@@ -369,7 +380,12 @@
 
     
     <div class="post-content">
-      <h1 id="1-简介">1 简介</h1>
+      <hr>
+<h2 id="tags">title: 5-paramiko模块
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<h1 id="1-简介">1 简介</h1>
 <p>        ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6+ 和Python 3.3+ 版本，实现了SSHv2协议(底层使用cryptography)。有了Paramiko以后，我们就可以在Python代码中直接使用SSH协议对远程服务器执行操作，而不是通过ssh命令对远程服务器进行操作。<br>
         由于paramiko属于第三方库，所以需要使用如下命令先行安装</p>
 <div class="highlight"><div class="chroma">
@@ -735,7 +751,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2016-06-07
       
     </span>
   </p>
@@ -756,24 +772,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E6%A8%A1%E5%9D%97/">Python模块</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/5-django-csrf-sessioncookie/">
+          <a class="prev" href="/post/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -783,12 +802,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">5-django-csrf-session&amp;cookie</span>
+            <span class="prev-text nav-default">12-树-基础知识-二叉树-完全二叉树-斜树</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/">
-            <span class="next-text nav-default">5-Python的封装与解构-集合</span>
+          <a class="next" href="/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/">
+            <span class="next-text nav-default">36-网络编程-TCP编程</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -963,6 +982,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

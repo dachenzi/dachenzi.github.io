@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/tags/tools/</link>
+    <description>Recent content in Tools on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 25 May 2019 15:40:40 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gogs安装</title>
+      <link>https://dachenzi.github.io/post/gogs%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 25 May 2019 15:40:40 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/gogs%E5%AE%89%E8%A3%85/</guid>
+      <description>1 Gogs安装 Gogs 是一款极易搭建的自助 Git 服务。Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过</description>
+    </item>
+    
+    <item>
+      <title>1-ansible</title>
+      <link>https://dachenzi.github.io/post/1-ansible/</link>
+      <pubDate>Sun, 08 Jul 2018 18:15:42 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-ansible/</guid>
+      <description>文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup</description>
+    </item>
+    
+  </channel>
+</rss>

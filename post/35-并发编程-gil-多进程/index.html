@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessing模块 2.1 Process类 2.2 Process类的方" />
+  <meta name="description" content="title: 35-并发编程-GIL-多进程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessin" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="35-并发编程-GIL-多进程" />
-<meta property="og:description" content="文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessing模块 2.1 Process类 2.2 Process类的方" />
+<meta property="og:description" content="title: 35-并发编程-GIL-多进程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessin" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/35-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-gil-%E5%A4%9A%E8%BF%9B%E7%A8%8B/" />
-
+<meta property="article:published_time" content="2016-05-24T15:33:38+00:00" />
+<meta property="article:modified_time" content="2016-05-24T15:33:38+00:00" />
 <meta itemprop="name" content="35-并发编程-GIL-多进程">
-<meta itemprop="description" content="文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessing模块 2.1 Process类 2.2 Process类的方">
+<meta itemprop="description" content="title: 35-并发编程-GIL-多进程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessin">
+<meta itemprop="datePublished" content="2016-05-24T15:33:38+00:00" />
+<meta itemprop="dateModified" content="2016-05-24T15:33:38+00:00" />
+<meta itemprop="wordCount" content="7508">
 
-<meta itemprop="wordCount" content="7485">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="35-并发编程-GIL-多进程"/>
-<meta name="twitter:description" content="文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessing模块 2.1 Process类 2.2 Process类的方"/>
+<meta name="twitter:description" content="title: 35-并发编程-GIL-多进程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 GIL 1.1 为什么会有GIL 1.2 GIL与thread lock 1.3 个人总结 2 multiprocessin"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">35-并发编程-GIL-多进程</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2016-05-24" class="post-time">
+          2016-05-24
         </time>
-        
-        <span class="more-meta"> 约 7485 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 7508 字 </span>
           <span class="more-meta"> 预计阅读 15 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 35-并发编程-GIL-多进程
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-为什么会有gil">1.1 为什么会有GIL</a></li>
     <li><a href="#12-gil与thread-lock">1.2 GIL与thread lock</a>
@@ -377,7 +388,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 35-并发编程-GIL-多进程
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-gil">1 GIL</a>
@@ -1121,7 +1137,7 @@ This lock is necessary mainly because CPython’s memory management is not threa
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2016-05-24
       
     </span>
   </p>
@@ -1142,24 +1158,27 @@ This lock is necessary mainly because CPython’s memory management is not threa
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/">
+          <a class="prev" href="/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1169,12 +1188,12 @@ This lock is necessary mainly because CPython’s memory management is not threa
 </svg>
 
             </i>
-            <span class="prev-text nav-default">33-并发编程-线程同步-Event-lock</span>
+            <span class="prev-text nav-default">36-网络编程-TCP编程</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/">
-            <span class="next-text nav-default">36-网络编程-TCP编程</span>
+          <a class="next" href="/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">1-JavaScript介绍及使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1349,6 +1368,13 @@ This lock is necessary mainly because CPython’s memory management is not threa
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供" />
+  <meta name="description" content="title: 43-celery异步任务队列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="43-celery异步任务队列" />
-<meta property="og:description" content="1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供" />
+<meta property="og:description" content="title: 43-celery异步任务队列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/" />
-
+<meta property="article:published_time" content="2017-05-20T05:43:06+00:00" />
+<meta property="article:modified_time" content="2017-05-20T05:43:06+00:00" />
 <meta itemprop="name" content="43-celery异步任务队列">
-<meta itemprop="description" content="1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供">
+<meta itemprop="description" content="title: 43-celery异步任务队列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵">
+<meta itemprop="datePublished" content="2017-05-20T05:43:06+00:00" />
+<meta itemprop="dateModified" content="2017-05-20T05:43:06+00:00" />
+<meta itemprop="wordCount" content="5605">
 
-<meta itemprop="wordCount" content="5582">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="43-celery异步任务队列"/>
-<meta name="twitter:description" content="1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供"/>
+<meta name="twitter:description" content="title: 43-celery异步任务队列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">43-celery异步任务队列</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2017-05-20" class="post-time">
+          2017-05-20
         </time>
-        
-        <span class="more-meta"> 约 5582 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 5605 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 43-celery异步任务队列
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#31-利用pip3命令安装celery模块">3.1 利用pip3命令安装celery模块</a></li>
     <li><a href="#32-创建一个celery-application">3.2 创建一个celery application</a>
@@ -376,7 +387,12 @@
 
     
     <div class="post-content">
-      <h1 id="1-celery概述">1 Celery概述</h1>
+      <hr>
+<h2 id="tags">title: 43-celery异步任务队列
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<h1 id="1-celery概述">1 Celery概述</h1>
 <p>关于celery的定义，首先来看官方网站：
 <strong>Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供维护这样一个系统的必需工具。</strong></p>
 <p>        简单来看，是一个基于python开发的分布式异步消息任务队列，持使用任务队列的方式在分布的机器、进程、线程上执行任务调度。通过它可以轻松的实现任务的异步处理， 如果你的业务场景中需要用到异步任务，就可以考虑使用celery， 举几个实例场景中可用的例子:</p>
@@ -1152,7 +1168,7 @@ celery -A task worker -l debug  <span class="c1"># 使用-l设置输出日志级
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2017-05-20
       
     </span>
   </p>
@@ -1173,24 +1189,27 @@ celery -A task worker -l debug  <span class="c1"># 使用-l设置输出日志级
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/">
+          <a class="prev" href="/post/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1200,12 +1219,12 @@ celery -A task worker -l debug  <span class="c1"># 使用-l设置输出日志级
 </svg>
 
             </i>
-            <span class="prev-text nav-default">42-数据库-orm-SQLAlchemy</span>
+            <span class="prev-text nav-default">13-高阶函数-柯里化-装饰器</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-            <span class="next-text nav-default">44-zookeeper学习笔记</span>
+          <a class="next" href="/post/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/">
+            <span class="next-text nav-default">7-自定义类admin管理增删改查</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1380,6 +1399,13 @@ celery -A task worker -l debug  <span class="c1"># 使用-l设置输出日志级
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

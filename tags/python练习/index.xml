@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python练习 on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/tags/python%E7%BB%83%E4%B9%A0/</link>
+    <description>Recent content in Python练习 on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Dec 2019 18:14:00 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/python%E7%BB%83%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基础</title>
+      <link>https://dachenzi.github.io/post/%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 16 Dec 2019 18:14:00 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E5%9F%BA%E7%A1%80/</guid>
+      <description>title: 基础练习题 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1、给一个半径，求圆的面积和周长。圆周率3.14 2 输入两个数，比较大小后，从小到大升序打印 3 依次输入若干个</description>
+    </item>
+    
+    <item>
+      <title>素数系列</title>
+      <link>https://dachenzi.github.io/post/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sun, 31 Mar 2019 16:17:35 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</guid>
+      <description>title: 素数系列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 给一个数、判断它是否是素数(质数) (质数：一个大于1的自然数只能被1和它本身整除) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</description>
+    </item>
+    
+    <item>
+      <title>Python基础练习</title>
+      <link>https://dachenzi.github.io/post/python%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</link>
+      <pubDate>Wed, 18 Apr 2018 19:32:50 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/python%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/</guid>
+      <description>title: 阶段复习-1 data: 2020-09-21 17:03:56 tags: {% raw %} 1 求和 2 选取文件 3 转置矩阵 4 生成随机的20个ID 5 去除重复数字 6 排序 7 第6题实现选择排序 8 判断密码强弱 9 日志统计</description>
+    </item>
+    
+    <item>
+      <title>双向链表之容器包装</title>
+      <link>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</link>
+      <pubDate>Tue, 16 Jan 2018 01:41:33 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</guid>
+      <description>title: 双向链表之容器包装 data: 2020-09-21 17:03:56 tags: {% raw %} 容器包装 构建双向链表，实现append，pop，insert，remove，iternodes方法 将双向链</description>
+    </item>
+    
+    <item>
+      <title>打印菱形</title>
+      <link>https://dachenzi.github.io/post/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</link>
+      <pubDate>Mon, 03 Jul 2017 19:53:25 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</guid>
+      <description>title: 打印菱形 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印菱形 1 分析 2 对称性 3 abs及三元表达式调整 4 完了吗？ 打印菱形 现在有需求，请使用 Python 尽可能少的代码，打印如下</description>
+    </item>
+    
+    <item>
+      <title>斐波那契序列系列</title>
+      <link>https://dachenzi.github.io/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sun, 18 Jun 2017 14:36:43 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</guid>
+      <description>title: 斐波那契序列系列 data: 2020-09-21 17:03:56 tags: {% raw %} 1 打印100以内的斐波那契序列 1 2 3 4 5 6 7 8 a, b = 0, 1 print(b) while True: c = a + b if c &amp;gt; 100: break print(c) a, b = b, c 2 求斐波那契数</description>
+    </item>
+    
+    <item>
+      <title>双向链表</title>
+      <link>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 23 Dec 2016 06:34:22 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</guid>
+      <description>title: 双向链表 data: 2020-09-21 17:03:56 tags: {% raw %} 用面向对象实现LinkedList链表 (1)单向链表实现append，iternodes方法 (2)双向链表实现app</description>
+    </item>
+    
+    <item>
+      <title>九九乘法表</title>
+      <link>https://dachenzi.github.io/post/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/</link>
+      <pubDate>Wed, 14 Dec 2016 17:46:27 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/</guid>
+      <description>title: 九九乘法表 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6</description>
+    </item>
+    
+    <item>
+      <title>字典</title>
+      <link>https://dachenzi.github.io/post/%E5%AD%97%E5%85%B8/</link>
+      <pubDate>Tue, 05 Jul 2016 03:38:38 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E5%AD%97%E5%85%B8/</guid>
+      <description>title: 字典练习题 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 用户输入一个数字 2 数字重复统计 3 字符串重复统计 1 用户输入一个数字 打印每一位数字及其重复的次数 1 2 3 4 5 6</description>
+    </item>
+    
+  </channel>
+</rss>

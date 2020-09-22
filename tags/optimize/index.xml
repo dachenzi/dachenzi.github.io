@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimize on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/tags/optimize/</link>
+    <description>Recent content in Optimize on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Jun 2019 02:43:32 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/optimize/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1-平均负载</title>
+      <link>https://dachenzi.github.io/post/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</link>
+      <pubDate>Wed, 26 Jun 2019 02:43:32 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</guid>
+      <description>1 平均负载 安装stress，sysstat包 1 yum install -y stress sysstat 其中： stress是一个Linux系统压力测试工具，可以用作异常进程，模拟平均负载升</description>
+    </item>
+    
+  </channel>
+</rss>

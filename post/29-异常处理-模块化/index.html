@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
+  <meta name="description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="29-异常处理-模块化" />
-<meta property="og:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
+<meta property="og:description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/" />
-
+<meta property="article:published_time" content="2016-06-22T03:04:18+00:00" />
+<meta property="article:modified_time" content="2016-06-22T03:04:18+00:00" />
 <meta itemprop="name" content="29-异常处理-模块化">
-<meta itemprop="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常">
+<meta itemprop="description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕">
+<meta itemprop="datePublished" content="2016-06-22T03:04:18+00:00" />
+<meta itemprop="dateModified" content="2016-06-22T03:04:18+00:00" />
+<meta itemprop="wordCount" content="8204">
 
-<meta itemprop="wordCount" content="8185">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="29-异常处理-模块化"/>
-<meta name="twitter:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常"/>
+<meta name="twitter:description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">29-异常处理-模块化</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2016-06-22" class="post-time">
+          2016-06-22
         </time>
-        
-        <span class="more-meta"> 约 8185 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 8204 字 </span>
           <span class="more-meta"> 预计阅读 17 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 29-异常处理-模块化
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-产生异常">1.1 产生异常</a>
       <ul>
@@ -395,7 +406,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 29-异常处理-模块化
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E5%BC%82%E5%B8%B8">1 异常</a>
@@ -1539,7 +1555,7 @@ raise 自定义异常()
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2016-06-22
       
     </span>
   </p>
@@ -1560,24 +1576,27 @@ raise 自定义异常()
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/28-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92-__slots__-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8/">
+          <a class="prev" href="/post/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1587,12 +1606,12 @@ raise 自定义异常()
 </svg>
 
             </i>
-            <span class="prev-text nav-default">28-生成器交互-__slots__-未实现异常</span>
+            <span class="prev-text nav-default">2-nginx安装echo模块</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/3-concurrent%E6%A8%A1%E5%9D%97/">
-            <span class="next-text nav-default">3-concurrent模块</span>
+          <a class="next" href="/post/5-sqlalchemy-flask_sqlalchemy-wtforms/">
+            <span class="next-text nav-default">5-sqlalchemy-flask_sqlalchemy-wtforms</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1767,6 +1786,13 @@ raise 自定义异常()
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

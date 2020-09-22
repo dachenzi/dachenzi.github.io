@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constraint 1.2.5 索引 1.3 实体联系 1.4 视图 2 SQL 2.1 分" />
+  <meta name="description" content="title: 40-数据库基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constrain" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="40-数据库基础" />
-<meta property="og:description" content="文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constraint 1.2.5 索引 1.3 实体联系 1.4 视图 2 SQL 2.1 分" />
+<meta property="og:description" content="title: 40-数据库基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constrain" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" />
-
+<meta property="article:published_time" content="2016-11-01T14:39:14+00:00" />
+<meta property="article:modified_time" content="2016-11-01T14:39:14+00:00" />
 <meta itemprop="name" content="40-数据库基础">
-<meta itemprop="description" content="文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constraint 1.2.5 索引 1.3 实体联系 1.4 视图 2 SQL 2.1 分">
+<meta itemprop="description" content="title: 40-数据库基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constrain">
+<meta itemprop="datePublished" content="2016-11-01T14:39:14+00:00" />
+<meta itemprop="dateModified" content="2016-11-01T14:39:14+00:00" />
+<meta itemprop="wordCount" content="11062">
 
-<meta itemprop="wordCount" content="11046">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="40-数据库基础"/>
-<meta name="twitter:description" content="文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constraint 1.2.5 索引 1.3 实体联系 1.4 视图 2 SQL 2.1 分"/>
+<meta name="twitter:description" content="title: 40-数据库基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 数据库概述 1.1 关系数据库之ACID理论 1.2 关系数据库之概念 1.2.1 候选键 1.2.2 主键 1.2.3 外键 1.2.4 约束Constrain"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">40-数据库基础</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2016-11-01" class="post-time">
+          2016-11-01
         </time>
-        
-        <span class="more-meta"> 约 11046 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 11062 字 </span>
           <span class="more-meta"> 预计阅读 23 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 40-数据库基础
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-关系数据库之acid理论">1.1 关系数据库之ACID理论</a></li>
     <li><a href="#12-关系数据库之概念">1.2 关系数据库之概念</a>
@@ -406,7 +417,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 40-数据库基础
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A6%82%E8%BF%B0">1 数据库概述</a>
@@ -1772,7 +1788,7 @@ SET AUTOCOMMIT语句可以禁用或启用默认的autocommit模式，用于当�
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2016-11-01
       
     </span>
   </p>
@@ -1793,24 +1809,27 @@ SET AUTOCOMMIT语句可以禁用或启用默认的autocommit模式，用于当�
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+          <a class="prev" href="/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1820,12 +1839,12 @@ SET AUTOCOMMIT语句可以禁用或启用默认的autocommit模式，用于当�
 </svg>
 
             </i>
-            <span class="prev-text nav-default">4-内置结构-元组-字符串</span>
+            <span class="prev-text nav-default">44-zookeeper学习笔记</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/">
-            <span class="next-text nav-default">41-数据库-pymysql-DBUtils</span>
+          <a class="next" href="/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/">
+            <span class="next-text nav-default">8-rbac权限系统</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -2000,6 +2019,13 @@ SET AUTOCOMMIT语句可以禁用或启用默认的autocommit模式，用于当�
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

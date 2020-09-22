@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo" />
+  <meta name="description" content="title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="4-logging模块" />
-<meta property="og:description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo" />
+<meta property="og:description" content="title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/" />
-
+<meta property="article:published_time" content="2019-06-16T00:03:45+00:00" />
+<meta property="article:modified_time" content="2019-06-16T00:03:45+00:00" />
 <meta itemprop="name" content="4-logging模块">
-<meta itemprop="description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo">
+<meta itemprop="description" content="title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息">
+<meta itemprop="datePublished" content="2019-06-16T00:03:45+00:00" />
+<meta itemprop="dateModified" content="2019-06-16T00:03:45+00:00" />
+<meta itemprop="wordCount" content="8484">
 
-<meta itemprop="wordCount" content="8465">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python模块," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="4-logging模块"/>
-<meta name="twitter:description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo"/>
+<meta name="twitter:description" content="title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">4-logging模块</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2019-06-16" class="post-time">
+          2019-06-16
         </time>
-        
-        <span class="more-meta"> 约 8465 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E6%A8%A1%E5%9D%97/"> Python模块 </a>
+            
+          </div>
+        <span class="more-meta"> 约 8484 字 </span>
           <span class="more-meta"> 预计阅读 17 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 4-logging模块
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-日志级别">1.1 日志级别</a></li>
     <li><a href="#12-日志格式字符串">1.2 日志格式字符串</a></li>
@@ -384,7 +395,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 4-logging模块
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-logging%E6%A8%A1%E5%9D%97">1 logging模块</a>
@@ -1743,7 +1759,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2019-06-16
       
     </span>
   </p>
@@ -1764,24 +1780,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E6%A8%A1%E5%9D%97/">Python模块</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/4-docker%E7%BD%91%E7%BB%9C/">
+          <a class="prev" href="/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1791,12 +1810,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">4-docker网络</span>
+            <span class="prev-text nav-default">1-基础概念及环境部署</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/4-websocket-flask-websocket/">
-            <span class="next-text nav-default">4-websocket-flask-websocket</span>
+          <a class="next" href="/post/linuxuser/">
+            <span class="next-text nav-default">LinuxUser</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1971,6 +1990,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

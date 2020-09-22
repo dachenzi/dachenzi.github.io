@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的默认值 3.2 可变参数 3.2.1 可变位置传参 3.2.2 可变关键字传参" />
+  <meta name="description" content="title: 9-函数定义-位置参数-返回值 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,21 +60,23 @@
 
 
 <meta property="og:title" content="9-函数定义-位置参数-返回值" />
-<meta property="og:description" content="文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的默认值 3.2 可变参数 3.2.1 可变位置传参 3.2.2 可变关键字传参" />
+<meta property="og:description" content="title: 9-函数定义-位置参数-返回值 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/9-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89-%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E8%BF%94%E5%9B%9E%E5%80%BC/" />
-
+<meta property="article:published_time" content="2018-01-06T20:05:48+00:00" />
+<meta property="article:modified_time" content="2018-01-06T20:05:48+00:00" />
 <meta itemprop="name" content="9-函数定义-位置参数-返回值">
-<meta itemprop="description" content="文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的默认值 3.2 可变参数 3.2.1 可变位置传参 3.2.2 可变关键字传参">
+<meta itemprop="description" content="title: 9-函数定义-位置参数-返回值 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的">
+<meta itemprop="datePublished" content="2018-01-06T20:05:48+00:00" />
+<meta itemprop="dateModified" content="2018-01-06T20:05:48+00:00" />
+<meta itemprop="wordCount" content="4658">
 
-<meta itemprop="wordCount" content="4635">
 
 
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="9-函数定义-位置参数-返回值"/>
-<meta name="twitter:description" content="文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的默认值 3.2 可变参数 3.2.1 可变位置传参 3.2.2 可变关键字传参"/>
+<meta name="twitter:description" content="title: 9-函数定义-位置参数-返回值 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -321,11 +323,14 @@
       <h1 class="post-title">9-函数定义-位置参数-返回值</h1>
       
       <div class="post-meta">
-        <time datetime="0001-01-01" class="post-time">
-          0001-01-01
+        <time datetime="2018-01-06" class="post-time">
+          2018-01-06
         </time>
-        
-        <span class="more-meta"> 约 4635 字 </span>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            
+          </div>
+        <span class="more-meta"> 约 4658 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
 
         
@@ -342,6 +347,12 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tags">title: 9-函数定义-位置参数-返回值
+data: 2020-09-21 17:03:56
+tags:</a></li>
+  </ul>
+
   <ul>
     <li><a href="#11-为什么要使用函数">1.1 为什么要使用函数</a></li>
     <li><a href="#12-python中的函数">1.2 Python中的函数</a></li>
@@ -366,7 +377,12 @@
 
     
     <div class="post-content">
-      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <hr>
+<h2 id="tags">title: 9-函数定义-位置参数-返回值
+data: 2020-09-21 17:03:56
+tags:</h2>
+<p>{% raw %}</p>
+<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D">1 函数介绍</a>
@@ -1036,7 +1052,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      0001-01-01
+      2018-01-06
       
     </span>
   </p>
@@ -1057,24 +1073,27 @@
     
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/wechat-qr-code.png">
+        <img class="image" src="/static/wechat-qr-code.png">
         <span>微信打赏</span>
       </label>
     
       <label class="qr-code-image" for="reward">
-        <img class="image" src="/alipay-qr-code.png">
+        <img class="image" src="/static/alipay-qr-code.png">
         <span>支付宝打赏</span>
       </label>
   </div>
 </div>
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          
+        </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/">
+          <a class="prev" href="/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1084,12 +1103,12 @@
 </svg>
 
             </i>
-            <span class="prev-text nav-default">8-rbac权限系统</span>
+            <span class="prev-text nav-default">双向链表之容器包装</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/dns/">
-            <span class="next-text nav-default">DNS</span>
+          <a class="next" href="/post/nginxbasis/">
+            <span class="next-text nav-default">nginxbasis</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
@@ -1264,6 +1283,13 @@
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

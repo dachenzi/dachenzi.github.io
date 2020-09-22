@@ -6,185 +6,185 @@
     <description>Recent content in Posts on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Jan 2018 16:01:23 +0800</lastBuildDate><atom:link href="https://dachenzi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jan 2020 23:02:11 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Ansible基础</title>
-      <link>https://dachenzi.github.io/post/1-ansible/</link>
-      <pubDate>Mon, 01 Jan 2018 16:01:23 +0800</pubDate>
+      <title>25-面向对象高级-魔术方法基础</title>
+      <link>https://dachenzi.github.io/post/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 13 Jan 2020 23:02:11 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-ansible/</guid>
-      <description>文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup</description>
+      <guid>https://dachenzi.github.io/post/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
+      <description>title: 25-面向对象高级-魔术方法基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 魔术方法 2 类的魔术方法 2.1 基本的魔法方法和常用属性 2.2 有关属性 2.3 比较操作符 2.4 算数运算符</description>
     </item>
     
     <item>
-      <title>1-django-介绍-MTV-命令-基础配置-admin</title>
-      <link>https://dachenzi.github.io/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>5-Python的封装与解构-集合</title>
+      <link>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</link>
+      <pubDate>Sat, 21 Dec 2019 22:57:33 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</guid>
-      <description>文章目录 1 什么是web框架 2 WSGI 3 MVC与MTV模式 3.1 MVC框架 3.2 MTV框架 3.3 区别 4 django介绍 4.1 Django处理顺序 4.2 创建django站</description>
+      <guid>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</guid>
+      <description>title: 5-Python的封装与解构-集合 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的</description>
     </item>
     
     <item>
-      <title>1-docker入门介绍</title>
-      <link>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>DNS</title>
+      <link>https://dachenzi.github.io/post/dns/</link>
+      <pubDate>Tue, 17 Dec 2019 00:44:05 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid>
-      <description>1 虚拟化介绍 主流的虚拟机化方式： 主机级虚拟化：虚拟化的是整个完整的物理硬件平台(VMware workstation) 容器级虚拟化：虚拟化的是一个个的用户空间 主机虚</description>
+      <guid>https://dachenzi.github.io/post/dns/</guid>
+      <description>title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3</description>
     </item>
     
     <item>
-      <title>1-flask-快速入门-配置-路由基础-请求与响应</title>
-      <link>https://dachenzi.github.io/post/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>基础</title>
+      <link>https://dachenzi.github.io/post/%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 16 Dec 2019 18:14:00 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/</guid>
-      <description>文章目录 1 werkzeug 2 hello world 3 静态文件和模板文件配置 4 用户登录 5 session使用 5.1 基于装饰器的用户认证 5.2 endpoint 5.3 functools.wraps 5.4 session的产生过程分析 6 配置基</description>
+      <guid>https://dachenzi.github.io/post/%E5%9F%BA%E7%A1%80/</guid>
+      <description>title: 基础练习题 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1、给一个半径，求圆的面积和周长。圆周率3.14 2 输入两个数，比较大小后，从小到大升序打印 3 依次输入若干个</description>
     </item>
     
     <item>
-      <title>1-JavaScript介绍及使用</title>
-      <link>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>2-docker基本使用</title>
+      <link>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 06 Nov 2019 00:30:42 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
-      <description>文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS</description>
+      <guid>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>1 docker的基本结构 docker的架构图如下： Client端 &amp;ndash;&amp;gt; docker client Hosts(Docker_Host,server端) &amp;ndash;&amp;gt; docker daemon Registries &amp;ndash;&amp;gt; docker registries do</description>
     </item>
     
     <item>
-      <title>1-random模块</title>
-      <link>https://dachenzi.github.io/post/1-random%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>面向对象基础</title>
+      <link>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sat, 05 Oct 2019 11:10:53 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-random%E6%A8%A1%E5%9D%97/</guid>
-      <description>1 随机数random 之所以在这里介绍random模块是因为，我们可能需要在列表中随机挑选一个或几个重复或者不重复的数据，这时，就可以使用py</description>
+      <guid>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</guid>
+      <description>title: 面向对象基础 data: 2020-09-21 17:03:56 tags: {% raw %} 1 随机整数生成类 1.1 工具类思路 1.2 生成器思路 2 打印坐标 3 车辆信息 4 实现温度的处理 5 模拟购物车 6 面积计算 1 随机整数生成</description>
     </item>
     
     <item>
-      <title>1-冒泡排序</title>
-      <link>https://dachenzi.github.io/post/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>2-django-urls路由系统基本使用</title>
+      <link>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 21 Sep 2019 03:35:55 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
-      <description>1 冒泡算法 冒泡排序（Bubble Sort），是一种计算机科学领域的较简单的排序算法,它属于交换排序，主要的方式是通过两辆比较，交换位置，如同</description>
+      <guid>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>1 路由系统(urls控制) 1.1 正则字符串参数 1.2 url的分组 1.2.1 无名分组 1.2.2 有名分组 1.3 URLconf 在什么上查找 1.4 include(路由分发) 1.5 别名(name参数</description>
     </item>
     
     <item>
-      <title>1-基础概念及环境部署</title>
-      <link>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>6-subprocess模块-tempfile模块</title>
+      <link>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Sun, 25 Aug 2019 01:49:41 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
-      <description>文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解释器 5. Python版本区别 6. Pytho</description>
+      <guid>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</guid>
+      <description>title: 6-subprocess模块-tempfile模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 subprocess模块 用于执行命令，它取代了比较老得os.system</description>
+    </item>
+    
+    <item>
+      <title>16-文件操作-StringIO-BytesIO</title>
+      <link>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</link>
+      <pubDate>Fri, 19 Jul 2019 15:25:35 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</guid>
+      <description>title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲</description>
+    </item>
+    
+    <item>
+      <title>4-django-orm基本使用</title>
+      <link>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 08 Jul 2019 02:30:31 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>文章目录 1 数据库与ORM 2 orm的配置 2.1 引擎和配置 2.2 mysql驱动程序 3 orm 表模型 3.1 创建表对象 3.2 Django字段类型 3.3 常用字段参数说明 3.4 特殊类</description>
+    </item>
+    
+    <item>
+      <title>3-concurrent模块</title>
+      <link>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Fri, 28 Jun 2019 21:51:20 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</guid>
+      <description>title: 3-concurrent模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 conturrent包 2 future模块 3 ThreadPoolExecutor对象 4 F</description>
     </item>
     
     <item>
       <title>1-平均负载</title>
       <link>https://dachenzi.github.io/post/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 26 Jun 2019 02:43:32 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/</guid>
       <description>1 平均负载 安装stress，sysstat包 1 yum install -y stress sysstat 其中： stress是一个Linux系统压力测试工具，可以用作异常进程，模拟平均负载升</description>
     </item>
     
     <item>
-      <title>1-源码安装缺少configure文件</title>
-      <link>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>2-选择排序</title>
+      <link>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 23 Jun 2019 04:09:01 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</guid>
-      <description>源代码中没有configure的软件安装方法 今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里</description>
+      <guid>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>title: 2-选择排序 data: 2020-09-21 17:03:56 tags: {% raw %} 1 选择排序介绍 2 基本选择排序 3 选择排序的优化 3.1 二元选择排序 3.2 同时排序最大和最小值 3.3 索引混乱 3.4 代码优化 4 总结 1 选择</description>
     </item>
     
     <item>
-      <title>10-函数嵌套-作用域-闭包-LEGB-函数销毁</title>
-      <link>https://dachenzi.github.io/post/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>1-基础概念及环境部署</title>
+      <link>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sun, 16 Jun 2019 19:55:58 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</guid>
-      <description>文章目录 1 函数嵌套 2 作用域 2.1 global关键字 3 闭包 3.1 nonlocal关键字 4 默认值的作用域 5 变量名解析原则LEGB 6 函数的销毁 1 函数嵌套 一</description>
+      <guid>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>title: 1-基础概念及环境部署 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解</description>
     </item>
     
     <item>
-      <title>11-函数的执行流程-函数递归-匿名函数-生成器</title>
-      <link>https://dachenzi.github.io/post/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>4-logging模块</title>
+      <link>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Sun, 16 Jun 2019 00:03:45 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
-      <description>文章目录 1 函数的执行流程 1.1 字节码了解压栈过程 1.2 嵌套函数的压栈 2 递归 2.1 递归函数 2.2 递归的性能 2.3 递归的优化 2.4 间接递归 2.5 递归总结 3 匿名函数 4 Pyth</description>
+      <guid>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</guid>
+      <description>title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息</description>
     </item>
     
     <item>
-      <title>12-树-基础知识-二叉树-完全二叉树-斜树</title>
-      <link>https://dachenzi.github.io/post/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>LinuxUser</title>
+      <link>https://dachenzi.github.io/post/linuxuser/</link>
+      <pubDate>Fri, 07 Jun 2019 04:01:16 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</guid>
-      <description>文章目录 1 树 2 树的概念 3 树的特点 4 二叉树 4.1 斜树 4.2 满二叉树 4.3 完全二叉树 4.4 二叉树的性质 4.4.1 性质1 4.4.2 性质2 4.4.3 性质3 4.4.4 性质4 4.4.5 性质5 4.4.6 其他性质 1 树 树在</description>
+      <guid>https://dachenzi.github.io/post/linuxuser/</guid>
+      <description>1 小知识点回顾 Linux 是一个多用户多任务操作系统。 每个文件和进程，都需要对应一个用户和用户组。 Linux系统是通过UID和GID来识别用户和组的。</description>
     </item>
     
     <item>
-      <title>13-高阶函数-柯里化-装饰器</title>
-      <link>https://dachenzi.github.io/post/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>4-内置结构-元组-字符串</title>
+      <link>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Tue, 04 Jun 2019 00:52:44 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/13-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-%E8%A3%85%E9%A5%B0%E5%99%A8/</guid>
-      <description>文章目录 1 高阶函数 1.1 自定义sort函数 1.1.1 将规模缩小，先实现排序，先不管key和reverse参数 1.1.2 添加reverse参数判断 1.1.3 添加key参数</description>
+      <guid>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>title: 4-内置结构-元组-字符串 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 元组概念 1.1 元祖的特点 1.2 元组的定义 1.3 元组的访问 1.4 元组的查询 2 命名元组 3 字符串 3.1 字符串的基本</description>
     </item>
     
     <item>
-      <title>14-函数参数检测-inspect模块</title>
-      <link>https://dachenzi.github.io/post/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>gogs安装</title>
+      <link>https://dachenzi.github.io/post/gogs%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 25 May 2019 15:40:40 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</guid>
-      <description>文章目录 1 python类型注解 2 函数定义的弊端 3 函数文档 4 函数注解 4.1 annotation属性 5 inspect模块 5.1 常用方法 5.2 signatur</description>
+      <guid>https://dachenzi.github.io/post/gogs%E5%AE%89%E8%A3%85/</guid>
+      <description>1 Gogs安装 Gogs 是一款极易搭建的自助 Git 服务。Gogs 的目标是打造一个最简单、最快速和最轻松的方式搭建自助 Git 服务。使用 Go 语言开发使得 Gogs 能够通过</description>
     </item>
     
     <item>
-      <title>15-reduce-pratial偏函数-lsu_cache</title>
-      <link>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>rpmforyum_repo</title>
+      <link>https://dachenzi.github.io/post/rpmforyum_repo/</link>
+      <pubDate>Mon, 20 May 2019 20:12:49 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</guid>
-      <description>文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war</description>
+      <guid>https://dachenzi.github.io/post/rpmforyum_repo/</guid>
+      <description>1 Linux上安装软件包的方式 Linux下常用的软件包安装方式有三种。 1.1 编译安装 编译:将源代码变为机器可执行的代码文件。 安装:将可执行文件安</description>
     </item>
     
     <item>
-      <title>16-文件操作-StringIO-BytesIO</title>
-      <link>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>DNS-server</title>
+      <link>https://dachenzi.github.io/post/dns-server/</link>
+      <pubDate>Fri, 17 May 2019 21:39:51 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</guid>
-      <description>文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管</description>
-    </item>
-    
-    <item>
-      <title>17-路径操作-shutil模块</title>
-      <link>https://dachenzi.github.io/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/</guid>
-      <description>文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法</description>
-    </item>
-    
-    <item>
-      <title>18-csv文件-ini文件处理</title>
-      <link>https://dachenzi.github.io/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</guid>
-      <description>文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法 2 ini文件处理 2.1 configparser模块 2.2</description>
-    </item>
-    
-    <item>
-      <title>2-datetime模块</title>
-      <link>https://dachenzi.github.io/post/2-datetime%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/2-datetime%E6%A8%A1%E5%9D%97/</guid>
-      <description>文章目录 1 时间 2 datetime模块 2.1 获取当前日期和时间 2.2 获取指定日期和时间 2.3 datetime转换为timestamp 2.4 timestamp转</description>
+      <guid>https://dachenzi.github.io/post/dns-server/</guid>
+      <description>title: DNS-server data: 2020-09-21 17:03:56 tags: {% raw %} 比较好用的dns记录 OpenDNS： 208.67.222.222 208.67.220.220 台湾中华电讯的 DNS： 168.95.192.1 168.95.192.2 香港宽频的 DNS： 203.80.96.9 203.80.96.10 Level 3: 4.2.2.2</description>
     </item>
     
   </channel>
