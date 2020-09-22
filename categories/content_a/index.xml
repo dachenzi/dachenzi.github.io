@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>content_a on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/categories/content_a/</link>
+    <description>Recent content in content_a on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 07 Feb 2020 01:09:20 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/content_a/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3-内置结构-列表</title>
+      <link>https://dachenzi.github.io/post/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</link>
+      <pubDate>Fri, 07 Feb 2020 01:09:20 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</guid>
+      <description>文章目录 1 Python内置数据结构 1.1 数值型 1.2 math模块 1.3 round圆整 1.4 常用的其他函数 1.5 类型判断 2 列表 2.1 索引访问 2.2 列表和链表的区别 2.3 列表的</description>
+    </item>
+    
+    <item>
+      <title>1-源码安装缺少configure文件</title>
+      <link>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 10 Dec 2019 19:01:32 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%BC%BA%E5%B0%91configure%E6%96%87%E4%BB%B6/</guid>
+      <description>源代码中没有configure的软件安装方法 今天下载了一个旧版的GeoIP软件包，解压以后发现代码包中没有configure文件，现在这这里</description>
+    </item>
+    
+    <item>
+      <title>打印菱形</title>
+      <link>https://dachenzi.github.io/post/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</link>
+      <pubDate>Sat, 07 Dec 2019 17:04:06 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E6%89%93%E5%8D%B0%E8%8F%B1%E5%BD%A2/</guid>
+      <description>文章目录 打印菱形 1 分析 2 对称性 3 abs及三元表达式调整 4 完了吗？ 打印菱形 现在有需求，请使用 Python 尽可能少的代码，打印如下菱形 1 2 3 4 5 6 7 * *** *****</description>
+    </item>
+    
+    <item>
+      <title>1-docker入门介绍</title>
+      <link>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Sat, 30 Nov 2019 10:44:28 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>1 虚拟化介绍 主流的虚拟机化方式： 主机级虚拟化：虚拟化的是整个完整的物理硬件平台(VMware workstation) 容器级虚拟化：虚拟化的是一个个的用户空间 主机虚</description>
+    </item>
+    
+    <item>
+      <title>4-内置结构-元组-字符串</title>
+      <link>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Sun, 24 Nov 2019 03:58:33 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>文章目录 1 元组概念 1.1 元祖的特点 1.2 元组的定义 1.3 元组的访问 1.4 元组的查询 2 命名元组 3 字符串 3.1 字符串的基本操作 3.1.1 字符串的访问 3.1.2 字符串的拼接 3.2 字符串分</description>
+    </item>
+    
+    <item>
+      <title>16-文件操作-StringIO-BytesIO</title>
+      <link>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</link>
+      <pubDate>Mon, 18 Nov 2019 11:39:58 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</guid>
+      <description>文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管</description>
+    </item>
+    
+    <item>
+      <title>素数系列</title>
+      <link>https://dachenzi.github.io/post/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Tue, 12 Nov 2019 03:09:55 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E7%B4%A0%E6%95%B0%E7%B3%BB%E5%88%97/</guid>
+      <description>1 给一个数、判断它是否是素数(质数) (质数：一个大于1的自然数只能被1和它本身整除) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 (1) 传统方法 n</description>
+    </item>
+    
+    <item>
+      <title>12-树-基础知识-二叉树-完全二叉树-斜树</title>
+      <link>https://dachenzi.github.io/post/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</link>
+      <pubDate>Tue, 05 Nov 2019 02:03:35 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/12-%E6%A0%91-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%96%9C%E6%A0%91/</guid>
+      <description>文章目录 1 树 2 树的概念 3 树的特点 4 二叉树 4.1 斜树 4.2 满二叉树 4.3 完全二叉树 4.4 二叉树的性质 4.4.1 性质1 4.4.2 性质2 4.4.3 性质3 4.4.4 性质4 4.4.5 性质5 4.4.6 其他性质 1 树 树在</description>
+    </item>
+    
+    <item>
+      <title>31-gogs安装-git基础</title>
+      <link>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 30 Sep 2019 14:22:22 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</guid>
+      <description>文章目录 1 Gogs安装 2 Git介绍 3 使用Github仓库 3.1 Git配置 3.2 远程仓库 4 Git基本使用 4.1 创建版本库 4.2 查看工作区状态 4.3 查看修改内容 4.4 查</description>
+    </item>
+    
+    <item>
+      <title>43-celery异步任务队列</title>
+      <link>https://dachenzi.github.io/post/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</link>
+      <pubDate>Tue, 17 Sep 2019 00:53:12 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</guid>
+      <description>1 Celery概述 关于celery的定义，首先来看官方网站： Celery(芹菜) 是一个简单、灵活且可靠的，处理大量消息的分布式系统，并且提供</description>
+    </item>
+    
+    <item>
+      <title>双向链表之容器包装</title>
+      <link>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</link>
+      <pubDate>Wed, 11 Sep 2019 08:08:12 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%AE%B9%E5%99%A8%E5%8C%85%E8%A3%85/</guid>
+      <description>容器包装 构建双向链表，实现append，pop，insert，remove，iternodes方法 将双向链表链表封装为容器，并且提供__ge</description>
+    </item>
+    
+    <item>
+      <title>33-并发编程-线程同步-Event-lock</title>
+      <link>https://dachenzi.github.io/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</link>
+      <pubDate>Thu, 05 Sep 2019 23:08:10 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</guid>
+      <description>文章目录 1 线程同步 1.1 Event 1.1.1 什么是Flag？ 1.1.2 Event原理 1.1.3 吃包子 1.2 Lock 1.2.1 lock方法 1.2.2 计数器 1.2.3 非阻塞锁 1.2.4 锁应用场景 1 线程同步 线程同步，线程间协</description>
+    </item>
+    
+    <item>
+      <title>斐波那契序列系列</title>
+      <link>https://dachenzi.github.io/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sun, 01 Sep 2019 19:16:53 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/</guid>
+      <description>1 打印100以内的斐波那契序列 1 2 3 4 5 6 7 8 a, b = 0, 1 print(b) while True: c = a + b if c &amp;gt; 100: break print(c) a, b = b, c 2 求斐波那契数列第101项 1 2 3 4 5 6 7 8 a, b</description>
+    </item>
+    
+    <item>
+      <title>38-网络编程-socketserver</title>
+      <link>https://dachenzi.github.io/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</link>
+      <pubDate>Thu, 29 Aug 2019 08:30:46 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</guid>
+      <description>文章目录 1 socket编程弊端 2 SocketServer模块 2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口 3</description>
+    </item>
+    
+    <item>
+      <title>1-基础概念及环境部署</title>
+      <link>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Thu, 29 Aug 2019 00:41:19 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解释器 5. Python版本区别 6. Pytho</description>
+    </item>
+    
+    <item>
+      <title>Tmux使用</title>
+      <link>https://dachenzi.github.io/post/tmux%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 24 Aug 2019 07:20:34 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/tmux%E4%BD%BF%E7%94%A8/</guid>
+      <description>1 Tmux 终端复用器类自由软件，功能类似于GUN screen，可以在一个终端内管理多个分离的会话，窗口及窗格，对于同时使用多个命令行，或多个任务时</description>
+    </item>
+    
+    <item>
+      <title>44-zookeeper学习笔记</title>
+      <link>https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 05 Aug 2019 13:22:19 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理</description>
+    </item>
+    
+    <item>
+      <title>15-reduce-pratial偏函数-lsu_cache</title>
+      <link>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</link>
+      <pubDate>Sat, 03 Aug 2019 18:53:56 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</guid>
+      <description>文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war</description>
+    </item>
+    
+    <item>
+      <title>2-flask-蓝图-闪现-中间件-session</title>
+      <link>https://dachenzi.github.io/post/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</link>
+      <pubDate>Thu, 01 Aug 2019 08:52:36 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/</guid>
+      <description>文章目录 1 flask蓝图 1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置 2 消息闪现 3 中间件 4 flask-session插件 4.1 安装 4.2 将session放在redis中</description>
+    </item>
+    
+    <item>
+      <title>1-JavaScript介绍及使用</title>
+      <link>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Thu, 25 Jul 2019 02:22:12 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
+      <description>文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS</description>
+    </item>
+    
+  </channel>
+</rss>

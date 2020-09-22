@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 17-路径操作-shutil模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路" />
+  <meta name="description" content="文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="17-路径操作-shutil模块" />
-<meta property="og:description" content="title: 17-路径操作-shutil模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路" />
+<meta property="og:description" content="文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/" />
-<meta property="article:published_time" content="2016-11-21T07:06:21+00:00" />
-<meta property="article:modified_time" content="2016-11-21T07:06:21+00:00" />
+<meta property="article:published_time" content="2019-04-17T13:44:08+00:00" />
+<meta property="article:modified_time" content="2019-04-17T13:44:08+00:00" />
 <meta itemprop="name" content="17-路径操作-shutil模块">
-<meta itemprop="description" content="title: 17-路径操作-shutil模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路">
-<meta itemprop="datePublished" content="2016-11-21T07:06:21+00:00" />
-<meta itemprop="dateModified" content="2016-11-21T07:06:21+00:00" />
-<meta itemprop="wordCount" content="5721">
+<meta itemprop="description" content="文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法">
+<meta itemprop="datePublished" content="2019-04-17T13:44:08+00:00" />
+<meta itemprop="dateModified" content="2019-04-17T13:44:08+00:00" />
+<meta itemprop="wordCount" content="5697">
 
 
 
-<meta itemprop="keywords" content="Python基础," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="17-路径操作-shutil模块"/>
-<meta name="twitter:description" content="title: 17-路径操作-shutil模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路"/>
+<meta name="twitter:description" content="文章目录 1 路径操作 1.1 os.path模块 1.2 pathlib模块 1.2.1 目录操作 初始化(一个路径对象) 路径拼接和分解 获取路径 父目录 目录的组成部分 全局方法"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">17-路径操作-shutil模块</h1>
       
       <div class="post-meta">
-        <time datetime="2016-11-21" class="post-time">
-          2016-11-21
+        <time datetime="2019-04-17" class="post-time">
+          2019-04-17
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 5721 字 </span>
+        <span class="more-meta"> 约 5697 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
@@ -347,12 +347,6 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 17-路径操作-shutil模块
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
   <ul>
     <li><a href="#11-ospath模块">1.1 os.path模块</a></li>
     <li><a href="#12-pathlib模块">1.2 pathlib模块</a>
@@ -376,12 +370,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 17-路径操作-shutil模块
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C">1 路径操作</a>
@@ -1531,7 +1520,7 @@ tags:</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2016-11-21
+      2019-04-17
       
     </span>
   </p>
@@ -1565,14 +1554,14 @@ tags:</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/">
+          <a class="prev" href="/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1582,12 +1571,12 @@ tags:</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">九九乘法表</span>
+            <span class="prev-text nav-default">18-csv文件-ini文件处理</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-            <span class="next-text nav-default">44-zookeeper学习笔记</span>
+          <a class="next" href="/post/linuxsed/">
+            <span class="next-text nav-default">Linuxsed</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

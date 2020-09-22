@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 九九乘法表 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6" />
+  <meta name="description" content="文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="九九乘法表" />
-<meta property="og:description" content="title: 九九乘法表 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6" />
+<meta property="og:description" content="文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8/" />
-<meta property="article:published_time" content="2016-12-14T17:46:27+00:00" />
-<meta property="article:modified_time" content="2016-12-14T17:46:27+00:00" />
+<meta property="article:published_time" content="2018-09-17T01:15:30+00:00" />
+<meta property="article:modified_time" content="2018-09-17T01:15:30+00:00" />
 <meta itemprop="name" content="九九乘法表">
-<meta itemprop="description" content="title: 九九乘法表 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6">
-<meta itemprop="datePublished" content="2016-12-14T17:46:27+00:00" />
-<meta itemprop="dateModified" content="2016-12-14T17:46:27+00:00" />
-<meta itemprop="wordCount" content="1809">
+<meta itemprop="description" content="文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7">
+<meta itemprop="datePublished" content="2018-09-17T01:15:30+00:00" />
+<meta itemprop="dateModified" content="2018-09-17T01:15:30+00:00" />
+<meta itemprop="wordCount" content="1796">
 
 
 
-<meta itemprop="keywords" content="Python练习," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="九九乘法表"/>
-<meta name="twitter:description" content="title: 九九乘法表 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6"/>
+<meta name="twitter:description" content="文章目录 打印九九乘法表 1 降低问题复杂度 2 获取对角线下半部部分 3 调整循环次数 4 调整间距 5 使用三元云算符惊喜调整间隔 6 利用format优化显示 7"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">九九乘法表</h1>
       
       <div class="post-meta">
-        <time datetime="2016-12-14" class="post-time">
-          2016-12-14
+        <time datetime="2018-09-17" class="post-time">
+          2018-09-17
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E7%BB%83%E4%B9%A0/"> Python练习 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 1809 字 </span>
+        <span class="more-meta"> 约 1796 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
@@ -346,24 +346,13 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 九九乘法表
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 九九乘法表
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#%E6%89%93%E5%8D%B0%E4%B9%9D%E4%B9%9D%E4%B9%98%E6%B3%95%E8%A1%A8">打印九九乘法表</a></li>
@@ -800,7 +789,7 @@ tags:</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2016-12-14
+      2018-09-17
       
     </span>
   </p>
@@ -834,14 +823,14 @@ tags:</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E7%BB%83%E4%B9%A0/">Python练习</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/">
+          <a class="prev" href="/post/%E5%AD%97%E5%85%B8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -851,12 +840,12 @@ tags:</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">双向链表</span>
+            <span class="prev-text nav-default">字典</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/">
-            <span class="next-text nav-default">17-路径操作-shutil模块</span>
+          <a class="next" href="/post/linuxdirs/">
+            <span class="next-text nav-default">LinuxDirs</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

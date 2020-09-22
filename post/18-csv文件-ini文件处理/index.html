@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 18-csv文件-ini文件处理 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法" />
+  <meta name="description" content="文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法 2 ini文件处理 2.1 configparser模块 2.2" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="18-csv文件-ini文件处理" />
-<meta property="og:description" content="title: 18-csv文件-ini文件处理 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法" />
+<meta property="og:description" content="文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法 2 ini文件处理 2.1 configparser模块 2.2" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" />
-<meta property="article:published_time" content="2018-04-10T20:28:07+00:00" />
-<meta property="article:modified_time" content="2018-04-10T20:28:07+00:00" />
+<meta property="article:published_time" content="2019-05-25T18:58:05+00:00" />
+<meta property="article:modified_time" content="2019-05-25T18:58:05+00:00" />
 <meta itemprop="name" content="18-csv文件-ini文件处理">
-<meta itemprop="description" content="title: 18-csv文件-ini文件处理 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法">
-<meta itemprop="datePublished" content="2018-04-10T20:28:07+00:00" />
-<meta itemprop="dateModified" content="2018-04-10T20:28:07+00:00" />
-<meta itemprop="wordCount" content="3490">
+<meta itemprop="description" content="文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法 2 ini文件处理 2.1 configparser模块 2.2">
+<meta itemprop="datePublished" content="2019-05-25T18:58:05+00:00" />
+<meta itemprop="dateModified" content="2019-05-25T18:58:05+00:00" />
+<meta itemprop="wordCount" content="3466">
 
 
 
-<meta itemprop="keywords" content="Python基础," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="18-csv文件-ini文件处理"/>
-<meta name="twitter:description" content="title: 18-csv文件-ini文件处理 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法"/>
+<meta name="twitter:description" content="文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法 2 ini文件处理 2.1 configparser模块 2.2"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">18-csv文件-ini文件处理</h1>
       
       <div class="post-meta">
-        <time datetime="2018-04-10" class="post-time">
-          2018-04-10
+        <time datetime="2019-05-25" class="post-time">
+          2019-05-25
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 3490 字 </span>
+        <span class="more-meta"> 约 3466 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
@@ -347,12 +347,6 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 18-csv文件-ini文件处理
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
   <ul>
     <li><a href="#11-手动生成一个csv文件">1.1 手动生成一个csv文件</a></li>
     <li><a href="#12-cvs模块">1.2 cvs模块</a>
@@ -383,12 +377,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 18-csv文件-ini文件处理
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-csv%E6%96%87%E4%BB%B6">1 CSV文件</a>
@@ -768,7 +757,7 @@ tags:</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2018-04-10
+      2019-05-25
       
     </span>
   </p>
@@ -802,14 +791,14 @@ tags:</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/python%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0/">
+          <a class="prev" href="/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -819,12 +808,12 @@ tags:</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">Python基础练习</span>
+            <span class="prev-text nav-default">1-django-介绍-MTV-命令-基础配置-admin</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/">
-            <span class="next-text nav-default">33-并发编程-线程同步-Event-lock</span>
+          <a class="next" href="/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/">
+            <span class="next-text nav-default">17-路径操作-shutil模块</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

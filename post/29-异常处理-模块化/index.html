@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕" />
+  <meta name="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="29-异常处理-模块化" />
-<meta property="og:description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕" />
+<meta property="og:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/" />
-<meta property="article:published_time" content="2016-06-22T03:04:18+00:00" />
-<meta property="article:modified_time" content="2016-06-22T03:04:18+00:00" />
+<meta property="article:published_time" content="2018-09-02T09:34:59+00:00" />
+<meta property="article:modified_time" content="2018-09-02T09:34:59+00:00" />
 <meta itemprop="name" content="29-异常处理-模块化">
-<meta itemprop="description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕">
-<meta itemprop="datePublished" content="2016-06-22T03:04:18+00:00" />
-<meta itemprop="dateModified" content="2016-06-22T03:04:18+00:00" />
-<meta itemprop="wordCount" content="8204">
+<meta itemprop="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常">
+<meta itemprop="datePublished" content="2018-09-02T09:34:59+00:00" />
+<meta itemprop="dateModified" content="2018-09-02T09:34:59+00:00" />
+<meta itemprop="wordCount" content="8185">
 
 
 
-<meta itemprop="keywords" content="Python基础," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="29-异常处理-模块化"/>
-<meta name="twitter:description" content="title: 29-异常处理-模块化 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕"/>
+<meta name="twitter:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">29-异常处理-模块化</h1>
       
       <div class="post-meta">
-        <time datetime="2016-06-22" class="post-time">
-          2016-06-22
+        <time datetime="2018-09-02" class="post-time">
+          2018-09-02
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 8204 字 </span>
+        <span class="more-meta"> 约 8185 字 </span>
           <span class="more-meta"> 预计阅读 17 分钟 </span>
 
         
@@ -347,12 +347,6 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 29-异常处理-模块化
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
   <ul>
     <li><a href="#11-产生异常">1.1 产生异常</a>
       <ul>
@@ -406,12 +400,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 29-异常处理-模块化
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E5%BC%82%E5%B8%B8">1 异常</a>
@@ -1555,7 +1544,7 @@ raise 自定义异常()
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2016-06-22
+      2018-09-02
       
     </span>
   </p>
@@ -1589,14 +1578,14 @@ raise 自定义异常()
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/">
+          <a class="prev" href="/post/linuxdirs/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1606,12 +1595,12 @@ raise 自定义异常()
 </svg>
 
             </i>
-            <span class="prev-text nav-default">2-nginx安装echo模块</span>
+            <span class="prev-text nav-default">LinuxDirs</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/5-sqlalchemy-flask_sqlalchemy-wtforms/">
-            <span class="next-text nav-default">5-sqlalchemy-flask_sqlalchemy-wtforms</span>
+          <a class="next" href="/post/6-form-modelform%E5%AF%B9%E8%B1%A1/">
+            <span class="next-text nav-default">6-Form-ModelForm对象</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

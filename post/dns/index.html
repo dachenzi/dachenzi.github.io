@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3" />
+  <meta name="description" content="1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="DNS" />
-<meta property="og:description" content="title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3" />
+<meta property="og:description" content="1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/dns/" />
-<meta property="article:published_time" content="2019-12-17T00:44:05+00:00" />
-<meta property="article:modified_time" content="2019-12-17T00:44:05+00:00" />
+<meta property="article:published_time" content="2019-07-06T15:57:04+00:00" />
+<meta property="article:modified_time" content="2019-07-06T15:57:04+00:00" />
 <meta itemprop="name" content="DNS">
-<meta itemprop="description" content="title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3">
-<meta itemprop="datePublished" content="2019-12-17T00:44:05+00:00" />
-<meta itemprop="dateModified" content="2019-12-17T00:44:05+00:00" />
-<meta itemprop="wordCount" content="4668">
+<meta itemprop="description" content="1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记">
+<meta itemprop="datePublished" content="2019-07-06T15:57:04+00:00" />
+<meta itemprop="dateModified" content="2019-07-06T15:57:04+00:00" />
+<meta itemprop="wordCount" content="4659">
 
 
 
-<meta itemprop="keywords" content="Linux," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DNS"/>
-<meta name="twitter:description" content="title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3"/>
+<meta name="twitter:description" content="1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">DNS</h1>
       
       <div class="post-meta">
-        <time datetime="2019-12-17" class="post-time">
-          2019-12-17
+        <time datetime="2019-07-06" class="post-time">
+          2019-07-06
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/linux/"> Linux </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 4668 字 </span>
+        <span class="more-meta"> 约 4659 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
 
         
@@ -348,12 +348,6 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#tags">title: DNS
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
-  <ul>
     <li><a href="#61-什么是a记录">6.1 什么是A记录？</a></li>
     <li><a href="#62-什么是ns记录">6.2 什么是NS记录？</a></li>
     <li><a href="#63-什么是cname记录">6.3 什么是CNAME记录？</a></li>
@@ -366,12 +360,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: DNS
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<!-- TOC -->
+      <!-- TOC -->
 <ul>
 <li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AFdns">1 什么是DNS</a></li>
 <li><a href="#2-dns%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F">2 DNS域名系统</a></li>
@@ -558,7 +547,7 @@ www.baidu.com is an <span class="nb">alias</span> <span class="k">for</span> www
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2019-12-17
+      2019-07-06
       
     </span>
   </p>
@@ -592,14 +581,14 @@ www.baidu.com is an <span class="nb">alias</span> <span class="k">for</span> www
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/linux/">Linux</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/">
+          <a class="prev" href="/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -609,12 +598,12 @@ www.baidu.com is an <span class="nb">alias</span> <span class="k">for</span> www
 </svg>
 
             </i>
-            <span class="prev-text nav-default">5-Python的封装与解构-集合</span>
+            <span class="prev-text nav-default">1-JavaScript介绍及使用</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/%E5%9F%BA%E7%A1%80/">
-            <span class="next-text nav-default">基础</span>
+          <a class="next" href="/post/5-django-csrf-sessioncookie/">
+            <span class="next-text nav-default">5-django-csrf-session&amp;cookie</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

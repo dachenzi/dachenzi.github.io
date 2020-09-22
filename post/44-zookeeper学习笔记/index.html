@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 44-zookeeper学习笔记 data: 2020-09-21 17:03:56 tags: {% raw %} 1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分" />
+  <meta name="description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="44-zookeeper学习笔记" />
-<meta property="og:description" content="title: 44-zookeeper学习笔记 data: 2020-09-21 17:03:56 tags: {% raw %} 1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分" />
+<meta property="og:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
-<meta property="article:published_time" content="2016-11-07T13:06:20+00:00" />
-<meta property="article:modified_time" content="2016-11-07T13:06:20+00:00" />
+<meta property="article:published_time" content="2019-08-05T13:22:19+00:00" />
+<meta property="article:modified_time" content="2019-08-05T13:22:19+00:00" />
 <meta itemprop="name" content="44-zookeeper学习笔记">
-<meta itemprop="description" content="title: 44-zookeeper学习笔记 data: 2020-09-21 17:03:56 tags: {% raw %} 1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分">
-<meta itemprop="datePublished" content="2016-11-07T13:06:20+00:00" />
-<meta itemprop="dateModified" content="2016-11-07T13:06:20+00:00" />
-<meta itemprop="wordCount" content="5371">
+<meta itemprop="description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理">
+<meta itemprop="datePublished" content="2019-08-05T13:22:19+00:00" />
+<meta itemprop="dateModified" content="2019-08-05T13:22:19+00:00" />
+<meta itemprop="wordCount" content="5347">
 
 
 
-<meta itemprop="keywords" content="Python基础," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="44-zookeeper学习笔记"/>
-<meta name="twitter:description" content="title: 44-zookeeper学习笔记 data: 2020-09-21 17:03:56 tags: {% raw %} 1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分"/>
+<meta name="twitter:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">44-zookeeper学习笔记</h1>
       
       <div class="post-meta">
-        <time datetime="2016-11-07" class="post-time">
-          2016-11-07
+        <time datetime="2019-08-05" class="post-time">
+          2019-08-05
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 5371 字 </span>
+        <span class="more-meta"> 约 5347 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
 
         
@@ -347,12 +347,6 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 44-zookeeper学习笔记
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
   <ul>
     <li><a href="#41-选主流程">4.1 选主流程</a></li>
     <li><a href="#42-同步流程">4.2 同步流程</a></li>
@@ -384,12 +378,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 44-zookeeper学习笔记
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<h1 id="1-zookeeper">1 zookeeper</h1>
+      <h1 id="1-zookeeper">1 zookeeper</h1>
 <p>        zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。</p>
 <h1 id="2-应用场景">2 应用场景</h1>
 <p>        越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。</p>
@@ -982,7 +971,7 @@ Created /data/agent0000000000
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2016-11-07
+      2019-08-05
       
     </span>
   </p>
@@ -1016,14 +1005,14 @@ Created /data/agent0000000000
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/">
+          <a class="prev" href="/post/tmux%E4%BD%BF%E7%94%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1033,12 +1022,12 @@ Created /data/agent0000000000
 </svg>
 
             </i>
-            <span class="prev-text nav-default">17-路径操作-shutil模块</span>
+            <span class="prev-text nav-default">Tmux使用</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/40-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">
-            <span class="next-text nav-default">40-数据库基础</span>
+          <a class="next" href="/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/">
+            <span class="next-text nav-default">15-reduce-pratial偏函数-lsu_cache</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

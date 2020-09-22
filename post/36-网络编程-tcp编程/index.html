@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="daxin.li" />
-  <meta name="description" content="title: 36-网络编程-TCP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 ma" />
+  <meta name="description" content="文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 makefile方法 3.5 socket交互 3.4.1 通讯循" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -60,23 +60,23 @@
 
 
 <meta property="og:title" content="36-网络编程-TCP编程" />
-<meta property="og:description" content="title: 36-网络编程-TCP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 ma" />
+<meta property="og:description" content="文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 makefile方法 3.5 socket交互 3.4.1 通讯循" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/" />
-<meta property="article:published_time" content="2016-05-25T22:19:08+00:00" />
-<meta property="article:modified_time" content="2016-05-25T22:19:08+00:00" />
+<meta property="article:published_time" content="2018-01-13T19:43:08+00:00" />
+<meta property="article:modified_time" content="2018-01-13T19:43:08+00:00" />
 <meta itemprop="name" content="36-网络编程-TCP编程">
-<meta itemprop="description" content="title: 36-网络编程-TCP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 ma">
-<meta itemprop="datePublished" content="2016-05-25T22:19:08+00:00" />
-<meta itemprop="dateModified" content="2016-05-25T22:19:08+00:00" />
-<meta itemprop="wordCount" content="8989">
+<meta itemprop="description" content="文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 makefile方法 3.5 socket交互 3.4.1 通讯循">
+<meta itemprop="datePublished" content="2018-01-13T19:43:08+00:00" />
+<meta itemprop="dateModified" content="2018-01-13T19:43:08+00:00" />
+<meta itemprop="wordCount" content="8968">
 
 
 
-<meta itemprop="keywords" content="Python基础," />
+<meta itemprop="keywords" content="content_a," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="36-网络编程-TCP编程"/>
-<meta name="twitter:description" content="title: 36-网络编程-TCP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 ma"/>
+<meta name="twitter:description" content="文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 makefile方法 3.5 socket交互 3.4.1 通讯循"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -323,14 +323,14 @@
       <h1 class="post-title">36-网络编程-TCP编程</h1>
       
       <div class="post-meta">
-        <time datetime="2016-05-25" class="post-time">
-          2016-05-25
+        <time datetime="2018-01-13" class="post-time">
+          2018-01-13
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
+            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
             
           </div>
-        <span class="more-meta"> 约 8989 字 </span>
+        <span class="more-meta"> 约 8968 字 </span>
           <span class="more-meta"> 预计阅读 18 分钟 </span>
 
         
@@ -347,12 +347,6 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tags">title: 36-网络编程-TCP编程
-data: 2020-09-21 17:03:56
-tags:</a></li>
-  </ul>
-
   <ul>
     <li><a href="#31-通信流程">3.1 通信流程</a></li>
     <li><a href="#32-构建服务端">3.2 构建服务端</a></li>
@@ -389,12 +383,7 @@ tags:</a></li>
 
     
     <div class="post-content">
-      <hr>
-<h2 id="tags">title: 36-网络编程-TCP编程
-data: 2020-09-21 17:03:56
-tags:</h2>
-<p>{% raw %}</p>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%E6%A6%82%E8%BF%B0">1 概述</a></li>
@@ -2044,7 +2033,7 @@ client.close()
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2016-05-25
+      2018-01-13
       
     </span>
   </p>
@@ -2078,14 +2067,14 @@ client.close()
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
+          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/5-paramiko%E6%A8%A1%E5%9D%97/">
+          <a class="prev" href="/post/27-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E6%8F%8F%E8%BF%B0%E5%99%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -2095,12 +2084,12 @@ client.close()
 </svg>
 
             </i>
-            <span class="prev-text nav-default">5-paramiko模块</span>
+            <span class="prev-text nav-default">27-面向对象高级-描述器</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/35-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-gil-%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
-            <span class="next-text nav-default">35-并发编程-GIL-多进程</span>
+          <a class="next" href="/post/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/">
+            <span class="next-text nav-default">2-JavaScript函数-作用域-异常</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
