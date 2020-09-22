@@ -63,17 +63,17 @@
 <meta property="og:description" content="1 什么是定时任务 我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/linuxcrontab/" />
-<meta property="article:published_time" content="2018-06-23T00:25:02+00:00" />
-<meta property="article:modified_time" content="2018-06-23T00:25:02+00:00" />
+<meta property="article:published_time" content="2018-09-24T11:29:52+00:00" />
+<meta property="article:modified_time" content="2018-09-24T11:29:52+00:00" />
 <meta itemprop="name" content="Linuxcrontab">
 <meta itemprop="description" content="1 什么是定时任务 我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚">
-<meta itemprop="datePublished" content="2018-06-23T00:25:02+00:00" />
-<meta itemprop="dateModified" content="2018-06-23T00:25:02+00:00" />
-<meta itemprop="wordCount" content="7580">
+<meta itemprop="datePublished" content="2018-09-24T11:29:52+00:00" />
+<meta itemprop="dateModified" content="2018-09-24T11:29:52+00:00" />
+<meta itemprop="wordCount" content="3778">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Os," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linuxcrontab"/>
 <meta name="twitter:description" content="1 什么是定时任务 我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">Linuxcrontab</h1>
       
       <div class="post-meta">
-        <time datetime="2018-06-23" class="post-time">
-          2018-06-23
+        <time datetime="2018-09-24" class="post-time">
+          2018-09-24
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/os/"> Os </a>
             
           </div>
-        <span class="more-meta"> 约 7580 字 </span>
-          <span class="more-meta"> 预计阅读 16 分钟 </span>
+        <span class="more-meta"> 约 3778 字 </span>
+          <span class="more-meta"> 预计阅读 8 分钟 </span>
 
         
         
@@ -363,38 +363,6 @@
     <li><a href="#43-特殊符号">4.3 特殊符号</a></li>
     <li><a href="#44-配置命令">4.4 配置命令</a></li>
     <li><a href="#45-本章小结">4.5 本章小结</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#mathjax-true">title: Linuxcrontab
-date: 2017-03-14 09:35:52
-lastmod: 2017-03-14 09:35:52
-draft: false
-tags: [Os,]
-categories: [Os,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#31-系统定时任务-1">3.1 系统定时任务</a></li>
-    <li><a href="#32-用户自定义任务-1">3.2 用户自定义任务</a>
-      <ul>
-        <li><a href="#123-自定义任务种类-1">1.2.3 自定义任务种类</a></li>
-      </ul>
-    </li>
-    <li><a href="#33-本章小结-1">3.3 本章小结</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#41-开启服务-1">4.1 开启服务</a></li>
-    <li><a href="#42-配置文件-1">4.2 配置文件</a></li>
-    <li><a href="#43-特殊符号-1">4.3 特殊符号</a></li>
-    <li><a href="#44-配置命令-1">4.4 配置命令</a></li>
-    <li><a href="#45-本章小结-1">4.5 本章小结</a></li>
   </ul>
 </nav>
   </div>
@@ -852,468 +820,6 @@ backup_2016-03-30.tar.gz
 <li>开启postfix服务，让邮件成功发送。（不常用）</li>
 <li>在crontab定时任务的每一条目后添加 &gt;/dev/null 2&gt;&amp;1，把通知丢弃。</li>
 </ol>
-<hr>
-<h2 id="mathjax-true">title: Linuxcrontab
-date: 2017-03-14 09:35:52
-lastmod: 2017-03-14 09:35:52
-draft: false
-tags: [Os,]
-categories: [Os,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<h1 id="1-什么是定时任务-1">1 什么是定时任务</h1>
-<p>        我们的服务器存放的都是非常重要的数据，为了安全起见，我们每晚都会进行备份把数据备份到其他服务器上防止数据丢失，那么我们每天晚上都要手动的去备份吗？
-        服务器上运行的服务都会有日志文件，它会记录程序运行运行时的输出信息，服务器运行久了这些文件就会非常大，那么我们要定期的进行手动删除吗？
-        如果我们需要定时执行一些周期性重复性的任务，我们就会用到定时执行任务功能来帮我们自动执行每天、每周等周期性重复性的任务而不需要人为干预即可实现。</p>
-<h1 id="2-windows的定时任务-1">2 Windows的定时任务</h1>
-<p>作为使用者最多的操作系统，windows下也有定时任务。依次选择<code>开始</code>——&gt;<code>所有程序</code>——&gt;<code>附件</code>——&gt;<code>系统工具</code>——&gt;<code>任务计划程序</code>
-<img src="../photo/win-contab.jpeg" alt="contab"></p>
-<h1 id="3-linux的定时任务-1">3 Linux的定时任务</h1>
-<p>        Linux中的定时任务主要分为两种:</p>
-<ol>
-<li>系统定时任务</li>
-<li>用户自定义定时任务</li>
-</ol>
-<h2 id="31-系统定时任务-1">3.1 系统定时任务</h2>
-<p>        系统周期自行执行的任务工作，如轮询系统日志、备份系统数据、清理系统缓存等，这些任务无需我们认为干涉。系统定时任务是由/etc/logrotate.conf文件中的定义的，它的文件定义内容为：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># grep &#39;^[^#]&#39; /etc/logrotate.conf</span>
-weekly               <span class="c1">#按周分隔</span>
-rotate <span class="m">4</span>             <span class="c1">#最多分成4份，然后覆盖</span>
-create                <span class="c1">#创建新的空文件，供记录</span>
-dateext             <span class="c1">#分隔文件，用日期加后缀名</span>
-include /etc/logrotate.d           <span class="c1">#包涵/etc/logrotato.d下的文件</span>
-/var/log/wtmp <span class="o">{</span>
-    monthly             <span class="c1">#按月分隔</span>
-    create <span class="m">0664</span> root utmp    <span class="c1">#分隔后,创建权限为0644属主为root，名字为utmp的新文件</span>
-        minsize 1M      <span class="c1">#最小1M</span>
-    rotate <span class="m">1</span>             <span class="c1">#分1份</span>
-<span class="o">}</span>
-/var/log/btmp <span class="o">{</span>
-    missingok
-    monthly
-    create <span class="m">0600</span> root utmp
-    rotate <span class="m">1</span>
-<span class="o">}</span>
-<span class="c1">#        该文件定义的是系统定时任务，我们一般不更改其内容。</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="32-用户自定义任务-1">3.2 用户自定义任务</h2>
-<p>        某个用户或系统管理员定期要做的任务，例如每隔5跟中和互联网上时间服务器进行时间同步（基础优化）每天晚上0点备份站点数据库及数据库数据，一般这些工作需要每个用户自行设置。<br>
-        用户自定义常用的有三种：<code>at</code>、<code>anacron</code>、<code>crontab</code></p>
-<h3 id="123-自定义任务种类-1">1.2.3 自定义任务种类</h3>
-<p><strong><code>at</code></strong><br>
-        仅仅适合那些执行一次就结束的调度任务命令，例如：某天晚上需要处理一个任务，仅仅是这一天晚上，属于突发性的工作任务。由于at命令的是atd服务提供的，所以在我们使用at之前需要首先启动atd服务。由于at仅能执行一次，所以工作中并不常用。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># chkconfig --list atd</span>
-atd             0:off   1:off   2:off   3:off   4:off   5:off   6:off
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong><code>anacron</code></strong><br>
-        这个命令适合那些非7<em>24小时开机的服务器，anacron并不能指定具体时间执行任务工作，而是以天为周期或者在系统每次开机后执行的任务工作。它会检测服务器停机期间应该执行，但没有进行的任务工作，并将该任务执行一遍。由于网站服务器基本都是7</em>24小时开机的，所以该命令也不常用。
-<strong><code>crontab</code></strong><br>
-这个命令可以周期性的执行任务工作，比如可以每5分钟同步一次服务器的时间。crontab这个命令时候crond服务提供的，所以想要使用crontab就必须开启crond服务，这个命令对我们非常有用！下面将详细说明</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># chkconfig --list crond</span>
-crond           0:off   1:off   2:on    3:on    4:on    5:on    6:off
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="33-本章小结-1">3.3 本章小结</h2>
-<p>        我们所说的crond服务是运行的程序，而crontab命令是用户用来设置定时规则的命令。<code>crond</code>服务是企业生产工作中常用的重要服务，at和anacron很少用，可以忽略,几乎每个服务器都会用到crond服务。成百上千的服务器可以开发分布式定时任务项目方案。</p>
-<h1 id="4-crontab定时任务-1">4 crontab定时任务</h1>
-<p>        crontab是一个命令，后台周期性按分钟检测的是crond服务，这个服务会周期性的检测<code>/var/spool/cron/username</code>(用户的定时任务配置文件)用来检测是否有定时任务要执行。它的配置及说明文件为<code>/etc/crontab</code>。</p>
-<h2 id="41-开启服务-1">4.1 开启服务</h2>
-<p>        确保crond服务开机自启动。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># chkconfig --list | grep crond</span>
-crond           0:off   1:off   2:off    3:off    4:off    5:off    6:off
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># chkconfig crond on #设置crond服务，2345级别自启动</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># chkconfig --list | grep crond</span>
-crond           0:off   1:off   2:on    3:on    4:on    5:on    6:off
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="42-配置文件-1">4.2 配置文件</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># cat /etc/crontab</span>
-<span class="nv">SHELL</span><span class="o">=</span>/bin/bash
-<span class="nv">PATH</span><span class="o">=</span>/sbin:/bin:/usr/sbin:/usr/bin
-<span class="nv">MAILTO</span><span class="o">=</span>root
-<span class="nv">HOME</span><span class="o">=</span>/
- 
-<span class="c1"># For details see man 4 crontabs</span>
- 
-<span class="c1"># Example of job definition:</span>
-<span class="c1"># .---------------- minute (0 - 59)</span>
-<span class="c1"># |  .------------- hour (0 - 23)</span>
-<span class="c1"># |  |  .---------- day of month (1 - 31)</span>
-<span class="c1"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span>
-<span class="c1"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span>
-<span class="c1"># |  |  |  |  |</span>
-<span class="c1"># *  *  *  *  * user-name command to be executed</span>
- 
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>其中各字段含义为：</p>
-<ul>
-<li>第一段：表示分钟，取值范围是0-59</li>
-<li>第二段：表示小时，取值范围是0-23</li>
-<li>第三段：表示日，取值分为是1-31</li>
-<li>第四段：表示月份，取值范围是1-12</li>
-<li>第五段：表示周，取值范围是0-6(或1-7)</li>
-<li>第六段：表示cmd（要执行的操作）</li>
-</ul>
-<p><strong>小提示：周和日最好不要同时用，可能达不到想要的效果。</strong></p>
-<h2 id="43-特殊符号-1">4.3 特殊符号</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">含义</th>
-<th style="text-align:left">实例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">表示每(任意时间都)</td>
-<td style="text-align:left">* * * * * 表示分钟</td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">表示范围区间</td>
-<td style="text-align:left">1-5 * * * *表示每小时的1、2、3、4、5分钟</td>
-</tr>
-<tr>
-<td style="text-align:center">,</td>
-<td style="text-align:center">表示分隔时段</td>
-<td style="text-align:left">1，3 * * * *表示每小时的第1，3分钟</td>
-</tr>
-<tr>
-<td style="text-align:center">/n</td>
-<td style="text-align:center">表示每隔n</td>
-<td style="text-align:left">*/5 * * * * 表示每隔5分钟</td>
-</tr>
-</tbody>
-</table>
-<p>__小提示：分位上是* 表示每分钟（一般是不正常的）__</p>
-<h2 id="44-配置命令-1">4.4 配置命令</h2>
-<p><strong><code>crontab</code></strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">crontab</td>
-<td style="text-align:center">-l(list)</td>
-<td style="text-align:center">查看crontab定时任务。功能等同于cat /var/spool/cron/username</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">-e(edit)</td>
-<td style="text-align:center">编辑crontab定时任务。功能等同于 vi /var/spool/cron/username</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">-u(user)</td>
-<td style="text-align:center">查看指定用户的crontab信息</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">格式：
-       crontab –e 直接编辑crontab定时任务
-</code></pre></td></tr></table>
-</div>
-</div><p>例如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># crontab -l</span>
-<span class="c1">###sync time server###</span>
-*/5 * * * * /usr/sbin/ntpdate cn.ntp.org.cn &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#         #5分钟同步一次时间，把输出定义到空，错误输出等同于正确输出</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>小提示：</p>
-<ol>
-<li>使用crontab –e去编辑定时任务，因为它可以检查语法，比如时间格式是否正确</li>
-<li>该命令具有SUID权限，普通用户也可以执行</li>
-</ol>
-<h2 id="45-本章小结-1">4.5 本章小结</h2>
-<ul>
-<li>使用<code>crontab –e</code>编辑定时任务的时，尽量添加注释。</li>
-<li>如果使用echo类似的命令时，不要继续使用&raquo;， 2&gt;,等符号，一面达不到预期效果</li>
-<li>定时任务中的路径一定要写绝对路径。</li>
-<li><code>crond</code>服务必须开启</li>
-<li>日志存放在<code>/var/log/cron</code>中</li>
-</ul>
-<h1 id="5-规范-1">5 规范</h1>
-<ol>
-<li>由于<code>crontab</code>的重要性，在编写时应该遵守一定的规范。</li>
-<li>添加一条<code>crontab</code>记录时，要添加备注。</li>
-<li>把要定期执行的命令放入脚本中。</li>
-<li>进入目标的上级目录打包（也可以全路径）。</li>
-<li>命令在命令行测试完毕后，再复制粘贴到脚本中，防止错误。</li>
-<li>脚本最好放在一个统一的目录下。</li>
-<li>有些命令测试时为了查看过程添加了-v参数，在<code>crontab</code>中需要取消该参数。</li>
-<li>脚本命名一般使用.sh为后缀,其他的还有.pl，表示perl脚本，.py表示python脚本。</li>
-<li>指定脚本的解释器，可以防止脚本没有x权限时导致无法执行，以bash为例，指定bash为解释器时，要加命令的全路径<code>/bin/bash</code>,脚本也要使用全路径。</li>
-<li>定时任务结尾要加上<code>&gt;/dev/null 2&gt;&amp;1 </code>防止因为<code>sendmail</code>服务没开，造成的邮件过多，导致inode满的问题。</li>
-</ol>
-<h1 id="6-实例-1">6 实例</h1>
-<p>        每隔 2 个小时将/etc/services 文件打包备份到/tmp 下（最好每次备份成不同的备份包）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1.使用命令行进行测试</span>
-<span class="o">[</span>root@lixin tmp<span class="o">]</span><span class="c1"># tar zcvf /tmp/backup_$(date +%F).tar.gz /etc/services</span>
-tar: Removing leading <span class="s1">&#39;/&#39;</span> from member names
-/etc/services
-<span class="o">[</span>root@lixin tmp<span class="o">]</span><span class="c1"># ls</span>
-<span class="m">123</span>    backup_2016-03-30.tar.gz
-<span class="o">[</span>root@lixin tmp<span class="o">]</span><span class="c1">#           # $()表示引用括号内命令的结果，可也可以使用反引号``。</span>
-
-<span class="c1"># 2.编写脚本（把命令放入文件中），取消-v参数</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># vim backup.sh</span>
-tar zcf /tmp/backup_<span class="k">$(</span>date +%F<span class="k">)</span>.tar.gz /etc/services
-
-<span class="c1"># 3.使用sh测试脚本</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls /tmp</span>
-<span class="m">123</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># sh backup.sh</span>
-tar: Removing leading <span class="s1">&#39;/&#39;</span> from member names
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># ls /tmp</span>
-<span class="m">123</span>  backup_2016-03-30.tar.gz
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#</span>
-
-<span class="c1"># 4.编写定时任务</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># crontab -e</span>
-<span class="c1">###backup services data###</span>
-* */2 * * * /bin/sh /root/backup.sh &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>在每周6的凌晨3：15分执行/home/shell/collect.pl 并将标准输出和标准错误输出到/dev/null设备，请写出crontab中的语句</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># crontab -e</span>
-<span class="c1">###backup###</span>
-<span class="m">15</span> <span class="m">03</span> * * <span class="m">6</span> /bin/perl /home/shell/collect.pl &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>crontab在11月份内，每天的早上6点到12点钟，每2小时执行一次/usr/bin/httpd.sh怎么实现</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1"># crontab -e</span>
-<span class="c1">###reboot httpd server###</span>
-<span class="m">00</span> 6-12/2 * <span class="m">11</span> * /bin/sh /usr/bin/httpd.sh &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>每天晚上00：30点，打包站点目录，/etc/rc.local，/var/spool/cron，/etc/hosts，备份到/backup目录下，每次备份按时间生成不同的备份包，删除三天以前的备份包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 1.使用命令行进行测试</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#cd /</span>
-<span class="o">[</span>root@lixin /<span class="o">]</span><span class="c1"># tar zcvf /backup/backup_$(date +%F).tar.gz etc/rc.local var/spool/cron/ etc/hosts</span>
-etc/rc.local
-var/spool/cron/
-var/spool/cron/root
-etc/hosts
-<span class="o">[</span>root@lixin /<span class="o">]</span><span class="c1"># cd /backup</span>
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1"># ls</span>
-backup_2016-03-30.tar.gz
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1">#</span>
-
-<span class="c1"># 2.编写脚本，取消输出参数-v</span>
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1">#vim backup.sh</span>
-<span class="nb">cd</span> / <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>tar zcf /backup/backup_<span class="k">$(</span>date +%F<span class="k">)</span>.tar.gz etc/rc.local var/spool/cron/ etc/hosts
-<span class="c1">####备份####</span>
-<span class="c1"># &amp;&amp;表示且，只有cd /这条命令执行成功后，才会执行tar命令</span>
-<span class="c1"># \回车，表示下一行和本行属于一行</span>
-
-<span class="c1"># 3.使用sh测试脚本</span>
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1"># sh backup.sh</span>
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1"># ls /tmp</span>
-<span class="m">123</span>  backup_2016-03-30.tar.gz
-<span class="o">[</span>root@lixin backup<span class="o">]</span><span class="c1">#                 #测试成功</span>
-
-<span class="c1"># 4.编写crontab内容</span>
-<span class="o">[</span>root@lixin ~<span class="o">]</span><span class="c1">#crontab -e</span>
-<span class="c1">###backup web station###</span>
-<span class="m">30</span> <span class="m">00</span> * * * /bin/sh /backup/backup.sh &gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="7-注意-1">7 注意</h1>
-<p>        在<code>crontab –e</code>中，比如使用<code>date +%F</code>，这种命令时，由于<code>crontab</code> 默认不识别%，需要进行转意，即<code>\%</code>，当我们使用脚本进行定时任务时，而脚本中又使用系统环境变量，建议在脚本中再定义一遍，防止因为环境变量的问题导致定时任务失败。</p>
-<h1 id="8-inode被填满的问题-1">8 inode被填满的问题</h1>
-<p>问题：我们的服务器上发生了No space left on device，df –h发现没满，请问为什么？<br>
-解答：默认定时任务执行时会给root发邮件，如果邮件服务不打开，就会把邮件存放在临时队列目录：</p>
-<ol>
-<li>centos 5：/var/spool/clientmqueue</li>
-<li>centos 6：/var/spool/postfix/maildrop</li>
-</ol>
-<p>        当crontab的定时任务，结尾不加&gt;/dev/null 2&gt;&amp;1的时候，定时任务执行后的邮件就会临时存放在上述目录，由于每个邮件占4K，所以很快会把inode号占满，就会造成这种情况。
-解决方法有两种：</p>
-<ol>
-<li>开启postfix服务，让邮件成功发送。（不常用）</li>
-<li>在crontab定时任务的每一条目后添加 &gt;/dev/null 2&gt;&amp;1，把通知丢弃。</li>
-</ol>
 
     </div>
 
@@ -1327,7 +833,7 @@ backup_2016-03-30.tar.gz
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2018-06-23
+      2018-09-24
       
     </span>
   </p>
@@ -1361,14 +867,14 @@ backup_2016-03-30.tar.gz
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/os/">Os</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+          <a class="prev" href="/post/1-%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1378,12 +884,12 @@ backup_2016-03-30.tar.gz
 </svg>
 
             </i>
-            <span class="prev-text nav-default">39-同步-异步-IO多路复用</span>
+            <span class="prev-text nav-default">1-平均负载</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-            <span class="next-text nav-default">2-选择排序</span>
+          <a class="next" href="/post/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/">
+            <span class="next-text nav-default">无法修改docker监听端口</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

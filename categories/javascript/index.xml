@@ -6,32 +6,32 @@
     <description>Recent content in JavaScript on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Nov 2017 11:10:10 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Dec 2019 10:07:17 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3-React基本使用</title>
       <link>https://dachenzi.github.io/post/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Thu, 16 Nov 2017 11:10:10 +0000</pubDate>
+      <pubDate>Thu, 19 Dec 2019 10:07:17 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>1 React React是Facebook开发并开源的前端框架。当时他们的团队在市面上没有找到合适的MVC框架，就自己写了一个Js框架，用来架设Ins</description>
     </item>
     
     <item>
-      <title>1-JavaScript介绍及使用</title>
-      <link>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Tue, 12 Apr 2016 19:44:35 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
-      <description>文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS</description>
-    </item>
-    
-    <item>
       <title>2-JavaScript函数-作用域-异常</title>
       <link>https://dachenzi.github.io/post/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/</link>
-      <pubDate>Fri, 01 Apr 2016 07:30:18 +0000</pubDate>
+      <pubDate>Fri, 06 Apr 2018 10:30:36 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/</guid>
       <description>文章目录 1 Javascript函数 1.1 基本语法 1.2 函数表达式 1.3 函数的调用 1.4 高阶函数 1 Javascript函数 javascript的函数和其他任何</description>
+    </item>
+    
+    <item>
+      <title>1-JavaScript介绍及使用</title>
+      <link>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Wed, 01 Feb 2017 07:43:57 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid>
+      <description>文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS</description>
     </item>
     
   </channel>

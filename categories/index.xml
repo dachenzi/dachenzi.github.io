@@ -6,13 +6,148 @@
     <description>Recent content in Categories on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 07 Feb 2020 01:09:20 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Jan 2020 15:06:07 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>content_a</title>
-      <link>https://dachenzi.github.io/categories/content_a/</link>
-      <pubDate>Fri, 07 Feb 2020 01:09:20 +0000</pubDate>
+      <title>Shell</title>
+      <link>https://dachenzi.github.io/categories/shell/</link>
+      <pubDate>Tue, 07 Jan 2020 15:06:07 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/categories/content_a/</guid>
+      <guid>https://dachenzi.github.io/categories/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python模块</title>
+      <link>https://dachenzi.github.io/categories/python%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Sat, 04 Jan 2020 08:29:43 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/python%E6%A8%A1%E5%9D%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python基础</title>
+      <link>https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 22 Dec 2019 21:12:44 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://dachenzi.github.io/categories/javascript/</link>
+      <pubDate>Thu, 19 Dec 2019 10:07:17 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python练习</title>
+      <link>https://dachenzi.github.io/categories/python%E7%BB%83%E4%B9%A0/</link>
+      <pubDate>Fri, 06 Dec 2019 19:17:54 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/python%E7%BB%83%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flask框架</title>
+      <link>https://dachenzi.github.io/categories/flask%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Fri, 04 Oct 2019 02:21:43 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/flask%E6%A1%86%E6%9E%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Os</title>
+      <link>https://dachenzi.github.io/categories/os/</link>
+      <pubDate>Mon, 16 Sep 2019 10:40:41 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/os/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django框架</title>
+      <link>https://dachenzi.github.io/categories/django%E6%A1%86%E6%9E%B6/</link>
+      <pubDate>Wed, 10 Jul 2019 23:26:13 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/django%E6%A1%86%E6%9E%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>算法</title>
+      <link>https://dachenzi.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 02 Dec 2018 12:27:52 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimize</title>
+      <link>https://dachenzi.github.io/categories/optimize/</link>
+      <pubDate>Mon, 01 Oct 2018 15:29:31 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/optimize/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Container</title>
+      <link>https://dachenzi.github.io/categories/container/</link>
+      <pubDate>Fri, 21 Sep 2018 18:40:45 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Questions</title>
+      <link>https://dachenzi.github.io/categories/questions/</link>
+      <pubDate>Mon, 27 Aug 2018 01:39:36 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/questions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>小工具</title>
+      <link>https://dachenzi.github.io/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 04 Jan 2018 23:26:08 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>https://dachenzi.github.io/categories/tools/</link>
+      <pubDate>Mon, 01 May 2017 00:18:52 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://dachenzi.github.io/categories/linux/</link>
+      <pubDate>Sat, 29 Apr 2017 16:53:30 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://dachenzi.github.io/categories/web/</link>
+      <pubDate>Wed, 24 Aug 2016 20:50:31 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/categories/web/</guid>
       <description></description>
     </item>
     

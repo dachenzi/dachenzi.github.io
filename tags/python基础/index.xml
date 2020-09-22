@@ -6,185 +6,185 @@
     <description>Recent content in Python基础 on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Jan 2020 23:02:11 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Dec 2019 21:12:44 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>44-zookeeper学习笔记</title>
+      <link>https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 22 Dec 2019 21:12:44 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理</description>
+    </item>
+    
     <item>
       <title>25-面向对象高级-魔术方法基础</title>
       <link>https://dachenzi.github.io/post/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Mon, 13 Jan 2020 23:02:11 +0000</pubDate>
+      <pubDate>Tue, 29 Oct 2019 04:37:40 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
-      <description>title: 25-面向对象高级-魔术方法基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 魔术方法 2 类的魔术方法 2.1 基本的魔法方法和常用属性 2.2 有关属性 2.3 比较操作符 2.4 算数运算符</description>
-    </item>
-    
-    <item>
-      <title>5-Python的封装与解构-集合</title>
-      <link>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</link>
-      <pubDate>Sat, 21 Dec 2019 22:57:33 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</guid>
-      <description>title: 5-Python的封装与解构-集合 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的</description>
-    </item>
-    
-    <item>
-      <title>面向对象基础</title>
-      <link>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Sat, 05 Oct 2019 11:10:53 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</guid>
-      <description>title: 面向对象基础 data: 2020-09-21 17:03:56 tags: {% raw %} 1 随机整数生成类 1.1 工具类思路 1.2 生成器思路 2 打印坐标 3 车辆信息 4 实现温度的处理 5 模拟购物车 6 面积计算 1 随机整数生成</description>
-    </item>
-    
-    <item>
-      <title>16-文件操作-StringIO-BytesIO</title>
-      <link>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</link>
-      <pubDate>Fri, 19 Jul 2019 15:25:35 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/</guid>
-      <description>title: 16-文件操作-StringIO-BytesIO data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲</description>
-    </item>
-    
-    <item>
-      <title>1-基础概念及环境部署</title>
-      <link>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Sun, 16 Jun 2019 19:55:58 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
-      <description>title: 1-基础概念及环境部署 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解</description>
-    </item>
-    
-    <item>
-      <title>4-内置结构-元组-字符串</title>
-      <link>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
-      <pubDate>Tue, 04 Jun 2019 00:52:44 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
-      <description>title: 4-内置结构-元组-字符串 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 元组概念 1.1 元祖的特点 1.2 元组的定义 1.3 元组的访问 1.4 元组的查询 2 命名元组 3 字符串 3.1 字符串的基本</description>
-    </item>
-    
-    <item>
-      <title>31-gogs安装-git基础</title>
-      <link>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Tue, 14 May 2019 01:03:55 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</guid>
-      <description>title: 31-gogs安装-git基础 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 Gogs安装 2 Git介绍 3 使用Github仓库 3.1 Git配置 3.2 远程仓库 4 Git基本使用</description>
-    </item>
-    
-    <item>
-      <title>26-面向对象高级-上下文管理-反射</title>
-      <link>https://dachenzi.github.io/post/26-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86-%E5%8F%8D%E5%B0%84/</link>
-      <pubDate>Tue, 16 Apr 2019 14:50:38 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/26-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86-%E5%8F%8D%E5%B0%84/</guid>
-      <description>title: 26-面向对象高级-上下文管理-反射 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 上下文管理 1.1 上下文管理的安全性 1.2 返回值 1.3 方法的参数 1.4 计算函数的运行时间 1.5 主要应</description>
-    </item>
-    
-    <item>
-      <title>10-函数嵌套-作用域-闭包-LEGB-函数销毁</title>
-      <link>https://dachenzi.github.io/post/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</link>
-      <pubDate>Fri, 05 Apr 2019 23:23:45 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/10-%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E9%97%AD%E5%8C%85-legb-%E5%87%BD%E6%95%B0%E9%94%80%E6%AF%81/</guid>
-      <description>title: 10-函数嵌套-作用域-闭包-LEGB-函数销毁 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数嵌套 2 作用域 2.1 global关键字 3 闭包 3.1 nonlocal关键字</description>
-    </item>
-    
-    <item>
-      <title>39-同步-异步-IO多路复用</title>
-      <link>https://dachenzi.github.io/post/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</link>
-      <pubDate>Thu, 27 Dec 2018 03:39:19 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</guid>
-      <description>title: 39-同步-异步-IO多路复用 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 同步与异步 2 阻塞与非阻塞 3 什么是IO 3.1 内核态用户态 3.2 IO两个阶段 3.3 IO模型 3.3.1 同步阻塞</description>
-    </item>
-    
-    <item>
-      <title>32-并发编程-线程-多线程</title>
-      <link>https://dachenzi.github.io/post/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
-      <pubDate>Mon, 17 Dec 2018 10:17:36 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description>title: 32-并发编程-线程-多线程 data: 2020-09-21 17:03:56 tags: {% raw %} 1 概述 我们都知道windows是支持多任务的操作系统。 什么叫&amp;rsquo;多任务&amp;rsquo;呢</description>
-    </item>
-    
-    <item>
-      <title>41-数据库-pymysql-DBUtils</title>
-      <link>https://dachenzi.github.io/post/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</link>
-      <pubDate>Thu, 29 Nov 2018 06:00:39 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</guid>
-      <description>title: 41-数据库-pymysql-DBUtils data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 Python操作数据库 2 安装模块 3 基本使用 3.1 创建一个连接 3.2 连接数据库 3.3</description>
-    </item>
-    
-    <item>
-      <title>37-网络编程-UDP编程</title>
-      <link>https://dachenzi.github.io/post/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Mon, 12 Nov 2018 15:36:40 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</guid>
-      <description>title: 37-网络编程-UDP编程 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP</description>
+      <description>文章目录 1 魔术方法 2 类的魔术方法 2.1 基本的魔法方法和常用属性 2.2 有关属性 2.3 比较操作符 2.4 算数运算符 2.5 反运算 2.6 增量赋值运算 2.7 一元操作符 2.8 类型转换 2.9 上</description>
     </item>
     
     <item>
       <title>15-reduce-pratial偏函数-lsu_cache</title>
       <link>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</link>
-      <pubDate>Mon, 27 Aug 2018 06:15:30 +0000</pubDate>
+      <pubDate>Mon, 19 Aug 2019 02:57:48 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/</guid>
-      <description>title: 15-reduce-pratial偏函数-lsu_cache data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 p</description>
+      <description>文章目录 介绍 1 reduce方法 2 partial方法(偏函数) 2.1 partial方法基本使用 2.2 partial原码分析 2.3 functools.war</description>
     </item>
     
     <item>
-      <title>18-csv文件-ini文件处理</title>
-      <link>https://dachenzi.github.io/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</link>
-      <pubDate>Tue, 10 Apr 2018 20:28:07 +0000</pubDate>
+      <title>42-数据库-orm-SQLAlchemy</title>
+      <link>https://dachenzi.github.io/post/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/</link>
+      <pubDate>Sun, 28 Jul 2019 00:19:58 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/18-csv%E6%96%87%E4%BB%B6-ini%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</guid>
-      <description>title: 18-csv文件-ini文件处理 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 CSV文件 1.1 手动生成一个csv文件 1.2 cvs模块 1.2.1 reader方法 1.2.2 writer方法</description>
+      <guid>https://dachenzi.github.io/post/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/</guid>
+      <description>文章目录 1 ORM 2 sqlalchemy 3 基本使用 3.1 创建连接 3.1.1 利用连接池执行sql 3.2 创建基类 3.3 创建实体类 3.3.1 常用字段 3.4 实例化 3.5 创建表 3.6 创建会话Session 3.7 数据操作</description>
     </item>
     
     <item>
-      <title>33-并发编程-线程同步-Event-lock</title>
-      <link>https://dachenzi.github.io/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</link>
-      <pubDate>Sun, 11 Mar 2018 10:17:21 +0000</pubDate>
+      <title>2-基础语法-操作符-循环控制</title>
+      <link>https://dachenzi.github.io/post/2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E6%93%8D%E4%BD%9C%E7%AC%A6-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6/</link>
+      <pubDate>Thu, 25 Jul 2019 18:06:02 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/</guid>
-      <description>title: 33-并发编程-线程同步-Event-lock data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 线程同步 1.1 Event 1.1.1 什么是Flag？ 1.1.2 Event原理 1.1.3 吃包子 1.2 Lock 1.2.1 lock</description>
+      <guid>https://dachenzi.github.io/post/2-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E6%93%8D%E4%BD%9C%E7%AC%A6-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6/</guid>
+      <description>文章目录 1 Python 基础语法 1.1 注释 1.2 缩进 1.3 续行 1.4 标识符 1.5 转义序列 1.6 数字 1.7 字符串 1.8 其他 2 Python 运算符 2.1 赋值运算符 2.2 算数运算符 2.3 关系运算符 2.4 逻辑运算符 2.5 位运</description>
     </item>
     
     <item>
-      <title>9-函数定义-位置参数-返回值</title>
-      <link>https://dachenzi.github.io/post/9-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89-%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E8%BF%94%E5%9B%9E%E5%80%BC/</link>
-      <pubDate>Sat, 06 Jan 2018 20:05:48 +0000</pubDate>
+      <title>1-基础概念及环境部署</title>
+      <link>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Tue, 23 Jul 2019 10:10:18 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/9-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89-%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0-%E8%BF%94%E5%9B%9E%E5%80%BC/</guid>
-      <description>title: 9-函数定义-位置参数-返回值 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 函数介绍 1.1 为什么要使用函数 1.2 Python中的函数 2 函数的基本使用 3 函数的参数 3.1 参数的</description>
+      <guid>https://dachenzi.github.io/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>文章目录 1. 编程基础 1.1. 基本概念 1.2. 语言分类 1.3. 高级语言的发展 2. 程序 3. python的语言介绍 4. Python的解释器 5. Python版本区别 6. Pytho</description>
+    </item>
+    
+    <item>
+      <title>3-内置结构-列表</title>
+      <link>https://dachenzi.github.io/post/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</link>
+      <pubDate>Thu, 04 Jul 2019 15:04:29 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/3-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%88%97%E8%A1%A8/</guid>
+      <description>文章目录 1 Python内置数据结构 1.1 数值型 1.2 math模块 1.3 round圆整 1.4 常用的其他函数 1.5 类型判断 2 列表 2.1 索引访问 2.2 列表和链表的区别 2.3 列表的</description>
+    </item>
+    
+    <item>
+      <title>4-内置结构-元组-字符串</title>
+      <link>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Tue, 02 Jul 2019 09:10:14 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/4-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%85%83%E7%BB%84-%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>文章目录 1 元组概念 1.1 元祖的特点 1.2 元组的定义 1.3 元组的访问 1.4 元组的查询 2 命名元组 3 字符串 3.1 字符串的基本操作 3.1.1 字符串的访问 3.1.2 字符串的拼接 3.2 字符串分</description>
+    </item>
+    
+    <item>
+      <title>6-内置结构-字典</title>
+      <link>https://dachenzi.github.io/post/6-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%AD%97%E5%85%B8/</link>
+      <pubDate>Thu, 13 Jun 2019 00:25:39 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/6-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%AD%97%E5%85%B8/</guid>
+      <description>文章目录 1 字典介绍 2 字典的基本操作 2.1 字典的定义 2.2 字典元素的访问 2.3 字典的增删改 3 字典遍历 3.1 遍历字典的key 3.2 遍历字典的value 3.3 变量字典的键</description>
+    </item>
+    
+    <item>
+      <title>38-网络编程-socketserver</title>
+      <link>https://dachenzi.github.io/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</link>
+      <pubDate>Sun, 19 May 2019 02:52:31 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/</guid>
+      <description>文章目录 1 socket编程弊端 2 SocketServer模块 2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口 3</description>
     </item>
     
     <item>
       <title>27-面向对象高级-描述器</title>
       <link>https://dachenzi.github.io/post/27-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E6%8F%8F%E8%BF%B0%E5%99%A8/</link>
-      <pubDate>Mon, 13 Nov 2017 11:00:31 +0000</pubDate>
+      <pubDate>Thu, 25 Apr 2019 14:29:30 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/27-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E6%8F%8F%E8%BF%B0%E5%99%A8/</guid>
-      <description>title: 27-面向对象高级-描述器 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 描述器 2 描述器协议 2.1 非数据描述器 2.1.1 实例分析 2.2 数据描述器 2.2.1 实例 2.3 描述器的调用及属性访问顺序</description>
+      <description>文章目录 1 描述器 2 描述器协议 2.1 非数据描述器 2.1.1 实例分析 2.2 数据描述器 2.2.1 实例 2.3 描述器的调用及属性访问顺序 2.4 描述器总结 3 Python的描述器体现 3.1 s</description>
+    </item>
+    
+    <item>
+      <title>5-Python的封装与解构-集合</title>
+      <link>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</link>
+      <pubDate>Sat, 09 Feb 2019 12:12:34 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/</guid>
+      <description>文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的基本操作 2.2.1 增加元素 2.2.2 删除元素 2.2.3 修改元素 2.2.4 成员判断 2.3</description>
+    </item>
+    
+    <item>
+      <title>11-函数的执行流程-函数递归-匿名函数-生成器</title>
+      <link>https://dachenzi.github.io/post/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</link>
+      <pubDate>Sat, 12 Jan 2019 00:23:12 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/11-%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B-%E5%87%BD%E6%95%B0%E9%80%92%E5%BD%92-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
+      <description>文章目录 1 函数的执行流程 1.1 字节码了解压栈过程 1.2 嵌套函数的压栈 2 递归 2.1 递归函数 2.2 递归的性能 2.3 递归的优化 2.4 间接递归 2.5 递归总结 3 匿名函数 4 Pyth</description>
     </item>
     
     <item>
       <title>7-列表解析式-生成器</title>
       <link>https://dachenzi.github.io/post/7-%E5%88%97%E8%A1%A8%E8%A7%A3%E6%9E%90%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8/</link>
-      <pubDate>Thu, 14 Sep 2017 07:58:48 +0000</pubDate>
+      <pubDate>Thu, 15 Nov 2018 00:06:38 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/7-%E5%88%97%E8%A1%A8%E8%A7%A3%E6%9E%90%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8/</guid>
-      <description>title: 7-列表解析式-生成器 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 解析式 2 列表解析式 2.1 列表解析式进阶 3 其他解析式 3.1 集合表达式 3.2 字典解析式 4 生成器表达式 4.1 特点 4.2</description>
+      <description>文章目录 1 解析式 2 列表解析式 2.1 列表解析式进阶 3 其他解析式 3.1 集合表达式 3.2 字典解析式 4 生成器表达式 4.1 特点 4.2 next函数 5 总结 1 解析式 从一个问题来</description>
     </item>
     
     <item>
-      <title>14-函数参数检测-inspect模块</title>
-      <link>https://dachenzi.github.io/post/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Sat, 24 Jun 2017 17:43:33 +0000</pubDate>
+      <title>36-网络编程-TCP编程</title>
+      <link>https://dachenzi.github.io/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 12 Nov 2018 03:57:00 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/14-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E6%A3%80%E6%B5%8B-inspect%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 14-函数参数检测-inspect模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 python类型注解 2 函数定义的弊端 3 函数文档 4 函数注解 4.1 annotatio</description>
+      <guid>https://dachenzi.github.io/post/36-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-tcp%E7%BC%96%E7%A8%8B/</guid>
+      <description>文章目录 1 概述 2 TCP/IP协议基础 3 TCP编程 3.1 通信流程 3.2 构建服务端 3.3 构建客户端 3.4 常用方法 3.4.1 makefile方法 3.5 socket交互 3.4.1 通讯循</description>
+    </item>
+    
+    <item>
+      <title>面向对象基础</title>
+      <link>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 04 Nov 2018 22:07:40 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</guid>
+      <description>1 随机整数生成类 1.1 工具类思路 1.2 生成器思路 2 打印坐标 3 车辆信息 4 实现温度的处理 5 模拟购物车 6 面积计算 1 随机整数生成类 描述：创建一个随机整数生成</description>
+    </item>
+    
+    <item>
+      <title>32-并发编程-线程-多线程</title>
+      <link>https://dachenzi.github.io/post/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sun, 26 Aug 2018 07:52:38 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1 概述 我们都知道windows是支持多任务的操作系统。 什么叫&amp;rsquo;多任务&amp;rsquo;呢？简单地说，就是操作系统可以同时运行多个任务</description>
+    </item>
+    
+    <item>
+      <title>31-gogs安装-git基础</title>
+      <link>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Fri, 27 Jul 2018 02:23:47 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/31-gogs%E5%AE%89%E8%A3%85-git%E5%9F%BA%E7%A1%80/</guid>
+      <description>文章目录 1 Gogs安装 2 Git介绍 3 使用Github仓库 3.1 Git配置 3.2 远程仓库 4 Git基本使用 4.1 创建版本库 4.2 查看工作区状态 4.3 查看修改内容 4.4 查</description>
+    </item>
+    
+    <item>
+      <title>41-数据库-pymysql-DBUtils</title>
+      <link>https://dachenzi.github.io/post/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</link>
+      <pubDate>Fri, 20 Jul 2018 02:11:24 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/41-%E6%95%B0%E6%8D%AE%E5%BA%93-pymysql-dbutils/</guid>
+      <description>文章目录 1 Python操作数据库 2 安装模块 3 基本使用 3.1 创建一个连接 3.2 连接数据库 3.3 游标 3.3.1 利用游标操作数据库 3.3.2 事务管理 3.3.3 执行SQL语句 3.3.3.1 批量执行</description>
+    </item>
+    
+    <item>
+      <title>37-网络编程-UDP编程</title>
+      <link>https://dachenzi.github.io/post/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Fri, 13 Jul 2018 00:42:39 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/37-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-udp%E7%BC%96%E7%A8%8B/</guid>
+      <description>文章目录 1 UDP协议 2 UDP通信流程 3 UDP编程 3.1 构建服务端 3.2 构建客户端 3.3 常用方法 4 聊天室 5 UDP协议应用 1 UDP协议 UDP是面向无连接的协</description>
     </item>
     
   </channel>

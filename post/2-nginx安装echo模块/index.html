@@ -63,17 +63,17 @@
 <meta property="og:description" content="nginx 安装第三方echo模块 openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/2-nginx%E5%AE%89%E8%A3%85echo%E6%A8%A1%E5%9D%97/" />
-<meta property="article:published_time" content="2017-01-28T18:15:12+00:00" />
-<meta property="article:modified_time" content="2017-01-28T18:15:12+00:00" />
+<meta property="article:published_time" content="2018-08-27T01:39:36+00:00" />
+<meta property="article:modified_time" content="2018-08-27T01:39:36+00:00" />
 <meta itemprop="name" content="2-nginx安装echo模块">
 <meta itemprop="description" content="nginx 安装第三方echo模块 openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，">
-<meta itemprop="datePublished" content="2017-01-28T18:15:12+00:00" />
-<meta itemprop="dateModified" content="2017-01-28T18:15:12+00:00" />
-<meta itemprop="wordCount" content="608">
+<meta itemprop="datePublished" content="2018-08-27T01:39:36+00:00" />
+<meta itemprop="dateModified" content="2018-08-27T01:39:36+00:00" />
+<meta itemprop="wordCount" content="285">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Questions," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2-nginx安装echo模块"/>
 <meta name="twitter:description" content="nginx 安装第三方echo模块 openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">2-nginx安装echo模块</h1>
       
       <div class="post-meta">
-        <time datetime="2017-01-28" class="post-time">
-          2017-01-28
+        <time datetime="2018-08-27" class="post-time">
+          2018-08-27
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/questions/"> Questions </a>
             
           </div>
-        <span class="more-meta"> 约 608 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span class="more-meta"> 约 285 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
 
         
         
@@ -351,20 +351,6 @@
     <li><a href="#nginx-安装第三方echo模块">nginx 安装第三方echo模块</a></li>
     <li><a href="#添加echo-nginx-module模块">添加echo-nginx-module模块</a></li>
     <li><a href="#基本使用">基本使用</a></li>
-    <li><a href="#mathjax-true">title: 2-nginx安装echo模块
-date: 2017-10-30 08:58:23
-lastmod: 2017-10-30 08:58:23
-draft: false
-tags: [Questions,]
-categories: [Questions,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-    <li><a href="#nginx-安装第三方echo模块-1">nginx 安装第三方echo模块</a></li>
-    <li><a href="#添加echo-nginx-module模块-1">添加echo-nginx-module模块</a></li>
-    <li><a href="#基本使用-1">基本使用</a></li>
   </ul>
 </nav>
   </div>
@@ -413,59 +399,6 @@ $ make <span class="o">&amp;&amp;</span> make install
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 2-nginx安装echo模块
-date: 2017-10-30 08:58:23
-lastmod: 2017-10-30 08:58:23
-draft: false
-tags: [Questions,]
-categories: [Questions,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<h2 id="nginx-安装第三方echo模块-1">nginx 安装第三方echo模块</h2>
-<p>openresty是基于nginx的一个分支版本，echo模块用于打印出内置变量的值，这样可以方便我们知晓整个过程，便于排错，对于nginx来说，可以使用echo-nginx-module来添加echo模块。</p>
-<h2 id="添加echo-nginx-module模块-1">添加echo-nginx-module模块</h2>
-<ol>
-<li>
-<p>下载echo-nginx-module模块
-<a href="https://github.com/openresty/echo-nginx-module/releases">echo-nginx-module下载地址</a></p>
-</li>
-<li>
-<p>解压后重新编译nginx
-只需要在原有的nginx编译命令后添加如下命令</p>
-</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ ./configure ... ...--add-module<span class="o">=</span>/opt/software/echo-nginx-module-0.61/
-$ make <span class="o">&amp;&amp;</span> make install 
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="基本使用-1">基本使用</h2>
-<p>在nginx.conf中使用 echo 即可输出打印的变量
-<a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#variables">nginx内置变量</a></p>
-<p>比如nginx配置文件</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">location /hello <span class="o">{</span>
-    <span class="nb">echo</span> <span class="nv">$http_user_agent</span>
-	<span class="nb">echo</span> <span class="nv">$host</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -479,7 +412,7 @@ $ make <span class="o">&amp;&amp;</span> make install
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2017-01-28
+      2018-08-27
       
     </span>
   </p>
@@ -513,14 +446,14 @@ $ make <span class="o">&amp;&amp;</span> make install
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/questions/">Questions</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/4-websocket-flask-websocket/">
+          <a class="prev" href="/post/4-docker%E7%BD%91%E7%BB%9C/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -530,12 +463,12 @@ $ make <span class="o">&amp;&amp;</span> make install
 </svg>
 
             </i>
-            <span class="prev-text nav-default">4-websocket-flask-websocket</span>
+            <span class="prev-text nav-default">4-docker网络</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/shellnotes/">
-            <span class="next-text nav-default">ShellNotes</span>
+          <a class="next" href="/post/32-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+            <span class="next-text nav-default">32-并发编程-线程-多线程</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

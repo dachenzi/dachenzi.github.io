@@ -6,11 +6,11 @@
     <description>Recent content in Web on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Dec 2017 22:33:56 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Aug 2016 20:50:31 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/web/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nginxbasis</title>
       <link>https://dachenzi.github.io/post/nginxbasis/</link>
-      <pubDate>Tue, 19 Dec 2017 22:33:56 +0000</pubDate>
+      <pubDate>Wed, 24 Aug 2016 20:50:31 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/nginxbasis/</guid>
       <description>1 nginx介绍 HTTP协议包含很多功能。常用的www，world wide web是http功能之一。默认端口为80端口，也被称之为7层协议。 常用w</description>

@@ -6,86 +6,86 @@
     <description>Recent content in Django框架 on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 21 Sep 2019 03:35:55 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/django%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>2-django-urls路由系统基本使用</title>
-      <link>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sat, 21 Sep 2019 03:35:55 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>1 路由系统(urls控制) 1.1 正则字符串参数 1.2 url的分组 1.2.1 无名分组 1.2.2 有名分组 1.3 URLconf 在什么上查找 1.4 include(路由分发) 1.5 别名(name参数</description>
-    </item>
-    
-    <item>
-      <title>4-django-orm基本使用</title>
-      <link>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 08 Jul 2019 02:30:31 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>文章目录 1 数据库与ORM 2 orm的配置 2.1 引擎和配置 2.2 mysql驱动程序 3 orm 表模型 3.1 创建表对象 3.2 Django字段类型 3.3 常用字段参数说明 3.4 特殊类</description>
-    </item>
-    
-    <item>
-      <title>5-django-csrf-session&amp;cookie</title>
-      <link>https://dachenzi.github.io/post/5-django-csrf-sessioncookie/</link>
-      <pubDate>Sun, 31 Mar 2019 21:05:07 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/5-django-csrf-sessioncookie/</guid>
-      <description>文章目录 1 CSRF跨站请求伪造 1.1 CSRF攻击介绍及防御 1.2 防御CSRF攻击 1.2.1 验证 HTTP Referer 字段 1.2.2 在请求地址中添加 token 并验证 1.2.3 在 HTTP 头中自定义属性并验证 1.2.4</description>
-    </item>
-    
-    <item>
-      <title>3-django-template模板基本使用</title>
-      <link>https://dachenzi.github.io/post/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Thu, 17 Jan 2019 14:31:35 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>文章目录 1 Template 1.1 模板的基础使用 1.1.1 变量 1.1.2 注释标签 1.1.3 深度查询 1.1.4 内置变量过滤器filter 1.1.5 自定义过滤器之filter 1.1.6 自定义过滤器之simple_</description>
-    </item>
-    
-    <item>
-      <title>6-自定义类admin管理增删改查</title>
-      <link>https://dachenzi.github.io/post/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
-      <pubDate>Wed, 24 Oct 2018 13:40:07 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
-      <description>文章目录 1 django admin分析 2 django admin源码分析 2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin 3 django admin的接口 4 自定义ayra进行C</description>
-    </item>
-    
+    <lastBuildDate>Wed, 10 Jul 2019 23:26:13 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/django%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>1-django-介绍-MTV-命令-基础配置-admin</title>
       <link>https://dachenzi.github.io/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</link>
-      <pubDate>Wed, 30 May 2018 09:59:07 +0000</pubDate>
+      <pubDate>Wed, 10 Jul 2019 23:26:13 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/</guid>
       <description>文章目录 1 什么是web框架 2 WSGI 3 MVC与MTV模式 3.1 MVC框架 3.2 MTV框架 3.3 区别 4 django介绍 4.1 Django处理顺序 4.2 创建django站</description>
     </item>
     
     <item>
-      <title>7-自定义类admin管理增删改查</title>
-      <link>https://dachenzi.github.io/post/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
-      <pubDate>Sat, 18 Mar 2017 16:06:36 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
-      <description>文章目录 1 django admin分析 2 django admin源码分析 2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin 3 django admin的接口 4 自定义ayra进行C</description>
-    </item>
-    
-    <item>
       <title>8-rbac权限系统</title>
       <link>https://dachenzi.github.io/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Sun, 30 Oct 2016 09:24:08 +0000</pubDate>
+      <pubDate>Tue, 28 May 2019 14:22:08 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/</guid>
       <description>文章目录 1 rbac 2 表结构设计 3 初始化权限结构 4 中间件验证 5 生成菜单显示 1 rbac 基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有</description>
     </item>
     
     <item>
+      <title>4-django-orm基本使用</title>
+      <link>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Thu, 16 May 2019 05:20:02 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>文章目录 1 数据库与ORM 2 orm的配置 2.1 引擎和配置 2.2 mysql驱动程序 3 orm 表模型 3.1 创建表对象 3.2 Django字段类型 3.3 常用字段参数说明 3.4 特殊类</description>
+    </item>
+    
+    <item>
+      <title>3-django-template模板基本使用</title>
+      <link>https://dachenzi.github.io/post/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 03 Feb 2019 10:59:03 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>文章目录 1 Template 1.1 模板的基础使用 1.1.1 变量 1.1.2 注释标签 1.1.3 深度查询 1.1.4 内置变量过滤器filter 1.1.5 自定义过滤器之filter 1.1.6 自定义过滤器之simple_</description>
+    </item>
+    
+    <item>
+      <title>2-django-urls路由系统基本使用</title>
+      <link>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 15 Jan 2019 03:21:50 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/2-django-urls%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>1 路由系统(urls控制) 1.1 正则字符串参数 1.2 url的分组 1.2.1 无名分组 1.2.2 有名分组 1.3 URLconf 在什么上查找 1.4 include(路由分发) 1.5 别名(name参数</description>
+    </item>
+    
+    <item>
+      <title>5-django-csrf-session&amp;cookie</title>
+      <link>https://dachenzi.github.io/post/5-django-csrf-sessioncookie/</link>
+      <pubDate>Tue, 29 May 2018 22:14:58 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/5-django-csrf-sessioncookie/</guid>
+      <description>文章目录 1 CSRF跨站请求伪造 1.1 CSRF攻击介绍及防御 1.2 防御CSRF攻击 1.2.1 验证 HTTP Referer 字段 1.2.2 在请求地址中添加 token 并验证 1.2.3 在 HTTP 头中自定义属性并验证 1.2.4</description>
+    </item>
+    
+    <item>
       <title>6-Form-ModelForm对象</title>
       <link>https://dachenzi.github.io/post/6-form-modelform%E5%AF%B9%E8%B1%A1/</link>
-      <pubDate>Wed, 14 Sep 2016 04:50:19 +0000</pubDate>
+      <pubDate>Wed, 27 Dec 2017 03:05:47 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/6-form-modelform%E5%AF%B9%E8%B1%A1/</guid>
       <description>文章目录 1 Form表单验证 1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生</description>
+    </item>
+    
+    <item>
+      <title>7-自定义类admin管理增删改查</title>
+      <link>https://dachenzi.github.io/post/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
+      <pubDate>Fri, 25 Aug 2017 02:07:28 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/7-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
+      <description>文章目录 1 django admin分析 2 django admin源码分析 2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin 3 django admin的接口 4 自定义ayra进行C</description>
+    </item>
+    
+    <item>
+      <title>6-自定义类admin管理增删改查</title>
+      <link>https://dachenzi.github.io/post/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</link>
+      <pubDate>Tue, 06 Dec 2016 05:46:25 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/6-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BBadmin%E7%AE%A1%E7%90%86%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/</guid>
+      <description>文章目录 1 django admin分析 2 django admin源码分析 2.1 注册部分 2.2 路由分发部分 2.3 流程总结 2.4 定制admin 3 django admin的接口 4 自定义ayra进行C</description>
     </item>
     
   </channel>

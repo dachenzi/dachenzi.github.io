@@ -63,17 +63,17 @@
 <meta property="og:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
-<meta property="article:published_time" content="2019-08-05T13:22:19+00:00" />
-<meta property="article:modified_time" content="2019-08-05T13:22:19+00:00" />
+<meta property="article:published_time" content="2019-12-22T21:12:44+00:00" />
+<meta property="article:modified_time" content="2019-12-22T21:12:44+00:00" />
 <meta itemprop="name" content="44-zookeeper学习笔记">
 <meta itemprop="description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理">
-<meta itemprop="datePublished" content="2019-08-05T13:22:19+00:00" />
-<meta itemprop="dateModified" content="2019-08-05T13:22:19+00:00" />
-<meta itemprop="wordCount" content="10753">
+<meta itemprop="datePublished" content="2019-12-22T21:12:44+00:00" />
+<meta itemprop="dateModified" content="2019-12-22T21:12:44+00:00" />
+<meta itemprop="wordCount" content="5347">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="44-zookeeper学习笔记"/>
 <meta name="twitter:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">44-zookeeper学习笔记</h1>
       
       <div class="post-meta">
-        <time datetime="2019-08-05" class="post-time">
-          2019-08-05
+        <time datetime="2019-12-22" class="post-time">
+          2019-12-22
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
             
           </div>
-        <span class="more-meta"> 约 10753 字 </span>
-          <span class="more-meta"> 预计阅读 22 分钟 </span>
+        <span class="more-meta"> 约 5347 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
 
         
         
@@ -371,43 +371,6 @@
   <ul>
     <li><a href="#81-watcher">8.1 watcher</a></li>
     <li><a href="#82-高级api">8.2 高级API</a></li>
-    <li><a href="#mathjax-true">title: 44-zookeeper学习笔记
-date: 2019-03-16 19:45:57
-lastmod: 2019-03-16 19:45:57
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#41-选主流程-1">4.1 选主流程</a></li>
-    <li><a href="#42-同步流程-1">4.2 同步流程</a></li>
-    <li><a href="#43-角色与工作流程-1">4.3 角色与工作流程</a>
-      <ul>
-        <li><a href="#431-leader的工作流程-1">4.3.1 leader的工作流程</a></li>
-        <li><a href="#432-follower工作流程-1">4.3.2 follower工作流程</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#61-myid-1">6.1 myid</a></li>
-    <li><a href="#62-启动模式-1">6.2 启动模式</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#71-结构-1">7.1 结构</a></li>
-    <li><a href="#72-命令行操作-1">7.2 命令行操作</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#81-watcher-1">8.1 watcher</a></li>
-    <li><a href="#82-高级api-1">8.2 高级API</a></li>
   </ul>
 </nav>
   </div>
@@ -995,598 +958,6 @@ Created /data/agent0000000000
 <span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 44-zookeeper学习笔记
-date: 2019-03-16 19:45:57
-lastmod: 2019-03-16 19:45:57
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<h1 id="1-zookeeper-1">1 zookeeper</h1>
-<p>        zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。</p>
-<h1 id="2-应用场景-1">2 应用场景</h1>
-<p>        越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。</p>
-<h1 id="3-zookeeper的体系架构-1">3 zookeeper的体系架构</h1>
-<p>        server端集群架构（leader及follower）每个集群仅选出一个leader，其他zk节点均为follower，具有fast fail特性（leader失效，快速在剩下的follower中竞选leader），非常健壮，无单点，不超过半数Server挂掉不影响提供服务（所以建议zookeeper的节点个数为奇数个，比如zk节点为4个，那么挂两个节点，整个集群就会失效，而5个的话，挂3个才会失效），采用master/Slave模式
-<img src="photo/zookeeper.png" alt="zookeeper"></p>
-<h1 id="4-zookeeper的工作原理-1">4 zookeeper的工作原理</h1>
-<p>        zookeeper和核心是原子广播，这个机制保证了各个server之间的同步。实现这个机制的协议叫做zab协议。zab协议有两种模式，分别使用的是<code>恢复模式（选主）</code>和<code>广播模式（同步）</code>。当服务启动或者在领导者崩溃后，zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。<br>
-        为保证事务的顺序一致性，zookeeper采用了递增的事务id号(zxid)来标识事务。所有的协议(请求)都在被提出的时候加上了zxid。zxid是一个64位的数字，它的高32位是epoch用来表示leader关系是否改变，每次一个leader被选举出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。简单来说：高32位就是标识当前系统的leader的，低32位就是当前环境下zxid的计数
-每个Server在工作过程中有三种状态：</p>
-<ol>
-<li>LOOKING：当前Server不知道leader是谁，正在搜寻</li>
-<li>LEADING：当前Server即为选举出来的leader</li>
-<li>FOLLOWING：leader已经选举出来，当前Server与之同步</li>
-</ol>
-<h2 id="41-选主流程-1">4.1 选主流程</h2>
-<p>        当leader崩溃或者服务刚刚启动时，这时zk进入恢复模式，恢复模式需要重新选举出一个新的leader，让所有的Server都恢复到一个正确的状态。zk的选举算法有两种：一种是基于basic paxos实现的，另外一种是基于fast paxos算法实现的。系统默认的选举算法为fast paxos。流程如下；
-<img src="photo/flow.png" alt="flow"></p>
-<ol>
-<li>选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server；</li>
-<li>选举线程首先向所有Server节点发起一次询问（包括自己）；</li>
-<li>选举线程收到回复后，验证是否是自己发起的讯问（验证zxid是否一致），然后获取对方的id（myid），并存储到当前询问对象列表中，最后堆取对方提出的leader相关信息（id，zxid）并将这些信息存储到当次选举的投票记录表中；</li>
-<li>收到所有Server回复后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server；</li>
-<li>线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2+1的Server票数，就设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。</li>
-<li>要使Leader获得多数Server的支持，则Server的总数必须是奇数（2n+1），且存活的Server数目不得少于n+1</li>
-</ol>
-<p>每个Server启动都会重复以上流程。在恢复模式下，如果是刚存崩溃状态恢复的或者刚启动的Server还会从磁盘快照中恢复数据和会话消息，zk会记录事务日志并定期进行快照，方便在恢复时期进行状态恢复。选主流程图如下：</p>
-<blockquote>
-<p>原理简单来说，就是要选举leader，会生成一个zxid，然后分发给所有的server（所以这里一台server可以接受多台server给他发送要选举leader的请求），然后各个server根据发送给自己的zxid，选择一个值最大的，然后将这个选择返回给发送这个zxid的server，只要这个server收到的答复大于等于2/n+1个（也就是超过半数的同意票），则表明自己当选为leader，然后会向所有server广播自己已经成为leader。</p>
-</blockquote>
-<h2 id="42-同步流程-1">4.2 同步流程</h2>
-<p>选举完leader以后，zk就进入了状态同步过程。</p>
-<ol>
-<li>leader等待server链接</li>
-<li>follower链接leader，将最大的zxid发送给leader</li>
-<li>leader根据follower的zxid确定同步点</li>
-<li>完成同步后通知follower已经成为<code>up to date</code>状态</li>
-<li>follower收到uptodate消息后，就可以接受client的请求进行服务了。</li>
-</ol>
-<p><img src="photo/flow1.png" alt="flow1"></p>
-<h2 id="43-角色与工作流程-1">4.3 角色与工作流程</h2>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Leader</td>
-<td>负责投票的发起和决议，更新系统状态。Leader数据是最新的、最权威的。</td>
-</tr>
-<tr>
-<td>Follower</td>
-<td>接受客户端读请求并返回结果，写请求转给Leader。参与选主投票</td>
-</tr>
-<tr>
-<td>Observer</td>
-<td>接受客户端读请求并返回结果，写请求发给Leader。不参与投票。扩展节点，减轻读压力</td>
-</tr>
-<tr>
-<td>Client</td>
-<td>读写请求的发起方</td>
-</tr>
-</tbody>
-</table>
-<h3 id="431-leader的工作流程-1">4.3.1 leader的工作流程</h3>
-<p>leader主要有三个功能</p>
-<ol>
-<li>恢复数据</li>
-<li>维持与Learner的心跳，</li>
-<li>learner的消息类型主要有ping消息、request消息、ack消息、revalidate消息.</li>
-</ol>
-<p><img src="photo/flow3.png" alt="flow3"></p>
-<p>根据不同的消息类型进行不同的处理</p>
-<ul>
-<li><code>ping消息</code>：指learner的心跳消息。</li>
-<li><code>request消息</code>：是follower发送的提议消息。（包括写请求与同步请求）</li>
-<li><code>ack消息</code>：是follower对提议的回复，超过半数的follower通过，则commit该提议。</li>
-<li><code>revalidate消息</code>：是用来延长session有效时间的。</li>
-</ul>
-<h3 id="432-follower工作流程-1">4.3.2 follower工作流程</h3>
-<p>follower主要有四个功能</p>
-<ol>
-<li>向leader发送请求(ping消息、request消息、ack消息、revalidate消息）</li>
-<li>接受leader的消息并处理</li>
-<li>接受client的请求，如果为写请求，发送给leader进行投票</li>
-<li>返回client结果</li>
-</ol>
-<p>follower的消息循环处理如下集成来自leader的消息</p>
-<ul>
-<li>ping消息：心跳消息</li>
-<li>proposal消息：leader发起的提案，要求follower投票；</li>
-<li>commit消息：服务器端最新一次提案的消息：</li>
-<li>uptodate消息：表明同步完成；</li>
-<li>revalidate消息：根据leader的revalidate结果，关闭带revalidate的session还是允许其接收消息；</li>
-<li>sync消息：返回sync结果到客户端，这个消息最初由客户端发起，用来强制道德最新的更新；</li>
-</ul>
-<p>follower的工作流程简图如下所示，在实际实现中，follower是通过5个线程来实现的</p>
-<p><img src="photo/flow4.png" alt="flow4"></p>
-<p>对于observer的流程不再叙述，observer流程和Follower的唯一不同的地方就是observer不会参加leader发起的投票。
-资料来源：http://cailin.iteye.com/blog/2014486/
-<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/">http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/</a></p>
-<h1 id="5-安装-1">5 安装</h1>
-<p>(建议在Linux/Mac下运行)</p>
-<p>软件需求：需要安装jdk，1.8+ 以上。</p>
-<p>下载zookeeper软件包：http://zookeeper.apache.org/releases.htm</p>
-<p>安装方式：解压就可以使用，建议配置一下JAVA_HOME变量</p>
-<p>yum安装的jdk一般存放在/usr/java下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># vim /etc/profile.d/jdk.sh </span>
-<span class="n">export</span> <span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">default</span> 
-<span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">JAVA_HOME</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="err">$</span><span class="n">PATH</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="6-配置文件-1">6 配置文件</h1>
-<p>conf目录下为zookeeper的配置文件，默认zookeeper提供了一个simple文件，我们可以根据它来定制我们自己的配置文件.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cp zoo_simple.cfg zoo.cfg
-</code></pre></td></tr></table>
-</div>
-</div><p>一个基本的zoo.cfg文件为：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tickTime</span><span class="o">=</span><span class="mi">2000</span>
-<span class="n">initLimit</span><span class="o">=</span><span class="mi">10</span>
-<span class="n">syncLimit</span><span class="o">=</span><span class="mi">5</span>
-<span class="n">dataDir</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">zookeeper</span>
-<span class="n">dataLogDir</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">log</span>
-<span class="n">clientPort</span><span class="o">=</span><span class="mi">2181</span>
-
-<span class="c1"># 集群配置部分</span>
-<span class="n">server</span><span class="o">.</span><span class="mi">1</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2887</span><span class="p">:</span><span class="mi">3887</span>
-<span class="n">server</span><span class="o">.</span><span class="mi">2</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2888</span><span class="p">:</span><span class="mi">3888</span>
-<span class="n">server</span><span class="o">.</span><span class="mi">3</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2889</span><span class="p">:</span><span class="mi">3889</span>
-</code></pre></td></tr></table>
-</div>
-</div><table>
-<thead>
-<tr>
-<th>配置项目</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>clientPort</td>
-<td>客户端通信端口</td>
-</tr>
-<tr>
-<td>dataDir</td>
-<td>zk的数据目录，持久化内存数据的目录，快照</td>
-</tr>
-<tr>
-<td>dataLogDir</td>
-<td>顺序日志存储目录</td>
-</tr>
-<tr>
-<td>tickTime</td>
-<td>滴答声，以后凡是用到时间都是以这个时间间隔tick为单位，本例中，设定时 间1个tick是2000毫秒</td>
-</tr>
-<tr>
-<td>initLimit=10</td>
-<td>Follower到Leader初始化连接的忍受的最长时间间隔，2000ms*10=20s</td>
-</tr>
-<tr>
-<td>syncLimit=5</td>
-<td>Follower和Leader之间通信，请求和应答的时间上限为5个tick间隔</td>
-</tr>
-<tr>
-<td>server.1=nodex:2887:3887</td>
-<td>server.x，x是每一个server的myid nodex必须是每一个主机都能解析的主机名，可以用ip <br>2887，Follower和Leader之间通信端口 <br>3887，选举用端口</td>
-</tr>
-</tbody>
-</table>
-<h2 id="61-myid-1">6.1 myid</h2>
-<p>集群模式下，需要配置myid文件，它存放在对应节点的data目录下，名字为myid，如果集群无法启动，请确认该文件是否存在</p>
-<h2 id="62-启动模式-1">6.2 启动模式</h2>
-<p>主要分为两种模式：</p>
-<ul>
-<li>单机模式：单节点单进程跑</li>
-<li>集群模式
-<ul>
-<li>伪集群：单节点跑多个进程</li>
-<li>真集群：多节点跑</li>
-</ul>
-</li>
-</ul>
-<p>建议使用多节点，可靠性更高</p>
-<h1 id="7-基本操作-1">7 基本操作</h1>
-<p>配置zookeeper目录下的bin目录，到PATH中，可以方便的直接使用bin下面的命令，否则只能使用绝对路径了。
-使用zkCli.sh连接zookeeper，常用参数</p>
-<ul>
-<li><code>timeout</code>：当前会话的超时时间，zookeper依靠与客户端的心跳来判断会话是否有效，单位是毫秒</li>
-<li><code>r</code>： 只读模式，zookeeper的只读模式指一个服务器与集群中过半机器失去连接以后，这个服务器就不在不处理客户端的请求，但我们仍然希望该服务器可以提供读服务。</li>
-<li><code>server</code>：zookeeper服务器ip地址和端口号</li>
-</ul>
-<h2 id="71-结构-1">7.1 结构</h2>
-<p>Zk是一种树型层次目录结构数据模型。每个节点称作ZNode。每一个节点ZNode可以包含数据和子节点(Ephemeral类型节点不能有子节点)。
-ZNode有2种类型:</p>
-<ul>
-<li>Ephemeral临时的:临时节点是会话级的，会话结束时节点会被自动删除，不能有子节点。</li>
-<li>Persistent持久的:持久节点可以长期保存数据。
-<ul>
-<li>Sequential节点：这种节点是顺序节点</li>
-</ul>
-</li>
-</ul>
-<p>组合使用生成4种形式节点：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PERSISTENT</td>
-<td>create 持久节点</td>
-</tr>
-<tr>
-<td>EPHEMERAL</td>
-<td>create -e /test/epath e，客户端断开，节点就消失了</td>
-</tr>
-<tr>
-<td>PERSISTENT_SEQUENTIAL</td>
-<td>create -s /test/spath s，连续执行几次看看效果</td>
-</tr>
-<tr>
-<td>EPHEMERAL_SEQUENTIAL</td>
-<td>create -e -s /test/spath s</td>
-</tr>
-</tbody>
-</table>
-<h2 id="72-命令行操作-1">7.2 命令行操作</h2>
-<p>下面是常用操作：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ls</span> <span class="err">查看节点</span>
-    <span class="n">ls</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
-<span class="n">ls2</span> <span class="err">查看节点和信息</span> 
-    <span class="n">ls2</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
-<span class="n">get</span> <span class="err">获取节点的信息</span> 
-    <span class="n">get</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
-<span class="n">create</span> <span class="err">创建</span><span class="n">path</span><span class="err">，设置数据</span>
-    <span class="n">create</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="n">path</span> <span class="n">data</span> <span class="n">acl</span> 
-<span class="n">delete</span> <span class="err">删除</span><span class="n">path</span>
-    <span class="n">delete</span> <span class="n">path</span> <span class="p">[</span><span class="n">version</span><span class="p">]</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>-s 表示数据类型为序列</li>
-<li>-e 表示数据为临时数据(绑定owner节点，当owner断开时，对应配置消失)</li>
-</ul>
-<blockquote>
-<p>create的时候必须指定节点属性，当节点没有属性时，可以使用create /data []</p>
-</blockquote>
-<p>下面是基础命令操作：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 16<span class="o">]</span> create /name data
-Created /name
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 17<span class="o">]</span> ls /name
-<span class="o">[]</span>
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 18<span class="o">]</span> get /name
-data
-<span class="nv">cZxid</span> <span class="o">=</span> 0x30000003c
-<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:41:47 CST <span class="m">2019</span>
-<span class="nv">mZxid</span> <span class="o">=</span> 0x30000003c
-<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:41:47 CST <span class="m">2019</span>
-<span class="nv">pZxid</span> <span class="o">=</span> 0x30000003c
-<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x0
-<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">4</span>
-<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 20<span class="o">]</span> create -s /name/habby lanqiu
-Created /name/habby0000000000
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 21<span class="o">]</span> create -s /name/habby zuqiu
-Created /name/habby0000000001
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 24<span class="o">]</span> ls /name
-<span class="o">[</span>habby0000000001, habby0000000000<span class="o">]</span>  <span class="c1"># 序列类型</span>
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 25<span class="o">]</span> get /name/habby0000000001
-zuqiu
-<span class="nv">cZxid</span> <span class="o">=</span> 0x30000003e
-<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:43:04 CST <span class="m">2019</span>
-<span class="nv">mZxid</span> <span class="o">=</span> 0x30000003e
-<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:43:04 CST <span class="m">2019</span>
-<span class="nv">pZxid</span> <span class="o">=</span> 0x30000003e
-<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x0
-<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">5</span>
-<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 26<span class="o">]</span>
-
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 44<span class="o">]</span> create -e -s /data/agent 10.0.0.10
-Created /data/agent0000000000
-<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 45<span class="o">]</span> get /data/agent0000000000
-10.0.0.10
-<span class="nv">cZxid</span> <span class="o">=</span> 0x300000048
-<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:55:05 CST <span class="m">2019</span>
-<span class="nv">mZxid</span> <span class="o">=</span> 0x300000048
-<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:55:05 CST <span class="m">2019</span>
-<span class="nv">pZxid</span> <span class="o">=</span> 0x300000048
-<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
-<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x2000b1cd6260006   <span class="c1"># 当前session id，退出时，当前配置失效</span>
-<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">9</span>
-<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>PS：利用zookeeper的这种特性，我们的分布式应用心跳可以通过zookeeper来做，agent可以使用-e的方式来zookeeper中注册，当agent失效时，那么zookeeper中的相关配置就会被剔除，此时agent失效。</p>
-<h1 id="8-python操作zookeeper-1">8 Python操作zookeeper</h1>
-<p>利用kazoo库，来操作zookeeper，使用pip安装即可。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
-
-<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="c1">## 新增</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="s1">&#39;daxin&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># create /name daxin</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">ensure_path</span><span class="p">(</span><span class="s1">&#39;/name1&#39;</span><span class="p">)</span>  <span class="c1"># 确保/name1存在，不存在创建(递归创建)</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/cmdb/agent/10.0.0.10&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">sequence</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># create -e -s /cmdb/agent/10.0.0.10 nginx</span>
-
-<span class="c1">## 获取</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>  <span class="c1"># get /name</span>
-<span class="n">datas</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span> <span class="c1"># ls /name</span>
-
-<span class="c1">## 修改</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;helloworld&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># 修改数据</span>
-
-<span class="c1">## 删除</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>  <span class="c1"># delete /name , 不存在，异常</span>
-
-<span class="c1">## 其他判断</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>   <span class="c1"># 判断/name 是否存在，不存在返回None，存在返回对应的ZnodeStat对象</span>
-
-<span class="n">zk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="81-watcher-1">8.1 watcher</h2>
-<p>可以在get、get_children、exists方法上。当这些get、exists方法调用时，将watcher挂在节点上，如果节点改变或被删除，触发watcher。注意，<code>该节点事件触发一次</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
-
-<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span><span class="n">event</span><span class="p">)</span>  <span class="c1"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
-
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="n">watch</span><span class="o">=</span><span class="n">watcher</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;daxin&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;dachenzi&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-
-<span class="c1">########</span>
-<span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
-<span class="kn">from</span> <span class="nn">kazoo.protocol.states</span> <span class="kn">import</span> <span class="n">ZnodeStat</span>
-<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
-
-<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">,</span><span class="n">watch</span><span class="o">=</span><span class="n">watcher</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">)</span>  <span class="c1"># 触发一次</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>仅仅在第一次执行set的时，触发了watcher函数</p>
-<h2 id="82-高级api-1">8.2 高级API</h2>
-<p>一般情况下watcher只在该节点上触发一次，kazoo提供了装饰器实现多次触发</p>
-<ul>
-<li>DataWatch()</li>
-<li>ChildrenWatch()</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
-<span class="kn">from</span> <span class="nn">kazoo.protocol.states</span> <span class="kn">import</span> <span class="n">ZnodeStat</span>
-
-<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="nd">@zk.DataWatch</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
-
-
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># 每次触发都会执行</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -1600,7 +971,7 @@ Created /data/agent0000000000
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2019-08-05
+      2019-12-22
       
     </span>
   </p>
@@ -1634,14 +1005,14 @@ Created /data/agent0000000000
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/tmux%E4%BD%BF%E7%94%A8/">
+          <a class="prev" href="/post/5-paramiko%E6%A8%A1%E5%9D%97/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1651,12 +1022,12 @@ Created /data/agent0000000000
 </svg>
 
             </i>
-            <span class="prev-text nav-default">Tmux使用</span>
+            <span class="prev-text nav-default">5-paramiko模块</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/">
-            <span class="next-text nav-default">15-reduce-pratial偏函数-lsu_cache</span>
+          <a class="next" href="/post/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">3-React基本使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

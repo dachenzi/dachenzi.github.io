@@ -6,20 +6,11 @@
     <description>Recent content in Container on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Nov 2019 00:30:42 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/container/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>2-docker基本使用</title>
-      <link>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Wed, 06 Nov 2019 00:30:42 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
-      <description>1 docker的基本结构 docker的架构图如下： Client端 &amp;ndash;&amp;gt; docker client Hosts(Docker_Host,server端) &amp;ndash;&amp;gt; docker daemon Registries &amp;ndash;&amp;gt; docker registries do</description>
-    </item>
-    
+    <lastBuildDate>Fri, 21 Sep 2018 18:40:45 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/container/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>无法修改docker监听端口</title>
       <link>https://dachenzi.github.io/post/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/</link>
-      <pubDate>Wed, 14 Nov 2018 02:12:55 +0000</pubDate>
+      <pubDate>Fri, 21 Sep 2018 18:40:45 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/%E6%97%A0%E6%B3%95%E4%BF%AE%E6%94%B9docker%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3/</guid>
       <description>docker daemon启用tcp端口异常 默认情况下docker daemon监听的是本地的sock的，它的位置一般为/var/run/docker.s</description>
@@ -28,28 +19,37 @@
     <item>
       <title>4-docker网络</title>
       <link>https://dachenzi.github.io/post/4-docker%E7%BD%91%E7%BB%9C/</link>
-      <pubDate>Thu, 26 Apr 2018 04:54:02 +0000</pubDate>
+      <pubDate>Fri, 21 Sep 2018 17:42:00 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/4-docker%E7%BD%91%E7%BB%9C/</guid>
       <description>brctl show docker 网络： docker 四种网络类型： bridge(Bridged Container): NAT桥模式(默认) host(Open Container): 与当前物理机共享网络资源(可以直接管理物理机网卡配置),容器使用宿主机的网络资源 none(Closed container):</description>
     </item>
     
     <item>
-      <title>1-docker入门介绍</title>
-      <link>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link>
-      <pubDate>Thu, 14 Dec 2017 04:11:56 +0000</pubDate>
+      <title>2-docker基本使用</title>
+      <link>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 17 Jul 2017 04:21:29 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid>
-      <description>1 虚拟化介绍 主流的虚拟机化方式： 主机级虚拟化：虚拟化的是整个完整的物理硬件平台(VMware workstation) 容器级虚拟化：虚拟化的是一个个的用户空间 主机虚</description>
+      <guid>https://dachenzi.github.io/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>1 docker的基本结构 docker的架构图如下： Client端 &amp;ndash;&amp;gt; docker client Hosts(Docker_Host,server端) &amp;ndash;&amp;gt; docker daemon Registries &amp;ndash;&amp;gt; docker registries do</description>
     </item>
     
     <item>
       <title>3-docker镜像</title>
       <link>https://dachenzi.github.io/post/3-docker%E9%95%9C%E5%83%8F/</link>
-      <pubDate>Sat, 13 Feb 2016 02:56:33 +0000</pubDate>
+      <pubDate>Fri, 03 Feb 2017 00:59:11 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/3-docker%E9%95%9C%E5%83%8F/</guid>
       <description>1 docker image 镜像 docker host 从docker registries 中获取镜像并存入到本地，所以要求docker host本地能够存储这种镜像，这种存储空间要求是一种特殊而且专用的</description>
+    </item>
+    
+    <item>
+      <title>1-docker入门介绍</title>
+      <link>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Wed, 22 Jun 2016 01:00:31 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/1-docker%E5%85%A5%E9%97%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>1 虚拟化介绍 主流的虚拟机化方式： 主机级虚拟化：虚拟化的是整个完整的物理硬件平台(VMware workstation) 容器级虚拟化：虚拟化的是一个个的用户空间 主机虚</description>
     </item>
     
   </channel>

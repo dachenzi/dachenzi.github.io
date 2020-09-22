@@ -63,17 +63,17 @@
 <meta property="og:description" content="文章目录 1 同步与异步 2 阻塞与非阻塞 3 什么是IO 3.1 内核态用户态 3.2 IO两个阶段 3.3 IO模型 3.3.1 同步阻塞IO 3.3.2 同步非阻塞IO 3.3.3 IO多路复用 3.3.4 异步IO 4" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/39-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" />
-<meta property="article:published_time" content="2018-07-05T03:17:21+00:00" />
-<meta property="article:modified_time" content="2018-07-05T03:17:21+00:00" />
+<meta property="article:published_time" content="2018-01-29T15:31:04+00:00" />
+<meta property="article:modified_time" content="2018-01-29T15:31:04+00:00" />
 <meta itemprop="name" content="39-同步-异步-IO多路复用">
 <meta itemprop="description" content="文章目录 1 同步与异步 2 阻塞与非阻塞 3 什么是IO 3.1 内核态用户态 3.2 IO两个阶段 3.3 IO模型 3.3.1 同步阻塞IO 3.3.2 同步非阻塞IO 3.3.3 IO多路复用 3.3.4 异步IO 4">
-<meta itemprop="datePublished" content="2018-07-05T03:17:21+00:00" />
-<meta itemprop="dateModified" content="2018-07-05T03:17:21+00:00" />
-<meta itemprop="wordCount" content="8960">
+<meta itemprop="datePublished" content="2018-01-29T15:31:04+00:00" />
+<meta itemprop="dateModified" content="2018-01-29T15:31:04+00:00" />
+<meta itemprop="wordCount" content="4451">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="39-同步-异步-IO多路复用"/>
 <meta name="twitter:description" content="文章目录 1 同步与异步 2 阻塞与非阻塞 3 什么是IO 3.1 内核态用户态 3.2 IO两个阶段 3.3 IO模型 3.3.1 同步阻塞IO 3.3.2 同步非阻塞IO 3.3.3 IO多路复用 3.3.4 异步IO 4"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">39-同步-异步-IO多路复用</h1>
       
       <div class="post-meta">
-        <time datetime="2018-07-05" class="post-time">
-          2018-07-05
+        <time datetime="2018-01-29" class="post-time">
+          2018-01-29
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
             
           </div>
-        <span class="more-meta"> 约 8960 字 </span>
-          <span class="more-meta"> 预计阅读 18 分钟 </span>
+        <span class="more-meta"> 约 4451 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
 
         
         
@@ -365,37 +365,6 @@
     <li><a href="#42-register方法">4.2 register方法</a></li>
     <li><a href="#43-利用selectors完成io多路复用版本的echoserver">4.3 利用selectors完成IO多路复用版本的EchoServer</a></li>
     <li><a href="#44-聊天室">4.4 聊天室</a></li>
-    <li><a href="#mathjax-true">title: 39-同步-异步-IO多路复用
-date: 2018-06-22 15:05:56
-lastmod: 2018-06-22 15:05:56
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#31-内核态用户态-1">3.1 内核态用户态</a></li>
-    <li><a href="#32-io两个阶段-1">3.2 IO两个阶段</a></li>
-    <li><a href="#33-io模型-1">3.3 IO模型</a>
-      <ul>
-        <li><a href="#331-同步阻塞io-1">3.3.1 同步阻塞IO</a></li>
-        <li><a href="#332-同步非阻塞io-1">3.3.2 同步非阻塞IO</a></li>
-        <li><a href="#333-io多路复用-1">3.3.3 IO多路复用</a></li>
-        <li><a href="#334-异步io-1">3.3.4 异步IO</a></li>
-      </ul>
-    </li>
-  </ul>
-
-  <ul>
-    <li><a href="#41-selectors库-1">4.1 selectors库</a></li>
-    <li><a href="#42-register方法-1">4.2 register方法</a></li>
-    <li><a href="#43-利用selectors完成io多路复用版本的echoserver-1">4.3 利用selectors完成IO多路复用版本的EchoServer</a></li>
-    <li><a href="#44-聊天室-1">4.4 聊天室</a></li>
   </ul>
 </nav>
   </div>
@@ -1047,662 +1016,6 @@ mathjax: true</a></li>
             <span class="k">break</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 39-同步-异步-IO多路复用
-date: 2018-06-22 15:05:56
-lastmod: 2018-06-22 15:05:56
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5">1 同步与异步</a></li>
-<li><a href="#2-%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E">2 阻塞与非阻塞</a></li>
-<li><a href="#3-%E4%BB%80%E4%B9%88%E6%98%AFio">3 什么是IO</a>
-<ul>
-<li><a href="#31-%E5%86%85%E6%A0%B8%E6%80%81%E7%94%A8%E6%88%B7%E6%80%81">3.1 内核态用户态</a></li>
-<li><a href="#32-io%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5">3.2 IO两个阶段</a></li>
-<li><a href="#33-io%E6%A8%A1%E5%9E%8B">3.3 IO模型</a>
-<ul>
-<li><a href="#331-%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9Eio">3.3.1 同步阻塞IO</a></li>
-<li><a href="#332-%E5%90%8C%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9Eio">3.3.2 同步非阻塞IO</a></li>
-<li><a href="#333-io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8">3.3.3 IO多路复用</a></li>
-<li><a href="#334-%E5%BC%82%E6%AD%A5io">3.3.4 异步IO</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#4-python%E4%B8%AD%E7%9A%84io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8">4 Python中的IO多路复用</a>
-<ul>
-<li><a href="#41-selectors%E5%BA%93">4.1 selectors库</a></li>
-<li><a href="#42-register%E6%96%B9%E6%B3%95">4.2 register方法</a></li>
-<li><a href="#43-%E5%88%A9%E7%94%A8selectors%E5%AE%8C%E6%88%90io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%89%88%E6%9C%AC%E7%9A%84echoserver">4.3 利用selectors完成IO多路复用版本的EchoServer</a></li>
-<li><a href="#44-%E8%81%8A%E5%A4%A9%E5%AE%A4">4.4 聊天室</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
-<h1 id="1-同步与异步-1">1 同步与异步</h1>
-<p>同步和异步关注的是程序在执行时的状态：</p>
-<ul>
-<li><code>同步</code>，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其他的命令。</li>
-<li><code>异步</code>，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。</li>
-</ul>
-<h4>例如:</h4>
-<ul>
-<li>同步如打电话，通信双方不能断（我们是同时进行，同步），你一句我一句，这样的好处是，对方想表达的信息我马上能收到，但是，我在打着电话，我无法做别的事情。</li>
-<li>异步如收发收短信，对比打电话，打电话我一定要在电话的旁边听着，保证双方都在线，而收发短信，对方不用保证此刻我一定在手机旁，同时，我也不用时刻留意手机有没有来短信。这样的话，我看着视频，然后来了短信，我就处理短信（也可以不处理），接着再看视频。</li>
-</ul>
-<p>        对于写程序，同步往往会阻塞，没有数据过来，我就等着，异步则不会阻塞，没数据来我干别的事，有数据来去处理这些数据。一句话总结一下就是：<code>函数或方法被调用时，调用者是否得到最终结果的</code>。</p>
-<ul>
-<li>直接得到最终结果的就是同步调用；</li>
-<li>得到中间结果而非最终结果的，就是异步调用</li>
-</ul>
-<h1 id="2-阻塞与非阻塞-1">2 阻塞与非阻塞</h1>
-<p>阻塞和非阻塞关注的是程序在等待调用结果（消息，返回值）时的状态.</p>
-<ul>
-<li>阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。</li>
-<li>非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</li>
-</ul>
-<p>一句话总结一下就是：<code>函数或方法被调用时，是否立刻返回</code></p>
-<ul>
-<li>立即返回就是非阻塞调用</li>
-<li>不立即返回就是阻塞调用</li>
-</ul>
-<h1 id="3-什么是io-1">3 什么是IO</h1>
-<p>linux系统中，所有的设备读写都可以看做文件的读写来操作，对文件的读写一般要经过内核态和用户态的切换，正因为有切换才导致了IO有同步和异步的说法。</p>
-<h2 id="31-内核态用户态-1">3.1 内核态用户态</h2>
-<p>在i386之前，CPU工作在实模式下，之后开始支持保护模式，通常用保护环（ring）来描述特权级，分为四个运行级别：Ring0 ~ Ring3.</p>
-<blockquote>
-<p>实模下，软件可以直接访问BIOS例程以及周边硬件，没有任何硬件等级的存储器保护观念或多任务。</p>
-</blockquote>
-<p>CPU 在某个时刻运行在特定的特权级，等级约束了CPU了可以做什么，不可以做什么。x86(现在最流行的PC/Server CPU架构) CPU 只用了两个特权级：0 和 3：</p>
-<ul>
-<li><code>Ring 0</code>: 可以执行特权指令，可以访问说有级别数据，可以访问IO设备等(<strong>级别最高</strong>)</li>
-<li><code>Ring 3</code>：只能访问本级别数据(<strong>级别最低</strong>)</li>
-</ul>
-<p>针对于Linux来说，</p>
-<ul>
-<li>ring0 就是<code>内核态</code>，运行内核代码</li>
-<li>ring3 就是<code>用户态</code>，运行用户代码</li>
-</ul>
-<p>当用户的应用程序想访问某些硬件资源时，就需要通过操作系统提供的 <strong>系统调用</strong> ，系统调用可以使用特权指令运行在内核空间，此时进程陷入内核态运行。系统调用完成，进程将回到用户态继续执行用户空间代码。</p>
-<blockquote>
-<p>现代操作系统采用虚拟存储器，对于32位操作系统来说，进程对虚拟内存地址的内存寻址空间为4G(2^32)。操作系统中，内核程序独立且运行在较高的特权级别上，它们驻留在被保护的内存空间上，拥有访问硬件设备的权限，这部分内存称为内核空间(内核态，最高1G)。</p>
-</blockquote>
-<h2 id="32-io两个阶段-1">3.2 IO两个阶段</h2>
-<p>通常来讲IO可以分成两种类型：</p>
-<ul>
-<li>来自网络的IO</li>
-<li>来自文件或者设备的IO</li>
-</ul>
-<p>IO过程可以分为两个阶段：</p>
-<ul>
-<li>数据准备阶段(内核从IO设备读写数据)</li>
-<li>内核空间复制回用户空间进程缓冲区阶段(进程从内核复制数据)</li>
-</ul>
-<h2 id="33-io模型-1">3.3 IO模型</h2>
-<p>主要分为同步IO和异步IO，而同步IO又可以分为：同步阻塞IO、同步非阻塞IO、IO多路复用。</p>
-<h3 id="331-同步阻塞io-1">3.3.1 同步阻塞IO</h3>
-<p>进程等待(阻塞)，直到读写完成。(<code>全程等待</code>)<br>
-<img src="photo/zuseio.png" alt="zuse"></p>
-<h3 id="332-同步非阻塞io-1">3.3.2 同步非阻塞IO</h3>
-<p>进程调用read操作，如果IO设备没准备好，立即返回ERROR，进程不阻塞。用户可以再次发起系统调用，如果内核已经准备好，就阻塞，然后复制数据到用户空间</p>
-<ol>
-<li>第一阶段数据没有准备好，就先忙别的，等会再来看看。检查数据是否准备好了的过程是非阻塞的。</li>
-<li>第二阶段是阻塞的，即内核空间和用户空间之间复制数据是阻塞的。</li>
-</ol>
-<p><img src="photo/feizuseio.png" alt="feizuse"></p>
-<h3 id="333-io多路复用-1">3.3.3 IO多路复用</h3>
-<p>所谓IO多路复用，就是同时监控多个IO，有一个准备好了，就不需要等了立即开始处理，提高了同时处理IO的能力。主要的IO多路复用有：</p>
-<ul>
-<li>select: 几乎所有操作系统平台都支持，poll是对select的升级</li>
-<li>epoll：Linux系统内核2.5+开始支持，对select和poll的增强，在监视的基础上，增加回调机制。（BSD、Mac平台有kqueue，Windows有iocp）</li>
-</ul>
-<p><img src="photo/ioduolufuyong.png" alt="ioduolu"></p>
-<h4>例如:</h4>  
-<ul>
-<li>select：食堂供应很多菜（众多IO），你需要吃某三菜一汤，大师傅（操作系统）说要现做，需要等。你只好等待大师傅叫，其中一样菜好了，大师傅叫你，说你点的菜有的好了，你得自己遍历找找看哪一样好了。请服务员打给你。</li>
-<li>epool:是有菜准备好了，大师傅喊你去几号窗口直接打菜，不用自己找菜了。</li>
-</ul>
-<p>一般情况下，select最多能监听1024个fd(可以修改，但不建议)，但是由于select采用轮询的方式，当管理的IO多了，每次都要遍历全部fd，效率低下。epoll没有管理的fd的上限，且是回调机制，不需要遍历，效果很高。</p>
-<h3 id="334-异步io-1">3.3.4 异步IO</h3>
-<p>进程发起异步IO请求，立即返回。内核完成IO的两个阶段，后给进程发信号<br>
-<img src="photo/yibuio.png" alt="yibu"></p>
-<blockquote>
-<p>Linux的aio的系统调用，内核从2.6版本开始支持。</p>
-</blockquote>
-<h1 id="4-python中的io多路复用-1">4 Python中的IO多路复用</h1>
-<p>Python的select库实现了select、poll系统调用，这个基本上操作系统都支持，部分实现了epoll，它是底层的IO多路复用模块。</p>
-<ul>
-<li>select维护一个文件描述符数据结构，单个进程使用于上限，通常是1024，线性扫描这个数据结构，效率低。</li>
-<li>pool和select的区别是内部数据结构使用链表，没有这个最大限制，但是依然是线性遍历才知道哪个设备就绪了。</li>
-<li>epoll使用事件通知机制，使用回调机制提高效率</li>
-</ul>
-<blockquote>
-<p>select/pool 还有从内核空间复制消息到用户空间，而epoll通过内核空间和用户空间共享一块内存来减少复制。</p>
-</blockquote>
-<h2 id="41-selectors库-1">4.1 selectors库</h2>
-<p>Python 3.4 提供 selectors库，高级IO复用库。它的类层次结构如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">BaseSelector</span>
-<span class="o">+--</span> <span class="n">SelectSelector</span>
-<span class="o">+--</span> <span class="n">PollSelector</span>
-<span class="o">+--</span> <span class="n">EpollSelector</span>
-<span class="o">+--</span> <span class="n">DevpollSelector</span>
-<span class="o">+--</span> <span class="n">KqueueSelector</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>观察模块原码<code>倒数几行</code>我们知道，selecors.DefaultSelector会返回当前平台最有效、性能最高的实现，但是由于没有实现 Windows下的IOCP，所以windows下只能退化为select。</p>
-<h2 id="42-register方法-1">4.2 register方法</h2>
-<p>selectorsobj.register为当前selectors实例注册一个文件对象，监视它的IO实现，返回一个selectKey对象。它的参数如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileobj</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>fileobj: 被监视的文件对象，比如socket对象</li>
-<li>events: 事件，该文件对象必须等待的事件</li>
-<li>data：可选的与此文件对象关联的不透明的属性，例如：关联用来存储每个客户端的会话ID，关联方法。通过这个参数在关注的事件产生后让selector干什么事。</li>
-</ul>
-<p>常用的Event事件</p>
-<ul>
-<li>EVENT_READ: 可读0b01，内核已经准备好输入输出设备，可以开始读了。</li>
-<li>EVENT_WRITE: 可写0b10，内核准备好了，可以往里写了。</li>
-</ul>
-<p>返回的selectKey对象对象具有以下方法：</p>
-<ul>
-<li>fileobj: 注册的文件对象(socket)</li>
-<li>fd：文件描述符</li>
-<li>events：等待fd标识的文件对象触发的事件类型</li>
-<li>data：注册时关联的数据(标识回调函数)</li>
-</ul>
-<h2 id="43-利用selectors完成io多路复用版本的echoserver-1">4.3 利用selectors完成IO多路复用版本的EchoServer</h2>
-<p>下面是代码:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">import</span> <span class="nn">selectors</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">EchoServer</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">DefaultSelector</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evnet</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>   <span class="c1"># 事件被触发，说明有链接进来，那么不需要阻塞等待</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>  <span class="c1"># 注册accept函数</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>   <span class="c1"># 启动监视进程</span>
-
-
-    <span class="c1"># 启动selector，用于监视事件的发生</span>
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">evnet</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-            <span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
-                <span class="n">key</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">fileobj</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">sock</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="c1"># 将client的读写也加入到监事列表中</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">)</span>
-
-    <span class="c1"># 当对应的socket有写操作，会直接直接触发执行，所以这里根本不需要死循环</span>
-    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">client_ip</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">evnet</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-            <span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">return</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">client_ip</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-        <span class="n">sock</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-    <span class="c1"># 关闭进程时，将selectors中注册的事件取消掉，再关闭监视器</span>
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evnet</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-        <span class="n">event_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">get_map</span><span class="p">():</span>
-            <span class="n">event_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">EchoServer</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
-    <span class="n">es</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
-            <span class="n">es</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-            <span class="k">break</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="44-聊天室-1">4.4 聊天室</h2>
-<p>这里是每次client进来时，通过记录client的socket来完成的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">import</span> <span class="nn">selectors</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-
-<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">ChatSocketServer</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">DefaultSelector</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clients</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># 用于记录连接的client</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>  <span class="c1"># 事件被触发，说明有链接进来，那么不需要阻塞等待</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>  <span class="c1"># 注册accept函数</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>  <span class="c1"># 启动监视进程</span>
-
-    <span class="c1"># 启动selector，用于监视事件的发生</span>
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-            <span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
-                <span class="n">key</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">fileobj</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">sock</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-
-        <span class="c1"># 添加已连接客户端列表</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="p">[</span><span class="n">client</span><span class="p">]</span> <span class="o">=</span> <span class="n">sock</span>
-
-        <span class="c1"># 将client的读写也加入到监事列表中</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">)</span>
-
-    <span class="c1"># 当对应的socket有写操作，会直接直接触发执行，所以这里根本不需要死循环</span>
-    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">client_ip</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">client_ip</span><span class="p">)</span>   <span class="c1"># 退出后弹出client地址</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-            <span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">return</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">client_ip</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">clients</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="n">clients</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-
-    <span class="c1"># 关闭进程时，将selectors中注册的事件取消掉，再关闭监视器</span>
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-        <span class="n">event_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">get_map</span><span class="p">():</span>
-            <span class="n">event_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>    <span class="c1"># 关闭所以已连接的client的socket</span>
-            <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">ChatSocketServer</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
-    <span class="n">es</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
-            <span class="n">es</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-            <span class="k">break</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>当然还可以通过selector来处理，为什么呢？因为每当有请求进来，selector都会监视当前连接的recv，那么我们只需要在selector中的recv拿出来，就知道到底有多少连接了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">import</span> <span class="nn">selectors</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-
-<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">ChatSocketServer</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">DefaultSelector</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>  <span class="c1"># 事件被触发，说明有链接进来，那么不需要阻塞等待</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>  <span class="c1"># 注册accept函数</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>  <span class="c1"># 启动监视进程</span>
-
-    <span class="c1"># 启动selector，用于监视事件的发生</span>
-    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-            <span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
-                <span class="n">key</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">fileobj</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">sock</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-
-        <span class="c1"># 将client的读写也加入到监事列表中</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">selectors</span><span class="o">.</span><span class="n">EVENT_READ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">)</span>
-
-    <span class="c1"># 当对应的socket有写操作，会直接直接触发执行，所以这里根本不需要死循环</span>
-    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">):</span>
-        <span class="n">client_ip</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">sock</span><span class="p">)</span>   <span class="c1"># 客户端退出，则取消监控当前 socket 事件</span>
-            <span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="k">return</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">client_ip</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-        <span class="c1"># 群发消息，如果data绑定的是recv(排除accept)，那么就通过socket群发消息</span>
-        <span class="k">for</span> <span class="n">sock</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">get_map</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">sock</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">:</span>
-                <span class="n">sock</span><span class="o">.</span><span class="n">fileobj</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-
-    <span class="c1"># 关闭进程时，将selectors中注册的事件取消掉，再关闭监视器</span>
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-        <span class="n">event_list</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">get_map</span><span class="p">():</span>
-            <span class="n">event_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">selector</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">ChatSocketServer</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
-    <span class="n">es</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
-            <span class="n">es</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-            <span class="k">break</span>
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -1716,7 +1029,7 @@ mathjax: true</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2018-07-05
+      2018-01-29
       
     </span>
   </p>
@@ -1750,14 +1063,14 @@ mathjax: true</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/">
+          <a class="prev" href="/post/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1767,12 +1080,12 @@ mathjax: true</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">面向对象基础</span>
+            <span class="prev-text nav-default">2-JavaScript函数-作用域-异常</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/linuxcrontab/">
-            <span class="next-text nav-default">Linuxcrontab</span>
+          <a class="next" href="/post/tmux%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">Tmux使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

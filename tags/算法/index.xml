@@ -6,32 +6,32 @@
     <description>Recent content in 算法 on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 23 Jun 2019 04:09:01 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>2-选择排序</title>
-      <link>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Sun, 23 Jun 2019 04:09:01 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
-      <description>title: 2-选择排序 data: 2020-09-21 17:03:56 tags: {% raw %} 1 选择排序介绍 2 基本选择排序 3 选择排序的优化 3.1 二元选择排序 3.2 同时排序最大和最小值 3.3 索引混乱 3.4 代码优化 4 总结 1 选择</description>
-    </item>
-    
+    <lastBuildDate>Sun, 02 Dec 2018 12:27:52 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3-直接插入排序</title>
       <link>https://dachenzi.github.io/post/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Wed, 31 Oct 2018 20:27:20 +0000</pubDate>
+      <pubDate>Sun, 02 Dec 2018 12:27:52 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/3-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
-      <description>title: 3-直接插入排序 data: 2020-09-21 17:03:56 tags: {% raw %} 1 直接插入排序 2 分析过程 3 关于存储中间变量 4 代码编写 5 总结 1 直接插入排序 直接插入排序属于比较简单的排序算法，</description>
+      <description>1 直接插入排序 2 分析过程 3 关于存储中间变量 4 代码编写 5 总结 1 直接插入排序 直接插入排序属于比较简单的排序算法，基本原理： 在未排序序列中，构建一</description>
+    </item>
+    
+    <item>
+      <title>2-选择排序</title>
+      <link>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Wed, 15 Jun 2016 01:56:54 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/2-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>1 选择排序介绍 2 基本选择排序 3 选择排序的优化 3.1 二元选择排序 3.2 同时排序最大和最小值 3.3 索引混乱 3.4 代码优化 4 总结 1 选择排序介绍 选择排序（Selec</description>
     </item>
     
     <item>
       <title>1-冒泡排序</title>
       <link>https://dachenzi.github.io/post/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Sun, 17 Jul 2016 10:09:52 +0000</pubDate>
+      <pubDate>Thu, 31 Mar 2016 06:53:13 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
-      <description>title: 1-冒泡排序 data: 2020-09-21 17:03:56 tags: {% raw %} 1 冒泡算法 冒泡排序（Bubble Sort），是一种计算机科学领域的较简单的排序算法,它属于交换排序，主要的方式是</description>
+      <description>1 冒泡算法 冒泡排序（Bubble Sort），是一种计算机科学领域的较简单的排序算法,它属于交换排序，主要的方式是通过两辆比较，交换位置，如同</description>
     </item>
     
   </channel>

@@ -6,59 +6,59 @@
     <description>Recent content in Python模块 on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 25 Aug 2019 01:49:41 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/python%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Jan 2020 08:29:43 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/python%E6%A8%A1%E5%9D%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>6-subprocess模块-tempfile模块</title>
-      <link>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Sun, 25 Aug 2019 01:49:41 +0000</pubDate>
+      <title>5-paramiko模块</title>
+      <link>https://dachenzi.github.io/post/5-paramiko%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Sat, 04 Jan 2020 08:29:43 +0000</pubDate>
       
-      <guid>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 6-subprocess模块-tempfile模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 subprocess模块 用于执行命令，它取代了比较老得os.system</description>
-    </item>
-    
-    <item>
-      <title>3-concurrent模块</title>
-      <link>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Fri, 28 Jun 2019 21:51:20 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 3-concurrent模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 conturrent包 2 future模块 3 ThreadPoolExecutor对象 4 F</description>
-    </item>
-    
-    <item>
-      <title>4-logging模块</title>
-      <link>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Sun, 16 Jun 2019 00:03:45 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 4-logging模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息</description>
+      <guid>https://dachenzi.github.io/post/5-paramiko%E6%A8%A1%E5%9D%97/</guid>
+      <description>1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支持Python 2.6+ 和Python 3.3+ 版本，实</description>
     </item>
     
     <item>
       <title>2-datetime模块</title>
       <link>https://dachenzi.github.io/post/2-datetime%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Sun, 05 May 2019 23:04:48 +0000</pubDate>
+      <pubDate>Sat, 20 Oct 2018 08:20:35 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/2-datetime%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 2-datetime模块 data: 2020-09-21 17:03:56 tags: {% raw %} 文章目录 1 时间 2 datetime模块 2.1 获取当前日期和时间 2.2 获取指定日期和时间 2.3 datetime转换为</description>
+      <description>文章目录 1 时间 2 datetime模块 2.1 获取当前日期和时间 2.2 获取指定日期和时间 2.3 datetime转换为timestamp 2.4 timestamp转</description>
+    </item>
+    
+    <item>
+      <title>6-subprocess模块-tempfile模块</title>
+      <link>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Tue, 29 Aug 2017 20:19:58 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/</guid>
+      <description>1 subprocess模块 用于执行命令，它取代了比较老得os.system,commands等模块，它通过启动子进程来完成命令的执行，并且提</description>
+    </item>
+    
+    <item>
+      <title>3-concurrent模块</title>
+      <link>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Tue, 09 May 2017 21:40:49 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/3-concurrent%E6%A8%A1%E5%9D%97/</guid>
+      <description>文章目录 1 conturrent包 2 future模块 3 ThreadPoolExecutor对象 4 Future对象 5 ProcessPoolExe</description>
+    </item>
+    
+    <item>
+      <title>4-logging模块</title>
+      <link>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</link>
+      <pubDate>Fri, 21 Oct 2016 09:52:43 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/</guid>
+      <description>文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo</description>
     </item>
     
     <item>
       <title>1-random模块</title>
       <link>https://dachenzi.github.io/post/1-random%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Thu, 20 Jul 2017 12:44:34 +0000</pubDate>
+      <pubDate>Wed, 05 Oct 2016 06:37:31 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/1-random%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 1-random模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 随机数random 之所以在这里介绍random模块是因为，我们可能需要在列表中随机挑选一个或几个重复或</description>
-    </item>
-    
-    <item>
-      <title>5-paramiko模块</title>
-      <link>https://dachenzi.github.io/post/5-paramiko%E6%A8%A1%E5%9D%97/</link>
-      <pubDate>Tue, 07 Jun 2016 17:55:25 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/5-paramiko%E6%A8%A1%E5%9D%97/</guid>
-      <description>title: 5-paramiko模块 data: 2020-09-21 17:03:56 tags: {% raw %} 1 简介 ssh是一个协议，OpenSSH是其中一个开源实现，paramiko是Python的一个库，支</description>
+      <description>1 随机数random 之所以在这里介绍random模块是因为，我们可能需要在列表中随机挑选一个或几个重复或者不重复的数据，这时，就可以使用py</description>
     </item>
     
   </channel>

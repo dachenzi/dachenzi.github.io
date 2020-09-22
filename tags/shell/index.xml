@@ -6,11 +6,11 @@
     <description>Recent content in Shell on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 26 Sep 2016 00:27:22 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Jan 2020 15:06:07 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ShellNotes</title>
       <link>https://dachenzi.github.io/post/shellnotes/</link>
-      <pubDate>Mon, 26 Sep 2016 00:27:22 +0000</pubDate>
+      <pubDate>Tue, 07 Jan 2020 15:06:07 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/shellnotes/</guid>
       <description>1 什么是shell shell是一个命令解释器，位于操作系统的最外层，它负责和用户直接对话，不用户输入的内容解释给操作系统，操作系统处理完毕后</description>

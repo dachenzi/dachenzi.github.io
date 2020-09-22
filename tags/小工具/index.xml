@@ -6,14 +6,14 @@
     <description>Recent content in 小工具 on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Jul 2016 03:00:18 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Jan 2018 23:26:08 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tmux使用</title>
       <link>https://dachenzi.github.io/post/tmux%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sun, 10 Jul 2016 03:00:18 +0000</pubDate>
+      <pubDate>Thu, 04 Jan 2018 23:26:08 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/tmux%E4%BD%BF%E7%94%A8/</guid>
-      <description>title: Tmux使用 data: 2020-09-21 17:03:56 tags: {% raw %} 1 Tmux 终端复用器类自由软件，功能类似于GUN screen，可以在一个终端内管理多个分离的会话，窗口及窗格，对于同时</description>
+      <description>1 Tmux 终端复用器类自由软件，功能类似于GUN screen，可以在一个终端内管理多个分离的会话，窗口及窗格，对于同时使用多个命令行，或多个任务时</description>
     </item>
     
   </channel>

@@ -6,23 +6,23 @@
     <description>Recent content in Linux on daxin.li&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Dec 2019 00:44:05 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>DNS</title>
-      <link>https://dachenzi.github.io/post/dns/</link>
-      <pubDate>Tue, 17 Dec 2019 00:44:05 +0000</pubDate>
-      
-      <guid>https://dachenzi.github.io/post/dns/</guid>
-      <description>title: DNS data: 2020-09-21 17:03:56 tags: {% raw %} 1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3</description>
-    </item>
-    
+    <lastBuildDate>Sat, 29 Apr 2017 16:53:30 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DNS-server</title>
       <link>https://dachenzi.github.io/post/dns-server/</link>
-      <pubDate>Fri, 17 May 2019 21:39:51 +0000</pubDate>
+      <pubDate>Sat, 29 Apr 2017 16:53:30 +0000</pubDate>
       
       <guid>https://dachenzi.github.io/post/dns-server/</guid>
-      <description>title: DNS-server data: 2020-09-21 17:03:56 tags: {% raw %} 比较好用的dns记录 OpenDNS： 208.67.222.222 208.67.220.220 台湾中华电讯的 DNS： 168.95.192.1 168.95.192.2 香港宽频的 DNS： 203.80.96.9 203.80.96.10 Level 3: 4.2.2.2</description>
+      <description>比较好用的dns记录 OpenDNS： 208.67.222.222 208.67.220.220 台湾中华电讯的 DNS： 168.95.192.1 168.95.192.2 香港宽频的 DNS： 203.80.96.9 203.80.96.10 Level 3: 4.2.2.2</description>
+    </item>
+    
+    <item>
+      <title>DNS</title>
+      <link>https://dachenzi.github.io/post/dns/</link>
+      <pubDate>Sun, 29 May 2016 19:06:41 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/post/dns/</guid>
+      <description>1 什么是DNS 2 DNS域名系统 3 DNS域名结构 4 域名服务器 5 域名解析过程 6 特殊记录说明 6.1 什么是A记录？ 6.2 什么是NS记录？ 6.3 什么是CNAME记</description>
     </item>
     
   </channel>

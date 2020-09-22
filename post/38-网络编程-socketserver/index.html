@@ -63,17 +63,17 @@
 <meta property="og:description" content="文章目录 1 socket编程弊端 2 SocketServer模块 2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口 3" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/" />
-<meta property="article:published_time" content="2019-08-29T08:30:46+00:00" />
-<meta property="article:modified_time" content="2019-08-29T08:30:46+00:00" />
+<meta property="article:published_time" content="2019-05-19T02:52:31+00:00" />
+<meta property="article:modified_time" content="2019-05-19T02:52:31+00:00" />
 <meta itemprop="name" content="38-网络编程-socketserver">
 <meta itemprop="description" content="文章目录 1 socket编程弊端 2 SocketServer模块 2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口 3">
-<meta itemprop="datePublished" content="2019-08-29T08:30:46+00:00" />
-<meta itemprop="dateModified" content="2019-08-29T08:30:46+00:00" />
-<meta itemprop="wordCount" content="5667">
+<meta itemprop="datePublished" content="2019-05-19T02:52:31+00:00" />
+<meta itemprop="dateModified" content="2019-05-19T02:52:31+00:00" />
+<meta itemprop="wordCount" content="2802">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="38-网络编程-socketserver"/>
 <meta name="twitter:description" content="文章目录 1 socket编程弊端 2 SocketServer模块 2.1 服务器类 2.2 Mixin类 2.3 RequestHandlerClass是啥 2.4 编程接口 3"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">38-网络编程-socketserver</h1>
       
       <div class="post-meta">
-        <time datetime="2019-08-29" class="post-time">
-          2019-08-29
+        <time datetime="2019-05-19" class="post-time">
+          2019-05-19
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
             
           </div>
-        <span class="more-meta"> 约 5667 字 </span>
-          <span class="more-meta"> 预计阅读 12 分钟 </span>
+        <span class="more-meta"> 约 2802 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
 
         
         
@@ -352,27 +352,6 @@
     <li><a href="#22-mixin类">2.2 Mixin类</a></li>
     <li><a href="#23-requesthandlerclass是啥">2.3 RequestHandlerClass是啥</a></li>
     <li><a href="#24-编程接口">2.4 编程接口</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#mathjax-true">title: 38-网络编程-socketserver
-date: 2017-07-18 15:17:59
-lastmod: 2017-07-18 15:17:59
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#21-服务器类-1">2.1 服务器类</a></li>
-    <li><a href="#22-mixin类-1">2.2 Mixin类</a></li>
-    <li><a href="#23-requesthandlerclass是啥-1">2.3 RequestHandlerClass是啥</a></li>
-    <li><a href="#24-编程接口-1">2.4 编程接口</a></li>
   </ul>
 </nav>
   </div>
@@ -978,616 +957,6 @@ mathjax: true</a></li>
 </code></pre></td></tr></table>
 </div>
 </div><p>使用TCP工具强制退出时会发送空串，而使用我们自己写的tcp client，则不会发送，所以这里所了两种异常的处理。socketserver只是用在服务端，客户端使用上一篇TCP client即可。</p>
-<hr>
-<h2 id="mathjax-true">title: 38-网络编程-socketserver
-date: 2017-07-18 15:17:59
-lastmod: 2017-07-18 15:17:59
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-socket%E7%BC%96%E7%A8%8B%E5%BC%8A%E7%AB%AF">1 socket编程弊端</a></li>
-<li><a href="#2-socketserver%E6%A8%A1%E5%9D%97">2 SocketServer模块</a>
-<ul>
-<li><a href="#21-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%B1%BB">2.1 服务器类</a></li>
-<li><a href="#22-mixin%E7%B1%BB">2.2 Mixin类</a></li>
-<li><a href="#23-requesthandlerclass%E6%98%AF%E5%95%A5">2.3 RequestHandlerClass是啥</a></li>
-<li><a href="#24-%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3">2.4 编程接口</a></li>
-</ul>
-</li>
-<li><a href="#3-%E5%AE%9E%E7%8E%B0echoserver">3 实现EchoServer</a></li>
-<li><a href="#4-%E8%81%8A%E5%A4%A9%E5%AE%A4">4 聊天室</a></li>
-</ul>
-<!-- /TOC -->
-<h1 id="1-socket编程弊端-1">1 socket编程弊端</h1>
-<p>socket编程过于底层，编程虽然有套路，但是要写出健壮的代码还是比较困难的，所以很多语言都会socket底层API进行封装，Python的封装就是SocketServer模块。它是网络服务编程框架，便于企业级快速开发。</p>
-<h1 id="2-socketserver模块-1">2 SocketServer模块</h1>
-<p>SocketServer，网络通信服务器，是Python标准库中的一个高级模块，其作用是创建网络服务器。该模块简化了编写网络服务器的任务。</p>
-<h2 id="21-服务器类-1">2.1 服务器类</h2>
-<p>SocketServer模块中定义了五种服务器类。</p>
-<ul>
-<li>BaseServer(server_address, RequestHandlerClass)：服务器的基类，定义了API。</li>
-<li>TCPServer(server_address, RequestHandlerClass, bind_and_activate=True)：使用TCP/IP套接字。</li>
-<li>UDPServer：使用数据报套接字</li>
-<li>UnixStreamServer：使用UNIX套接字，只适用UNIX平台</li>
-<li>UnixDatagramServer：使用UNIX套接字，只适用UNIX平台</li>
-</ul>
-<p>它们的继承关系：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">        +------------+
-        <span class="p">|</span> BaseServer <span class="p">|</span>
-        +------------+
-              <span class="p">|</span>
-              v
-        +-----------+        +------------------+
-        <span class="p">|</span> TCPServer <span class="p">|</span>-------&gt;<span class="p">|</span> UnixStreamServer <span class="p">|</span>
-        +-----------+        +------------------+
-              <span class="p">|</span>
-              v
-        +-----------+        +--------------------+
-        <span class="p">|</span> UDPServer <span class="p">|</span>-------&gt;<span class="p">|</span> UnixDatagramServer <span class="p">|</span>
-        +-----------+        +--------------------+
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>除了基类为抽象基类意外，其他四个类都是同步阻塞的。</p>
-</blockquote>
-<h2 id="22-mixin类-1">2.2 Mixin类</h2>
-<p>SocketServer模块中还提供了一些Mixin类，用于和同步类组成多线程或者多进程的异步方式。</p>
-<ul>
-<li>class ForkingUDPServer(ForkingMixIn, UDPServer)</li>
-<li>class ForkingTCPServer(ForkingMixIn, TCPServer)</li>
-<li>class ThreadingUDPServer(ThreadingMixIn, UDPServer)</li>
-<li>class ThreadingTCPServer(ThreadingMixIn, TCPServer)</li>
-<li>class ThreadingUnixStreamServer(ThreadingMixIn, UnixStreamServer)</li>
-<li>class ThreadingUnixDatagramServer(ThreadingMixIn, UnixDatagramServer)</li>
-</ul>
-<blockquote>
-<p>fork是创建多进程，thread是创建多线程。fork需要操作系统支持，Windows不支持。</p>
-</blockquote>
-<h2 id="23-requesthandlerclass是啥-1">2.3 RequestHandlerClass是啥</h2>
-<p>要想使用服务器类，需要传入一个RequestHandlerClass类，为什么要传入这个RequestHandlerClass类，它是干什么的？下面一起来看看源码：</p>
-<ol>
-<li>TCPServer入口</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 446 行 </span>
-<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">,</span> <span class="n">bind_and_activate</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Constructor.  May be extended, do not override.&#34;&#34;&#34;</span>
-    <span class="n">BaseServer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">)</span>    <span class="c1"># 把RequestHandlerClass交给了BaseServer</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address_family</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">socket_type</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start="2">
-<li>BaseServer</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 204 行</span>
-<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandlerClass</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Constructor.  May be extended, do not override.&#34;&#34;&#34;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">server_address</span> <span class="o">=</span> <span class="n">server_address</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">RequestHandlerClass</span> <span class="o">=</span> <span class="n">RequestHandlerClass</span>  <span class="c1"># 将RequestHandlerClass当作类属性付给了实例本身</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__is_shut_down</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__shutdown_request</span> <span class="o">=</span> <span class="bp">False</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start="3">
-<li>开启的服务serve_forever方法</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 219 行</span>
-<span class="k">def</span> <span class="nf">serve_forever</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poll_interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__is_shut_down</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="o">...</span> <span class="o">...</span>
-                <span class="k">if</span> <span class="n">ready</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request_noblock</span><span class="p">()</span>   <span class="c1"># 这里执行了_handle_request_noblock()方法</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">service_actions</span><span class="p">()</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__shutdown_request</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__is_shut_down</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start="4">
-<li>_handle_request_noblock()方法</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 304行</span>
-    <span class="k">def</span> <span class="nf">_handle_request_noblock</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="o">...</span> <span class="o">...</span> 
-            <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>    <span class="c1"># 这里又调用了process_request方法</span>
-            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-                <span class="k">raise</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start="5">
-<li>process_request方法</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 342 行</span>
-<span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">finish_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">)</span>   <span class="c1"># 这里又调用了finish_request方法</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><ol start="6">
-<li>finish_request方法</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 359 行</span>
-<span class="k">def</span> <span class="nf">finish_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Finish one request by instantiating RequestHandlerClass.&#34;&#34;&#34;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">RequestHandlerClass</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>   <span class="c1"># 实例化对象</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>通过观察源码，我们知道RequestHandlerClass接受了两个参数，根据上下文代码我们可知：</p>
-<ol>
-<li>request：客户端的socket连接</li>
-<li>client_address: 客户端的地址二元组信息</li>
-</ol>
-<p>那么这个RequestHandlerClass到底是啥？</p>
-<h2 id="24-编程接口-1">2.4 编程接口</h2>
-<p>        通过源码，我们可以知道，最后传入RequestHandlerClass的是socket和client的ip地址，是不是和我们前面写的TCP多线程版本的recv函数很想？没错，RequestHandlerClass在这里被称为编程接口，由于处理业务逻辑。<br>
-        但是RequestHandlerClass我们没有参照，该如何写呢？ socketserver提供了抽象基类BaseRequestHandler，共我们继承来实现。</p>
-<blockquote>
-<p><code>BaseRequestHandler 是和用户连接的用户请求处理类的基类，所以 RequestHandlerClass 必须是 BaseRequestHandler 的子类，</code>。</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BaseRequestHandler</span><span class="p">:</span>
-
-    <span class="c1"># 在初始化时就会调用这些方法</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">client_address</span><span class="p">,</span> <span class="n">server</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client_address</span> <span class="o">=</span> <span class="n">client_address</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">()</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    <span class="c1"># 每一个连接初始化</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># 每一次请求处理</span>
-        <span class="k">pass</span> 
-
-    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># 每一个连接清理</span>
-        <span class="k">pass</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>观察源码我们知道，setup、handler、finish在类初始化时就会被执行：</p>
-<ol>
-<li>setup()：执行处理请求之前的初始化相关的各种工作。默认不会做任何事。</li>
-<li>handler()：执行那些所有与处理请求相关的工作。默认也不会做任何事。</li>
-<li>finish()：执行当处理完请求后的清理工作，默认不会做任何事。</li>
-</ol>
-<p>这些参数到底是什么？</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socketserver</span>
-
-<span class="k">class</span> <span class="nc">MyRequestHandler</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>  <span class="c1"># &lt;socketserver.TCPServer object at 0x00000153270DA320&gt;</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">)</span>  <span class="c1"># (&#39;127.0.0.1&#39;, 62124)</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>  <span class="c1"># &lt;socket.socket fd=296, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=(&#39;127.0.0.1&#39;, 999), raddr=(&#39;127.0.0.1&#39;, 62124)&gt;</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">TCPServer</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">999</span><span class="p">),</span> <span class="n">MyRequestHandler</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>根据上面的输出信息我们知道：</p>
-<ul>
-<li>self.server:指代当前server本身</li>
-<li>self.client_address:客户端地址</li>
-<li>self.request: 和客户端连接的socket对象</li>
-</ul>
-<p>我们总结一下，<code>使用socketserver创建一个服务器</code>需要以下几个步骤：</p>
-<ol>
-<li><strong>从BaseRequestHandler类派生出子类，并覆盖其handler()方法来创建请求处理程序类，此方法将处理传入请求。</strong></li>
-<li><strong>实例化一个服务器类，传参服务器的地址和请求处理类</strong></li>
-<li><strong>调用服务器实例的handler_request()或serve_forever()方法(启动服务)</strong></li>
-<li><strong>调用server_close()方法(关闭服务)</strong></li>
-</ol>
-<h1 id="3-实现echoserver-1">3 实现EchoServer</h1>
-<p>顾名思义：Echo，即来什么消息就回显什么消息，即客户端发来什么消息，就返回什么消息。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socketserver</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-
-<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">MyRequestHandler</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        
-        <span class="c1"># 优先执行父类同名方法是一个很好的习惯，即便是父类不作任何处理</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">MyRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">MyRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">handle</span><span class="p">()</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-                <span class="k">break</span>
-
-            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">MyRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="p">((</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">),</span> <span class="n">MyRequestHandler</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
-
-        <span class="c1"># 让所有启动的线程都为daemon进程</span>
-        <span class="n">server</span><span class="o">.</span><span class="n">daemon_threads</span> <span class="o">=</span> <span class="bp">True</span>
-
-        <span class="c1"># serve_foreve会阻塞，所以交给子线程运行</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd</span><span class="p">:</span> <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
-                <span class="n">server</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
-                <span class="k">break</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">())</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>ThreadingTCPServer是TCPServer的子类，它混合了ThreadingMixIn类使用多线程来接受客户端的连接。</p>
-<h1 id="4-聊天室-1">4 聊天室</h1>
-<p>代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socketserver</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-
-<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
-
-
-<span class="k">class</span> <span class="nc">ChatRequestHandler</span><span class="p">(</span><span class="n">socketserver</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
-    <span class="n">clients</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-
-    <span class="c1"># 每个连接进来时的操作</span>
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ChatRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
-
-    <span class="c1"># 每个连接的业务处理</span>
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ChatRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">handle</span><span class="p">()</span>
-        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-            
-            <span class="c1"># use Client code except</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
-            <span class="k">except</span> <span class="n">ConnectionResetError</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-                <span class="k">break</span>
-                
-            <span class="c1"># use TCP tools except</span>
-            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;quit&#39;</span> <span class="ow">or</span> <span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
-                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">)</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;{}:{} is down ~~~~~~&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-                <span class="k">break</span>
-
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&#34;{}:{} {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;{}:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
-            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients</span><span class="p">:</span>
-                    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-    <span class="c1"># 每个连接关闭的时候，会执行</span>
-    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="nb">super</span><span class="p">(</span><span class="n">ChatRequestHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-
-<span class="k">class</span> <span class="nc">ChatTCPServer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="n">ChatRequestHandler</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">daemon_threads</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">cts</span> <span class="o">=</span> <span class="n">ChatTCPServer</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
-    <span class="n">cts</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt;:&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
-            <span class="n">cts</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd</span><span class="p">:</span> <span class="k">continue</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">())</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>使用TCP工具强制退出时会发送空串，而使用我们自己写的tcp client，则不会发送，所以这里所了两种异常的处理。socketserver只是用在服务端，客户端使用上一篇TCP client即可。</p>
 
     </div>
 
@@ -1601,7 +970,7 @@ mathjax: true</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2019-08-29
+      2019-05-19
       
     </span>
   </p>
@@ -1635,14 +1004,14 @@ mathjax: true</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/">
+          <a class="prev" href="/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1652,12 +1021,12 @@ mathjax: true</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">斐波那契序列系列</span>
+            <span class="prev-text nav-default">8-rbac权限系统</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
-            <span class="next-text nav-default">1-基础概念及环境部署</span>
+          <a class="next" href="/post/4-django-orm%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">4-django-orm基本使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

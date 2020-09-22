@@ -63,17 +63,17 @@
 <meta property="og:description" content="1 打印100以内的斐波那契序列 1 2 3 4 5 6 7 8 a, b = 0, 1 print(b) while True: c = a &#43; b if c &gt; 100: break print(c) a, b = b, c 2 求斐波那契数列第101项 1 2 3 4 5 6 7 8 a, b" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%E7%B3%BB%E5%88%97/" />
-<meta property="article:published_time" content="2019-09-01T19:16:53+00:00" />
-<meta property="article:modified_time" content="2019-09-01T19:16:53+00:00" />
+<meta property="article:published_time" content="2019-12-06T19:17:54+00:00" />
+<meta property="article:modified_time" content="2019-12-06T19:17:54+00:00" />
 <meta itemprop="name" content="斐波那契序列系列">
 <meta itemprop="description" content="1 打印100以内的斐波那契序列 1 2 3 4 5 6 7 8 a, b = 0, 1 print(b) while True: c = a &#43; b if c &gt; 100: break print(c) a, b = b, c 2 求斐波那契数列第101项 1 2 3 4 5 6 7 8 a, b">
-<meta itemprop="datePublished" content="2019-09-01T19:16:53+00:00" />
-<meta itemprop="dateModified" content="2019-09-01T19:16:53+00:00" />
-<meta itemprop="wordCount" content="243">
+<meta itemprop="datePublished" content="2019-12-06T19:17:54+00:00" />
+<meta itemprop="dateModified" content="2019-12-06T19:17:54+00:00" />
+<meta itemprop="wordCount" content="96">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Python练习," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="斐波那契序列系列"/>
 <meta name="twitter:description" content="1 打印100以内的斐波那契序列 1 2 3 4 5 6 7 8 a, b = 0, 1 print(b) while True: c = a &#43; b if c &gt; 100: break print(c) a, b = b, c 2 求斐波那契数列第101项 1 2 3 4 5 6 7 8 a, b"/>
@@ -323,14 +323,14 @@
       <h1 class="post-title">斐波那契序列系列</h1>
       
       <div class="post-meta">
-        <time datetime="2019-09-01" class="post-time">
-          2019-09-01
+        <time datetime="2019-12-06" class="post-time">
+          2019-12-06
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/python%E7%BB%83%E4%B9%A0/"> Python练习 </a>
             
           </div>
-        <span class="more-meta"> 约 243 字 </span>
+        <span class="more-meta"> 约 96 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
 
         
@@ -346,21 +346,7 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#mathjax-true">title: 斐波那契序列系列
-date: 2017-08-26 23:22:10
-lastmod: 2017-08-26 23:22:10
-draft: false
-tags: [Python练习,]
-categories: [Python练习,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
 
@@ -412,64 +398,6 @@ mathjax: true</a></li>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 斐波那契序列系列
-date: 2017-08-26 23:22:10
-lastmod: 2017-08-26 23:22:10
-draft: false
-tags: [Python练习,]
-categories: [Python练习,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<h1 id="1-打印100以内的斐波那契序列-1">1 打印100以内的斐波那契序列</h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="k">break</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="2-求斐波那契数列第101项-1">2 求斐波那契数列第101项</h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -483,7 +411,7 @@ mathjax: true</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2019-09-01
+      2019-12-06
       
     </span>
   </p>
@@ -517,14 +445,14 @@ mathjax: true</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/python%E7%BB%83%E4%B9%A0/">Python练习</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/33-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5-event-lock/">
+          <a class="prev" href="/post/3-react%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -534,12 +462,12 @@ mathjax: true</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">33-并发编程-线程同步-Event-lock</span>
+            <span class="prev-text nav-default">3-React基本使用</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/">
-            <span class="next-text nav-default">38-网络编程-socketserver</span>
+          <a class="next" href="/post/25-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/">
+            <span class="next-text nav-default">25-面向对象高级-魔术方法基础</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

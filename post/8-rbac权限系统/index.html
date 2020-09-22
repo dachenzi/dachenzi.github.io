@@ -63,17 +63,17 @@
 <meta property="og:description" content="文章目录 1 rbac 2 表结构设计 3 初始化权限结构 4 中间件验证 5 生成菜单显示 1 rbac 基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/8-rbac%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F/" />
-<meta property="article:published_time" content="2017-07-22T23:21:42+00:00" />
-<meta property="article:modified_time" content="2017-07-22T23:21:42+00:00" />
+<meta property="article:published_time" content="2019-05-28T14:22:08+00:00" />
+<meta property="article:modified_time" content="2019-05-28T14:22:08+00:00" />
 <meta itemprop="name" content="8-rbac权限系统">
 <meta itemprop="description" content="文章目录 1 rbac 2 表结构设计 3 初始化权限结构 4 中间件验证 5 生成菜单显示 1 rbac 基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有">
-<meta itemprop="datePublished" content="2017-07-22T23:21:42+00:00" />
-<meta itemprop="dateModified" content="2017-07-22T23:21:42+00:00" />
-<meta itemprop="wordCount" content="6473">
+<meta itemprop="datePublished" content="2019-05-28T14:22:08+00:00" />
+<meta itemprop="dateModified" content="2019-05-28T14:22:08+00:00" />
+<meta itemprop="wordCount" content="3210">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Django框架," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="8-rbac权限系统"/>
 <meta name="twitter:description" content="文章目录 1 rbac 2 表结构设计 3 初始化权限结构 4 中间件验证 5 生成菜单显示 1 rbac 基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">8-rbac权限系统</h1>
       
       <div class="post-meta">
-        <time datetime="2017-07-22" class="post-time">
-          2017-07-22
+        <time datetime="2019-05-28" class="post-time">
+          2019-05-28
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/django%E6%A1%86%E6%9E%B6/"> Django框架 </a>
             
           </div>
-        <span class="more-meta"> 约 6473 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        <span class="more-meta"> 约 3210 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
         
@@ -346,21 +346,7 @@
 <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#mathjax-true">title: 8-rbac权限系统
-date: 2018-07-28 14:06:48
-lastmod: 2018-07-28 14:06:48
-draft: false
-tags: [Django框架,]
-categories: [Django框架,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
 
@@ -1029,681 +1015,6 @@ mathjax: true</a></li>
 
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 8-rbac权限系统
-date: 2018-07-28 14:06:48
-lastmod: 2018-07-28 14:06:48
-draft: false
-tags: [Django框架,]
-categories: [Django框架,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-rbac">1 rbac</a></li>
-<li><a href="#2-%E8%A1%A8%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1">2 表结构设计</a></li>
-<li><a href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%99%90%E7%BB%93%E6%9E%84">3 初始化权限结构</a></li>
-<li><a href="#4-%E4%B8%AD%E9%97%B4%E4%BB%B6%E9%AA%8C%E8%AF%81">4 中间件验证</a></li>
-<li><a href="#5-%E7%94%9F%E6%88%90%E8%8F%9C%E5%8D%95%E6%98%BE%E7%A4%BA">5 生成菜单显示</a></li>
-</ul>
-<!-- /TOC -->
-<h1 id="1-rbac-1">1 rbac</h1>
-<p>基于角色的权限管理系统，可以独立成为一个组建，来引入各个项目。主要具有两个功能：</p>
-<ul>
-<li>权限验证</li>
-<li>菜单生成</li>
-</ul>
-<p>通过将权限信息写入到session中，每次访问时，使用中间件来匹配访问的URL与session中权限列表中的url是否匹配，如果匹配准入，否则提示无权访问，针对菜单的显示功能，通过inclusion_tag渲染的方式，构造一个菜单列表，进行渲染，可以在任何使用的地方，使用templatetags的方式进入，并渲染（样式需要自行调整）。</p>
-<h1 id="2-表结构设计-1">2 表结构设计</h1>
-<p>分析业务逻辑，创建五张表:</p>
-<ul>
-<li>用户表：存放用户相关信息，并关联角色表（一个人有多个角色，一个角色可以包含多个人）</li>
-<li>角色表：角色信息，关联权限组（一个角色可以关联多个角色组，一个角色组可以关联多个角色）</li>
-<li>权限表：存放权限信息，存储带正则表达式的url（一个权限只能关联一个权限组）</li>
-<li>权限组表：将权限进行分类，并关联到所属的菜单中（一个组只能关联一个菜单）</li>
-<li>菜单表：菜单信息</li>
-</ul>
-<p>表关系如下：
-<img src="../photo/rbac.jpg" alt="rbac"></p>
-<p>下面是字段代码设计：字段可以自行增减。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-<span class="k">class</span> <span class="nc">UserInfo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;用户名&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-    <span class="n">passwd</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;密码&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;邮箱&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">roles</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;角色&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;Role&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;rbac_userinfo&#39;</span>
-        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;用户表&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-
-<span class="k">class</span> <span class="nc">Role</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;角色名称&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-    <span class="n">permissions</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s1">&#39;Permission&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;roles&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;rbac_role&#39;</span>
-        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;角色表&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
-
-<span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;权限名称&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;带正则的url&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
-    <span class="n">code</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;权限代码&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-    <span class="n">groups</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;权限组&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;PermissionGroup&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;permissions&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">is_menu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;是否是菜单&#39;</span><span class="p">)</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;归属菜单&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;Permission&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;parents&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;rbac_permission&#39;</span>
-        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;权限表&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
-
-<span class="k">class</span> <span class="nc">PermissionGroup</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;权限组名称&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-    <span class="n">menu</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;所属菜单&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;Menu&#39;</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;permissiongroups&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;rbac_permissiongroup&#39;</span>
-        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;权限组表&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
-
-<span class="k">class</span> <span class="nc">Menu</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;菜单名称&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-
-    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;rbac_menu&#39;</span>
-        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s1">&#39;菜单表&#39;</span>
-
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="3-初始化权限结构-1">3 初始化权限结构</h1>
-<p>用户请求进来，首先为其初始化个人权限信息：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-
-
-<span class="k">def</span> <span class="nf">init_permission</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-    <span class="c1"># 初始化权限</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    1. 获取这个人的所有权限
-</span><span class="s2">    2. 组建权限结构
-</span><span class="s2">    3. 组建菜单结构
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="c1"># 1. 获取这个人的所有权限（角色权限重叠，要去重）</span>
-    <span class="n">permissions_dict</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">roles</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;permissions__id&#39;</span><span class="p">,</span> <span class="s1">&#39;permissions__parent__id&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;permissions__groups__id&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;permissions__groups__title&#39;</span><span class="p">,</span> <span class="s1">&#39;permissions__code&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;permissions__url&#39;</span><span class="p">,</span> <span class="s1">&#39;permissions__groups__menu__id&#39;</span><span class="p">,</span>
-                                        <span class="s1">&#39;permissions__groups__menu__title&#39;</span><span class="p">,</span> <span class="s1">&#39;permissions__title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
-    <span class="c1"># 修改名称</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    [
-</span><span class="s2">        {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
-</span><span class="s2">        {&#39;id&#39;: 2, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;add&#39;, &#39;url&#39;: &#39;/add&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
-</span><span class="s2">        {&#39;id&#39;: 3, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;delete&#39;, &#39;url&#39;: &#39;/(</span><span class="se">\\</span><span class="s2">d+)/delete&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
-</span><span class="s2">    ]
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">permissions_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">permissions</span> <span class="ow">in</span> <span class="n">permissions_dict</span><span class="p">:</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__title&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;parent_id&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__parent__id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;group_id&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__groups__id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;group_title&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__groups__title&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__code&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__url&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;menu_id&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__groups__menu__id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;menu_title&#39;</span><span class="p">:</span> <span class="n">permissions</span><span class="p">[</span><span class="s1">&#39;permissions__groups__menu__title&#39;</span><span class="p">]</span>
-        <span class="p">}</span>
-
-        <span class="n">permissions_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
-
-    <span class="c1"># 写入session 中</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="n">settings</span><span class="o">.</span><span class="n">PERMISSION_MENU_KEY</span><span class="p">]</span> <span class="o">=</span> <span class="n">permissions_list</span>
-
-    <span class="c1"># 构建权限结构</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">        {
-</span><span class="s2">            1: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;delete&#39;, &#39;edit&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/delete&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/change&#39;]}, 
-</span><span class="s2">            3: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;delete&#39;, &#39;edit&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/delete&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/change&#39;]}, 
-</span><span class="s2">            2: {&#39;code&#39;: [&#39;list&#39;, &#39;add&#39;, &#39;edit&#39;, &#39;delete&#39;], &#39;url&#39;: [&#39;/changelist&#39;, &#39;/add&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/change&#39;, &#39;/(</span><span class="se">\\</span><span class="s2">d+)/delete&#39;]}
-</span><span class="s2">        }
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">permissions_code_url</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">permissions_dict</span><span class="p">:</span>
-        <span class="nb">id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;permissions__groups__id&#39;</span><span class="p">]</span>
-        <span class="n">code</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;permissions__code&#39;</span><span class="p">]</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;permissions__url&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">permissions_code_url</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">permissions_code_url</span><span class="p">[</span><span class="nb">id</span><span class="p">][</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-            <span class="n">permissions_code_url</span><span class="p">[</span><span class="nb">id</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">permissions_code_url</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">code</span><span class="p">,</span> <span class="p">],</span>
-                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">url</span><span class="p">,</span> <span class="p">]</span>
-            <span class="p">}</span>
-
-    <span class="c1"># 写入session中</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="n">settings</span><span class="o">.</span><span class="n">PERMISSION_KEY</span><span class="p">]</span> <span class="o">=</span> <span class="n">permissions_code_url</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>注意：这里为了配置化，把一些key放在了settings.py文件中定义,可以在配置文件中进行如下配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">########### rbac权限 ############</span>
-<span class="n">PERMISSION_KEY</span> <span class="o">=</span> <span class="s1">&#39;permission_keys&#39;</span>
-<span class="n">PERMISSION_MENU_KEY</span> <span class="o">=</span> <span class="s1">&#39;menu_keys&#39;</span>
-<span class="n">WHITE_LIST</span> <span class="o">=</span> <span class="p">[</span>   <span class="c1"># 白名单配置</span>
-    <span class="s1">&#39;/login/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;/admin.*&#39;</span>
-<span class="p">]</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="4-中间件验证-1">4 中间件验证</h1>
-<p>编写中间件，用于对请求url的权限验证，注意要配置白名单。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">redirect</span>
-
-<span class="k">class</span> <span class="nc">RbacMiddleWare</span><span class="p">(</span><span class="n">MiddlewareMixin</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-        <span class="n">current_path</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_info</span>
-
-        <span class="c1"># 白名单验证</span>
-        <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">WHITE_LIST</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;^{}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>   <span class="c1"># 使用正则进行验证</span>
-            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">current_path</span><span class="p">):</span>
-                <span class="k">return</span> <span class="bp">None</span>
-
-        <span class="c1"># 权限验证</span>
-        <span class="n">permission_list</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">PERMISSION_KEY</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">permission_list</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/login/&#39;</span><span class="p">)</span>
-
-        <span class="n">flag</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">permission_info</span> <span class="ow">in</span> <span class="n">permission_list</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">permission_info</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]:</span>
-                <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;^{}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">current_path</span><span class="p">):</span>
-                    <span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
-                    <span class="k">break</span>
-            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
-                <span class="k">break</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;Permission Deny&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>返回None或者无明确返回，则表示验证通过。</p>
-<h1 id="5-生成菜单显示-1">5 生成菜单显示</h1>
-<p>这里利用inclusion_tag来完成菜单的渲染，注意，需要存放在templagetags目录下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
-
-<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">Library</span>
-
-<span class="n">register</span> <span class="o">=</span> <span class="n">Library</span><span class="p">()</span>
-
-
-<span class="nd">@register.inclusion_tag</span><span class="p">(</span><span class="s1">&#39;menu/menu.html&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">menu_html</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="n">current_path</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">path_info</span>
-    <span class="n">menu_list</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">PERMISSION_MENU_KEY</span><span class="p">)</span>
-
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    [
-</span><span class="s2">        {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
-</span><span class="s2">        {&#39;id&#39;: 2, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;add&#39;, &#39;url&#39;: &#39;/add&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
-</span><span class="s2">        {&#39;id&#39;: 3, &#39;parent_id&#39;: 1, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;delete&#39;, &#39;url&#39;: &#39;/(</span><span class="se">\\</span><span class="s2">d+)/delete&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
-</span><span class="s2">    ]
-</span><span class="s2">
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="c1"># 菜单</span>
-    <span class="n">menu_dict</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">menu</span> <span class="ow">in</span> <span class="n">menu_list</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">menu</span><span class="p">[</span><span class="s1">&#39;parent_id&#39;</span><span class="p">]:</span>
-            <span class="n">menu_dict</span><span class="p">[</span><span class="n">menu</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">menu</span>
-
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">        {
-</span><span class="s2">            1: {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}, 
-</span><span class="s2">            5: {&#39;id&#39;: 5, &#39;parent_id&#39;: None, &#39;group_id&#39;: 3, &#39;group_title&#39;: &#39;成绩组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 3, &#39;menu_title&#39;: &#39;成绩管理&#39;}
-</span><span class="s2">        }
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="c1"># 处理菜单选择信息，如果当前访问的链接是菜单，那么则添加active属性，如果不是菜单，那么找到它所在的菜单，为其添加active属性</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">menu_list</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;^{}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">current_path</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;parent_id&#39;</span><span class="p">]:</span>
-                <span class="n">menu_dict</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;parent_id&#39;</span><span class="p">]][</span><span class="s1">&#39;active&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">menu_dict</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]][</span><span class="s1">&#39;active&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">        {
-</span><span class="s2">            1: {&#39;id&#39;: 1, &#39;parent_id&#39;: None, &#39;group_id&#39;: 1, &#39;group_title&#39;: &#39;用户组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/changelist&#39;, &#39;menu_id&#39;: 1, &#39;menu_title&#39;: &#39;用户管理&#39;}
-</span><span class="s2">            13: {&#39;id&#39;: 13, &#39;parent_id&#39;: None, &#39;group_id&#39;: 4, &#39;group_title&#39;: &#39;首页组&#39;, &#39;code&#39;: &#39;list&#39;, &#39;url&#39;: &#39;/index/&#39;, &#39;menu_id&#39;: 4, &#39;menu_title&#39;: &#39;首页&#39;, &#39;active&#39;:True}
-</span><span class="s2">        }
-</span><span class="s2">
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="c1"># 构建显示的菜单结构</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    {
-</span><span class="s2">        1: {&#39;menu_title&#39;: &#39;用户管理&#39;, &#39;menu_id&#39;: 1, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 1, &#39;title&#39;: &#39;用户列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 2, &#39;title&#39;: &#39;添加用户&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
-</span><span class="s2">        3: {&#39;menu_title&#39;: &#39;成绩管理&#39;, &#39;menu_id&#39;: 3, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 5, &#39;title&#39;: &#39;成绩列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 6, &#39;title&#39;: &#39;添加成绩&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
-</span><span class="s2">        2: {&#39;menu_title&#39;: &#39;课程管理&#39;, &#39;menu_id&#39;: 2, &#39;active&#39;: None, &#39;children&#39;: [{&#39;id&#39;: 9, &#39;title&#39;: &#39;课程列表&#39;, &#39;url&#39;: &#39;/changelist&#39;}, {&#39;id&#39;: 10, &#39;title&#39;: &#39;添加课程&#39;, &#39;url&#39;: &#39;/add&#39;}]}, 
-</span><span class="s2">        4: {&#39;menu_title&#39;: &#39;首页&#39;, &#39;menu_id&#39;: 4, &#39;active&#39;: True, &#39;children&#39;: [{&#39;id&#39;: 13, &#39;title&#39;: &#39;首页&#39;, &#39;url&#39;: &#39;/index/&#39;}]}
-</span><span class="s2">    }
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">menu_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">active</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_id&#39;</span><span class="p">]][</span><span class="s1">&#39;active&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">active</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_id&#39;</span><span class="p">]][</span><span class="s1">&#39;children&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span> <span class="s1">&#39;active&#39;</span><span class="p">:</span><span class="n">active</span><span class="p">}</span>
-            <span class="p">)</span>
-
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;menu_title&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_title&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;menu_id&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;menu_id&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="n">active</span><span class="p">,</span>
-                <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span> <span class="s1">&#39;active&#39;</span><span class="p">:</span><span class="n">active</span><span class="p">}]</span>
-            <span class="p">}</span>
-
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;menu_dict&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>inclusion_tag会把函数的返回值，使用模版渲染后，当作返回值，返回到前端页面，所以这里定制menu/menu.html</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="n">menu_dict</span><span class="o">.</span><span class="n">items</span> <span class="o">%</span><span class="p">}</span>
-    <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;item&#34;</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;item-title&#34;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">item</span><span class="o">.</span><span class="n">menu_title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">active</span> <span class="o">%</span><span class="p">}</span>
-            <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;item-permission&#34;</span><span class="o">&gt;</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
-            <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;item-permission hide&#34;</span><span class="o">&gt;</span>
-        <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-        <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">children</span> <span class="o">%</span><span class="p">}</span>
-
-            <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">active</span> <span class="o">%</span><span class="p">}</span>
-                <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&#34;{{ child.url }}&#34;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&#34;active&#34;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">child</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
-            <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
-                <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&#34;{{ child.url }}&#34;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">child</span><span class="o">.</span><span class="n">title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
-            <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-
-        <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
-        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-        <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
-<span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>样式可以自定调整。在页面中渲染时，可以比如</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">staticfiles</span> <span class="o">%</span><span class="p">}</span>
-<span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">menu_page</span> <span class="o">%</span><span class="p">}</span>   <span class="c1"># 加载inclusion_tag所在的文件名</span>
-<span class="o">&lt;</span><span class="err">!</span><span class="n">DOCTYPE</span> <span class="n">html</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">html</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">meta</span> <span class="n">charset</span><span class="o">=</span><span class="s2">&#34;UTF-8&#34;</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">Title</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&#34;stylesheet&#34;</span> <span class="n">href</span><span class="o">=</span><span class="s2">&#34;{</span><span class="si">% s</span><span class="s2">tatic &#39;rbac/rbac.css&#39; %}&#34;</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="p">{</span><span class="o">%</span> <span class="n">menu_html</span> <span class="n">request</span> <span class="o">%</span><span class="p">}</span>   <span class="c1"># 调用inclusion_tag并传递参数</span>
-<span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;{</span><span class="si">% s</span><span class="s2">tatic &#39;js/jquery-3.2.1.min.js&#39; %}&#34;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;{</span><span class="si">% s</span><span class="s2">tatic &#39;rbac/rbac.js&#39; %}&#34;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
-<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
-
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -1717,7 +1028,7 @@ mathjax: true</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2017-07-22
+      2019-05-28
       
     </span>
   </p>
@@ -1751,14 +1062,14 @@ mathjax: true</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/django%E6%A1%86%E6%9E%B6/">Django框架</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/1-ansible/">
+          <a class="prev" href="/post/6-%E5%86%85%E7%BD%AE%E7%BB%93%E6%9E%84-%E5%AD%97%E5%85%B8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1768,12 +1079,12 @@ mathjax: true</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">1-ansible</span>
+            <span class="prev-text nav-default">6-内置结构-字典</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/28-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92-__slots__-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8/">
-            <span class="next-text nav-default">28-生成器交互-__slots__-未实现异常</span>
+          <a class="next" href="/post/38-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B-socketserver/">
+            <span class="next-text nav-default">38-网络编程-socketserver</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

@@ -63,17 +63,17 @@
 <meta property="og:description" content="文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的基本操作 2.2.1 增加元素 2.2.2 删除元素 2.2.3 修改元素 2.2.4 成员判断 2.3" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dachenzi.github.io/post/5-python%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84-%E9%9B%86%E5%90%88/" />
-<meta property="article:published_time" content="2017-06-26T01:04:45+00:00" />
-<meta property="article:modified_time" content="2017-06-26T01:04:45+00:00" />
+<meta property="article:published_time" content="2019-02-09T12:12:34+00:00" />
+<meta property="article:modified_time" content="2019-02-09T12:12:34+00:00" />
 <meta itemprop="name" content="5-Python的封装与解构-集合">
 <meta itemprop="description" content="文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的基本操作 2.2.1 增加元素 2.2.2 删除元素 2.2.3 修改元素 2.2.4 成员判断 2.3">
-<meta itemprop="datePublished" content="2017-06-26T01:04:45+00:00" />
-<meta itemprop="dateModified" content="2017-06-26T01:04:45+00:00" />
-<meta itemprop="wordCount" content="8356">
+<meta itemprop="datePublished" content="2019-02-09T12:12:34+00:00" />
+<meta itemprop="dateModified" content="2019-02-09T12:12:34+00:00" />
+<meta itemprop="wordCount" content="4148">
 
 
 
-<meta itemprop="keywords" content="content_a," />
+<meta itemprop="keywords" content="Python基础," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="5-Python的封装与解构-集合"/>
 <meta name="twitter:description" content="文章目录 1 封装与解构 1.1 封装 1.2 解构 1.3 Python3的解构 2 set类型 2.1 set的定义 2.2 set的基本操作 2.2.1 增加元素 2.2.2 删除元素 2.2.3 修改元素 2.2.4 成员判断 2.3"/>
@@ -323,15 +323,15 @@
       <h1 class="post-title">5-Python的封装与解构-集合</h1>
       
       <div class="post-meta">
-        <time datetime="2017-06-26" class="post-time">
-          2017-06-26
+        <time datetime="2019-02-09" class="post-time">
+          2019-02-09
         </time>
         <div class="post-category">
-            <a href="https://dachenzi.github.io/categories/content_a/"> content_a </a>
+            <a href="https://dachenzi.github.io/categories/python%E5%9F%BA%E7%A1%80/"> Python基础 </a>
             
           </div>
-        <span class="more-meta"> 约 8356 字 </span>
-          <span class="more-meta"> 预计阅读 17 分钟 </span>
+        <span class="more-meta"> 约 4148 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
 
         
         
@@ -373,45 +373,6 @@
     <li><a href="#33-差集">3.3 差集</a></li>
     <li><a href="#34-对称差集">3.4 对称差集</a></li>
     <li><a href="#35-集合的其他运算">3.5 集合的其他运算</a></li>
-    <li><a href="#mathjax-true">title: 5-Python的封装与解构-集合
-date: 2019-12-13 09:10:06
-lastmod: 2019-12-13 09:10:06
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#11-封装-1">1.1 封装</a></li>
-    <li><a href="#12-解构-1">1.2 解构</a></li>
-    <li><a href="#13-python3的解构-1">1.3 Python3的解构</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#21-set的定义-1">2.1 set的定义</a></li>
-    <li><a href="#22-set的基本操作-1">2.2 set的基本操作</a>
-      <ul>
-        <li><a href="#221-增加元素-1">2.2.1 增加元素</a></li>
-        <li><a href="#222-删除元素-1">2.2.2 删除元素</a></li>
-        <li><a href="#223-修改元素-1">2.2.3 修改元素</a></li>
-        <li><a href="#224-成员判断-1">2.2.4 成员判断</a></li>
-      </ul>
-    </li>
-    <li><a href="#23-set小结-1">2.3 set小结</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#31-集合运算-1">3.1 集合运算</a></li>
-    <li><a href="#32-并集-1">3.2 并集</a></li>
-    <li><a href="#33-交集-1">3.3 交集</a></li>
-    <li><a href="#33-差集-1">3.3 差集</a></li>
-    <li><a href="#34-对称差集-1">3.4 对称差集</a></li>
-    <li><a href="#35-集合的其他运算-1">3.5 集合的其他运算</a></li>
   </ul>
 </nav>
   </div>
@@ -1014,613 +975,6 @@ mathjax: true</a></li>
 <span class="n">s</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">bool</span> <span class="o">--&gt;</span> <span class="err">判断当前集合和另一个集合有没有交集</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<h2 id="mathjax-true">title: 5-Python的封装与解构-集合
-date: 2019-12-13 09:10:06
-lastmod: 2019-12-13 09:10:06
-draft: false
-tags: [Python基础,]
-categories: [Python基础,]
-author: &ldquo;daxin.li&rdquo;
-comment: true
-toc: true
-reward: true
-mathjax: true</h2>
-<p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E6%9E%84">1 封装与解构</a>
-<ul>
-<li><a href="#11-%E5%B0%81%E8%A3%85">1.1 封装</a></li>
-<li><a href="#12-%E8%A7%A3%E6%9E%84">1.2 解构</a></li>
-<li><a href="#13-python3%E7%9A%84%E8%A7%A3%E6%9E%84">1.3 Python3的解构</a></li>
-</ul>
-</li>
-<li><a href="#2-set%E7%B1%BB%E5%9E%8B">2 set类型</a>
-<ul>
-<li><a href="#21-set%E7%9A%84%E5%AE%9A%E4%B9%89">2.1 set的定义</a></li>
-<li><a href="#22-set%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">2.2 set的基本操作</a>
-<ul>
-<li><a href="#221-%E5%A2%9E%E5%8A%A0%E5%85%83%E7%B4%A0">2.2.1 增加元素</a></li>
-<li><a href="#222-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0">2.2.2 删除元素</a></li>
-<li><a href="#223-%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0">2.2.3 修改元素</a></li>
-<li><a href="#224-%E6%88%90%E5%91%98%E5%88%A4%E6%96%AD">2.2.4 成员判断</a></li>
-</ul>
-</li>
-<li><a href="#23-set%E5%B0%8F%E7%BB%93">2.3 set小结</a></li>
-</ul>
-</li>
-<li><a href="#3-%E9%9B%86%E5%90%88">3 集合</a>
-<ul>
-<li><a href="#31-%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97">3.1 集合运算</a></li>
-<li><a href="#32-%E5%B9%B6%E9%9B%86">3.2 并集</a></li>
-<li><a href="#33-%E4%BA%A4%E9%9B%86">3.3 交集</a></li>
-<li><a href="#33-%E5%B7%AE%E9%9B%86">3.3 差集</a></li>
-<li><a href="#34-%E5%AF%B9%E7%A7%B0%E5%B7%AE%E9%9B%86">3.4 对称差集</a></li>
-<li><a href="#35-%E9%9B%86%E5%90%88%E7%9A%84%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97">3.5 集合的其他运算</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
-<hr>
-<h1 id="1-封装与解构-1">1 封装与解构</h1>
-<p>        封装与解构属于Python语言的一种特性，它使用起来很像其他语言中的<code>&quot;逗号表达式&quot;</code>，但内部原理是不同的，在某些场景下：比如变量交换复制时使用，显得非常优雅。</p>
-<h2 id="11-封装-1">1.1 封装</h2>
-<p>        封装故名思议就是装箱，把多个值使用逗号分隔，组合在一起，本质上来看，其返回的是一个元组，只是省略了小括号。(一定要区别与C语言的逗号表达式)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">91</span><span class="p">]:</span> <span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 定义一个元组                                        </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">t2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>    <span class="c1"># 省略括号，其内部还是会封装成元组                                       </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="n">t1</span>                                                 
-<span class="n">Out</span><span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">t2</span>                                                 
-<span class="n">Out</span><span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>                                           
-<span class="n">Out</span><span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="nb">tuple</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>                                           
-<span class="n">Out</span><span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="nb">tuple</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="12-解构-1">1.2 解构</h2>
-<p>        解构，解构，就是把箱子解开，在Python中表示从线性结构中把元素解开，并且顺序的赋值给其他变量，需要注意的是，解构时接受元素的变量，需要放在等式的左边，并且数量要和右边解开的元素的个数一致。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="n">t1</span>                                                 
-<span class="n">Out</span><span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">98</span><span class="p">]:</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">t1</span>    <span class="c1"># 表示把1赋给a，把2赋给b                                       </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">99</span><span class="p">]:</span> <span class="n">a</span>                                                  
-<span class="n">Out</span><span class="p">[</span><span class="mi">99</span><span class="p">]:</span> <span class="mi">1</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">100</span><span class="p">]:</span> <span class="n">b</span>                                                 
-<span class="n">Out</span><span class="p">[</span><span class="mi">100</span><span class="p">]:</span> <span class="mi">2</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">101</span><span class="p">]:</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">t1</span>           <span class="c1"># 当接受元素的变量多余解构的元素时，会提示ValueError，反之相同                             </span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span>                                <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">101</span><span class="o">-</span><span class="mf">2e8</span><span class="n">ad53e5fc7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">t1</span>
-
-<span class="ne">ValueError</span><span class="p">:</span> <span class="ow">not</span> <span class="n">enough</span> <span class="n">values</span> <span class="n">to</span> <span class="n">unpack</span> <span class="p">(</span><span class="n">expected</span> <span class="mi">3</span><span class="p">,</span> <span class="n">got</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">102</span><span class="p">]:</span>  
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="13-python3的解构-1">1.3 Python3的解构</h2>
-<p>        了解了封装与解构，那么回想一下当我们需要进行变量交换的时候，是否可以通过封装与解构进行优化呢？当我们在其他语言中进行a，b变量的值的交换，我们需要一个中间变量temp，即：<code>a = temp,a = b,b = temp</code>，在Python中我们可以省略。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span><span class="n">a</span>    <span class="c1"># 这样就完成了变量的交换了，是不是很方便</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
-<span class="mi">200</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
-<span class="mi">1</span>
-<span class="o">&gt;&gt;&gt;</span> 
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>为什么可以使用这种骚操作，是因为Python在进行变量赋值时，会先计算等式右边的表达式，封装起来，然后再进行解构，赋给对应位置上的变量。并且还提供了其他更便捷的方法比如*号。</p>
-</blockquote>
-<ul>
-<li><code>*号</code>： 使用方式为: <code>*变量名</code>，贪婪的吸收解构的元素形成一个列表,<strong>无论能否吸收，都会返回一个列表</strong>。</li>
-<li><code>_号</code>：表示丢弃一个变量(实际上是使用<code>_</code>接受变量，但是使用这么一个符号，就表示我们不想用它)</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>                                  
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">t</span>                                                   
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">head</span><span class="p">,</span><span class="o">*</span><span class="n">mid</span><span class="p">,</span><span class="n">tail</span> <span class="o">=</span> <span class="n">t</span>                                  
-<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">head</span>                                                
-<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="mi">0</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">mid</span>                                                 
-<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">tail</span>                                                
-<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="mi">4</span>
-
-</code></pre></td></tr></table>
-</div>
-</div><p>需要注意的是：</p>
-<ol>
-<li>*变量名，这种格式不能单独使用</li>
-<li>也不能多个*变量名，连续使用(因为从原理上看，两个、*变量名连起来使用，会引起歧义，所以Python禁止了这种写法)</li>
-<li>*_这种格式，可以收集足够多的元素丢弃</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 1 从[1,(2,3,4),5]中取出4来</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">_</span><span class="p">,(</span><span class="o">*</span><span class="n">_</span><span class="p">,</span><span class="n">a</span><span class="p">),</span><span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="mi">5</span><span class="p">]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">4</span>
-
-<span class="c1"># 环境变量JAVA_HOME=/usr/bin/java，返回环境变量名和路径</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">env</span><span class="p">,</span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;JAVA_HOME=/usr/bin/java&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">env</span><span class="p">,</span><span class="n">path</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="s1">&#39;JAVA_HOME&#39;</span><span class="p">,</span><span class="s1">&#39;/usr/bin/java&#39;</span><span class="p">)</span>
-
-<span class="err">或者</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span>  <span class="n">env</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;JAVA_HOME=/usr/bin/java&#39;</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>                                                                                    
-<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">env</span><span class="p">,</span><span class="n">path</span>                                           
-<span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="p">(</span><span class="s1">&#39;JAVA_HOME&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/bin/java&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>解构是Python提供的很好的功能，可以方便的提取复杂的数据结构的值，配置_使用时，会更加便捷。</strong></p>
-<h1 id="2-set类型-1">2 set类型</h1>
-<p>        集合set在Python中是一个非常重要的<code>非线性结构</code>，它使用<code>{}</code>表示，用三个词总结集合的特点就是：<strong><code>可变的</code></strong>、<strong><code>无序的</code></strong>、<strong><code>不重复</code></strong>。它的官方解释如下：</p>
-<ul>
-<li>set是一个无序的，不同的<code>可hash对象</code>组成的集。</li>
-<li>常用来进行成员测试，在一个序列中去掉重复的对象，和进行数学上的计算，比如<code>交集(intersection)</code>、<code>并集(union)</code>、<code>差集(difference)</code>、<code>对称差集(symmetric difference)</code>等。</li>
-<li>和其他容器类型相似，在一个无序的集合中支持<code>x in set</code>,<code>len(set)</code>,<code>for x in set</code>等操作。</li>
-<li>set不会记录元素的位置以及元素加入集合的顺序，所以set不支持<code>索引</code>，<code>切片</code>或者其他的类序列的操作。</li>
-</ul>
-<blockquote>
-<p>什么是可hash对象，可以简单的理解为可以被hash()计算的对象，在Python中，可hash对象是不可变类型的，比如tuple, str, int, 等等。</p>
-</blockquote>
-<h2 id="21-set的定义-1">2.1 set的定义</h2>
-<p>        Python提供了两种定义一个集合的方式，<code>set()</code> 和 <code>set(iterable)</code>，他们的用法如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">set</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">new</span> <span class="n">empty</span> <span class="nb">set</span> <span class="nb">object</span>     <span class="o">--&gt;</span> <span class="err">返回一个空的</span><span class="n">set对象</span>
-<span class="nb">set</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">new</span> <span class="nb">set</span> <span class="nb">object</span>   <span class="o">--&gt;</span> <span class="err">返回一个</span><span class="n">set对象</span><span class="err">，元素有</span><span class="n">iterable填充</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>例如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">44</span><span class="p">]:</span> <span class="n">s1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">45</span><span class="p">]:</span> <span class="n">s2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>             <span class="c1"># {0, 1, 2, 3, 4}                                                                    </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">46</span><span class="p">]:</span> <span class="n">s3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>   <span class="c1"># 外面使用list进行转换，多此一举，{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}                                                                     </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">47</span><span class="p">]:</span> <span class="n">s4</span> <span class="o">=</span> <span class="p">{}</span>           <span class="c1"># 这种方式实际上是创建了一个字典                                                                               </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="n">s4</span>        
-<span class="n">Out</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span> <span class="p">{}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">s4</span><span class="p">)</span>  
-<span class="n">Out</span><span class="p">[</span><span class="mi">50</span><span class="p">]:</span> <span class="nb">dict</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">51</span><span class="p">]:</span> <span class="n">s5</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">}</span>                                                                                  
-<span class="n">In</span> <span class="p">[</span><span class="mi">52</span><span class="p">]:</span> <span class="n">s6</span><span class="o">=</span><span class="p">{[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,),</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span>       <span class="c1"># list属于不可hash对象，所以无法添加到set中去                                                                        </span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">52</span><span class="o">-</span><span class="mi">237</span><span class="n">c72203405</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">s6</span><span class="o">=</span><span class="p">{[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,),</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span>
-
-<span class="ne">TypeError</span><span class="p">:</span> <span class="n">unhashable</span> <span class="nb">type</span><span class="p">:</span> <span class="s1">&#39;list&#39;</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">53</span><span class="p">]:</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="22-set的基本操作-1">2.2 set的基本操作</h2>
-<p>        set是可变的类型，那就意味着，我们可以对set进行增加、删除、修改等操作。</p>
-<h3 id="221-增加元素-1">2.2.1 增加元素</h3>
-<p>        set提供了两种定义一个集合的方式，<code>add</code> 和 <code>update</code>，他们的用法如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">()</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">在集合</span><span class="n">s中添加一个元素</span><span class="err">，如果元素存在，则什么都不做</span><span class="p">(</span><span class="err">去重特性</span><span class="p">)</span><span class="err">。（就地修改）</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">把</span><span class="o">*</span><span class="n">others个可迭代可hash对象</span><span class="err">，和</span><span class="n">s进行并集</span><span class="err">，然后赋给</span><span class="n">s</span><span class="err">。（就地修改）</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>例</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">62</span><span class="p">]:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">63</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>     <span class="c1"># 把&#39;abc&#39;当作一个元素添加进去                                                                                     </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">64</span><span class="p">]:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">}</span>  
-<span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>     <span class="c1"># 把(1,2,3) 当作一个元素添加进去                                                                             </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">66</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="s1">&#39;abcdef&#39;</span><span class="p">,[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>     <span class="c1"># 多个可迭代可hash对象取并集                                                      </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="222-删除元素-1">2.2.2 删除元素</h3>
-<p>        set提供了多种定义一个集合的方式，比如 <code>remove</code> ,<code>pop</code>，他们的用法如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>  <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">在集合</span><span class="n">s中删除一个元素</span><span class="err">，这个元素必须存在集合</span><span class="n">s中</span><span class="err">，否则会报</span><span class="n">KeyError异常</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="o">--&gt;</span> <span class="n">item</span> <span class="o">--&gt;</span> <span class="err">在集合</span><span class="n">s中随便弹出一个元素</span><span class="err">，并返回元素的本身，如果集合本身为空，那么会提示</span><span class="n">KeyError异常</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">在集合</span><span class="n">s中删除一个元素</span><span class="err">，如果元素不存在集合中，那么什么也不做</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">清空集合</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>例</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                                                                                       
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">74</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>       <span class="c1"># 不存在集合内的元素，删除会报异常                                                                               </span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span>                                  <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">74</span><span class="o">-</span><span class="mi">9</span><span class="n">d9da17ab719</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="ne">KeyError</span><span class="p">:</span> <span class="mi">1000</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">76</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">77</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>   
-<span class="n">Out</span><span class="p">[</span><span class="mi">77</span><span class="p">]:</span> <span class="mi">1</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">78</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">78</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">82</span><span class="p">]:</span> <span class="n">s1</span>        
-<span class="n">Out</span><span class="p">[</span><span class="mi">82</span><span class="p">]:</span> <span class="nb">set</span><span class="p">()</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">84</span><span class="p">]:</span> <span class="n">s1</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>      <span class="c1"># 空集合会报异常                                                                                    </span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span>                                  <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">84</span><span class="o">-</span><span class="mi">095118</span><span class="n">de218b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">s1</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-
-<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;pop from an empty set&#39;</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">85</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">86</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>     <span class="c1"># 直接删除，不会返回                                                                             </span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">89</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                                                                                      
-<span class="n">In</span> <span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">90</span><span class="p">]:</span> <span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">}</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">92</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span> 
-<span class="n">In</span> <span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="n">s</span>         
-<span class="n">Out</span><span class="p">[</span><span class="mi">93</span><span class="p">]:</span> <span class="nb">set</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="223-修改元素-1">2.2.3 修改元素</h3>
-<p>上来我们需要先想一个问题，为什么要修改set呢？修改的本质是什么？</p>
-<ul>
-<li>修改的本质其实就是找到这个元素，删除，然后在加入新的元素</li>
-<li>由于集合是非线性结构，所以无法被索引</li>
-<li>但是set是容器，可以被迭代</li>
-</ul>
-<blockquote>
-<p>所以set不能像list那样，通过索引修改元素，因为它无序的特性，修改其实等同于删除、再添加而已。</p>
-</blockquote>
-<h3 id="224-成员判断-1">2.2.4 成员判断</h3>
-<p>我们说既然set是容器，那么我们就可以对容器内的元素进行判断，那么就需要使用成员判断符 <code>in</code> 和 <code>not in</code> 了。</p>
-<ul>
-<li>in: x in s, 判断元素x是否是在集合s中，返回bool类型</li>
-<li>not in : x not in s,  判断元素x不在集合s中，返回bool类型</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>                                                                                
-<span class="n">In</span> <span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">s</span>    
-<span class="n">Out</span><span class="p">[</span><span class="mi">96</span><span class="p">]:</span> <span class="bp">True</span>
-<span class="n">In</span> <span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="mi">10000</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span>                                                                                    
-<span class="n">Out</span><span class="p">[</span><span class="mi">97</span><span class="p">]:</span> <span class="bp">True</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>我们知道在list，str这种<code>线性结构</code>中进行<code>成员判断</code>时，它的时间复杂度是<code>O(n)</code>的，因为需要遍历，但是在set中就很简单了，它只需要把要判断的元素进行hash，找到set中对应的门牌号，把里面的数据拽出来，看看是不是相同。 这种操作通常都是<code>O(1)</code>的，所以在set中，<code>成员判断效率很高</code>，当然在<code>dict类型</code>中，也是如此。</p>
-</blockquote>
-<h2 id="23-set小结-1">2.3 set小结</h2>
-<p>        线性结构的查询时间复杂度是<code>O(n)</code>，即随着数据规模的这不过大而增加耗时，set、dict等结构，内部使用的是hash值作为key，时间复杂度可以做到<code>O(1)</code>查询时间和数据规模无关，在python中可hash对象有(都属于不可变类型)</p>
-<ul>
-<li>数值类型int、float、complex</li>
-<li>布尔值True、False</li>
-<li>字符串String、Bytes</li>
-<li>元组tuple</li>
-<li>None</li>
-</ul>
-<h1 id="3-集合-1">3 集合</h1>
-<p>        简单来说，所谓的一个集合，就是将数个对象归类而分成为一个或数个形态各异的大小整体。 一般来讲，集合是具有某种特性的事物的整体，或是一些确认对象的汇集。构成集合的事物或对象称作元素或是成员。集合的元素可以是任何事物，可以是人，可以是物，也可以是字母或数字等。 （此解释来自于维基百科）</p>
-<ul>
-<li>全集：所有元素的结合。例如实数集，所有实数组成的集合就是实数集</li>
-<li>子集subset和超集superset: 一个集合A所有的元素都在另一个集合B内，A是B的子集，B是A的超集</li>
-<li>真子集和真超集：A是B的子集，且A不等于B，A就是B的真子集，B就是A的真超集</li>
-<li>并集：多个集合合并的结果</li>
-<li>交集：多个集合的公共部分</li>
-<li>差集：集合中除去和其他集合共有的部分</li>
-</ul>
-<blockquote>
-<p>这些是小学数学基础概念哦，兄弟们。</p>
-</blockquote>
-<h2 id="31-集合运算-1">3.1 集合运算</h2>
-<p>        通过集合运算，我们可以方便的对求出集合的差集、并集等，Python的集合除了提供了大量的集合运算方法还提供了不少的特殊符号用来表示集合运算。</p>
-<h2 id="32-并集-1">3.2 并集</h2>
-<p>        将集合A和集合B所有元素合并在一起，组成的集合称为集合A和集合B的并集</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">new</span> <span class="nb">set</span> <span class="nb">object</span> <span class="o">--&gt;</span> <span class="err">把多个集合和集合</span><span class="n">s进行合并</span><span class="err">，返回一个新的集合对象</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">|</span> <span class="err">表示</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">把</span><span class="o">*</span><span class="n">others个可迭代可hash对象</span><span class="err">，和</span><span class="n">s进行并集</span><span class="err">，然后赋给</span><span class="n">s</span><span class="err">。（就地修改）</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">!=</span> <span class="err">表示</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="33-交集-1">3.3 交集</h2>
-<p>        集合A和集合B，由所有属于A且属于B的元素组成的集合。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">new</span> <span class="nb">set</span> <span class="nb">object</span> <span class="o">--&gt;</span> <span class="err">返回多个集合的交集</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">&amp;</span> <span class="err">表示</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">intersection_update</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="bp">None</span>  <span class="o">--&gt;</span> <span class="err">获取多个集合的交集，就地进行修改</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">&amp;=</span> <span class="err">表示</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="33-差集-1">3.3 差集</h2>
-<p>        集合A和B，由所有属于A且不属于B的元素组成的集合。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="o">*</span><span class="n">others</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">new</span> <span class="nb">set</span> <span class="nb">object</span> <span class="o">--&gt;</span> <span class="err">返回集合</span><span class="n">s和其他多个集合的差集</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">-</span> <span class="err">表示</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">difference_update</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">返回集合</span><span class="n">s和其他多个集合的差集</span><span class="err">，就地进行修改</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">-=</span> <span class="err">表示</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="34-对称差集-1">3.4 对称差集</h2>
-<p>        不属于集合A和集合B交集的其他元素组成的集合，数学表达式为：(A-B) U (B-A)。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">new</span> <span class="nb">set</span> <span class="nb">object</span> <span class="o">--&gt;</span> <span class="err">返回和另一些集合的对称差集</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">^</span> <span class="err">表示</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">symmetric_difference_update</span> <span class="o">--&gt;</span> <span class="bp">None</span> <span class="o">--&gt;</span> <span class="err">返回和另一些集合的对称差集，就地修改</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">^=</span> <span class="err">表示</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="35-集合的其他运算-1">3.5 集合的其他运算</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">bool</span> <span class="o">--&gt;</span> <span class="err">判断当前集合是否是另一个集合的子集</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">&lt;=</span> <span class="err">表示</span>
-
-<span class="n">set1</span> <span class="o">&lt;</span> <span class="n">set2</span> <span class="p">:</span> <span class="err">判断</span><span class="n">set1是否是set2的真子集</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">isssuperset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">bool</span> <span class="o">--&gt;</span> <span class="err">判断当前集合是否是</span><span class="n">other的超集</span>
-<span class="o">--&gt;</span> <span class="err">使用</span> <span class="o">&gt;=</span> <span class="err">表示</span>
-
-<span class="n">set1</span> <span class="o">&gt;</span> <span class="n">set2</span> <span class="p">:</span> <span class="err">判断</span><span class="n">set1是否是other的真超集</span>
-
-<span class="n">s</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="nb">bool</span> <span class="o">--&gt;</span> <span class="err">判断当前集合和另一个集合有没有交集</span>
-</code></pre></td></tr></table>
-</div>
 </div>
     </div>
 
@@ -1634,7 +988,7 @@ mathjax: true</h2>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2017-06-26
+      2019-02-09
       
     </span>
   </p>
@@ -1668,14 +1022,14 @@ mathjax: true</h2>
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://dachenzi.github.io/tags/content_a/">content_a</a>
+          <a href="https://dachenzi.github.io/tags/python%E5%9F%BA%E7%A1%80/">Python基础</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/42-%E6%95%B0%E6%8D%AE%E5%BA%93-orm-sqlalchemy/">
+          <a class="prev" href="/post/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -1685,12 +1039,12 @@ mathjax: true</h2>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">42-数据库-orm-SQLAlchemy</span>
+            <span class="prev-text nav-default">双向链表</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/linuxuser/">
-            <span class="next-text nav-default">LinuxUser</span>
+          <a class="next" href="/post/3-django-template%E6%A8%A1%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">3-django-template模板基本使用</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
