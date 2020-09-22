@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>2-flask-蓝图-闪现-中间件-session - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 flask蓝图 1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置 2 消息闪现 3 中间件 4 flask-session插件 4.1 安装 4.2 将session放在redis中" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="2-flask-蓝图-闪现-中间件-session" />
+<meta property="og:description" content="文章目录 1 flask蓝图 1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置 2 消息闪现 3 中间件 4 flask-session插件 4.1 安装 4.2 将session放在redis中" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/2-flask-%E8%93%9D%E5%9B%BE-%E9%97%AA%E7%8E%B0-%E4%B8%AD%E9%97%B4%E4%BB%B6-session/" />
+
+<meta itemprop="name" content="2-flask-蓝图-闪现-中间件-session">
+<meta itemprop="description" content="文章目录 1 flask蓝图 1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置 2 消息闪现 3 中间件 4 flask-session插件 4.1 安装 4.2 将session放在redis中">
+
+<meta itemprop="wordCount" content="3235">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2-flask-蓝图-闪现-中间件-session"/>
+<meta name="twitter:description" content="文章目录 1 flask蓝图 1.1 第一个蓝图 1.2 before_request/after_request 1.3 蓝图配置 2 消息闪现 3 中间件 4 flask-session插件 4.1 安装 4.2 将session放在redis中"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">2-flask-蓝图-闪现-中间件-session</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 3235 words </span>
+          <span class="more-meta"> 7 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-第一个蓝图">1.1 第一个蓝图</a></li>
+    <li><a href="#12-before_requestafter_request">1.2 before_request/after_request</a></li>
+    <li><a href="#13-蓝图配置">1.3 蓝图配置</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-安装">4.1 安装</a></li>
+    <li><a href="#42-将session放在redis中">4.2 将session放在redis中</a></li>
+    <li><a href="#43-为什么可以直接使用">4.3 为什么可以直接使用</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-flask%E8%93%9D%E5%9B%BE">1 flask蓝图</a>
+<ul>
+<li><a href="#11-%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%93%9D%E5%9B%BE">1.1 第一个蓝图</a></li>
+<li><a href="#12-before_requestafter_request">1.2 before_request/after_request</a></li>
+<li><a href="#13-%E8%93%9D%E5%9B%BE%E9%85%8D%E7%BD%AE">1.3 蓝图配置</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%B6%88%E6%81%AF%E9%97%AA%E7%8E%B0">2 消息闪现</a></li>
+<li><a href="#3-%E4%B8%AD%E9%97%B4%E4%BB%B6">3 中间件</a></li>
+<li><a href="#4-flask-session%E6%8F%92%E4%BB%B6">4 flask-session插件</a>
+<ul>
+<li><a href="#41-%E5%AE%89%E8%A3%85">4.1 安装</a></li>
+<li><a href="#42-%E5%B0%86session%E6%94%BE%E5%9C%A8redis%E4%B8%AD">4.2 将session放在redis中</a></li>
+<li><a href="#43-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8">4.3 为什么可以直接使用</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-flask蓝图">1 flask蓝图</h1>
+<p>        为了在一个或多个应用中，使应用模块化并且支持常用方案，Flask引入了<code>蓝图</code>概念。蓝图可以极大地简化大型应用并为扩展提供集中的注册入口。 <code>Blueprint对象</code>与 Flask 应用对象的工作方式类似，但不是一 个真正的应用。它更像一个用于构建和扩展应用的蓝图 。</p>
+<p>蓝图的用途：</p>
+<ol>
+<li>把一个应用分解为一套蓝图。这是针对大型应用的理想方案：一个项目可以实例化几个应用，初始化多个扩展，并注册许多蓝图。</li>
+<li>在一个应用的 URL 前缀和（或）子域上注册一个蓝图。 URL 前缀和（或）子域的参数成为蓝图中所有视图的通用视图参数（缺省情况下）。</li>
+<li>使用不同的 URL 规则在应用中多次注册蓝图。</li>
+<li>通过蓝图提供模板过滤器、静态文件、模板和其他工具。蓝图不必执行应用或视图 函数。</li>
+<li>当初始化一个 Flask 扩展时，为以上任意一种用途注册一个蓝图。</li>
+</ol>
+<p>        在蓝图被注册到应用之后，当分配请求时，Flask 会把蓝图和视图函数关联起来，并生成两个端点之前的URL 。</p>
+<h2 id="11-第一个蓝图">1.1 第一个蓝图</h2>
+<p>蓝图的标准目录结构如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">flask_app</span>
+<span class="err">├─</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span>
+<span class="err">└─</span><span class="n">flask_app</span>
+	<span class="err">├─</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="err">├─</span><span class="n">static</span>
+    <span class="err">├─</span><span class="n">templates</span>
+    <span class="err">└─</span><span class="n">views</span>   <span class="c1"># 视图函数存放的位置</span>
+    	<span class="err">├─</span><span class="n">account</span><span class="o">.</span><span class="n">py</span>
+    	<span class="err">└─</span><span class="n">content</span><span class="o">.</span><span class="n">py</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>要求在__init__.py文件中去实例化flask对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.views.acount</span> <span class="kn">import</span> <span class="n">account</span>
+<span class="kn">from</span> <span class="nn">.views.content</span> <span class="kn">import</span> <span class="n">content</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>  <span class="c1"># 注册蓝图</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>  <span class="c1"># 注册蓝图</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注册蓝图时，也可以添加<code>url_prefix='/pages'</code>来指定当前蓝图的前缀。</p>
+</blockquote>
+<p>在manage.py来做启动管理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask_app</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在我们的views的模块中，我们需要通过blueprint对象来注册路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># user.py</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># 创建蓝图对象</span>
+
+<span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>   <span class="c1"># 添加蓝图管理的视图函数</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;login&#39;</span>
+
+<span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>  <span class="c1"># 添加蓝图管理的视图函数</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;logout&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以把blueprint对象理解为代理（也可以理解为django中的app的概念)，使用蓝图以后的执行逻辑为：</p>
+<ol>
+<li>创建蓝图对象</li>
+<li>使用不同的蓝图对象来聚合不同类型的视图函数</li>
+<li>将蓝图注册给app管理</li>
+</ol>
+<h2 id="12-before_requestafter_request">1.2 before_request/after_request</h2>
+<p>在使用蓝图的情况下，before_request/after_request装饰器，就可以选择针对不同的蓝图来调用，还是针对全局来调用。以上面的结构为例：</p>
+<ol>
+<li>定义在__init__.py中就是全局执行</li>
+<li>在某个蓝图对象中，调用before_request/after_request就是针对这个蓝图对象来执行的。</li>
+</ol>
+<p>针对全局(在__init__.py文件中):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.before_request</span>
+<span class="k">def</span> <span class="nf">auth</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>针对蓝图对象(在对应的views函数中):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 以content.py的content蓝图对象为例</span>
+<span class="nd">@account.before_request</span>
+<span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;check&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行顺序为：先执行全局before_request，然后执行蓝图before_request，先执行蓝图after_request，然后执行全局after_request</p>
+<h2 id="13-蓝图配置">1.3 蓝图配置</h2>
+<p><code>url_prefix</code>: 为蓝图添加前缀</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;account&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span><span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/account&#39;</span><span class="p">)</span>  <span class="c1"># 创建蓝图对象</span>
+
+<span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>   <span class="c1"># 添加蓝图管理的视图函数</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;login&#39;</span>
+
+<span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>  <span class="c1"># 添加蓝图管理的视图函数</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;logout&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>访问当前蓝图接管的视图函数时，需要添加前缀/account才可以，比如/login,就是/account/login</p>
+<p><code>static_folder</code>: 蓝图的静态文件存放路径
+<code>static_url_path</code>: 蓝图静态文件的访问路径
+<code>template_folder</code>: 蓝图的模板文件存放路径</p>
+<h1 id="2-消息闪现">2 消息闪现</h1>
+<p>        一个好的应用和用户界面都需要良好的反馈。如果用户得不到足够的反馈，那么应用 最终会被用户唾弃。 Flask 的闪现系统提供了一个良好的反馈方式。闪现系统的基 本工作方式是：在且只在下一个请求中访问上一个请求结束时记录的消息。一般我们 结合布局模板来使用闪现系统。</p>
+<blockquote>
+<p>注意，浏览器会限制 cookie 的大小，有时候网络服 务器也会。这样如果消息比会话 cookie 大的话，那么会导致消息闪现静默失败。</p>
+</blockquote>
+<p>        比如：我们在上一个函数中执行了错误的操作，那么直接在当前页面报错可能不是特别友好，更多的用法是跳转到特定的错误页面，然后将异常信息输出。通常我们使用的方式是通过session传递，产生错误时，将信息设置到session中，跳转到错误页面时，通过session将信息取出显示完毕后，删除session中的数据(如果只用一次的话)</p>
+<p>        消息闪现就是基于session的一次性消息的注入与提取，主要使用两个函数实现</p>
+<ul>
+<li><code>flash(message,category='message')</code>:设置消息,category可以为消息设置分类(可以不分类)</li>
+<li><code>get_flashed_messages(category_filter=[])</code>：可以通过指定类别来获取消息(可以不指定过滤)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;用户退出&#39;</span><span class="p">)</span>  <span class="c1"># 等同于session[&#39;message&#39;] = &#39;用户退出&#39;</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/info&#39;</span><span class="p">)</span>
+
+<span class="nd">@account.route</span><span class="p">(</span><span class="s1">&#39;/info&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">info</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">get_flashed_messages</span><span class="p">(</span><span class="n">category_filter</span><span class="o">=</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>  <span class="c1"># 等同于session.pop(&#39;message&#39;)</span>
+    <span class="k">return</span> <span class="n">Markup</span><span class="p">(</span><span class="s1">&#39;&lt;h1&gt;{}&lt;/h1&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="3-中间件">3 中间件</h1>
+<p>django中的中间件可以用于登录验证，IP限制的问题，flask的中间件实现原理不同，看下面的列子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># 这里的run，最终执行的是wsgi_app</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>那么我们如何使用中间件呢，需要在接受请求之前来执行我们的代码，run函数实际上调用的是对象的wsgi_app，那么我们改写wsgi_app即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Middleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">applciation</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">application</span>
+
+	<span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+		<span class="o">...</span> <span class="o">...</span>  <span class="c1"># 可以定制的代码</span>
+		<span class="o">...</span> <span class="o">...</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="o">*</span><span class="n">arge</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">Middleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># 这里的run，最终执行的是wsgi_app</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，<strong>request对象是在wsgi_app执行的时候才会产生的，所以我们这里是没办法直接使用request对象的。</strong></p>
+<h1 id="4-flask-session插件">4 flask-session插件</h1>
+<p>        flask-session插件用于处理session敏感度的问题，如果加密存放在客户端，那么有一定几率被反解，一般情况下，我们会把session放在redis/memcache等nosql中去，使用flask-session可以帮我们简化这个过程。</p>
+<h2 id="41-安装">4.1 安装</h2>
+<p>首先需要安装如下模块</p>
+<ul>
+<li>flask-session:扩展插件</li>
+<li>redis:Python的redis驱动程序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span><span class="o">-</span><span class="n">session</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">redis</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-将session放在redis中">4.2 将session放在redis中</h2>
+<p>        flask比较厉害的一点，就是想要更换redis存储的位置，那么代码根本不需要修改，只需要添加下面redis的配置即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 在创建app的地方进行配置</span>
+
+<span class="kn">from</span> <span class="nn">flask.ext.session</span> <span class="kn">import</span> <span class="n">Session</span> 
+<span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span>  
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_TYPE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;redis&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SESSION_REDIS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;10.0.0.13&#39;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;6379&#39;</span><span class="p">)</span>
+<span class="n">Session</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>问题:</p>
+<ol>
+<li>新版本已经无法通过flask.ext.session来导入Session对象了，需要使用flask_session来导入Session</li>
+<li>如果redis存在密码，那么只需要给Redis对象添加password属性即可</li>
+</ol>
+<p>redis中存储的session格式：（存放的是session的id,利用uuid生成)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">10.0.0.13:6379&gt; keys *
+1<span class="o">)</span> <span class="s2">&#34;session:857c79dc-3871-4a89-9737-ce6b4aeea3b8&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;session:48c714d0-9c54-434b-b43a-70a53c1e0056&#34;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-为什么可以直接使用">4.3 为什么可以直接使用</h2>
+<p>        还记得的我们session生成的过程吗？当用户第一次访问时，如果session为空，那么会使用SecureCookieSessionInterface()为我们生成一个session(空字典)，然后调用它的open_session方法来处理生成新的session。</p>
+<p>        在使用前我们使用Session(app)包装了一下我们的app，它做了什么？</p>
+<ul>
+<li>利用init_app初始化app</li>
+<li>将app的session_interface替换为Session对象的_get_interface(app)的返回值</li>
+<li>内部将system_interface替换成了RedisSessionInterface对象的实例</li>
+<li>所以再执行open_session方法的时候，其实已经被换成了RedisSessionInterface的open_session方法</li>
+<li>在它们内部处理redis相关的读取操作</li>
+</ul>
+<blockquote>
+<p>利用uuid生成的随机唯一ID，通过cookie写到客户端，真正保存的信息，存放在redis中</p>
+</blockquote>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/2-docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">2-docker基本使用</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/2-javascript%E5%87%BD%E6%95%B0-%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%BC%82%E5%B8%B8/">
+            <span class="next-text nav-default">2-JavaScript函数-作用域-异常</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

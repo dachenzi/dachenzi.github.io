@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>1-JavaScript介绍及使用 - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="1-JavaScript介绍及使用" />
+<meta property="og:description" content="文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/1-javascript%E4%BB%8B%E7%BB%8D%E5%8F%8A%E4%BD%BF%E7%94%A8/" />
+
+<meta itemprop="name" content="1-JavaScript介绍及使用">
+<meta itemprop="description" content="文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS">
+
+<meta itemprop="wordCount" content="6212">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="1-JavaScript介绍及使用"/>
+<meta name="twitter:description" content="文章目录 1 JavaScript概述 1.1 Java和JavaScript的区别 1.2 什么是JavaScript 1.3 JavaScript的组成 2 JavaS"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">1-JavaScript介绍及使用</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 6212 words </span>
+          <span class="more-meta"> 13 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-java和javascript的区别">1.1 Java和JavaScript的区别</a></li>
+    <li><a href="#12-什么是javascript">1.2 什么是JavaScript</a></li>
+    <li><a href="#13-javascript的组成">1.3 JavaScript的组成</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-javascript调用方式">2.1 JavaScript调用方式</a></li>
+    <li><a href="#22-javascript的变量标识符">2.2 JavaScript的变量标识符</a>
+      <ul>
+        <li><a href="#221-变量的命名">2.2.1 变量的命名</a></li>
+        <li><a href="#222-标识符">2.2.2 标识符</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-js的数据类型">2.3 JS的数据类型</a>
+      <ul>
+        <li><a href="#231-数字number类型">2.3.1 数字(Number)类型</a></li>
+        <li><a href="#232-字符串string类型">2.3.2 字符串(String)类型</a></li>
+        <li><a href="#233-布尔boolean类型">2.3.3 布尔(Boolean)类型</a></li>
+        <li><a href="#234-数组array类型">2.3.4 数组(Array)类型</a></li>
+        <li><a href="#235-对象object">2.3.5 对象(Object)</a></li>
+        <li><a href="#236-空null类型和未定义undefined类型">2.3.6 空(Null)类型和未定义(Undefined)类型</a></li>
+        <li><a href="#237-声明变量类型">2.3.7 声明变量类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#24-运算符">2.4 运算符</a>
+      <ul>
+        <li><a href="#241--和--的区别">2.4.1 == 和 === 的区别</a></li>
+        <li><a href="#242-variable和variable的区别">2.4.2 variable++和++variable的区别</a></li>
+        <li><a href="#243-三元运算符">2.4.3 三元运算符</a></li>
+        <li><a href="#244-逗号操作符">2.4.4 逗号操作符</a></li>
+        <li><a href="#245-其他">2.4.5 其他</a></li>
+      </ul>
+    </li>
+    <li><a href="#25-流程控制">2.5 流程控制</a>
+      <ul>
+        <li><a href="#251-顺序结构">2.5.1 顺序结构</a></li>
+        <li><a href="#252-分支结构">2.5.2 分支结构</a></li>
+        <li><a href="#253-循环结构">2.5.3 循环结构</a></li>
+        <li><a href="#254-小练习">2.5.4 小练习</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-javascript%E6%A6%82%E8%BF%B0">1 JavaScript概述</a>
+<ul>
+<li><a href="#11-java%E5%92%8Cjavascript%E7%9A%84%E5%8C%BA%E5%88%AB">1.1 Java和JavaScript的区别</a></li>
+<li><a href="#12-%E4%BB%80%E4%B9%88%E6%98%AFjavascript">1.2 什么是JavaScript</a></li>
+<li><a href="#13-javascript%E7%9A%84%E7%BB%84%E6%88%90">1.3 JavaScript的组成</a></li>
+</ul>
+</li>
+<li><a href="#2-javascript%E5%9F%BA%E7%A1%80">2 JavaScript基础</a>
+<ul>
+<li><a href="#21-javascript%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F">2.1 JavaScript调用方式</a></li>
+<li><a href="#22-javascript%E7%9A%84%E5%8F%98%E9%87%8F%E6%A0%87%E8%AF%86%E7%AC%A6">2.2 JavaScript的变量标识符</a>
+<ul>
+<li><a href="#221-%E5%8F%98%E9%87%8F%E7%9A%84%E5%91%BD%E5%90%8D">2.2.1 变量的命名</a></li>
+<li><a href="#222-%E6%A0%87%E8%AF%86%E7%AC%A6">2.2.2 标识符</a></li>
+</ul>
+</li>
+<li><a href="#23-js%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">2.3 JS的数据类型</a>
+<ul>
+<li><a href="#231-%E6%95%B0%E5%AD%97number%E7%B1%BB%E5%9E%8B">2.3.1 数字(Number)类型</a></li>
+<li><a href="#232-%E5%AD%97%E7%AC%A6%E4%B8%B2string%E7%B1%BB%E5%9E%8B">2.3.2 字符串(String)类型</a></li>
+<li><a href="#233-%E5%B8%83%E5%B0%94boolean%E7%B1%BB%E5%9E%8B">2.3.3 布尔(Boolean)类型</a></li>
+<li><a href="#234-%E6%95%B0%E7%BB%84array%E7%B1%BB%E5%9E%8B">2.3.4 数组(Array)类型</a></li>
+<li><a href="#235-%E5%AF%B9%E8%B1%A1object">2.3.5 对象(Object)</a></li>
+<li><a href="#236-%E7%A9%BAnull%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%9C%AA%E5%AE%9A%E4%B9%89undefined%E7%B1%BB%E5%9E%8B">2.3.6 空(Null)类型和未定义(Undefined)类型</a></li>
+<li><a href="#237-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B">2.3.7 声明变量类型</a></li>
+</ul>
+</li>
+<li><a href="#24-%E8%BF%90%E7%AE%97%E7%AC%A6">2.4 运算符</a>
+<ul>
+<li><a href="#241--%E5%92%8C--%E7%9A%84%E5%8C%BA%E5%88%AB">2.4.1 == 和 === 的区别</a></li>
+<li><a href="#242-variable%E5%92%8Cvariable%E7%9A%84%E5%8C%BA%E5%88%AB">2.4.2 variable++和++variable的区别</a></li>
+<li><a href="#243-%E4%B8%89%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6">2.4.3 三元运算符</a></li>
+<li><a href="#244-%E9%80%97%E5%8F%B7%E6%93%8D%E4%BD%9C%E7%AC%A6">2.4.4 逗号操作符</a></li>
+<li><a href="#245-%E5%85%B6%E4%BB%96">2.4.5 其他</a></li>
+</ul>
+</li>
+<li><a href="#25-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">2.5 流程控制</a>
+<ul>
+<li><a href="#251-%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84">2.5.1 顺序结构</a></li>
+<li><a href="#252-%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84">2.5.2 分支结构</a>
+<ul>
+<li><a href="#2521-if---else%E7%BB%93%E6%9E%84">2.5.2.1 if - else结构</a></li>
+<li><a href="#2522-if-else-if---else-%E7%BB%93%E6%9E%84">2.5.2.2 if-else if - else 结构</a></li>
+<li><a href="#2523-switchcase%E7%BB%93%E6%9E%84">2.5.2.3 switch&hellip;case结构</a></li>
+</ul>
+</li>
+<li><a href="#253-%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84">2.5.3 循环结构</a>
+<ul>
+<li><a href="#2531-for%E6%9D%A1%E4%BB%B6%E5%BE%AA%E7%8E%AF">2.5.3.1 for条件循环</a></li>
+<li><a href="#2532-for-in%E5%BE%AA%E7%8E%AF">2.5.3.2 for-in循环</a></li>
+<li><a href="#2533-for-of%E5%BE%AA%E7%8E%AF">2.5.3.3 for-of循环</a></li>
+<li><a href="#2533-whiledo%E5%BE%AA%E7%8E%AF">2.5.3.3 while..do循环</a></li>
+<li><a href="#2533-dowhile%E5%BE%AA%E7%8E%AF">2.5.3.3 do..while循环</a></li>
+</ul>
+</li>
+<li><a href="#254-%E5%B0%8F%E7%BB%83%E4%B9%A0">2.5.4 小练习</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-javascript概述">1 JavaScript概述</h1>
+<p>JavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。</p>
+<h2 id="11-java和javascript的区别">1.1 Java和JavaScript的区别</h2>
+<p>JavaScript 与 Java 是两种完全不同的语言，无论在概念上还是设计上。</p>
+<ul>
+<li>Java（由 Sun 发明）是更复杂的编程语言。</li>
+<li>JavaScript 由 Brendan Eich 发明。它于 1995 年出现在 Netscape 中（该浏览器已停止更新），并于 1997 年被 ECMA（一个标准协会）采纳。ECMA-262 是 JavaScript 标准的官方名称。</li>
+</ul>
+<h2 id="12-什么是javascript">1.2 什么是JavaScript</h2>
+<p>JavaScript 是脚本语言</p>
+<ul>
+<li>JavaScript 是一种轻量级的编程语言。</li>
+<li>JavaScript 是可插入 HTML 页面的编程代码。</li>
+<li>JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。</li>
+<li>JavaScript 可以控制HTML 输出流、对事件的反应、改变 HTML 内容、改变 HTML 图像、改变 HTML 样式、验证输入等等。</li>
+</ul>
+<h2 id="13-javascript的组成">1.3 JavaScript的组成</h2>
+<p>我们说的JavaScript通常由三部分组成：</p>
+<ul>
+<li>ECMAScript：JavaScript标准化部分，主要定义了基础的数据类型，语法，关键字等等。</li>
+<li>DOM(文档对象模型)：整合JS，CSS，HTML。</li>
+<li>BOM(浏览器对象模型)：整合JS 和 浏览器。</li>
+</ul>
+<h1 id="2-javascript基础">2 JavaScript基础</h1>
+<p>JavaScript 是一个程序语言。遵循ECMAScript标准，语法规则定义了语言结构。</p>
+<h2 id="21-javascript调用方式">2.1 JavaScript调用方式</h2>
+<p>HTML中引入JS的方式主要有两种:直接嵌入式编写、通过导入JS文件</p>
+<ul>
+<li>直接嵌入式编写：必须位于 <script> 与 </script> 标签之间。脚本可被放置在 HTML 页面的 <body> 和 <head> 部分中。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>    <span class="c1">// 用于弹出告警框，便于调试
+</span><span class="c1"></span>    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：通常的做法是把JS函数放入 <head> 部分中，或者放在页面底部。这样就可以把它们安置到同一处位置，不会干扰页面的内容。  &ndash;&gt; 建议放在body的最后面，这样不会阻碍网页加载</p>
+<ul>
+<li>导入式：在<script></script>标签内导入</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;index.js&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：外部脚本不能中不能包含 <script> 标签。</p>
+<h2 id="22-javascript的变量标识符">2.2 JavaScript的变量标识符</h2>
+<p>        变量是用于存储信息的&quot;容器&quot;。在代数中，我们使用字母（比如 x）来保存值（比如 5）。通过上面的表达式 z=x+y，我们能够计算出 z 的值为 11。在 JavaScript 中，这些字母被称为变量。声明一个遍变量的方式主要有以下方法：</p>
+<ul>
+<li>使用var关键字： <code>var x = 1</code>; 根据值的类型，x是number类型。（<code>局部变量</code>）</li>
+<li>不使用var关键字： <code>y = 1</code>; 根据值的类型，x是number类型。（<code>全局变量</code>） 严格模式会报错，不建议用</li>
+<li>只定义不赋值：<code>var x</code>; 那么此时该变量的类型为<code>undefine</code>。</li>
+<li>使用let关键字： <code>let x = 1</code>; 和var关键字创建的效果大致相同，属于<code>ES6的新语法</code>，以大括号为作用域</li>
+<li>使用const关键字：<code>const x = 1</code>; 声明一个常量x，不允许更改</li>
+</ul>
+<blockquote>
+<p><code>var会把变量提升</code>到当前全局或函数的作用域的头部先行定义。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">x</span><span class="p">)</span>  
+<span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">y</span><span class="p">)</span><span class="err">、</span>
+<span class="err">#</span><span class="k">typeof</span> <span class="nx">表示查看对象的类型</span>
+<span class="err">#</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="err">：</span><span class="nx">通了浏览器的console输出</span><span class="err">，</span><span class="nx">便于调试</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Tips：</p>
+<ul>
+<li>在一行内定义多个变量需要用逗号隔开：var a = 1, b = 2;</li>
+<li>重新声明并不会修改变量的值： var a = 1;  var a      a的值依旧为1</li>
+</ul>
+<h3 id="221-变量的命名">2.2.1 变量的命名</h3>
+<p>变量可以使用短名称（比如 x 和 y），也可以使用描述性更好的名称（比如 age, sum, totalvolume）。</p>
+<ul>
+<li>变量必须以字母开头</li>
+<li>变量也能以 $ 和 _ 符号开头（不过我们不推荐这么做）</li>
+<li>变量名称对大小写敏感（y 和 Y 是不同的变量）</li>
+</ul>
+<p>主要存在以下写法：</p>
+<ul>
+<li>Camel 标记法:首字母是小写的，接下来的字母都以大写字符开头。例如：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">myTestValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">mySecondValue</span> <span class="o">=</span> <span class="s2">&#34;hi&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Pascal 标记法:首字母是大写的，接下来的字母都以大写字符开头。例如：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Var</span> <span class="nx">MyTestValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">MySecondValue</span> <span class="o">=</span> <span class="s2">&#34;hi&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>匈牙利类型标记法:在以 Pascal 标记法命名的变量前附加一个小写字母（或小写字母序列），说明该变量的类型。例如，i 表示整数，s 表示字符串，如下所示“</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">Var</span> <span class="nx">iMyTestValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">sMySecondValue</span> <span class="o">=</span> <span class="s2">&#34;hi&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="222-标识符">2.2.2 标识符</h3>
+<p>        由不以数字开头的字母、数字、下划线(_)、美元符号($)组成,常用于表示函数、变量等的名称,例如：_abc,$abc,abc,abc123是标识符，而1abc不是,JavaScript语言中代表特定含义的词称为保留字，不允许程序再定义为标识符</p>
+<h2 id="23-js的数据类型">2.3 JS的数据类型</h2>
+<p>数据类型主要有一下几种：字符串（String）、数字(Number)、布尔(Boolean)、数组(Array)、对象(Object)、空（Null）、未定义（Undefined）。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number</td>
+<td>数值型，包括整形和浮点型</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布尔型, true和false</td>
+</tr>
+<tr>
+<td>string</td>
+<td>字符串型</td>
+</tr>
+<tr>
+<td>null</td>
+<td>只有一个值null</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>变量声明未赋值的；对象未定义的属性</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>ES6新引入类型</td>
+</tr>
+<tr>
+<td>object</td>
+<td>是以上基本类型的复合类型，是容器</td>
+</tr>
+</tbody>
+</table>
+<p>javascript的隐式转换</p>
+<ul>
+<li>遇到字符串，加号就是拼接字符串，所有非字符和字符串相加，都是是隐式的转换为字符串。</li>
+<li>如果没有字符串，加号把其他所有类型都当数字处理，非数字类型隐式转换为数字。undefined特殊，因为它没有定义值，所以转换失败会得到一个特殊值NaN</li>
+<li>如果运算符是逻辑运算符，短路符，返回就是短路时的类型。没有隐式转换</li>
+</ul>
+<blockquote>
+<p>除非你十分明确，否则不要依赖隐式转换</p>
+</blockquote>
+<h3 id="231-数字number类型">2.3.1 数字(Number)类型</h3>
+<p>JavaScript 只有一种数字类型(双精度浮点型)。数字可以带小数点，也可以不带：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在JS中所有的数字类型均为number，并且都用64位浮点格式来存储。</p>
+<ul>
+<li>NaN类型: js来做数据转换的时候，比如当字符串转换成数字失效的时候，会返回一个 NaN 的值。类型也是属于number的</li>
+<li>在变量前添加 + ，则表示把该变量转换为正数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">&#39;a456&#39;</span><span class="p">;</span>
+<span class="nx">b</span> <span class="o">=</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  <span class="c1">// 无法转换，结果为NaN
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>数字类型还有三种符号值：+Infinity（正无穷）、-Infinity（负无穷）和 NaN (not-a-number非数字)。</p>
+<table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number.parseFloat()</td>
+<td>把字符串参数解析成浮点数，和全局方法 parseFloat() 作用一致</td>
+</tr>
+<tr>
+<td>Number.parseInt()</td>
+<td>把字符串解析成特定基数对应的整型数字，和全局方法 parseInt() 作用一致</td>
+</tr>
+<tr>
+<td>Number.isFinite()</td>
+<td>判断传递的值是否为有限数字</td>
+</tr>
+<tr>
+<td>Number.isInteger()</td>
+<td>判断传递的值是否为整数</td>
+</tr>
+<tr>
+<td>Number.isNaN()</td>
+<td>判断传递的值是否为NaN</td>
+</tr>
+</tbody>
+</table>
+<p>内置数学对象Math：</p>
+<ul>
+<li>Math提供了绝对值、对数指数运算、三角函数运算、最大值、最小值、随机数、开方等运算函数，提供了PI值。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log2</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span> <span class="c1">// (0, 1)
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="232-字符串string类型">2.3.2 字符串(String)类型</h3>
+<p>字符串是存储字符（比如 &ldquo;Lee daxin&rdquo;）的变量。可以是引号中的任意文本。</p>
+<blockquote>
+<p>由于没有字符类型，所以在字符串中表达常用的特殊字符，但是在使用特殊字符时必须加上反斜线\；常用的转义字符 \n:换行 ':单引号 &quot;:双引号 \:右划线</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;dachenzi&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">job</span> <span class="o">=</span> <span class="s1">&#39;Linux&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ES6还提供了反引号用来定义一个字符串，可以支持多行，还支持插值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;daxin&#39;</span>
+<span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="nx">info</span> <span class="o">=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">age</span><span class="si">}</span><span class="sb">`</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>  <span class="c1">// daxin,20
+</span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>常用方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj.length</td>
+<td>长度</td>
+</tr>
+<tr>
+<td>obj.trim()</td>
+<td>移除空白</td>
+</tr>
+<tr>
+<td>obj.trimLeft()</td>
+<td>左边移除空白（非ES6官方语法）</td>
+</tr>
+<tr>
+<td>obj.trimRight)</td>
+<td>右边移除空白（非ES6官方语法）</td>
+</tr>
+<tr>
+<td>obj.charAt(n)</td>
+<td>返回字符串中的第n个字符</td>
+</tr>
+<tr>
+<td>obj.concat(value, &hellip;)</td>
+<td>拼接</td>
+</tr>
+<tr>
+<td>obj.indexOf(substring,start)</td>
+<td>子序列位置</td>
+</tr>
+<tr>
+<td>obj.lastIndexOf(substring,start)</td>
+<td>子序列位置</td>
+</tr>
+<tr>
+<td>obj.substring(from, to)</td>
+<td>根据索引获取子序列</td>
+</tr>
+<tr>
+<td>obj.slice(start, end)</td>
+<td>切片</td>
+</tr>
+<tr>
+<td>obj.toLowerCase()</td>
+<td>大写</td>
+</tr>
+<tr>
+<td>obj.toUpperCase()</td>
+<td>小写</td>
+</tr>
+<tr>
+<td>obj.split(delimiter, limit)</td>
+<td>分割</td>
+</tr>
+<tr>
+<td>obj.search(regexp)</td>
+<td>从头开始匹配，返回匹配成功的第一个位置(g无效)</td>
+</tr>
+<tr>
+<td>obj.match(regexp)</td>
+<td>全局搜索，如果正则中有g表示找到全部，否则只找到第一个。</td>
+</tr>
+<tr>
+<td>obj.replace(regexp, replacement)</td>
+<td>替换，正则中有g则替换所有，否则只替换第一个匹配项，<br>$数字：匹配的第n个组内容；<br>$&amp;：当前匹配的内容；<br>$`：位于匹配子串左侧的文本；<br>$'：位于匹配子串右侧的文本<br>$$：直接量$符号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="233-布尔boolean类型">2.3.3 布尔(Boolean)类型</h3>
+<p>布尔（逻辑）只能有两个值：true 或 false。也代表1和0，实际运算中true=1,false=0 。这点和shell是不同的。主要用于流程控制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+ <span class="p">}</span>
+ <span class="k">else</span> <span class="p">{</span>
+         <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;False&#34;</span><span class="p">)</span>
+ <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="234-数组array类型">2.3.4 数组(Array)类型</h3>
+<p>类似于其他语言的列表，但是不是一个东西。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//方式1：
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span> 
+<span class="c1">//方式2:
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span> 
+<span class="c1">//方式3:
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>扩展：列表的索引为数字，而数组的索引可以为任意.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+     <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">();</span>
+     <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">;</span>
+     <span class="nx">arr</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+     <span class="nx">arr</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hello world&#39;</span><span class="p">;</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="235-对象object">2.3.5 对象(Object)</h3>
+<p>对象由花括号分隔。在括号内部，对象的属性以名称和值对的形式 (name : value) 来定义。属性由逗号分隔：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//方式1：
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">person</span><span class="o">=</span><span class="p">{</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&#34;Bill&#34;</span><span class="p">,</span> <span class="nx">lastname</span><span class="o">:</span><span class="s2">&#34;Gates&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="o">:</span><span class="mi">5566</span><span class="p">};</span>
+ 
+<span class="c1">//方式2：
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">person</span><span class="o">=</span><span class="p">{</span>
+    <span class="nx">firstname</span> <span class="o">:</span> <span class="s2">&#34;Bill&#34;</span><span class="p">,</span>
+    <span class="nx">lastname</span>  <span class="o">:</span> <span class="s2">&#34;Gates&#34;</span><span class="p">,</span>
+    <span class="nx">id</span>        <span class="o">:</span>  <span class="mi">5566</span>
+<span class="p">};</span>
+<span class="c1">//声明中的空格和折行无关紧要
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Persion对象有三个属性：firstname、lastname 以及 id。访问属性的两个方式：</p>
+<ul>
+<li>persion.firstname</li>
+<li>persion[&lsquo;firstname&rsquo;]</li>
+</ul>
+<h3 id="236-空null类型和未定义undefined类型">2.3.6 空(Null)类型和未定义(Undefined)类型</h3>
+<p>Undefined 这个值表示变量不含有值,当声明的变量未初始化时，该变量的默认值是 undefined。当函数无明确返回值时，返回的也是值 &ldquo;undefined。另一种只有一个值的类型是 Null，它只有一个专用值 null，即它的字面量。值 undefined 实际上是从值 null 派生来的,因此 ECMAScript 把它们定义为相等的。可以通过将变量的值设置为 null 来清空变量的值。尽管这两个值相等，但它们的含义不同。undefined 是声明了变量但未对其初始化时赋予该变量的值，null 则用于表示尚未存在的对象。如果函数或方法要返回的是对象，那么找不到该对象时，返回的通常是 null。</p>
+<h3 id="237-声明变量类型">2.3.7 声明变量类型</h3>
+<p>如果我们只定义变量没有进行赋值，那么默认就是undefined类型的，如果想要声明某个类型的变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span><span class="o">=</span>   <span class="k">new</span> <span class="nb">String</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x</span><span class="o">=</span>      <span class="k">new</span> <span class="nb">Number</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span><span class="o">=</span>      <span class="k">new</span> <span class="nb">Boolean</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">arr</span><span class="o">=</span>    <span class="k">new</span> <span class="nb">Array</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">person</span><span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-运算符">2.4 运算符</h2>
+<p>常用的运算符如下:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>包含</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算术运算符</td>
+<td>+  -   *   /   %    ++   &ndash;</td>
+</tr>
+<tr>
+<td>比较运算符</td>
+<td>&gt;   &gt;=   &lt;    &lt;=    !=    ==    ===   !==</td>
+</tr>
+<tr>
+<td>逻辑运算符</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>赋值运算符</td>
+<td>=  +=   -=  *=   /=</td>
+</tr>
+<tr>
+<td>字符串运算符</td>
+<td>+  连接，两边操作数有一个或两个是字符串就做连接运算</td>
+</tr>
+</tbody>
+</table>
+<h3 id="241--和--的区别">2.4.1 == 和 === 的区别</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s1">&#39;123&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span> <span class="o">==</span> <span class="nx">b</span><span class="p">);</span>
+ 
+<span class="c1">// JS在做比较运算的时候，会把不同的数据类型进行转换，所以这里a 是等于 b的。
+</span><span class="c1">// 如果不希望JS完成类型转换，那么可以使用===。
+</span></code></pre></td></tr></table>
+</div>
+</div><p>python强类型语言，js属于弱类型语言。</p>
+<ul>
+<li>强类型定义语言：一种总是强制类型定义的语言。Java和Python是强制类型定义的。如果你有一个整数，如果不显示地进行转换，你不能将其视为一个字符串。</li>
+<li>弱类型定义语言：一种类型可以被忽略的语言，与强类型定义相反。JavaScript是弱类型定义的。在JavaScript中，可以将字符串'12&rsquo;和整数3进行连接得到字符串'123'，然后可以把它看成整数123，而不需要显示转换。</li>
+</ul>
+<h3 id="242-variable和variable的区别">2.4.2 variable++和++variable的区别</h3>
+<p>假如x=2，那么x++表达式执行后的值为3，x&ndash;表达式执行后的值为1；i++相当于i=i+1，i&ndash;相当于i=i-1；递增和递减运算符可以放在变量前也可以放在变量后：&ndash;i</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//区别主要体现在赋值的时候
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="o">++</span><span class="p">;</span>
+<span class="c1">//这里b的值为1，因为是先赋值后a自加
+</span><span class="c1"></span> 
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="o">++</span><span class="nx">a</span><span class="p">;</span>
+<span class="c1">//这里b的值为3，因为是先a自加后赋值
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="243-三元运算符">2.4.3 三元运算符</h3>
+<p>它的一般格式为：<code>条件表达式?真值:假值</code>，等价于简单的if&hellip;else结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="nx">条件表达式</span><span class="p">)</span> <span class="p">{</span>
+ <span class="nx">真值</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+ <span class="nx">假值</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">((</span><span class="s1">&#39;3&#39;</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)</span><span class="o">?</span><span class="s1">&#39;真&#39;</span><span class="o">:</span><span class="s1">&#39;假&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="244-逗号操作符">2.4.4 逗号操作符</h3>
+<p>JS允许多个表达式写在一起，最终将返回最后一个逗号表达式的值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">4</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">c</span><span class="o">=</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="o">?</span><span class="s1">&#39;t&#39;</span><span class="o">:</span><span class="s1">&#39;f&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="c1">//9
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">//f
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+ <span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">a</span><span class="o">++</span>  <span class="c1">// 没有有var/let创建的变量为全局变量，直接修改了全局变量
+</span><span class="c1"></span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">())</span> <span class="c1">// 最终返回的是 c = a++ 的值，为9
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="c1">// c为9
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="245-其他">2.4.5 其他</h3>
+<p>名称|说明
+instanceof|判断是否属于指定类型，但是对象必须是new关键字声明创建的。
+typeof|返回类型字符串
+delete|delete操作符, 删除一个对象(an object)或一个对象的属性(an object&rsquo;s property)或者一个数组中某一个键值(an element at a specified index in an array)。
+in|如果指定的属性在对象内，则返回true</p>
+<h2 id="25-流程控制">2.5 流程控制</h2>
+<p>JS中主要有三种流程控制结构：</p>
+<ul>
+<li>顺序结构（从上到下顺序执行）</li>
+<li>分支结构（比如if，else；switch case）</li>
+<li>循环结构（比如for，while）</li>
+</ul>
+<h3 id="251-顺序结构">2.5.1 顺序结构</h3>
+<p>即从上到下按照顺序执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="252-分支结构">2.5.2 分支结构</h3>
+<p>和python不同的是，条件表达式的and/or是用  &amp;&amp; / || 表示的</p>
+<h4 id="2521-if---else结构">2.5.2.1 if - else结构</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if (条件表达式) {
+    语句1；
+    ... ... 
+} else {
+    语句2;
+    ... ...
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：只要表达式成立，或者返回值是bool都可，即if(1)也是可以的，因为1的bool类型为true；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;true&#39;</span><span class="p">)</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;False&#39;</span><span class="p">)</span>
+ <span class="p">}</span>
+ 
+<span class="o">&lt;</span><span class="err">/scripts&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2522-if-else-if---else-结构">2.5.2.2 if-else if - else 结构</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="nx">条件表达式1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">语句1</span><span class="err">；</span>
+    <span class="p">....</span> <span class="p">....</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">条件表达式2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">语句2</span><span class="err">；</span>
+    <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">语句3</span><span class="p">;</span>
+    <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面看一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bigger than 10&#39;</span><span class="p">)</span>
+ <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">a</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;bingger than 5&#39;</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;smaller than 5&#39;</span><span class="p">)</span>
+ <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/scripts&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>条件的False等效</p>
+<ul>
+<li>false</li>
+<li>undefined</li>
+<li>null</li>
+<li>0</li>
+<li>NaN</li>
+<li>空字符串</li>
+</ul>
+<p>其它值都将被视为True</p>
+<h4 id="2523-switchcase结构">2.5.2.3 switch&hellip;case结构</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">switch</span>  <span class="p">(</span><span class="nx">条件表达式</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="nx">值1</span><span class="o">:</span><span class="nx">语句1</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="nx">值2</span><span class="o">:</span><span class="nx">语句2</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="nx">值3</span><span class="o">:</span><span class="nx">语句3</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="nx">值4</span><span class="o">:</span><span class="nx">语句4</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span><span class="nx">语句5</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面来看一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">a</span>  <span class="o">=</span>  <span class="mi">5</span> <span class="p">;</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="mi">0</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期一&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">1</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期二&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+     <span class="k">case</span> <span class="mi">2</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期三&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">3</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期四&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">4</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期五&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">5</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期六&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+     <span class="k">case</span> <span class="mi">6</span><span class="o">:</span><span class="nx">y</span> <span class="o">=</span> <span class="s1">&#39;星期七&#39;</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>switch比else if结构更加简洁清晰，使程序可读性更强,效率更高。但是一定要注意恰当的时候break语句，否则会继续顺序向下执行。</p>
+<h3 id="253-循环结构">2.5.3 循环结构</h3>
+<h4 id="2531-for条件循环">2.5.3.1 for条件循环</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="nx">初始化表达式</span><span class="p">;</span><span class="nx">条件表达式</span><span class="p">;</span><span class="nx">自增或自减</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">执行语句1</span><span class="p">;</span>
+    <span class="nx">执行语句2</span><span class="p">;</span>
+    <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面来看一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+ 
+ <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+ <span class="p">}</span>
+ 
+ <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>死循环的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(;;){</span>   <span class="c1">// 表达式，条件，等全为空
+</span><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2532-for-in循环">2.5.3.2 for-in循环</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="nx">变量</span> <span class="k">in</span> <span class="nx">属组或对象</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">执行语句1</span><span class="p">;</span>
+    <span class="nx">执行语句2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面来看一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+     <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+     <span class="p">}</span>
+ <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>PS：for循环，循环的是对象的索引</p>
+<h4 id="2533-for-of循环">2.5.3.3 for-of循环</h4>
+<p>for &hellip; of 直接取值，只能用于数组，不能作用于对象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">arry</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="k">for</span> <span class="p">(</span> <span class="kd">let</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">arry</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2533-whiledo循环">2.5.3.3 while..do循环</h4>
+<p>先判断条件，满足时，再执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">条件表达式</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">执行语句1</span><span class="err">；</span>
+        <span class="nx">执行语句2</span><span class="err">；</span>
+    <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面来看一个例子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+     <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="k">while</span> <span class="p">(</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">101</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">i</span>
+         <span class="nx">i</span><span class="o">++</span>
+     <span class="p">}</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sum</span><span class="p">)</span>
+ <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2533-dowhile循环">2.5.3.3 do..while循环</h4>
+<p>它的一般格式为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">do</span>
+ <span class="nx">statement</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">condition</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先执行语句，然后在进行条件判断。</p>
+<h3 id="254-小练习">2.5.4 小练习</h3>
+<p>打九九乘法表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;=</span><span class="nx">i</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">str</span> <span class="o">+=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">j</span><span class="si">}</span><span class="sb">*</span><span class="si">${</span><span class="nx">i</span><span class="si">}</span><span class="sb">=</span><span class="si">${</span><span class="nx">i</span><span class="o">*</span><span class="nx">j</span><span class="o">&gt;=</span><span class="mi">10</span><span class="o">?</span><span class="nx">i</span><span class="o">*</span><span class="nx">j</span> <span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">:</span><span class="nx">i</span><span class="o">*</span><span class="nx">j</span><span class="o">+</span><span class="s1">&#39;  &#39;</span><span class="si">}</span><span class="sb"> `</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nx">j</span><span class="o">&lt;=</span><span class="nx">i</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">str</span> <span class="o">+=</span> <span class="sb">`</span><span class="si">${</span><span class="nx">j</span><span class="si">}</span><span class="sb"> * </span><span class="si">${</span><span class="nx">i</span><span class="si">}</span><span class="sb"> = </span><span class="si">${</span><span class="p">(</span><span class="nx">a</span><span class="o">=</span><span class="nx">i</span><span class="o">*</span><span class="nx">j</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">10</span><span class="o">?</span><span class="nx">a</span><span class="o">:</span><span class="nx">a</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="si">}</span><span class="sb">  `</span>
+        <span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/1-flask-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E9%85%8D%E7%BD%AE-%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80-%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">1-flask-快速入门-配置-路由基础-请求与响应</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/1-random%E6%A8%A1%E5%9D%97/">
+            <span class="next-text nav-default">1-random模块</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

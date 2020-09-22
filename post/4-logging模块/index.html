@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>4-logging模块 - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="4-logging模块" />
+<meta property="og:description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/4-logging%E6%A8%A1%E5%9D%97/" />
+
+<meta itemprop="name" content="4-logging模块">
+<meta itemprop="description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo">
+
+<meta itemprop="wordCount" content="8465">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="4-logging模块"/>
+<meta name="twitter:description" content="文章目录 1 logging模块 1.1 日志级别 1.2 日志格式字符串 1.3 快速使用 1.3.1 修改日期格式 1.3.2 输出到文件中 1.3.3 构建消息 2 处理流程 3 logger类 3.1 getLo"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">4-logging模块</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 8465 words </span>
+          <span class="more-meta"> 17 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-日志级别">1.1 日志级别</a></li>
+    <li><a href="#12-日志格式字符串">1.2 日志格式字符串</a></li>
+    <li><a href="#13-快速使用">1.3 快速使用</a>
+      <ul>
+        <li><a href="#131-修改日期格式">1.3.1 修改日期格式</a></li>
+        <li><a href="#132-输出到文件中">1.3.2 输出到文件中</a></li>
+        <li><a href="#133-构建消息">1.3.3 构建消息</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-getlogger工厂方法">3.1 getLogger工厂方法</a></li>
+    <li><a href="#32-实例常用方法">3.2 实例常用方法</a></li>
+    <li><a href="#33-层次结构">3.3 层次结构</a></li>
+    <li><a href="#34-为什么是root-logger">3.4 为什么是root logger</a></li>
+    <li><a href="#35-root-logger是啥">3.5 root logger是啥？</a>
+      <ul>
+        <li><a href="#351-basicconfig常用参数">3.5.1 basicConfig常用参数</a></li>
+      </ul>
+    </li>
+    <li><a href="#36-继承关系">3.6 继承关系</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-streamhandler">4.1 StreamHandler</a></li>
+    <li><a href="#42-filehandler">4.2 FileHandler</a></li>
+    <li><a href="#43-多个handler">4.3 多个Handler</a></li>
+    <li><a href="#44-handler的常用方法">4.4 handler的常用方法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#91-按照大小切割日志">9.1 按照大小切割日志</a></li>
+    <li><a href="#92-按照时间切割日志">9.2 按照时间切割日志</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-logging%E6%A8%A1%E5%9D%97">1 logging模块</a>
+<ul>
+<li><a href="#11-%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB">1.1 日志级别</a></li>
+<li><a href="#12-%E6%97%A5%E5%BF%97%E6%A0%BC%E5%BC%8F%E5%AD%97%E7%AC%A6%E4%B8%B2">1.2 日志格式字符串</a></li>
+<li><a href="#13-%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8">1.3 快速使用</a>
+<ul>
+<li><a href="#131-%E4%BF%AE%E6%94%B9%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F">1.3.1 修改日期格式</a></li>
+<li><a href="#132-%E8%BE%93%E5%87%BA%E5%88%B0%E6%96%87%E4%BB%B6%E4%B8%AD">1.3.2 输出到文件中</a></li>
+<li><a href="#133-%E6%9E%84%E5%BB%BA%E6%B6%88%E6%81%AF">1.3.3 构建消息</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B">2 处理流程</a></li>
+<li><a href="#3-logger%E7%B1%BB">3 logger类</a>
+<ul>
+<li><a href="#31-getlogger%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95">3.1 getLogger工厂方法</a></li>
+<li><a href="#32-%E5%AE%9E%E4%BE%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">3.2 实例常用方法</a></li>
+<li><a href="#33-%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">3.3 层次结构</a></li>
+<li><a href="#34-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFroot-logger">3.4 为什么是root logger</a></li>
+<li><a href="#35-root-logger%E6%98%AF%E5%95%A5">3.5 root logger是啥？</a>
+<ul>
+<li><a href="#351-basicconfig%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0">3.5.1 basicConfig常用参数</a></li>
+</ul>
+</li>
+<li><a href="#36-%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB">3.6 继承关系</a></li>
+</ul>
+</li>
+<li><a href="#4-handler%E7%B1%BB">4 handler类</a>
+<ul>
+<li><a href="#41-streamhandler">4.1 StreamHandler</a></li>
+<li><a href="#42-filehandler">4.2 FileHandler</a></li>
+<li><a href="#43-%E5%A4%9A%E4%B8%AAhandler">4.3 多个Handler</a></li>
+<li><a href="#44-handler%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">4.4 handler的常用方法</a></li>
+</ul>
+</li>
+<li><a href="#5-formatter%E7%B1%BB">5 Formatter类</a></li>
+<li><a href="#6-filter%E7%B1%BB">6 Filter类</a></li>
+<li><a href="#7-%E4%BF%A1%E6%81%AF%E4%BC%A0%E9%80%92">7 信息传递</a></li>
+<li><a href="#8-%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90">8 过程分析</a></li>
+<li><a href="#9-%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2">9 日志切割</a>
+<ul>
+<li><a href="#91-%E6%8C%89%E7%85%A7%E5%A4%A7%E5%B0%8F%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97">9.1 按照大小切割日志</a></li>
+<li><a href="#92-%E6%8C%89%E7%85%A7%E6%97%B6%E9%97%B4%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97">9.2 按照时间切割日志</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-logging模块">1 logging模块</h1>
+<p>这个模块定义了一些函数和类，它们为应用程序和库实现了一个灵活的事件日志系统。下面先来了解下日志的级别分类。</p>
+<h2 id="11-日志级别">1.1 日志级别</h2>
+<p>下面是日志级别以及对应的数字值表：</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Numeric value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRITICAL</td>
+<td>50</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>40</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>30</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>20</td>
+</tr>
+<tr>
+<td>DEBUG</td>
+<td>10</td>
+</tr>
+<tr>
+<td>NOTSET</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>之所以设置级别是为了控制输出信息，以及针对日志进行了分类：</p>
+<ul>
+<li>Error一般为程序的错误信息</li>
+<li>Warning为程序的告警信息</li>
+<li>info和debug则可以是提示或者调试信息</li>
+</ul>
+<p>当我们需要对我们的程序运行时输出的日志进行分类打印时，可以使用这种简便而快速的方法。</p>
+<blockquote>
+<p>基本上所以的软件程序日志输出都分为上述级别。</p>
+</blockquote>
+<h2 id="12-日志格式字符串">1.2 日志格式字符串</h2>
+<p>logging模块中定义好的可以用于format格式字符串常用的如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段/属性名称</th>
+<th>使用格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asctime</td>
+<td>%(asctime)s</td>
+<td>日志事件发生的时间&ndash;人类可读时间，如：2003-07-08 16:49:45,896</td>
+</tr>
+<tr>
+<td>created</td>
+<td>%(created)f</td>
+<td>日志事件发生的时间&ndash;时间戳，就是当时调用datetime.datetime.now()函数返回的值</td>
+</tr>
+<tr>
+<td>relativeCreated</td>
+<td>%(relativeCreated)d</td>
+<td>日志事件发生的时间相对于logging模块加载时间的相对毫秒数（目前还不知道干嘛用的）</td>
+</tr>
+<tr>
+<td>msecs</td>
+<td>%(msecs)d</td>
+<td>日志事件发生事件的毫秒部分</td>
+</tr>
+<tr>
+<td>levelname</td>
+<td>%(levelname)s</td>
+<td>该日志记录的文字形式的日志级别（&lsquo;DEBUG&rsquo;, &lsquo;INFO&rsquo;, &lsquo;WARNING&rsquo;, &lsquo;ERROR&rsquo;, &lsquo;CRITICAL&rsquo;）</td>
+</tr>
+<tr>
+<td>levelno</td>
+<td>%(levelno)s</td>
+<td>该日志记录的数字形式的日志级别（10, 20, 30, 40, 50）</td>
+</tr>
+<tr>
+<td>name</td>
+<td>%(name)s</td>
+<td>所使用的日志器名称，默认是&rsquo;root'，因为默认使用的是 rootLogger</td>
+</tr>
+<tr>
+<td>message</td>
+<td>%(message)s</td>
+<td>日志记录的文本内容，通过 msg % args计算得到的</td>
+</tr>
+<tr>
+<td>pathname</td>
+<td>%(pathname)s</td>
+<td>调用日志记录函数的源码文件的全路径</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>%(filename)s</td>
+<td>pathname的文件名部分，包含文件后缀</td>
+</tr>
+<tr>
+<td>module</td>
+<td>%(module)s</td>
+<td>filename的名称部分，不包含后缀</td>
+</tr>
+<tr>
+<td>lineno</td>
+<td>%(lineno)d</td>
+<td>调用日志记录函数的源代码所在的行号</td>
+</tr>
+<tr>
+<td>funcName</td>
+<td>%(funcName)s</td>
+<td>调用日志记录函数的函数名</td>
+</tr>
+<tr>
+<td>process</td>
+<td>%(process)d</td>
+<td>进程ID</td>
+</tr>
+<tr>
+<td>processName</td>
+<td>%(processName)s</td>
+<td>进程名称，Python 3.1新增</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>%(thread)d</td>
+<td>线程ID</td>
+</tr>
+<tr>
+<td>threadName</td>
+<td>%(thread)s</td>
+<td>线程名称</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-快速使用">1.3 快速使用</h2>
+<p>了解了级别和格式，我们就可以按照如下方式定义日志然后输出了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%(asctime)s</span><span class="s2"> loggerName:</span><span class="si">%(name)s</span><span class="s2"> logLevel:</span><span class="si">%(levelname)s</span><span class="s2"> logNum:</span><span class="si">%(levelno)s</span><span class="s2"> Line:</span><span class="si">%(lineno)s</span><span class="s2"> message:</span><span class="si">%(message)s</span><span class="s2">&#34;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;hello world&#34;</span><span class="p">)</span>
+<span class="c1"># 2019-03-05 21:42:01,952 loggerName:root logLevel:INFO logNum:20 Line:6 message:hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ul>
+<li>basicConfig中的level表示日志的级别，也可以直接使用等价数字即可。这里INFO对应的是20，填写数字20，也可以。（使用字符串时，必须为大写)</li>
+<li>format表示按照上面定义的格式来输出日志信息。</li>
+<li>指定了level=logging.INFO，那么下面输入日志时就要大于等于logging.info(调用方法时为小写)</li>
+</ul>
+<blockquote>
+<p>日志格式，这里使用了空格进行分段，便于收集处理，当然分割符是自己指定的，但最好不要用00分割，会产生意想不到的问题</p>
+</blockquote>
+<h3 id="131-修改日期格式">1.3.1 修改日期格式</h3>
+<p>basicConfig提供了一个参数datefmt用来便捷的修改日志为指定格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(name)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> </span><span class="si">%(levelno)s</span><span class="s2"> </span><span class="si">%(lineno)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&#34;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;hello world&#34;</span><span class="p">)</span>
+<span class="c1"># 2019-03 root ERROR 40 6 hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>格式采用c风格的标准的时间占位符，比如:<code>&quot;%Y/%m/%d %H:%M:%S&quot;</code>。</p>
+<h3 id="132-输出到文件中">1.3.2 输出到文件中</h3>
+<p>basicConfig的filename参数用于指定输出的文件名称以及文件的位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(name)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> </span><span class="si">%(levelno)s</span><span class="s2"> </span><span class="si">%(lineno)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&#34;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;log.txt&#39;</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;hello world&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="133-构建消息">1.3.3 构建消息</h3>
+<p>如果需要自定义format中关键字占位符，动态的传递消息，可以使用extra来传递</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(helloworld)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&#34;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y/%m/</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;hello world&#34;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;helloworld&#39;</span><span class="p">:</span><span class="s1">&#39;daxin&#39;</span><span class="p">})</span>
+<span class="c1"># 2019/03/05 22:04:03 daxin hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在调用时通过extra传递字典来为自定义关键字传值。(很少用)</p>
+<h1 id="2-处理流程">2 处理流程</h1>
+<p>logging模块要输出一个日志要经过以下工序：
+<img src="../%E7%AC%94%E8%AE%B0/photo/loggingflow.png" alt="loggingflow"><br>
+看起来相对比较复杂，那么先从四大组件开始了解</p>
+<h1 id="3-logger类">3 logger类</h1>
+<p>        logger类被称为日志记录器，但从来不直接实例化，总是通过<code>logging.getLogger(name)</code>来实例化。对于具有相同名称的getLogger()的多次调用总是返回对同一个Logger对象的引用。它的主要功能有：</p>
+<ol>
+<li>基于日志严重等级（默认的过滤设施）或filter对象(过滤器)来决定要对哪些日志进行后续处理；</li>
+<li>将日志消息传送给所有绑定的日志handlers。</li>
+</ol>
+<blockquote>
+<p>消息的级别会通过getEffectiveLevel()转换为数字和logger设置的级别想比较，只有大于等于，才会被logger转发至所有绑定的handler</p>
+</blockquote>
+<h2 id="31-getlogger工厂方法">3.1 getLogger工厂方法</h2>
+<p>        logging模块建议使用getlogger方法，来构建一个新的logger实例，并且当传入的name相同时，多次执行返回的是相同的logger，为什么这样做呢？因为logger本身是跨线程的，并且是线程安全的，我们没必要为每一个线程创建一个用于输出日志的logger，而且这样很浪费内存空间。</p>
+<blockquote>
+<p>习惯上称getLogger为工厂方法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>        <span class="c1"># logger的名称必须为str</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="p">)</span>  <span class="c1"># &lt;Logger daxin (WARNING)&gt;  </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就构建了一个logger，级别为warning，那为什么是warning呢，和logger的父系结构有关。</p>
+<h2 id="32-实例常用方法">3.2 实例常用方法</h2>
+<p>logger类包含如下常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setLevel(level)</td>
+<td>设置logger的日志级别，可以设置为数字或者logging对应的级别</td>
+</tr>
+<tr>
+<td>getEffectiveLevel()</td>
+<td>获取对应的数字级别显示</td>
+</tr>
+<tr>
+<td>addHandler(hdlr)</td>
+<td>为logger添加一个Handler，可以添加多个</td>
+</tr>
+<tr>
+<td>removeHandler(hdlr)</td>
+<td>为logger删除一个Handler</td>
+</tr>
+<tr>
+<td>addFilter(filter)</td>
+<td>为logger添加一个Filter，可以添加多个</td>
+</tr>
+<tr>
+<td>removeFilter(filter)</td>
+<td>为logger删除一个Filter</td>
+</tr>
+<tr>
+<td>getChild(suffix)</td>
+<td>为logger创建一个子logger</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>以及对应分类的触发日志的方法:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>debug(msg, *args, **kwargs)</td>
+<td>标识消息为 <code>debug/10</code> 级别</td>
+</tr>
+<tr>
+<td>info(msg, *args, **kwargs)</td>
+<td>标识消息为 <code>info/20</code> 级别</td>
+</tr>
+<tr>
+<td>warning(msg, *args, **kwargs)</td>
+<td>标识消息为 <code>warning/30</code> 级别</td>
+</tr>
+<tr>
+<td>error(msg, *args, **kwargs)</td>
+<td>标识消息为 <code>error/40</code> 级别</td>
+</tr>
+<tr>
+<td>critical(msg, *args, **kwargs)</td>
+<td>标识消息为 <code>critical/50</code> 级别</td>
+</tr>
+</tbody>
+</table>
+<p>logger对象具有的属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handlers</td>
+<td>所有绑定的handler列表</td>
+</tr>
+<tr>
+<td>level</td>
+<td>当前logger的级别</td>
+</tr>
+<tr>
+<td>name</td>
+<td>当前logger的名称</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>当前logger的父logger，根节点为root</td>
+</tr>
+<tr>
+<td>filters</td>
+<td>所有绑定的filter列表</td>
+</tr>
+<tr>
+<td>propagate</td>
+<td>是否进行消息传递(默认为True，表示传递) &ndash; 后面会说</td>
+</tr>
+</tbody>
+</table>
+<p>举个栗子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(name)s</span><span class="s1"> [</span><span class="si">%(message)s</span><span class="s1">]&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;from mylogger level is info&#34;</span><span class="p">)</span>  <span class="c1"># 2019-03-06 11:10:47,000 daxin [from mylogger level is info]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>  <span class="c1"># 20(和继承关系有关)</span>
+
+<span class="c1"># 设置logger的级别</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;from mylogger level is Critical&#34;</span><span class="p">)</span>  <span class="c1"># 没办法输出，因为logger的级别是50，而我们输入的是级别为10的日志。</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>  <span class="c1"># 50</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-层次结构">3.3 层次结构</h2>
+<p>logger是层次结构的，使用.号分割，如&rsquo;a',&lsquo;a.b&rsquo;或&rsquo;a.b.c&rsquo;。</p>
+<ul>
+<li>a.b: a是b的parent，b是a的child</li>
+<li>对于a来说，a.main和a.main.one，都是a的后代。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(name)s</span><span class="s1"> [</span><span class="si">%(message)s</span><span class="s1">]&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># 构建一个子的logger</span>
+<span class="n">newlogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin.new&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">newlogger</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>  <span class="c1"># &lt;Logger daxin (ERROR)&gt;</span>
+
+<span class="c1"># 再构建一个子logger</span>
+<span class="n">endlogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin.new.end&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">endlogger</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>         <span class="c1"># &lt;Logger daxin.new (ERROR)&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">endlogger</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>  <span class="c1"># &lt;Logger daxin (ERROR)&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">endlogger</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>  <span class="c1"># &lt;RootLogger root (INFO)&gt; 为什么？</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>明明没有为mylogger指定parent，那么为什么他的parent会是root logger？ root logger是啥？</p>
+<h2 id="34-为什么是root-logger">3.4 为什么是root logger</h2>
+<p>我们没有定义过，那么肯定是logging模块中定义的，那么来看一下logging的源码。大约在logging的1731行有如下代码:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">root</span> <span class="o">=</span> <span class="n">RootLogger</span><span class="p">(</span><span class="n">WARNING</span><span class="p">)</span>
+<span class="n">Logger</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+<span class="n">Logger</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="n">Logger</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们发现logging帮我们实例化了一个logger，名字叫root，接下来查看RootLogger发现(1585行)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">RootLogger</span><span class="p">(</span><span class="n">Logger</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&#34;root&#34;</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>RootLogger继承自Logger类，它为我们创建了一个logger，且级别为Warning(20)，那为什么我们创建的logger会关联root logger呢？继续来看源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 1837行</span>
+<span class="k">def</span> <span class="nf">getLogger</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+        <span class="c1"># 如果指定了logger名称</span>
+        <span class="k">return</span> <span class="n">Logger</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>   
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 如果没有指定logger名称，默认返回构建好的root logger</span>
+        <span class="k">return</span> <span class="n">root</span>    
+
+<span class="c1"># 1160行，Logger.manager.getLogger</span>
+<span class="k">def</span> <span class="nf">getLogger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;A logger name must be a string&#39;</span><span class="p">)</span>
+    <span class="n">_acquireLock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 非初次创建，这里先省略</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loggerDict</span><span class="p">:</span>    
+            <span class="o">...</span> <span class="o">...</span> 
+        <span class="c1"># 初次创建，主要看下面的</span>
+        <span class="k">else</span><span class="p">:</span>   
+            <span class="n">rv</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loggerClass</span> <span class="ow">or</span> <span class="n">_loggerClass</span><span class="p">)(</span><span class="n">name</span><span class="p">)</span>   <span class="c1"># logger(name)</span>
+            <span class="n">rv</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="bp">self</span>   <span class="c1"># 为logger的实例，构建manager属性</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loggerDict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rv</span>  <span class="c1"># 在manager属性的字典中，新增{name:loggerobj},通过key来获取对应的logger，所以当传入的name相同时，多次执行返回的是相同的logger。</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fixupParents</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>  <span class="c1"># 看看这里做了什么？</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_releaseLock</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">rv</span>
+
+<span class="c1"># 1211行  _fixupParents()</span>
+<span class="k">def</span> <span class="nf">_fixupParents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alogger</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">alogger</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)</span>
+    <span class="n">rv</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="o">...</span> <span class="o">...</span> 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rv</span><span class="p">:</span>
+         <span class="c1"># 这里定义了：如果名字中，没有点(没有parent)，那么他的parent就是root</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>   
+    <span class="n">alogger</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rv</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="35-root-logger是啥">3.5 root logger是啥？</h2>
+<p>        现在想一想为什么我们一开始可以直接使用logging.basicConfig来设置日志的输出格式？根据我们上面的日志处理流程图，我们知道：没有logger，没有handler，没有format，它是怎么输出的呢。那么下面来看一下basicConfig的原码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">basicConfig</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">_acquireLock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>  
+        <span class="c1"># 我们发现这里其实是针对root logger 的定义及操作</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">handlers</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;handlers&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="o">...</span> <span class="o">...</span>
+            <span class="k">if</span> <span class="n">handlers</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;filename&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="n">mode</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;filemode&#34;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">stream</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;stream&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                    <span class="c1"># 这里会为root logger创建一个Handler，这里stream为None，在StreamHandler中，会设置为stderr</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>    
+                 <span class="c1"># 在handlers中添加 这个新的 handler</span>
+                <span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">]</span>  
+            <span class="n">dfs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;datefmt&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">style</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;style&#34;</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_STYLES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Style must be one of: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                                 <span class="n">_STYLES</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+            <span class="c1"># 如果没有给定format，这里定义了默认的格式，在 _STYLES[style][1]中，我们发现默认格式为 {levelname}:{name}:{message}</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;format&#34;</span><span class="p">,</span> <span class="n">_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>  
+            <span class="c1"># 构建Formatter</span>
+            <span class="n">fmt</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">dfs</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>  
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">h</span><span class="o">.</span><span class="n">formatter</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>  <span class="c1"># 把formatter绑定在了handler上</span>
+                
+                <span class="c1"># 把上面创建的handler，绑定到root logger上</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;level&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">root</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">keys</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unrecognised argument(s): </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">keys</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_releaseLock</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        看到这，我们知道logging模块在导入时，就为我们创建了一个root logger，为的是让我们方便的直接进行日志输出，当然root logger也符合日志处理逻辑，只不过它的handler和Formatter是有默认值的，如果没有特殊需求，我们可以直接使用logging.basicConfig，来定制root logger的handler和Formatter等。</p>
+<h3 id="351-basicconfig常用参数">3.5.1 basicConfig常用参数</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">filename</td>
+<td>指定日志输出目标文件的文件名，指定该设置项后日志信心就不会被输出到控制台了</td>
+</tr>
+<tr>
+<td style="text-align:center">filemode</td>
+<td>指定日志文件的打开模式，默认为&rsquo;a'。需要注意的是，该选项要在filename指定时才有效</td>
+</tr>
+<tr>
+<td style="text-align:center">format</td>
+<td>指定日志格式字符串，即指定日志输出时所包含的字段信息以及它们的顺序。logging模块定义的格式字段下面会列出。</td>
+</tr>
+<tr>
+<td style="text-align:center">datefmt</td>
+<td>指定日期/时间格式。需要注意的是，该选项要在format中包含时间字段%(asctime)s时才有效</td>
+</tr>
+<tr>
+<td style="text-align:center">level</td>
+<td>指定日志器的日志级别</td>
+</tr>
+<tr>
+<td style="text-align:center">stream</td>
+<td>指定日志输出目标stream，如sys.stdout、sys.stderr以及网络stream。需要说明的是，stream和filename不能同时提供，否则会引发 ValueError异常</td>
+</tr>
+<tr>
+<td style="text-align:center">style</td>
+<td>Python 3.2中新添加的配置项。指定format格式字符串的风格，可取值为'%'、'{&lsquo;和&rsquo;$'，默认为'%'</td>
+</tr>
+<tr>
+<td style="text-align:center">handlers</td>
+<td>Python 3.3中新添加的配置项。该选项如果被指定，它应该是一个创建了多个Handler的可迭代对象，这些handler将会被添加到root logger。需要说明的是：filename、stream和handlers这三个配置项只能有一个存在，不能同时出现2个或3个，否则会引发ValueError异常。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="36-继承关系">3.6 继承关系</h2>
+<p>logger是层级结构，不同的logger实例存在继承和传递关系。看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>  <span class="c1"># 20</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>明明没有定义logger的级别，为什么会打印20？</p>
+<ul>
+<li><code>如果设置了level，就先使用自己的level</code>。</li>
+<li><code>如果不设置level，继承最近的祖先的level</code>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>   <span class="c1"># 30(root logger 是30)</span>
+
+<span class="c1"># 构建一个子logger</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">newlogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin.new&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">newlogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>  <span class="c1"># 50,未设置时，继承最近的父类。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果所有的父logger则，直接继承root logger，则级别为20.</p>
+<h1 id="4-handler类">4 handler类</h1>
+<p>        handler类一般称为日志分发器，它是一个基类，用于控制日志信息输出的目的地，可以是控制台、文件。不要直接对它进行实例化，可以使用它提供的几个子类，可以实现不同的输出功能：</p>
+<ol>
+<li>StreamHandler类：</li>
+<li>NullHandler类：</li>
+<li>FileHandler类：</li>
+</ol>
+<p>可以对它进行如下功能的定制：</p>
+<ol>
+<li>可以单独设置level</li>
+<li>可以单独设置formattrt格式</li>
+<li>可以单独设置filter过滤器</li>
+</ol>
+<p><strong><code>需要注意的是，我们创建的handler是需要通过绑定在logger上，才可以被触发的。</code></strong></p>
+<h2 id="41-streamhandler">4.1 StreamHandler</h2>
+<p>流式handler，一般用于输出到屏幕上。它的使用方法为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当stream不指定时，默认输出位置为sys.stderr(标准错误输出)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mylogger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">())</span>   <span class="c1"># 30(root logger 是30)</span>
+
+<span class="c1"># 构建一个handler</span>
+<span class="n">myhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+<span class="c1"># 将handler绑定在logger上</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">myhandler</span><span class="p">)</span> 
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;hello world &#39;</span><span class="p">)</span> <span class="c1"># hello world</span>
+<span class="c1"># 由于没有定义格式，默认情况下只输出日志内容</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="42-filehandler">4.2 FileHandler</h2>
+<p>故名思议，用于输出到文件中去。它的使用方法为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>filename：表示日志文件的名称(文件可以不存在)</li>
+<li>mode：日志文件的打开方式(默认为<code>追加</code>模式)</li>
+<li>encoding: 打开文件的编码格式，不访问的话可以设置为UTF-8</li>
+<li>delay：是否在保存时额外执行一次flush</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 构建一个handler</span>
+<span class="n">myhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Dahl\Desktop\access.log&#39;</span><span class="p">)</span>
+
+<span class="c1"># 将handler绑定在logger上</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">myhandler</span><span class="p">)</span>
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;hello world &#39;</span><span class="p">)</span> <span class="c1"># 输出到文件中</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-多个handler">4.3 多个Handler</h2>
+<p>一个logger是可以被添加多个handler的，多个Handler也是按照level进行比较输出的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># 构建一个handler</span>
+<span class="n">myhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C:\Users\Dahl\Desktop\access.log&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">myhandler</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+
+<span class="c1"># 构建两个handler</span>
+<span class="n">newhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">newhandler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">newhandler</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>
+
+<span class="c1"># 将handler绑定在logger上</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">myhandler</span><span class="p">)</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">newhandler</span><span class="p">)</span>
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;hello world &#39;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>上面代码只会输出到文件中去，因为newhandler的级别为30，要高于写入日志的级别20，所以newhandler不会输出这条日志，另外，新建的handler如果不设置Level，那么它的level是0，即只要logger转发过来一条匹配的日志消息，所有为0的handler都会处理。</p>
+<h2 id="44-handler的常用方法">4.4 handler的常用方法</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Handler.setLevel()</td>
+<td>设置handler将会处理的日志消息的最低严重级别</td>
+</tr>
+<tr>
+<td>Handler.setFormatter()</td>
+<td>为handler设置一个格式器对象</td>
+</tr>
+<tr>
+<td>Handler.addFilter()<br>Handler.removeFilter()</td>
+<td>为handler添加 和 删除一个过滤器对象</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-formatter类">5 Formatter类</h1>
+<p>Formater对象用于配置日志信息的最终顺序、结构和内容。与logger以及Handler基类不同的是，我们可以直接实例化Formatter类，来构造自己的输出格式。Formatter类的构造方法定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Formatter</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;%&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>fmt：表示日志格式字符串</li>
+<li>datefmt：表示时间格式</li>
+<li>style：表示风格（%一般为C风格）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 构建一个logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+
+<span class="c1"># 构建一个handler</span>
+<span class="n">myhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+<span class="c1"># 将handler绑定在logger上</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">myhandler</span><span class="p">)</span>
+
+<span class="c1"># 构建一个Formatter</span>
+<span class="n">myformatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">datefmt</span><span class="o">=</span><span class="s2">&#34;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">)</span>
+
+<span class="c1"># 将formatter绑定在handler上</span>
+<span class="n">myhandler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">myformatter</span><span class="p">)</span>
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;hello world &#39;</span><span class="p">)</span>  <span class="c1"># 2019/03/06 22:16:58 hello world </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是：<code>一个handler只能绑定一个Formatter</code>，如果不指定Formatter的格式，那么默认为:<code>%(message)s</code></p>
+<h1 id="6-filter类">6 Filter类</h1>
+<p>        Filter可以被Handler和Logger用来做比level更细粒度的、更复杂的过滤功能。Filter是一个过滤器基类，它只允许某个logger层级下的日志事件通过过滤。比如指定了过滤器fliter(&lsquo;daxin&rsquo;)，那么当这个过滤器绑定在logger或者handler上时，会只允许&rsquo;daxin',&lsquo;daxin.A&rsquo;,&lsquo;daxin.B&rsquo;,&lsquo;daxin.A.B&rsquo;这种name的日志信息通过，而&rsquo;daxindaxin.a&rsquo;就不行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># 构建logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">newlogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin.new&#39;</span><span class="p">)</span>
+
+<span class="c1"># 构建filter</span>
+<span class="n">myfilter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="s1">&#39;daxin.new&#39;</span><span class="p">)</span>
+
+<span class="c1"># 绑定fliter</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">myfilter</span><span class="p">)</span>
+<span class="n">newlogger</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">myfilter</span><span class="p">)</span>
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;mylogger  ~~~ hello world&#39;</span><span class="p">)</span>
+<span class="n">newlogger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;newlogger ~~~ hello world&#39;</span><span class="p">)</span>
+
+<span class="c1"># newlogger ~~~ hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们看到只有newlogger输出了，因为mylogger的name为daxin，不匹配filter的daxin.new的过滤，所以被阻塞了。</p>
+<p>在logging.Filter类的filter方法中，我们看到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">record</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">elif</span> <span class="n">record</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nlen</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;.&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其本质上其实就等于name.startswith(filter.name)</p>
+<h1 id="7-信息传递">7 信息传递</h1>
+<p>当我们使用子定义的logger时，我们会发现很好玩的事情，请看如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">FORMAT</span><span class="p">)</span>
+
+<span class="c1"># 构建logger</span>
+<span class="n">mylogger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+
+<span class="c1"># 构建handler</span>
+<span class="n">myhandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+
+<span class="c1"># 绑定handler</span>
+<span class="n">mylogger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">myhandler</span><span class="p">)</span>
+
+<span class="n">mylogger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;mylogger  ~~~ hello world&#39;</span><span class="p">)</span>
+
+<span class="c1"># mylogger  ~~~ hello world</span>
+<span class="c1"># 2019-03-07 19:42:57,556 mylogger  ~~~ hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么会出现两一个条记录？这是因为logger的<code>propagate属性</code>。</p>
+<ul>
+<li>在logger初始化时，propagate属性的<code>默认值为True</code></li>
+<li>为True时，当logger收到日志消息后通过level和fliter后，发送给所有绑定的handlers，还会继续传递给自己的父logger。</li>
+<li>父logger重复这个过程。</li>
+</ul>
+<h1 id="8-过程分析">8 过程分析</h1>
+<p>        根据上面的的四大类，那么我们再来看一下流程图，下面以一个logger为参照，当一个日志消息需要进行输出，那么它会经过以下步骤：</p>
+<ol>
+<li>如果消息在某一个logger对象上产生，这个logger就是当前logger，首先消息level要和当前logger的Effectivelevel比较，如果低于当前logger的EffectiveLevel，则流程结束；否则生成log记录。</li>
+<li>日志记录会交给当前logger的所有handler处理，记录还要和每一个handler的级别分别比较，低的不处理，否则按照handler输出日志记录</li>
+<li>当前logger的所有handler处理完毕后，查看自己的propagate属性，如果是True表示向父logger传递这个日志记录，否则到此流程结束</li>
+<li>如果日志记录传递到父logger，<code>不需要和父logger的level比较</code>，而是直接交给父的所有handler，父logger成为当前logger，重复2、3步骤，直到当前logger的父logger是None退出，也就是说当前logger最后一般是root logger(是否能到root logger要看中间的logger是否允许propagate)</li>
+</ol>
+<blockquote>
+<p>logger实例初始的propagate属性为True，即允许向父logger传递消息</p>
+</blockquote>
+<p>PS：如果root没有handler，就默认创建一个StreamHandler，如果设置了filename，就创建一个FileHandler。如果设置了format参数，就会用它生成一个Formatter对象，否则会生成缺省的Formattrt，并把这个Formatter加入到刚才创建的handler上，然后把这些handler加入到root.handlers列表上，level是设置给root logger的，如果root.handlers列表不为空，logging.basicConfig的调用什么都不做。</p>
+<h1 id="9-日志切割">9 日志切割</h1>
+<p>在生产上，我们不会向上面那样只是定义出日志的格式，就好了，还要考虑很多其他问题</p>
+<ul>
+<li>日志可以无限大吗</li>
+<li>日志都要存放在一个文件中么</li>
+</ul>
+<p>logging.handlers主要包含两个类，用于对日志进行分割处理</p>
+<ul>
+<li><code>RotatingFileHandler</code>：按照大小来切割日志</li>
+<li><code>TimedRotatingFileHandler</code>：按照时间来切割日志</li>
+</ul>
+<h2 id="91-按照大小切割日志">9.1 按照大小切割日志</h2>
+<p>下面是一个例子,其中：</p>
+<ul>
+<li>maxBytes: 表示单个文件的大小</li>
+<li>backupCount: 表示切割文件的总个数(超过时，依次覆盖)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">RotatingFileHandler</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">handler</span> <span class="o">=</span> <span class="n">RotatingFileHandler</span><span class="p">(</span><span class="s1">&#39;/Users/lixin/test.log&#39;</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span><span class="n">backupCount</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> [ </span><span class="si">%(levelname)s</span><span class="s1"> </span><span class="si">%(funcName)s</span><span class="s1"> ] </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+<span class="c1">#################</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;msg = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：当maxBytes和backupCount中任意一个参数为0时，切割方式不生效</p>
+<h2 id="92-按照时间切割日志">9.2 按照时间切割日志</h2>
+<p>下面时一个例子，其中</p>
+<ul>
+<li>when: 按照什么来切割。</li>
+<li>interval：间隔多久。</li>
+<li>backupCount: 切分几个</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">TimedRotatingFileHandler</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">handler</span> <span class="o">=</span> <span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="s1">&#39;/Users/lixin/text.log&#39;</span><span class="p">,</span><span class="n">when</span><span class="o">=</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="n">interval</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">backupCount</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> [ </span><span class="si">%(levelname)s</span><span class="s1"> </span><span class="si">%(funcName)s</span><span class="s1"> ] </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;msg = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>when可以指定的类型有：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">间隔的单位</th>
+<th style="text-align:center">当atTime参数设定时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&lsquo;S&rsquo;</td>
+<td style="text-align:center">Seconds</td>
+<td style="text-align:center">Ignored</td>
+</tr>
+<tr>
+<td style="text-align:center">&lsquo;M&rsquo;</td>
+<td style="text-align:center">Minutes</td>
+<td style="text-align:center">Ignored</td>
+</tr>
+<tr>
+<td style="text-align:center">&lsquo;H&rsquo;</td>
+<td style="text-align:center">Hours</td>
+<td style="text-align:center">Ignored</td>
+</tr>
+<tr>
+<td style="text-align:center">&lsquo;D&rsquo;</td>
+<td style="text-align:center">Days</td>
+<td style="text-align:center">Ignored</td>
+</tr>
+<tr>
+<td style="text-align:center">&lsquo;W0&rsquo;-&lsquo;W6&rsquo;</td>
+<td style="text-align:center">Weekday (0=Monday)</td>
+<td style="text-align:center">Used to compute initial rollover time</td>
+</tr>
+<tr>
+<td style="text-align:center">&lsquo;midnight&rsquo;</td>
+<td style="text-align:center">Roll over at midnight, if atTime not specified, else at time atTime</td>
+<td style="text-align:center">Used to compute initial rollover time</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/4-docker%E7%BD%91%E7%BB%9C/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">4-docker网络</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/4-websocket-flask-websocket/">
+            <span class="next-text nav-default">4-websocket-flask-websocket</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

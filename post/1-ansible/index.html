@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>An Example Post - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin" />
+  <meta name="description" content="文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/1-ansible/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="An Example Post" />
+<meta property="og:description" content="文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/1-ansible/" />
+<meta property="article:published_time" content="2018-01-01T16:01:23+08:00" />
+<meta property="article:modified_time" content="2018-01-02T16:01:23+08:00" />
+<meta itemprop="name" content="An Example Post">
+<meta itemprop="description" content="文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup">
+<meta itemprop="datePublished" content="2018-01-01T16:01:23+08:00" />
+<meta itemprop="dateModified" content="2018-01-02T16:01:23+08:00" />
+<meta itemprop="wordCount" content="13326">
+
+
+
+<meta itemprop="keywords" content="Linux,tag-2,tag-3," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="An Example Post"/>
+<meta name="twitter:description" content="文章目录 1 简介 1.1 基本组成 1.2 命令介绍 1.3 Inventory文件介绍 2 Ansible配置文件介绍 2.1 常用配置 2.2 ssh相关 2.3 权限提升相关 3 常用模块 3.1 setup"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">An Example Post</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-01-01" class="post-time">
+          2018-01-01
+        </time>
+        <div class="post-category">
+            <a href="https://dachenzi.github.io/categories/linux/"> Linux </a>
+            
+          </div>
+        <span class="more-meta"> 13326 words </span>
+          <span class="more-meta"> 27 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-基本组成">1.1 基本组成</a></li>
+    <li><a href="#12-命令介绍">1.2 命令介绍</a></li>
+    <li><a href="#13-inventory文件介绍">1.3 Inventory文件介绍</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-常用配置">2.1 常用配置</a></li>
+    <li><a href="#22-ssh相关">2.2 ssh相关</a></li>
+    <li><a href="#23-权限提升相关">2.3 权限提升相关</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-setup">3.1 setup</a></li>
+    <li><a href="#32-file">3.2 file</a></li>
+    <li><a href="#33-copy">3.3 copy</a></li>
+    <li><a href="#34-command">3.4 command</a></li>
+    <li><a href="#35-shell">3.5 shell</a></li>
+    <li><a href="#36-service">3.6 service</a></li>
+    <li><a href="#37-cron">3.7 cron</a></li>
+    <li><a href="#38-filesystem">3.8 filesystem</a></li>
+    <li><a href="#39-yum">3.9 yum</a></li>
+    <li><a href="#310-user">3.10 user</a></li>
+    <li><a href="#311-synchronize">3.11 synchronize</a></li>
+    <li><a href="#312-mount">3.12 mount</a></li>
+    <li><a href="#312-template">3.12 template</a></li>
+    <li><a href="#313-get_url">3.13 get_url</a></li>
+    <li><a href="#314-unarchive">3.14 unarchive</a></li>
+    <li><a href="#315-git">3.15 git</a></li>
+    <li><a href="#316-stat">3.16 stat</a></li>
+    <li><a href="#317-sysctl">3.17 sysctl</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-变量">5.1 变量</a>
+      <ul>
+        <li><a href="#511facts">5.1.1.facts</a></li>
+        <li><a href="#512-register注册器">5.1.2 register(注册器)</a></li>
+        <li><a href="#513-通过命令行传递变量">5.1.3 通过命令行传递变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#52-inventory">5.2 Inventory</a>
+      <ul>
+        <li><a href="#521-文件格式">5.2.1 文件格式</a></li>
+        <li><a href="#522-主机变量">5.2.2 主机变量</a></li>
+        <li><a href="#523-组变量">5.2.3 组变量</a></li>
+        <li><a href="#524-组嵌套">5.2.4 组嵌套</a></li>
+        <li><a href="#525-inenvtory-参数">5.2.5 inenvtory 参数</a></li>
+      </ul>
+    </li>
+    <li><a href="#53-条件测试">5.3 条件测试</a></li>
+    <li><a href="#54-迭代">5.4 迭代</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#61-playbook的一般结构">6.1 playbook的一般结构</a></li>
+    <li><a href="#62-target-配置项目">6.2 target 配置项目</a></li>
+    <li><a href="#63-variable-可用的配置项目">6.3 variable 可用的配置项目</a></li>
+    <li><a href="#64-task-配置项目">6.4 task 配置项目</a></li>
+    <li><a href="#65-handler-配置项目">6.5 handler 配置项目</a></li>
+    <li><a href="#66-ansible-playbook命令">6.6 ansible-playbook命令</a></li>
+    <li><a href="#67-其他配置">6.7 其他配置</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#71-role内各目录中的文件说明">7.1 role内各目录中的文件说明</a></li>
+    <li><a href="#72-ansible-galaxy-命令">7.2 ansible-galaxy 命令</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%AE%80%E4%BB%8B">1 简介</a>
+<ul>
+<li><a href="#11-%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90">1.1 基本组成</a></li>
+<li><a href="#12-%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D">1.2 命令介绍</a></li>
+<li><a href="#13-inventory%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D">1.3 Inventory文件介绍</a></li>
+</ul>
+</li>
+<li><a href="#2-ansible%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D">2 Ansible配置文件介绍</a>
+<ul>
+<li><a href="#21-%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE">2.1 常用配置</a></li>
+<li><a href="#22-ssh%E7%9B%B8%E5%85%B3">2.2 ssh相关</a></li>
+<li><a href="#23-%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E7%9B%B8%E5%85%B3">2.3 权限提升相关</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97">3 常用模块</a>
+<ul>
+<li><a href="#31-setup">3.1 setup</a></li>
+<li><a href="#32-file">3.2 file</a></li>
+<li><a href="#33-copy">3.3 copy</a></li>
+<li><a href="#34-command">3.4 command</a></li>
+<li><a href="#35-shell">3.5 shell</a></li>
+<li><a href="#36-service">3.6 service</a></li>
+<li><a href="#37-cron">3.7 cron</a></li>
+<li><a href="#38-filesystem">3.8 filesystem</a></li>
+<li><a href="#39-yum">3.9 yum</a></li>
+<li><a href="#310-user">3.10 user</a></li>
+<li><a href="#311-synchronize">3.11 synchronize</a></li>
+<li><a href="#312-mount">3.12 mount</a></li>
+<li><a href="#312-template">3.12 template</a></li>
+<li><a href="#313-get_url">3.13 get_url</a></li>
+<li><a href="#314-unarchive">3.14 unarchive</a></li>
+<li><a href="#315-git">3.15 git</a></li>
+<li><a href="#316-stat">3.16 stat</a></li>
+<li><a href="#317-sysctl">3.17 sysctl</a></li>
+</ul>
+</li>
+<li><a href="#4-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC">4 模块的返回值</a></li>
+<li><a href="#5-yaml%E7%AE%80%E4%BB%8B">5 YAML简介</a>
+<ul>
+<li><a href="#51-%E5%8F%98%E9%87%8F">5.1 变量</a>
+<ul>
+<li><a href="#511facts">5.1.1.facts</a></li>
+<li><a href="#512-register%E6%B3%A8%E5%86%8C%E5%99%A8">5.1.2 register(注册器)</a></li>
+<li><a href="#513-%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BC%A0%E9%80%92%E5%8F%98%E9%87%8F">5.1.3 通过命令行传递变量</a></li>
+</ul>
+</li>
+<li><a href="#52-inventory">5.2 Inventory</a>
+<ul>
+<li><a href="#521-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F">5.2.1 文件格式</a></li>
+<li><a href="#522-%E4%B8%BB%E6%9C%BA%E5%8F%98%E9%87%8F">5.2.2 主机变量</a></li>
+<li><a href="#523-%E7%BB%84%E5%8F%98%E9%87%8F">5.2.3 组变量</a></li>
+<li><a href="#524-%E7%BB%84%E5%B5%8C%E5%A5%97">5.2.4 组嵌套</a></li>
+<li><a href="#525-inenvtory-%E5%8F%82%E6%95%B0">5.2.5 inenvtory 参数</a></li>
+</ul>
+</li>
+<li><a href="#53-%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95">5.3 条件测试</a></li>
+<li><a href="#54-%E8%BF%AD%E4%BB%A3">5.4 迭代</a></li>
+</ul>
+</li>
+<li><a href="#6-playbook%E7%AE%80%E4%BB%8B">6 playbook简介</a>
+<ul>
+<li><a href="#61-playbook%E7%9A%84%E4%B8%80%E8%88%AC%E7%BB%93%E6%9E%84">6.1 playbook的一般结构</a></li>
+<li><a href="#62-target-%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE">6.2 target 配置项目</a></li>
+<li><a href="#63-variable-%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE">6.3 variable 可用的配置项目</a></li>
+<li><a href="#64-task-%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE">6.4 task 配置项目</a></li>
+<li><a href="#65-handler-%E9%85%8D%E7%BD%AE%E9%A1%B9%E7%9B%AE">6.5 handler 配置项目</a></li>
+<li><a href="#66-ansible-playbook%E5%91%BD%E4%BB%A4">6.6 ansible-playbook命令</a></li>
+<li><a href="#67-%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE">6.7 其他配置</a></li>
+</ul>
+</li>
+<li><a href="#7-roles">7 Roles</a>
+<ul>
+<li><a href="#71-role%E5%86%85%E5%90%84%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">7.1 role内各目录中的文件说明</a></li>
+<li><a href="#72-ansible-galaxy-%E5%91%BD%E4%BB%A4">7.2 ansible-galaxy 命令</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-简介">1 简介</h1>
+<p>        高度模块化，调用特定的模块，完成特定的任务，基于Yaml，来完成批量任务的模板化，来支持playbook。基于Python语言实现，主要使用Paramiko、PyYAML和JinJa2三个关键模块，部署简单(agentless)，主从模式，支持自定义模块，支持playbook，幂等性：允许重复执行N次，没有变化时，只会执行第一次。<br>
+特点：</p>
+<ol>
+<li>Configuration(cfengine,chef,puppet) 配置管理</li>
+<li>Deployment(Capistrano,Fabric) 部署发布</li>
+<li>Ad-Host Task(func) 命令行批量执行</li>
+<li>Multi-Ter Orchestration(Juju,sort of) 多层次任务编排</li>
+</ol>
+<p>PS：集成了上面括号中的工具的主要功能</p>
+<h2 id="11-基本组成">1.1 基本组成</h2>
+<p>主要由模块、插件、主机群、以及剧本的组成，各部分含义如下：</p>
+<ol>
+<li>核心模块(core modules):Ansible 自带的模块。</li>
+<li>自定义模块(custom Modules)：如果核心模块不足以完成某种功能，可以自行添加自定义模块(支持市面上大部分的编程语言)。</li>
+<li>插件(Plugins)：支持使用插件的方式对ansible本身的功能进行扩展。模块是用来实现任务的，增强ansible平台自己的功能就需要使用插件（loggin插件记录日志，email插件发送邮件）
+<ul>
+<li>其中最常用是：连接插件(Connectior Plugins) ：ansibile基于连接插件连接到各个主机上，虽然默认情况下ansible使用ssh连接到各个主机上，但它还支持其他的连接方法(mq)。</li>
+</ul>
+</li>
+<li>主机群(Host Inventory): 主机清单，定义ansible管理的主机，还可以存放一下针对不同主机的变量，也可以写入主机的用户名和密码</li>
+<li>剧本(playbooks)：ansible的任务配置文件，将多个任务定义在剧本中，由ansible自动执行</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install -y ansible
+pip3 install ansible
+</code></pre></td></tr></table>
+</div>
+</div><p>运行原理：把命令翻译成shell命令，拷贝到目标主机(/root/.ansible/tmp/下)，再执行，执行完毕后删除tmp文件。</p>
+<h2 id="12-命令介绍">1.2 命令介绍</h2>
+<p>ansible 命令主要参数信息</p>
+<ul>
+<li>-u : remote user，默认使用root用户登陆</li>
+<li>-i : Inventory，指定主机，默认是/etc/ansible/hosts</li>
+<li>-m ：指定模块的名称（不指定-m，那么默认是command模块）</li>
+<li>-a : 模块的参数(比如使用command模块，那么-a参数就是要执行的命令)</li>
+<li>-k : 用来提示输入远程主机的密码(基于用户密码登录)</li>
+<li>-f : 一次执行几个进程(并发数量)，默认为5个</li>
+<li>&ndash;sudo : 执行命令时使用 sudo 权限(需要用户具有sudo权限)</li>
+<li>&ndash;key-file: 建立SSH链接的私钥文件</li>
+<li>&ndash;list-hosts: 列出匹配到的服务器列表</li>
+</ul>
+<p>基于主机清单：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ansible</span><span class="o">/</span><span class="n">hosts</span> <span class="n">test</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">m</span> <span class="n">command</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;ls /home&#39;</span> <span class="o">-</span><span class="n">k</span> <span class="err">（</span><span class="n">ansible</span> <span class="err">依赖</span> <span class="n">sshpass</span><span class="err">）</span>
+<span class="o">|</span>
+<span class="o">--&gt;</span> <span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;ls /home&#39;</span> <span class="o">-</span><span class="n">k</span> 
+
+<span class="c1"># 上面两条命令默认状态下效果相同</span>
+
+<span class="c1"># 我们知道ansible通过ssh的方式来远程管理多台主机，所以我们需要使用ssh key的方式来进行ssh认证，当然你也可以使用ansible的时候加上-k，来通过交互式输入密码。当有了ssh key以后，那么我们就可以直接使用ansbile来执行任务了,比如：ansible all -m ping </span>
+
+<span class="c1"># 基于主机： </span>
+<span class="n">ansible</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="o">-</span><span class="n">m</span> <span class="n">ping</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="13-inventory文件介绍">1.3 Inventory文件介绍</h2>
+<p>/etc/ansible/hosts:(默认的Inventory)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">test</span><span class="p">]</span>                    <span class="c1"># 用于定义主机组,all表示所有主机，所以尽量避免使用all作为组名</span>
+<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>                 <span class="c1"># 该组的主机列表，可以是主机名(dns解析)或者IP地址，或者用符号来表示连续的主机</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.</span><span class="p">[</span><span class="mi">80</span><span class="p">:</span><span class="mi">88</span><span class="p">]</span>         <span class="c1"># 表示 192.168.1.80 - 192.168.1.88</span>
+
+<span class="p">[</span><span class="n">web</span><span class="p">:</span><span class="n">children</span><span class="p">]</span>            <span class="c1"># 表示子组</span>
+<span class="n">nginx</span>                     <span class="c1"># nginx组</span>
+<span class="n">test</span>                      <span class="c1"># test组</span>
+<span class="err">配置文件中的变量及参数：</span>
+
+<span class="p">[</span><span class="n">nginx</span><span class="p">]</span>
+<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">ansible_ssh_user</span><span class="o">=</span><span class="n">root</span> <span class="n">ansible_ssh_host</span><span class="o">=</span><span class="n">web1</span> <span class="c1"># 更细致的配置</span>
+
+    <span class="o">-</span> <span class="n">ansible_ssh_user</span> <span class="p">:</span> <span class="err">用于指定管理远程主机的帐号</span>
+    <span class="o">-</span> <span class="n">ansible_ssh_host</span> <span class="p">:</span> <span class="err">用于指定被管理的主机</span>
+    <span class="o">-</span> <span class="n">ansible_ssh_port</span> <span class="err">：用于指定</span><span class="n">ssh的端口</span>
+    <span class="o">-</span> <span class="n">ansible_ssh_private_key_file</span> <span class="err">：指定</span><span class="n">key文件</span>
+    <span class="o">-</span> <span class="n">host_key_checking</span><span class="o">=</span><span class="bp">False</span> <span class="err">：当第一次连接主机时，会提示</span><span class="n">yes</span><span class="o">/</span><span class="n">no</span><span class="err">，跳过此次环节</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-ansible配置文件介绍">2 Ansible配置文件介绍</h1>
+<p>ansible 查找 Ansible.cfg 文件遵循以下顺序：</p>
+<ol>
+<li>ANSIBLE_CONFIG环境变量指定的配置文件</li>
+<li>当前目录下的ansible.cfg文件</li>
+<li>当前用户home目录下的.ansible.cfg文件</li>
+<li>Ansible默认的/etc/ansible/ansible.cfg文件</li>
+</ol>
+<h2 id="21-常用配置">2.1 常用配置</h2>
+<ul>
+<li>inventory：指定inventory文件的路径</li>
+<li>remote_user：SSH连接时使用的用户名</li>
+<li>remote_port：SSH连接时使用的端口号</li>
+<li>private_key_file：SSH连接时使用的私钥文件</li>
+<li>roles_path：查找roles的路径，可以指定多个查找路径，多个路径之间用冒号分隔</li>
+<li>log_path：Ansible的日志文件路径</li>
+<li>host_key_checking：类似于ssh命令中的StrictHostKeyChecking选项，当等于False时，不检查远程主机是否存在于Konw_hosts文件中</li>
+<li>forks：并行进程的数量</li>
+<li>gathering：控制收集Facts变量的策略</li>
+</ul>
+<h2 id="22-ssh相关">2.2 ssh相关</h2>
+<ul>
+<li>ssh_args：可以通过这个参数控制Ansible的ssh连接</li>
+<li>pipelining: 多个task之间共享SSH连接，开启pipelining能够有效提升Ansible的执行速度</li>
+<li>control_path：保存ControlPath socket的路径</li>
+</ul>
+<h2 id="23-权限提升相关">2.3 权限提升相关</h2>
+<ul>
+<li>become：是否进行权限提升</li>
+<li>become_method：权限提升的方式，默认为sudo</li>
+<li>become_user：提升为哪个用户的权限，默认为root</li>
+<li>become_ask_pass：默认为False，表示权限提升时不需要密码(设置为true时，手动输入密码，或者配置ansible_become_pass变量)</li>
+</ul>
+<h1 id="3-常用模块">3 常用模块</h1>
+<p>查看模块的帮助：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">doc</span> <span class="o">-</span><span class="n">l</span> <span class="c1"># 查看核心的模块(包含模块的大致说明,比较慢)</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">doc</span> <span class="o">-</span><span class="n">s</span> <span class="s1">&#39;command&#39;</span> <span class="c1"># 执行模块名，可以列出模块的用法</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="31-setup">3.1 setup</h2>
+<p>用于统计系统的相关信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 例子</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">setup</span> 
+<span class="c1"># 参数</span>
+  <span class="o">-</span> <span class="nb">filter</span><span class="err">：</span> <span class="err">过滤要显示的内容</span>
+  <span class="o">-</span> <span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">setup</span> <span class="o">-</span><span class="n">a</span> <span class="s2">&#34;filter=ansible_python_version&#34;</span> <span class="o">-</span><span class="n">k</span> <span class="c1"># 只获取主机ansible_python_version的值</span>
+  <span class="o">-</span> <span class="err">更多的帮助</span> <span class="n">ansible</span><span class="o">-</span><span class="n">doc</span> <span class="o">-</span><span class="n">s</span> <span class="n">setup</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="32-file">3.2 file</h2>
+<p>设置文件属性,常用参数如下：</p>
+<ul>
+<li>force: 在两种情况下会强制创建软连接，默认值为 no</li>
+<li>源文件不存在但之后会建立的情况下</li>
+<li>目标软连接已存在，需要先取消之前的软连，然后创建新的软链</li>
+<li>group：定义文件的属组</li>
+<li>mode：定义文件的权限</li>
+<li>owner：定义文件的属主</li>
+<li>path：必选项，定义文件的路径</li>
+<li>recurse：递归设置文件的属性，只对目录生效（-R）</li>
+<li>src：要被链接的源文件的属性，只应用于state=link的情况</li>
+<li>dest：被链接到的路径，只应用与state=link的情况</li>
+<li>state：</li>
+<li>directory：如果目录不存在创建目录</li>
+<li>file：即使文件不存在，也不会被创建</li>
+<li>link：创建软连接</li>
+<li>hard：创建硬链接</li>
+<li>touch：如果文件不存在，则会创建一个新的文件，如果文件存在，则会更新其最后修改时间</li>
+<li>absent：删除目录，文件或者取消链接文件</li>
+</ul>
+<p>例子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="nb">file</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;src=/etc/fstab dest=/tmp/fstab state=link&#39;</span> <span class="o">-</span><span class="n">k</span>                              <span class="c1"># 等于 ln -s /etc/fstab /tmp/fstab</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="nb">file</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;path=/tmp/fstab state=absent&#39;</span> <span class="o">-</span><span class="n">k</span>                                           <span class="c1"># 删除文件</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="nb">file</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;path=/tmp/lixin.txt state=touch owner=nobody group=nobody mode=666&#39;</span> <span class="o">-</span><span class="n">k</span>     <span class="c1"># 创建文件指定其属主，属组，权限</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="33-copy">3.3 copy</h2>
+<p>复制文件到远程主机，每次备份会产生一个md5sum，如果两次赋值文件的md5sum相同，那么就不会再次执行复制动作。</p>
+<p>参数</p>
+<ul>
+<li>backup：在覆盖之前将原文件备份，备份文件名包含时间信息。有两个选项：yes | no</li>
+<li>src：源文件，如果是目录的话，会递归赋值，包括目录本身，如果目录为/，那么只会复制目录下的文件</li>
+<li>dest：目标文件路径</li>
+<li>others：所有file模块里的选项都可以在这里使用</li>
+<li>content：用于替代&rsquo;src'，可以直接设定文件的值</li>
+<li>directory_mode：递归设定目录的权限，默认为系统默认权限</li>
+<li>force：如果目标主机包含该文件，但内容不同，如果设置为yes，则强制覆盖，如果为no，则只有当前目标主机的目标位置不存在该文件时，才复制，默认为yes。</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">copy</span> <span class="o">-</span><span class="n">a</span> <span class="s2">&#34;content=&#39;hello world&#39; dest=/tmp/tmp.txt&#34;</span> <span class="o">-</span><span class="n">k</span>    <span class="c1"># 在目录主机上创建tmp.txt文件，内容为hello world</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="34-command">3.4 command</h2>
+<p>在远程主机上执行命令。（默认模块）,参数</p>
+<ul>
+<li>creates：文件名，当该文件存在时，则不执行后面的命令</li>
+<li>chdir：执行命令前，先修改当前路径</li>
+<li>removes：文件名，当文件不存在时，则不执行后面的命令</li>
+<li>executable：切换shell来执行命令，该执行路径必须是一个绝对路径</li>
+</ul>
+<h2 id="35-shell">3.5 shell</h2>
+<p>和command模块相同，参数也相同。command，shell，raw，script模块同属于commands类，都是用来执行命令，不同的是：</p>
+<ul>
+<li>command模块执行的命令中不能包含：|，&lt;,&gt;,&amp; 符号。</li>
+<li>shell模块:可以执行远程服务器上的shell脚本文件，也支持 管道符等，脚本需要使用绝对路径。</li>
+<li>raw模块和shell模块相同，可以执行任意命令就像在本机一样，相当于ssh之直接执行Linux命令，不会进入到ansible的模块子系统中。</li>
+<li>script模块，用来执行一个shell脚本，其实将管理端的shell脚本copy到被管理端上然后执行，相当于 scp + shell 的组合。(需要在脚本所在目录下执行)</li>
+</ul>
+<p>PS:官方建议使用command模块，如果需求不满足，可以使用raw模块</p>
+<h2 id="36-service">3.6 service</h2>
+<p>用于管理服务,参数</p>
+<ul>
+<li>arguments: 给命令行提供一些选项</li>
+<li>enable：是否开机启动 yes | no</li>
+<li>name：服务名称</li>
+<li>pattern：定义一个模式，如果通过status命令来查看服务的状态时，没有响应，就会通过ps指令在进程中根据该模式进行查找，如果匹配到，则认为该服务已经在运行，否则会认为未启动( ps aux | grep <code>pattern</code> )</li>
+<li>runlevel：运行级别</li>
+<li>sleep：如果执行了，restarted，则在 stop 和 start 之间沉睡几秒钟</li>
+<li>state：started、stoped、restarted和reloaded，其中started和stoped是幂等的，也就是说如果服务已经停止，那么运行stoped不会执行任何操作</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">service</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=nginx state=started enabled=yes&#39;</span> <span class="o">-</span><span class="n">k</span>                   <span class="c1"># 启动nginx进程，并设置为开机启动</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">service</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=nginx state=stopped&#39;</span> <span class="o">-</span><span class="n">k</span>                               <span class="c1"># 关闭nginx进程</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">service</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=network state=restarted arguments=eth0&#39;</span> <span class="o">-</span><span class="n">k</span>            <span class="c1"># 重启network进程，并传递eth0 作为参数，即：重启eth0网卡</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">service</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=nginx pattern=/usr/local/nginx state=started&#39;</span> <span class="o">-</span><span class="n">k</span>      <span class="c1"># 如果无法使用 service nginx status查寻到nginx的状态，那么会使用 ps 来过滤 pattern指定的关键字，如果存在，则表示程序已经正常启动　</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="37-cron">3.7 cron</h2>
+<p>用于管理定时任务(crontab 来操作),参数</p>
+<ul>
+<li>backup: 对远程主机上的原计划内容修改之前做备份</li>
+<li>cront_file: 如果指定该选项，则用该文件替换远程主机上的cron.d目录下的用户计划任务</li>
+<li>day: 日(1-31,<em>,</em>/2,&hellip;&hellip;)</li>
+<li>hour: 小时(0-23,<em>,</em>/2,&hellip;&hellip;)</li>
+<li>minute: 分钟(0-59,<em>,</em>/2,&hellip;&hellip;)</li>
+<li>mouth: 月(1-12,<em>,</em>/2,&hellip;&hellip;)</li>
+<li>weekday: 周(0-7,*,&hellip;&hellip;)</li>
+<li>job: 要执行的任务，依赖于state=present</li>
+<li>name: 该任务的描述，必选项。</li>
+<li>special_time：指定什么时候执行（被触发），参数：reboot，yearly，annually，monthly，weekly，daily，hourly。</li>
+<li>state：确认该任务计划是创建还是删除 Present(启用) | Absent(停用)</li>
+<li>user：以哪个用户的身份执行</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">cron</span> <span class="o">-</span><span class="n">a</span> <span class="s2">&#34;hour=3 month=2 day=1 job=&#39;echo hello&#39; name=&#39;test&#39; state=present &#34;</span> <span class="o">-</span><span class="n">k</span>  <span class="c1"># 添加一条定时任务，* 3 1 2 * echo hello</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">cron</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=test state=absent&#39;</span> <span class="o">-</span><span class="n">k</span>                                            <span class="c1"># 删除name为test的计划任务</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="38-filesystem">3.8 filesystem</h2>
+<p>用于在块设备上创建文件系统。参数</p>
+<ul>
+<li>dev：目标块设备</li>
+<li>force：在一个已有的文件系统的设备上强制创建</li>
+<li>fstype：文件系统类型</li>
+<li>opts：传递给mkfs命令的选项</li>
+</ul>
+<h2 id="39-yum">3.9 yum</h2>
+<p>使用yum包管理软件包,参数</p>
+<ul>
+<li>config_file：yum的配置文件</li>
+<li>disable_gpg_check: 关闭gpg_check</li>
+<li>disablerepo: 不启用某个源</li>
+<li>enablerepo：启用某个源</li>
+<li>list：列出repo源</li>
+<li>name：软件包的名称，可以为一个url路径，或者本地一个rpm包的路径</li>
+<li>state：状态
+<ul>
+<li>安装：
+<ul>
+<li>present</li>
+<li>installed *</li>
+<li>latest</li>
+</ul>
+</li>
+<li>删除：
+<ul>
+<li>absent</li>
+<li>removed *</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">yum</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=httpd state=installed&#39;</span> <span class="o">-</span><span class="n">k</span>     <span class="c1"># yum 安装 httpd　　</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="310-user">3.10 user</h2>
+<p>用于管理用户（useradd,userdel） 也可以用command模块来执行shell命令创建和管理用户,参数</p>
+<ul>
+<li>home：指定用户的家目录</li>
+<li>createhome: 是否创建用户家目录 yes | no</li>
+<li>groups：用户的属组</li>
+<li>uid：用户的uid</li>
+<li>password：用户的密码</li>
+<li>name：用户的名称</li>
+<li>system：是否是系统用户</li>
+<li>remove：是否删除用户家目录</li>
+<li>state：具体的操作， 删除/添加， present | absent</li>
+<li>shell： 指定用户的shell　</li>
+</ul>
+<h2 id="311-synchronize">3.11 synchronize</h2>
+<p>使用rsync同步文件,参数</p>
+<ul>
+<li>archive：是否进行归档，默认为yes，相当于同时开启recursive,links,perms,times,owner,group -D等选项</li>
+<li>checksum：是否校验和</li>
+<li>copy_links：是否复制链接文件</li>
+<li>delete：删除源中没有而目标存在的文件</li>
+<li>dest_port: 对方用于接收的端口</li>
+<li>dirs: 非递归传输目录</li>
+<li>mode：模式，推和拉模式， push | pull ,默认为push(推)</li>
+<li>src：同步的数据源的位置</li>
+<li>rsync_opts: 指定rsync的选项，多个选项可以用逗号分隔</li>
+<li>dest：目标文件</li>
+<li>compress: 默认为yes，表示在文件同步过程中是否启用压缩</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">synchronize</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;src=/etc/yum.repos.d/epel.repo dest=/tmp/epel.repo&#39;</span> <span class="o">-</span><span class="n">k</span>                  <span class="c1"># rsync 传输文件</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">synchronize</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;src=/tmp/123/ dest=/tmp/456/ delete=yes&#39;</span> <span class="o">-</span><span class="n">k</span>                             <span class="c1"># 类似于 rsync --delete </span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">synchronize</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;src=/tmp/123/ dest=/tmp/test/ rsync_opts=&#34;-avz,--exclude=passwd&#34;&#39;</span> <span class="o">-</span><span class="n">k</span>    <span class="c1"># 同步文件，添加rsync的参数-avz，并且排除passwd文件</span>
+<span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">synchronize</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;src=/tmp/test/abc.txt dest=/tmp/123/ mode=pull&#39;</span> <span class="o">-</span><span class="n">k</span>                      <span class="c1"># 把远程的文件，拉到本地的/tmp/123/目录下　　</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="312-mount">3.12 mount</h2>
+<p>用于磁盘挂载相关操作,参数</p>
+<ul>
+<li>fstype：挂载文件的类型</li>
+<li>name：挂载点</li>
+<li>opts：传递给mount命令的参数</li>
+<li>src：要挂载的文件</li>
+<li>state：
+<ul>
+<li>present：只会在 fstab 中添加，不会操作磁盘</li>
+<li>mounted：自动创建挂载点并挂载</li>
+<li>unmounted：卸载</li>
+<li>absent：只会在 fstab 中删除，不会操作磁盘</li>
+</ul>
+</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">mount</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;fstype=ext4 src=/dev/loop0 name=/aaa state=mounted&#39;</span> <span class="o">-</span><span class="n">k</span>   <span class="c1"># 挂在/dev/loop0 设备</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="312-template">3.12 template</h2>
+<p>模版，用于将模版文件渲染后，输出到远程主机上，模版文件一般以.j2为结尾，标识其是一个jinja2模版文件,参数</p>
+<ul>
+<li>src：模版文件的路径</li>
+<li>dest：拷贝到远程主机上的位置</li>
+<li>mode：权限</li>
+<li>attributes: 特殊权限 类似于 chattr</li>
+<li>force：存在覆盖</li>
+<li>group：属组</li>
+<li>owner：属主</li>
+</ul>
+<h2 id="313-get_url">3.13 get_url</h2>
+<p>从互联网下载数据到本地，作用类似于Linux下的curl命令。参数</p>
+<ul>
+<li>url：必传参数，文件的下载地址</li>
+<li>dest：必传参数，文件保存的绝对路径</li>
+<li>mode：文件的权限mode</li>
+<li>othes：所有file模块里的选项都可以在这里使用</li>
+<li>checksum：文件的校验码</li>
+<li>headers：传递给下载服务器的 HTTP Headers</li>
+<li>backup：如果本地已经存在同名的配置文件，先行备份</li>
+<li>timeout：下载的超时时间</li>
+</ul>
+<h2 id="314-unarchive">3.14 unarchive</h2>
+<p>用于解压文件，其作用类似于Linux下的tar命令，默认情况下unarchive的作用是将控制节点的压缩包拷贝到远程服务器上，然后进行解压,参数</p>
+<ul>
+<li>remote_src: 用来表示需要解压的文件存在远程服务器中还是本地服务器中，默认为no，表示解压前先将控制节点上的文件复制到远程主机上中，然后再进行解压。</li>
+<li>src：指定压缩文件的路径，该选项取决于remote_src的取值，如果remote_src取值为yes,则src指定的是远程服务器中压缩包的地址，如果remote_src取值为no，则src指向的是控制节点中的路径</li>
+<li>dest：该选项指定的是远程服务器上的绝对路径，表示压缩文件解压的路径</li>
+<li>list_files: 默认情况下该选项的取值为no，如果该选项取值为yes，也会解压缩文件，并且在ansible的返回值中列出压缩包里的文件；</li>
+<li>exclude：解压文件时排出exclude选项指定的文件或目录列表</li>
+<li>keep_newer: 默认值为False，如果该选项为True，那么当目标地址中存在同名文件，并且文件比压缩包中的文件更新时，不进行覆盖。</li>
+<li>owner：文件或目录解压以后的所有者</li>
+<li>group: 文件或目录解压以后所属的群组</li>
+<li>mode: 文件或目录解压以后的权限</li>
+</ul>
+<h2 id="315-git">3.15 git</h2>
+<p>在远程服务器上执行git相关操作。依赖于git命令，需要在远程主机上先进性安装,参数</p>
+<ul>
+<li>repo：远程git库的地址，可以是一个git协议，ssh协议或者http协议的git库地址</li>
+<li>dest：必选参数，git库clone到本地服务器以后保存的绝对路径</li>
+<li>version：克隆远程git库的版本，取值可以为HEAD，分支名称，tag的名称，也可以是一个commit的hash值</li>
+<li>foces：默认为no，当该选项为yes时，如果本地git库有修改，将会抛弃本地的修改(强制覆盖)</li>
+<li>accept_hostkey: 当该选项取值为yes时，如果git库服务器不再know_hosts中，则添加到know_hosts中，key_file指定克隆远程git库地址时使用的私钥。　</li>
+</ul>
+<h2 id="316-stat">3.16 stat</h2>
+<p>用于获取远程服务器上的文件信息，类似于Linux下的stat命令,参数</p>
+<ul>
+<li>path：用于指定文件或目录的路径　</li>
+</ul>
+<h2 id="317-sysctl">3.17 sysctl</h2>
+<p>与Linux下的sysctl命令相似，用来控制Linux内核参数,参数：</p>
+<ul>
+<li>name：需要设置的参数</li>
+<li>value：需要设置的值</li>
+<li>sysctl_file: sysctl.conf文件的绝对路径，默认路径为/etc/sysctl.conf</li>
+<li>reload：该选项可以取值为 yes 或 no，默认为yes，用于表示设置完以后是否需要实行sysctl -p的操作</li>
+</ul>
+<p>例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span> <span class="n">test</span> <span class="o">-</span><span class="n">m</span> <span class="n">sysctl</span> <span class="o">-</span><span class="n">a</span> <span class="s1">&#39;name=vm.overcommit_memory value=1&#39;</span>  <span class="c1"># 修改vm.overcommit_memory的值为1</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="4-模块的返回值">4 模块的返回值</h1>
+<p>Ansible通过模块来执行具体的操作，由于模块功能千差万别，所以执行模块操作后，Ansible会根据不同的需要返回不同的结果，Ansible中一些常见的返回值如下：</p>
+<ul>
+<li>changed：几乎所有的Ansible模块都会返回该变量，表示模块是否对远程主机进行了操作</li>
+<li>failed：如果模块未能执行完成，将返回failed和true</li>
+<li>msg：模块执行失败的原因，常见的错误如ssh连接失败，没有执行权限等</li>
+<li>rc：与命令行相关的模块会返会rc，表示执行Linux名的返回码</li>
+<li>stdout：与rc相似，返回的是标准输出的结果</li>
+<li>stderr：与rc详细，返回的是标准差错误输出</li>
+<li>backup_file：所有存在backup选项的模块，用来返回备份文件的路径</li>
+<li>results：应用在Playbook中存在循环的情况，返回多个结果</li>
+</ul>
+<h1 id="5-yaml简介">5 YAML简介</h1>
+<p>ansible中使用YAML基础元素：</p>
+<ul>
+<li>变量</li>
+<li>Inventory</li>
+<li>条件测试</li>
+<li>迭代</li>
+</ul>
+<h2 id="51-变量">5.1 变量</h2>
+<p>变量仅能由字母、数字、下划线组成，且只能以字母开头</p>
+<h3 id="511facts">5.1.1.facts</h3>
+<p>facts是由正在通信的远程目标主机返回的信息，这些信息被保存在ansible变量中，要获取指定的远程主机所所支持的facts，可以使用setup模块。</p>
+<h3 id="512-register注册器">5.1.2 register(注册器)</h3>
+<p>把任务的输入定义为变量，然后用于其它任务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">task</span><span class="err">：</span>
+<span class="o">-</span> <span class="n">shell</span><span class="err">：</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">foo</span>
+  <span class="n">register</span><span class="p">:</span> <span class="n">foo_result</span>
+  <span class="n">ignore_errors</span><span class="p">:</span> <span class="bp">True</span>
+
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">test</span>
+  <span class="n">shell</span><span class="p">:</span> <span class="n">echo</span> <span class="err">‘</span><span class="n">hello</span> <span class="n">world</span><span class="s1">&#39;</span>
+  <span class="n">when</span><span class="p">:</span> <span class="n">foo_result</span><span class="o">.</span><span class="n">success</span>    <span class="c1"># wen条件判断foo_result</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="513-通过命令行传递变量">5.1.3 通过命令行传递变量</h3>
+<p>在运行playbook的时候也可以传递一些变量提供playbook使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="n">test</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">extra</span><span class="o">-</span><span class="nb">vars</span> <span class="s1">&#39;hosts=www user=www&#39;</span>
+<span class="mf">4.</span><span class="err">通过</span><span class="n">roles传递变量</span>
+<span class="err">当给一个主机英语角色的时候，可以传递变量，然后在角色内使用这些变量</span>
+
+<span class="o">-</span> <span class="n">host</span><span class="p">:</span> <span class="n">webservers</span>
+  <span class="n">roles</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">common</span>                                                   <span class="c1"># common 角色</span>
+    <span class="o">-</span> <span class="p">{</span><span class="n">roles</span><span class="p">:</span><span class="n">foo_app_instance</span><span class="p">,</span><span class="nb">dir</span><span class="p">:</span><span class="s1">&#39;/var/lib/html&#39;</span><span class="p">,</span><span class="n">port</span><span class="p">:</span><span class="mi">8080</span><span class="p">}</span>   <span class="c1"># 传递变量参数</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="52-inventory">5.2 Inventory</h2>
+<p>ansible的主要功能在于批量主机操作，为了便捷地使用其中的部分主机，可以在Inventory file中讲其分组命名，默认的Inventory file为/etc/ansible/hosts。</p>
+<h3 id="521-文件格式">5.2.1 文件格式</h3>
+<p>Inventory文件遵循INI文件风格，中括号中的字符表示组名。可以将同一个主机同时归并到多个不同的组中，此外，当如果目标主机使用了非默认的SSH端口，还可以在主机名称之后使用冒号加端口号来标明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span>         <span class="c1"># 直接列出主机</span>
+
+<span class="p">[</span><span class="n">web</span><span class="p">]</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.2</span>
+<span class="n">www</span><span class="o">.</span><span class="n">daxin</span><span class="o">.</span><span class="n">com</span>
+
+<span class="p">[</span><span class="n">web</span><span class="p">]</span>
+<span class="n">db</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">daxin</span><span class="o">.</span><span class="n">com</span>   <span class="c1"># 表示 db1.daxin.com db2.daxin.com db3.daxin.com</span>
+
+<span class="c1"># 字母或者数字是连续的那么，可以使用列表的方式进行标识</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="522-主机变量">5.2.2 主机变量</h3>
+<p>可以在 Inventory 中自定义主机时为其添加主机变量以便于在playbook中使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">nginx</span><span class="p">]</span>
+<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="n">http_port</span><span class="o">=</span><span class="mi">8080</span> <span class="n">user</span><span class="o">=</span><span class="n">daxin</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>PS：定义主机时传递的专有的变量，在playbook中可以直接调用</p>
+<h3 id="523-组变量">5.2.3 组变量</h3>
+<p>组变量是指赋予给指定组内所有主机上的在playbook中可用的变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">nginx</span><span class="p">]</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.2</span>
+
+<span class="p">[</span><span class="n">nginx</span><span class="p">:</span><span class="nb">vars</span><span class="p">]</span>      <span class="c1"># 固定用法                   </span>
+<span class="n">ntp_server</span> <span class="o">=</span> <span class="n">ntp1</span><span class="o">.</span><span class="n">daxin</span><span class="o">.</span><span class="n">com</span>
+<span class="n">nfs_server</span> <span class="o">=</span> <span class="n">nfs1</span><span class="o">.</span><span class="n">daxin</span><span class="o">.</span><span class="n">com</span>　
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="524-组嵌套">5.2.4 组嵌套</h3>
+<p>inventory 中，组还可以包含其他组，并且也可以向组中的主机指定变量，不过，这些变量只能在ansible-playbook中使用，而ansible不支持。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">nginx</span><span class="p">]</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span>
+
+<span class="p">[</span><span class="n">apache</span><span class="p">]</span>
+<span class="mf">192.168</span><span class="o">.</span><span class="mf">1.2</span>
+
+<span class="p">[</span><span class="n">web</span><span class="p">:</span><span class="n">children</span><span class="p">]</span>        <span class="c1"># 引用其他组作为自己组内的主机(子组)</span>
+<span class="n">nginx</span>                 <span class="c1"># nginx组</span>
+<span class="n">apache</span>                <span class="c1"># apache组　</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="525-inenvtory-参数">5.2.5 inenvtory 参数</h3>
+<p>ansible基于ssh连接inventory中指定的远程主机时，还可以通过参数指定其交互方式：</p>
+<ul>
+<li>ansible_ssh_user : 用于指定管理远程主机的帐号</li>
+<li>ansible_ssh_host : 用于指定被管理的主机</li>
+<li>ansible_ssh_port ：用于指定ssh的端口</li>
+<li>ansible_ssh_private_key_file ：指定key文件</li>
+<li>host_key_checking=False ：当第一次连接主机时，会提示yes/no，跳过此次环节</li>
+<li>ansible_ssh_pass : 用于ssh登录的密码</li>
+<li>ansible_sudo_pass : 用于用户sudo时的密码</li>
+<li>ansible_connection : 连接客户端的类型(local,ssh,paramiko), 1.2版本以前模式为paramiko，后面版本为ssh</li>
+</ul>
+<h2 id="53-条件测试">5.3 条件测试</h2>
+<p>如果需要根据变量，facts或此前任务的执行结果来做为某task执行与否的前提时要用到条件测试。</p>
+<p>when语句：在task后添加when子句即可使用条件测试：when语句支持Jinja2表达式语法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;shutdown redhat system&#39;</span>
+  <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">shutdown</span> <span class="o">-</span><span class="n">h</span> <span class="n">now</span>
+  <span class="n">when</span><span class="p">:</span> <span class="n">ansible_os_family</span> <span class="o">==</span> <span class="s1">&#39;redhat&#39;</span>     <span class="c1"># ansible_os_family 是 setup中收集到的信息，这里可以直接进行调用</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="54-迭代">5.4 迭代</h2>
+<p>当有需要重复性执行的任务时，可以使用迭代机制，其使用格式为将需要迭代的内容定义为item变量引用，并通过with_items语句来指明迭代的元素列表即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">add</span> <span class="n">user</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="p">{{</span> <span class="n">item</span> <span class="p">}}</span> <span class="n">state</span><span class="o">=</span><span class="n">present</span> <span class="n">groups</span><span class="o">=</span><span class="n">wheel</span> <span class="c1"># 必须要用 {{item}} 来表示迭代。</span>
+    <span class="n">with_items</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">daxin1</span>
+      <span class="o">-</span> <span class="n">daxin2</span>
+
+<span class="c1"># 等同于：</span>
+
+<span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">add</span> <span class="n">user</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">daxin1</span> <span class="n">state</span><span class="o">=</span><span class="n">present</span> <span class="n">groups</span><span class="o">=</span><span class="n">wheel</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">add</span> <span class="n">user</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">daxin2</span> <span class="n">state</span><span class="o">=</span><span class="n">present</span> <span class="n">groups</span><span class="o">=</span><span class="n">wheel</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>事实上,with_items中还可以使用元素为hashes，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">add</span> <span class="n">users</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="p">{{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span> <span class="n">state</span><span class="o">=</span><span class="n">parsent</span> <span class="n">groups</span><span class="o">=</span><span class="p">{{</span><span class="n">items</span><span class="o">.</span><span class="n">group</span><span class="p">}}</span>
+    <span class="n">with_items</span><span class="p">:</span>
+      <span class="o">-</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;daxin&#39;</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;daxin&#39;</span><span class="p">}</span>
+      <span class="o">-</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="s1">&#39;daxin2&#39;</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;daxin2&#39;</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：with_items中的列表值也可以是字典，但引用时要使用item.key</p>
+<h1 id="6-playbook简介">6 playbook简介</h1>
+<p>        playbook是由一个或多个play组成的列表。play的主要功能在于将事先归并为一组的主机装扮成通过ansible中的task定义好的角色。从根本上讲，所谓task无非是调用ansible的一个module。将多个play组织在一个playbook中，即可让他们联合起来按事先编排的机制完成某一任务。</p>
+<blockquote>
+<p>有一个形象的比如，Ansible中的模块类似于Linux下的命令，而Ansible的Playbook则类似于Linux下的shell脚本。Shell脚本将各个Linux命令组合起来，以此实现复杂的功能。</p>
+</blockquote>
+<p>在Ansible中，一个play必须包含两部分内容，hosts，tasks，play配置文件例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node2</span> <span class="o">~</span><span class="p">]</span><span class="c1"># cat httpd.yaml </span>
+<span class="o">---</span> <span class="c1">#yaml的默认开头格式</span>
+<span class="o">-</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">test</span> 
+  <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+  <span class="nb">vars</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="n">info</span><span class="p">:</span> <span class="s1">&#39;hello world&#39;</span>
+  <span class="n">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">setup</span> <span class="n">a</span> <span class="n">infomation</span> <span class="c1"># task名称</span>
+      <span class="n">copy</span><span class="p">:</span> <span class="n">dest</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">info</span> <span class="n">content</span><span class="o">=</span><span class="s2">&#34;{{info}}&#34;</span>
+      <span class="n">notify</span><span class="p">:</span> <span class="n">say</span> <span class="n">something</span> 
+  <span class="n">handlers</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">say</span> <span class="n">something</span> <span class="c1"># handlers名称</span>
+      <span class="n">command</span><span class="p">:</span> <span class="n">echo</span> <span class="s1">&#39;copy ok&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="61-playbook的一般结构">6.1 playbook的一般结构</h2>
+<p>一个playbook针对配置区域划分，主要分为4类：</p>
+<ul>
+<li>target section：定义将要执行playbook的远程主机组</li>
+<li>variable section：定义playbook运行时需要使用的变量</li>
+<li>task section：定义将要在远程主机上执行的任务列表</li>
+<li>handler section：定义task执行完以后需要调用的任务</li>
+</ul>
+<p>细化一点的话playbook的结构为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Inventory</span><span class="err">：操作的主机</span> <span class="o">*</span>
+<span class="n">Modules</span><span class="err">：使用的模块</span> <span class="o">*</span>
+<span class="n">Ad</span> <span class="n">Hoc</span> <span class="n">Commands</span><span class="err">：在主机上指定的命令</span>
+<span class="n">Playbooks</span> 
+  <span class="n">Tasks</span><span class="err">：任务，即调用模块完成的某操作</span> <span class="o">*</span>
+  <span class="n">Variables</span><span class="err">：变量</span> 
+  <span class="n">Templates</span><span class="err">：模板</span>
+  <span class="n">Handlers</span><span class="err">：处理器，由某事件触发完成的操作</span>
+  <span class="n">Roles</span><span class="err">：角色</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="62-target-配置项目">6.2 target 配置项目</h2>
+<ul>
+<li>hosts：定义远程的主机组</li>
+<li>user：执行该任务的用户</li>
+<li>remote_user: 远端运行该play的用户，可以细分到每一个task</li>
+<li>*sudo：如果设置为yes，执行该任务组的用户在执行任务的时候，获取root权限</li>
+<li>*sudo_user: 如果你设置user为tom，速度设置为yes，sudo_user为jerry，则tom用户则会获取jerry用户的权限</li>
+<li>connection：通过什么方式连接到远程主机，默认为ssh</li>
+<li>become：是否提权</li>
+<li>become_method： 提权得方式(sudo)</li>
+<li>notify：当任务执行完毕后，通知handler section 中的任务模块(出发执行)</li>
+<li>set_fact: 模块可以自定义facts，这些自定义的facts可以通过template或者变量的方式在playbook中使用。如果你想要获取一个进程使用的内存的百分比，则必须通过set_fact来进行计算之后得出其值，并将其值在playbook中引用。set_fact: innodb_buffer_pool_size_mb=&quot;{{ ansible_memtotal_mb / 2 }}&quot;</li>
+<li>gather_facts：除非你明确说明不需要在远程主机上执行setup模块，否则会默认自动执行。如果你的确不需要setup模块所传递过来的变量，你可以启用该选项</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>可以使用setup获取到的字典中的key，来渲染对应的值</li>
+<li>当值的类型为字典嵌套时，可以使用点来进行深入查找 {{ansible_eth0.ipv4.address}}</li>
+<li>当值的类型为列表时，{{ansible[0].xxx}}　　</li>
+</ul>
+<h2 id="63-variable-可用的配置项目">6.3 variable 可用的配置项目</h2>
+<ul>
+<li>vars：定义一个变量。key：value，多个变量，可以使用{key:value,key2:value2}</li>
+<li>vars_files：定义一个变量文件。这里列出变量文件的绝对路径即可。 变量文件中的直接使用key:value定义即可。</li>
+<li>vars_prompt: 通过交互的方式输入的值</li>
+<li>name：变量的值</li>
+<li>prompt：提示信息</li>
+<li>private：是否为私有变量，yes | no， yes时输入的变量不在屏幕上显示，否则会显示在屏幕上</li>
+</ul>
+<h2 id="64-task-配置项目">6.4 task 配置项目</h2>
+<p>        play的主体部分是task list,task list中的各任务被按次序诸葛在hosts中 指定的所有主机上运行,即在所有主机上完成第一个任务后再开始第二个.在运行自上而下某个playbook时,如果中途发生错误,所有已执行任务都可以能回滚,因此,在更正playbook后重新执行一次即可.</p>
+<p>        task的目的是使用指定的参数运行模块,而在模块参数中可以使用变量,模块执行是幂等的,这意味着多次执行是安全的,因为其结果一致.</p>
+<p>        每个task都应该有其name,用于playbook的执行结果输出，建议其内容尽可能清晰的描述任务执行步骤。如果未提供name，则action的结果将用于输出。</p>
+<p>定义任务的三种方式：</p>
+<ol>
+<li>方式1(action)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">task的名称</span>
+  <span class="n">action</span><span class="err">：要做的操作</span>
+<span class="c1"># 例如： action: yum name= httpd state=installed</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>方式2(直接写模块名)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">task的名称</span>
+  <span class="n">copy</span><span class="p">:</span> <span class="n">src</span><span class="o">=</span><span class="n">files</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span> <span class="n">dest</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>方式3(模块名时，模块的参数也可以用下列方式使用)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">task的名称</span>
+  <span class="n">service</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span><span class="n">httpd</span>
+    <span class="n">state</span><span class="p">:</span><span class="n">restarted</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在众多模块中只有command和shel模块仅需要给定一个列表而无需使用key=value格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">disable</span> <span class="n">selinux</span>
+  <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">setenforce</span> <span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果命令或脚本的输出码不以0，可以使用如下方式替代</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">run</span> <span class="n">this</span> <span class="n">command</span> <span class="ow">and</span> <span class="n">ignore</span> <span class="n">the</span> <span class="n">result</span>
+  <span class="n">shell</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">somecommand</span> <span class="o">||</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">true</span>     <span class="c1"># 强行成功</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或者使用ignore_errors来忽略错误信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">run</span> <span class="n">this</span> <span class="n">command</span> <span class="ow">and</span> <span class="n">ignore</span> <span class="n">the</span> <span class="n">result</span>
+    <span class="n">shell</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">somecommand</span>
+    <span class="n">ignote_errors</span><span class="p">:</span><span class="bp">True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>常用参数：</p>
+<ul>
+<li>ignote_errors： 是否忽略错误</li>
+<li>register： 注册变量，即把当前任务的结果注册到register指定的变量后，在后续的task中可以进行调用，或者判断</li>
+<li>when：当when后面的条件为真时才会执行当前task，一般配合register来做,当然，when也可以读取变量</li>
+</ul>
+<blockquote>
+<p>when支持多条件</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 1、当多个条件是列表时，它们之间是并且的关系</span>
+<span class="n">when</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">ansible_distribution</span> <span class="o">==</span> <span class="s2">&#34;Centos&#34;</span>
+<span class="o">-</span> <span class="n">ansible_distribution</span> <span class="o">==</span> <span class="s2">&#34;ubuntu&#34;</span>
+
+<span class="c1"># 2、如果要表达更复杂的关系，可以用and/or, </span>
+<span class="n">when</span><span class="p">:</span> <span class="p">(</span><span class="n">ansible_distribution</span> <span class="o">==</span> <span class="s2">&#34;Centos&#34;</span> <span class="ow">and</span> <span class="n">ansible_distribution_major_version</span> <span class="o">==</span> <span class="s2">&#34;6&#34;</span> <span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">ansible_distribution</span> <span class="o">==</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="65-handler-配置项目">6.5 handler 配置项目</h2>
+<p>用于当关注的医院发生变化时采取一定的操作</p>
+<ul>
+<li>Handlers 也是一些 task 的列表,通过名字来引用,它们和一般的 task 并没有什么区别。</li>
+<li>Handlers 是由通知者进行 notify, 如果没有被 notify,handlers 不会执行。</li>
+<li>不管有多少个通知者进行了 notify,等到 play 中的所有 task 执行完成之后,handlers 也只会被执行一次。</li>
+<li>Handlers 最佳的应用场景是用来重启服务,或者触发系统重启操作.除此以外很少用到了。</li>
+</ul>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">template</span> <span class="n">configuration</span> <span class="nb">file</span>
+    <span class="n">template</span><span class="p">:</span> <span class="n">src</span><span class="o">=</span><span class="n">template</span><span class="o">.</span><span class="n">j2</span> <span class="n">dest</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">configuration</span><span class="o">.</span><span class="n">conf</span>
+    <span class="n">notify</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">restart</span> <span class="n">memcached</span>
+
+<span class="n">handlers</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">restart</span> <span class="n">memcached</span>
+    <span class="n">service</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">memcached</span> <span class="n">state</span><span class="o">=</span><span class="n">restart</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="66-ansible-playbook命令">6.6 ansible-playbook命令</h2>
+<p>playbook需要使用ansible-playbook来运行，它具有ansible的部分参数，以及自己独有的参数：</p>
+<ul>
+<li>&ndash;list-tasks：列出playbook的任务列表。</li>
+<li>&ndash;step：每执行一个任务后停止，等待用户确认。(yes/no/continue,yes会继续下一个task，continue会执行完当前play，下一个play再次等待用户输入)</li>
+<li>&ndash;syntax-check：检查playbook的语法</li>
+<li>-C &ndash;check：检查当前这个playbook是否会修改远程服务器，相当于预测playbook的执行结果</li>
+</ul>
+<h2 id="67-其他配置">6.7 其他配置</h2>
+<p><code>tags</code>: 在playbook中，可以为某个任务或某些任务定义一个“标签”，在执行此playbook时，通过为ansible-playbook 使用 &ndash;tags选项能实现仅指定的tasks，而非所有的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tasks</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">user</span> <span class="n">add</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;daxin&#39;</span> <span class="n">state</span><span class="o">=</span><span class="n">parsent</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">config</span> <span class="nb">file</span>
+    <span class="nb">file</span><span class="p">:</span> <span class="n">src</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">daxin</span><span class="o">.</span><span class="n">txt</span> <span class="n">dest</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">daxin</span><span class="o">.</span><span class="n">txt</span>
+    <span class="n">tags</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">copyfile</span>
+
+<span class="c1"># 运行时</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="n">test</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">tags</span><span class="o">=</span><span class="s1">&#39;copyfile&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>include</code>：在playbook中，一般情况下，一个yaml文件包含一个play，比如我要同时安装db.yaml 和 web.yaml，那么我们可以用include的方式来进行聚合</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">cat</span> <span class="nb">all</span><span class="o">.</span><span class="n">yaml</span>
+<span class="o">---</span>
+<span class="o">-</span> <span class="n">include</span><span class="p">:</span><span class="n">db</span><span class="o">.</span><span class="n">yaml</span>
+<span class="o">-</span> <span class="n">include</span><span class="p">:</span><span class="n">web</span><span class="o">.</span><span class="n">yaml</span>　　
+</code></pre></td></tr></table>
+</div>
+</div><p>这时只需要执行all.yaml即可。 ansible all all.yaml</p>
+<p><code>strategy</code>: free,任务策略
+默认情况下，ansible是按照顺序执行task的，当匹配到的所有主机执行完task1后，再继续指定task2。
+从Ansible 2.0开始，ansible支持free的任务执行策略，允许较快的远程服务器提前完成play的部署，不用等待其他远程服务器一起执行task。</p>
+<p>更多知识： <a href="https://github.com/lorin/ansible-quickref">https://github.com/lorin/ansible-quickref</a></p>
+<h1 id="7-roles">7 Roles</h1>
+<p>ansible自1.2版本引入的新特性，用于层次性、结构化地组织playbook，roles能够根据层次型结构自动装载变量文件、tasks以及handles等。要使用roles，只需要在playbook中使用include指令即可。简单来讲，roles就是通过分别将变量、文件、任务、模块及处理器放置于单独的目录中，并可以便捷的通过include它们的一种机制。角色一般用于基于主机构建服务的场景中，但也可以是用于构建守护进程等场景中。</p>
+<p>创建roles的步骤</p>
+<ul>
+<li>创建以roles命名的目录</li>
+<li>在roles目录中分别创建以各角色名称命名的目录</li>
+<li>在每个角色命名的目录中，分别创建files，handlers，meta，tasks，templates和vars目录；用不到的可以创建为空目录，或者不创建</li>
+<li>在playbook文件中，调用各角色</li>
+</ul>
+<h2 id="71-role内各目录中的文件说明">7.1 role内各目录中的文件说明</h2>
+<ol>
+<li>tasks目录：至少应该包含一个main.yml的文件，其定义了此角色的任务列表；此文件可以使用include包含其他的位于此目录的task文件</li>
+<li>files目录：存放由copy或script等模块调用的文件</li>
+<li>templates目录：templates模块会自动在此目录中寻找Jinja2模版文件</li>
+<li>handlers目录：此目录中应该包含一个main.yml</li>
+<li>yml文件，用于定义此角色用到的各handler，在handler中使用include包含的其他handler文件也应该位于此目录中</li>
+<li>vars目录：应当包含一个main.yml文件，用于定义此角色用到的变量</li>
+<li>meta目录：应当包含一个main.yml文件,用于定于此角色的特殊设定及依赖关系,ansible1.3 以后才支持</li>
+<li>default目录: 为当前角色设定默认变量时使用此目录，应当包含一个main.yml文件</li>
+</ol>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 目录结构：</span>
+<span class="err">├──</span> <span class="n">db</span><span class="o">.</span><span class="n">yaml</span>
+<span class="err">└──</span> <span class="n">roles</span>
+<span class="err">└──</span> <span class="n">db</span>
+<span class="err">├──</span> <span class="n">files</span>
+<span class="err">├──</span> <span class="n">handler</span>
+<span class="err">├──</span> <span class="n">tasks</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
+<span class="err">├──</span> <span class="n">templates</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">my</span><span class="o">.</span><span class="n">cnf</span><span class="o">.</span><span class="n">j2</span>
+<span class="err">└──</span> <span class="nb">vars</span>
+<span class="err">└──</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
+
+<span class="c1"># db.yaml 文件</span>
+<span class="o">-</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">test</span>
+  <span class="n">roles</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">db</span>
+
+<span class="c1"># tasks.main.yml 文件</span>
+<span class="o">---</span>
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">MySQL</span>
+  <span class="n">yum</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">server</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">present</span>
+
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">copy</span> <span class="n">File</span>
+  <span class="n">template</span><span class="p">:</span>
+    <span class="n">src</span><span class="p">:</span> <span class="s2">&#34;my.cnf.j2&#34;</span>
+    <span class="n">dest</span><span class="p">:</span> <span class="s2">&#34;/etc/my.cnf&#34;</span>
+
+<span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Start</span> <span class="n">MySQL</span>
+  <span class="n">service</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">mariadb</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">started</span>
+
+<span class="c1"># vars.main.yml 文件</span>
+<span class="o">---</span>
+<span class="n">mysql_port</span><span class="p">:</span> <span class="mi">3307</span>
+
+<span class="c1"># templates.my.cnf.j2 文件</span>
+<span class="p">[</span><span class="n">mysqld</span><span class="p">]</span>
+<span class="n">datadir</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="n">socket</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">mysql</span><span class="o">.</span><span class="n">sock</span>
+<span class="n">user</span><span class="o">=</span><span class="n">mysql</span>
+<span class="c1"># Disabling symbolic-links is recommended to prevent assorted security risks</span>
+<span class="n">symbolic</span><span class="o">-</span><span class="n">links</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">port</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">mysql_port</span> <span class="p">}}</span>
+<span class="n">bind</span> <span class="o">=</span> <span class="p">{{</span> <span class="n">ansible_all_ipv4_addresses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">}}</span>
+
+<span class="p">[</span><span class="n">mysqld_safe</span><span class="p">]</span>
+<span class="n">log</span><span class="o">-</span><span class="n">error</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">mariadb</span><span class="o">/</span><span class="n">mariadb</span><span class="o">.</span><span class="n">log</span>
+<span class="n">pid</span><span class="o">-</span><span class="nb">file</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">mariadb</span><span class="o">/</span><span class="n">mariadb</span><span class="o">.</span><span class="n">pid</span>
+
+<span class="c1"># 运行</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">playbook</span> <span class="o">-</span><span class="n">i</span> <span class="n">hosts</span> <span class="n">db</span><span class="o">.</span><span class="n">yaml</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="72-ansible-galaxy-命令">7.2 ansible-galaxy 命令</h2>
+<p>我们可以利用ansible-galaxy来快速创建并初始化一个roles</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">init</span> <span class="n">roles</span><span class="o">/</span><span class="n">mysql</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们在galaxy.ansible.com 上找到适合自己的roles时，只需要运行 ansible-galaxy install 作者id.角色包名称即可完成安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 安装别人写好的roles：(galaxy.ansible.com)</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">install</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ansible</span><span class="o">/</span><span class="n">roles</span> <span class="n">bennojoy</span><span class="o">.</span><span class="n">mysql</span>
+<span class="c1"># 安装到指定目录</span>
+<span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="o">-</span><span class="n">p</span> <span class="o">./</span><span class="n">roles</span> <span class="n">install</span> <span class="n">bennojoy</span><span class="o">.</span><span class="n">ntp</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>默认情况下role存放在/etc/ansible/roles目录，也可以在ansible.cfg 中 使用 roles_path ，来制定roles的目录</p>
+<p>列出已经安装的roles：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="nb">list</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>查看已安装的roles信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">info</span> <span class="n">bennojoy</span><span class="o">.</span><span class="n">mysql</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>卸载roles:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ansible</span><span class="o">-</span><span class="n">galaxy</span> <span class="n">remove</span> <span class="n">bennojoy</span><span class="o">.</span><span class="n">mysql</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      2018-01-02
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://dachenzi.github.io/tags/linux/">Linux</a>
+          <a href="https://dachenzi.github.io/tags/tag-2/">tag-2</a>
+          <a href="https://dachenzi.github.io/tags/tag-3/">tag-3</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/1-django-%E4%BB%8B%E7%BB%8D-mtv-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-admin/">
+            <span class="next-text nav-default">1-django-介绍-MTV-命令-基础配置-admin</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

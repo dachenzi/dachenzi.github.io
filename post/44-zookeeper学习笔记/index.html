@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>44-zookeeper学习笔记 - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="44-zookeeper学习笔记" />
+<meta property="og:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/44-zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+
+<meta itemprop="name" content="44-zookeeper学习笔记">
+<meta itemprop="description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理">
+
+<meta itemprop="wordCount" content="5347">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="44-zookeeper学习笔记"/>
+<meta name="twitter:description" content="1 zookeeper zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">44-zookeeper学习笔记</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 5347 words </span>
+          <span class="more-meta"> 11 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#41-选主流程">4.1 选主流程</a></li>
+    <li><a href="#42-同步流程">4.2 同步流程</a></li>
+    <li><a href="#43-角色与工作流程">4.3 角色与工作流程</a>
+      <ul>
+        <li><a href="#431-leader的工作流程">4.3.1 leader的工作流程</a></li>
+        <li><a href="#432-follower工作流程">4.3.2 follower工作流程</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#61-myid">6.1 myid</a></li>
+    <li><a href="#62-启动模式">6.2 启动模式</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#71-结构">7.1 结构</a></li>
+    <li><a href="#72-命令行操作">7.2 命令行操作</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#81-watcher">8.1 watcher</a></li>
+    <li><a href="#82-高级api">8.2 高级API</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h1 id="1-zookeeper">1 zookeeper</h1>
+<p>        zookeeper分布式服务框架是apache hadoop的一个子项目，主要是用来解决分布式应用中经常遇到的一些数据管理问题，如集群管理、统一命名服务、分布式配置管理、分布式消息队列、分布式锁、分布式协调通知等。</p>
+<h1 id="2-应用场景">2 应用场景</h1>
+<p>        越来越多的分布式计算开始强依赖zookeeper 比如 storm（流计算），Hbase。zookeeper对分布式开发带来了许多便利，利用zookeeper的独有得特性巧妙的解决了很多难题，很多分布式技术用到了zookeeper或多或少的特性，尤其是新生代分布式技术都会依赖zookeeper特性，如Hbase，storm。</p>
+<h1 id="3-zookeeper的体系架构">3 zookeeper的体系架构</h1>
+<p>        server端集群架构（leader及follower）每个集群仅选出一个leader，其他zk节点均为follower，具有fast fail特性（leader失效，快速在剩下的follower中竞选leader），非常健壮，无单点，不超过半数Server挂掉不影响提供服务（所以建议zookeeper的节点个数为奇数个，比如zk节点为4个，那么挂两个节点，整个集群就会失效，而5个的话，挂3个才会失效），采用master/Slave模式
+<img src="photo/zookeeper.png" alt="zookeeper"></p>
+<h1 id="4-zookeeper的工作原理">4 zookeeper的工作原理</h1>
+<p>        zookeeper和核心是原子广播，这个机制保证了各个server之间的同步。实现这个机制的协议叫做zab协议。zab协议有两种模式，分别使用的是<code>恢复模式（选主）</code>和<code>广播模式（同步）</code>。当服务启动或者在领导者崩溃后，zab就进入了恢复模式，当领导者被选举出来，且大多数Server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和Server具有相同的系统状态。<br>
+        为保证事务的顺序一致性，zookeeper采用了递增的事务id号(zxid)来标识事务。所有的协议(请求)都在被提出的时候加上了zxid。zxid是一个64位的数字，它的高32位是epoch用来表示leader关系是否改变，每次一个leader被选举出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。简单来说：高32位就是标识当前系统的leader的，低32位就是当前环境下zxid的计数
+每个Server在工作过程中有三种状态：</p>
+<ol>
+<li>LOOKING：当前Server不知道leader是谁，正在搜寻</li>
+<li>LEADING：当前Server即为选举出来的leader</li>
+<li>FOLLOWING：leader已经选举出来，当前Server与之同步</li>
+</ol>
+<h2 id="41-选主流程">4.1 选主流程</h2>
+<p>        当leader崩溃或者服务刚刚启动时，这时zk进入恢复模式，恢复模式需要重新选举出一个新的leader，让所有的Server都恢复到一个正确的状态。zk的选举算法有两种：一种是基于basic paxos实现的，另外一种是基于fast paxos算法实现的。系统默认的选举算法为fast paxos。流程如下；
+<img src="photo/flow.png" alt="flow"></p>
+<ol>
+<li>选举线程由当前Server发起选举的线程担任，其主要功能是对投票结果进行统计，并选出推荐的Server；</li>
+<li>选举线程首先向所有Server节点发起一次询问（包括自己）；</li>
+<li>选举线程收到回复后，验证是否是自己发起的讯问（验证zxid是否一致），然后获取对方的id（myid），并存储到当前询问对象列表中，最后堆取对方提出的leader相关信息（id，zxid）并将这些信息存储到当次选举的投票记录表中；</li>
+<li>收到所有Server回复后，就计算出zxid最大的那个Server，并将这个Server相关信息设置成下一次要投票的Server；</li>
+<li>线程将当前zxid最大的Server设置为当前Server要推荐的Leader，如果此时获胜的Server获得n/2+1的Server票数，就设置当前推荐的leader为获胜的Server，将根据获胜的Server相关信息设置自己的状态，否则，继续这个过程，直到leader被选举出来。</li>
+<li>要使Leader获得多数Server的支持，则Server的总数必须是奇数（2n+1），且存活的Server数目不得少于n+1</li>
+</ol>
+<p>每个Server启动都会重复以上流程。在恢复模式下，如果是刚存崩溃状态恢复的或者刚启动的Server还会从磁盘快照中恢复数据和会话消息，zk会记录事务日志并定期进行快照，方便在恢复时期进行状态恢复。选主流程图如下：</p>
+<blockquote>
+<p>原理简单来说，就是要选举leader，会生成一个zxid，然后分发给所有的server（所以这里一台server可以接受多台server给他发送要选举leader的请求），然后各个server根据发送给自己的zxid，选择一个值最大的，然后将这个选择返回给发送这个zxid的server，只要这个server收到的答复大于等于2/n+1个（也就是超过半数的同意票），则表明自己当选为leader，然后会向所有server广播自己已经成为leader。</p>
+</blockquote>
+<h2 id="42-同步流程">4.2 同步流程</h2>
+<p>选举完leader以后，zk就进入了状态同步过程。</p>
+<ol>
+<li>leader等待server链接</li>
+<li>follower链接leader，将最大的zxid发送给leader</li>
+<li>leader根据follower的zxid确定同步点</li>
+<li>完成同步后通知follower已经成为<code>up to date</code>状态</li>
+<li>follower收到uptodate消息后，就可以接受client的请求进行服务了。</li>
+</ol>
+<p><img src="photo/flow1.png" alt="flow1"></p>
+<h2 id="43-角色与工作流程">4.3 角色与工作流程</h2>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leader</td>
+<td>负责投票的发起和决议，更新系统状态。Leader数据是最新的、最权威的。</td>
+</tr>
+<tr>
+<td>Follower</td>
+<td>接受客户端读请求并返回结果，写请求转给Leader。参与选主投票</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td>接受客户端读请求并返回结果，写请求发给Leader。不参与投票。扩展节点，减轻读压力</td>
+</tr>
+<tr>
+<td>Client</td>
+<td>读写请求的发起方</td>
+</tr>
+</tbody>
+</table>
+<h3 id="431-leader的工作流程">4.3.1 leader的工作流程</h3>
+<p>leader主要有三个功能</p>
+<ol>
+<li>恢复数据</li>
+<li>维持与Learner的心跳，</li>
+<li>learner的消息类型主要有ping消息、request消息、ack消息、revalidate消息.</li>
+</ol>
+<p><img src="photo/flow3.png" alt="flow3"></p>
+<p>根据不同的消息类型进行不同的处理</p>
+<ul>
+<li><code>ping消息</code>：指learner的心跳消息。</li>
+<li><code>request消息</code>：是follower发送的提议消息。（包括写请求与同步请求）</li>
+<li><code>ack消息</code>：是follower对提议的回复，超过半数的follower通过，则commit该提议。</li>
+<li><code>revalidate消息</code>：是用来延长session有效时间的。</li>
+</ul>
+<h3 id="432-follower工作流程">4.3.2 follower工作流程</h3>
+<p>follower主要有四个功能</p>
+<ol>
+<li>向leader发送请求(ping消息、request消息、ack消息、revalidate消息）</li>
+<li>接受leader的消息并处理</li>
+<li>接受client的请求，如果为写请求，发送给leader进行投票</li>
+<li>返回client结果</li>
+</ol>
+<p>follower的消息循环处理如下集成来自leader的消息</p>
+<ul>
+<li>ping消息：心跳消息</li>
+<li>proposal消息：leader发起的提案，要求follower投票；</li>
+<li>commit消息：服务器端最新一次提案的消息：</li>
+<li>uptodate消息：表明同步完成；</li>
+<li>revalidate消息：根据leader的revalidate结果，关闭带revalidate的session还是允许其接收消息；</li>
+<li>sync消息：返回sync结果到客户端，这个消息最初由客户端发起，用来强制道德最新的更新；</li>
+</ul>
+<p>follower的工作流程简图如下所示，在实际实现中，follower是通过5个线程来实现的</p>
+<p><img src="photo/flow4.png" alt="flow4"></p>
+<p>对于observer的流程不再叙述，observer流程和Follower的唯一不同的地方就是observer不会参加leader发起的投票。
+资料来源：http://cailin.iteye.com/blog/2014486/
+<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/">http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/</a></p>
+<h1 id="5-安装">5 安装</h1>
+<p>(建议在Linux/Mac下运行)</p>
+<p>软件需求：需要安装jdk，1.8+ 以上。</p>
+<p>下载zookeeper软件包：http://zookeeper.apache.org/releases.htm</p>
+<p>安装方式：解压就可以使用，建议配置一下JAVA_HOME变量</p>
+<p>yum安装的jdk一般存放在/usr/java下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># vim /etc/profile.d/jdk.sh </span>
+<span class="n">export</span> <span class="n">JAVA_HOME</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="n">default</span> 
+<span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">JAVA_HOME</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="err">$</span><span class="n">PATH</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6-配置文件">6 配置文件</h1>
+<p>conf目录下为zookeeper的配置文件，默认zookeeper提供了一个simple文件，我们可以根据它来定制我们自己的配置文件.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cp zoo_simple.cfg zoo.cfg
+</code></pre></td></tr></table>
+</div>
+</div><p>一个基本的zoo.cfg文件为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tickTime</span><span class="o">=</span><span class="mi">2000</span>
+<span class="n">initLimit</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">syncLimit</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">dataDir</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">zookeeper</span>
+<span class="n">dataLogDir</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">/</span><span class="n">log</span>
+<span class="n">clientPort</span><span class="o">=</span><span class="mi">2181</span>
+
+<span class="c1"># 集群配置部分</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">1</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2887</span><span class="p">:</span><span class="mi">3887</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">2</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2888</span><span class="p">:</span><span class="mi">3888</span>
+<span class="n">server</span><span class="o">.</span><span class="mi">3</span><span class="o">=</span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">2889</span><span class="p">:</span><span class="mi">3889</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>配置项目</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clientPort</td>
+<td>客户端通信端口</td>
+</tr>
+<tr>
+<td>dataDir</td>
+<td>zk的数据目录，持久化内存数据的目录，快照</td>
+</tr>
+<tr>
+<td>dataLogDir</td>
+<td>顺序日志存储目录</td>
+</tr>
+<tr>
+<td>tickTime</td>
+<td>滴答声，以后凡是用到时间都是以这个时间间隔tick为单位，本例中，设定时 间1个tick是2000毫秒</td>
+</tr>
+<tr>
+<td>initLimit=10</td>
+<td>Follower到Leader初始化连接的忍受的最长时间间隔，2000ms*10=20s</td>
+</tr>
+<tr>
+<td>syncLimit=5</td>
+<td>Follower和Leader之间通信，请求和应答的时间上限为5个tick间隔</td>
+</tr>
+<tr>
+<td>server.1=nodex:2887:3887</td>
+<td>server.x，x是每一个server的myid nodex必须是每一个主机都能解析的主机名，可以用ip <br>2887，Follower和Leader之间通信端口 <br>3887，选举用端口</td>
+</tr>
+</tbody>
+</table>
+<h2 id="61-myid">6.1 myid</h2>
+<p>集群模式下，需要配置myid文件，它存放在对应节点的data目录下，名字为myid，如果集群无法启动，请确认该文件是否存在</p>
+<h2 id="62-启动模式">6.2 启动模式</h2>
+<p>主要分为两种模式：</p>
+<ul>
+<li>单机模式：单节点单进程跑</li>
+<li>集群模式
+<ul>
+<li>伪集群：单节点跑多个进程</li>
+<li>真集群：多节点跑</li>
+</ul>
+</li>
+</ul>
+<p>建议使用多节点，可靠性更高</p>
+<h1 id="7-基本操作">7 基本操作</h1>
+<p>配置zookeeper目录下的bin目录，到PATH中，可以方便的直接使用bin下面的命令，否则只能使用绝对路径了。
+使用zkCli.sh连接zookeeper，常用参数</p>
+<ul>
+<li><code>timeout</code>：当前会话的超时时间，zookeper依靠与客户端的心跳来判断会话是否有效，单位是毫秒</li>
+<li><code>r</code>： 只读模式，zookeeper的只读模式指一个服务器与集群中过半机器失去连接以后，这个服务器就不在不处理客户端的请求，但我们仍然希望该服务器可以提供读服务。</li>
+<li><code>server</code>：zookeeper服务器ip地址和端口号</li>
+</ul>
+<h2 id="71-结构">7.1 结构</h2>
+<p>Zk是一种树型层次目录结构数据模型。每个节点称作ZNode。每一个节点ZNode可以包含数据和子节点(Ephemeral类型节点不能有子节点)。
+ZNode有2种类型:</p>
+<ul>
+<li>Ephemeral临时的:临时节点是会话级的，会话结束时节点会被自动删除，不能有子节点。</li>
+<li>Persistent持久的:持久节点可以长期保存数据。
+<ul>
+<li>Sequential节点：这种节点是顺序节点</li>
+</ul>
+</li>
+</ul>
+<p>组合使用生成4种形式节点：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PERSISTENT</td>
+<td>create 持久节点</td>
+</tr>
+<tr>
+<td>EPHEMERAL</td>
+<td>create -e /test/epath e，客户端断开，节点就消失了</td>
+</tr>
+<tr>
+<td>PERSISTENT_SEQUENTIAL</td>
+<td>create -s /test/spath s，连续执行几次看看效果</td>
+</tr>
+<tr>
+<td>EPHEMERAL_SEQUENTIAL</td>
+<td>create -e -s /test/spath s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="72-命令行操作">7.2 命令行操作</h2>
+<p>下面是常用操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ls</span> <span class="err">查看节点</span>
+    <span class="n">ls</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
+<span class="n">ls2</span> <span class="err">查看节点和信息</span> 
+    <span class="n">ls2</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
+<span class="n">get</span> <span class="err">获取节点的信息</span> 
+    <span class="n">get</span> <span class="n">path</span> <span class="p">[</span><span class="n">watch</span><span class="p">]</span>
+<span class="n">create</span> <span class="err">创建</span><span class="n">path</span><span class="err">，设置数据</span>
+    <span class="n">create</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="n">path</span> <span class="n">data</span> <span class="n">acl</span> 
+<span class="n">delete</span> <span class="err">删除</span><span class="n">path</span>
+    <span class="n">delete</span> <span class="n">path</span> <span class="p">[</span><span class="n">version</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-s 表示数据类型为序列</li>
+<li>-e 表示数据为临时数据(绑定owner节点，当owner断开时，对应配置消失)</li>
+</ul>
+<blockquote>
+<p>create的时候必须指定节点属性，当节点没有属性时，可以使用create /data []</p>
+</blockquote>
+<p>下面是基础命令操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 16<span class="o">]</span> create /name data
+Created /name
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 17<span class="o">]</span> ls /name
+<span class="o">[]</span>
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 18<span class="o">]</span> get /name
+data
+<span class="nv">cZxid</span> <span class="o">=</span> 0x30000003c
+<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:41:47 CST <span class="m">2019</span>
+<span class="nv">mZxid</span> <span class="o">=</span> 0x30000003c
+<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:41:47 CST <span class="m">2019</span>
+<span class="nv">pZxid</span> <span class="o">=</span> 0x30000003c
+<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x0
+<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">4</span>
+<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 20<span class="o">]</span> create -s /name/habby lanqiu
+Created /name/habby0000000000
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 21<span class="o">]</span> create -s /name/habby zuqiu
+Created /name/habby0000000001
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 24<span class="o">]</span> ls /name
+<span class="o">[</span>habby0000000001, habby0000000000<span class="o">]</span>  <span class="c1"># 序列类型</span>
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 25<span class="o">]</span> get /name/habby0000000001
+zuqiu
+<span class="nv">cZxid</span> <span class="o">=</span> 0x30000003e
+<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:43:04 CST <span class="m">2019</span>
+<span class="nv">mZxid</span> <span class="o">=</span> 0x30000003e
+<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:43:04 CST <span class="m">2019</span>
+<span class="nv">pZxid</span> <span class="o">=</span> 0x30000003e
+<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x0
+<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">5</span>
+<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 26<span class="o">]</span>
+
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 44<span class="o">]</span> create -e -s /data/agent 10.0.0.10
+Created /data/agent0000000000
+<span class="o">[</span>zk: 127.0.0.1:2182<span class="o">(</span>CONNECTED<span class="o">)</span> 45<span class="o">]</span> get /data/agent0000000000
+10.0.0.10
+<span class="nv">cZxid</span> <span class="o">=</span> 0x300000048
+<span class="nv">ctime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:55:05 CST <span class="m">2019</span>
+<span class="nv">mZxid</span> <span class="o">=</span> 0x300000048
+<span class="nv">mtime</span> <span class="o">=</span> Sun Apr <span class="m">14</span> 18:55:05 CST <span class="m">2019</span>
+<span class="nv">pZxid</span> <span class="o">=</span> 0x300000048
+<span class="nv">cversion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">dataVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">aclVersion</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">ephemeralOwner</span> <span class="o">=</span> 0x2000b1cd6260006   <span class="c1"># 当前session id，退出时，当前配置失效</span>
+<span class="nv">dataLength</span> <span class="o">=</span> <span class="m">9</span>
+<span class="nv">numChildren</span> <span class="o">=</span> <span class="m">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>PS：利用zookeeper的这种特性，我们的分布式应用心跳可以通过zookeeper来做，agent可以使用-e的方式来zookeeper中注册，当agent失效时，那么zookeeper中的相关配置就会被剔除，此时agent失效。</p>
+<h1 id="8-python操作zookeeper">8 Python操作zookeeper</h1>
+<p>利用kazoo库，来操作zookeeper，使用pip安装即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
+
+<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1">## 新增</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="s1">&#39;daxin&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># create /name daxin</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">ensure_path</span><span class="p">(</span><span class="s1">&#39;/name1&#39;</span><span class="p">)</span>  <span class="c1"># 确保/name1存在，不存在创建(递归创建)</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/cmdb/agent/10.0.0.10&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">sequence</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># create -e -s /cmdb/agent/10.0.0.10 nginx</span>
+
+<span class="c1">## 获取</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>  <span class="c1"># get /name</span>
+<span class="n">datas</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span> <span class="c1"># ls /name</span>
+
+<span class="c1">## 修改</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;helloworld&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># 修改数据</span>
+
+<span class="c1">## 删除</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>  <span class="c1"># delete /name , 不存在，异常</span>
+
+<span class="c1">## 其他判断</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>   <span class="c1"># 判断/name 是否存在，不存在返回None，存在返回对应的ZnodeStat对象</span>
+
+<span class="n">zk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="81-watcher">8.1 watcher</h2>
+<p>可以在get、get_children、exists方法上。当这些get、exists方法调用时，将watcher挂在节点上，如果节点改变或被删除，触发watcher。注意，<code>该节点事件触发一次</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
+
+<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span><span class="n">event</span><span class="p">)</span>  <span class="c1"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
+
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="n">watch</span><span class="o">=</span><span class="n">watcher</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;daxin&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;dachenzi&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="c1">########</span>
+<span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
+<span class="kn">from</span> <span class="nn">kazoo.protocol.states</span> <span class="kn">import</span> <span class="n">ZnodeStat</span>
+<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>  <span class="c1"># (WatchedEvent(type=&#39;CHANGED&#39;, state=&#39;CONNECTED&#39;, path=&#39;/name&#39;),)</span>
+
+<span class="n">zk</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">,</span><span class="n">watch</span><span class="o">=</span><span class="n">watcher</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">zk</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/names&#39;</span><span class="p">)</span>  <span class="c1"># 触发一次</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>仅仅在第一次执行set的时，触发了watcher函数</p>
+<h2 id="82-高级api">8.2 高级API</h2>
+<p>一般情况下watcher只在该节点上触发一次，kazoo提供了装饰器实现多次触发</p>
+<ul>
+<li>DataWatch()</li>
+<li>ChildrenWatch()</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kazoo.client</span> <span class="kn">import</span> <span class="n">KazooClient</span>
+<span class="kn">from</span> <span class="nn">kazoo.protocol.states</span> <span class="kn">import</span> <span class="n">ZnodeStat</span>
+
+<span class="n">zk</span> <span class="o">=</span> <span class="n">KazooClient</span><span class="p">(</span><span class="n">hosts</span><span class="o">=</span><span class="s1">&#39;10.0.0.10:2181&#39;</span><span class="p">)</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="nd">@zk.DataWatch</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">watcher</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>
+
+
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>  <span class="c1"># 每次触发都会执行</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+<span class="n">zk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span><span class="s1">&#39;123&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/43-celery%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">43-celery异步任务队列</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/5-django-csrf-sessioncookie/">
+            <span class="next-text nav-default">5-django-csrf-session&amp;cookie</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

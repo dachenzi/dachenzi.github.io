@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://dachenzi.github.io/sitemap.xml

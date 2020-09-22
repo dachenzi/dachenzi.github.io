@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>29-异常处理-模块化 - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="29-异常处理-模块化" />
+<meta property="og:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/29-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86-%E6%A8%A1%E5%9D%97%E5%8C%96/" />
+
+<meta itemprop="name" content="29-异常处理-模块化">
+<meta itemprop="description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常">
+
+<meta itemprop="wordCount" content="8185">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="29-异常处理-模块化"/>
+<meta name="twitter:description" content="文章目录 1 异常 1.1 产生异常 1.1.1 解释器触发异常 1.1.2 手动触发异常 1.2 异常类型 1.2.1 自定义异常 1.3 异常处理(捕获) 1.3.1 多种捕获 1.3.2 finally子句引发的问题 1.3.3 异常"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">29-异常处理-模块化</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 8185 words </span>
+          <span class="more-meta"> 17 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-产生异常">1.1 产生异常</a>
+      <ul>
+        <li><a href="#111-解释器触发异常">1.1.1 解释器触发异常</a></li>
+        <li><a href="#112-手动触发异常">1.1.2 手动触发异常</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-异常类型">1.2 异常类型</a>
+      <ul>
+        <li><a href="#121-自定义异常">1.2.1 自定义异常</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-异常处理捕获">1.3 异常处理(捕获)</a>
+      <ul>
+        <li><a href="#131-多种捕获">1.3.1 多种捕获</a></li>
+        <li><a href="#132-finally子句引发的问题">1.3.2 finally子句引发的问题</a></li>
+        <li><a href="#133-异常的传递">1.3.3 异常的传递</a></li>
+        <li><a href="#134-异常的捕捉时机">1.3.4 异常的捕捉时机</a></li>
+        <li><a href="#135-小结">1.3.5 小结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-导入语句">2.1 导入语句</a>
+      <ul>
+        <li><a href="#211-import导入">2.1.1 import导入</a></li>
+        <li><a href="#212-from导入">2.1.2 from导入</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-自定义模块">2.2 自定义模块</a></li>
+    <li><a href="#23-模块搜索顺序">2.3 模块搜索顺序</a></li>
+    <li><a href="#24-模块的重复导入">2.4 模块的重复导入</a></li>
+    <li><a href="#25-模块的运行">2.5 模块的运行</a></li>
+    <li><a href="#26-包">2.6 包</a>
+      <ul>
+        <li><a href="#261-模块和包的区别">2.6.1 模块和包的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#27-相对导入与绝对导入">2.7 相对导入与绝对导入</a></li>
+    <li><a href="#28-访问控制">2.8 访问控制</a>
+      <ul>
+        <li><a href="#281-from-xxx-import-">2.8.1 from xxx import *</a></li>
+        <li><a href="#282-__all__">2.8.2 __all__</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E5%BC%82%E5%B8%B8">1 异常</a>
+<ul>
+<li><a href="#11-%E4%BA%A7%E7%94%9F%E5%BC%82%E5%B8%B8">1.1 产生异常</a>
+<ul>
+<li><a href="#111-%E8%A7%A3%E9%87%8A%E5%99%A8%E8%A7%A6%E5%8F%91%E5%BC%82%E5%B8%B8">1.1.1 解释器触发异常</a></li>
+<li><a href="#112-%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91%E5%BC%82%E5%B8%B8">1.1.2 手动触发异常</a></li>
+</ul>
+</li>
+<li><a href="#12-%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B">1.2 异常类型</a>
+<ul>
+<li><a href="#121-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8">1.2.1 自定义异常</a></li>
+</ul>
+</li>
+<li><a href="#13-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%8D%95%E8%8E%B7">1.3 异常处理(捕获)</a>
+<ul>
+<li><a href="#131-%E5%A4%9A%E7%A7%8D%E6%8D%95%E8%8E%B7">1.3.1 多种捕获</a></li>
+<li><a href="#132-finally%E5%AD%90%E5%8F%A5%E5%BC%95%E5%8F%91%E7%9A%84%E9%97%AE%E9%A2%98">1.3.2 finally子句引发的问题</a></li>
+<li><a href="#133-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BC%A0%E9%80%92">1.3.3 异常的传递</a></li>
+<li><a href="#134-%E5%BC%82%E5%B8%B8%E7%9A%84%E6%8D%95%E6%8D%89%E6%97%B6%E6%9C%BA">1.3.4 异常的捕捉时机</a></li>
+<li><a href="#135-%E5%B0%8F%E7%BB%93">1.3.5 小结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-%E6%A8%A1%E5%9D%97%E5%8C%96">2 模块化</a>
+<ul>
+<li><a href="#21-%E5%AF%BC%E5%85%A5%E8%AF%AD%E5%8F%A5">2.1 导入语句</a>
+<ul>
+<li><a href="#211-import%E5%AF%BC%E5%85%A5">2.1.1 import导入</a></li>
+<li><a href="#212-from%E5%AF%BC%E5%85%A5">2.1.2 from导入</a></li>
+</ul>
+</li>
+<li><a href="#22-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97">2.2 自定义模块</a></li>
+<li><a href="#23-%E6%A8%A1%E5%9D%97%E6%90%9C%E7%B4%A2%E9%A1%BA%E5%BA%8F">2.3 模块搜索顺序</a></li>
+<li><a href="#24-%E6%A8%A1%E5%9D%97%E7%9A%84%E9%87%8D%E5%A4%8D%E5%AF%BC%E5%85%A5">2.4 模块的重复导入</a></li>
+<li><a href="#25-%E6%A8%A1%E5%9D%97%E7%9A%84%E8%BF%90%E8%A1%8C">2.5 模块的运行</a></li>
+<li><a href="#26-%E5%8C%85">2.6 包</a>
+<ul>
+<li><a href="#261-%E6%A8%A1%E5%9D%97%E5%92%8C%E5%8C%85%E7%9A%84%E5%8C%BA%E5%88%AB">2.6.1 模块和包的区别</a></li>
+</ul>
+</li>
+<li><a href="#27-%E7%9B%B8%E5%AF%B9%E5%AF%BC%E5%85%A5%E4%B8%8E%E7%BB%9D%E5%AF%B9%E5%AF%BC%E5%85%A5">2.7 相对导入与绝对导入</a></li>
+<li><a href="#28-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6">2.8 访问控制</a>
+<ul>
+<li><a href="#281-from-xxx-import-">2.8.1 from xxx import *</a></li>
+<li><a href="#282-__all__">2.8.2 __all__</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-异常">1 异常</h1>
+<p>        在程序运行过程中，总会遇到各种各样的错误。有的错误是程序编写有问题造成的，比如本来应该输出整数结果输出了字符串，有的错误是用户输入造成的，比如让用户输入email地址，结果得到一个空字符串，这种错误可以通过检查用户输入来做相应的处理。还有一类错误是完全无法在程序运行过程中预测的，比如写入文件的时候，磁盘满了，写不进去了，或者从网络抓取数据，网络突然断掉了。这类错误也称为异常，在程序中通常是必须处理的，否则，程序会因为各种问题终止并退出。</p>
+<h2 id="11-产生异常">1.1 产生异常</h2>
+<p>在Python中产生异常主要有两种方式：解释器出触发和手动触发</p>
+<blockquote>
+<p>当异常被触发后，触发异常的代码段的后续代码将不会被继续执行。如果存在于顶层命名空间中，可能还会导致整个程序退出。</p>
+</blockquote>
+<h3 id="111-解释器触发异常">1.1.1 解释器触发异常</h3>
+<p>什么情况下解释器会触发异常？举个例子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello world)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        当解释器一行一行解释时，由于print函数少些一个引号，不符合Python语法规范，所以会提示SyntaxError，严格来说的话，语法错误不算一种异常，在解释阶段就无法通过，所以没办法进行捕获，其他的还比如IndentationError,因为是SyntaxError的子类， 而print(1/0)的除数不能为零，符合Python语法规范，只是在代码运行时触发了ZeroDivisionError异常，这种在运行时触发的异常，我们都是可以捕获的。</p>
+<h3 id="112-手动触发异常">1.1.2 手动触发异常</h3>
+<p>在代码中，使用<code>raise</code>关键字，可以手动触发异常，当检测某些数据类型，不符合预期时，就可以手动的触发，它的格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">raise 异常类型
+raise 异常类型()
+raise 自定义异常
+raise 自定义异常()
+</code></pre></td></tr></table>
+</div>
+</div><p>手动触发异常：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        函数add期待两个类型为int的参数，如果我们传递&rsquo;a',&lsquo;1&rsquo;时，由于Python语言的特性，预期的结果就可能会不同，如果后续代码依赖该函数的返回值，那么就可能会引发后续代码的异常报错，不利于排查。<br>
+        raise关键字可以触发异常类，也可以触发异常类实例，其实当我们触发异常类时，实际上raise会帮我们实例化，然后触发。异常类也可以传参，其本质上，可以理解为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">raise</span> <span class="ne">Exception</span> <span class="o">==</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Exception</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Exception&#39;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span> 
+
+    <span class="o">......</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>不传递参数时，使用默认属性初始化，传递参数时，则参数进行实例初始化赋值。</p>
+<h2 id="12-异常类型">1.2 异常类型</h2>
+<p>Python内置了大量的异常类，用于标识不同的异常以及分类。如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ne">BaseException</span>
+ <span class="o">+--</span> <span class="ne">SystemExit</span>
+ <span class="o">+--</span> <span class="ne">KeyboardInterrupt</span>
+ <span class="o">+--</span> <span class="ne">GeneratorExit</span>
+ <span class="o">+--</span> <span class="ne">Exception</span>
+      <span class="o">+--</span> <span class="ne">StopIteration</span>
+      <span class="o">+--</span> <span class="n">StopAsyncIteration</span>
+      <span class="o">+--</span> <span class="ne">ArithmeticError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">FloatingPointError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">OverflowError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">ZeroDivisionError</span>
+      <span class="o">+--</span> <span class="ne">AssertionError</span>
+      <span class="o">+--</span> <span class="ne">AttributeError</span>
+      <span class="o">+--</span> <span class="n">BufferError</span>
+      <span class="o">+--</span> <span class="ne">EOFError</span>
+      <span class="o">+--</span> <span class="ne">ImportError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">ModuleNotFoundError</span>
+      <span class="o">+--</span> <span class="ne">LookupError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">IndexError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">KeyError</span>
+      <span class="o">+--</span> <span class="ne">MemoryError</span>
+      <span class="o">+--</span> <span class="ne">NameError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">UnboundLocalError</span>
+      <span class="o">+--</span> <span class="ne">OSError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">BlockingIOError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">ChildProcessError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">ConnectionError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="n">BrokenPipeError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="n">ConnectionAbortedError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="n">ConnectionRefusedError</span>
+      <span class="o">|</span>    <span class="o">|</span>    <span class="o">+--</span> <span class="n">ConnectionResetError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">FileExistsError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">FileNotFoundError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">InterruptedError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">IsADirectoryError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">NotADirectoryError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">PermissionError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">ProcessLookupError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">TimeoutError</span>
+      <span class="o">+--</span> <span class="ne">ReferenceError</span>
+      <span class="o">+--</span> <span class="ne">RuntimeError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">NotImplementedError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="n">RecursionError</span>
+      <span class="o">+--</span> <span class="ne">SyntaxError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">IndentationError</span>
+      <span class="o">|</span>         <span class="o">+--</span> <span class="ne">TabError</span>
+      <span class="o">+--</span> <span class="ne">SystemError</span>
+      <span class="o">+--</span> <span class="ne">TypeError</span>
+      <span class="o">+--</span> <span class="ne">ValueError</span>
+      <span class="o">|</span>    <span class="o">+--</span> <span class="ne">UnicodeError</span>
+      <span class="o">|</span>         <span class="o">+--</span> <span class="ne">UnicodeDecodeError</span>
+      <span class="o">|</span>         <span class="o">+--</span> <span class="ne">UnicodeEncodeError</span>
+      <span class="o">|</span>         <span class="o">+--</span> <span class="ne">UnicodeTranslateError</span>
+      <span class="o">+--</span> <span class="ne">Warning</span>
+           <span class="o">+--</span> <span class="ne">DeprecationWarning</span>
+           <span class="o">+--</span> <span class="ne">PendingDeprecationWarning</span>
+           <span class="o">+--</span> <span class="ne">RuntimeWarning</span>
+           <span class="o">+--</span> <span class="ne">SyntaxWarning</span>
+           <span class="o">+--</span> <span class="ne">UserWarning</span>
+           <span class="o">+--</span> <span class="ne">FutureWarning</span>
+           <span class="o">+--</span> <span class="ne">ImportWarning</span>
+           <span class="o">+--</span> <span class="ne">UnicodeWarning</span>
+           <span class="o">+--</span> <span class="n">BytesWarning</span>
+           <span class="o">+--</span> <span class="n">ResourceWarning</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>不同的层级表示继承关系，常用的错误及其含义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ne">AttributeError</span>       <span class="c1"># 试图访问一个对象没有的属性时</span>
+<span class="ne">IOError</span>              <span class="c1"># 输入/输出异常；基本上是无法打开文件</span>
+<span class="ne">ImportError</span>          <span class="c1"># 无法引入模块或包；基本上是路径问题或名称错误</span>
+<span class="ne">SyntaxError</span>          <span class="c1"># 语法错误</span>
+<span class="ne">IndentationError</span>     <span class="c1"># 代码没有正确对齐(SyntaxError的子类)</span>
+<span class="ne">IndexError</span>           <span class="c1"># 下标索引超出序列边界，比如当x只有三个元素，却试图访问x[5]</span>
+<span class="ne">KeyError</span>             <span class="c1"># 试图访问字典里不存在的键</span>
+<span class="ne">KeyboardInterrupt</span>    <span class="c1"># Ctrl+C被按下</span>
+<span class="ne">NameError</span>            <span class="c1"># 使用一个还未被赋予对象的变量</span>
+<span class="ne">TypeError</span>            <span class="c1"># 传入对象类型与要求的不符合</span>
+<span class="ne">UnboundLocalError</span>    <span class="c1"># 试图访问一个还未被设置的局部变量，基本上是由于另有一个同名的全局变量，导致你以为正在访问它</span>
+<span class="ne">ValueError</span>           <span class="c1"># 传入一个调用者不期望的值，即使值的类型是正确的，比如列表a=[1, 2, 3],而你执行了a.remove(4)</span>
+<span class="ne">SystemExit</span>           <span class="c1"># sys.exit()函数触发的异常，异常被解释器发现时，会退出执行</span>
+<span class="n">ArithmetieError</span>      <span class="c1"># 所有算数引发的异常</span>
+<span class="ne">LookupError</span>          <span class="c1"># 使用映射的键或序列的索引无效的异常</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Python提供的大部分运行时的错误异常，都继承自Exception类，所以我们自定义的异常类，也要从Exception类继承(当然也可以从BaseException继承，但不建议。)</p>
+<h3 id="121-自定义异常">1.2.1 自定义异常</h3>
+<p>自定义的异常类需要从Exception进行继承</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s1">&#39;Not Exception&#39;</span><span class="p">,</span><span class="n">code</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+
+<span class="c1"># 就等于</span>
+<span class="c1"># class MyException(Exception):</span>
+<span class="c1">#     pass</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">MyException</span><span class="p">(</span><span class="s1">&#39;from MyException&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">MyException</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;没有异常&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>由于异常有默认值，所以传递不传递参数都可</p>
+<h2 id="13-异常处理捕获">1.3 异常处理(捕获)</h2>
+<p>        所谓异常处理就是：出现异常，捕获并处理异常。一个健壮的程序应该尽可能的的避免错误，尽可能的捕捉错误，处理各种异常。Python内置了一套异常处理机制，来帮助我们进行错误处理。其完整格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="err">代码段</span><span class="mi">1</span>       <span class="c1"># 检测执行的代码段</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="err">代码段</span><span class="mi">2</span>       <span class="c1"># try代码段产生异常后，被捕捉到后执行的代码段</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="err">代码段</span><span class="mi">3</span>       <span class="c1"># try代码段中没有异常要执行的代码段(非必须)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="err">代码段</span><span class="mi">4</span>       <span class="c1"># try代码段中不管有没有异常，都要执行的代码段(非必须)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中except语句可以有多个，捕捉不同类型的异常并进行相应的处理，并且还可利用as语句存储异常，所以except的扩展格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">except</span><span class="p">:</span> <span class="err">表示遇到异常就捕捉。</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span> <span class="err">表示只捕捉</span><span class="n">Exception类的异常</span><span class="err">，而</span><span class="n">Exception类包含了Python内置的所有异常</span><span class="err">，所以功能类似于捕捉所有。</span>
+<span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="err">捕捉</span><span class="n">IndexError异常</span><span class="err">，并交给变量</span><span class="n">e存储</span><span class="err">。</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是: <code>except子句必须和try在同一层，搭配使用，不能单独使用except</code>。下面来看一个小例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;一切正常&#39;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;真的是一切正常&#39;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;我是 finally&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：
+        由于列表a只有3个元素，取列表第四个元素，会报异常(IndexError: list index out of range，从pycharm的console窗口就能看到)，异常被except捕捉，所以会打印，一切正常，并打印错误信息。由于产生了异常不会执行else语句，最后执行finally语句。</p>
+<h3 id="131-多种捕获">1.3.1 多种捕获</h3>
+<p>        实际上我们一段代码可能会有不同类型的错误，而我们需要针对不同类型的错误，做不同的操作，所以这个时候就会用到多except语句。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">a</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+<span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;索引错误&#39;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;key错误&#39;</span><span class="p">,</span><span class="n">e</span> <span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;发生异常了&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：
+异常被IndexError捕获，所以会打印索引错误。<br>
+        多条except语句，优先级从上到下，和if条件的优先级是相同的，即如果捕获到一个，就不继续执行except语句了。利用多except语句，来对不同的异常进行处理，可以使我们的程序更健壮。</p>
+<h3 id="132-finally子句引发的问题">1.3.2 finally子句引发的问题</h3>
+<p>先来看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;from Test&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">200</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># from Test</span>
+<span class="c1"># 200</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>分析：<br>
+         在test语句中由于除数为0，所以会触发ZeroDivisionError异常，由于finally是最后被执行的，还没有上报呢，就return了，这个时候异常就被压制了。</p>
+<blockquote>
+<p>函数的返回值取决于最后一个执行的return语句，finally是最后被执行的语句。所以在finally语句中return是一个不明智的决定，除非你真的需要它。</p>
+</blockquote>
+<h3 id="133-异常的传递">1.3.3 异常的传递</h3>
+<p>当异常没有被处理时，就会向上层逐级上报。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">foo1</span><span class="p">():</span>
+    <span class="n">foo2</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">foo2</span><span class="p">():</span>
+    <span class="n">foo3</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">foo3</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">Exception</span>
+
+<span class="n">foo1</span><span class="p">()</span>
+
+<span class="c1"># Traceback (most recent call last):</span>
+<span class="c1">#   File &#34;E:/Python - base - code/chapter08_OOP/module_and_package.py&#34;, line 15, in &lt;module&gt;</span>
+<span class="c1">#     foo1()</span>
+<span class="c1">#   File &#34;E:/Python - base - code/chapter08_OOP/module_and_package.py&#34;, line 7, in foo1</span>
+<span class="c1">#     foo2()</span>
+<span class="c1">#   File &#34;E:/Python - base - code/chapter08_OOP/module_and_package.py&#34;, line 10, in foo2</span>
+<span class="c1">#     foo3()</span>
+<span class="c1">#   File &#34;E:/Python - base - code/chapter08_OOP/module_and_package.py&#34;, line 13, in foo3</span>
+<span class="c1">#     raise Exception</span>
+<span class="c1"># Exception</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>异常在foo3中产生，上报到foo2中，foo2没有处理，上报到foo1中，foo1没有处理，继续上报，如果到了外层还没有被处理，就会中断异常所在的线程的执行。</p>
+<blockquote>
+<p>try &hellip; except 可以被嵌套使用</p>
+</blockquote>
+<h3 id="134-异常的捕捉时机">1.3.4 异常的捕捉时机</h3>
+<p>我们可以在可能产生异常地方立即捕获，或者在边界捕获。立即捕获很好理解，那什么是边界捕获呢？</p>
+<ul>
+<li>例如：写了一个模块，用户调用这个模块的时候捕获异常，模块内部需要捕获、处理异常，一旦内部处理了，外部调用者就无法感知了。</li>
+<li>例如：open函数，出现的异常交给调用者处理，如果打开的文件不存在，可以创建，文件存在了，就不再创建了，继续看是否修改又或者删除，又或者其他业务逻辑。</li>
+<li>例如：自己写一个类，使用了open函数，但是出现了异常不知道如何处理，就继续向外层抛出，一般来说最外城也是边界，必须处理这个异常了，否则线程退出。</li>
+</ul>
+<h3 id="135-小结">1.3.5 小结</h3>
+<p>try的工作原理：</p>
+<ol>
+<li>如果try中语句执行时发生异常，搜索except子句，并执行第一个匹配该异常的except子句</li>
+<li>如果没有匹配的except子句，异常将被传递到外层的try(如果有)，如果外层不处理这个异常，将继续向外抛出，到达最外层，还没有被处理，就终止异常所在的线程</li>
+<li>如果在try执行时没有发生异常，将执行else子句中的代码段</li>
+<li>无论try中是否发生异常，finally子句都将会被执行</li>
+</ol>
+<h1 id="2-模块化">2 模块化</h1>
+<p>一般来说，编程语言中，库，包，模块是同一种概念、是代码的组织方式。Python中只有一种模块对象类型，但是为了模块化组织模块的便利，提供了&rsquo;包&rsquo;的概念。</p>
+<ul>
+<li>模块module：指的是一个个Python的源代码文件</li>
+<li>包package：指的是模块组织在一起的包名同名的目录及其相关文件</li>
+</ul>
+<h2 id="21-导入语句">2.1 导入语句</h2>
+<p>Pythong主要提供了两类导入模块的方法。它们是import和from &hellip; import。</p>
+<h3 id="211-import导入">2.1.1 import导入</h3>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>import n1,n2</td>
+<td>完全导入</td>
+</tr>
+<tr>
+<td>import x as x</td>
+<td>模块别名完全导入</td>
+</tr>
+</tbody>
+</table>
+<p>导入过程：</p>
+<ol>
+<li>找到指定的模块，加载和初始化它，生成模块对象。找不到，抛出异常</li>
+<li>在import所在的作用域的局部命名空间中，增加名称与上一步创建的对象关联。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>  <span class="c1"># 去掉_开头的方法</span>
+<span class="c1"># [&#39;os&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>dir()返回当前名称空间内的名称。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">functools</span> <span class="kn">as</span> <span class="nn">ft</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span><span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>  <span class="c1"># [&#39;ft&#39;]</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="p">)</span>       <span class="c1"># &lt;module &#39;os&#39; from &#39;D:\\Python3.6.6\\lib\\os.py&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>  <span class="c1"># &lt;module &#39;ntpath&#39; from &#39;D:\\Python3.6.6\\lib\\ntpath.py&#39;&gt;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>    <span class="c1"># [&#39;os&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当我们使用as语句时，那么当前名称空间会仅存在于一个as后的别名，来指向模块了。os.path在打印时也是一个模块，那么我们能否只导入os模块下的path模块呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>    <span class="c1"># [&#39;os&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>并没有导入os.path模块，只有os模块，这是为什么呢？</p>
+<ul>
+<li>导入顶级模块，其名称(无别名时)会加入到本地命名空间中，并绑定到其模块对象上去。</li>
+<li>导入非顶级模块，只将其顶级模块名称加入到本地名称空间中。</li>
+<li>如果使用了as，as后的名称直接绑定到导入的模块对象上，并将该名称加入到本地命名空间中。</li>
+</ul>
+<blockquote>
+<p>import 后面只能是包名，或者模块名</p>
+</blockquote>
+<h3 id="212-from导入">2.1.2 from导入</h3>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from xx import xx</td>
+<td>部分导入</td>
+</tr>
+<tr>
+<td>from xx import xx as xx</td>
+<td>别名部分导入</td>
+</tr>
+</tbody>
+</table>
+<p>导入过程：</p>
+<ol>
+<li>找到from子句中指定的模块，加载并初始化它们(不是导入)</li>
+<li>对于import 子句后的名称
+<ol>
+<li>先查from子句加载的模块是否具有该名称的属性</li>
+<li>如果不是，则尝试导入该名称的子模块</li>
+<li>还没有找到，则抛出ImportError异常</li>
+<li>这个名称保存到本地名称空间中，如果有sa子句，则使用as子句后的名称</li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>  <span class="c1"># [&#39;path&#39;]</span>
+
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">osp</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="nb">dir</span><span class="p">())))</span>  <span class="c1"># [&#39;osp&#39;, &#39;path&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>from 后面只能是模块或者包名,import后面可以是包、模块、类、函数、甚至是某个变量</p>
+</blockquote>
+<h2 id="22-自定义模块">2.2 自定义模块</h2>
+<p>一个py文件就是一个模块。先不考虑模块查找顺序，看下面例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 目录结构</span>
+<span class="c1"># Learn_Python_fromn_Zero</span>
+<span class="c1">#     |--my_module.py</span>
+<span class="c1">#     |--my_script.py</span>
+
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">my_module</span><span class="o">.</span><span class="n">py</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} say hello&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">import</span> <span class="nn">my_module</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">my_module</span><span class="o">.</span><span class="n">MyClass</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>   <span class="c1"># daxin say hello</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然也可以通过from方式只导入某个类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">my_module</span> <span class="kn">import</span> <span class="n">MyClass</span>
+
+<span class="n">daxin</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">daxin</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>  <span class="c1"># daxin say hello</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是,自定义模块的名称要遵循一定的规范：</p>
+<ol>
+<li>模块名就是文件名。</li>
+<li>模块名必须符合标识符命名要求，是非数字开头的字母数字下划线的组合。</li>
+<li>不要使用那个系统模块名，否则会出现冲突覆盖的问题。</li>
+<li>模块名通常全部为小写，可以添加_下划线。</li>
+</ol>
+<h2 id="23-模块搜索顺序">2.3 模块搜索顺序</h2>
+<p>sys.path是一个列表，里面存放的就是模块搜索的路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># E:\Learn_Python_from_Zero\chapter08\_Package_and_module</span>
+<span class="c1"># E:\Learn_Python_from_Zero</span>
+<span class="c1"># D:\Python3.6.6\python36.zip</span>
+<span class="c1"># D:\Python3.6.6\DLLs</span>
+<span class="c1"># D:\Python3.6.6\lib</span>
+<span class="c1"># D:\Python3.6.6</span>
+<span class="c1"># D:\Python3.6.6\lib\site-packages</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        上面的结果就是我当前环境下Python模块的路径搜索顺序，当加载一个模块的时候，需要从这些路径中从前到后依次查找，但并不搜索这些目录的子目录，搜索到模块就加载，搜索不到就抛异常。</p>
+<p>大致的路径顺序为：</p>
+<ol>
+<li><code>程序主目录</code>，运行程序的主程序所在的目录</li>
+<li><code>PYTHONPATH目录</code>，环境变量PYTHONPATH设置的目录，也是搜索模块哦路径</li>
+<li><code>标准库目录</code>，Python自带的库模块所在的目录</li>
+</ol>
+<blockquote>
+<p>sys.path是一个列表，那么就意味着可以进行增删改查，不过一般我们不会操作这个路径，除非你真的需要。</p>
+</blockquote>
+<h2 id="24-模块的重复导入">2.4 模块的重复导入</h2>
+<p>我们说模块的导入就是一个加载以及关联到标识符存入本地命名空间的过程，如果我要多次导入相同的模块，是不是要多次加载，多次重新存入本地命名空间呢，写个代码测试一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">os</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">os</span> <span class="kn">as</span> <span class="nn">daxin</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">daxin</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">os</span><span class="p">))</span>
+
+<span class="c1"># 2300567923272</span>
+<span class="c1"># 2300567923272</span>
+<span class="c1"># 2300567923272</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>三次导入的模块的内存地址是相同的，说明只会导入一次，这是为什么呢？这是因为在Python中，所有的加载的模块都会记录在sys.modules中，它里面存放的是已经加载过的所有模块的字典，导入模块就和它有关：</p>
+<ol>
+<li>import/from 触发导入操作</li>
+<li>解释器在sys.modules中查找是否已经加载过，如果已经加载则直接把加载后的对象，及名称加入到导入操作所在的命名空间中。</li>
+<li>如果使用了as语句，则将对象关联到新的标识符后，加入到导入操作所在的命名空间中。</li>
+<li>如果sys.modules中不存在，则在sys.path中寻找该模块，然后加载并写入到sys.modules中，然后重复2.3这个过程。</li>
+<li>如果没找到，那么就会报ImportError异常。</li>
+</ol>
+<h2 id="25-模块的运行">2.5 模块的运行</h2>
+<p>        每个模块都会定义一个__name__特殊变量来存储当前模块的名称，如果不指定，默认为源码文件名，如果是包则有限定名(包名.文件名)。<br>
+        解释器初始化的时候，<code>会初始化sys.modules字典,用来保存已加载的模块，加载builtins(全局函数、常量)模块，__main__模块，sys模块，以及初始化模块搜索路径sys.path</code> <br>
+        当从标准输入(命令行方式敲代码)、脚本(在命令行运行)或者交互式读取的时候，会将模块的__name__设置为__main__,模块的顶层代码就在__main__这个作用域中执行。如果是import导入的，其__name__默认就是模块的名称。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">py</span>
+<span class="k">print</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="n">myscript</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">import</span> <span class="nn">mymodulel.py</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>有如上两个py文件存在于同一层级下：</p>
+<ol>
+<li>直接运行mymodule.py，会打印__main__</li>
+<li>在myscript.py中导入时，会打印 mymodule</li>
+</ol>
+<p>很多时候，我们写的函数，类需要在其他地方调用，导入时会自动执行模块，如果存在很多print语句时，就会直接在导入的地方进行输出，不便于调用。所以一般我们都使用下面结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>他的好处是：</p>
+<ol>
+<li>直接运行当前Python文件，才会__name__属性为__main__，会执行后续代码</li>
+<li>使用import导入时，文件的__main__属性被重置为文件名，后续代码不会被执行，便于调用。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>__file__</td>
+<td>当前文件的绝对路径(字符串格式)</td>
+</tr>
+<tr>
+<td>__cached__</td>
+<td>编译后的字节码文件路径(字符串格式)</td>
+</tr>
+<tr>
+<td>__sepc__</td>
+<td>显示模块的规范</td>
+</tr>
+<tr>
+<td>__name__</td>
+<td>模块名</td>
+</tr>
+<tr>
+<td>__package__</td>
+<td>当模块是包时，同__name__，否则可以设置为顶级模块的空字符串。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="26-包">2.6 包</h2>
+<p>        Python中把包理解为一个特殊的模块，在文件系统上的体现就是一个目录。用于组织多个模块或者其他更多的包。主要有两种格式：</p>
+<ol>
+<li>目录</li>
+<li>目录下包含一个__init__.py文件</li>
+</ol>
+<blockquote>
+<p>新版本的Python直接认为一个目录就是一个包，但老版本的包，下面需要存在一个__init__.py文件，所以规范化起见，建议创建这个文件。</p>
+</blockquote>
+<p>__init__.py文件的作用：<br>
+        在linux下，一切皆文件，那么一个目录也是一个文件，Python认为包文件本身也可以有一定的属性或者其他信息，所以在包下用__init__.py标识这个包自身的属性信息或者其他代码。<code>包在导入时，它下面的__init__.py 就会被执行</code></p>
+<blockquote>
+<p>包目录下的其他py文件、子目录都被称为它的子模块。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 目录结构：</span>
+<span class="o">----</span> <span class="n">mypackage</span>
+         <span class="o">|---</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+         <span class="o">|---</span> <span class="n">hello</span>
+                <span class="o">|---</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+                <span class="o">|---</span> <span class="n">mymodule</span><span class="o">.</span><span class="n">py</span>
+<span class="o">----</span> <span class="n">myscript</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># myscript.py</span>
+<span class="kn">import</span> <span class="nn">mypackage</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mypackage</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">mymodule</span><span class="p">)</span>  <span class="c1"># ？ 可以执行吗</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>不可以执行，我们说能否执行主要看sys.modules中是否加载，以及是否关联到本地命名空间中去</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">mypackage</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>  <span class="c1"># [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;mypackage&#39;]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">mypackage</span><span class="p">))</span>  <span class="c1"># [&#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__path__&#39;, &#39;__spec__&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从命名空间中，我们可以看到，mypackage包下并没有hello这个包(都没有加载到sys.modules中去)，所以说直接通过import mypackage是无法导入它下面的子包以及子模块的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">mypackage.hello.mymodule</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  <span class="c1"># [ ..., &#39;mypackage&#39;, &#39;mypackage.hello&#39;, &#39;mypackage.hello.mymodule&#39;]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>  <span class="c1"># [ ... &#39;mypackage&#39;, &#39;sys&#39;]</span>
+<span class="n">mypackage</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从命名空间中，我们看到只有顶级包名加入了本地命名空间，但是我们导入的hello,mymodule已经加载到了sys.modules中，这样我们就可以使用mypackage调用了。</p>
+<h3 id="261-模块和包的区别">2.6.1 模块和包的区别</h3>
+<ol>
+<li>包能更好的组织模块，尤其是大量的模块，其代码行数很多，可以把它按照功能拆分成多个字模块，使用哪个功能时，加载对应的子模块即可。</li>
+<li>包目录中的__init__.py是在包第一次导入的时候就会执行，内容可以为空，也可以是用于该包初始个跨工作的代码，最好不要删除它。</li>
+<li>包目录之间只能使用点好作为分隔符，表示模块的层级关系</li>
+<li>模块就是名称空间，其内部的顶层标识符，都是它的属性，可以通过__dict__或者dir(module)查看。</li>
+<li>包是一个特殊的模块，但模块不一定是包，是一种组织模块的方式，它包含__path__属性</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">encoder</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump可以使用吗</span><span class="err">？</span> <span class="c1"># 无法使用，因为虽然加载了json模块，但是仅仅把encoder导入了当前名称空间 </span>
+
+<span class="kn">import</span> <span class="nn">json.encoder</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump可以使用吗</span><span class="err">？</span> <span class="c1"># 可以使用，因为eocoder是一个模块，这种导入当时，只会将顶层json模块加入到本地名称空间中，所以可以通过json执行dump函数。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="27-相对导入与绝对导入">2.7 相对导入与绝对导入</h2>
+<p>        绝对导入：在import语句或者from语句中，导入模块。模块名称最前面不是以.点开头的。绝对导入总是去模块搜索路径中寻找(也会查看是否已经加载)<br>
+        相对导入：只能在包内使用，且只能用在from语句中，使用.点号，表示当前目录内。使用..表示上一级目录。</p>
+<blockquote>
+<p>不要在顶层模块中使用相对导入。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">---</span> <span class="n">package1</span>
+      <span class="o">|</span> <span class="o">---</span> <span class="n">m1</span><span class="o">.</span><span class="n">py</span>
+      <span class="o">|</span> <span class="o">---</span> <span class="n">m2</span><span class="o">.</span><span class="n">py</span>
+<span class="o">---</span> <span class="n">m3</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># m2.py</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">m1</span>
+
+<span class="c1"># m3.py</span>
+<span class="kn">from</span> <span class="nn">package1</span> <span class="kn">import</span> <span class="n">m2</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>直接运行m2.py时，是无法导入m1的。而，通过m3，导入m2，是正常的。这是因为：<code>一旦一个模块中使用了相对导入，就不可以作为主模块运行了</code>。</p>
+<blockquote>
+<p>使用相对导入的模块就是为了内部相互引用资源的，不是为了直接运行的，对于包来说，正确的使用方式还是在顶级模块使用这些包。</p>
+</blockquote>
+<h2 id="28-访问控制">2.8 访问控制</h2>
+<p>        模块中的变量、类、函数等等都可以称作模块的属性，在导入的时候，都可以被直接导入到本地命名，只要它们符合一个合法的标识符即可（包名，也同样适用）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># mymodule.py</span>
+<span class="n">_a</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="n">__x</span> <span class="o">=</span> <span class="mi">456</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">789</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span><span class="k">pass</span>
+
+<span class="c1"># my_script.py</span>
+<span class="kn">import</span> <span class="nn">mymodule</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">mymodule</span><span class="p">))</span>  <span class="c1"># [&#39;A&#39;,&#39;__x&#39;, &#39;_a&#39;, &#39;hello&#39;, &#39;y&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>也就是说模块内没有私有变量，在模块定义中不做特殊处理(类的私有变量会被改名)</p>
+<h3 id="281-from-xxx-import-">2.8.1 from xxx import *</h3>
+<p>使用from xxx import * 导入时，xxx模块中的私有属性以及保护属性将不会被导入。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># mymodule.py</span>
+<span class="n">_a</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="n">__x</span> <span class="o">=</span> <span class="mi">456</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">789</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span><span class="k">pass</span>
+
+<span class="c1"># my_script.py</span>
+<span class="kn">from</span> <span class="nn">mymodule</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>  <span class="c1"># [&#39;A&#39;,&#39;__x&#39;, &#39;_a&#39;, &#39;hello&#39;, &#39;y&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="282-__all__">2.8.2 __all__</h3>
+<p>一般写在文件的前几行，用于表示当from xxx import * 导入本模块时，哪些属性可以被别人导入，它的值是一个列表.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># mymodule.py</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_a&#39;</span><span class="p">,</span><span class="s1">&#39;y]</span>
+<span class="n">_a</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="n">__x</span> <span class="o">=</span> <span class="mi">456</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">789</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span><span class="k">pass</span>
+
+<span class="c1"># my_script.py</span>
+<span class="kn">from</span> <span class="nn">mymodule</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">())</span>  <span class="c1"># [&#39;_a&#39;, &#39;y&#39;]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以使用from xxx import * 导入时：</p>
+<ol>
+<li>如果模块没有__all__属性，那么只会导入非下划线开头的变量，如果是包，子模块也不会导入，除非在__all__中设置，或者__init__.py中导入它们</li>
+<li>如果模块有__all__,from xxx import * ,只导入__all__类表中指定的名称，哪怕这个名称是下划线开头的，或者是子模块</li>
+<li>使用起来虽然很简单，但是导入了大量不需要使用的变量，__all__就是控制被导入的变量的，为了避免冲突以及污染名称空间，建议添加__all__属性</li>
+</ol>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/28-%E7%94%9F%E6%88%90%E5%99%A8%E4%BA%A4%E4%BA%92-__slots__-%E6%9C%AA%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">28-生成器交互-__slots__-未实现异常</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/3-concurrent%E6%A8%A1%E5%9D%97/">
+            <span class="next-text nav-default">3-concurrent模块</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

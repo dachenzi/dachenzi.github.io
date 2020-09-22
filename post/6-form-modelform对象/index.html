@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>6-Form-ModelForm对象 - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 Form表单验证 1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/6-form-modelform%E5%AF%B9%E8%B1%A1/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="6-Form-ModelForm对象" />
+<meta property="og:description" content="文章目录 1 Form表单验证 1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/6-form-modelform%E5%AF%B9%E8%B1%A1/" />
+
+<meta itemprop="name" content="6-Form-ModelForm对象">
+<meta itemprop="description" content="文章目录 1 Form表单验证 1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生">
+
+<meta itemprop="wordCount" content="10792">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="6-Form-ModelForm对象"/>
+<meta name="twitter:description" content="文章目录 1 Form表单验证 1.1 创建一个Form表单对象 1.2 利用Form表单对象进行验证 1.3 利用Form对象手动生成前端标签 1.4 利用Form对象自动生"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">6-Form-ModelForm对象</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 10792 words </span>
+          <span class="more-meta"> 22 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-创建一个form表单对象">1.1 创建一个Form表单对象</a></li>
+    <li><a href="#12-利用form表单对象进行验证">1.2 利用Form表单对象进行验证</a></li>
+    <li><a href="#13-利用form对象手动生成前端标签">1.3 利用Form对象手动生成前端标签</a></li>
+    <li><a href="#14-利用form对象自动生成前端标签">1.4 利用Form对象自动生成前端标签</a></li>
+    <li><a href="#15-form字段的widget属性">1.5 Form字段的widget属性</a></li>
+    <li><a href="#16-form字段其他的属性">1.6 Form字段其他的属性</a></li>
+    <li><a href="#17-特别补充-choicefield">1.7 特别补充-ChoiceField</a></li>
+    <li><a href="#18-自定义验证规则">1.8 自定义验证规则</a>
+      <ul>
+        <li><a href="#181-通过对象来自定义验证规则">1.8.1 通过对象来自定义验证规则</a></li>
+        <li><a href="#182-通过函数来自定义验证规则">1.8.2 通过函数来自定义验证规则</a></li>
+        <li><a href="#183-通过在当前类的中定义-clean_字段名-的方法-来实现正则验证">1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</a></li>
+        <li><a href="#例子注册的时候两次密码一致性的验证">例子：注册的时候，两次密码一致性的验证</a></li>
+        <li><a href="#184-强制触发异常">1.8.4 强制触发异常</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-基本使用">2.1 基本使用</a></li>
+    <li><a href="#22-自定制字段名">2.2 自定制字段名</a></li>
+    <li><a href="#23-展示指定的列">2.3 展示指定的列</a></li>
+    <li><a href="#24-初始化数据">2.4 初始化数据</a></li>
+    <li><a href="#25-更新数据">2.5 更新数据</a></li>
+    <li><a href="#26-其他modelform配置项">2.6 其他ModelForm配置项</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-form%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81">1 Form表单验证</a>
+<ul>
+<li><a href="#11-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAform%E8%A1%A8%E5%8D%95%E5%AF%B9%E8%B1%A1">1.1 创建一个Form表单对象</a></li>
+<li><a href="#12-%E5%88%A9%E7%94%A8form%E8%A1%A8%E5%8D%95%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">1.2 利用Form表单对象进行验证</a></li>
+<li><a href="#13-%E5%88%A9%E7%94%A8form%E5%AF%B9%E8%B1%A1%E6%89%8B%E5%8A%A8%E7%94%9F%E6%88%90%E5%89%8D%E7%AB%AF%E6%A0%87%E7%AD%BE">1.3 利用Form对象手动生成前端标签</a></li>
+<li><a href="#14-%E5%88%A9%E7%94%A8form%E5%AF%B9%E8%B1%A1%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%89%8D%E7%AB%AF%E6%A0%87%E7%AD%BE">1.4 利用Form对象自动生成前端标签</a></li>
+<li><a href="#15-form%E5%AD%97%E6%AE%B5%E7%9A%84widget%E5%B1%9E%E6%80%A7">1.5 Form字段的widget属性</a></li>
+<li><a href="#16-form%E5%AD%97%E6%AE%B5%E5%85%B6%E4%BB%96%E7%9A%84%E5%B1%9E%E6%80%A7">1.6 Form字段其他的属性</a></li>
+<li><a href="#17-%E7%89%B9%E5%88%AB%E8%A1%A5%E5%85%85-choicefield">1.7 特别补充-ChoiceField</a></li>
+<li><a href="#18-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8 自定义验证规则</a>
+<ul>
+<li><a href="#181-%E9%80%9A%E8%BF%87%E5%AF%B9%E8%B1%A1%E6%9D%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8.1 通过对象来自定义验证规则</a></li>
+<li><a href="#182-%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E6%9D%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99">1.8.2 通过函数来自定义验证规则</a></li>
+<li><a href="#183-%E9%80%9A%E8%BF%87%E5%9C%A8%E5%BD%93%E5%89%8D%E7%B1%BB%E7%9A%84%E4%B8%AD%E5%AE%9A%E4%B9%89-clean_%E5%AD%97%E6%AE%B5%E5%90%8D-%E7%9A%84%E6%96%B9%E6%B3%95-%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%AD%A3%E5%88%99%E9%AA%8C%E8%AF%81">1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</a></li>
+<li><a href="#%E4%BE%8B%E5%AD%90%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%A4%E6%AC%A1%E5%AF%86%E7%A0%81%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E9%AA%8C%E8%AF%81">例子：注册的时候，两次密码一致性的验证</a></li>
+<li><a href="#184-%E5%BC%BA%E5%88%B6%E8%A7%A6%E5%8F%91%E5%BC%82%E5%B8%B8">1.8.4 强制触发异常</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-modelform%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81">2 ModelForm表单验证</a>
+<ul>
+<li><a href="#21-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">2.1 基本使用</a></li>
+<li><a href="#22-%E8%87%AA%E5%AE%9A%E5%88%B6%E5%AD%97%E6%AE%B5%E5%90%8D">2.2 自定制字段名</a></li>
+<li><a href="#23-%E5%B1%95%E7%A4%BA%E6%8C%87%E5%AE%9A%E7%9A%84%E5%88%97">2.3 展示指定的列</a></li>
+<li><a href="#24-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE">2.4 初始化数据</a></li>
+<li><a href="#25-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE">2.5 更新数据</a></li>
+<li><a href="#26-%E5%85%B6%E4%BB%96modelform%E9%85%8D%E7%BD%AE%E9%A1%B9">2.6 其他ModelForm配置项</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-form表单验证">1 Form表单验证</h1>
+<p>        什么是form？django 中的  form 组件 专门用来做对用户通过form表单形式提交的数据的格式进行验证的,还可以提供诸如form表单生成等牛逼的功能。</p>
+<p>        使用方式为：首先我们定义一个Form模版（可以理解为是匹配数据的模版），其中对字段进行了规范。接下来请求发过来后(request.POST)，我们把request.POST的数据交给form模版，进行验证，form模版验证完成后会产出三个信息。</p>
+<ol>
+<li>是否验证成功</li>
+<li>所有的正确信息</li>
+<li>所有的错误信息</li>
+</ol>
+<h2 id="11-创建一个form表单对象">1.1 创建一个Form表单对象</h2>
+<p>        使用From模版和model一样，是一个类，使用时需要引入django的form组件，然后继承Form类来获得一些功能。(可以定义在models.py中)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 基本使用</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">Form</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">fields</span>
+ 
+<span class="k">class</span> <span class="nc">FM</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>    <span class="c1"># 创建一个验证对象，用于验证用户提交的数据中的name属性为username的数据</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意： 这里定义的Form字段名称 必须和 前端form表单中的 input 框的 name 属性的值一致，才能进行验证。</p>
+<h2 id="12-利用form表单对象进行验证">1.2 利用Form表单对象进行验证</h2>
+<p>        当用户使用POST方法提交数据的时候，应该首先交给Form模版进行验证，这时Form模版会返回三个对象：</p>
+<ol>
+<li>验证的结果：formobj.as_valid()</li>
+<li>验证成功的数据：formobj.cleaned_data</li>
+<li>验证失败的数据：formobj.errors</li>
+</ol>
+<p>        使用form对象，那么需要实例化，在实例化时，传入需要验证的数据，这里传入request.POST</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+　　<span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>    <span class="c1"># 创建一个FM与用户提交数据的一个对象</span>
+　　<span class="k">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span>    　　　 <span class="c1"># 对这个对象进行验证，匹配成功会返回True，否则会返回False</span>
+　　<span class="k">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">)</span>   　　  <span class="c1"># 存放匹配成功的数据</span>
+　　<span class="k">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>    <span class="c1"># 存放错误的数据(默认情况下会输出一个字符串，包含了HTML标签，我们还可以使用Form提供的as_json方法对输出的字符串进行格式化显示)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参数有：</p>
+<ul>
+<li>data参数：表示要验证的数据</li>
+<li>Initial参数(可选)：表示的是初始化数据(数据类型为字典嵌套元组)。</li>
+</ul>
+<p>利用initial初始化Form数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Login</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="bp">None</span><span class="p">):</span>    <span class="c1"># 判断用户是否提交数据</span>
+            <span class="n">userid</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">)</span>   <span class="c1"># 获取用户请求的数据</span>
+            <span class="n">userinfo</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">userid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>   <span class="c1"># 在数据库中找到对应的数据</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="n">userinfo</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">:</span><span class="n">userinfo</span><span class="o">.</span><span class="n">password</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="n">userinfo</span><span class="o">.</span><span class="n">email</span><span class="p">})</span>  <span class="c1"># 对Form表单进行初始化赋值</span>
+        <span class="k">else</span><span class="p">:</span>   
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">()</span>     <span class="c1"># 否则不进行初始化</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;login.html&#39;</span><span class="p">,{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">obj</span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以得到的结果为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">formobj</span><span class="o">.</span><span class="n">as_valid</span><span class="p">()</span><span class="err">的返回结果为：</span>  
+<span class="c1"># True/False</span>
+
+<span class="n">formobj</span><span class="o">.</span><span class="n">cleaned_data的返回结果为</span><span class="err">：</span>
+<span class="c1"># 验证成功会存放通过验证的数据</span>
+<span class="p">{</span><span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;asasas&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;asas&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;asas@abc.com&#39;</span><span class="p">}</span>
+
+<span class="n">formobj</span><span class="o">.</span><span class="n">errors的结果为</span><span class="err">：</span>
+<span class="c1"># 默认的输出格式&lt;br&gt;&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;pwd&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;email&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;user&lt;ul class=&#34;errorlist&#34;&gt;&lt;li&gt;This field is required.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</span>
+ 
+<span class="c1"># 可以使用 as_json()格式化为字典</span>
+<span class="p">{</span><span class="s2">&#34;email&#34;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;This field is required.&#34;</span><span class="p">,</span> <span class="s2">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;required&#34;</span><span class="p">}],</span>
+  <span class="s2">&#34;pwd&#34;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;This field is required.&#34;</span><span class="p">,</span> <span class="s2">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;required&#34;</span><span class="p">}],</span>
+  <span class="s2">&#34;user&#34;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;This field is required.&#34;</span><span class="p">,</span> <span class="s2">&#34;code&#34;</span><span class="p">:</span> <span class="s2">&#34;required&#34;</span><span class="p">}]}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        由于前端提交了空的数据，所以这里message表示错误提示信息， This field is required.(这个字段不能为空)，code 表示的错误代码，required 表示必须的(必填项)。</p>
+<p>        有些同学会说，django返回的是英文的，我看不懂，那么其实我们可以自己进行定义，即针对code字段的类型进行自定义。（在error_message字典中，根据code的类型，定义不同的提示信息即可）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">FM</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;用户名不能为空&#39;</span><span class="p">})</span>  
+    <span class="n">password</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">min_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;密码不能为空&#39;</span><span class="p">,</span><span class="s1">&#39;min_length&#39;</span><span class="p">:</span><span class="s1">&#39;密码长度不能小于6位&#39;</span><span class="p">,</span><span class="s1">&#39;max_length&#39;</span><span class="p">:</span><span class="s1">&#39;密码的长度不能超过12位&#39;</span><span class="p">})</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;邮箱不能为空&#39;</span><span class="p">,</span><span class="s1">&#39;invalid&#39;</span><span class="p">:</span><span class="s1">&#39;邮箱格式错误&#39;</span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这时，如果错误代码等于我们定义的，那么就会输出对应的错误信息。</p>
+<p>扩展：由于formobj.erros中包含了所有的错误信息，那么我们可以把它传递到前端，然后再进行取值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>   <span class="c1"># 创建一个FM</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;login.html&#39;</span><span class="p">,{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">obj</span><span class="o">.</span><span class="n">errors</span><span class="p">})</span>
+
+<span class="c1"># 前端页面</span>
+<span class="o">&lt;</span><span class="n">form</span> <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;form&#39;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&#34;post&#34;</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">Hello</span> <span class="err">用户登陆</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">用户名</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;username&#34;</span><span class="o">&gt;</span> <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="err">密码</span><span class="p">:</span><span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;password&#34;</span><span class="o">&gt;</span>
+        <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+        <span class="err">邮箱</span><span class="p">:</span><span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;email&#34;</span><span class="o">&gt;</span>
+        <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span>
+    <span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&#34;提交&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        注意：这里用.0 取数据是因为 错误信息 message，其实是个列表，会存放所有的错误信息，对于空的请求，只会返回 非空的 错误信息，但是数据类型也是列表，所以这里取第一个。</p>
+<p>        点击提交后，用户输入正确的数据，会消失，这不是我们想要的，并且form标签看起来也很乱，有没有一种方式直接来生成呢，各位看官，请继续往下看。</p>
+<h2 id="13-利用form对象手动生成前端标签">1.3 利用Form对象手动生成前端标签</h2>
+<p>　　前面可以看到，我们创建FM类的时候，指定了三个Form字段，那么我们可以利用这三个Form字段来生成对应的input输入框。(Form字段其实本身不具有生成HTML标签的功能，它只有验证的功能，真正生成HTML标签的操作，是由Form字段类型(CharField)中的widgets属性定义了textinput插件完成的，详细信息，可以查看widgets的原码，继续了解)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{{</span> <span class="n">Form对象</span><span class="o">.</span><span class="err">字段名</span> <span class="p">}}</span>    <span class="c1"># 前端渲染时会渲染出对应的HTML标签</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对例子进行改写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># get方式要把FM对象传递给前端，否则无法生成HTML</span>
+<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;login.html&#39;</span><span class="p">,{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">obj</span><span class="p">})</span>
+ 
+ 
+<span class="c1"># 前端调用</span>
+<span class="o">&lt;</span><span class="n">form</span> <span class="n">method</span><span class="o">=</span><span class="s2">&#34;post&#34;</span> <span class="n">novalidate</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">username</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">password</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">email</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">data</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&#34;提交&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+<span class="c1"># 默认情况下高版本浏览器会对错误提示进行小窗提示，这里的为了避免浏览器这个行为，所以给form表单添加 novalidate 属性。</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="14-利用form对象自动生成前端标签">1.4 利用Form对象自动生成前端标签</h2>
+<p>Form提供了三种自动生成前端标签的方式：as_p,as_ul,as_table，由于是自动生成的，所以灵活性对比手动，要稍差点。</p>
+<ul>
+<li>as_p：生成的标签为p类型</li>
+<li>as_ul：生成的标签格ul类型</li>
+<li>as_table：生成的标签为tbody类型(注意，需要手动添加外层的<table></table>标签)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="c">&lt;!-- 1 as_table  --&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+        {{ data.as_table }}
+    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;提交&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+# 注意 as_table 的方式需要我们手动的添加table标签
+ 
+<span class="c">&lt;!-- 2 as_p  --&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    {{ data.as_p }}
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;提交&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+ 
+<span class="c">&lt;!-- 2 as_ul  --&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">novalidate</span><span class="p">&gt;</span>
+    {% csrf_token %}
+    {{ data.as_ul }}
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;提交&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：as_p,as_ul,as_table这种自动生成标签的方式来自于我们创建的FM对象，所以如果要让Form自动创建，那么需要在get请求模式下把Form对象，传递给Templates，才能引用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">FM</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;login.html&#39;</span><span class="p">,{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span><span class="n">obj</span><span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用以上两种方式：用户的输入的正确数据都会被保留。是不是很屌。不屌，因为只能输出input标签，还不能定制HTML标签的属性，真是太low了。No、No、No 你想到的，开发人员早就已经想到了</p>
+<h2 id="15-form字段的widget属性">1.5 Form字段的widget属性</h2>
+<p>由于前面已经说过，生成的标签类型是由widgets来控制的，那么我们就可以对其进行定制，生成我们想要的标签类型，并给标签添加属性信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">widgets</span>    <span class="c1">#导入插件库</span>
+ 
+<span class="k">class</span> <span class="nc">FM</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;用户名不能为空&#39;</span><span class="p">},</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;c1&#39;</span><span class="p">})</span>     <span class="c1"># 设置字段的类型为Textarea，并且添加class属性的值为cl</span>
+    <span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;密码不能为空&#39;</span><span class="p">,</span><span class="s1">&#39;min_length&#39;</span><span class="p">:</span><span class="s1">&#39;密码长度不能小于6位&#39;</span><span class="p">,</span><span class="s1">&#39;max_length&#39;</span><span class="p">:</span><span class="s1">&#39;密码的长度不能超过12位&#39;</span><span class="p">},</span>
+        <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">PasswordInput</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="s1">&#39;c1&#39;</span><span class="p">})</span>  <span class="c1"># 设置字段类型为Password类型，添加class属性为c1</span>
+    <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里我们修改了username字段的 标签格式，输出的就是一个textarea标签，并且利用了attr参数给标签添加了 class 属性（多个属性可以在attr中继续添加），这个插件里面几乎包含了所有的输入框比如input、radio、select、等等。</p>
+<h2 id="16-form字段其他的属性">1.6 Form字段其他的属性</h2>
+<p>一大波属性来袭：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Field</span>
+    <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>               <span class="err">是否允许为空</span>
+    <span class="n">widget</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                 <span class="n">HTML插件</span>
+    <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                  <span class="err">用于生成</span><span class="n">Label标签或显示内容</span>
+    <span class="n">initial</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                <span class="err">初始值</span>
+    <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>                <span class="err">帮助信息</span><span class="p">(</span><span class="err">在标签旁边显示</span><span class="p">)</span>
+    <span class="n">error_messages</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>         <span class="err">错误信息</span> <span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="s1">&#39;不能为空&#39;</span><span class="p">,</span> <span class="s1">&#39;invalid&#39;</span><span class="p">:</span> <span class="s1">&#39;格式错误&#39;</span><span class="p">}</span>
+    <span class="n">show_hidden_initial</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>   <span class="err">是否在当前插件后面再加一个隐藏的且具有默认值的插件（可用于检验两次输入是否一直）</span>
+    <span class="n">validators</span><span class="o">=</span><span class="p">[],</span>               <span class="err">自定义验证规则</span>
+    <span class="n">localize</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>              <span class="err">是否支持本地化（比如时区，在存储时区数据时，会匹配本地时区，不常用）</span>
+    <span class="n">disabled</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>              <span class="err">是否可以编辑</span>
+    <span class="n">label_suffix</span><span class="o">=</span><span class="bp">None</span>            <span class="n">Label内容后缀</span><span class="p">(</span><span class="err">比如在前端使用</span><span class="n">formobj</span><span class="o">.</span><span class="n">as_table生成表单时</span><span class="err">，</span><span class="n">label和input中间的分隔符</span><span class="err">，默认是冒号，不常用</span><span class="p">)</span>
+  
+  
+<span class="n">CharField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>             <span class="err">最大长度</span>
+    <span class="n">min_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>             <span class="err">最小长度</span>
+    <span class="n">strip</span><span class="o">=</span><span class="bp">True</span>                   <span class="err">是否移除用户输入空白</span>
+  
+<span class="n">IntegerField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">max_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>              <span class="err">最大值</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>              <span class="err">最小值</span>
+  
+<span class="n">FloatField</span><span class="p">(</span><span class="n">IntegerField</span><span class="p">)</span>
+    <span class="o">...</span>
+  
+<span class="n">DecimalField</span><span class="p">(</span><span class="n">IntegerField</span><span class="p">)</span>
+    <span class="n">max_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>              <span class="err">最大值</span>
+    <span class="n">min_value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>              <span class="err">最小值</span>
+    <span class="n">max_digits</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>             <span class="err">总长度</span>
+    <span class="n">decimal_places</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>         <span class="err">小数位长度</span>
+  
+<span class="n">BaseTemporalField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">input_formats</span><span class="o">=</span><span class="bp">None</span>          <span class="err">时间格式化</span>  
+  
+<span class="n">DateField</span><span class="p">(</span><span class="n">BaseTemporalField</span><span class="p">)</span>    <span class="err">格式：</span><span class="mi">2015</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">01</span>
+<span class="n">TimeField</span><span class="p">(</span><span class="n">BaseTemporalField</span><span class="p">)</span>    <span class="err">格式：</span><span class="mi">11</span><span class="p">:</span><span class="mi">12</span>
+<span class="n">DateTimeField</span><span class="p">(</span><span class="n">BaseTemporalField</span><span class="p">)</span><span class="err">格式：</span><span class="mi">2015</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">01</span> <span class="mi">11</span><span class="p">:</span><span class="mi">12</span>
+  
+<span class="n">DurationField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>            <span class="err">时间间隔：</span><span class="o">%</span><span class="n">d</span> <span class="o">%</span><span class="n">H</span><span class="p">:</span><span class="o">%</span><span class="n">M</span><span class="p">:</span><span class="o">%</span><span class="n">S</span><span class="o">.%</span><span class="n">f</span>
+    <span class="o">...</span>
+  
+<span class="n">RegexField</span><span class="p">(</span><span class="n">CharField</span><span class="p">)</span>
+    <span class="n">regex</span><span class="p">,</span>                      <span class="err">自定制正则表达式</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>            <span class="err">最大长度</span>
+    <span class="n">min_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>            <span class="err">最小长度</span>
+    <span class="n">error_message</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>         <span class="err">忽略，错误信息使用</span> <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;invalid&#39;</span><span class="p">:</span> <span class="s1">&#39;...&#39;</span><span class="p">}</span>
+  
+<span class="n">EmailField</span><span class="p">(</span><span class="n">CharField</span><span class="p">)</span>     
+    <span class="o">...</span>
+  
+<span class="n">FileField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">allow_empty_file</span><span class="o">=</span><span class="bp">False</span>     <span class="err">是否允许空文件</span>
+  
+<span class="n">ImageField</span><span class="p">(</span><span class="n">FileField</span><span class="p">)</span>     
+    <span class="o">...</span>
+    <span class="err">注：需要</span><span class="n">PIL模块</span><span class="err">，</span><span class="n">pip3</span> <span class="n">install</span> <span class="n">Pillow</span>
+    <span class="err">以上两个字典使用时，需要注意两点：</span>
+        <span class="o">-</span> <span class="n">form表单中</span> <span class="n">enctype</span><span class="o">=</span><span class="s2">&#34;multipart/form-data&#34;</span>
+        <span class="o">-</span> <span class="n">view函数中</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">MyForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+  
+<span class="n">URLField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="o">...</span>
+  
+  
+<span class="n">BooleanField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span> 
+    <span class="o">...</span>
+  
+<span class="n">NullBooleanField</span><span class="p">(</span><span class="n">BooleanField</span><span class="p">)</span>
+    <span class="o">...</span>
+  
+<span class="n">ChoiceField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="n">choices</span><span class="o">=</span><span class="p">(),</span>                <span class="err">选项，如：</span><span class="n">choices</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;上海&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;北京&#39;</span><span class="p">),)</span>
+    <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>             <span class="err">是否必填</span>
+    <span class="n">widget</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>               <span class="err">插件，默认</span><span class="n">select插件</span>
+    <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                <span class="n">Label内容</span>
+    <span class="n">initial</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>              <span class="err">初始值</span>
+    <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>              <span class="err">帮助提示</span>
+  
+  
+<span class="n">ModelChoiceField</span><span class="p">(</span><span class="n">ChoiceField</span><span class="p">)</span>
+    <span class="o">...</span>                        <span class="n">django</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ModelChoiceField</span>
+    <span class="n">queryset</span><span class="p">,</span>                  <span class="c1"># 查询数据库中的数据</span>
+    <span class="n">empty_label</span><span class="o">=</span><span class="s2">&#34;---------&#34;</span><span class="p">,</span>   <span class="c1"># 默认空显示内容</span>
+    <span class="n">to_field_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>        <span class="c1"># HTML中value的值对应的字段</span>
+    <span class="n">limit_choices_to</span><span class="o">=</span><span class="bp">None</span>      <span class="c1"># ModelForm中对queryset二次筛选</span>
+      
+<span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">ModelChoiceField</span><span class="p">)</span>
+    <span class="o">...</span>                        <span class="n">django</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span>
+  
+  
+      
+<span class="n">TypedChoiceField</span><span class="p">(</span><span class="n">ChoiceField</span><span class="p">)</span>
+    <span class="nb">coerce</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">val</span>   <span class="err">对选中的值进行一次转换</span>
+    <span class="n">empty_value</span><span class="o">=</span> <span class="s1">&#39;&#39;</span>            <span class="err">空值的默认值</span>
+  
+<span class="n">MultipleChoiceField</span><span class="p">(</span><span class="n">ChoiceField</span><span class="p">)</span>
+    <span class="o">...</span>
+  
+<span class="n">TypedMultipleChoiceField</span><span class="p">(</span><span class="n">MultipleChoiceField</span><span class="p">)</span>
+    <span class="nb">coerce</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">val</span>   <span class="err">对选中的每一个值进行一次转换</span>
+    <span class="n">empty_value</span><span class="o">=</span> <span class="s1">&#39;&#39;</span>            <span class="err">空值的默认值</span>
+  
+<span class="n">ComboField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">fields</span><span class="o">=</span><span class="p">()</span>                  <span class="err">使用多个验证，如下：即验证最大长度</span><span class="mi">20</span><span class="err">，又验证邮箱格式</span>
+                               <span class="n">fields</span><span class="o">.</span><span class="n">ComboField</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(),])</span>
+  
+<span class="n">MultiValueField</span><span class="p">(</span><span class="n">Field</span><span class="p">)</span>
+    <span class="n">PS</span><span class="p">:</span> <span class="err">抽象类，子类中可以实现聚合多个字典去匹配一个值，要配合</span><span class="n">MultiWidget使用</span>
+  
+<span class="n">SplitDateTimeField</span><span class="p">(</span><span class="n">MultiValueField</span><span class="p">)</span>
+    <span class="n">input_date_formats</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>   <span class="err">格式列表：</span><span class="p">[</span><span class="s1">&#39;%Y--%m--</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;%m</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">,</span> <span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%y&#39;</span><span class="p">]</span>
+    <span class="n">input_time_formats</span><span class="o">=</span><span class="bp">None</span>    <span class="err">格式列表：</span><span class="p">[</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">,</span> <span class="s1">&#39;%H:%M:%S.</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;%H:%M&#39;</span><span class="p">]</span>
+  
+<span class="n">FilePathField</span><span class="p">(</span><span class="n">ChoiceField</span><span class="p">)</span>     <span class="err">文件选项，目录下文件显示在页面中</span><span class="p">(</span><span class="err">下拉框显示</span><span class="n">path指定目录下的文件</span><span class="p">)</span><span class="err">，提交时</span> <span class="err">提交的是</span> <span class="err">文件的路径</span>
+    <span class="n">path</span><span class="p">,</span>                      <span class="err">文件夹路径</span>
+    <span class="n">match</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                <span class="err">正则匹配</span>
+    <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>           <span class="err">递归下面的文件夹</span>
+    <span class="n">allow_files</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>          <span class="err">允许文件</span>
+    <span class="n">allow_folders</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>       <span class="err">允许文件夹</span>
+    <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">widget</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">initial</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+  
+<span class="n">GenericIPAddressField</span>
+    <span class="n">protocol</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span>           <span class="n">both</span><span class="p">,</span><span class="n">ipv4</span><span class="p">,</span><span class="n">ipv6支持的IP格式</span>
+    <span class="n">unpack_ipv4</span><span class="o">=</span><span class="bp">False</span>          <span class="err">解析</span><span class="n">ipv4地址</span><span class="err">，如果是</span><span class="p">::</span><span class="n">ffff</span><span class="p">:</span><span class="mf">192.0</span><span class="o">.</span><span class="mf">2.1</span><span class="err">时候，可解析为</span><span class="mf">192.0</span><span class="o">.</span><span class="mf">2.1</span><span class="err">，</span> <span class="n">PS</span><span class="err">：</span><span class="n">protocol必须为both才能启用</span>
+  
+<span class="n">SlugField</span><span class="p">(</span><span class="n">CharField</span><span class="p">)</span>           <span class="err">数字，字母，下划线，减号（连字符）</span>
+    <span class="o">...</span>
+  
+<span class="n">UUIDField</span><span class="p">(</span><span class="n">CharField</span><span class="p">)</span>           <span class="n">uuid类型</span>
+    <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Django内置其他插件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">TextInput</span><span class="p">(</span><span class="n">Input</span><span class="p">)</span>
+<span class="n">NumberInput</span><span class="p">(</span><span class="n">TextInput</span><span class="p">)</span>
+<span class="n">EmailInput</span><span class="p">(</span><span class="n">TextInput</span><span class="p">)</span>
+<span class="n">URLInput</span><span class="p">(</span><span class="n">TextInput</span><span class="p">)</span>
+<span class="n">PasswordInput</span><span class="p">(</span><span class="n">TextInput</span><span class="p">)</span>
+<span class="n">HiddenInput</span><span class="p">(</span><span class="n">TextInput</span><span class="p">)</span>
+<span class="n">Textarea</span><span class="p">(</span><span class="n">Widget</span><span class="p">)</span>
+<span class="n">DateInput</span><span class="p">(</span><span class="n">DateTimeBaseInput</span><span class="p">)</span>
+<span class="n">DateTimeInput</span><span class="p">(</span><span class="n">DateTimeBaseInput</span><span class="p">)</span>
+<span class="n">TimeInput</span><span class="p">(</span><span class="n">DateTimeBaseInput</span><span class="p">)</span>
+<span class="n">CheckboxInput</span>
+<span class="n">Select</span>
+<span class="n">NullBooleanSelect</span>
+<span class="n">SelectMultiple</span>
+<span class="n">RadioSelect</span>
+<span class="n">CheckboxSelectMultiple</span>
+<span class="n">FileInput</span>
+<span class="n">ClearableFileInput</span>
+<span class="n">MultipleHiddenInput</span>
+<span class="n">SplitDateTimeWidget</span>
+<span class="n">SplitHiddenDateTimeWidget</span>
+<span class="n">SelectDateWidget</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>label 属性的用法举例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;/test/&#34;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&#34;post&#34;</span> <span class="n">novalidate</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">label</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">username</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">label</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">password</span> <span class="p">}}</span> <span class="p">{{</span> <span class="n">obj</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="mi">0</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&#34;提交&#34;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="17-特别补充-choicefield">1.7 特别补充-ChoiceField</h2>
+<p>ChoiceField表示下拉选择类型，针对不同的标签，不同的效果有多种搭配，需要注意的是，当输入框为非ChoiceField类型时，可以使用widget来添加choices选项。如果是ChoiceField类型，那么就可以直接添加choices属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 单radio，值为字符串</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+ <span class="n">initial</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>　　<span class="c1"># 初始数据数量为2</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">RadioSelect</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;上海&#39;</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;北京&#39;</span><span class="p">),))</span>
+<span class="p">)</span>
+ 
+<span class="c1"># 单radio，值为字符串</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+ <span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;上海&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;北京&#39;</span><span class="p">),),</span>     <span class="c1"># 定义要展示的数据信息，1表示ID</span>
+ <span class="n">initial</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">RadioSelect</span>
+<span class="p">)</span>
+ 
+<span class="c1"># 单select，值为字符串</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+ <span class="n">initial</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;上海&#39;</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;北京&#39;</span><span class="p">),))</span>
+<span class="p">)</span>
+ 
+<span class="c1"># 单select，值为字符串</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+ <span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;上海&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;北京&#39;</span><span class="p">),),</span>
+ <span class="n">initial</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Select</span>
+<span class="p">)</span>
+ 
+<span class="c1"># 多选select，值为列表</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span>
+ <span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;上海&#39;</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;北京&#39;</span><span class="p">),),</span>
+ <span class="n">initial</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,],</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">SelectMultiple</span>
+<span class="p">)</span>
+ 
+ 
+<span class="c1"># 单checkbox</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">CheckboxInput</span><span class="p">()</span>
+<span class="p">)</span>
+ 
+ 
+<span class="c1"># 多选checkbox,值为列表</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">MultipleChoiceField</span><span class="p">(</span>
+ <span class="n">initial</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">],</span>
+ <span class="n">choices</span><span class="o">=</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;上海&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;北京&#39;</span><span class="p">),),</span>
+ <span class="n">widget</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">CheckboxSelectMultiple</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ChoiceField类型的字段表示的是下拉单选框，它的choice选项表示要提供给用户选择的选项。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># choice 字段格式</span>
+<span class="n">city</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span>
+    <span class="n">choices</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;上海&#39;</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;北京&#39;</span><span class="p">)]</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>可以看到choices接收的数据类型为列表嵌套元组，是不是看起来很熟悉，没错，使用value_list获取到的数据，就是这个格式。</p>
+</blockquote>
+<p>        这个时候需要来一波需求了，当choices的数据来源于数据库的时候，我新加了一个城市，ChoiceField 并不！会！动！态！的！重！新！读！取！，为什么呢？</p>
+<p>        这个和类的实例化有关，严格来说的话这些字段都属于类的属性，类属性不会在实例化的时候进行重新读取，那么想要类属性在实例化的时候重新读取该咋办，是的， 没错，定义在__init__ 函数中(每次实例化都会执行)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">UserForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;用户名不能为空&#39;</span><span class="p">,</span><span class="s1">&#39;invaild&#39;</span><span class="p">:</span><span class="s1">&#39;用户名格式不正确&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;required&#39;</span><span class="p">:</span><span class="s1">&#39;密码不能为空&#39;</span><span class="p">,</span><span class="s1">&#39;invalid&#39;</span><span class="p">:</span><span class="s1">&#39;密码格式不正确&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+ 
+ 
+    <span class="n">ut_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[])</span> <span class="c1"># 下面每次初始化都会执行，所以这里可以写空，避免二次查库</span>
+    <span class="c1"># choices=[(1,&#39;上海&#39;),(2,&#39;北京&#39;),(3,&#39;河南&#39;)] 这里的choices接受这种格式的数据，和values_list的结果很像</span>
+ 
+ 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+ 
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;ut_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">UserType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>  <span class="c1"># 由于每次实例化的时候都会执行__init__方法，就可以动态的实时更新了。</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>针对下拉列表这种可能会变得数据，让其每次实例化的时候都动态的生成，否则会造成数据不能实时显示的问题</p>
+</blockquote>
+<h2 id="18-自定义验证规则">1.8 自定义验证规则</h2>
+<p>我们知道Form表单对象内置了许多字段类型，根据这些字段类型我们可以知道，其内部是包含了正则表达式的。其中源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Email字段正则表达式</span>
+<span class="k">class</span> <span class="nc">EmailValidator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Enter a valid email address.&#39;</span><span class="p">)</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;invalid&#39;</span>
+    <span class="n">user_regex</span> <span class="o">=</span> <span class="n">_lazy_re_compile</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&#34;(^[-!#$%&amp;&#39;*+/=?^_`{}|~0-9A-Z]+(\.[-!#$%&amp;&#39;*+/=?^_`{}|~0-9A-Z]+)*\Z&#34;</span>  <span class="c1"># dot-atom</span>
+        <span class="sa">r</span><span class="s1">&#39;|^&#34;([\001-\010\013\014\016-\037!#-\[\]-\177]|</span><span class="se">\\</span><span class="s1">[\001-\011\013\014\016-\177])*&#34;\Z)&#39;</span><span class="p">,</span>  <span class="c1"># quoted-string</span>
+        <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="n">domain_regex</span> <span class="o">=</span> <span class="n">_lazy_re_compile</span><span class="p">(</span>
+        <span class="c1"># max length for domain name labels is 63 characters per RFC 1034</span>
+        <span class="sa">r</span><span class="s1">&#39;((?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+)(?:[A-Z0-9-]{2,63}(?&lt;!-))\Z&#39;</span><span class="p">,</span>
+        <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="n">literal_regex</span> <span class="o">=</span> <span class="n">_lazy_re_compile</span><span class="p">(</span>
+        <span class="c1"># literal form, ipv4 or ipv6 address (SMTP 4.1.3)</span>
+        <span class="sa">r</span><span class="s1">&#39;\[([A-f0-9:\.]+)\]\Z&#39;</span><span class="p">,</span>
+        <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="n">domain_whitelist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>那么现在有一个需求，我要验证手机号，可是django Form没有内置这个正则表达式，我们该怎么办？ 能否自定义？答案是可以的。主要有以下三种方式：</p>
+<ol>
+<li>通过validators属性来定义(类型为列表)：主要分为下面两种方式
+<ul>
+<li>对象</li>
+<li>函数</li>
+</ul>
+</li>
+<li>通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</li>
+</ol>
+<h3 id="181-通过对象来自定义验证规则">1.8.1 通过对象来自定义验证规则</h3>
+<p>语法格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">RegexValidator</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;正则表达式&#39;</span><span class="p">,</span><span class="s1">&#39;错误提示&#39;</span><span class="p">)]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>匹配手机号的简单实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">Form</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">RegexValidator</span>     <span class="c1"># 注意需要导入RegexValidator对象</span>
+ 
+ 
+<span class="k">class</span> <span class="nc">UserInfo</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+ 
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">RegexValidator</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[0-9]+$&#39;</span><span class="p">,</span> <span class="s1">&#39;请输入数字&#39;</span><span class="p">),</span> <span class="n">RegexValidator</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^159[0-9]+$&#39;</span><span class="p">,</span> <span class="s1">&#39;数字必须以159开头&#39;</span><span class="p">)],</span>
+    <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ol>
+<li>多个条件并存的时候，顺序为从左到右</li>
+<li>由于指定传递正则表达式对象，所以可定制性不高</li>
+<li>多用于简单的场合下</li>
+</ol>
+<h3 id="182-通过函数来自定义验证规则">1.8.2 通过函数来自定义验证规则</h3>
+<p>语法格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>  <span class="c1"># 需要导入ValidationError</span>
+  
+<span class="k">def</span> <span class="err">函数名</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+  
+    <span class="s1">&#39;&#39;&#39;匹配规则若干&#39;&#39;&#39;</span>
+    <span class="err">如果不匹配</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ValiadationError</span><span class="p">(</span><span class="s1">&#39;error message&#39;</span><span class="p">)</span>
+  
+<span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="err">函数名</span><span class="p">,]</span>
+  
+<span class="c1"># 在字段的validators参数中表示正则匹配使用函数</span>
+<span class="c1"># 在函数中定义正则表达式进行返回</span>
+<span class="c1"># 匹配成功可以不进行返回</span>
+<span class="c1"># 匹配失败需要抛出ValidationError异常　</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么要使用ValidationError来抛出异常呢？这里来自于源码，有人要问，为啥老看源码，小白看不懂啊，我想所，人家django都写好了，你不去学习，还好意思问。神经病啊你</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># RegexValidator内部信息</span>
+<span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Validate that the input contains a match for the regular expression
+</span><span class="s2">        if inverse_match is False, otherwise raise ValidationError.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+                <span class="n">force_text</span><span class="p">(</span><span class="n">value</span><span class="p">)))):</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+
+<span class="c1"># 可以看到 RegexValidator 正则表达式对象 匹配不成功的时候会使用raise 主动的抛出ValidationError 异常，并且ValidationError对象接受两个信息，但是code已经有默认值了，所以我们这里只返回错误message即可</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>匹配手机号示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">Form</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+ 
+<span class="k">def</span> <span class="nf">my_re</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+ 
+    <span class="n">mobile_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$&#39;</span><span class="p">)</span>
+ 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mobile_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+ 
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;手机号码格式错误&#39;</span><span class="p">)</span>
+ 
+ 
+ 
+ 
+<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+ 
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span>
+        <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">my_re</span><span class="p">,]</span>       <span class="c1"># 调用我们定义的my_re函数进行验证</span>
+    <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="183-通过在当前类的中定义-clean_字段名-的方法-来实现正则验证">1.8.3 通过在当前类的中定义 clean_字段名 的方法 来实现正则验证</h3>
+<p>为什么要定义 clean_字段名 来进行正则验证呢？这里通过form.is_valid() 入口查看form字段的验证规则。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># is_valid</span>
+    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Returns True if the form has no errors. Otherwise, False. If errors are
+</span><span class="s2">        being ignored, returns False.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_bound</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span>
+<span class="c1"># 最后调用了 self.errors</span>
+ 
+ 
+<span class="c1"># 查看self.errors函数</span>
+    <span class="k">def</span> <span class="nf">errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;Returns an ErrorDict for the data provided for the form&#34;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+<span class="c1"># 这里又返回了 full_clean()</span>
+ 
+ 
+<span class="c1"># 查看full_clean()函数</span>
+    <span class="k">def</span> <span class="nf">full_clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Cleans all of self.data and populates self._errors and
+</span><span class="s2">        self.cleaned_data.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="n">ErrorDict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_bound</span><span class="p">:</span>  <span class="c1"># Stop further processing.</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># If the form is permitted to be empty, and none of the form data has</span>
+        <span class="c1"># changed from the initial data, short circuit any validation.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty_permitted</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_changed</span><span class="p">():</span>
+            <span class="k">return</span>
+ 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean_fields</span><span class="p">()</span>    <span class="c1"># 这里执行了 clean_fields() 函数，只要定义了clean_fieldsname 就会自动被执行</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean_form</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_post_clean</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>所以这里方法名称有特殊要求，必须为：clean_当前字段,自动会去执行这个方法，定义字段的时候不用显示的调用这个方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">widgets</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">RegexValidator</span>
+ 
+<span class="k">def</span> <span class="nf">clean_phone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># 去取用户提交的值：可能是错误是的，也可能是正确的</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span>
+    <span class="n">mobile_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mobile_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;手机号码格式错误&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phone</span><span class="o">=</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;手机号码已存在&#39;</span><span class="p">)</span>   <span class="c1"># 可以利用数据库对数据唯一性进行验证</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span>   <span class="c1"># 这里必须要返回正确的值，因为返回值会被重新赋值给cleaned_data中的Phone字段的值</span>
+     
+    <span class="c1"># 先通过form基础验证，才会继续匹配。 比如字段是必填的，如果没有填写，则不会执行clean_phone函数</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>**切记：</p>
+<ol>
+<li>不要瞎取值，因为不是按照顺序取值的，所以在你取得时候，可能还没有赋值。</li>
+<li>对象.<strong>dict</strong>：通过这种方法去取得值，因为每次顺序都是不一样的。所以可能你取的值，还没有被赋值。</li>
+</ol>
+<p>小结：</p>
+<ol>
+<li>对象，只能添加正则表达式</li>
+<li>函数，不常用</li>
+<li>当前类方法中自定义，可以添加对数据库的操作，注意必须要有返回值。</li>
+<li>对象方法和类方法中定义，是可以同时存在的，先执行对象中定义的，然后再执行类方法中自定义的。</li>
+</ol>
+<h3 id="例子注册的时候两次密码一致性的验证">例子：注册的时候，两次密码一致性的验证</h3>
+<p>由于不能再一个验证规则里面取其他字段的值，所以前面的方法并不可行，这里django提供了其他的form表单的整体验证（细心的人会看到刚刚的full_clean后有一个clean_form函数）</p>
+<p>定义clean函数，来对form进行整体验证(注意这里的数据，表示前面验证都有通过)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+ 
+<span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+ 
+    <span class="n">pwd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;pwd&#39;</span><span class="p">]</span>
+    <span class="n">pwd_confirm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;pwd_confirm&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">pwd</span> <span class="o">==</span> <span class="n">pwd_confirm</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span>   <span class="c1"># 必须有返回值，事关再次取cleaned_data是否有值</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;pwd&#39;</span><span class="p">,</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;密码输入不一致&#39;</span><span class="p">))</span>   <span class="c1"># 根据源码中的操作，把错误信息添加到 self.add_errors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;pwd_confirm&#39;</span><span class="p">,</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;密码输入不一致&#39;</span><span class="p">))</span>  <span class="c1"># 添加错误信息必须是ValidationError对象</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span>
+ 
+    <span class="c1"># 如果有人添加错误，那么就不能通过</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>扩展：</p>
+<ol>
+<li>由于在full_clean()函数中会执行钩子函数(clean_fields，clean_form，_post_clean)，所以钩子函数存在，就执行，不存在就跳过。【clean_form，_post_clean功能类似，这里不在赘述】</li>
+<li>当对象和类方法 同时存在时，先匹配对象，然后再匹配类方法。　</li>
+</ol>
+<h3 id="184-强制触发异常">1.8.4 强制触发异常</h3>
+<p>在某些场景下比如用户登录，如果用户名或者密码错误，我们需要手动触发一个异常，并提示：‘用户名或者密码错误’。这时可以利用form.add_error() 来进行触发。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+ 
+<span class="n">form</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;用户名或者密码错误&#39;</span><span class="p">))</span>
+ 
+ 
+<span class="c1"># 这样在前端的password字段后面会主动触发异常</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当然，这里用了ValidationError对象，是因为django提供的 form.is_valid中最后也是用过ValidationError完成添加的，这里其实也可以直接写错误信息，但是推荐和源码保持一致。</p>
+<h1 id="2-modelform表单验证">2 ModelForm表单验证</h1>
+<p>ModelForm顾名思义就是model和form的结合体，所以它包含了form的功能，比如：</p>
+<ul>
+<li>验证</li>
+<li>表单生成</li>
+</ul>
+<p>同时它还包含了model的功能，比如</p>
+<ul>
+<li>数据库操作(比如数据的修改，保存等)</li>
+</ul>
+<h2 id="21-基本使用">2.1 基本使用</h2>
+<p>使用起来比forms简单很多，不需要再编写字段，只需要传入要关联的model类即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">rbac</span> <span class="kn">import</span> <span class="n">model</span>
+
+<span class="k">class</span> <span class="nc">UserInfoModelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Userinfo</span>  <span class="c1"># 与Userinfo建立关系</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&#34;__all__&#34;</span>  <span class="c1"># 要显示的Userinfo字段(__all__表示所有)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>前端渲染方法和forms相同，这里不再赘述</p>
+<h2 id="22-自定制字段名">2.2 自定制字段名</h2>
+<p>默认渲染出来的字段名称是model类中对应的字段的名称(英文),如果要显示中文名称，可以通过两种方式：</p>
+<ol>
+<li>在model类中添加verbose_name来定义显示的中文名称(djang admin也是读取这个名字的)</li>
+<li>在ModelForm类中定义显示的名称</li>
+</ol>
+<p>ModelForm中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">UserInfoModelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Userinfo</span>  <span class="c1"># 与Userinfo建立关系</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&#34;__all__&#34;</span>  <span class="c1"># 要显示的Userinfo字段(__all__表示所有)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;你好&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span><span class="s1">&#39;世界&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roles&#39;</span><span class="p">:</span><span class="s1">&#39;谢谢&#39;</span>
+        <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>优先级高于字段的verbose_name，如果同时设置，会labels会覆盖verbose_name</p>
+<h2 id="23-展示指定的列">2.3 展示指定的列</h2>
+<p>fields用于指定要在前端渲染的字段，主要有两类值</p>
+<ul>
+<li>__all__: 显示所有字段</li>
+<li>[&lsquo;x&rsquo;,&lsquo;xx&rsquo;]:显示指定字段</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 显示指定列</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>  
+
+<span class="c1"># 排除指定列</span>
+<span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span>      
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="24-初始化数据">2.4 初始化数据</h2>
+<p>ModelForm对象在实例化的同时，还可以指定两个参数，用于初始化form表单（比如在修改页面，提前把要修改的数据灌入form表单中）</p>
+<ul>
+<li>initial: 类型为字典</li>
+<li>instance: 类型为对象</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">obj</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Userinfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  
+<span class="n">uf</span> <span class="o">=</span> <span class="n">UserInfoModelForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Userinfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">uf</span> <span class="o">=</span> <span class="n">UserInfoModelForm</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="25-更新数据">2.5 更新数据</h2>
+<p>需要特别注意更新数据时的操作，如果不传入要更新的实例，就会变成新增数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Userinfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="c1"># uf = UserInfoModelForm(request.POST)  # 直接调用是新增</span>
+    <span class="n">uf</span> <span class="o">=</span> <span class="n">UserInfoModelForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span><span class="n">instance</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>  <span class="c1"># 这样才是更新数据</span>
+    <span class="k">if</span> <span class="n">uf</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+        <span class="n">uf</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/arya/rbac/userinfo/&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="26-其他modelform配置项">2.6 其他ModelForm配置项</h2>
+<p>下面是ModelForm组件的相关配置项目：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">.</span>  <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span><span class="p">,</span>                           <span class="c1"># 对应Model的</span>
+        <span class="n">fields</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                     <span class="c1"># 字段</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                    <span class="c1"># 排除字段</span>
+        <span class="n">labels</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                     <span class="c1"># 提示信息</span>
+        <span class="n">help_texts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                 <span class="c1"># 帮助提示信息</span>
+        <span class="n">widgets</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>                    <span class="c1"># 自定义插件</span>
+        <span class="n">error_messages</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>             <span class="c1"># 自定义错误信息（整体错误信息from django.core.exceptions import NON_FIELD_ERRORS）</span>
+        <span class="n">field_classes</span><span class="o">=</span><span class="bp">None</span>               <span class="c1"># 自定义字段类 （也可以自定义字段）</span>
+        <span class="n">localized_fields</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;birth_date&#39;</span><span class="p">,)</span> <span class="c1"># 本地化，如：根据不同时区显示数据</span>
+        <span class="err">如：</span>
+            <span class="err">数据库中</span>
+                <span class="mi">2016</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">27</span> <span class="mo">04</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">57</span>
+            <span class="n">setting中的配置</span>
+                <span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s1">&#39;Asia/Shanghai&#39;</span>
+                <span class="n">USE_TZ</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="err">则显示：</span>
+                <span class="mi">2016</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">27</span> <span class="mi">12</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">57</span>
+<span class="n">b</span><span class="o">.</span> <span class="err">验证执行过程</span>
+    <span class="n">is_valid</span> <span class="o">-&gt;</span> <span class="n">full_clean</span> <span class="o">-&gt;</span> <span class="err">钩子</span> <span class="o">-&gt;</span> <span class="err">整体错误</span>
+
+<span class="n">c</span><span class="o">.</span> <span class="err">字典字段验证</span>
+    <span class="k">def</span> <span class="nf">clean_字段名</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 可以抛出异常</span>
+        <span class="c1"># from django.core.exceptions import ValidationError</span>
+        <span class="k">return</span> <span class="s2">&#34;新值&#34;</span>
+<span class="n">d</span><span class="o">.</span> <span class="err">用于验证</span>
+    <span class="n">model_form_obj</span> <span class="o">=</span> <span class="n">ModelForm</span><span class="p">()</span>
+    <span class="n">model_form_obj</span><span class="o">.</span><span class="n">is_valid</span><span class="p">()</span>
+    <span class="n">model_form_obj</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span>
+    <span class="n">model_form_obj</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
+    <span class="n">model_form_obj</span><span class="o">.</span><span class="n">cleaned_data</span>
+<span class="n">e</span><span class="o">.</span> <span class="err">用于创建</span>
+    <span class="n">model_form_obj</span> <span class="o">=</span> <span class="n">ModelForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+    <span class="c1">#### 页面显示，并提交 #####</span>
+    <span class="c1"># 默认保存多对多</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># 不做任何操作，内部定义 save_m2m（用于保存多对多）</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>      <span class="c1"># 保存单表信息</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">save_m2m</span><span class="p">()</span>  <span class="c1"># 保存关联多对多信息</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面是一个小例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">widgets</span> <span class="k">as</span> <span class="n">froms_widgets</span>
+
+<span class="k">class</span> <span class="nc">UserInfoModelForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UserInfo</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span>
+        <span class="c1"># fields =  [&#39;username&#39;,&#39;email&#39;]</span>
+        <span class="c1"># exclude = [&#39;username&#39;]</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;用户名&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;邮箱&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">help_texts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;...&#39;</span>
+        <span class="p">}</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">froms_widgets</span><span class="o">.</span><span class="n">Textarea</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;c1&#39;</span><span class="p">})</span>
+        <span class="p">}</span>
+        <span class="n">error_messages</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;__all__&#39;</span><span class="p">:{</span>    <span class="c1"># 整体错误信息</span>
+
+            <span class="p">},</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="s1">&#39;邮箱不能为空&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;invalid&#39;</span><span class="p">:</span> <span class="s1">&#39;邮箱格式错误..&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">field_classes</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># 定义字段的类是什么</span>
+            <span class="c1"># &#39;email&#39;: Ffields.URLField  # 这里只能填类，加上括号就是对象了。</span>
+        <span class="p">}</span>
+
+        <span class="c1"># localized_fields=(&#39;ctime&#39;,)  # 哪些字段做本地化</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/5-sqlalchemy-flask_sqlalchemy-wtforms/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">5-sqlalchemy-flask_sqlalchemy-wtforms</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/6-subprocess%E6%A8%A1%E5%9D%97-tempfile%E6%A8%A1%E5%9D%97/">
+            <span class="next-text nav-default">6-subprocess模块-tempfile模块</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>16-文件操作-StringIO-BytesIO - daxin.li&#39;s blog</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="daxin.li" />
+  <meta name="description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管" />
+
+  <meta name="keywords" content="Hugo, theme, jane" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<link rel="canonical" href="https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.b3a8813c06e6d785beba22bf8264e174fa2cb3a396b22f9ba24e2c00c18aaf7f.css" integrity="sha256-s6iBPAbm14W&#43;uiK/gmThdPoss6OWsi&#43;bok4sAMGKr38=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="16-文件操作-StringIO-BytesIO" />
+<meta property="og:description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dachenzi.github.io/post/16-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C-stringio-bytesio/" />
+
+<meta itemprop="name" content="16-文件操作-StringIO-BytesIO">
+<meta itemprop="description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管">
+
+<meta itemprop="wordCount" content="6338">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="16-文件操作-StringIO-BytesIO"/>
+<meta name="twitter:description" content="文章目录 1 文件操作 1.1 open函数介绍 1.2 打开操作 1.2.1 mode模式 1.2.2 文件指针 1.2.3 缓冲区 1.2.4 encoding编码 1.2.5 其他参数 1.3 读写操作 1.4 关闭操作 1.5 上下文管"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">daxin.li's blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      daxin.li's blog
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/post/">文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/tags/">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://dachenzi.github.io/categories/">类别</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://gohugo.io" rel="noopener" target="_blank">
+              关于
+              
+              <i class="iconfont">
+                <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M623.36 272.96 473.216 423.04C467.2 429.056 467.072 438.656 472.896 444.416c0 0-6.72-6.656 1.6 1.6C496.064 467.648 528.64 500.224 528.64 500.224 534.464 506.048 544 505.856 550.016 499.904l150.08-150.144 67.328 66.432c9.024 8.96 27.456 4.544 30.4-8.96 19.968-92.608 46.656-227.52 46.656-227.52 6.848-34.496-16.192-56.704-49.92-49.92 0 0-134.656 26.816-227.328 46.784C560.32 178.048 556.352 182.272 554.752 187.136c-3.2 6.208-3.008 14.208 3.776 20.992L623.36 272.96z"></path>
+  <path d="M841.152 457.152c-30.528 0-54.784 24.512-54.784 54.656l0 274.752L237.696 786.56 237.696 237.696l206.016 0c6.656 0 10.752 0 13.248 0C487.68 237.696 512 213.184 512 182.848 512 152.32 487.36 128 456.96 128L183.04 128C153.216 128 128 152.576 128 182.848c0 3.136 0.256 6.272 0.768 9.28C128.256 195.136 128 198.272 128 201.408l0 639.488c0 0.064 0 0.192 0 0.256 0 0.128 0 0.192 0 0.32 0 30.528 24.512 54.784 54.784 54.784l646.976 0c6.592 0 9.728 0 11.712 0 28.736 0 52.928-22.976 54.464-51.968C896 843.264 896 842.304 896 841.344l0-20.352L896 561.408 896 512.128C896 481.792 871.424 457.152 841.152 457.152z"></path>
+</svg>
+
+              </i>
+            </a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">16-文件操作-StringIO-BytesIO</h1>
+      
+      <div class="post-meta">
+        <time datetime="0001-01-01" class="post-time">
+          0001-01-01
+        </time>
+        
+        <span class="more-meta"> 6338 words </span>
+          <span class="more-meta"> 13 min read </span>
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Table of Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-open函数介绍">1.1 open函数介绍</a></li>
+    <li><a href="#12-打开操作">1.2 打开操作</a>
+      <ul>
+        <li><a href="#121-mode模式">1.2.1 mode模式</a></li>
+        <li><a href="#122-文件指针">1.2.2 文件指针</a></li>
+        <li><a href="#123-缓冲区">1.2.3 缓冲区</a></li>
+        <li><a href="#124-encoding编码">1.2.4 encoding编码</a></li>
+        <li><a href="#125-其他参数">1.2.5 其他参数</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-读写操作">1.3 读写操作</a></li>
+    <li><a href="#14-关闭操作">1.4 关闭操作</a></li>
+    <li><a href="#15-上下文管理">1.5 上下文管理</a></li>
+    <li><a href="#16-文件对象的其他方法">1.6 文件对象的其他方法</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><font size=5 face='微软雅黑'><strong>文章目录</strong></font></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">1 文件操作</a>
+<ul>
+<li><a href="#11-open%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D">1.1 open函数介绍</a></li>
+<li><a href="#12-%E6%89%93%E5%BC%80%E6%93%8D%E4%BD%9C">1.2 打开操作</a>
+<ul>
+<li><a href="#121-mode%E6%A8%A1%E5%BC%8F">1.2.1 mode模式</a></li>
+<li><a href="#122-%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88">1.2.2 文件指针</a></li>
+<li><a href="#123-%E7%BC%93%E5%86%B2%E5%8C%BA">1.2.3 缓冲区</a></li>
+<li><a href="#124-encoding%E7%BC%96%E7%A0%81">1.2.4 encoding编码</a></li>
+<li><a href="#125-%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0">1.2.5 其他参数</a></li>
+</ul>
+</li>
+<li><a href="#13-%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C">1.3 读写操作</a></li>
+<li><a href="#14-%E5%85%B3%E9%97%AD%E6%93%8D%E4%BD%9C">1.4 关闭操作</a></li>
+<li><a href="#15-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86">1.5 上下文管理</a></li>
+<li><a href="#16-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95">1.6 文件对象的其他方法</a></li>
+</ul>
+</li>
+<li><a href="#2-stringio%E6%A8%A1%E5%9D%97">2 StringIO模块</a></li>
+<li><a href="#3-bytesio%E6%A8%A1%E5%9D%97">3 BytesIO模块</a></li>
+<li><a href="#4-file-like%E5%AF%B9%E8%B1%A1">4 file-like对象</a></li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-文件操作">1 文件操作</h1>
+<p>        读写文件是最常见的IO操作(一般说IO操作，指的是文件IO，如果是网络，一般都会直接说网络IO)，在磁盘上读写文件的功能都是由操作系统提供的，操作系统不允许普通的程序直接操作磁盘(大部分程序都需要间接的通过操作系统来完成对硬件的操作)，所以，读写文件就是请求操作系统打开一个文件对象（通常称为文件描述符），然后，通过操作系统提供的接口从这个文件对象中读取数据（读文件），或者把数据写入这个文件对象（写文件）。在操作系统中，文件常用的操作有：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open</td>
+<td>打开</td>
+</tr>
+<tr>
+<td>read</td>
+<td>读取</td>
+</tr>
+<tr>
+<td>write</td>
+<td>写</td>
+</tr>
+<tr>
+<td>close</td>
+<td>关闭</td>
+</tr>
+<tr>
+<td>readline</td>
+<td>行读取</td>
+</tr>
+<tr>
+<td>readlines</td>
+<td>多行读取</td>
+</tr>
+<tr>
+<td>seek</td>
+<td>文件指针操作</td>
+</tr>
+<tr>
+<td>tell</td>
+<td>指针操作</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-open函数介绍">1.1 open函数介绍</h2>
+<p>        在python中，我们使用open函数来打开一个文件，然后返回一个文件对象(流对象)和文件描述符。打开文件失败，则返回异常。</p>
+<blockquote>
+<p>第三方模块codecs包中提供的open函数，具备内置函数open的所有功能，并且在内部它对目标文件进行了编码的与判断处理，当你不知道目标文件的编码类型时，使用codecs.open来说更可靠。</p>
+</blockquote>
+<h2 id="12-打开操作">1.2 打开操作</h2>
+<p>想要读取文件，那么就需要先行打开文件。下面来看一下open函数的用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">open</span><span class="p">([</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s2">&#34;mode=&#39;r&#39;&#34;</span><span class="p">,</span> <span class="s1">&#39;buffering=-1&#39;</span><span class="p">,</span> <span class="s1">&#39;encoding=None&#39;</span><span class="p">,</span> <span class="s1">&#39;errors=None&#39;</span><span class="p">,</span> <span class="s1">&#39;newline=None&#39;</span><span class="p">,</span> <span class="s1">&#39;closefd=True&#39;</span><span class="p">,</span> <span class="s1">&#39;opener=None&#39;</span><span class="p">],)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>file</code>：要打开的文件名(默认为当前路径，否则要指定绝对路径)。</li>
+<li><code>mode</code>：表示打开文件的格式。</li>
+<li><code>buffering</code>: 设置缓冲区的大小(二进制模式和文本模式不同)</li>
+<li><code>encoding</code>：打开文件的编码格式(文本模式)</li>
+<li><code>errors</code>: 转码错误时是否提示异常</li>
+<li><code>newline</code>: 文本模式中对新行的处理方式</li>
+<li><code>closefd</code>: 删除描述符时，文件对象是否释放</li>
+</ul>
+<blockquote>
+<p>Python 2.x中包含file和open两个操作文件的函数，Python 3.x 中只有open，操作方法相同 <code>f = file('/etc/passwd','r') </code></p>
+</blockquote>
+<h3 id="121-mode模式">1.2.1 mode模式</h3>
+<p>文件打开的方式有如下几种：</p>
+<table>
+<thead>
+<tr>
+<th>描述字符</th>
+<th>意义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>只读打开</td>
+<td>文件的默认打开方式，文件不存在会报异常</td>
+</tr>
+<tr>
+<td>w</td>
+<td>只写打开</td>
+<td>文件不存在会创建，存在的话，会覆盖源文件（非追加）</td>
+</tr>
+<tr>
+<td>x</td>
+<td>创建并只写一个新文件</td>
+<td>文件已存在则报错</td>
+</tr>
+<tr>
+<td>a</td>
+<td>只追加写模式</td>
+<td>在文件末尾追加，文件不存在，新建并追加</td>
+</tr>
+<tr>
+<td>b</td>
+<td>二进制模式</td>
+<td><code>字节流</code>，将文件就按照字节理解，与字符编码无关。二进制模式操作时，字节操作使用bytes类型</td>
+</tr>
+<tr>
+<td>t</td>
+<td>文本模式</td>
+<td><code>字符流</code>，将文件的字节按照某种字符编码理解，按照字符操作，缺省模式</td>
+</tr>
+<tr>
+<td>+</td>
+<td>读写打开一个文件</td>
+<td>给原来只读、只写方式打开提供缺失的读或者写能力</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>默认使用文本只读模式打开,特殊文件需要用文本模式传输的话，建议使用b　</p>
+</blockquote>
+<p>        <code>+符</code>，为r、w、a、x提供缺失的读或者写的功能，但是，获取文件对象依旧按照r、w、a、x自己的特征。但+不能单独使用，可以认为它是为前面的模式字符做的增强功能。</p>
+<table>
+<thead>
+<tr>
+<th>描述字符</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r+</td>
+<td>读模式附加写功能</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>写模式附加读功能</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>追加写模式附加读功能</td>
+</tr>
+<tr>
+<td>x+</td>
+<td>打开一个新文件可读可写</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>以上为文本模式，二进制模式时只需要添加b即可.即r+b,或者rb+都可</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="n">FileNotFoundError</span>                         <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">27</span><span class="n">a5c78b3969</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="n">FileNotFoundError</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="nb">file</span> <span class="ow">or</span> <span class="n">directory</span><span class="p">:</span> <span class="s1">&#39;hello.txt&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="s1">&#39;</span><span class="se">\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00</span><span class="s1">abc&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="n">UnsupportedOperation</span>                      <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="mf">571e9</span><span class="n">fb02258</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">UnsupportedOperation</span><span class="p">:</span> <span class="ow">not</span> <span class="n">readable</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<ul>
+<li>我们把这个 f 成为文件句柄（用来标识一个文件的内存对象），包含文件名，字符集，大小，硬盘上的起始位置等等。</li>
+<li>f 在这里就变成了一个文件迭代器，我们可以通过使用for line in f ,去循环的读取文件的每一行内容</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># for 循环遍历文件，打印文件的每一行</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="o">...</span><span class="p">:</span>     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="o">...</span><span class="p">:</span>
+<span class="n">hello</span>
+<span class="n">world</span>
+<span class="n">my</span>
+<span class="n">name</span>
+<span class="ow">is</span>
+<span class="n">daxin</span>
+<span class="n">thanks</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：这里for line in fd，其实可以从fd.readlines()中读取，但是如果文件很大，那么就会一次性读取到内存中，非常占内存，而这里fd存储的是对象，只有我们读取一行，它才会把这行读取到内存中，建议使用这种方法。</p>
+</blockquote>
+<h3 id="122-文件指针">1.2.2 文件指针</h3>
+<p>        为什么文件只能读一次，第二次读就是空的了？是否可以重复读取呢？在对文件操作中，会存在一个指针<code>用于指定当前光标的位置</code>，当我们读完一次后， 文件指针就指向了文件的末尾了，那么如果想要重复读取，那么只需要对指针的位置进行调整即可。</p>
+<ol>
+<li>mode = r , 指针起始在0</li>
+<li>mode = a , 指针其实在EOF(end of file：文件末尾)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>    <span class="c1"># 显示当前文件指针的位置</span>
+<span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span>   <span class="c1"># 移动文件指针的位置</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>offset：偏移多少字节</li>
+<li>whence：从哪里开始</li>
+</ul>
+<p>在文本模式下：</p>
+<ul>
+<li>whence <code>0</code>：缺省值，表示从头开始，offset只能正整数</li>
+<li>whence <code>1</code>：表示从当前位置开始，offset只能设置为0</li>
+<li>whence <code>2</code>：表示从EOF位置开始，offset只能设置为0</li>
+</ul>
+<blockquote>
+<p>文本模式支持从开头向后偏移的方式。whence为1时，只支持偏移0(<code>seek(0,0)</code>)，相当于原地不同，没什么卵用。whence为2时，表示从EOF开始，但也只支持偏移0(<code>seek(0,2)</code>)，相当于将文件指针移动到EOF。</p>
+</blockquote>
+<p>二进制模式下：</p>
+<ul>
+<li>whence <code>0</code>: 缺省值，表示从头开始，offset只能正整数</li>
+<li>whence <code>1</code>: 表示从当前位置，offset可正可负</li>
+<li>whence <code>2</code>: 表示从EOF开始，offset可正可负</li>
+</ul>
+<blockquote>
+<p>二进制模式支持任意起点的偏移，从头、从尾部、从中间位置开始，向后seek可以超界，但是向前seek的时候，不能超界，否则抛异常</p>
+</blockquote>
+<h3 id="123-缓冲区">1.2.3 缓冲区</h3>
+<p>        open函数的第三个参数为buffering，叫作缓冲区，缓冲区是内存中的一小部分空间，用于存放准备写入磁盘的数据，操作系统在进行磁盘写入的时候，由于磁盘速度要远远慢于CPU以及内存，如果每次写入数据时，都要直接写到磁盘上的话，那么效率会非常的低，所以在操作系统层面会对写入操作进行优化，比如缓冲区默认大小为4K或者4K的倍数(为什么是4K，和磁盘扇区有关，这里就不详述了)，当写入的数据小于4K，会先存在缓冲区，当缓冲区满了，或者超过一定时间没有写入，操作系统会将数据一次性的刷入(flush)磁盘。<br>
+        buffering的默认值为-1，表示使用缺省大小的buffer，如果是二进制模式，由<code>io.DEFAULT_BUFFER_SIZE</code>决定，默认是<code>4096</code>或者<code>8192</code>，如果是文本模式，设备类型为终端设备时，使用<code>行缓存方式</code>，如果不是，则使用二进制模式的策略。使用其他值时，有如下含义：</p>
+<ul>
+<li><code>0</code> ：只在二进制模式使用，表示关闭buffer</li>
+<li><code>1</code> ：只在文本模式使用，表示使用行缓冲。(见到换行符就flush)</li>
+<li><code>大于1</code> ：用于指定buffer的大小</li>
+</ul>
+<p>二进制场景：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w+b&#39;</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="k">print</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">DEFAULT_BUFFER_SIZE</span><span class="p">)</span>
+<span class="mi">8192</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;daxin&#34;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="mi">5</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="mi">0</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="sa">b</span><span class="s1">&#39;daxin&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>    <span class="c1"># 默认情况下缓冲区大小为8192字节，所以我们写入的不会被立即刷入到磁盘上，如果我们要手动刷入可以手动执行flush命令</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>   <span class="c1"># close会触发flush操作</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w+b&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># 缓冲区为4个字节</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;dax&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>    <span class="c1"># 3个字节不会刷入磁盘</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="mi">3</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>   <span class="c1"># 超过缓冲区大小会直接连同本次写入的数据一起刷入磁盘</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="mi">2</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="mi">0</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="sa">b</span><span class="s1">&#39;daxin&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>文本字符串场景：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w+&#39;</span><span class="p">)</span>   <span class="c1"># 没有指定缓冲区的大小，采用默认值-1（由于不是终端设备，所以采用二进制的策略 由io.DEFAULT_BUFFER_SIZE控制</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="mf">123.</span><span class="n">txt</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="mi">5</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="mf">123.</span><span class="n">txt</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>   <span class="c1"># 遇到换行符的时候并没有刷入磁盘</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="mi">1</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="mf">123.</span><span class="n">txt</span>    
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;w+&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># 指定缓冲区的大小为1(行)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;daxin&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="mi">5</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; hello&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="mi">6</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="mf">123.</span><span class="n">txt</span>    <span class="c1"># 没有遇到换行符，所以不会刷入磁盘</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>   <span class="c1"># 遇到换行符，然后刷入磁盘</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="mi">1</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="err">!</span><span class="n">cat</span> <span class="mf">123.</span><span class="n">txt</span>
+<span class="n">daxin</span> <span class="n">hello</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>buffering</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>buffering=1</td>
+<td>文本和二进制模式时，都是io.DEFAULT_BUFFER_SIZE控制</td>
+</tr>
+<tr>
+<td>buffering=0</td>
+<td>文本模式时不支持，二进制模式时表示关闭缓冲区</td>
+</tr>
+<tr>
+<td>buffering=1</td>
+<td>文本模式表示行换成，二进制模式表示一个字节</td>
+</tr>
+<tr>
+<td>buffering&gt;1</td>
+<td>文本模式时，是io.DEFAULT_BUFFER_SIZE字节，flush后把当前字符串也写入磁盘。二进制模式时，表示缓冲区的大小，直到超过这个值时，才会刷入磁盘</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>一般来说，文本模式一般都用默认缓冲区大小，二进制模式可以指定buffer的大小。除非我们明确知道，否则选择默认缓冲区大小是一个比较好的选择，另外在日常编程中，明确知道需要写磁盘了，都会手动调用一次flush，而不是等到自动flush或者close的时候。</p>
+</blockquote>
+<h3 id="124-encoding编码">1.2.4 encoding编码</h3>
+<p>        当我们操作二进制文件的时候，数据都是十六进制的，并没有什么编码的一说。而在使用文本模式时，就需要指定编码类型了，常用的中文编码比如，GBK、UTF-8、Unicode等，文件在内存中都是Unicode格式的，而存储在磁盘上就是按照本地编码的格式存储了，windows上默认的是GBK(ANSI,cp936)，当我们存储的文本数据不是默认的格式时，在打开时就会产生乱码，这时可以使用指定编码格式打开文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="err">默认值时，表示使用操作系统默认编码类型</span>
+<span class="o">-</span> <span class="n">windows</span><span class="p">:</span> <span class="n">GBK</span><span class="p">(</span><span class="mh">0xB0A1</span><span class="p">)</span>
+<span class="o">-</span> <span class="n">Linux</span><span class="p">:</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span><span class="p">(</span><span class="mh">0xE5</span> <span class="mi">95</span> <span class="mi">8</span><span class="n">A</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="125-其他参数">1.2.5 其他参数</h3>
+<p><code>errors</code>: 什么样的编码错误将被捕获。</p>
+<ul>
+<li>None/strict：有编码错误将抛出ValueError异常</li>
+<li>ignore：表示忽略</li>
+</ul>
+<p><code>newline</code>: 文本模式中，换行的转换。可以为None、''(空串)、'\r'、'\n'、'\r\n'。</p>
+<ul>
+<li>读时，None表示'\r'、'\n'、'\r\n&rsquo;都被转换为'\n';''(空串)表示不会自动转换通用换行符；其他合法字符表示换行符就是指定字符，就会按照指定字符分行</li>
+<li>写时，None表示'\n&rsquo;都会被替换为系统指定缺省分隔符(os.linesep);'\n&rsquo;表示'\n&rsquo;不替换；其他的合法字符表示'\n&rsquo;会被替换为指定的字符</li>
+</ul>
+<p><code>closefd</code>: 关闭文件描述符.</p>
+<ul>
+<li>True: 表示关闭它</li>
+<li>False: 会在文件关闭后保持这个文件描述符</li>
+</ul>
+<blockquote>
+<p>fileobj.fileno()查看</p>
+</blockquote>
+<h2 id="13-读写操作">1.3 读写操作</h2>
+<p><code>read(size=-1)</code>: 表示读取的多少个字符或字节；负数或者None表示读取到EOF(end of file),中文文本时，表示size个字符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="s1">&#39;daxin&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="s1">&#39; hell&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="s1">&#39;o&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="s1">&#39;你&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>readline(size=-1)</code>: 一行行读取文件内容。size设置一次能读取行内几个字符或者字节。负数或者None表示读取到EOF(end of file)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="s1">&#39;a d&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>  
+<span class="s1">&#39;axin hello world</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>  
+<span class="s1">&#39;c</span><span class="se">\n</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>readlines(hint=-1)</code>: 读取所有行并返回列表。<strong><code>当指定hint为负数时，则会读取所有行，当指定为正数时，表示读取hint个字符所在的行</code></strong>。比如第一行有6个字符，第二行有3个字符，当我们使用readlines(7)时，就会返回两行，而如果使用readlines(5)时就会只返回第一行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">58</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;2</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;3</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;4</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;5</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;6</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;7</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;8</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">94</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">95</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;你好啊我了个去</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;为什么</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">98</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">98</span><span class="p">]:</span> <span class="p">[</span><span class="s1">&#39;你好</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;在&#39;</span><span class="p">]</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">99</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>write(s)</code>: 把字符串写入到文件中并返回写入字符串的个数。
+<code>writelines(lines)</code>: 将字符串列表写入文件中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">60</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">65</span><span class="p">]:</span> <span class="mi">25</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">67</span><span class="p">]:</span> <span class="mi">2</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">68</span><span class="p">]:</span> <span class="mi">25</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">69</span><span class="p">]:</span> <span class="s1">&#39;10&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">71</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="s1">&#39;11&#39;</span><span class="p">,</span><span class="s1">&#39;12&#39;</span><span class="p">])</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="mi">25</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">73</span><span class="p">]:</span> <span class="s1">&#39;101112&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="14-关闭操作">1.4 关闭操作</h2>
+<p>        当我们打开一个文件时，那么在系统中就会存在一个文件描述符对应这个文件，并且在文件系统中，一个程序可以使用的文件描述符的数量是有限的，如果我们使用完毕后不进行释放，那么很有可能就耗光文件描述符的数量(Linux中默认的文件描述符为1024，使用ulimit -a查看)，产生异常，所以在使用完毕后，我们就需要手动的进行关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>   
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>关闭文件的操作，会同时调用flush()，把缓冲区的数据刷入磁盘。当文件已经关闭，再次关闭没有任何效果</p>
+</blockquote>
+<h2 id="15-上下文管理">1.5 上下文管理</h2>
+<p>        上面说我们每次打开一个文件都需要手动的进行关闭，那么如果忘记了，这个文件会一直占用着对应的文件描述符，如果多次打开一个文件不关闭，那么每次都会占用新的文件秒师傅，直到文件描述符用完。上下文管理就是为了解决这种问题的，它有如下特点：</p>
+<ol>
+<li>使用 with .. as 关键字。</li>
+<li>with语句块执行完毕的时候，会自动关闭文件对象</li>
+<li>不会开启新的作用域(不会产生诸如函数的内部变量等)</li>
+</ol>
+<p>        2.6以上版本支持with读取,<code>with open('/tmp/hello.txt') as fd:</code>,然后所有打开文件的操作都需要缩进，包含在with下才，这样不需要明确的指定close，当新的代码没有缩进的时候，文件会自动关闭。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">103</span><span class="p">]:</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+     <span class="o">...</span><span class="p">:</span>     <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+     <span class="o">...</span><span class="p">:</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">105</span><span class="p">]:</span> <span class="bp">True</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-PYTHON" data-lang="PYTHON"><span class="n">In</span> <span class="p">[</span><span class="mi">100</span><span class="p">]:</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;123.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r+&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">101</span><span class="p">]:</span> <span class="k">with</span> <span class="n">f</span><span class="p">:</span>
+     <span class="o">...</span><span class="p">:</span>     <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+     <span class="o">...</span><span class="p">:</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">102</span><span class="p">]:</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">102</span><span class="p">]:</span> <span class="bp">True</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="16-文件对象的其他方法">1.6 文件对象的其他方法</h2>
+<p>文件对象的内置方法还有很多种，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fd</span><span class="o">.</span><span class="n">closed</span><span class="p">()</span><span class="err">：</span>    <span class="err">判断文件是否被关闭，若被打开提示</span><span class="bp">False</span><span class="err">，没有的话提示</span><span class="bp">True</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span><span class="err">：</span>     <span class="err">把修改的内容，强制刷新到文件中去</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">isatty</span><span class="err">：</span>      <span class="err">判断是否是一个终端文件</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">mode</span><span class="err">：</span>        <span class="err">查看文件的打开模式</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">name</span><span class="err">：</span>        <span class="err">查看文件的名称</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">next</span><span class="err">：</span>        <span class="err">迭代的方法，和</span><span class="n">readline很像</span><span class="err">，区别是，</span><span class="n">next读到末尾会报错</span><span class="err">，</span><span class="n">readline会继续返回空</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">read</span><span class="err">：</span>        <span class="err">一次性读取所有内容，以字符串的方式存取</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">readable</span><span class="p">():</span>   <span class="err">判断文件是否可读</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">readlines</span><span class="err">：</span>   <span class="err">一次性读取所有内容，以列表的方式存取（适合操作小文件）</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="err">：</span>  <span class="err">每次读取一行内容</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="err">：</span>     <span class="err">调整文件读取的指针位置</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">seekable</span><span class="p">()</span><span class="err">：</span>  <span class="err">判断文件是否可以调整指针位置（</span><span class="n">tty</span><span class="err">，磁盘等文件是不能被</span><span class="n">seek的</span><span class="err">），可以被</span><span class="n">seek则返回真</span><span class="err">，否则返回假</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span><span class="err">：</span>      <span class="err">查询文件目前读取位置（以字符为单位）</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span><span class="err">：</span>  <span class="err">截取文件，从开头开始截取，不指定指针位置的话，那么会清空文件</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="err">：</span>       <span class="err">把一个字符串写入到文件中去</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">writelines</span><span class="p">()</span><span class="err">：把字符串列表写入文件中</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">xreadlines</span><span class="p">()</span><span class="err">：读一行打印一行，针对大文件非常适用</span> <span class="o">-----&gt;</span> <span class="n">Python</span> <span class="mf">2.</span><span class="n">x</span> <span class="err">中适用，</span><span class="mf">3.</span><span class="n">x中已经取消</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">encoding</span><span class="p">:</span>     <span class="err">查看文件的编码</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">writeable</span><span class="p">()</span><span class="err">：</span> <span class="err">判断文件是否可以写</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">fileno</span><span class="p">()</span><span class="err">：</span>    <span class="err">返回文件在操作系统上的文件描述符（一个进程的运行默认会打开三个特殊的文件描述符：</span><span class="mi">0</span><span class="err">表示</span> <span class="n">stdin</span><span class="err">、</span><span class="mi">1</span><span class="err">表示</span> <span class="n">stdout</span><span class="err">，</span><span class="mi">2</span><span class="err">表示</span><span class="n">stderr</span><span class="err">）</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">name</span><span class="err">：</span>        <span class="err">文件名称</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-stringio模块">2 StringIO模块</h1>
+<p>        用于在内存空开辟一个文本模式的buffer,可以像文件对象一样操作它,当close方法被调用时,这个buffer会被释放.</p>
+<blockquote>
+<p>使用前需要先进行导入, from io import StringIO</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">106</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">107</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>   <span class="c1"># 实例化一个StringIO对象用于读写,相当于 f = open(&#39;123.txt&#39;,&#39;r+&#39;)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="mi">3</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="s1">&#39;&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="mi">0</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="s1">&#39;123&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>getvalue()</code>: 获取全部内容,根文件指针没有关系.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">106</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">107</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">108</span><span class="p">]:</span> <span class="mi">3</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">109</span><span class="p">]:</span> <span class="s1">&#39;&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">110</span><span class="p">]:</span> <span class="mi">0</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>    <span class="c1"># 指针已经切换到文件末尾</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">111</span><span class="p">]:</span> <span class="s1">&#39;123&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">112</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>    <span class="c1"># 无视指针,可以读取所有</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">112</span><span class="p">]:</span> <span class="s1">&#39;123&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>一般来说,磁盘的操作比内存的操作要慢得多,内存足够的情况下,一般的优化思路是少落地,减少磁盘IO的过程,可以大大提高程序的运行效率.</p>
+</blockquote>
+<h1 id="3-bytesio模块">3 BytesIO模块</h1>
+<p>        用于在内存中开辟一个二进制模式的buffer,可以像文件对象一样操作它,当close方法被调用时,这个buffer会被释放.</p>
+<blockquote>
+<p>调用前需要先导入: from io import BytesIO</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">114</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">115</span><span class="p">]:</span> <span class="n">b</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>  <span class="c1"># 实例化一个BytesIO对象用于存储二进制数据</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">116</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">116</span><span class="p">]:</span> <span class="mi">3</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">117</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">117</span><span class="p">]:</span> <span class="mi">0</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">118</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">118</span><span class="p">]:</span> <span class="sa">b</span><span class="s1">&#39;abc&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">119</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>   <span class="c1"># 同样无视指针的存在</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">119</span><span class="p">]:</span> <span class="sa">b</span><span class="s1">&#39;abc&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>        针对StringIO和BytesIO来说,还有如下方法:</p>
+<ol>
+<li>readable(): 可读吗?</li>
+<li>writeable(): 可写吗?</li>
+<li>seekable(): 可以调整指针吗?</li>
+</ol>
+<h1 id="4-file-like对象">4 file-like对象</h1>
+<p>        类文件对象,可以向文件对象一个操作,比如socket对象,输入输出对象(stdin,stdout)等都是类文件对象.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">120</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdin</span><span class="p">,</span><span class="n">stdout</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">122</span><span class="p">]:</span> <span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">)</span>
+<span class="mi">123</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">123</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">123</span><span class="p">]:</span> <span class="n">colorama</span><span class="o">.</span><span class="n">ansitowin32</span><span class="o">.</span><span class="n">StreamWrapper</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">124</span><span class="p">]:</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>每个程序初始化运行时,都会打开3个文件:</p>
+<ul>
+<li>stdin: 标准输入</li>
+<li>stdout: 标准输出</li>
+<li>stderr: 标准错误输出</li>
+</ul>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">daxin.li</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+      0001-01-01
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/wechat-qr-code.png">
+        <span>Wechat</span>
+      </label>
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/static/alipay-qr-code.png">
+        <span>Alipay</span>
+      </label>
+  </div>
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/15-reduce-pratial%E5%81%8F%E5%87%BD%E6%95%B0-lsu_cache/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">15-reduce-pratial偏函数-lsu_cache</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+          <a class="next" href="/post/17-%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C-shutil%E6%A8%A1%E5%9D%97/">
+            <span class="next-text nav-default">17-路径操作-shutil模块</span>
+            <span class="prev-text nav-mobile">Next</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:dahlhin.li@gmail.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://github.com/dachenzi" rel="me noopener" class="iconfont"
+      title="github"  target="_blank"
+      >
+      <svg class="icon" style="" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M512 12.672c-282.88 0-512 229.248-512 512 0 226.261333 146.688 418.133333 350.08 485.76 25.6 4.821333 34.986667-11.008 34.986667-24.618667 0-12.16-0.426667-44.373333-0.64-87.04-142.421333 30.890667-172.458667-68.693333-172.458667-68.693333C188.672 770.986667 155.008 755.2 155.008 755.2c-46.378667-31.744 3.584-31.104 3.584-31.104 51.413333 3.584 78.421333 52.736 78.421333 52.736 45.653333 78.293333 119.850667 55.68 149.12 42.581333 4.608-33.109333 17.792-55.68 32.426667-68.48-113.706667-12.8-233.216-56.832-233.216-253.013333 0-55.893333 19.84-101.546667 52.693333-137.386667-5.76-12.928-23.04-64.981333 4.48-135.509333 0 0 42.88-13.738667 140.8 52.48 40.96-11.392 84.48-17.024 128-17.28 43.52 0.256 87.04 5.888 128 17.28 97.28-66.218667 140.16-52.48 140.16-52.48 27.52 70.528 10.24 122.581333 5.12 135.509333 32.64 35.84 52.48 81.493333 52.48 137.386667 0 196.693333-119.68 240-233.6 252.586667 17.92 15.36 34.56 46.762667 34.56 94.72 0 68.522667-0.64 123.562667-0.64 140.202666 0 13.44 8.96 29.44 35.2 24.32C877.44 942.592 1024 750.592 1024 524.672c0-282.752-229.248-512-512-512"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://weibo.com/2401416804/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="me noopener" class="iconfont"
+      title="weibo"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M385.714286 733.714286q12-19.428571 6.285714-39.428571t-25.714286-28.571429q-19.428571-8-41.714286-0.571429t-34.285714 26.285714q-12.571429 19.428571-7.428571 39.142857t24.571429 28.857143 42.571429 1.428571 35.714286-27.142857zm53.714286-69.142857q4.571429-7.428571 2-15.142857t-10-10.571429q-8-2.857143-16.285714 2.857143t-12.285714 10.571429q-9.714286 17.714286 7.428571 25.714286 8 2.857143 16.571429 2.857143t12.571429-10.571429zm99.428571 61.142857q-25.714286 58.285714-90.285714 85.714286t-128 6.857143q-61.142857-19.428571-84.285714-72.285714t3.714286-107.142857q26.857143-53.142857 86.571429-79.428571t120.285714-10.857143q63.428571 16.571429 90.571429 68.285714t1.428571 108.857143zm178.285714-91.428571q-5.142857-54.857143-50.857143-97.142857t-119.142857-62.285714-156.857143-12q-127.428571 13.142857-211.142857 80.857143t-75.714286 151.142857q5.142857 54.857143 50.857143 97.142857t119.142857 62.285714 156.857143 12q127.428571-13.142857 211.142857-80.857143t75.714286-151.142857zm176 2.285714q0 38.857143-21.142857 79.714286t-62.285714 78.285714-96.285714 67.142857-129.142857 47.428571-154.571429 17.714286-157.142857-19.142857-137.428571-53.142857-98-86.285714-37.142857-114q0-65.714286 39.714286-140t112.857143-147.428571q96.571429-96.571429 195.142857-134.857143t140.857143 4q37.142857 36.571429 11.428571 119.428571-2.285714 8-0.571429 11.428571t5.714286 4 8.285714 2.857143 7.714286-2l3.428571-1.142857q79.428571-33.714286 140.571429-33.714286t87.428571 34.857143q25.714286 36 0 101.714286-1.142857 7.428571-2.571429 11.428571t2.571429 7.142857 6.857143 4.285714 9.714286 3.428571q32.571429 10.285714 58.857143 26.857143t45.714286 46.571429 19.428571 66.571429zm-42.285714-356.571429q24 26.857143 31.142857 62t-3.714286 67.142857q-4.571429 13.142857-16.857143 19.428571t-25.428571 2.285714q-13.142857-4.571429-19.428571-16.857143t-2.285714-25.428571q11.428571-36-13.714286-63.428571t-61.142857-20q-13.714286 2.857143-25.714286-4.571429t-14.285714-21.142857q-2.857143-13.714286 4.571429-25.428571t21.142857-14.571429q34.285714-7.428571 68 3.142857t57.714286 37.428571zm103.428571-93.142857q49.714286 54.857143 64.285714 127.142857t-7.714286 138q-5.142857 15.428571-19.428571 22.857143t-29.714286 2.285714-22.857143-19.428571-2.857143-29.714286q16-46.857143 5.714286-98.285714t-45.714286-90.285714q-35.428571-39.428571-84.571429-54.571429t-98.857143-4.857143q-16 3.428571-29.714286-5.428571t-17.142857-24.857143 5.428571-29.428571 24.857143-16.857143q70.285714-14.857143 139.428571 6.571429t118.857143 76.857143z"></path>
+</svg>
+
+    </a>
+  
+    <a href="https://www.zhihu.com/people/da-chen-zi-67" rel="me noopener" class="iconfont"
+      title="zhihu"  target="_blank"
+      >
+      <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M351.791182 562.469462l192.945407 0c0-45.367257-21.3871-71.939449-21.3871-71.939449L355.897709 490.530013c3.977591-82.182744 7.541767-187.659007 8.816806-226.835262l159.282726 0c0 0-0.86367-67.402109-18.578124-67.402109s-279.979646 0-279.979646 0 16.850783-88.141456 39.318494-127.053698c0 0-83.60514-4.510734-112.121614 106.962104S81.344656 355.077018 76.80834 367.390461c-4.536316 12.313443 24.62791 5.832845 36.941354 0 12.313443-5.832845 68.050885-25.924439 84.252893-103.69571l86.570681 0c1.165546 49.28652 4.596691 200.335724 3.515057 226.835262L109.86113 490.530013c-25.275663 18.147312-33.701566 71.939449-33.701566 71.939449L279.868105 562.469462c-8.497535 56.255235-23.417339 128.763642-44.275389 167.210279-33.05279 60.921511-50.55235 116.65793-169.802314 212.576513 0 0-19.442818 14.257725 40.829917 9.073656 60.273758-5.185093 117.305683-20.739347 156.840094-99.807147 20.553105-41.107233 41.805128-93.250824 58.386782-146.138358l-0.055259 0.185218 167.855986 193.263655c0 0 22.035876-51.847855 5.832845-108.880803L371.045711 650.610918l-42.1244 31.157627-0.045025 0.151449c11.69946-41.020252 20.11206-81.5749 22.726607-116.858498C351.665315 564.212152 351.72876 563.345412 351.791182 562.469462z"></path>
+  <path d="M584.918753 182.033893l0 668.840094 70.318532 0 28.807093 80.512708 121.875768-80.512708 153.600307 0L959.520453 182.033893 584.918753 182.033893zM887.150192 778.934538l-79.837326 0-99.578949 65.782216-23.537066-65.782216-24.855084 0L659.341766 256.673847l227.807403 0L887.149169 778.934538z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://dachenzi.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2016 -
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        daxin.li
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
