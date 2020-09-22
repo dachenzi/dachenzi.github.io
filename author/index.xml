@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Author on daxin.li&#39;s blog</title>
+    <link>https://dachenzi.github.io/author/</link>
+    <description>Recent content in Author on daxin.li&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 07 Jan 2020 15:06:07 +0000</lastBuildDate><atom:link href="https://dachenzi.github.io/author/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>daxin.li</title>
+      <link>https://dachenzi.github.io/author/daxin.li/</link>
+      <pubDate>Tue, 07 Jan 2020 15:06:07 +0000</pubDate>
+      
+      <guid>https://dachenzi.github.io/author/daxin.li/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

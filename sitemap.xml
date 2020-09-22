@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dachenzi.github.io/author/</loc>
+    <lastmod>2020-01-07T15:06:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://dachenzi.github.io/categories/</loc>
+    <lastmod>2020-01-07T15:06:07+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://dachenzi.github.io/author/daxin.li/</loc>
     <lastmod>2020-01-07T15:06:07+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -921,6 +935,12 @@
   <url>
     <loc>https://dachenzi.github.io/post/gogs%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2016-01-21T00:37:08+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://dachenzi.github.io/en/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
